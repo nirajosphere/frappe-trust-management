@@ -1,0 +1,54 @@
+import React from "react";
+import { Select, Card, Typography, Space } from "antd";
+import { useFrappeGetDocList } from "../../hooks/useFrappe";
+import { useDonation } from "../../context/DonationContext";
+import { EnvironmentOutlined } from "@ant-design/icons";
+
+const { Text } = Typography;
+
+const TempleSelect = () => {
+    const { selectedTemple, setSelectedTemple } = useDonation();
+    const { data: temples, loading } = useFrappeGetDocList("Temple", { fields: ["name", "temple_name"] });
+
+    return (
+        <Card 
+            title={
+                <Space>
+                    <EnvironmentOutlined className="text-primary" />
+                    <span>Select Temple</span>
+                </Space>
+            } 
+            size="small" 
+            className="aavatto-card"
+        >
+            <div className="flex flex-col gap-2">
+                <Text strong className="text-gray-600 block mb-1">Target Temple</Text>
+                <Select
+                    placeholder="Search and select a temple"
+                    className="w-full h-12 rounded-xl"
+                    value={selectedTemple}
+                    onChange={setSelectedTemple}
+                    loading={loading}
+                    showSearch
+                    optionFilterProp="label"
+                    filterOption={(input, option) =>
+                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    options={temples?.map(t => ({
+                        value: t.name,
+                        label: t.temple_name
+                    }))}
+                />
+                {temples?.length === 0 && !loading && (
+                    <div className="mt-2 p-3 bg-amber-50 border border-amber-100 rounded-lg">
+                        <Text type="warning" className="text-amber-700 font-medium select-none">
+                            ⚠️ No temples found in the system. Please add one in Frappe.
+                        </Text>
+                    </div>
+                )}
+            </div>
+        </Card>
+    );
+};
+
+export default TempleSelect;
