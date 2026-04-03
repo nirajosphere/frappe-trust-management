@@ -71,13 +71,7 @@ export const navigationItems = [
         ),
     },
 
-    {
-        key: "donation",
-        icon: <ShoppingCartOutlined />,
-        label: "Donation POS",
-        component: <Donation />,
-        hidden: true,
-    },
+
 ];
 
 /**
@@ -102,7 +96,7 @@ export const getComponentForRoute = (currentRoute) => {
 
     // Handle Forms (Add / Edit)
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
-        // Special case for Donation POS
+        // Intercept 'Add New' for Donations to show the POS interface
         if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
             return <Donation />;
         }

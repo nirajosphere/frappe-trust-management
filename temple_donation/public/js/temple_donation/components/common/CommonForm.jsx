@@ -107,9 +107,16 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                     ].filter(Boolean)}
                                 >
                                     {field.type === 'textarea' ? (
-                                        <Input.TextArea placeholder={field.placeholder} rows={field.rows || 3} />
+                                        <Input.TextArea 
+                                            placeholder={field.placeholder} 
+                                            rows={field.rows || 3} 
+                                            disabled={field.readOnly || field.disabled}
+                                        />
                                     ) : (
-                                        <Input placeholder={field.placeholder} />
+                                        <Input 
+                                            placeholder={field.placeholder} 
+                                            disabled={field.readOnly || field.disabled}
+                                        />
                                     )}
                                 </Form.Item>
                             </Col>

@@ -1,13 +1,11 @@
 import React from "react";
 import { Select, Card, Typography, Space } from "antd";
 import { useFrappeGetDocList } from "../../hooks/useFrappe";
-import { useDonation } from "../../context/DonationContext";
 import { EnvironmentOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
-const TempleSelect = () => {
-    const { selectedTemple, setSelectedTemple } = useDonation();
+const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
     const { data: temples, loading } = useFrappeGetDocList("Temple", { fields: ["name", "temple_name"] });
 
     return (
@@ -19,7 +17,7 @@ const TempleSelect = () => {
                 </Space>
             } 
             size="small" 
-            className="aavatto-card"
+            className="aavatto-card mb-6"
         >
             <div className="flex flex-col gap-2">
                 <Text strong className="text-gray-600 block mb-1">Target Temple</Text>
@@ -27,7 +25,7 @@ const TempleSelect = () => {
                     placeholder="Search and select a temple"
                     className="w-full h-12 rounded-xl"
                     value={selectedTemple}
-                    onChange={setSelectedTemple}
+                    onChange={onTempleSelect}
                     loading={loading}
                     showSearch
                     optionFilterProp="label"

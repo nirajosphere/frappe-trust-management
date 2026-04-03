@@ -8,27 +8,22 @@ import {
     ProfileOutlined,
     SafetyCertificateOutlined
 } from "@ant-design/icons";
-import { useDonation } from "../../context/DonationContext";
 
 const { Text } = Typography;
 
-const PaymentSection = () => {
-    const { 
-        paymentMode, 
-        setPaymentMode, 
-        handleSubmit, 
-        isSubmitting, 
-        cartItems 
-    } = useDonation();
-
+const PaymentSection = ({ 
+    paymentMode, 
+    onPaymentModeChange, 
+    onSubmit, 
+    loading, 
+    disabled 
+}) => {
     const paymentModes = [
         { label: "Cash", value: "Cash", icon: <WalletOutlined />, color: "orange" },
         { label: "UPI/Online", value: "UPI", icon: <QrcodeOutlined />, color: "blue" },
         { label: "Card", value: "Card", icon: <CreditCardOutlined />, color: "purple" },
         { label: "Cheque", value: "Cheque", icon: <ProfileOutlined />, color: "cyan" },
     ];
-
-    const isDisabled = cartItems.length === 0;
 
     return (
         <Card 
@@ -50,7 +45,7 @@ const PaymentSection = () => {
                     {paymentModes.map(mode => (
                         <button
                             key={mode.value}
-                            onClick={() => setPaymentMode(mode.value)}
+                            onClick={() => onPaymentModeChange(mode.value)}
                             className={`
                                 flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all duration-200
                                 ${paymentMode === mode.value 
@@ -80,21 +75,21 @@ const PaymentSection = () => {
                 size="large"
                 block
                 icon={<CheckCircleOutlined className="text-lg" />}
-                onClick={handleSubmit}
-                loading={isSubmitting}
-                disabled={isDisabled}
+                onClick={onSubmit}
+                loading={loading}
+                disabled={disabled}
                 className={`
                     h-16 rounded-2xl text-lg font-black tracking-tight shadow-lg transition-all
-                    ${isDisabled 
+                    ${disabled 
                         ? 'bg-gray-200 border-gray-200 text-gray-400' 
                         : 'bg-primary border-none shadow-primary/30 hover:scale-[1.02] active:scale-95'
                     }
                 `}
             >
-                {isSubmitting ? 'PROCESSING...' : 'CONFIRM DONATION'}
+                {loading ? 'PROCESSING...' : 'CONFIRM DONATION'}
             </Button>
             
-            {!isDisabled && (
+            {!disabled && (
                 <div className="mt-4 text-center">
                     <Tag color="success" className="rounded-full border-none px-3 py-1 font-bold text-[10px] uppercase tracking-widest bg-green-50 text-green-600">
                         System Ready for Transaction

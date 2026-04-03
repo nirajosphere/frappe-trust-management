@@ -12,6 +12,7 @@
   "cashier",
   "payment_mode",
   "total_amount",
+  "donation_items",
   "notes"
  ],
  "fields": [
@@ -56,6 +57,12 @@
    "fieldtype": "Currency",
    "label": "Total Amount",
    "reqd": 1
+  },
+  {
+   "fieldname": "donation_items",
+   "fieldtype": "Table",
+   "label": "Donation Items",
+   "options": "Donation Item"
   },
   {
    "fieldname": "notes",

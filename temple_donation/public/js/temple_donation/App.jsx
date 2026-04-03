@@ -5,7 +5,7 @@ import { DashboardOutlined } from "@ant-design/icons";
 // Centralized Configs
 import { themeConfig } from "./config/theme";
 import { menuItems, getComponentForRoute } from "./config/navigation";
-import { DonationProvider } from "./context/DonationContext";
+
 
 import "./styles.css";
 
@@ -42,7 +42,7 @@ const App = () => {
     };
 
     return (
-        <DonationProvider>
+
             <ConfigProvider theme={themeConfig}>
                 <Layout style={{ minHeight: "100vh", background: "#f9fafb" }}>
                     {/* Top Navigation Bar */}
@@ -56,7 +56,7 @@ const App = () => {
                         {/* Horizontal Menu */}
                         <Menu
                             mode="horizontal"
-                            selectedKeys={[currentRoute]}
+                            selectedKeys={[currentRoute.split('/')[0]]}
                             items={menuItems}
                             onClick={handleMenuClick}
                             className="aavatto-topbar-menu"
@@ -75,7 +75,7 @@ const App = () => {
                     </Content>
                 </Layout>
             </ConfigProvider>
-        </DonationProvider>
+
     );
 };
 

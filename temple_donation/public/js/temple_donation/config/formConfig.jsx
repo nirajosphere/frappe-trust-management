@@ -1,4 +1,4 @@
-import { DOCTYPE_DONOR, DOCTYPE_TEMPLE } from "./constants";
+import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION } from "./constants";
 
 /**
  * Centralized form configuration for different Doctypes.
@@ -86,5 +86,47 @@ export const formConfigs = {
                 rows: 2
             }
         ]
+    },
+    [DOCTYPE_DONATION]: {
+        title: "Donation",
+        fields: [
+            {
+                name: "donor",
+                label: "Donor",
+                type: "text",
+                placeholder: "Select Donor",
+                required: true,
+                message: "Please select a donor!"
+            },
+            {
+                name: "temple",
+                label: "Temple",
+                type: "text",
+                placeholder: "Select Temple",
+                required: true,
+                message: "Please select a temple!"
+            },
+            {
+                name: "payment_mode",
+                label: "Payment Mode",
+                type: "text",
+                placeholder: "Cash / UPI / Card",
+                required: true
+            },
+            {
+                name: "total_amount",
+                label: "Total Amount",
+                type: "text",
+                placeholder: "0.00",
+                required: true
+            },
+            {
+                name: "notes",
+                label: "Notes",
+                type: "textarea",
+                rows: 3
+            }
+        ]
     }
 };
+

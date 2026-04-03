@@ -1,12 +1,10 @@
 import React from "react";
 import { Card, Table, InputNumber, Button, Space, Typography, Empty, Row, Col } from "antd";
 import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { useDonation } from "../../context/DonationContext";
 
 const { Text, Title } = Typography;
 
-const Cart = () => {
-    const { cartItems, handleUpdateAmount, handleRemoveItem, totalAmount } = useDonation();
+const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
     const quickAmounts = [101, 201, 501, 1001, 2100, 5100];
 
     const columns = [
@@ -33,14 +31,14 @@ const Cart = () => {
                         value={amount}
                         formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         parser={(value) => value.replace(/₹\s?|(,*)/g, "")}
-                        onChange={(val) => handleUpdateAmount(index, val)}
+                        onChange={(val) => onUpdateAmount(index, val)}
                         className="w-full rounded-lg border-gray-200 hover:border-primary focus:border-primary font-bold text-primary"
                     />
                     <div className="flex flex-wrap gap-1">
                         {quickAmounts.map(q => (
                             <button
                                 key={q}
-                                onClick={() => handleUpdateAmount(index, q)}
+                                onClick={() => onUpdateAmount(index, q)}
                                 className="px-2 py-0.5 text-[10px] bg-gray-50 border border-gray-200 rounded hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 font-medium"
                             >
                                 {q}
@@ -60,7 +58,7 @@ const Cart = () => {
                     danger
                     shape="circle"
                     icon={<DeleteOutlined />}
-                    onClick={() => handleRemoveItem(index)}
+                    onClick={() => onRemoveItem(index)}
                     className="hover:bg-red-50"
                 />
             ),
@@ -76,13 +74,13 @@ const Cart = () => {
                 </Space>
             }
             size="small"
-            className="aavatto-card !p-0 overflow-hidden flex flex-col"
+            className="aavatto-card !p-0 overflow-hidden flex flex-col mb-6"
             styles={{ body: { padding: 0 } }}
         >
             <div className="max-h-[400px] overflow-y-auto">
                 <Table
                     columns={columns}
-                    dataSource={cartItems}
+                    dataSource={items}
                     pagination={false}
                     rowKey={(record, index) => `${record.donation_type}-${index}`}
                     className="custom-cart-table"

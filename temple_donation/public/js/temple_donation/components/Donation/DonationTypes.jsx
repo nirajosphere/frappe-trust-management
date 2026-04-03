@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Typography, Empty, Spin, Space } from "antd";
 import { HeartFilled, AppstoreOutlined } from "@ant-design/icons";
-import { useDonation } from "../../context/DonationContext";
 
 const { Text } = Typography;
 
-const DonationTypes = () => {
-    const { selectedTemple, handleAddToCart } = useDonation();
+const DonationTypes = ({ selectedTemple, onAddToCart }) => {
     const [donationTypes, setDonationTypes] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -75,7 +73,7 @@ const DonationTypes = () => {
                         <Col key={type.name} xs={12} sm={8} md={8} lg={6}>
                             <Card
                                 hoverable
-                                onClick={() => handleAddToCart(type)}
+                                onClick={() => onAddToCart(type)}
                                 className="group relative overflow-hidden rounded-2xl border-gray-100 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white"
                                 bodyStyle={{ padding: '24px 16px', textAlign: 'center' }}
                             >

@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Card, Input, Button, Form, Row, Col, Typography, Space, Badge } from "antd";
 import { UserAddOutlined, SearchOutlined, CheckCircleFilled, UserOutlined } from "@ant-design/icons";
 import DonorModal from "./DonorModal";
-import { useDonation } from "../../context/DonationContext";
 
 const { Text, Title } = Typography;
 
-const DonorSection = () => {
-    const { selectedDonor, setSelectedDonor } = useDonation();
+const DonorSection = ({ selectedDonor, onDonorSelect }) => {
     const [mobileNumber, setMobileNumber] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [searching, setSearching] = useState(false);
@@ -34,21 +32,21 @@ const DonorSection = () => {
                 callback: (r) => {
                     setSearching(false);
                     if (r.message && r.message.length > 0) {
-                        setSelectedDonor(r.message[0]);
+                        onDonorSelect(r.message[0]);
                     } else {
-                        setSelectedDonor(null);
+                        onDonorSelect(null);
                     }
                 }
             });
         } else {
-            setSelectedDonor(null);
+            onDonorSelect(null);
         }
     };
 
     const handleNewDonor = (donor) => {
         setIsModalOpen(false);
         setMobileNumber(donor.mobile_number);
-        setSelectedDonor(donor);
+        onDonorSelect(donor);
     };
 
     return (
@@ -60,7 +58,7 @@ const DonorSection = () => {
                 </Space>
             } 
             size="small" 
-            className="aavatto-card"
+            className="aavatto-card mb-6"
         >
             <Form layout="vertical">
                 <Row gutter={24} align="bottom">
@@ -119,7 +117,7 @@ const DonorSection = () => {
                                         ghost
                                         size="middle"
                                         onClick={() => {
-                                            setSelectedDonor(null);
+                                            onDonorSelect(null);
                                             setMobileNumber("");
                                         }}
                                         className="rounded-lg font-semibold hover:bg-red-50"

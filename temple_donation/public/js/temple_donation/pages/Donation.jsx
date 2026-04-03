@@ -1,5 +1,5 @@
-import React from "react";
-import { Row, Col, Typography, Space, Button } from "antd";
+import React, { useState, useMemo, useCallback } from "react";
+import { Row, Col, Typography, Space, Button, message } from "antd";
 import { HeartFilled, RedoOutlined } from "@ant-design/icons";
 
 import DonorSection from "../components/Donation/DonorSection";
@@ -7,58 +7,175 @@ import TempleSelect from "../components/Donation/TempleSelect";
 import DonationTypes from "../components/Donation/DonationTypes";
 import Cart from "../components/Donation/Cart";
 import PaymentSection from "../components/Donation/PaymentSection";
-import { useDonation } from "../context/DonationContext";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const Donation = () => {
-    const { 
-        isSubmitting, 
-        handleReset, 
-        cartItems 
-    } = useDonation();
+    // --- State Management ---
+    const [selectedDonor, setSelectedDonor] = useState(null);
+    const [selectedTemple, setSelectedTemple] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
+    const [paymentMode, setPaymentMode] = useState("Cash");
+    const [submitting, setSubmitting] = useState(false);
 
+    // Calculate total amount
+    const totalAmount = useMemo(() => 
+        cartItems.reduce((acc, item) => acc + (item.amount || 0), 0)
+    , [cartItems]);
+
+    const handleAddToCart = useCallback((donationType) => {
+        if (!selectedTemple) {
+            message.warning("Please select a temple first.");
+            return;
+        }
+
+        // Check if already in cart
+        const exists = cartItems.find(item => item.donation_type === donationType.name);
+        if (exists) {
+            message.info(`${donationType.dontation_type} is already in the cart`);
+            return;
+        }
+
+        const newItem = {
+            donation_type: donationType.name,
+            dontation_type: donationType.dontation_type,
+            amount: 101 // Default amount
+        };
+        setCartItems(prev => [...prev, newItem]);
+        message.success(`Added ${donationType.dontation_type}`);
+    }, [cartItems, selectedTemple]);
+
+    const handleUpdateAmount = useCallback((index, amount) => {
+        const newItems = [...cartItems];
+        newItems[index].amount = parseFloat(amount) || 0;
+        setCartItems(newItems);
+    }, [cartItems]);
+
+    const handleRemoveItem = useCallback((index) => {
+        setCartItems(prev => prev.filter((_, i) => i !== index));
+    }, []);
+
+    const handleReset = useCallback(() => {
+        setSelectedDonor(null);
+        setSelectedTemple(null);
+        setCartItems([]);
+        setPaymentMode("Cash");
+    }, []);
+
+    const handleSubmit = useCallback(async () => {
+        if (!selectedDonor) {
+            message.error("Please select or add a donor");
+            return;
+        }
+        if (!selectedTemple) {
+            message.error("Please select a temple");
+            return;
+        }
+        if (cartItems.length === 0) {
+            message.error("Cart is empty. Please add donation types.");
+            return;
+        }
+
+        setSubmitting(true);
+        
+        const donationData = {
+            donor: selectedDonor.name,
+            donor_name: selectedDonor.donor_name,
+            mobile_number: selectedDonor.mobile_number,
+            temple: selectedTemple,
+            cashier: typeof frappe !== "undefined" ? frappe.session.user : "Guest",
+            payment_mode: paymentMode,
+            total_amount: totalAmount,
+            donation_items: cartItems.map(item => ({
+                donation_type: item.donation_type,
+                amount: item.amount
+            }))
+        };
+
+        frappe.call({
+            method: "frappe.client.insert",
+            args: {
+                doc: {
+                    doctype: "Donation",
+                    ...donationData
+                }
+            },
+            callback: (r) => {
+                setSubmitting(false);
+                if (r.message) {
+                    message.success("Donation submitted successfully!");
+                    handleReset();
+                    // Go back to the donation list
+                    if (typeof frappe !== "undefined") {
+                        frappe.set_route("temple-donation", "donations");
+                    }
+                }
+            },
+            error: (err) => {
+                setSubmitting(false);
+                message.error(err.message || "Failed to submit donation");
+            }
+        });
+    }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount, handleReset]);
+
+    // --- Render ---
     return (
-        <div className="container mx-auto py-8 px-4 lg:px-0">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                <Space align="center" size="middle">
-                    <div className="bg-primary/10 p-3 rounded-2xl">
-                        <HeartFilled className="text-3xl text-primary" />
-                    </div>
-                    <div>
-                        <Title level={2} className="!m-0 !font-extrabold !tracking-tight">
-                            Temple Donation POS
-                        </Title>
-                        <p className="text-gray-500 m-0">Manage temple donations efficiently</p>
-                    </div>
+        <div className="donation-page">
+            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Space>
+                    <HeartFilled style={{ fontSize: '24px', color: '#4f46e5' }} />
+                    <Title level={2} style={{ margin: 0, fontWeight: 800, letterSpacing: '-0.5px' }}>
+                        Temple Donation POS
+                    </Title>
                 </Space>
-                
-                <Button
-                    icon={<RedoOutlined />}
+                <Button 
+                    icon={<RedoOutlined />} 
                     onClick={handleReset}
-                    type="default"
-                    className="rounded-lg hover:border-primary hover:text-primary transition-all"
+                    type="text"
+                    className="hover:text-primary transition-colors"
                 >
                     Reset Form
                 </Button>
             </div>
 
-            <Row gutter={[32, 32]}>
+            <Row gutter={[24, 24]}>
                 {/* Left Side: Donor Search, Temple Selection, and Grid */}
                 <Col xs={24} lg={15}>
-                    <div className="space-y-8">
-                        <DonorSection />
-                        <TempleSelect />
-                        <DonationTypes />
+                    <div className="space-y-6">
+                        <DonorSection 
+                            onDonorSelect={setSelectedDonor} 
+                            selectedDonor={selectedDonor} 
+                        />
+                        
+                        <TempleSelect 
+                            onTempleSelect={setSelectedTemple} 
+                            selectedTemple={selectedTemple} 
+                        />
+                        
+                        <DonationTypes 
+                            selectedTemple={selectedTemple} 
+                            onAddToCart={handleAddToCart} 
+                        />
                     </div>
                 </Col>
 
                 {/* Right Side: Cart and Payment */}
                 <Col xs={24} lg={9}>
-                    <div className="space-y-8 sticky top-24">
-                        <Cart />
-                        <PaymentSection />
+                    <div className="space-y-6 sticky top-6">
+                        <Cart 
+                            items={cartItems} 
+                            onUpdateAmount={handleUpdateAmount} 
+                            onRemoveItem={handleRemoveItem}
+                            totalAmount={totalAmount}
+                        />
+                        
+                        <PaymentSection 
+                            paymentMode={paymentMode} 
+                            onPaymentModeChange={setPaymentMode}
+                            onSubmit={handleSubmit}
+                            loading={submitting}
+                            disabled={cartItems.length === 0}
+                        />
                     </div>
                 </Col>
             </Row>
