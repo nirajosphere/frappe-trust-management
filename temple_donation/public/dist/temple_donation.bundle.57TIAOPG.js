@@ -1291,7 +1291,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React443 = require_react(), Internals = {
+        var React449 = require_react(), Internals = {
           d: {
             f: noop4,
             r: function() {
@@ -1309,7 +1309,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React443.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React449.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3161,7 +3161,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React443.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React449.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18999,14 +18999,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React443 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React449 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React443.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React449.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21799,7 +21799,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React443.version;
+          var isomorphicReactPackageVersion = React449.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21970,10 +21970,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react157 = __toESM(require_react());
+  var import_react159 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react156 = __toESM(require_react());
+  var import_react158 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -83315,14 +83315,14 @@ html body {
   }
   var AppstoreOutlined_default2 = RefIcon36;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CheckCircleOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
   var React413 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/CheckCircleOutlined.js
-  var CheckCircleOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z" } }, { "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" } }] }, "name": "check-circle", "theme": "outlined" };
-  var CheckCircleOutlined_default = CheckCircleOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ArrowLeftOutlined.js
+  var ArrowLeftOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" } }] }, "name": "arrow-left", "theme": "outlined" };
+  var ArrowLeftOutlined_default = ArrowLeftOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CheckCircleOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
   function _extends95() {
     _extends95 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83337,24 +83337,24 @@ html body {
     };
     return _extends95.apply(this, arguments);
   }
-  var CheckCircleOutlined2 = (props, ref) => /* @__PURE__ */ React413.createElement(AntdIcon_default, _extends95({}, props, {
+  var ArrowLeftOutlined2 = (props, ref) => /* @__PURE__ */ React413.createElement(AntdIcon_default, _extends95({}, props, {
     ref,
-    icon: CheckCircleOutlined_default
+    icon: ArrowLeftOutlined_default
   }));
-  var RefIcon37 = /* @__PURE__ */ React413.forwardRef(CheckCircleOutlined2);
+  var RefIcon37 = /* @__PURE__ */ React413.forwardRef(ArrowLeftOutlined2);
   if (true) {
-    RefIcon37.displayName = "CheckCircleOutlined";
+    RefIcon37.displayName = "ArrowLeftOutlined";
   }
-  var CheckCircleOutlined_default2 = RefIcon37;
+  var ArrowLeftOutlined_default2 = RefIcon37;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CreditCardOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/BankOutlined.js
   var React414 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/CreditCardOutlined.js
-  var CreditCardOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-792 72h752v120H136V232zm752 560H136V440h752v352zm-237-64h165c4.4 0 8-3.6 8-8v-72c0-4.4-3.6-8-8-8H651c-4.4 0-8 3.6-8 8v72c0 4.4 3.6 8 8 8z" } }] }, "name": "credit-card", "theme": "outlined" };
-  var CreditCardOutlined_default = CreditCardOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/BankOutlined.js
+  var BankOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M894 462c30.9 0 43.8-39.7 18.7-58L530.8 126.2a31.81 31.81 0 00-37.6 0L111.3 404c-25.1 18.2-12.2 58 18.8 58H192v374h-72c-4.4 0-8 3.6-8 8v52c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-52c0-4.4-3.6-8-8-8h-72V462h62zM512 196.7l271.1 197.2H240.9L512 196.7zM264 462h117v374H264V462zm189 0h117v374H453V462zm307 374H642V462h118v374z" } }] }, "name": "bank", "theme": "outlined" };
+  var BankOutlined_default = BankOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CreditCardOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/BankOutlined.js
   function _extends96() {
     _extends96 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83369,24 +83369,24 @@ html body {
     };
     return _extends96.apply(this, arguments);
   }
-  var CreditCardOutlined2 = (props, ref) => /* @__PURE__ */ React414.createElement(AntdIcon_default, _extends96({}, props, {
+  var BankOutlined2 = (props, ref) => /* @__PURE__ */ React414.createElement(AntdIcon_default, _extends96({}, props, {
     ref,
-    icon: CreditCardOutlined_default
+    icon: BankOutlined_default
   }));
-  var RefIcon38 = /* @__PURE__ */ React414.forwardRef(CreditCardOutlined2);
+  var RefIcon38 = /* @__PURE__ */ React414.forwardRef(BankOutlined2);
   if (true) {
-    RefIcon38.displayName = "CreditCardOutlined";
+    RefIcon38.displayName = "BankOutlined";
   }
-  var CreditCardOutlined_default2 = RefIcon38;
+  var BankOutlined_default2 = RefIcon38;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CheckCircleOutlined.js
   var React415 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/DashboardOutlined.js
-  var DashboardOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M924.8 385.6a446.7 446.7 0 00-96-142.4 446.7 446.7 0 00-142.4-96C631.1 123.8 572.5 112 512 112s-119.1 11.8-174.4 35.2a446.7 446.7 0 00-142.4 96 446.7 446.7 0 00-96 142.4C75.8 440.9 64 499.5 64 560c0 132.7 58.3 257.7 159.9 343.1l1.7 1.4c5.8 4.8 13.1 7.5 20.6 7.5h531.7c7.5 0 14.8-2.7 20.6-7.5l1.7-1.4C901.7 817.7 960 692.7 960 560c0-60.5-11.9-119.1-35.2-174.4zM761.4 836H262.6A371.12 371.12 0 01140 560c0-99.4 38.7-192.8 109-263 70.3-70.3 163.7-109 263-109 99.4 0 192.8 38.7 263 109 70.3 70.3 109 163.7 109 263 0 105.6-44.5 205.5-122.6 276zM623.5 421.5a8.03 8.03 0 00-11.3 0L527.7 506c-18.7-5-39.4-.2-54.1 14.5a55.95 55.95 0 000 79.2 55.95 55.95 0 0079.2 0 55.87 55.87 0 0014.5-54.1l84.5-84.5c3.1-3.1 3.1-8.2 0-11.3l-28.3-28.3zM490 320h44c4.4 0 8-3.6 8-8v-80c0-4.4-3.6-8-8-8h-44c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8zm260 218v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8h-80c-4.4 0-8 3.6-8 8zm12.7-197.2l-31.1-31.1a8.03 8.03 0 00-11.3 0l-56.6 56.6a8.03 8.03 0 000 11.3l31.1 31.1c3.1 3.1 8.2 3.1 11.3 0l56.6-56.6c3.1-3.1 3.1-8.2 0-11.3zm-458.6-31.1a8.03 8.03 0 00-11.3 0l-31.1 31.1a8.03 8.03 0 000 11.3l56.6 56.6c3.1 3.1 8.2 3.1 11.3 0l31.1-31.1c3.1-3.1 3.1-8.2 0-11.3l-56.6-56.6zM262 530h-80c-4.4 0-8 3.6-8 8v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8z" } }] }, "name": "dashboard", "theme": "outlined" };
-  var DashboardOutlined_default = DashboardOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/CheckCircleOutlined.js
+  var CheckCircleOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z" } }, { "tag": "path", "attrs": { "d": "M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" } }] }, "name": "check-circle", "theme": "outlined" };
+  var CheckCircleOutlined_default = CheckCircleOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CheckCircleOutlined.js
   function _extends97() {
     _extends97 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83401,24 +83401,24 @@ html body {
     };
     return _extends97.apply(this, arguments);
   }
-  var DashboardOutlined2 = (props, ref) => /* @__PURE__ */ React415.createElement(AntdIcon_default, _extends97({}, props, {
+  var CheckCircleOutlined2 = (props, ref) => /* @__PURE__ */ React415.createElement(AntdIcon_default, _extends97({}, props, {
     ref,
-    icon: DashboardOutlined_default
+    icon: CheckCircleOutlined_default
   }));
-  var RefIcon39 = /* @__PURE__ */ React415.forwardRef(DashboardOutlined2);
+  var RefIcon39 = /* @__PURE__ */ React415.forwardRef(CheckCircleOutlined2);
   if (true) {
-    RefIcon39.displayName = "DashboardOutlined";
+    RefIcon39.displayName = "CheckCircleOutlined";
   }
-  var DashboardOutlined_default2 = RefIcon39;
+  var CheckCircleOutlined_default2 = RefIcon39;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/EnvironmentOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CreditCardOutlined.js
   var React416 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/EnvironmentOutlined.js
-  var EnvironmentOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M854.6 289.1a362.49 362.49 0 00-79.9-115.7 370.83 370.83 0 00-118.2-77.8C610.7 76.6 562.1 67 512 67c-50.1 0-98.7 9.6-144.5 28.5-44.3 18.3-84 44.5-118.2 77.8A363.6 363.6 0 00169.4 289c-19.5 45-29.4 92.8-29.4 142 0 70.6 16.9 140.9 50.1 208.7 26.7 54.5 64 107.6 111 158.1 80.3 86.2 164.5 138.9 188.4 153a43.9 43.9 0 0022.4 6.1c7.8 0 15.5-2 22.4-6.1 23.9-14.1 108.1-66.8 188.4-153 47-50.4 84.3-103.6 111-158.1C867.1 572 884 501.8 884 431.1c0-49.2-9.9-97-29.4-142zM512 880.2c-65.9-41.9-300-207.8-300-449.1 0-77.9 31.1-151.1 87.6-206.3C356.3 169.5 431.7 139 512 139s155.7 30.5 212.4 85.9C780.9 280 812 353.2 812 431.1c0 241.3-234.1 407.2-300 449.1zm0-617.2c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 551c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 439c0-29.9 11.7-58 32.8-79.2C454 338.6 482.1 327 512 327c29.9 0 58 11.6 79.2 32.8C612.4 381 624 409.1 624 439c0 29.9-11.6 58-32.8 79.2z" } }] }, "name": "environment", "theme": "outlined" };
-  var EnvironmentOutlined_default = EnvironmentOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/CreditCardOutlined.js
+  var CreditCardOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-792 72h752v120H136V232zm752 560H136V440h752v352zm-237-64h165c4.4 0 8-3.6 8-8v-72c0-4.4-3.6-8-8-8H651c-4.4 0-8 3.6-8 8v72c0 4.4 3.6 8 8 8z" } }] }, "name": "credit-card", "theme": "outlined" };
+  var CreditCardOutlined_default = CreditCardOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/EnvironmentOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/CreditCardOutlined.js
   function _extends98() {
     _extends98 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83433,24 +83433,24 @@ html body {
     };
     return _extends98.apply(this, arguments);
   }
-  var EnvironmentOutlined2 = (props, ref) => /* @__PURE__ */ React416.createElement(AntdIcon_default, _extends98({}, props, {
+  var CreditCardOutlined2 = (props, ref) => /* @__PURE__ */ React416.createElement(AntdIcon_default, _extends98({}, props, {
     ref,
-    icon: EnvironmentOutlined_default
+    icon: CreditCardOutlined_default
   }));
-  var RefIcon40 = /* @__PURE__ */ React416.forwardRef(EnvironmentOutlined2);
+  var RefIcon40 = /* @__PURE__ */ React416.forwardRef(CreditCardOutlined2);
   if (true) {
-    RefIcon40.displayName = "EnvironmentOutlined";
+    RefIcon40.displayName = "CreditCardOutlined";
   }
-  var EnvironmentOutlined_default2 = RefIcon40;
+  var CreditCardOutlined_default2 = RefIcon40;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
   var React417 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HeartFilled.js
-  var HeartFilled = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M923 283.6a260.04 260.04 0 00-56.9-82.8 264.4 264.4 0 00-84-55.5A265.34 265.34 0 00679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 00-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9z" } }] }, "name": "heart", "theme": "filled" };
-  var HeartFilled_default = HeartFilled;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/DashboardOutlined.js
+  var DashboardOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M924.8 385.6a446.7 446.7 0 00-96-142.4 446.7 446.7 0 00-142.4-96C631.1 123.8 572.5 112 512 112s-119.1 11.8-174.4 35.2a446.7 446.7 0 00-142.4 96 446.7 446.7 0 00-96 142.4C75.8 440.9 64 499.5 64 560c0 132.7 58.3 257.7 159.9 343.1l1.7 1.4c5.8 4.8 13.1 7.5 20.6 7.5h531.7c7.5 0 14.8-2.7 20.6-7.5l1.7-1.4C901.7 817.7 960 692.7 960 560c0-60.5-11.9-119.1-35.2-174.4zM761.4 836H262.6A371.12 371.12 0 01140 560c0-99.4 38.7-192.8 109-263 70.3-70.3 163.7-109 263-109 99.4 0 192.8 38.7 263 109 70.3 70.3 109 163.7 109 263 0 105.6-44.5 205.5-122.6 276zM623.5 421.5a8.03 8.03 0 00-11.3 0L527.7 506c-18.7-5-39.4-.2-54.1 14.5a55.95 55.95 0 000 79.2 55.95 55.95 0 0079.2 0 55.87 55.87 0 0014.5-54.1l84.5-84.5c3.1-3.1 3.1-8.2 0-11.3l-28.3-28.3zM490 320h44c4.4 0 8-3.6 8-8v-80c0-4.4-3.6-8-8-8h-44c-4.4 0-8 3.6-8 8v80c0 4.4 3.6 8 8 8zm260 218v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8h-80c-4.4 0-8 3.6-8 8zm12.7-197.2l-31.1-31.1a8.03 8.03 0 00-11.3 0l-56.6 56.6a8.03 8.03 0 000 11.3l31.1 31.1c3.1 3.1 8.2 3.1 11.3 0l56.6-56.6c3.1-3.1 3.1-8.2 0-11.3zm-458.6-31.1a8.03 8.03 0 00-11.3 0l-31.1 31.1a8.03 8.03 0 000 11.3l56.6 56.6c3.1 3.1 8.2 3.1 11.3 0l31.1-31.1c3.1-3.1 3.1-8.2 0-11.3l-56.6-56.6zM262 530h-80c-4.4 0-8 3.6-8 8v44c0 4.4 3.6 8 8 8h80c4.4 0 8-3.6 8-8v-44c0-4.4-3.6-8-8-8z" } }] }, "name": "dashboard", "theme": "outlined" };
+  var DashboardOutlined_default = DashboardOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/DashboardOutlined.js
   function _extends99() {
     _extends99 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83465,24 +83465,24 @@ html body {
     };
     return _extends99.apply(this, arguments);
   }
-  var HeartFilled2 = (props, ref) => /* @__PURE__ */ React417.createElement(AntdIcon_default, _extends99({}, props, {
+  var DashboardOutlined2 = (props, ref) => /* @__PURE__ */ React417.createElement(AntdIcon_default, _extends99({}, props, {
     ref,
-    icon: HeartFilled_default
+    icon: DashboardOutlined_default
   }));
-  var RefIcon41 = /* @__PURE__ */ React417.forwardRef(HeartFilled2);
+  var RefIcon41 = /* @__PURE__ */ React417.forwardRef(DashboardOutlined2);
   if (true) {
-    RefIcon41.displayName = "HeartFilled";
+    RefIcon41.displayName = "DashboardOutlined";
   }
-  var HeartFilled_default2 = RefIcon41;
+  var DashboardOutlined_default2 = RefIcon41;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HomeOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/EnvironmentOutlined.js
   var React418 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HomeOutlined.js
-  var HomeOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" } }] }, "name": "home", "theme": "outlined" };
-  var HomeOutlined_default = HomeOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/EnvironmentOutlined.js
+  var EnvironmentOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M854.6 289.1a362.49 362.49 0 00-79.9-115.7 370.83 370.83 0 00-118.2-77.8C610.7 76.6 562.1 67 512 67c-50.1 0-98.7 9.6-144.5 28.5-44.3 18.3-84 44.5-118.2 77.8A363.6 363.6 0 00169.4 289c-19.5 45-29.4 92.8-29.4 142 0 70.6 16.9 140.9 50.1 208.7 26.7 54.5 64 107.6 111 158.1 80.3 86.2 164.5 138.9 188.4 153a43.9 43.9 0 0022.4 6.1c7.8 0 15.5-2 22.4-6.1 23.9-14.1 108.1-66.8 188.4-153 47-50.4 84.3-103.6 111-158.1C867.1 572 884 501.8 884 431.1c0-49.2-9.9-97-29.4-142zM512 880.2c-65.9-41.9-300-207.8-300-449.1 0-77.9 31.1-151.1 87.6-206.3C356.3 169.5 431.7 139 512 139s155.7 30.5 212.4 85.9C780.9 280 812 353.2 812 431.1c0 241.3-234.1 407.2-300 449.1zm0-617.2c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 551c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 439c0-29.9 11.7-58 32.8-79.2C454 338.6 482.1 327 512 327c29.9 0 58 11.6 79.2 32.8C612.4 381 624 409.1 624 439c0 29.9-11.6 58-32.8 79.2z" } }] }, "name": "environment", "theme": "outlined" };
+  var EnvironmentOutlined_default = EnvironmentOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HomeOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/EnvironmentOutlined.js
   function _extends100() {
     _extends100 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83497,24 +83497,24 @@ html body {
     };
     return _extends100.apply(this, arguments);
   }
-  var HomeOutlined2 = (props, ref) => /* @__PURE__ */ React418.createElement(AntdIcon_default, _extends100({}, props, {
+  var EnvironmentOutlined2 = (props, ref) => /* @__PURE__ */ React418.createElement(AntdIcon_default, _extends100({}, props, {
     ref,
-    icon: HomeOutlined_default
+    icon: EnvironmentOutlined_default
   }));
-  var RefIcon42 = /* @__PURE__ */ React418.forwardRef(HomeOutlined2);
+  var RefIcon42 = /* @__PURE__ */ React418.forwardRef(EnvironmentOutlined2);
   if (true) {
-    RefIcon42.displayName = "HomeOutlined";
+    RefIcon42.displayName = "EnvironmentOutlined";
   }
-  var HomeOutlined_default2 = RefIcon42;
+  var EnvironmentOutlined_default2 = RefIcon42;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MailOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
   var React419 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/MailOutlined.js
-  var MailOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" } }] }, "name": "mail", "theme": "outlined" };
-  var MailOutlined_default = MailOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HeartFilled.js
+  var HeartFilled = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M923 283.6a260.04 260.04 0 00-56.9-82.8 264.4 264.4 0 00-84-55.5A265.34 265.34 0 00679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 00-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9z" } }] }, "name": "heart", "theme": "filled" };
+  var HeartFilled_default = HeartFilled;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MailOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
   function _extends101() {
     _extends101 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83529,24 +83529,24 @@ html body {
     };
     return _extends101.apply(this, arguments);
   }
-  var MailOutlined2 = (props, ref) => /* @__PURE__ */ React419.createElement(AntdIcon_default, _extends101({}, props, {
+  var HeartFilled2 = (props, ref) => /* @__PURE__ */ React419.createElement(AntdIcon_default, _extends101({}, props, {
     ref,
-    icon: MailOutlined_default
+    icon: HeartFilled_default
   }));
-  var RefIcon43 = /* @__PURE__ */ React419.forwardRef(MailOutlined2);
+  var RefIcon43 = /* @__PURE__ */ React419.forwardRef(HeartFilled2);
   if (true) {
-    RefIcon43.displayName = "MailOutlined";
+    RefIcon43.displayName = "HeartFilled";
   }
-  var MailOutlined_default2 = RefIcon43;
+  var HeartFilled_default2 = RefIcon43;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PhoneOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HistoryOutlined.js
   var React420 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/PhoneOutlined.js
-  var PhoneOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M877.1 238.7L770.6 132.3c-13-13-30.4-20.3-48.8-20.3s-35.8 7.2-48.8 20.3L558.3 246.8c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l89.6 89.7a405.46 405.46 0 01-86.4 127.3c-36.7 36.9-79.6 66-127.2 86.6l-89.6-89.7c-13-13-30.4-20.3-48.8-20.3a68.2 68.2 0 00-48.8 20.3L132.3 673c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l106.4 106.4c22.2 22.2 52.8 34.9 84.2 34.9 6.5 0 12.8-.5 19.2-1.6 132.4-21.8 263.8-92.3 369.9-198.3C818 606 888.4 474.6 910.4 342.1c6.3-37.6-6.3-76.3-33.3-103.4zm-37.6 91.5c-19.5 117.9-82.9 235.5-178.4 331s-213 158.9-330.9 178.4c-14.8 2.5-30-2.5-40.8-13.2L184.9 721.9 295.7 611l119.8 120 .9.9 21.6-8a481.29 481.29 0 00285.7-285.8l8-21.6-120.8-120.7 110.8-110.9 104.5 104.5c10.8 10.8 15.8 26 13.3 40.8z" } }] }, "name": "phone", "theme": "outlined" };
-  var PhoneOutlined_default = PhoneOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HistoryOutlined.js
+  var HistoryOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 003 14.1zm167.7 301.1l-56.7-19.5a8 8 0 00-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 01-112.5 75.9 352.18 352.18 0 01-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 01-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 01171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 01112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 01775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z" } }] }, "name": "history", "theme": "outlined" };
+  var HistoryOutlined_default = HistoryOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PhoneOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HistoryOutlined.js
   function _extends102() {
     _extends102 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83561,24 +83561,24 @@ html body {
     };
     return _extends102.apply(this, arguments);
   }
-  var PhoneOutlined2 = (props, ref) => /* @__PURE__ */ React420.createElement(AntdIcon_default, _extends102({}, props, {
+  var HistoryOutlined2 = (props, ref) => /* @__PURE__ */ React420.createElement(AntdIcon_default, _extends102({}, props, {
     ref,
-    icon: PhoneOutlined_default
+    icon: HistoryOutlined_default
   }));
-  var RefIcon44 = /* @__PURE__ */ React420.forwardRef(PhoneOutlined2);
+  var RefIcon44 = /* @__PURE__ */ React420.forwardRef(HistoryOutlined2);
   if (true) {
-    RefIcon44.displayName = "PhoneOutlined";
+    RefIcon44.displayName = "HistoryOutlined";
   }
-  var PhoneOutlined_default2 = RefIcon44;
+  var HistoryOutlined_default2 = RefIcon44;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ProfileOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HomeOutlined.js
   var React421 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ProfileOutlined.js
-  var ProfileOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656zM492 400h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zM340 368a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "profile", "theme": "outlined" };
-  var ProfileOutlined_default = ProfileOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HomeOutlined.js
+  var HomeOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" } }] }, "name": "home", "theme": "outlined" };
+  var HomeOutlined_default = HomeOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ProfileOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HomeOutlined.js
   function _extends103() {
     _extends103 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83593,24 +83593,24 @@ html body {
     };
     return _extends103.apply(this, arguments);
   }
-  var ProfileOutlined2 = (props, ref) => /* @__PURE__ */ React421.createElement(AntdIcon_default, _extends103({}, props, {
+  var HomeOutlined2 = (props, ref) => /* @__PURE__ */ React421.createElement(AntdIcon_default, _extends103({}, props, {
     ref,
-    icon: ProfileOutlined_default
+    icon: HomeOutlined_default
   }));
-  var RefIcon45 = /* @__PURE__ */ React421.forwardRef(ProfileOutlined2);
+  var RefIcon45 = /* @__PURE__ */ React421.forwardRef(HomeOutlined2);
   if (true) {
-    RefIcon45.displayName = "ProfileOutlined";
+    RefIcon45.displayName = "HomeOutlined";
   }
-  var ProfileOutlined_default2 = RefIcon45;
+  var HomeOutlined_default2 = RefIcon45;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/QrcodeOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MailOutlined.js
   var React422 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/QrcodeOutlined.js
-  var QrcodeOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M468 128H160c-17.7 0-32 14.3-32 32v308c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V136c0-4.4-3.6-8-8-8zm-56 284H192V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm194 210H136c-4.4 0-8 3.6-8 8v308c0 17.7 14.3 32 32 32h308c4.4 0 8-3.6 8-8V556c0-4.4-3.6-8-8-8zm-56 284H192V612h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm590-630H556c-4.4 0-8 3.6-8 8v332c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V160c0-17.7-14.3-32-32-32zm-32 284H612V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm194 210h-48c-4.4 0-8 3.6-8 8v134h-78V556c0-4.4-3.6-8-8-8H556c-4.4 0-8 3.6-8 8v332c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V644h78v102c0 4.4 3.6 8 8 8h190c4.4 0 8-3.6 8-8V556c0-4.4-3.6-8-8-8zM746 832h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zm142 0h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z" } }] }, "name": "qrcode", "theme": "outlined" };
-  var QrcodeOutlined_default = QrcodeOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/MailOutlined.js
+  var MailOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z" } }] }, "name": "mail", "theme": "outlined" };
+  var MailOutlined_default = MailOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/QrcodeOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MailOutlined.js
   function _extends104() {
     _extends104 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83625,24 +83625,24 @@ html body {
     };
     return _extends104.apply(this, arguments);
   }
-  var QrcodeOutlined2 = (props, ref) => /* @__PURE__ */ React422.createElement(AntdIcon_default, _extends104({}, props, {
+  var MailOutlined2 = (props, ref) => /* @__PURE__ */ React422.createElement(AntdIcon_default, _extends104({}, props, {
     ref,
-    icon: QrcodeOutlined_default
+    icon: MailOutlined_default
   }));
-  var RefIcon46 = /* @__PURE__ */ React422.forwardRef(QrcodeOutlined2);
+  var RefIcon46 = /* @__PURE__ */ React422.forwardRef(MailOutlined2);
   if (true) {
-    RefIcon46.displayName = "QrcodeOutlined";
+    RefIcon46.displayName = "MailOutlined";
   }
-  var QrcodeOutlined_default2 = RefIcon46;
+  var MailOutlined_default2 = RefIcon46;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PhoneOutlined.js
   var React423 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/RedoOutlined.js
-  var RedoOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z" } }] }, "name": "redo", "theme": "outlined" };
-  var RedoOutlined_default = RedoOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/PhoneOutlined.js
+  var PhoneOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M877.1 238.7L770.6 132.3c-13-13-30.4-20.3-48.8-20.3s-35.8 7.2-48.8 20.3L558.3 246.8c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l89.6 89.7a405.46 405.46 0 01-86.4 127.3c-36.7 36.9-79.6 66-127.2 86.6l-89.6-89.7c-13-13-30.4-20.3-48.8-20.3a68.2 68.2 0 00-48.8 20.3L132.3 673c-13 13-20.3 30.5-20.3 48.9 0 18.5 7.2 35.8 20.3 48.9l106.4 106.4c22.2 22.2 52.8 34.9 84.2 34.9 6.5 0 12.8-.5 19.2-1.6 132.4-21.8 263.8-92.3 369.9-198.3C818 606 888.4 474.6 910.4 342.1c6.3-37.6-6.3-76.3-33.3-103.4zm-37.6 91.5c-19.5 117.9-82.9 235.5-178.4 331s-213 158.9-330.9 178.4c-14.8 2.5-30-2.5-40.8-13.2L184.9 721.9 295.7 611l119.8 120 .9.9 21.6-8a481.29 481.29 0 00285.7-285.8l8-21.6-120.8-120.7 110.8-110.9 104.5 104.5c10.8 10.8 15.8 26 13.3 40.8z" } }] }, "name": "phone", "theme": "outlined" };
+  var PhoneOutlined_default = PhoneOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PhoneOutlined.js
   function _extends105() {
     _extends105 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83657,24 +83657,24 @@ html body {
     };
     return _extends105.apply(this, arguments);
   }
-  var RedoOutlined2 = (props, ref) => /* @__PURE__ */ React423.createElement(AntdIcon_default, _extends105({}, props, {
+  var PhoneOutlined2 = (props, ref) => /* @__PURE__ */ React423.createElement(AntdIcon_default, _extends105({}, props, {
     ref,
-    icon: RedoOutlined_default
+    icon: PhoneOutlined_default
   }));
-  var RefIcon47 = /* @__PURE__ */ React423.forwardRef(RedoOutlined2);
+  var RefIcon47 = /* @__PURE__ */ React423.forwardRef(PhoneOutlined2);
   if (true) {
-    RefIcon47.displayName = "RedoOutlined";
+    RefIcon47.displayName = "PhoneOutlined";
   }
-  var RedoOutlined_default2 = RefIcon47;
+  var PhoneOutlined_default2 = RefIcon47;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ProfileOutlined.js
   var React424 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SafetyCertificateOutlined.js
-  var SafetyCertificateOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z" } }] }, "name": "safety-certificate", "theme": "outlined" };
-  var SafetyCertificateOutlined_default = SafetyCertificateOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ProfileOutlined.js
+  var ProfileOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 728H184V184h656v656zM492 400h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zm0 144h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H492c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8zM340 368a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0zm0 144a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "profile", "theme": "outlined" };
+  var ProfileOutlined_default = ProfileOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ProfileOutlined.js
   function _extends106() {
     _extends106 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83689,24 +83689,24 @@ html body {
     };
     return _extends106.apply(this, arguments);
   }
-  var SafetyCertificateOutlined2 = (props, ref) => /* @__PURE__ */ React424.createElement(AntdIcon_default, _extends106({}, props, {
+  var ProfileOutlined2 = (props, ref) => /* @__PURE__ */ React424.createElement(AntdIcon_default, _extends106({}, props, {
     ref,
-    icon: SafetyCertificateOutlined_default
+    icon: ProfileOutlined_default
   }));
-  var RefIcon48 = /* @__PURE__ */ React424.forwardRef(SafetyCertificateOutlined2);
+  var RefIcon48 = /* @__PURE__ */ React424.forwardRef(ProfileOutlined2);
   if (true) {
-    RefIcon48.displayName = "SafetyCertificateOutlined";
+    RefIcon48.displayName = "ProfileOutlined";
   }
-  var SafetyCertificateOutlined_default2 = RefIcon48;
+  var ProfileOutlined_default2 = RefIcon48;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/QrcodeOutlined.js
   var React425 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ShoppingCartOutlined.js
-  var ShoppingCartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "0 0 1024 1024", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z" } }] }, "name": "shopping-cart", "theme": "outlined" };
-  var ShoppingCartOutlined_default = ShoppingCartOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/QrcodeOutlined.js
+  var QrcodeOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M468 128H160c-17.7 0-32 14.3-32 32v308c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V136c0-4.4-3.6-8-8-8zm-56 284H192V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm194 210H136c-4.4 0-8 3.6-8 8v308c0 17.7 14.3 32 32 32h308c4.4 0 8-3.6 8-8V556c0-4.4-3.6-8-8-8zm-56 284H192V612h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm590-630H556c-4.4 0-8 3.6-8 8v332c0 4.4 3.6 8 8 8h332c4.4 0 8-3.6 8-8V160c0-17.7-14.3-32-32-32zm-32 284H612V192h220v220zm-138-74h56c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm194 210h-48c-4.4 0-8 3.6-8 8v134h-78V556c0-4.4-3.6-8-8-8H556c-4.4 0-8 3.6-8 8v332c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V644h78v102c0 4.4 3.6 8 8 8h190c4.4 0 8-3.6 8-8V556c0-4.4-3.6-8-8-8zM746 832h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zm142 0h-48c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z" } }] }, "name": "qrcode", "theme": "outlined" };
+  var QrcodeOutlined_default = QrcodeOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/QrcodeOutlined.js
   function _extends107() {
     _extends107 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83721,24 +83721,24 @@ html body {
     };
     return _extends107.apply(this, arguments);
   }
-  var ShoppingCartOutlined2 = (props, ref) => /* @__PURE__ */ React425.createElement(AntdIcon_default, _extends107({}, props, {
+  var QrcodeOutlined2 = (props, ref) => /* @__PURE__ */ React425.createElement(AntdIcon_default, _extends107({}, props, {
     ref,
-    icon: ShoppingCartOutlined_default
+    icon: QrcodeOutlined_default
   }));
-  var RefIcon49 = /* @__PURE__ */ React425.forwardRef(ShoppingCartOutlined2);
+  var RefIcon49 = /* @__PURE__ */ React425.forwardRef(QrcodeOutlined2);
   if (true) {
-    RefIcon49.displayName = "ShoppingCartOutlined";
+    RefIcon49.displayName = "QrcodeOutlined";
   }
-  var ShoppingCartOutlined_default2 = RefIcon49;
+  var QrcodeOutlined_default2 = RefIcon49;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
   var React426 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserAddOutlined.js
-  var UserAddOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M678.3 642.4c24.2-13 51.9-20.4 81.4-20.4h.1c3 0 4.4-3.6 2.2-5.6a371.67 371.67 0 00-103.7-65.8c-.4-.2-.8-.3-1.2-.5C719.2 505 759.6 431.7 759.6 349c0-137-110.8-248-247.5-248S264.7 212 264.7 349c0 82.7 40.4 156 102.6 201.1-.4.2-.8.3-1.2.5-44.7 18.9-84.8 46-119.3 80.6a373.42 373.42 0 00-80.4 119.5A373.6 373.6 0 00137 888.8a8 8 0 008 8.2h59.9c4.3 0 7.9-3.5 8-7.8 2-77.2 32.9-149.5 87.6-204.3C357 628.2 432.2 597 512.2 597c56.7 0 111.1 15.7 158 45.1a8.1 8.1 0 008.1.3zM512.2 521c-45.8 0-88.9-17.9-121.4-50.4A171.2 171.2 0 01340.5 349c0-45.9 17.9-89.1 50.3-121.6S466.3 177 512.2 177s88.9 17.9 121.4 50.4A171.2 171.2 0 01683.9 349c0 45.9-17.9 89.1-50.3 121.6C601.1 503.1 558 521 512.2 521zM880 759h-84v-84c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v84h-84c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h84v84c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-84h84c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z" } }] }, "name": "user-add", "theme": "outlined" };
-  var UserAddOutlined_default = UserAddOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/RedoOutlined.js
+  var RedoOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z" } }] }, "name": "redo", "theme": "outlined" };
+  var RedoOutlined_default = RedoOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
   function _extends108() {
     _extends108 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83753,24 +83753,24 @@ html body {
     };
     return _extends108.apply(this, arguments);
   }
-  var UserAddOutlined2 = (props, ref) => /* @__PURE__ */ React426.createElement(AntdIcon_default, _extends108({}, props, {
+  var RedoOutlined2 = (props, ref) => /* @__PURE__ */ React426.createElement(AntdIcon_default, _extends108({}, props, {
     ref,
-    icon: UserAddOutlined_default
+    icon: RedoOutlined_default
   }));
-  var RefIcon50 = /* @__PURE__ */ React426.forwardRef(UserAddOutlined2);
+  var RefIcon50 = /* @__PURE__ */ React426.forwardRef(RedoOutlined2);
   if (true) {
-    RefIcon50.displayName = "UserAddOutlined";
+    RefIcon50.displayName = "RedoOutlined";
   }
-  var UserAddOutlined_default2 = RefIcon50;
+  var RedoOutlined_default2 = RefIcon50;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
   var React427 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserOutlined.js
-  var UserOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" } }] }, "name": "user", "theme": "outlined" };
-  var UserOutlined_default = UserOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SafetyCertificateOutlined.js
+  var SafetyCertificateOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z" } }] }, "name": "safety-certificate", "theme": "outlined" };
+  var SafetyCertificateOutlined_default = SafetyCertificateOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js
   function _extends109() {
     _extends109 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83785,24 +83785,24 @@ html body {
     };
     return _extends109.apply(this, arguments);
   }
-  var UserOutlined2 = (props, ref) => /* @__PURE__ */ React427.createElement(AntdIcon_default, _extends109({}, props, {
+  var SafetyCertificateOutlined2 = (props, ref) => /* @__PURE__ */ React427.createElement(AntdIcon_default, _extends109({}, props, {
     ref,
-    icon: UserOutlined_default
+    icon: SafetyCertificateOutlined_default
   }));
-  var RefIcon51 = /* @__PURE__ */ React427.forwardRef(UserOutlined2);
+  var RefIcon51 = /* @__PURE__ */ React427.forwardRef(SafetyCertificateOutlined2);
   if (true) {
-    RefIcon51.displayName = "UserOutlined";
+    RefIcon51.displayName = "SafetyCertificateOutlined";
   }
-  var UserOutlined_default2 = RefIcon51;
+  var SafetyCertificateOutlined_default2 = RefIcon51;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
   var React428 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/WalletOutlined.js
-  var WalletOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 464H528V448h312v128zm0 264H184V184h656v200H496c-17.7 0-32 14.3-32 32v192c0 17.7 14.3 32 32 32h344v200zM580 512a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "wallet", "theme": "outlined" };
-  var WalletOutlined_default = WalletOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SaveOutlined.js
+  var SaveOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M893.3 293.3L730.7 130.7c-7.5-7.5-16.7-13-26.7-16V112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V338.5c0-17-6.7-33.2-18.7-45.2zM384 184h256v104H384V184zm456 656H184V184h136v136c0 17.7 14.3 32 32 32h320c17.7 0 32-14.3 32-32V205.8l136 136V840zM512 442c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144-64.5-144-144-144zm0 224c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z" } }] }, "name": "save", "theme": "outlined" };
+  var SaveOutlined_default = SaveOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
   function _extends110() {
     _extends110 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -83817,15 +83817,143 @@ html body {
     };
     return _extends110.apply(this, arguments);
   }
-  var WalletOutlined2 = (props, ref) => /* @__PURE__ */ React428.createElement(AntdIcon_default, _extends110({}, props, {
+  var SaveOutlined2 = (props, ref) => /* @__PURE__ */ React428.createElement(AntdIcon_default, _extends110({}, props, {
+    ref,
+    icon: SaveOutlined_default
+  }));
+  var RefIcon52 = /* @__PURE__ */ React428.forwardRef(SaveOutlined2);
+  if (true) {
+    RefIcon52.displayName = "SaveOutlined";
+  }
+  var SaveOutlined_default2 = RefIcon52;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  var React429 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ShoppingCartOutlined.js
+  var ShoppingCartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "0 0 1024 1024", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z" } }] }, "name": "shopping-cart", "theme": "outlined" };
+  var ShoppingCartOutlined_default = ShoppingCartOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  function _extends111() {
+    _extends111 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends111.apply(this, arguments);
+  }
+  var ShoppingCartOutlined2 = (props, ref) => /* @__PURE__ */ React429.createElement(AntdIcon_default, _extends111({}, props, {
+    ref,
+    icon: ShoppingCartOutlined_default
+  }));
+  var RefIcon53 = /* @__PURE__ */ React429.forwardRef(ShoppingCartOutlined2);
+  if (true) {
+    RefIcon53.displayName = "ShoppingCartOutlined";
+  }
+  var ShoppingCartOutlined_default2 = RefIcon53;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  var React430 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserAddOutlined.js
+  var UserAddOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M678.3 642.4c24.2-13 51.9-20.4 81.4-20.4h.1c3 0 4.4-3.6 2.2-5.6a371.67 371.67 0 00-103.7-65.8c-.4-.2-.8-.3-1.2-.5C719.2 505 759.6 431.7 759.6 349c0-137-110.8-248-247.5-248S264.7 212 264.7 349c0 82.7 40.4 156 102.6 201.1-.4.2-.8.3-1.2.5-44.7 18.9-84.8 46-119.3 80.6a373.42 373.42 0 00-80.4 119.5A373.6 373.6 0 00137 888.8a8 8 0 008 8.2h59.9c4.3 0 7.9-3.5 8-7.8 2-77.2 32.9-149.5 87.6-204.3C357 628.2 432.2 597 512.2 597c56.7 0 111.1 15.7 158 45.1a8.1 8.1 0 008.1.3zM512.2 521c-45.8 0-88.9-17.9-121.4-50.4A171.2 171.2 0 01340.5 349c0-45.9 17.9-89.1 50.3-121.6S466.3 177 512.2 177s88.9 17.9 121.4 50.4A171.2 171.2 0 01683.9 349c0 45.9-17.9 89.1-50.3 121.6C601.1 503.1 558 521 512.2 521zM880 759h-84v-84c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v84h-84c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h84v84c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-84h84c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z" } }] }, "name": "user-add", "theme": "outlined" };
+  var UserAddOutlined_default = UserAddOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  function _extends112() {
+    _extends112 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends112.apply(this, arguments);
+  }
+  var UserAddOutlined2 = (props, ref) => /* @__PURE__ */ React430.createElement(AntdIcon_default, _extends112({}, props, {
+    ref,
+    icon: UserAddOutlined_default
+  }));
+  var RefIcon54 = /* @__PURE__ */ React430.forwardRef(UserAddOutlined2);
+  if (true) {
+    RefIcon54.displayName = "UserAddOutlined";
+  }
+  var UserAddOutlined_default2 = RefIcon54;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  var React431 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserOutlined.js
+  var UserOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" } }] }, "name": "user", "theme": "outlined" };
+  var UserOutlined_default = UserOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  function _extends113() {
+    _extends113 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends113.apply(this, arguments);
+  }
+  var UserOutlined2 = (props, ref) => /* @__PURE__ */ React431.createElement(AntdIcon_default, _extends113({}, props, {
+    ref,
+    icon: UserOutlined_default
+  }));
+  var RefIcon55 = /* @__PURE__ */ React431.forwardRef(UserOutlined2);
+  if (true) {
+    RefIcon55.displayName = "UserOutlined";
+  }
+  var UserOutlined_default2 = RefIcon55;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  var React432 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/WalletOutlined.js
+  var WalletOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 464H528V448h312v128zm0 264H184V184h656v200H496c-17.7 0-32 14.3-32 32v192c0 17.7 14.3 32 32 32h344v200zM580 512a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "wallet", "theme": "outlined" };
+  var WalletOutlined_default = WalletOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  function _extends114() {
+    _extends114 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends114.apply(this, arguments);
+  }
+  var WalletOutlined2 = (props, ref) => /* @__PURE__ */ React432.createElement(AntdIcon_default, _extends114({}, props, {
     ref,
     icon: WalletOutlined_default
   }));
-  var RefIcon52 = /* @__PURE__ */ React428.forwardRef(WalletOutlined2);
+  var RefIcon56 = /* @__PURE__ */ React432.forwardRef(WalletOutlined2);
   if (true) {
-    RefIcon52.displayName = "WalletOutlined";
+    RefIcon56.displayName = "WalletOutlined";
   }
-  var WalletOutlined_default2 = RefIcon52;
+  var WalletOutlined_default2 = RefIcon56;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/theme.js
   var themeConfig = {
@@ -83857,7 +83985,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react155 = __toESM(require_react());
+  var import_react157 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/pages/Dashboard.jsx
   var import_react143 = __toESM(require_react());
@@ -83866,8 +83994,8 @@ html body {
   };
   var Dashboard_default = Dashboard;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donors.jsx
-  var import_react145 = __toESM(require_react());
+  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
+  var import_react146 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/hooks/useFrappe.js
   var import_react144 = __toESM(require_react());
@@ -83986,128 +84114,78 @@ html body {
     };
     return { deleteDoc, loading, error };
   };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donors.jsx
-  var { Title: Title3, Text: Text2 } = typography_default;
-  var Donors = () => {
-    const { data: donors, loading, error, mutate } = useFrappeGetDocList("Donor", {
-      fields: ["name", "donor_name", "mobile_number", "address"],
-      limit: 100
-    });
-    const { createDoc, loading: creating } = useFrappeCreateDoc();
-    const { updateDoc, loading: updating } = useFrappeUpdateDoc();
-    const { deleteDoc } = useFrappeDeleteDoc();
-    const [isModalOpen, setIsModalOpen] = (0, import_react145.useState)(false);
-    const [editingDonor, setEditingDonor] = (0, import_react145.useState)(null);
-    const [form] = form_default.useForm();
-    const [searchText, setSearchText] = (0, import_react145.useState)("");
-    const filteredDonors = donors == null ? void 0 : donors.filter(
-      (donor) => {
-        var _a, _b;
-        return ((_a = donor.donor_name) == null ? void 0 : _a.toLowerCase().includes(searchText.toLowerCase())) || ((_b = donor.mobile_number) == null ? void 0 : _b.includes(searchText));
+  var useFrappeGetDoc = (doctype, name) => {
+    const [data, setData] = (0, import_react144.useState)(null);
+    const [loading, setLoading] = (0, import_react144.useState)(true);
+    const [error, setError] = (0, import_react144.useState)(null);
+    const fetchData = () => {
+      if (!name || typeof frappe === "undefined") {
+        setLoading(false);
+        return;
       }
-    );
-    const columns = [
-      {
-        title: "Donor ID",
-        dataIndex: "name",
-        key: "name",
-        width: 150,
-        render: (text) => /* @__PURE__ */ import_react145.default.createElement(Text2, {
-          copyable: true
-        }, text)
-      },
-      {
-        title: "Name",
-        dataIndex: "donor_name",
-        key: "donor_name",
-        render: (text) => /* @__PURE__ */ import_react145.default.createElement(Text2, {
-          strong: true
-        }, text),
-        sorter: (a, b) => a.donor_name.localeCompare(b.donor_name)
-      },
-      {
-        title: "Mobile Number",
-        dataIndex: "mobile_number",
-        key: "mobile_number"
-      },
-      {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
-        ellipsis: true,
-        render: (text) => text || /* @__PURE__ */ import_react145.default.createElement(Text2, {
-          type: "secondary"
-        }, "-")
-      },
-      {
-        title: "Actions",
-        key: "actions",
-        width: 150,
-        render: (_, record) => /* @__PURE__ */ import_react145.default.createElement(space_default, {
-          size: "middle"
-        }, /* @__PURE__ */ import_react145.default.createElement(button_default, {
-          type: "primary",
-          ghost: true,
-          icon: /* @__PURE__ */ import_react145.default.createElement(EditOutlined_default2, null),
-          onClick: () => handleEdit(record)
-        }, "Edit"), /* @__PURE__ */ import_react145.default.createElement(button_default, {
-          danger: true,
-          icon: /* @__PURE__ */ import_react145.default.createElement(DeleteOutlined_default2, null),
-          onClick: () => handleDelete(record.name)
-        }, "Delete"))
-      }
-    ];
-    const showModal = () => {
-      setEditingDonor(null);
-      form.resetFields();
-      setIsModalOpen(true);
-    };
-    const handleEdit = (donor) => {
-      setEditingDonor(donor);
-      form.setFieldsValue(donor);
-      setIsModalOpen(true);
-    };
-    const handleDelete = (name) => {
-      modal_default.confirm({
-        title: "Are you sure you want to delete this donor?",
-        content: "This action cannot be undone.",
-        okText: "Yes, Delete",
-        okType: "danger",
-        cancelText: "No",
-        onOk() {
-          return deleteDoc("Donor", name).then(() => {
-            message_default.success("Donor deleted successfully!");
-            mutate();
-          }).catch((err) => {
-            message_default.error(err.message || "Failed to delete.");
-          });
+      setLoading(true);
+      frappe.call({
+        method: "frappe.client.get",
+        args: { doctype, name },
+        callback: (r3) => {
+          setLoading(false);
+          if (r3.message)
+            setData(r3.message);
+        },
+        error: (err) => {
+          setLoading(false);
+          setError(err);
         }
       });
     };
-    const handleCancel = () => {
-      setIsModalOpen(false);
-      setEditingDonor(null);
-      form.resetFields();
+    (0, import_react144.useEffect)(() => {
+      fetchData();
+    }, [doctype, name]);
+    return { data, loading, error, mutate: fetchData };
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonTable.jsx
+  var import_react145 = __toESM(require_react());
+  var { Title: Title3, Text: Text2 } = typography_default;
+  var CommonTable = ({
+    title,
+    description,
+    columns,
+    dataSource,
+    loading,
+    searchPlaceholder = "Search...",
+    onAdd,
+    onEdit,
+    onDelete,
+    rowKey = "name"
+  }) => {
+    const [searchText, setSearchText] = (0, import_react145.useState)("");
+    const filteredData = dataSource == null ? void 0 : dataSource.filter((item) => {
+      return Object.values(item).some(
+        (val) => String(val).toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+    const actionColumn = {
+      title: "Actions",
+      key: "actions",
+      width: 150,
+      render: (_, record) => /* @__PURE__ */ import_react145.default.createElement(space_default, {
+        size: "middle"
+      }, onEdit && /* @__PURE__ */ import_react145.default.createElement(button_default, {
+        type: "primary",
+        ghost: true,
+        icon: /* @__PURE__ */ import_react145.default.createElement(EditOutlined_default2, null),
+        onClick: () => onEdit(record),
+        size: "small"
+      }, "Edit"), onDelete && /* @__PURE__ */ import_react145.default.createElement(button_default, {
+        danger: true,
+        icon: /* @__PURE__ */ import_react145.default.createElement(DeleteOutlined_default2, null),
+        onClick: () => onDelete(record),
+        size: "small"
+      }, "Delete"))
     };
-    const handleSave = async (values) => {
-      try {
-        if (editingDonor) {
-          await updateDoc("Donor", editingDonor.name, values);
-          message_default.success("Donor updated successfully!");
-        } else {
-          await createDoc("Donor", values);
-          message_default.success("Donor created successfully!");
-        }
-        handleCancel();
-        await mutate();
-      } catch (err) {
-        message_default.error(err.message || "Something went wrong");
-      }
-    };
-    return /* @__PURE__ */ import_react145.default.createElement("div", {
-      style: { padding: "24px" }
-    }, /* @__PURE__ */ import_react145.default.createElement(card_default, {
+    const finalColumns = onEdit || onDelete ? [...columns, actionColumn] : columns;
+    return /* @__PURE__ */ import_react145.default.createElement(card_default, {
       bordered: false,
       className: "shadow-sm",
       style: { borderRadius: "12px" }
@@ -84116,101 +84194,101 @@ html body {
       align: "middle",
       style: { marginBottom: "24px" }
     }, /* @__PURE__ */ import_react145.default.createElement(col_default2, null, /* @__PURE__ */ import_react145.default.createElement(Title3, {
-      level: 2,
+      level: 3,
       style: { margin: 0, fontWeight: 800 }
-    }, "Donors Management"), /* @__PURE__ */ import_react145.default.createElement(Text2, {
+    }, title), /* @__PURE__ */ import_react145.default.createElement(Text2, {
       type: "secondary"
-    }, "View, add, edit or delete donor records")), /* @__PURE__ */ import_react145.default.createElement(col_default2, null, /* @__PURE__ */ import_react145.default.createElement(button_default, {
+    }, description)), /* @__PURE__ */ import_react145.default.createElement(col_default2, null, onAdd && /* @__PURE__ */ import_react145.default.createElement(button_default, {
       type: "primary",
-      size: "large",
-      icon: /* @__PURE__ */ import_react145.default.createElement(UserAddOutlined_default2, null),
-      onClick: () => {
-        if (typeof frappe !== "undefined") {
-          frappe.set_route("temple-donation", "donation");
-        }
-      },
-      style: { height: "48px", borderRadius: "8px", fontWeight: 600 }
-    }, "Add New Donor"))), /* @__PURE__ */ import_react145.default.createElement("div", {
+      icon: /* @__PURE__ */ import_react145.default.createElement(PlusOutlined_default2, null),
+      onClick: onAdd,
+      style: { height: "40px", borderRadius: "8px", fontWeight: 600 }
+    }, "Add New"))), /* @__PURE__ */ import_react145.default.createElement("div", {
       style: { marginBottom: "20px" }
     }, /* @__PURE__ */ import_react145.default.createElement(input_default, {
-      placeholder: "Search donors by name or mobile...",
+      placeholder: searchPlaceholder,
       prefix: /* @__PURE__ */ import_react145.default.createElement(SearchOutlined_default2, {
         style: { color: "#bfbfbf" }
       }),
       onChange: (e3) => setSearchText(e3.target.value),
       style: { width: "100%", maxWidth: "400px", borderRadius: "8px" },
       allowClear: true
-    })), loading ? /* @__PURE__ */ import_react145.default.createElement("div", {
-      style: { textAlign: "center", padding: "100px" }
-    }, /* @__PURE__ */ import_react145.default.createElement(spin_default, {
-      size: "large",
-      tip: "Fetching donors..."
-    })) : error ? /* @__PURE__ */ import_react145.default.createElement(alert_default, {
-      message: "Connection Error",
-      description: error.message || "Failed to fetch donors list.",
-      type: "error",
-      showIcon: true
-    }) : /* @__PURE__ */ import_react145.default.createElement(table_default, {
-      dataSource: filteredDonors,
-      columns,
-      rowKey: "name",
+    })), /* @__PURE__ */ import_react145.default.createElement(table_default, {
+      dataSource: filteredData,
+      columns: finalColumns,
+      rowKey,
+      loading,
       pagination: {
         pageSize: 10,
         showSizeChanger: true,
-        showTotal: (total) => `Total ${total} donors`
+        showTotal: (total) => `Total ${total} items`
       },
-      className: "aavatto-table"
-    })), /* @__PURE__ */ import_react145.default.createElement(modal_default, {
-      title: editingDonor ? "Edit Donor Details" : "Register New Donor",
-      open: isModalOpen,
-      onCancel: handleCancel,
-      footer: null,
-      destroyOnClose: true
-    }, /* @__PURE__ */ import_react145.default.createElement(form_default, {
-      form,
-      layout: "vertical",
-      onFinish: handleSave,
-      initialValues: { payment_mode: "Cash" }
-    }, /* @__PURE__ */ import_react145.default.createElement(form_default.Item, {
-      name: "donor_name",
-      label: "Full Name",
-      rules: [{ required: true, message: "Please enter the donor's full name!" }]
-    }, /* @__PURE__ */ import_react145.default.createElement(input_default, {
-      placeholder: "John Doe",
-      style: { borderRadius: "6px" }
-    })), /* @__PURE__ */ import_react145.default.createElement(form_default.Item, {
-      name: "mobile_number",
-      label: "Mobile Number",
-      rules: [
-        { required: true, message: "Please enter the mobile number!" },
-        { pattern: /^\d{10}$/, message: "Please enter a valid 10-digit number!" }
-      ]
-    }, /* @__PURE__ */ import_react145.default.createElement(input_default, {
-      placeholder: "9876543210",
-      style: { borderRadius: "6px" }
-    })), /* @__PURE__ */ import_react145.default.createElement(form_default.Item, {
-      name: "address",
-      label: "Address (Optional)"
-    }, /* @__PURE__ */ import_react145.default.createElement(input_default.TextArea, {
-      placeholder: "Enter full address",
-      rows: 3,
-      style: { borderRadius: "6px" }
-    })), /* @__PURE__ */ import_react145.default.createElement(form_default.Item, {
-      style: { marginBottom: 0, textAlign: "right", marginTop: "24px" }
-    }, /* @__PURE__ */ import_react145.default.createElement(space_default, null, /* @__PURE__ */ import_react145.default.createElement(button_default, {
-      onClick: handleCancel,
-      style: { borderRadius: "6px" }
-    }, "Cancel"), /* @__PURE__ */ import_react145.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
-      loading: creating || updating,
-      style: { borderRadius: "6px", minWidth: "100px" }
-    }, editingDonor ? "Save Changes" : "Create Donor"))))));
+      className: "aavatto-table",
+      scroll: { x: "max-content" }
+    }));
   };
-  var Donors_default = Donors;
+  var CommonTable_default = CommonTable;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/Orders.jsx
-  var import_react146 = __toESM(require_react());
+  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
+  var ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"] }) => {
+    const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
+      fields,
+      limit: 100,
+      orderBy: { field: "modified", order: "desc" }
+    });
+    const { deleteDoc } = useFrappeDeleteDoc();
+    const handleAdd = () => {
+      if (typeof frappe !== "undefined" && basePath) {
+        frappe.set_route("temple-donation", basePath, "new");
+      }
+    };
+    const handleEdit = (record) => {
+      if (typeof frappe !== "undefined" && basePath) {
+        frappe.set_route("temple-donation", basePath, "edit", record.name);
+      }
+    };
+    const handleDelete = (record) => {
+      modal_default.confirm({
+        title: `Are you sure you want to delete this ${doctype}?`,
+        content: "This action cannot be undone.",
+        okText: "Yes, Delete",
+        okType: "danger",
+        cancelText: "No",
+        onOk() {
+          return deleteDoc(doctype, record.name).then(() => {
+            message_default.success(`${doctype} deleted successfully!`);
+            mutate();
+          }).catch((err) => {
+            message_default.error(err.message || "Failed to delete.");
+          });
+        }
+      });
+    };
+    if (error) {
+      return /* @__PURE__ */ import_react146.default.createElement("div", {
+        style: { padding: "24px" }
+      }, /* @__PURE__ */ import_react146.default.createElement(alert_default, {
+        message: "Connection Error",
+        description: error.message || `Failed to fetch ${doctype} list.`,
+        type: "error",
+        showIcon: true
+      }));
+    }
+    return /* @__PURE__ */ import_react146.default.createElement("div", {
+      style: { padding: "24px" }
+    }, /* @__PURE__ */ import_react146.default.createElement(CommonTable_default, {
+      title,
+      description,
+      columns: columns || [],
+      dataSource: data,
+      loading,
+      onAdd: handleAdd,
+      onEdit: handleEdit,
+      onDelete: handleDelete,
+      searchPlaceholder: `Search ${doctype}s...`
+    }));
+  };
+  var ListingPage_default = ListingPage;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donation.jsx
   var import_react154 = __toESM(require_react());
@@ -84930,31 +85008,406 @@ html body {
   };
   var Donation_default = Donation;
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonForm.jsx
+  var import_react155 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/config/constants.js
+  var DOCTYPE_DONOR = "Donor";
+  var DOCTYPE_TEMPLE = "Temple";
+  var DOCTYPE_DONATION = "Donation";
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
+  var formConfigs = {
+    [DOCTYPE_DONOR]: {
+      title: "Donor",
+      fields: [
+        {
+          name: "donor_name",
+          label: "Full Name",
+          type: "text",
+          placeholder: "Enter donor's full name",
+          required: true,
+          message: "Please enter the donor's full name!"
+        },
+        {
+          name: "mobile_number",
+          label: "Mobile Number",
+          type: "text",
+          placeholder: "9876543210",
+          required: true,
+          message: "Please enter the mobile number!",
+          pattern: /^\d{10}$/,
+          patternMessage: "Please enter a valid 10-digit number!"
+        },
+        {
+          name: "address",
+          label: "Address (Optional)",
+          type: "textarea",
+          placeholder: "Enter full address",
+          rows: 3
+        }
+      ]
+    },
+    [DOCTYPE_TEMPLE]: {
+      title: "Temple",
+      fields: [
+        {
+          name: "temple_name",
+          label: "Temple Name",
+          type: "text",
+          placeholder: "Enter temple name",
+          required: true,
+          message: "Please enter the temple name!"
+        },
+        {
+          name: "city",
+          label: "City",
+          type: "text",
+          placeholder: "e.g. Ahmedabad"
+        },
+        {
+          name: "state",
+          label: "State",
+          type: "text",
+          placeholder: "e.g. Gujarat"
+        },
+        {
+          name: "trust_registration_no",
+          label: "Trust Registration No",
+          type: "text",
+          placeholder: "Reg No."
+        },
+        {
+          name: "pincode",
+          label: "Pincode",
+          type: "text",
+          placeholder: "e.g. 380001"
+        },
+        {
+          name: "temple_address",
+          label: "Temple Address",
+          type: "textarea",
+          placeholder: "Enter full temple address",
+          rows: 3
+        },
+        {
+          name: "note",
+          label: "Note",
+          type: "textarea",
+          placeholder: "Additional notes...",
+          rows: 2
+        }
+      ]
+    }
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonForm.jsx
+  var { Title: Title7, Text: Text9 } = typography_default;
+  var CommonForm = ({ doctype, id, onBack }) => {
+    const isEdit = !!id;
+    const config = formConfigs[doctype];
+    const [form] = form_default.useForm();
+    const { createDoc, loading: creating } = useFrappeCreateDoc();
+    const { updateDoc, loading: updating } = useFrappeUpdateDoc();
+    const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(doctype, id);
+    (0, import_react155.useEffect)(() => {
+      if (isEdit && initialValues) {
+        form.setFieldsValue(initialValues);
+      } else if (!isEdit) {
+        form.resetFields();
+      }
+    }, [isEdit, initialValues, form]);
+    const handleSave = async (values) => {
+      try {
+        if (isEdit) {
+          await updateDoc(doctype, id, values);
+          message_default.success(`${config.title} updated successfully!`);
+        } else {
+          await createDoc(doctype, values);
+          message_default.success(`${config.title} created successfully!`);
+        }
+        if (onBack)
+          onBack();
+      } catch (err) {
+        message_default.error(err.message || "Something went wrong.");
+      }
+    };
+    if (isEdit && fetching) {
+      return /* @__PURE__ */ import_react155.default.createElement("div", {
+        style: { textAlign: "center", padding: "100px" }
+      }, /* @__PURE__ */ import_react155.default.createElement(spin_default, {
+        size: "large",
+        tip: `Loading ${config.title} data...`
+      }));
+    }
+    if (isEdit && fetchError) {
+      return /* @__PURE__ */ import_react155.default.createElement("div", {
+        style: { padding: "24px" }
+      }, /* @__PURE__ */ import_react155.default.createElement(alert_default, {
+        message: "Error Loading Data",
+        description: fetchError.message || `Failed to fetch ${config.title} details.`,
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react155.default.createElement(button_default, {
+          onClick: onBack,
+          icon: /* @__PURE__ */ import_react155.default.createElement(ArrowLeftOutlined_default2, null)
+        }, "Go Back")
+      }));
+    }
+    return /* @__PURE__ */ import_react155.default.createElement("div", {
+      style: { padding: "24px", maxWidth: "800px", margin: "0 auto" }
+    }, /* @__PURE__ */ import_react155.default.createElement(card_default, {
+      bordered: false,
+      className: "shadow-sm",
+      style: { borderRadius: "12px" }
+    }, /* @__PURE__ */ import_react155.default.createElement(row_default2, {
+      align: "middle",
+      style: { marginBottom: "24px" },
+      gutter: 16
+    }, /* @__PURE__ */ import_react155.default.createElement(col_default2, null, /* @__PURE__ */ import_react155.default.createElement(button_default, {
+      type: "text",
+      icon: /* @__PURE__ */ import_react155.default.createElement(ArrowLeftOutlined_default2, null),
+      onClick: onBack,
+      style: { fontSize: "18px" }
+    })), /* @__PURE__ */ import_react155.default.createElement(col_default2, null, /* @__PURE__ */ import_react155.default.createElement(Title7, {
+      level: 3,
+      style: { margin: 0, fontWeight: 800 }
+    }, isEdit ? `Edit ${config.title}` : `Add New ${config.title}`))), /* @__PURE__ */ import_react155.default.createElement(form_default, {
+      form,
+      layout: "vertical",
+      onFinish: handleSave,
+      scrollToFirstError: true
+    }, /* @__PURE__ */ import_react155.default.createElement(row_default2, {
+      gutter: 16
+    }, config.fields.map((field) => /* @__PURE__ */ import_react155.default.createElement(col_default2, {
+      span: field.type === "textarea" ? 24 : 12,
+      key: field.name
+    }, /* @__PURE__ */ import_react155.default.createElement(form_default.Item, {
+      name: field.name,
+      label: field.label,
+      rules: [
+        { required: field.required, message: field.message },
+        field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
+      ].filter(Boolean)
+    }, field.type === "textarea" ? /* @__PURE__ */ import_react155.default.createElement(input_default.TextArea, {
+      placeholder: field.placeholder,
+      rows: field.rows || 3
+    }) : /* @__PURE__ */ import_react155.default.createElement(input_default, {
+      placeholder: field.placeholder
+    }))))), /* @__PURE__ */ import_react155.default.createElement(form_default.Item, {
+      style: { marginBottom: 0, textAlign: "right", marginTop: "24px" }
+    }, /* @__PURE__ */ import_react155.default.createElement(space_default, null, /* @__PURE__ */ import_react155.default.createElement(button_default, {
+      onClick: onBack,
+      style: { borderRadius: "6px" }
+    }, "Cancel"), /* @__PURE__ */ import_react155.default.createElement(button_default, {
+      type: "primary",
+      htmlType: "submit",
+      loading: creating || updating,
+      icon: /* @__PURE__ */ import_react155.default.createElement(SaveOutlined_default2, null),
+      style: { borderRadius: "6px", minWidth: "120px", height: "40px" }
+    }, isEdit ? "Update Details" : `Create ${config.title}`))))));
+  };
+  var CommonForm_default = CommonForm;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/config/tableConfig.jsx
+  var import_react156 = __toESM(require_react());
+  var { Text: Text10 } = typography_default;
+  var donorColumns = [
+    {
+      title: "Donor ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Name",
+      dataIndex: "donor_name",
+      key: "donor_name",
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        strong: true
+      }, text),
+      sorter: (a, b) => a.donor_name.localeCompare(b.donor_name)
+    },
+    {
+      title: "Mobile Number",
+      dataIndex: "mobile_number",
+      key: "mobile_number"
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      ellipsis: true,
+      render: (text) => text || /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        type: "secondary"
+      }, "-")
+    }
+  ];
+  var templeColumns = [
+    {
+      title: "ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Temple Name",
+      dataIndex: "temple_name",
+      key: "temple_name",
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        strong: true
+      }, text),
+      sorter: (a, b) => a.temple_name.localeCompare(b.temple_name)
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city"
+    },
+    {
+      title: "State",
+      dataIndex: "state",
+      key: "state"
+    },
+    {
+      title: "Registration No",
+      dataIndex: "trust_registration_no",
+      key: "trust_registration_no"
+    }
+  ];
+  var donationColumns = [
+    {
+      title: "Donation ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Donor",
+      dataIndex: "donor_name",
+      key: "donor_name",
+      render: (text) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        strong: true
+      }, text)
+    },
+    {
+      title: "Temple",
+      dataIndex: "temple",
+      key: "temple"
+    },
+    {
+      title: "Amount",
+      dataIndex: "total_amount",
+      key: "total_amount",
+      render: (val) => /* @__PURE__ */ import_react156.default.createElement(Text10, {
+        type: "success",
+        strong: true
+      }, "\u20B9", Number(val || 0).toLocaleString()),
+      sorter: (a, b) => (a.total_amount || 0) - (b.total_amount || 0)
+    },
+    {
+      title: "Payment Mode",
+      dataIndex: "payment_mode",
+      key: "payment_mode",
+      render: (mode) => /* @__PURE__ */ import_react156.default.createElement(tag_default, {
+        color: mode === "Cash" ? "green" : "blue"
+      }, mode)
+    }
+  ];
+
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
   var navigationItems = [
     {
       key: "dashboard",
-      icon: /* @__PURE__ */ import_react155.default.createElement(DashboardOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react157.default.createElement(DashboardOutlined_default2, null),
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react155.default.createElement(Dashboard_default, null)
-    },
-    {
-      key: "donation",
-      icon: /* @__PURE__ */ import_react155.default.createElement(ShoppingCartOutlined_default2, null),
-      label: "Donation POS",
-      component: /* @__PURE__ */ import_react155.default.createElement(Donation_default, null),
-      hidden: true
+      component: /* @__PURE__ */ import_react157.default.createElement(Dashboard_default, null)
     },
     {
       key: "donors",
-      icon: /* @__PURE__ */ import_react155.default.createElement(UserOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react157.default.createElement(UserOutlined_default2, null),
+      label: "Donors",
+      component: /* @__PURE__ */ import_react157.default.createElement(ListingPage_default, {
+        doctype: DOCTYPE_DONOR,
+        title: "Donors Management",
+        description: "View, add, edit or delete donor records",
+        columns: donorColumns,
+        basePath: "donors",
+        fields: ["name", "donor_name", "mobile_number", "address"]
+      })
+    },
+    {
+      key: "temples",
+      icon: /* @__PURE__ */ import_react157.default.createElement(BankOutlined_default2, null),
+      label: "Temples",
+      component: /* @__PURE__ */ import_react157.default.createElement(ListingPage_default, {
+        doctype: DOCTYPE_TEMPLE,
+        title: "Temple Management",
+        description: "View, add, edit or delete temple records",
+        columns: templeColumns,
+        basePath: "temples",
+        fields: ["name", "temple_name", "city", "state", "trust_registration_no"]
+      })
+    },
+    {
+      key: "donations",
+      icon: /* @__PURE__ */ import_react157.default.createElement(HistoryOutlined_default2, null),
       label: "Donation List",
-      component: /* @__PURE__ */ import_react155.default.createElement(Donors_default, null)
+      component: /* @__PURE__ */ import_react157.default.createElement(ListingPage_default, {
+        doctype: DOCTYPE_DONATION,
+        title: "Donation Records",
+        description: "View and track all donation transactions",
+        columns: donationColumns,
+        basePath: "donations",
+        fields: ["name", "donor_name", "temple", "total_amount", "payment_mode"]
+      })
+    },
+    {
+      key: "donation",
+      icon: /* @__PURE__ */ import_react157.default.createElement(ShoppingCartOutlined_default2, null),
+      label: "Donation POS",
+      component: /* @__PURE__ */ import_react157.default.createElement(Donation_default, null),
+      hidden: true
     }
   ];
   var getComponentForRoute = (currentRoute) => {
-    const item = navigationItems.find((nav) => nav.key === currentRoute);
-    return item ? item.component : /* @__PURE__ */ import_react155.default.createElement(Dashboard_default, null);
+    const parts = currentRoute.split("/");
+    const baseKey = parts[0];
+    const subRoute = parts[1];
+    const dynamicId = parts[2];
+    const doctypeMap = {
+      "donors": DOCTYPE_DONOR,
+      "temples": DOCTYPE_TEMPLE,
+      "donations": DOCTYPE_DONATION
+    };
+    const targetDoctype = doctypeMap[baseKey];
+    if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
+      if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
+        return /* @__PURE__ */ import_react157.default.createElement(Donation_default, null);
+      }
+      return /* @__PURE__ */ import_react157.default.createElement(CommonForm_default, {
+        doctype: targetDoctype,
+        id: dynamicId,
+        onBack: () => {
+          if (typeof frappe !== "undefined") {
+            frappe.set_route("temple-donation", baseKey);
+          }
+        }
+      });
+    }
+    const item = navigationItems.find((nav) => nav.key === baseKey);
+    if (item)
+      return item.component;
+    return /* @__PURE__ */ import_react157.default.createElement(Dashboard_default, null);
   };
   var menuItems = navigationItems.filter((item) => !item.hidden).map(({ key, icon, label }) => ({
     key,
@@ -84965,8 +85418,8 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react156.useState)("dashboard");
-    (0, import_react156.useEffect)(() => {
+    const [currentRoute, setCurrentRoute] = (0, import_react158.useState)("dashboard");
+    (0, import_react158.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -84989,28 +85442,28 @@ html body {
         frappe.set_route("temple-donation", key === "dashboard" ? "" : key);
       }
     };
-    return /* @__PURE__ */ import_react156.default.createElement(DonationProvider, null, /* @__PURE__ */ import_react156.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react158.default.createElement(DonationProvider, null, /* @__PURE__ */ import_react158.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react156.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react158.default.createElement(layout_default2, {
       style: { minHeight: "100vh", background: "#f9fafb" }
-    }, /* @__PURE__ */ import_react156.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react158.default.createElement(Header3, {
       className: "aavatto-topbar"
-    }, /* @__PURE__ */ import_react156.default.createElement("div", {
+    }, /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "aavatto-topbar-brand"
-    }, /* @__PURE__ */ import_react156.default.createElement(DashboardOutlined_default2, {
+    }, /* @__PURE__ */ import_react158.default.createElement(DashboardOutlined_default2, {
       style: { fontSize: "22px", color: "#4f46e5" }
-    }), /* @__PURE__ */ import_react156.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react156.default.createElement(menu_default2, {
+    }), /* @__PURE__ */ import_react158.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react158.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute],
       items: menuItems,
       onClick: handleMenuClick,
       className: "aavatto-topbar-menu",
       disabledOverflow: true
-    }), /* @__PURE__ */ import_react156.default.createElement("div", {
+    }), /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "aavatto-topbar-version"
-    }, "v1.0.0")), /* @__PURE__ */ import_react156.default.createElement(Content3, {
+    }, "v1.0.0")), /* @__PURE__ */ import_react158.default.createElement(Content3, {
       style: { padding: "24px 0px", background: "#f9fafb", minHeight: "calc(100vh - 64px)" }
-    }, /* @__PURE__ */ import_react156.default.createElement("div", {
+    }, /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute))))));
   };
@@ -85028,7 +85481,7 @@ html body {
     }
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
-      root.render(/* @__PURE__ */ import_react157.default.createElement(App, null));
+      root.render(/* @__PURE__ */ import_react159.default.createElement(App, null));
       this.$temple_donation = root;
     }
   };
@@ -85081,4 +85534,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.FFJFB2LS.js.map
+//# sourceMappingURL=temple_donation.bundle.57TIAOPG.js.map

@@ -167,3 +167,34 @@ export const useFrappeDeleteDoc = () => {
 
     return { deleteDoc, loading, error };
 };
+export const useFrappeGetDoc = (doctype, name) => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const fetchData = () => {
+        if (!name || typeof frappe === "undefined") {
+            setLoading(false);
+            return;
+        }
+        setLoading(true);
+        frappe.call({
+            method: "frappe.client.get",
+            args: { doctype, name },
+            callback: (r) => {
+                setLoading(false);
+                if (r.message) setData(r.message);
+            },
+            error: (err) => {
+                setLoading(false);
+                setError(err);
+            }
+        });
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [doctype, name]);
+
+    return { data, loading, error, mutate: fetchData };
+};

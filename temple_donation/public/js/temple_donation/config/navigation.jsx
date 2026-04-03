@@ -2,16 +2,17 @@ import React from "react";
 import {
     DashboardOutlined,
     UserOutlined,
+    BankOutlined,
+    HistoryOutlined,
     ShoppingCartOutlined,
-    DatabaseOutlined,
-    BarChartOutlined,
-    SettingOutlined,
 } from "@ant-design/icons";
 
 import Dashboard from "../pages/Dashboard";
-import Donors from "../pages/Donors";
-import Orders from "../pages/Orders";
+import ListingPage from "../pages/ListingPage";
 import Donation from "../pages/Donation";
+import CommonForm from "../components/common/CommonForm";
+import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION } from "./constants";
+import { donorColumns, templeColumns, donationColumns } from "./tableConfig";
 
 /**
  * Centralized navigation configuration.
@@ -25,47 +26,106 @@ export const navigationItems = [
         component: <Dashboard />,
     },
     {
+        key: "donors",
+        icon: <UserOutlined />,
+        label: "Donors",
+        component: (
+            <ListingPage
+                doctype={DOCTYPE_DONOR}
+                title="Donors Management"
+                description="View, add, edit or delete donor records"
+                columns={donorColumns}
+                basePath="donors"
+                fields={["name", "donor_name", "mobile_number", "address"]}
+            />
+        ),
+    },
+    {
+        key: "temples",
+        icon: <BankOutlined />,
+        label: "Temples",
+        component: (
+            <ListingPage
+                doctype={DOCTYPE_TEMPLE}
+                title="Temple Management"
+                description="View, add, edit or delete temple records"
+                columns={templeColumns}
+                basePath="temples"
+                fields={["name", "temple_name", "city", "state", "trust_registration_no"]}
+            />
+        ),
+    },
+    {
+        key: "donations",
+        icon: <HistoryOutlined />,
+        label: "Donation List",
+        component: (
+            <ListingPage
+                doctype={DOCTYPE_DONATION}
+                title="Donation Records"
+                description="View and track all donation transactions"
+                columns={donationColumns}
+                basePath="donations"
+                fields={["name", "donor_name", "temple", "total_amount", "payment_mode"]}
+            />
+        ),
+    },
+
+    {
         key: "donation",
         icon: <ShoppingCartOutlined />,
         label: "Donation POS",
         component: <Donation />,
         hidden: true,
     },
-    {
-        key: "donors",
-        icon: <UserOutlined />,
-        label: "Donation List",
-        component: <Donors />,
-    },
-    // {
-    //     key: "orders",
-    //     icon: <ShoppingCartOutlined />,
-    //     label: "Orders",
-    //     component: <Orders />,
-    // },
-    // {
-    //     key: "inventory",
-    //     icon: <DatabaseOutlined />,
-    //     label: "Inventory",
-    //     component: <Dashboard />, // Placeholder until Inventory page is created
-    // },
-    // {
-    //     key: "analytics",
-    //     icon: <BarChartOutlined />,
-    //     label: "Analytics",
-    //     component: <Dashboard />, // Placeholder until Analytics page is created
-    // },
-    // {
-    //     key: "settings",
-    //     icon: <SettingOutlined />,
-    //     label: "Settings",
-    //     component: <Dashboard />, // Placeholder until Settings page is created
-    // },
 ];
 
+/**
+ * Enhanced route resolver. Parses nested paths:
+ * - [doctype]/new -> Render Add Form
+ * - [doctype]/edit/[id] -> Render Edit Form
+ */
 export const getComponentForRoute = (currentRoute) => {
-    const item = navigationItems.find(nav => nav.key === currentRoute);
-    return item ? item.component : <Dashboard />;
+    const parts = currentRoute.split('/');
+    const baseKey = parts[0];
+    const subRoute = parts[1];
+    const dynamicId = parts[2];
+
+    // Determine target Doctype from baseKey
+    const doctypeMap = {
+        "donors": DOCTYPE_DONOR,
+        "temples": DOCTYPE_TEMPLE,
+        "donations": DOCTYPE_DONATION
+    };
+
+    const targetDoctype = doctypeMap[baseKey];
+
+    // Handle Forms (Add / Edit)
+    if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
+        // Special case for Donation POS
+        if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
+            return <Donation />;
+        }
+
+        return (
+            <CommonForm
+                doctype={targetDoctype}
+                id={dynamicId}
+                onBack={() => {
+                    if (typeof frappe !== "undefined") {
+                        frappe.set_route("temple-donation", baseKey);
+                    }
+                }}
+            />
+        );
+    }
+
+    // Handle standard list views / other components
+    const item = navigationItems.find(nav => nav.key === baseKey);
+    if (item) return item.component;
+
+    // Default to Dashboard
+    return <Dashboard />;
 };
 
 export const menuItems = navigationItems
@@ -75,3 +135,5 @@ export const menuItems = navigationItems
         icon,
         label,
     }));
+
+
