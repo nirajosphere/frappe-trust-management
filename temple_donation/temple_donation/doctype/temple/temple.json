@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "TEMPLE-.#####",
+ "creation": "2026-04-03 12:31:40.593529",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "temple_name",
+  "city",
+  "state",
+  "trust_registration_no",
+  "temple_address",
+  "country",
+  "pincode",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "temple_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Temple Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "trust_registration_no",
+   "fieldtype": "Data",
+   "label": "Trust Registration No"
+  },
+  {
+   "fieldname": "temple_address",
+   "fieldtype": "Small Text",
+   "label": "Temple Address"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-03 14:26:17.991753",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Temple",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

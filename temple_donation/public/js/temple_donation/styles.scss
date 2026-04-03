@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * Temple Donation – Custom Page Styles (SCSS)
+ * ──────────────────────────────────────────
+ */
+
+[data-page-route="temple-donation"] {
+  --topbar-height: 64px;
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-color: #f9fafb;
+  --card-bg: #ffffff;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: var(--bg-color);
+  color: var(--text-main);
+
+  .page-head {
+    display: none !important;
+  }
+
+  .layout-main-section {
+    padding: 0 !important;
+    background-color: var(--bg-color) !important;
+  }
+
+  .layout-side-section {
+    background: #fff !important;
+    border-right: 1px solid var(--border-color) !important;
+    padding: 0 !important;
+  }
+
+  .aavatto-topbar {
+    @apply flex items-center gap-0 sticky top-0 z-[200] bg-white border-b border-[#e5e7eb] px-7 shadow-sm;
+    height: var(--topbar-height) !important;
+    line-height: var(--topbar-height) !important;
+  }
+
+  .aavatto-topbar-brand {
+    @apply flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-primary whitespace-nowrap mr-8 flex-shrink-0;
+  }
+
+  .aavatto-topbar-menu {
+    @apply flex-1 border-none bg-transparent;
+    line-height: var(--topbar-height) !important;
+    
+    .ant-menu-item-selected, .ant-menu-item-active {
+      color: var(--primary-color) !important;
+    }
+    
+    .ant-menu-item::after {
+      border-bottom-color: var(--primary-color) !important;
+    }
+  }
+
+  .aavatto-topbar-version {
+    @apply text-[11px] uppercase tracking-wider text-gray-500 ml-5 flex-shrink-0;
+  }
+
+  .aavatto-card {
+    @apply bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 mb-6;
+    &:hover {
+      @apply shadow-md -translate-y-0.5;
+    }
+  }
+
+  /* Custom utility classes or refined AntD overrides */
+  .donation-card {
+    @apply rounded-xl border border-gray-100 overflow-hidden;
+  }
+}
+
+/* Animations */
+@keyframes templePageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#react-root {
+  animation: templePageFadeIn 0.4s ease-out;
+}
