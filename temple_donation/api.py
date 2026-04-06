@@ -65,10 +65,18 @@ def reset_user_balance(user_name, amount):
 @frappe.whitelist()
 def get_dashboard_stats():
     """
-    Returns core stats for the dashboard: Total sum, Top category, and New donors today.
+    Returns core stats for the dashboard.
+    Total Donation = (Sum of Handed-over Cash from Ledger) + (Sum of non-Cash donations).
     """
-    # 1. Total Donation
-    total_donation = frappe.db.get_value("Donation", filters={}, fieldname="sum(total_amount)") or 0
+    # 1. Handed-over Cash from Ledger
+    handed_over_cash = frappe.db.get_value("Ledger", filters={}, fieldname="sum(opening_balance)") or 0
+    
+    # 2. Direct non-cash donations (Online/Bank/Card)
+    direct_donations = frappe.db.get_value("Donation", 
+                                          filters={"payment_mode": ["!=", "Cash"]}, 
+                                          fieldname="sum(total_amount)") or 0
+                                          
+    total_donation = handed_over_cash + direct_donations
     
     # 2. Top Category
     top_cat_result = frappe.db.sql("""
