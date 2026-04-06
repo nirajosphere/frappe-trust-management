@@ -1291,7 +1291,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React485 = require_react(), Internals = {
+        var React497 = require_react(), Internals = {
           d: {
             f: noop4,
             r: function() {
@@ -1309,7 +1309,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React485.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React497.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3161,7 +3161,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React485.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React497.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18999,14 +18999,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React485 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React497 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React485.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React497.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21799,7 +21799,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React485.version;
+          var isomorphicReactPackageVersion = React497.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21970,10 +21970,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react168 = __toESM(require_react());
+  var import_react180 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react167 = __toESM(require_react());
+  var import_react179 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -89819,7 +89819,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react165 = __toESM(require_react());
+  var import_react177 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/pages/Dashboard.jsx
   var import_react150 = __toESM(require_react());
@@ -89828,8 +89828,14 @@ html body {
   };
   var Dashboard_default = Dashboard;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
+  // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donation.jsx
+  var import_react158 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorSection.jsx
   var import_react153 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorModal.jsx
+  var import_react152 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/hooks/useFrappe.js
   var import_react151 = __toESM(require_react());
@@ -90015,230 +90021,12 @@ html body {
     return { data, loading, error, mutate: fetchData };
   };
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonTable.jsx
-  var import_react152 = __toESM(require_react());
-  var { Title: Title3, Text: Text2 } = typography_default;
-  var CommonTable = ({
-    title,
-    description,
-    columns,
-    dataSource,
-    loading,
-    searchPlaceholder = "Search...",
-    onAdd,
-    onEdit,
-    onDelete,
-    onView,
-    onPrint,
-    rowKey = "name"
-  }) => {
-    const [searchText, setSearchText] = (0, import_react152.useState)("");
-    const filteredData = dataSource == null ? void 0 : dataSource.filter((item) => {
-      return Object.values(item).some(
-        (val) => String(val).toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    const exportToExcel = () => {
-      if (!filteredData || filteredData.length === 0) {
-        message_default.warning("No data to export");
-        return;
-      }
-      const headers = columns.map((col) => col.title).filter((title2) => title2 && title2 !== "Actions");
-      const csvRows = [];
-      csvRows.push(headers.join(","));
-      filteredData.forEach((item) => {
-        const row = columns.filter((col) => col.title && col.title !== "Actions").map((col) => {
-          const val = item[col.dataIndex];
-          return `"${String(val || "").replace(/"/g, '""')}"`;
-        });
-        csvRows.push(row.join(","));
-      });
-      const csvContent = csvRows.join("\n");
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const url2 = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.setAttribute("href", url2);
-      link.setAttribute("download", `${title.replace(/\s+/g, "_")}_export.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-    const actionColumn = {
-      title: "Actions",
-      key: "actions",
-      fixed: "right",
-      width: 220,
-      render: (_, record) => /* @__PURE__ */ import_react152.default.createElement(space_default, {
-        size: "small"
-      }, onView && /* @__PURE__ */ import_react152.default.createElement(button_default, {
-        type: "default",
-        shape: "circle",
-        icon: /* @__PURE__ */ import_react152.default.createElement(EyeOutlined_default2, null),
-        onClick: () => onView(record),
-        size: "small",
-        title: "View Details"
-      }), onPrint && /* @__PURE__ */ import_react152.default.createElement(button_default, {
-        type: "default",
-        shape: "circle",
-        icon: /* @__PURE__ */ import_react152.default.createElement(PrinterOutlined_default2, null),
-        onClick: () => onPrint(record),
-        size: "small",
-        title: "Print"
-      }), onEdit && /* @__PURE__ */ import_react152.default.createElement(button_default, {
-        type: "primary",
-        ghost: true,
-        shape: "circle",
-        icon: /* @__PURE__ */ import_react152.default.createElement(EditOutlined_default2, null),
-        onClick: () => onEdit(record),
-        size: "small",
-        title: "Edit"
-      }), onDelete && /* @__PURE__ */ import_react152.default.createElement(button_default, {
-        danger: true,
-        shape: "circle",
-        icon: /* @__PURE__ */ import_react152.default.createElement(DeleteOutlined_default2, null),
-        onClick: () => onDelete(record),
-        size: "small",
-        title: "Delete"
-      }))
-    };
-    const finalColumns = onView || onPrint || onEdit || onDelete ? [...columns, actionColumn] : columns;
-    return /* @__PURE__ */ import_react152.default.createElement(card_default, {
-      bordered: false,
-      className: "shadow-sm listing-table-card",
-      style: { borderRadius: "16px" }
-    }, /* @__PURE__ */ import_react152.default.createElement(row_default2, {
-      justify: "space-between",
-      align: "middle",
-      style: { marginBottom: "32px" }
-    }, /* @__PURE__ */ import_react152.default.createElement(col_default2, null, /* @__PURE__ */ import_react152.default.createElement(Title3, {
-      level: 3,
-      style: { margin: 0, fontWeight: 800 }
-    }, title), /* @__PURE__ */ import_react152.default.createElement(Text2, {
-      type: "secondary"
-    }, description)), /* @__PURE__ */ import_react152.default.createElement(col_default2, null, /* @__PURE__ */ import_react152.default.createElement(space_default, {
-      size: "middle"
-    }, /* @__PURE__ */ import_react152.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react152.default.createElement(ExportOutlined_default2, null),
-      onClick: exportToExcel,
-      style: { height: "40px", borderRadius: "8px" }
-    }, "Export"), onAdd && /* @__PURE__ */ import_react152.default.createElement(button_default, {
-      type: "primary",
-      icon: /* @__PURE__ */ import_react152.default.createElement(PlusOutlined_default2, null),
-      onClick: onAdd,
-      style: { height: "40px", borderRadius: "8px", fontWeight: 600 }
-    }, "Add New Record")))), /* @__PURE__ */ import_react152.default.createElement(divider_default, {
-      style: { marginTop: 0, marginBottom: "24px" }
-    }), /* @__PURE__ */ import_react152.default.createElement("div", {
-      style: { marginBottom: "24px" }
-    }, /* @__PURE__ */ import_react152.default.createElement(input_default, {
-      placeholder: searchPlaceholder,
-      prefix: /* @__PURE__ */ import_react152.default.createElement(SearchOutlined_default2, {
-        style: { color: "#bfbfbf" }
-      }),
-      onChange: (e3) => setSearchText(e3.target.value),
-      style: { width: "100%", maxWidth: "400px", height: "45px", borderRadius: "10px" },
-      allowClear: true
-    })), /* @__PURE__ */ import_react152.default.createElement(table_default, {
-      dataSource: filteredData,
-      columns: finalColumns,
-      rowKey,
-      loading,
-      pagination: {
-        pageSize: 10,
-        showSizeChanger: true,
-        showTotal: (total) => `Total ${total} entries`,
-        style: { marginTop: "24px" }
-      },
-      className: "aavatto-premium-table",
-      scroll: { x: "max-content" }
-    }));
-  };
-  var CommonTable_default = CommonTable;
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
-  var ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"] }) => {
-    const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
-      fields,
-      limit: 100,
-      orderBy: { field: "modified", order: "desc" }
-    });
-    const { deleteDoc } = useFrappeDeleteDoc();
-    const handleAdd = () => {
-      if (typeof frappe !== "undefined" && basePath) {
-        frappe.set_route("temple-donation", basePath, "new");
-      }
-    };
-    const handleEdit = (record) => {
-      if (typeof frappe !== "undefined" && basePath) {
-        frappe.set_route("temple-donation", basePath, "edit", record.name);
-      }
-    };
-    const handleDelete = (record) => {
-      modal_default.confirm({
-        title: `Are you sure you want to delete this ${doctype}?`,
-        content: "This action cannot be undone.",
-        okText: "Yes, Delete",
-        okType: "danger",
-        cancelText: "No",
-        onOk() {
-          return deleteDoc(doctype, record.name).then(() => {
-            message_default.success(`${doctype} deleted successfully!`);
-            mutate();
-          }).catch((err) => {
-            message_default.error(err.message || "Failed to delete.");
-          });
-        }
-      });
-    };
-    const handleView = (record) => {
-      if (typeof frappe !== "undefined" && basePath) {
-        frappe.set_route("temple-donation", basePath, "view", record.name);
-      }
-    };
-    const handlePrint = (record) => {
-      window.print();
-    };
-    if (error) {
-      return /* @__PURE__ */ import_react153.default.createElement("div", {
-        style: { padding: "24px" }
-      }, /* @__PURE__ */ import_react153.default.createElement(alert_default, {
-        message: "Connection Error",
-        description: error.message || `Failed to fetch ${doctype} list.`,
-        type: "error",
-        showIcon: true
-      }));
-    }
-    return /* @__PURE__ */ import_react153.default.createElement("div", {
-      style: { padding: "24px" }
-    }, /* @__PURE__ */ import_react153.default.createElement(CommonTable_default, {
-      title,
-      description,
-      columns: columns || [],
-      dataSource: data,
-      loading,
-      onAdd: handleAdd,
-      onEdit: handleEdit,
-      onDelete: handleDelete,
-      onView: handleView,
-      onPrint: handlePrint,
-      searchPlaceholder: `Search ${doctype}s...`
-    }));
-  };
-  var ListingPage_default = ListingPage;
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donation.jsx
-  var import_react160 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorSection.jsx
-  var import_react155 = __toESM(require_react());
-
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorModal.jsx
-  var import_react154 = __toESM(require_react());
-  var { Text: Text3 } = typography_default;
+  var { Text: Text2 } = typography_default;
   var DonorModal = ({ open: open2, onCancel, onSuccess, initialMobileNumber }) => {
     const [form] = form_default.useForm();
     const { createDoc, loading } = useFrappeCreateDoc();
-    (0, import_react154.useEffect)(() => {
+    (0, import_react152.useEffect)(() => {
       if (open2 && initialMobileNumber) {
         form.setFieldsValue({ mobile_number: initialMobileNumber });
       } else if (open2) {
@@ -90257,10 +90045,10 @@ html body {
         message_default.error(error.message || "Failed to add donor");
       }
     };
-    return /* @__PURE__ */ import_react154.default.createElement(modal_default, {
-      title: /* @__PURE__ */ import_react154.default.createElement(space_default, null, /* @__PURE__ */ import_react154.default.createElement(UserAddOutlined_default2, {
+    return /* @__PURE__ */ import_react152.default.createElement(modal_default, {
+      title: /* @__PURE__ */ import_react152.default.createElement(space_default, null, /* @__PURE__ */ import_react152.default.createElement(UserAddOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react154.default.createElement("span", {
+      }), /* @__PURE__ */ import_react152.default.createElement("span", {
         className: "font-bold"
       }, "Register New Donor")),
       open: open2,
@@ -90278,31 +90066,31 @@ html body {
       cancelButtonProps: {
         className: "h-10 rounded-lg px-6"
       }
-    }, /* @__PURE__ */ import_react154.default.createElement("div", {
+    }, /* @__PURE__ */ import_react152.default.createElement("div", {
       className: "py-4"
-    }, /* @__PURE__ */ import_react154.default.createElement(Text3, {
+    }, /* @__PURE__ */ import_react152.default.createElement(Text2, {
       type: "secondary",
       className: "block mb-6 text-sm italic"
-    }, "Fill in the details below to create a permanent donor profile in the system."), /* @__PURE__ */ import_react154.default.createElement(form_default, {
+    }, "Fill in the details below to create a permanent donor profile in the system."), /* @__PURE__ */ import_react152.default.createElement(form_default, {
       form,
       layout: "vertical",
       requiredMark: "optional"
-    }, /* @__PURE__ */ import_react154.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react152.default.createElement(form_default.Item, {
       name: "donor_name",
-      label: /* @__PURE__ */ import_react154.default.createElement(Text3, {
+      label: /* @__PURE__ */ import_react152.default.createElement(Text2, {
         strong: true,
         className: "text-gray-600"
       }, "Full Name"),
       rules: [{ required: true, message: "Please enter donor name" }]
-    }, /* @__PURE__ */ import_react154.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react152.default.createElement(input_default, {
       placeholder: "e.g. Rajesh Kumar",
-      prefix: /* @__PURE__ */ import_react154.default.createElement(ProfileOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react152.default.createElement(ProfileOutlined_default2, {
         className: "text-gray-400"
       }),
       className: "h-11 rounded-xl"
-    })), /* @__PURE__ */ import_react154.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react152.default.createElement(form_default.Item, {
       name: "mobile_number",
-      label: /* @__PURE__ */ import_react154.default.createElement(Text3, {
+      label: /* @__PURE__ */ import_react152.default.createElement(Text2, {
         strong: true,
         className: "text-gray-600"
       }, "Mobile Number"),
@@ -90310,34 +90098,34 @@ html body {
         { required: true, message: "Please enter mobile number" },
         { pattern: /^\d{10}$/, message: "Please enter a valid 10-digit mobile number" }
       ]
-    }, /* @__PURE__ */ import_react154.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react152.default.createElement(input_default, {
       placeholder: "10-digit number",
-      prefix: /* @__PURE__ */ import_react154.default.createElement(PhoneOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react152.default.createElement(PhoneOutlined_default2, {
         className: "text-gray-400"
       }),
       className: "h-11 rounded-xl font-medium"
-    })), /* @__PURE__ */ import_react154.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react152.default.createElement(form_default.Item, {
       name: "email",
-      label: /* @__PURE__ */ import_react154.default.createElement(Text3, {
+      label: /* @__PURE__ */ import_react152.default.createElement(Text2, {
         strong: true,
         className: "text-gray-600"
       }, "Email Address (Optional)")
-    }, /* @__PURE__ */ import_react154.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react152.default.createElement(input_default, {
       placeholder: "email@example.com",
-      prefix: /* @__PURE__ */ import_react154.default.createElement(MailOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react152.default.createElement(MailOutlined_default2, {
         className: "text-gray-400"
       }),
       className: "h-11 rounded-xl"
-    })), /* @__PURE__ */ import_react154.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react152.default.createElement(form_default.Item, {
       name: "address",
-      label: /* @__PURE__ */ import_react154.default.createElement(Text3, {
+      label: /* @__PURE__ */ import_react152.default.createElement(Text2, {
         strong: true,
         className: "text-gray-600"
       }, "Resident Address (Optional)")
-    }, /* @__PURE__ */ import_react154.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react152.default.createElement(input_default.TextArea, {
       placeholder: "Enter full address",
       rows: 3,
-      prefix: /* @__PURE__ */ import_react154.default.createElement(HomeOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react152.default.createElement(HomeOutlined_default2, {
         className: "text-gray-400"
       }),
       className: "rounded-xl"
@@ -90346,12 +90134,12 @@ html body {
   var DonorModal_default = DonorModal;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorSection.jsx
-  var { Text: Text4, Title: Title4 } = typography_default;
+  var { Text: Text3, Title: Title3 } = typography_default;
   var DonorSection = ({ selectedDonor, onDonorSelect }) => {
-    const [mobileNumber, setMobileNumber] = (0, import_react155.useState)("");
-    const [isModalOpen, setIsModalOpen] = (0, import_react155.useState)(false);
-    const [searching, setSearching] = (0, import_react155.useState)(false);
-    (0, import_react155.useEffect)(() => {
+    const [mobileNumber, setMobileNumber] = (0, import_react153.useState)("");
+    const [isModalOpen, setIsModalOpen] = (0, import_react153.useState)(false);
+    const [searching, setSearching] = (0, import_react153.useState)(false);
+    (0, import_react153.useEffect)(() => {
       if (!selectedDonor) {
         setMobileNumber("");
       } else {
@@ -90387,30 +90175,30 @@ html body {
       setMobileNumber(donor.mobile_number);
       onDonorSelect(donor);
     };
-    return /* @__PURE__ */ import_react155.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react155.default.createElement(space_default, null, /* @__PURE__ */ import_react155.default.createElement(UserOutlined_default2, {
+    return /* @__PURE__ */ import_react153.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react153.default.createElement(space_default, null, /* @__PURE__ */ import_react153.default.createElement(UserOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react155.default.createElement("span", null, "Donor Information")),
+      }), /* @__PURE__ */ import_react153.default.createElement("span", null, "Donor Information")),
       size: "small",
       className: "aavatto-card mb-6"
-    }, /* @__PURE__ */ import_react155.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react153.default.createElement(form_default, {
       layout: "vertical"
-    }, /* @__PURE__ */ import_react155.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react153.default.createElement(row_default2, {
       gutter: 24,
       align: "bottom"
-    }, /* @__PURE__ */ import_react155.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react153.default.createElement(col_default2, {
       xs: 24,
       sm: 16,
       md: 18
-    }, /* @__PURE__ */ import_react155.default.createElement(form_default.Item, {
-      label: /* @__PURE__ */ import_react155.default.createElement(Text4, {
+    }, /* @__PURE__ */ import_react153.default.createElement(form_default.Item, {
+      label: /* @__PURE__ */ import_react153.default.createElement(Text3, {
         strong: true,
         className: "text-gray-600"
       }, "Mobile Number Search"),
       className: "mb-0"
-    }, /* @__PURE__ */ import_react155.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react153.default.createElement(input_default, {
       placeholder: "Enter 10-digit mobile number",
-      prefix: /* @__PURE__ */ import_react155.default.createElement(SearchOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react153.default.createElement(SearchOutlined_default2, {
         className: "text-gray-400"
       }),
       value: mobileNumber,
@@ -90418,50 +90206,50 @@ html body {
       maxLength: 10,
       allowClear: true,
       className: "h-12 rounded-xl text-lg font-medium border-gray-200 hover:border-primary focus:border-primary"
-    }))), /* @__PURE__ */ import_react155.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react153.default.createElement(col_default2, {
       xs: 24,
       sm: 8,
       md: 6
-    }, !selectedDonor && mobileNumber.length === 10 && !searching && /* @__PURE__ */ import_react155.default.createElement(button_default, {
+    }, !selectedDonor && mobileNumber.length === 10 && !searching && /* @__PURE__ */ import_react153.default.createElement(button_default, {
       type: "primary",
-      icon: /* @__PURE__ */ import_react155.default.createElement(UserAddOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react153.default.createElement(UserAddOutlined_default2, null),
       onClick: () => setIsModalOpen(true),
       block: true,
       className: "h-12 rounded-xl bg-primary hover:bg-primary-hover border-none font-bold shadow-sm"
-    }, "Add Donor"))), selectedDonor && /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, "Add Donor"))), selectedDonor && /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "mt-6"
-    }, /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "bg-indigo-50/50 rounded-2xl p-6 border border-indigo-100 flex flex-col md:flex-row gap-6 items-center"
-    }, /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "bg-white p-4 rounded-full shadow-sm border border-indigo-100 relative"
-    }, /* @__PURE__ */ import_react155.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react153.default.createElement(UserOutlined_default2, {
       className: "text-4xl text-primary"
-    }), /* @__PURE__ */ import_react155.default.createElement(CheckCircleFilled_default2, {
+    }), /* @__PURE__ */ import_react153.default.createElement(CheckCircleFilled_default2, {
       className: "text-green-500 absolute bottom-0 right-0 text-xl bg-white rounded-full"
-    })), /* @__PURE__ */ import_react155.default.createElement("div", {
+    })), /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "flex-1 text-center md:text-left"
-    }, /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "flex flex-col md:flex-row md:items-center justify-between gap-4"
-    }, /* @__PURE__ */ import_react155.default.createElement("div", null, /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, /* @__PURE__ */ import_react153.default.createElement("div", null, /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "flex items-center gap-2 justify-center md:justify-start"
-    }, /* @__PURE__ */ import_react155.default.createElement(Title4, {
+    }, /* @__PURE__ */ import_react153.default.createElement(Title3, {
       level: 4,
       className: "!m-0 !font-bold"
-    }, selectedDonor.donor_name), /* @__PURE__ */ import_react155.default.createElement(badge_default, {
+    }, selectedDonor.donor_name), /* @__PURE__ */ import_react153.default.createElement(badge_default, {
       status: "processing",
       text: "Verified Donor",
       className: "text-xs font-semibold"
-    })), /* @__PURE__ */ import_react155.default.createElement("div", {
+    })), /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "flex flex-wrap gap-4 mt-2 justify-center md:justify-start text-gray-500"
-    }, /* @__PURE__ */ import_react155.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react153.default.createElement(space_default, {
       size: "small"
-    }, /* @__PURE__ */ import_react155.default.createElement(Text4, {
+    }, /* @__PURE__ */ import_react153.default.createElement(Text3, {
       className: "text-gray-500 text-xs"
-    }, "\u{1F4F1} ", selectedDonor.mobile_number)), selectedDonor.email && /* @__PURE__ */ import_react155.default.createElement(space_default, {
+    }, "\u{1F4F1} ", selectedDonor.mobile_number)), selectedDonor.email && /* @__PURE__ */ import_react153.default.createElement(space_default, {
       size: "small"
-    }, /* @__PURE__ */ import_react155.default.createElement(Text4, {
+    }, /* @__PURE__ */ import_react153.default.createElement(Text3, {
       className: "text-gray-500 text-xs"
-    }, "\u2709\uFE0F ", selectedDonor.email)))), /* @__PURE__ */ import_react155.default.createElement(button_default, {
+    }, "\u2709\uFE0F ", selectedDonor.email)))), /* @__PURE__ */ import_react153.default.createElement(button_default, {
       type: "primary",
       danger: true,
       ghost: true,
@@ -90471,12 +90259,12 @@ html body {
         setMobileNumber("");
       },
       className: "rounded-lg font-semibold hover:bg-red-50"
-    }, "Change Donor")), selectedDonor.address && /* @__PURE__ */ import_react155.default.createElement("div", {
+    }, "Change Donor")), selectedDonor.address && /* @__PURE__ */ import_react153.default.createElement("div", {
       className: "mt-4 pt-4 border-t border-indigo-100 text-center md:text-left"
-    }, /* @__PURE__ */ import_react155.default.createElement(Text4, {
+    }, /* @__PURE__ */ import_react153.default.createElement(Text3, {
       type: "secondary",
       className: "text-sm"
-    }, "\u{1F4CD} ", selectedDonor.address)))))), /* @__PURE__ */ import_react155.default.createElement(DonorModal_default, {
+    }, "\u{1F4CD} ", selectedDonor.address)))))), /* @__PURE__ */ import_react153.default.createElement(DonorModal_default, {
       open: isModalOpen,
       onCancel: () => setIsModalOpen(false),
       onSuccess: handleNewDonor,
@@ -90486,22 +90274,22 @@ html body {
   var DonorSection_default = DonorSection;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/TempleSelect.jsx
-  var import_react156 = __toESM(require_react());
-  var { Text: Text5 } = typography_default;
+  var import_react154 = __toESM(require_react());
+  var { Text: Text4 } = typography_default;
   var TempleSelect = ({ selectedTemple, onTempleSelect }) => {
     const { data: temples, loading } = useFrappeGetDocList("Temple", { fields: ["name", "temple_name"] });
-    return /* @__PURE__ */ import_react156.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react156.default.createElement(space_default, null, /* @__PURE__ */ import_react156.default.createElement(EnvironmentOutlined_default2, {
+    return /* @__PURE__ */ import_react154.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react154.default.createElement(space_default, null, /* @__PURE__ */ import_react154.default.createElement(EnvironmentOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react156.default.createElement("span", null, "Select Temple")),
+      }), /* @__PURE__ */ import_react154.default.createElement("span", null, "Select Temple")),
       size: "small",
       className: "aavatto-card mb-6"
-    }, /* @__PURE__ */ import_react156.default.createElement("div", {
+    }, /* @__PURE__ */ import_react154.default.createElement("div", {
       className: "flex flex-col gap-2"
-    }, /* @__PURE__ */ import_react156.default.createElement(Text5, {
+    }, /* @__PURE__ */ import_react154.default.createElement(Text4, {
       strong: true,
       className: "text-gray-600 block mb-1"
-    }, "Target Temple"), /* @__PURE__ */ import_react156.default.createElement(select_default, {
+    }, "Target Temple"), /* @__PURE__ */ import_react154.default.createElement(select_default, {
       placeholder: "Search and select a temple",
       className: "w-full h-12 rounded-xl",
       value: selectedTemple,
@@ -90517,9 +90305,9 @@ html body {
         value: t2.name,
         label: t2.temple_name
       }))
-    }), (temples == null ? void 0 : temples.length) === 0 && !loading && /* @__PURE__ */ import_react156.default.createElement("div", {
+    }), (temples == null ? void 0 : temples.length) === 0 && !loading && /* @__PURE__ */ import_react154.default.createElement("div", {
       className: "mt-2 p-3 bg-amber-50 border border-amber-100 rounded-lg"
-    }, /* @__PURE__ */ import_react156.default.createElement(Text5, {
+    }, /* @__PURE__ */ import_react154.default.createElement(Text4, {
       type: "warning",
       className: "text-amber-700 font-medium select-none"
     }, "\u26A0\uFE0F No temples found in the system. Please add one in Frappe."))));
@@ -90527,12 +90315,12 @@ html body {
   var TempleSelect_default = TempleSelect;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationTypes.jsx
-  var import_react157 = __toESM(require_react());
-  var { Text: Text6 } = typography_default;
+  var import_react155 = __toESM(require_react());
+  var { Text: Text5 } = typography_default;
   var DonationTypes = ({ selectedTemple, onAddToCart }) => {
-    const [donationTypes, setDonationTypes] = (0, import_react157.useState)([]);
-    const [loading, setLoading] = (0, import_react157.useState)(false);
-    (0, import_react157.useEffect)(() => {
+    const [donationTypes, setDonationTypes] = (0, import_react155.useState)([]);
+    const [loading, setLoading] = (0, import_react155.useState)(false);
+    (0, import_react155.useEffect)(() => {
       if (selectedTemple) {
         fetchDonationTypes();
       } else {
@@ -90559,62 +90347,62 @@ html body {
       });
     };
     if (!selectedTemple) {
-      return /* @__PURE__ */ import_react157.default.createElement(card_default, {
+      return /* @__PURE__ */ import_react155.default.createElement(card_default, {
         className: "aavatto-card min-h-[300px] flex items-center justify-center border-dashed border-2 border-gray-200 bg-gray-50/30"
-      }, /* @__PURE__ */ import_react157.default.createElement(empty_default2, {
+      }, /* @__PURE__ */ import_react155.default.createElement(empty_default2, {
         image: empty_default2.PRESENTED_IMAGE_SIMPLE,
-        description: /* @__PURE__ */ import_react157.default.createElement("span", {
+        description: /* @__PURE__ */ import_react155.default.createElement("span", {
           className: "text-gray-400 font-medium italic"
         }, "Select a temple to view available donation types")
       }));
     }
-    return /* @__PURE__ */ import_react157.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react157.default.createElement(space_default, null, /* @__PURE__ */ import_react157.default.createElement(AppstoreOutlined_default2, {
+    return /* @__PURE__ */ import_react155.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react155.default.createElement(space_default, null, /* @__PURE__ */ import_react155.default.createElement(AppstoreOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react157.default.createElement("span", null, "Donation Types")),
+      }), /* @__PURE__ */ import_react155.default.createElement("span", null, "Donation Types")),
       size: "small",
       className: "aavatto-card"
-    }, loading ? /* @__PURE__ */ import_react157.default.createElement("div", {
+    }, loading ? /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "flex flex-col items-center justify-center py-20 gap-4"
-    }, /* @__PURE__ */ import_react157.default.createElement(spin_default, {
+    }, /* @__PURE__ */ import_react155.default.createElement(spin_default, {
       size: "large"
-    }), /* @__PURE__ */ import_react157.default.createElement(Text6, {
+    }), /* @__PURE__ */ import_react155.default.createElement(Text5, {
       className: "text-gray-400 animate-pulse"
-    }, "Fetching donation categories...")) : donationTypes.length > 0 ? /* @__PURE__ */ import_react157.default.createElement(row_default2, {
+    }, "Fetching donation categories...")) : donationTypes.length > 0 ? /* @__PURE__ */ import_react155.default.createElement(row_default2, {
       gutter: [16, 16]
-    }, donationTypes.map((type5) => /* @__PURE__ */ import_react157.default.createElement(col_default2, {
+    }, donationTypes.map((type5) => /* @__PURE__ */ import_react155.default.createElement(col_default2, {
       key: type5.name,
       xs: 12,
       sm: 8,
       md: 8,
       lg: 6
-    }, /* @__PURE__ */ import_react157.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react155.default.createElement(card_default, {
       hoverable: true,
       onClick: () => onAddToCart(type5),
       className: "group relative overflow-hidden rounded-2xl border-gray-100 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white",
       bodyStyle: { padding: "24px 16px", textAlign: "center" }
-    }, /* @__PURE__ */ import_react157.default.createElement("div", {
+    }, /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "absolute -right-4 -top-4 w-16 h-16 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500"
-    }), /* @__PURE__ */ import_react157.default.createElement("div", {
+    }), /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "relative z-10"
-    }, /* @__PURE__ */ import_react157.default.createElement("div", {
+    }, /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "text-3xl text-primary mb-3 transform group-hover:scale-110 transition-transform duration-300"
-    }, /* @__PURE__ */ import_react157.default.createElement(HeartFilled_default2, null)), /* @__PURE__ */ import_react157.default.createElement(Text6, {
+    }, /* @__PURE__ */ import_react155.default.createElement(HeartFilled_default2, null)), /* @__PURE__ */ import_react155.default.createElement(Text5, {
       strong: true,
       className: "block text-gray-800 text-sm group-hover:text-primary transition-colors"
-    }, type5.dontation_type), /* @__PURE__ */ import_react157.default.createElement("div", {
+    }, type5.dontation_type), /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "mt-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold text-primary uppercase tracking-widest"
-    }, "Click to Add")))))) : /* @__PURE__ */ import_react157.default.createElement("div", {
+    }, "Click to Add")))))) : /* @__PURE__ */ import_react155.default.createElement("div", {
       className: "py-12 border-2 border-dashed border-gray-100 rounded-2xl bg-gray-50/30"
-    }, /* @__PURE__ */ import_react157.default.createElement(empty_default2, {
+    }, /* @__PURE__ */ import_react155.default.createElement(empty_default2, {
       description: "No donation types found for this temple"
     })));
   };
   var DonationTypes_default = DonationTypes;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/Cart.jsx
-  var import_react158 = __toESM(require_react());
-  var { Text: Text7, Title: Title5 } = typography_default;
+  var import_react156 = __toESM(require_react());
+  var { Text: Text6, Title: Title4 } = typography_default;
   var Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
     const quickAmounts = [101, 201, 501, 1001, 2100, 5100];
     const columns = [
@@ -90622,12 +90410,12 @@ html body {
         title: "Donation Item",
         dataIndex: "dontation_type",
         key: "dontation_type",
-        render: (text) => /* @__PURE__ */ import_react158.default.createElement("div", {
+        render: (text) => /* @__PURE__ */ import_react156.default.createElement("div", {
           className: "flex flex-col"
-        }, /* @__PURE__ */ import_react158.default.createElement(Text7, {
+        }, /* @__PURE__ */ import_react156.default.createElement(Text6, {
           strong: true,
           className: "text-gray-800"
-        }, text), /* @__PURE__ */ import_react158.default.createElement(Text7, {
+        }, text), /* @__PURE__ */ import_react156.default.createElement(Text6, {
           type: "secondary",
           className: "text-[10px] uppercase tracking-tighter"
         }, "Donation Category"))
@@ -90637,18 +90425,18 @@ html body {
         dataIndex: "amount",
         key: "amount",
         width: 180,
-        render: (amount, record, index2) => /* @__PURE__ */ import_react158.default.createElement("div", {
+        render: (amount, record, index2) => /* @__PURE__ */ import_react156.default.createElement("div", {
           className: "flex flex-col gap-2"
-        }, /* @__PURE__ */ import_react158.default.createElement(input_number_default, {
+        }, /* @__PURE__ */ import_react156.default.createElement(input_number_default, {
           min: 1,
           value: amount,
           formatter: (value) => `\u20B9 ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
           parser: (value) => value.replace(/₹\s?|(,*)/g, ""),
           onChange: (val) => onUpdateAmount(index2, val),
           className: "w-full rounded-lg border-gray-200 hover:border-primary focus:border-primary font-bold text-primary"
-        }), /* @__PURE__ */ import_react158.default.createElement("div", {
+        }), /* @__PURE__ */ import_react156.default.createElement("div", {
           className: "flex flex-wrap gap-1"
-        }, quickAmounts.map((q) => /* @__PURE__ */ import_react158.default.createElement("button", {
+        }, quickAmounts.map((q) => /* @__PURE__ */ import_react156.default.createElement("button", {
           key: q,
           onClick: () => onUpdateAmount(index2, q),
           className: "px-2 py-0.5 text-[10px] bg-gray-50 border border-gray-200 rounded hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 font-medium"
@@ -90658,66 +90446,66 @@ html body {
         title: "",
         key: "action",
         width: 40,
-        render: (_, __, index2) => /* @__PURE__ */ import_react158.default.createElement(button_default, {
+        render: (_, __, index2) => /* @__PURE__ */ import_react156.default.createElement(button_default, {
           type: "text",
           danger: true,
           shape: "circle",
-          icon: /* @__PURE__ */ import_react158.default.createElement(DeleteOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react156.default.createElement(DeleteOutlined_default2, null),
           onClick: () => onRemoveItem(index2),
           className: "hover:bg-red-50"
         })
       }
     ];
-    return /* @__PURE__ */ import_react158.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react158.default.createElement(space_default, null, /* @__PURE__ */ import_react158.default.createElement(ShoppingCartOutlined_default2, {
+    return /* @__PURE__ */ import_react156.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react156.default.createElement(space_default, null, /* @__PURE__ */ import_react156.default.createElement(ShoppingCartOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react158.default.createElement("span", {
+      }), /* @__PURE__ */ import_react156.default.createElement("span", {
         className: "font-bold"
       }, "Selection Cart")),
       size: "small",
       className: "aavatto-card !p-0 overflow-hidden flex flex-col mb-6",
       styles: { body: { padding: 0 } }
-    }, /* @__PURE__ */ import_react158.default.createElement("div", {
+    }, /* @__PURE__ */ import_react156.default.createElement("div", {
       className: "max-h-[400px] overflow-y-auto"
-    }, /* @__PURE__ */ import_react158.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react156.default.createElement(table_default, {
       columns,
       dataSource: items,
       pagination: false,
       rowKey: (record, index2) => `${record.donation_type}-${index2}`,
       className: "custom-cart-table",
       locale: {
-        emptyText: /* @__PURE__ */ import_react158.default.createElement("div", {
+        emptyText: /* @__PURE__ */ import_react156.default.createElement("div", {
           className: "py-12"
-        }, /* @__PURE__ */ import_react158.default.createElement(empty_default2, {
+        }, /* @__PURE__ */ import_react156.default.createElement(empty_default2, {
           image: empty_default2.PRESENTED_IMAGE_SIMPLE,
           description: "Your cart is empty"
         }))
       }
-    })), /* @__PURE__ */ import_react158.default.createElement("div", {
+    })), /* @__PURE__ */ import_react156.default.createElement("div", {
       className: "p-6 bg-gray-50 border-t border-gray-100 mt-auto"
-    }, /* @__PURE__ */ import_react158.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react156.default.createElement(row_default2, {
       justify: "space-between",
       align: "middle"
-    }, /* @__PURE__ */ import_react158.default.createElement(col_default2, null, /* @__PURE__ */ import_react158.default.createElement("div", {
+    }, /* @__PURE__ */ import_react156.default.createElement(col_default2, null, /* @__PURE__ */ import_react156.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react158.default.createElement(Text7, {
+    }, /* @__PURE__ */ import_react156.default.createElement(Text6, {
       strong: true,
       className: "text-gray-500 uppercase text-xs tracking-widest"
-    }, "Total Payable"), /* @__PURE__ */ import_react158.default.createElement(Text7, {
+    }, "Total Payable"), /* @__PURE__ */ import_react156.default.createElement(Text6, {
       className: "text-gray-400 text-[10px] leading-3"
-    }, "Including all selected donation types"))), /* @__PURE__ */ import_react158.default.createElement(col_default2, {
+    }, "Including all selected donation types"))), /* @__PURE__ */ import_react156.default.createElement(col_default2, {
       className: "text-right"
-    }, /* @__PURE__ */ import_react158.default.createElement("div", {
+    }, /* @__PURE__ */ import_react156.default.createElement("div", {
       className: "text-3xl font-black text-primary"
-    }, /* @__PURE__ */ import_react158.default.createElement("span", {
+    }, /* @__PURE__ */ import_react156.default.createElement("span", {
       className: "text-sm mr-1"
     }, "\u20B9"), totalAmount.toLocaleString())))));
   };
   var Cart_default = Cart;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/PaymentSection.jsx
-  var import_react159 = __toESM(require_react());
-  var { Text: Text8 } = typography_default;
+  var import_react157 = __toESM(require_react());
+  var { Text: Text7 } = typography_default;
   var PaymentSection = ({
     paymentMode,
     onPaymentModeChange,
@@ -90726,48 +90514,48 @@ html body {
     disabled
   }) => {
     const paymentModes = [
-      { label: "Cash", value: "Cash", icon: /* @__PURE__ */ import_react159.default.createElement(WalletOutlined_default2, null), color: "orange" },
-      { label: "UPI/Online", value: "UPI", icon: /* @__PURE__ */ import_react159.default.createElement(QrcodeOutlined_default2, null), color: "blue" },
-      { label: "Card", value: "Card", icon: /* @__PURE__ */ import_react159.default.createElement(CreditCardOutlined_default2, null), color: "purple" },
-      { label: "Cheque", value: "Cheque", icon: /* @__PURE__ */ import_react159.default.createElement(ProfileOutlined_default2, null), color: "cyan" }
+      { label: "Cash", value: "Cash", icon: /* @__PURE__ */ import_react157.default.createElement(WalletOutlined_default2, null), color: "orange" },
+      { label: "UPI/Online", value: "UPI", icon: /* @__PURE__ */ import_react157.default.createElement(QrcodeOutlined_default2, null), color: "blue" },
+      { label: "Card", value: "Card", icon: /* @__PURE__ */ import_react157.default.createElement(CreditCardOutlined_default2, null), color: "purple" },
+      { label: "Cheque", value: "Cheque", icon: /* @__PURE__ */ import_react157.default.createElement(ProfileOutlined_default2, null), color: "cyan" }
     ];
-    return /* @__PURE__ */ import_react159.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react159.default.createElement(space_default, null, /* @__PURE__ */ import_react159.default.createElement(SafetyCertificateOutlined_default2, {
+    return /* @__PURE__ */ import_react157.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react157.default.createElement(space_default, null, /* @__PURE__ */ import_react157.default.createElement(SafetyCertificateOutlined_default2, {
         className: "text-primary"
-      }), /* @__PURE__ */ import_react159.default.createElement("span", {
+      }), /* @__PURE__ */ import_react157.default.createElement("span", {
         className: "font-bold"
       }, "Payment & Confirmation")),
       size: "small",
       className: "aavatto-card"
-    }, /* @__PURE__ */ import_react159.default.createElement("div", {
+    }, /* @__PURE__ */ import_react157.default.createElement("div", {
       className: "mb-6"
-    }, /* @__PURE__ */ import_react159.default.createElement(Text8, {
+    }, /* @__PURE__ */ import_react157.default.createElement(Text7, {
       strong: true,
       className: "text-gray-600 block mb-4 uppercase text-xs tracking-widest"
-    }, "Mode of Payment"), /* @__PURE__ */ import_react159.default.createElement("div", {
+    }, "Mode of Payment"), /* @__PURE__ */ import_react157.default.createElement("div", {
       className: "grid grid-cols-2 gap-3"
-    }, paymentModes.map((mode) => /* @__PURE__ */ import_react159.default.createElement("button", {
+    }, paymentModes.map((mode) => /* @__PURE__ */ import_react157.default.createElement("button", {
       key: mode.value,
       onClick: () => onPaymentModeChange(mode.value),
       className: `
                                 flex flex-col items-center justify-center p-4 rounded-2xl border-2 transition-all duration-200
                                 ${paymentMode === mode.value ? `border-primary bg-primary/5 text-primary shadow-sm ring-1 ring-primary/20` : "border-gray-100 bg-white text-gray-500 hover:border-gray-200 hover:bg-gray-50"}
                             `
-    }, /* @__PURE__ */ import_react159.default.createElement("div", {
+    }, /* @__PURE__ */ import_react157.default.createElement("div", {
       className: `text-2xl mb-1 ${paymentMode === mode.value ? "text-primary" : "text-gray-400"}`
-    }, mode.icon), /* @__PURE__ */ import_react159.default.createElement("span", {
+    }, mode.icon), /* @__PURE__ */ import_react157.default.createElement("span", {
       className: "font-bold text-xs uppercase tracking-wide"
-    }, mode.label))))), /* @__PURE__ */ import_react159.default.createElement("div", {
+    }, mode.label))))), /* @__PURE__ */ import_react157.default.createElement("div", {
       className: "bg-blue-50/50 p-4 rounded-2xl border border-blue-100/50 mb-6 flex items-start gap-3"
-    }, /* @__PURE__ */ import_react159.default.createElement(CheckCircleOutlined_default2, {
+    }, /* @__PURE__ */ import_react157.default.createElement(CheckCircleOutlined_default2, {
       className: "mt-1 text-blue-500"
-    }), /* @__PURE__ */ import_react159.default.createElement("div", {
+    }), /* @__PURE__ */ import_react157.default.createElement("div", {
       className: "text-[12px] leading-relaxed text-blue-800"
-    }, "By submitting, you confirm that the donor details and donation amounts are correct. A receipt will be generated automatically.")), /* @__PURE__ */ import_react159.default.createElement(button_default, {
+    }, "By submitting, you confirm that the donor details and donation amounts are correct. A receipt will be generated automatically.")), /* @__PURE__ */ import_react157.default.createElement(button_default, {
       type: "primary",
       size: "large",
       block: true,
-      icon: /* @__PURE__ */ import_react159.default.createElement(CheckCircleOutlined_default2, {
+      icon: /* @__PURE__ */ import_react157.default.createElement(CheckCircleOutlined_default2, {
         className: "text-lg"
       }),
       onClick: onSubmit,
@@ -90777,9 +90565,9 @@ html body {
                     h-16 rounded-2xl text-lg font-black tracking-tight shadow-lg transition-all
                     ${disabled ? "bg-gray-200 border-gray-200 text-gray-400" : "bg-primary border-none shadow-primary/30 hover:scale-[1.02] active:scale-95"}
                 `
-    }, loading ? "PROCESSING..." : "CONFIRM DONATION"), !disabled && /* @__PURE__ */ import_react159.default.createElement("div", {
+    }, loading ? "PROCESSING..." : "CONFIRM DONATION"), !disabled && /* @__PURE__ */ import_react157.default.createElement("div", {
       className: "mt-4 text-center"
-    }, /* @__PURE__ */ import_react159.default.createElement(tag_default, {
+    }, /* @__PURE__ */ import_react157.default.createElement(tag_default, {
       color: "success",
       className: "rounded-full border-none px-3 py-1 font-bold text-[10px] uppercase tracking-widest bg-green-50 text-green-600"
     }, "System Ready for Transaction")));
@@ -90787,18 +90575,18 @@ html body {
   var PaymentSection_default = PaymentSection;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/pages/Donation.jsx
-  var { Title: Title6, Text: Text9 } = typography_default;
+  var { Title: Title5, Text: Text8 } = typography_default;
   var Donation = () => {
-    const [selectedDonor, setSelectedDonor] = (0, import_react160.useState)(null);
-    const [selectedTemple, setSelectedTemple] = (0, import_react160.useState)(null);
-    const [cartItems, setCartItems] = (0, import_react160.useState)([]);
-    const [paymentMode, setPaymentMode] = (0, import_react160.useState)("Cash");
-    const [submitting, setSubmitting] = (0, import_react160.useState)(false);
-    const totalAmount = (0, import_react160.useMemo)(
+    const [selectedDonor, setSelectedDonor] = (0, import_react158.useState)(null);
+    const [selectedTemple, setSelectedTemple] = (0, import_react158.useState)(null);
+    const [cartItems, setCartItems] = (0, import_react158.useState)([]);
+    const [paymentMode, setPaymentMode] = (0, import_react158.useState)("Cash");
+    const [submitting, setSubmitting] = (0, import_react158.useState)(false);
+    const totalAmount = (0, import_react158.useMemo)(
       () => cartItems.reduce((acc, item) => acc + (item.amount || 0), 0),
       [cartItems]
     );
-    const handleAddToCart = (0, import_react160.useCallback)((donationType) => {
+    const handleAddToCart = (0, import_react158.useCallback)((donationType) => {
       if (!selectedTemple) {
         message_default.warning("Please select a temple first.");
         return;
@@ -90816,21 +90604,21 @@ html body {
       setCartItems((prev2) => [...prev2, newItem]);
       message_default.success(`Added ${donationType.dontation_type}`);
     }, [cartItems, selectedTemple]);
-    const handleUpdateAmount = (0, import_react160.useCallback)((index2, amount) => {
+    const handleUpdateAmount = (0, import_react158.useCallback)((index2, amount) => {
       const newItems = [...cartItems];
       newItems[index2].amount = parseFloat(amount) || 0;
       setCartItems(newItems);
     }, [cartItems]);
-    const handleRemoveItem = (0, import_react160.useCallback)((index2) => {
+    const handleRemoveItem = (0, import_react158.useCallback)((index2) => {
       setCartItems((prev2) => prev2.filter((_, i) => i !== index2));
     }, []);
-    const handleReset = (0, import_react160.useCallback)(() => {
+    const handleReset = (0, import_react158.useCallback)(() => {
       setSelectedDonor(null);
       setSelectedTemple(null);
       setCartItems([]);
       setPaymentMode("Cash");
     }, []);
-    const handleSubmit = (0, import_react160.useCallback)(async () => {
+    const handleSubmit = (0, import_react158.useCallback)(async () => {
       if (!selectedDonor) {
         message_default.error("Please select or add a donor");
         return;
@@ -90880,47 +90668,47 @@ html body {
         }
       });
     }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount, handleReset]);
-    return /* @__PURE__ */ import_react160.default.createElement("div", {
+    return /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "donation-page"
-    }, /* @__PURE__ */ import_react160.default.createElement("div", {
+    }, /* @__PURE__ */ import_react158.default.createElement("div", {
       style: { marginBottom: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }
-    }, /* @__PURE__ */ import_react160.default.createElement(space_default, null, /* @__PURE__ */ import_react160.default.createElement(HeartFilled_default2, {
+    }, /* @__PURE__ */ import_react158.default.createElement(space_default, null, /* @__PURE__ */ import_react158.default.createElement(HeartFilled_default2, {
       style: { fontSize: "24px", color: "#4f46e5" }
-    }), /* @__PURE__ */ import_react160.default.createElement(Title6, {
+    }), /* @__PURE__ */ import_react158.default.createElement(Title5, {
       level: 2,
       style: { margin: 0, fontWeight: 800, letterSpacing: "-0.5px" }
-    }, "Temple Donation POS")), /* @__PURE__ */ import_react160.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react160.default.createElement(RedoOutlined_default2, null),
+    }, "Temple Donation POS")), /* @__PURE__ */ import_react158.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react158.default.createElement(RedoOutlined_default2, null),
       onClick: handleReset,
       type: "text",
       className: "hover:text-primary transition-colors"
-    }, "Reset Form")), /* @__PURE__ */ import_react160.default.createElement(row_default2, {
+    }, "Reset Form")), /* @__PURE__ */ import_react158.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react160.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react158.default.createElement(col_default2, {
       xs: 24,
       lg: 15
-    }, /* @__PURE__ */ import_react160.default.createElement("div", {
+    }, /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "space-y-6"
-    }, /* @__PURE__ */ import_react160.default.createElement(DonorSection_default, {
+    }, /* @__PURE__ */ import_react158.default.createElement(DonorSection_default, {
       onDonorSelect: setSelectedDonor,
       selectedDonor
-    }), /* @__PURE__ */ import_react160.default.createElement(TempleSelect_default, {
+    }), /* @__PURE__ */ import_react158.default.createElement(TempleSelect_default, {
       onTempleSelect: setSelectedTemple,
       selectedTemple
-    }), /* @__PURE__ */ import_react160.default.createElement(DonationTypes_default, {
+    }), /* @__PURE__ */ import_react158.default.createElement(DonationTypes_default, {
       selectedTemple,
       onAddToCart: handleAddToCart
-    }))), /* @__PURE__ */ import_react160.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react158.default.createElement(col_default2, {
       xs: 24,
       lg: 9
-    }, /* @__PURE__ */ import_react160.default.createElement("div", {
+    }, /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "space-y-6 sticky top-6"
-    }, /* @__PURE__ */ import_react160.default.createElement(Cart_default, {
+    }, /* @__PURE__ */ import_react158.default.createElement(Cart_default, {
       items: cartItems,
       onUpdateAmount: handleUpdateAmount,
       onRemoveItem: handleRemoveItem,
       totalAmount
-    }), /* @__PURE__ */ import_react160.default.createElement(PaymentSection_default, {
+    }), /* @__PURE__ */ import_react158.default.createElement(PaymentSection_default, {
       paymentMode,
       onPaymentModeChange: setPaymentMode,
       onSubmit: handleSubmit,
@@ -90930,14 +90718,568 @@ html body {
   };
   var Donation_default = Donation;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonForm.jsx
-  var import_react161 = __toESM(require_react());
-
   // ../temple_donation/temple_donation/public/js/temple_donation/config/constants.js
   var DOCTYPE_DONOR = "Donor";
   var DOCTYPE_TEMPLE = "Temple";
   var DOCTYPE_DONATION = "Donation";
   var DOCTYPE_DONATION_TYPE = "Donation Type";
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorList.jsx
+  var import_react163 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
+  var import_react161 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonTable.jsx
+  var import_react159 = __toESM(require_react());
+  var { Title: Title6, Text: Text9 } = typography_default;
+  var CommonTable = ({
+    columns,
+    dataSource,
+    loading,
+    searchPlaceholder = "Search...",
+    onEdit,
+    onDelete,
+    onView,
+    onPrint,
+    rowKey = "name"
+  }) => {
+    const [searchText, setSearchText] = (0, import_react159.useState)("");
+    const filteredData = dataSource == null ? void 0 : dataSource.filter((item) => {
+      return Object.values(item).some(
+        (val) => String(val).toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+    const actionColumn = {
+      title: "Actions",
+      key: "actions",
+      fixed: "right",
+      width: 220,
+      render: (_, record) => /* @__PURE__ */ import_react159.default.createElement(space_default, {
+        size: "small"
+      }, onView && /* @__PURE__ */ import_react159.default.createElement(button_default, {
+        type: "default",
+        shape: "circle",
+        icon: /* @__PURE__ */ import_react159.default.createElement(EyeOutlined_default2, null),
+        onClick: () => onView(record),
+        size: "small",
+        title: "View Details"
+      }), onPrint && /* @__PURE__ */ import_react159.default.createElement(button_default, {
+        type: "default",
+        shape: "circle",
+        icon: /* @__PURE__ */ import_react159.default.createElement(PrinterOutlined_default2, null),
+        onClick: () => onPrint(record),
+        size: "small",
+        title: "Print"
+      }), onEdit && /* @__PURE__ */ import_react159.default.createElement(button_default, {
+        type: "primary",
+        ghost: true,
+        shape: "circle",
+        icon: /* @__PURE__ */ import_react159.default.createElement(EditOutlined_default2, null),
+        onClick: () => onEdit(record),
+        size: "small",
+        title: "Edit"
+      }), onDelete && /* @__PURE__ */ import_react159.default.createElement(button_default, {
+        danger: true,
+        shape: "circle",
+        icon: /* @__PURE__ */ import_react159.default.createElement(DeleteOutlined_default2, null),
+        onClick: () => onDelete(record),
+        size: "small",
+        title: "Delete"
+      }))
+    };
+    const finalColumns = onView || onPrint || onEdit || onDelete ? [...columns, actionColumn] : columns;
+    return /* @__PURE__ */ import_react159.default.createElement(card_default, {
+      bordered: false,
+      className: "shadow-sm listing-table-card",
+      style: { borderRadius: "16px" }
+    }, /* @__PURE__ */ import_react159.default.createElement("div", {
+      style: { marginBottom: "24px" }
+    }, /* @__PURE__ */ import_react159.default.createElement(input_default, {
+      placeholder: searchPlaceholder,
+      prefix: /* @__PURE__ */ import_react159.default.createElement(SearchOutlined_default2, {
+        style: { color: "#bfbfbf" }
+      }),
+      onChange: (e3) => setSearchText(e3.target.value),
+      style: { width: "100%", maxWidth: "400px", height: "45px", borderRadius: "10px" },
+      allowClear: true
+    })), /* @__PURE__ */ import_react159.default.createElement(table_default, {
+      dataSource: filteredData,
+      columns: finalColumns,
+      rowKey,
+      loading,
+      pagination: {
+        pageSize: 10,
+        showSizeChanger: true,
+        showTotal: (total) => `Total ${total} entries`,
+        style: { marginTop: "24px" }
+      },
+      className: "aavatto-premium-table",
+      scroll: { x: "max-content" }
+    }));
+  };
+  var CommonTable_default = CommonTable;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/PageHeader.jsx
+  var import_react160 = __toESM(require_react());
+  var { Title: Title7, Text: Text10 } = typography_default;
+  var PageHeader = ({
+    title,
+    description,
+    onAdd,
+    onExport,
+    addLabel = "Add New Record",
+    showBack = false,
+    onBack,
+    extra
+  }) => {
+    return /* @__PURE__ */ import_react160.default.createElement("div", {
+      className: "aavatto-page-header",
+      style: {
+        marginBottom: "24px",
+        background: "transparent"
+      }
+    }, /* @__PURE__ */ import_react160.default.createElement(row_default2, {
+      justify: "space-between",
+      align: "middle",
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react160.default.createElement(col_default2, {
+      flex: "auto"
+    }, /* @__PURE__ */ import_react160.default.createElement(space_default, {
+      size: "middle",
+      align: "start"
+    }, showBack && /* @__PURE__ */ import_react160.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react160.default.createElement(ArrowLeftOutlined_default2, null),
+      onClick: onBack,
+      shape: "circle",
+      style: { marginTop: "4px" }
+    }), /* @__PURE__ */ import_react160.default.createElement("div", null, /* @__PURE__ */ import_react160.default.createElement(Title7, {
+      level: 2,
+      style: { margin: 0, fontWeight: 800, letterSpacing: "-0.025em" }
+    }, title), description && /* @__PURE__ */ import_react160.default.createElement(Text10, {
+      type: "secondary"
+    }, description)))), /* @__PURE__ */ import_react160.default.createElement(col_default2, null, /* @__PURE__ */ import_react160.default.createElement(space_default, {
+      size: "middle"
+    }, onExport && /* @__PURE__ */ import_react160.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react160.default.createElement(ExportOutlined_default2, null),
+      onClick: onExport,
+      style: { height: "40px", borderRadius: "8px", fontWeight: 500 }
+    }, "Export"), onAdd && /* @__PURE__ */ import_react160.default.createElement(button_default, {
+      type: "primary",
+      icon: /* @__PURE__ */ import_react160.default.createElement(PlusOutlined_default2, null),
+      onClick: onAdd,
+      style: {
+        height: "40px",
+        borderRadius: "8px",
+        fontWeight: 600,
+        boxShadow: "0 4px 6px -1px rgb(79 70 229 / 0.2)"
+      }
+    }, addLabel), extra))));
+  };
+  var PageHeader_default = PageHeader;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/utils/exportUtils.js
+  var exportToCSV = (data, columns, filename) => {
+    if (!data || data.length === 0)
+      return;
+    const headers = columns.filter((col) => col.title && col.title !== "Actions").map((col) => col.title);
+    const csvRows = [];
+    csvRows.push(headers.join(","));
+    data.forEach((item) => {
+      const row = columns.filter((col) => col.title && col.title !== "Actions").map((col) => {
+        const val = item[col.dataIndex];
+        return `"${String(val || "").replace(/"/g, '""')}"`;
+      });
+      csvRows.push(row.join(","));
+    });
+    const csvContent = csvRows.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url2 = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url2);
+    link.setAttribute("download", `${filename.replace(/\s+/g, "_")}_export.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/pages/ListingPage.jsx
+  var ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"] }) => {
+    const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
+      fields,
+      limit: 100,
+      orderBy: { field: "modified", order: "desc" }
+    });
+    const { deleteDoc } = useFrappeDeleteDoc();
+    const handleAdd = () => {
+      if (typeof frappe !== "undefined" && basePath) {
+        frappe.set_route("temple-donation", basePath, "new");
+      }
+    };
+    const handleEdit = (record) => {
+      if (typeof frappe !== "undefined" && basePath) {
+        frappe.set_route("temple-donation", basePath, "edit", record.name);
+      }
+    };
+    const handleDelete = (record) => {
+      modal_default.confirm({
+        title: `Are you sure you want to delete this ${doctype}?`,
+        content: "This action cannot be undone.",
+        okText: "Yes, Delete",
+        okType: "danger",
+        cancelText: "No",
+        onOk() {
+          return deleteDoc(doctype, record.name).then(() => {
+            message_default.success(`${doctype} deleted successfully!`);
+            mutate();
+          }).catch((err) => {
+            message_default.error(err.message || "Failed to delete.");
+          });
+        }
+      });
+    };
+    const handleView = (record) => {
+      if (typeof frappe !== "undefined" && basePath) {
+        frappe.set_route("temple-donation", basePath, "view", record.name);
+      }
+    };
+    const handlePrint = (record) => {
+      window.print();
+    };
+    const handleExport = () => {
+      if (!data || data.length === 0) {
+        message_default.warning("No data to export");
+        return;
+      }
+      exportToCSV(data, columns, title);
+    };
+    if (error) {
+      return /* @__PURE__ */ import_react161.default.createElement("div", {
+        style: { padding: "24px" }
+      }, /* @__PURE__ */ import_react161.default.createElement(alert_default, {
+        message: "Connection Error",
+        description: error.message || `Failed to fetch ${doctype} list.`,
+        type: "error",
+        showIcon: true
+      }));
+    }
+    return /* @__PURE__ */ import_react161.default.createElement("div", {
+      style: { padding: "24px 0px" }
+    }, /* @__PURE__ */ import_react161.default.createElement(PageHeader_default, {
+      title,
+      description,
+      onAdd: handleAdd,
+      onExport: handleExport,
+      addLabel: "Add New Record"
+    }), /* @__PURE__ */ import_react161.default.createElement(CommonTable_default, {
+      columns: columns || [],
+      dataSource: data,
+      loading,
+      onEdit: handleEdit,
+      onDelete: handleDelete,
+      onView: handleView,
+      onPrint: handlePrint,
+      searchPlaceholder: `Search ${doctype}s...`
+    }));
+  };
+  var ListingPage_default = ListingPage;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/config/tableConfig.jsx
+  var import_react162 = __toESM(require_react());
+  var { Text: Text11 } = typography_default;
+  var donorColumns = [
+    {
+      title: "Donor ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Name",
+      dataIndex: "donor_name",
+      key: "donor_name",
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        strong: true
+      }, text),
+      sorter: (a, b) => a.donor_name.localeCompare(b.donor_name)
+    },
+    {
+      title: "Mobile Number",
+      dataIndex: "mobile_number",
+      key: "mobile_number"
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email"
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city"
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      ellipsis: true,
+      render: (text) => text || /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        type: "secondary"
+      }, "-")
+    }
+  ];
+  var templeColumns = [
+    {
+      title: "ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Temple Name",
+      dataIndex: "temple_name",
+      key: "temple_name",
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        strong: true
+      }, text),
+      sorter: (a, b) => a.temple_name.localeCompare(b.temple_name)
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city"
+    },
+    {
+      title: "State",
+      dataIndex: "state",
+      key: "state"
+    },
+    {
+      title: "Registration No",
+      dataIndex: "trust_registration_no",
+      key: "trust_registration_no"
+    }
+  ];
+  var donationColumns = [
+    {
+      title: "Donation ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Donor",
+      dataIndex: "donor_name",
+      key: "donor_name",
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        strong: true
+      }, text)
+    },
+    {
+      title: "Temple",
+      dataIndex: "temple",
+      key: "temple"
+    },
+    {
+      title: "Amount",
+      dataIndex: "total_amount",
+      key: "total_amount",
+      render: (val) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        type: "success",
+        strong: true
+      }, "\u20B9", Number(val || 0).toLocaleString()),
+      sorter: (a, b) => (a.total_amount || 0) - (b.total_amount || 0)
+    },
+    {
+      title: "Payment Mode",
+      dataIndex: "payment_mode",
+      key: "payment_mode",
+      render: (mode) => /* @__PURE__ */ import_react162.default.createElement(tag_default, {
+        color: mode === "Cash" ? "green" : "blue"
+      }, mode)
+    }
+  ];
+  var donationTypeColumns = [
+    {
+      title: "ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Donation Type",
+      dataIndex: "donation_type",
+      key: "donation_type",
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text11, {
+        strong: true
+      }, text),
+      sorter: (a, b) => a.donation_type.localeCompare(b.donation_type)
+    },
+    {
+      title: "Donation Type Code",
+      dataIndex: "donation_type_code",
+      key: "donation_type_code",
+      render: (text) => /* @__PURE__ */ import_react162.default.createElement(tag_default, {
+        color: "orange"
+      }, text)
+    },
+    {
+      title: "Temple",
+      dataIndex: "temple",
+      key: "temple"
+    },
+    {
+      title: "Default Amount",
+      dataIndex: "default_amount",
+      key: "default_amount",
+      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
+    },
+    {
+      title: "Image",
+      dataIndex: "donation_image",
+      key: "donation_image",
+      render: (img) => img ? /* @__PURE__ */ import_react162.default.createElement("img", {
+        src: img,
+        alt: "Donation",
+        style: { width: 40, height: 40, borderRadius: 4, objectFit: "cover" }
+      }) : "-"
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorList.jsx
+  var DonorList = () => {
+    return /* @__PURE__ */ import_react163.default.createElement(ListingPage_default, {
+      doctype: DOCTYPE_DONOR,
+      title: "Donors Management",
+      description: "View, add, edit or delete donor records",
+      columns: donorColumns,
+      basePath: "donors",
+      fields: ["name", "donor_name", "mobile_number", "address", "city", "email"]
+    });
+  };
+  var DonorList_default = DonorList;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
+  var import_react166 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  var import_react165 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationPrint.jsx
+  var import_react164 = __toESM(require_react());
+  var DonationPrint = ({ donation }) => {
+    if (!donation)
+      return null;
+    const formatDate = (dateStr) => {
+      if (!dateStr)
+        return "";
+      const date4 = new Date(dateStr);
+      return `${date4.getDate().toString().padStart(2, "0")}-${(date4.getMonth() + 1).toString().padStart(2, "0")}-${date4.getFullYear()}`;
+    };
+    return /* @__PURE__ */ import_react164.default.createElement("div", {
+      className: "print-only",
+      style: {
+        padding: "40px",
+        fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        color: "#000",
+        lineHeight: "1.6",
+        width: "100%",
+        maxWidth: "800px",
+        margin: "0 auto",
+        backgroundColor: "#fff"
+      }
+    }, /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { textAlign: "center", fontWeight: "bold", fontSize: "22px", marginBottom: "15px" }
+    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: {
+        border: "1px solid #000",
+        borderRadius: "25px",
+        padding: "8px 30px",
+        display: "inline-block",
+        margin: "0 auto 20px",
+        position: "relative",
+        left: "50%",
+        transform: "translateX(-50%)",
+        fontSize: "18px",
+        fontWeight: "bold"
+      }
+    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { textAlign: "center", marginBottom: "25px" }
+    }, /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { fontSize: "24px", fontWeight: "bold" }
+    }, donation.temple), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { fontSize: "16px", marginTop: "4px" }
+    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { fontSize: "14px", maxWidth: "600px", margin: "8px auto", textAlign: "center" }
+    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { fontSize: "18px", marginBottom: "20px", padding: "0 20px" }
+    }, /* @__PURE__ */ import_react164.default.createElement("strong", null, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0")), /* @__PURE__ */ import_react164.default.createElement("table", {
+      style: {
+        width: "100%",
+        borderCollapse: "collapse",
+        marginBottom: "20px",
+        border: "2px solid #000"
+      }
+    }, /* @__PURE__ */ import_react164.default.createElement("thead", null, /* @__PURE__ */ import_react164.default.createElement("tr", {
+      style: { backgroundColor: "#f9f9f9" }
+    }, /* @__PURE__ */ import_react164.default.createElement("th", {
+      style: { border: "1px solid #000", padding: "10px", textAlign: "center", fontSize: "18px" }
+    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react164.default.createElement("th", {
+      style: { border: "1px solid #000", padding: "10px", textAlign: "center", fontSize: "18px", width: "200px" }
+    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react164.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react164.default.createElement("tr", {
+      key: idx
+    }, /* @__PURE__ */ import_react164.default.createElement("td", {
+      style: { border: "1px solid #000", padding: "10px", fontSize: "16px" }
+    }, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react164.default.createElement("td", {
+      style: { border: "1px solid #000", padding: "10px", textAlign: "right", fontSize: "16px", fontWeight: "bold" }
+    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react164.default.createElement("tr", {
+      style: { fontWeight: "bold", backgroundColor: "#eee" }
+    }, /* @__PURE__ */ import_react164.default.createElement("td", {
+      style: { border: "1px solid #000", padding: "10px", fontSize: "18px" }
+    }, "Total"), /* @__PURE__ */ import_react164.default.createElement("td", {
+      style: { border: "1px solid #000", padding: "10px", textAlign: "right", fontSize: "18px" }
+    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { padding: "0 20px" }
+    }, donation.note && /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { marginBottom: "15px" }
+    }, /* @__PURE__ */ import_react164.default.createElement("strong", null, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { fontSize: "16px", marginBottom: "15px" }
+    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react164.default.createElement("strong", null, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react164.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react164.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react164.default.createElement("div", {
+      style: { marginTop: "30px" }
+    }, /* @__PURE__ */ import_react164.default.createElement("div", null, "\u0AA8\u0ABE\u0AA3\u0ABE \u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 - ", /* @__PURE__ */ import_react164.default.createElement("strong", null, donation.cashier || "Cashier")), /* @__PURE__ */ import_react164.default.createElement("div", null, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC"))), /* @__PURE__ */ import_react164.default.createElement("style", {
+      dangerouslySetInnerHTML: { __html: `
+                @media screen {
+                    .print-only { display: none !important; }
+                }
+                @media print {
+                    body * { visibility: hidden; }
+                    .print-only, .print-only * { visibility: visible; }
+                    .print-only { 
+                        position: absolute; 
+                        left: 0; 
+                        top: 0; 
+                        width: 100% !important; 
+                        padding: 0 !important;
+                        display: block !important;
+                    }
+                    .no-print { display: none !important; }
+                }
+            ` }
+    }));
+  };
+  var DonationPrint_default = DonationPrint;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
   var formConfigs = {
@@ -91184,13 +91526,190 @@ html body {
     }
   };
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  var { Title: Title8, Text: Text12 } = typography_default;
+  var CommonView = ({ doctype, id, onBack, onEdit }) => {
+    const { data: doc, loading, error } = useFrappeGetDoc(doctype, id);
+    const config = formConfigs[doctype];
+    const handlePrint = () => {
+      window.print();
+    };
+    if (loading) {
+      return /* @__PURE__ */ import_react165.default.createElement("div", {
+        style: { textAlign: "center", padding: "100px" }
+      }, /* @__PURE__ */ import_react165.default.createElement(spin_default, {
+        size: "large",
+        tip: `Loading ${doctype} details...`
+      }));
+    }
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react165.default.createElement("div", {
+        style: { padding: "24px" }
+      }, /* @__PURE__ */ import_react165.default.createElement(alert_default, {
+        message: "Error Loading Details",
+        description: (error == null ? void 0 : error.message) || "Document not found.",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react165.default.createElement(button_default, {
+          onClick: onBack,
+          icon: /* @__PURE__ */ import_react165.default.createElement(ArrowLeftOutlined_default2, null)
+        }, "Go Back")
+      }));
+    }
+    const renderFieldValue = (field, value) => {
+      if (!value)
+        return /* @__PURE__ */ import_react165.default.createElement(Text12, {
+          type: "secondary"
+        }, "-");
+      switch (field.type) {
+        case "image":
+          return /* @__PURE__ */ import_react165.default.createElement("img", {
+            src: value,
+            alt: field.label,
+            style: { maxWidth: "100px", borderRadius: "8px" }
+          });
+        case "textarea":
+          return /* @__PURE__ */ import_react165.default.createElement("pre", {
+            style: { whiteSpace: "pre-wrap", background: "transparent", border: "none", padding: 0, margin: 0, fontSize: "inherit", fontFamily: "inherit" }
+          }, value);
+        default:
+          if (typeof value === "object")
+            return JSON.stringify(value);
+          return /* @__PURE__ */ import_react165.default.createElement(Text12, {
+            strong: true
+          }, String(value));
+      }
+    };
+    return /* @__PURE__ */ import_react165.default.createElement("div", {
+      style: { padding: "24px 0px", maxWidth: "1200px", margin: "0 auto" }
+    }, /* @__PURE__ */ import_react165.default.createElement(PageHeader_default, {
+      title: `View ${(config == null ? void 0 : config.title) || doctype}'s Details`,
+      showBack: true,
+      onBack,
+      extra: /* @__PURE__ */ import_react165.default.createElement(space_default, null, /* @__PURE__ */ import_react165.default.createElement(button_default, {
+        icon: /* @__PURE__ */ import_react165.default.createElement(PrinterOutlined_default2, null),
+        onClick: handlePrint,
+        size: "large"
+      }, "Print"), /* @__PURE__ */ import_react165.default.createElement(button_default, {
+        type: "primary",
+        icon: /* @__PURE__ */ import_react165.default.createElement(EditOutlined_default2, null),
+        onClick: () => onEdit && onEdit(doc),
+        size: "large"
+      }, "Edit Details"))
+    }), /* @__PURE__ */ import_react165.default.createElement(card_default, {
+      bordered: false,
+      className: "shadow-sm",
+      style: { borderRadius: "16px", margin: "0 24px" }
+    }, /* @__PURE__ */ import_react165.default.createElement(row_default2, {
+      gutter: [32, 24]
+    }, config == null ? void 0 : config.fields.map((field) => /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6,
+      key: field.name
+    }, /* @__PURE__ */ import_react165.default.createElement("div", {
+      style: { marginBottom: "8px" }
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true,
+      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
+    }, field.label), renderFieldValue(field, doc[field.name])))), /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true,
+      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
+    }, "Created At"), /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      strong: true
+    }, doc.creation && new Date(doc.creation).toLocaleDateString())), /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12,
+      md: 8,
+      lg: 6
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true,
+      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
+    }, "Updated At"), /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      strong: true
+    }, doc.modified && new Date(doc.modified).toLocaleDateString()))), doctype === "Donation" && /* @__PURE__ */ import_react165.default.createElement(import_react165.default.Fragment, null, /* @__PURE__ */ import_react165.default.createElement(divider_default, null), /* @__PURE__ */ import_react165.default.createElement(DonationPrint_default, {
+      donation: doc
+    }), /* @__PURE__ */ import_react165.default.createElement(Title8, {
+      level: 4,
+      style: { marginBottom: "24px", color: "#4f46e5" }
+    }, "Donation's Payment Details"), /* @__PURE__ */ import_react165.default.createElement(row_default2, {
+      gutter: [32, 24]
+    }, /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      span: 6
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true
+    }, "Payment Type"), /* @__PURE__ */ import_react165.default.createElement(tag_default, {
+      color: "blue"
+    }, doc.payment_mode)), /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      span: 6
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true
+    }, "Total Donation Amount"), /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      strong: true,
+      style: { fontSize: "20px", color: "#10b981" }
+    }, "\u20B9", Number(doc.total_amount).toLocaleString())), /* @__PURE__ */ import_react165.default.createElement(col_default2, {
+      span: 6
+    }, /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      type: "secondary",
+      block: true
+    }, "Cashier"), /* @__PURE__ */ import_react165.default.createElement(Text12, {
+      strong: true
+    }, doc.cashier || "-"))), /* @__PURE__ */ import_react165.default.createElement(divider_default, null), /* @__PURE__ */ import_react165.default.createElement(Title8, {
+      level: 4,
+      style: { marginBottom: "24px", color: "#4f46e5" }
+    }, "Donation Items"), /* @__PURE__ */ import_react165.default.createElement(table_default, {
+      dataSource: doc.donation_items || [],
+      pagination: false,
+      rowKey: "name",
+      columns: [
+        { title: "Code", dataIndex: "donation_type", key: "donation_type" },
+        { title: "Name", dataIndex: "donation_type_name", key: "donation_type_name", render: (_, r3) => r3.donation_type },
+        {
+          title: "Donation Amount",
+          dataIndex: "amount",
+          key: "amount",
+          align: "right",
+          render: (val) => `\u20B9${Number(val).toLocaleString()}`
+        }
+      ],
+      style: { background: "#f8fafc", borderRadius: "12px" }
+    }))));
+  };
+  var CommonView_default = CommonView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
+  var DonorView = ({ id, onBack, onEdit }) => {
+    return /* @__PURE__ */ import_react166.default.createElement(CommonView_default, {
+      doctype: DOCTYPE_DONOR,
+      id,
+      onBack,
+      onEdit
+    });
+  };
+  var DonorView_default = DonorView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
+  var import_react168 = __toESM(require_react());
+
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonForm.jsx
-  var { Title: Title7, Text: Text10 } = typography_default;
+  var import_react167 = __toESM(require_react());
+  var { Title: Title9, Text: Text13 } = typography_default;
   var CommonForm = ({ doctype, id, onBack }) => {
     const isEdit = !!id;
     const config = formConfigs[doctype];
     const [form] = form_default.useForm();
-    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react161.useState)([]);
+    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react167.useState)([]);
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { upload: upload2, loading: uploading } = useFrappeFileUpload();
@@ -91198,7 +91717,7 @@ html body {
     const { data: allDonationTypes, loading: loadingDTypes } = useFrappeGetDocList(DOCTYPE_DONATION_TYPE, {
       fields: ["name", "donation_type", "donation_image"]
     });
-    (0, import_react161.useEffect)(() => {
+    (0, import_react167.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(initialValues);
         if (doctype === DOCTYPE_TEMPLE && initialValues.donation_types) {
@@ -91261,113 +91780,113 @@ html body {
       );
     };
     if (isEdit && fetching) {
-      return /* @__PURE__ */ import_react161.default.createElement("div", {
+      return /* @__PURE__ */ import_react167.default.createElement("div", {
         style: { textAlign: "center", padding: "100px" }
-      }, /* @__PURE__ */ import_react161.default.createElement(spin_default, {
+      }, /* @__PURE__ */ import_react167.default.createElement(spin_default, {
         size: "large",
         tip: `Loading ${config.title} data...`
       }));
     }
     if (isEdit && fetchError) {
-      return /* @__PURE__ */ import_react161.default.createElement("div", {
+      return /* @__PURE__ */ import_react167.default.createElement("div", {
         style: { padding: "24px" }
-      }, /* @__PURE__ */ import_react161.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react167.default.createElement(alert_default, {
         message: "Error Loading Data",
         description: fetchError.message || `Failed to fetch ${config.title} details.`,
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react161.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react167.default.createElement(button_default, {
           onClick: onBack,
-          icon: /* @__PURE__ */ import_react161.default.createElement(ArrowLeftOutlined_default2, null)
+          icon: /* @__PURE__ */ import_react167.default.createElement(ArrowLeftOutlined_default2, null)
         }, "Go Back")
       }));
     }
-    return /* @__PURE__ */ import_react161.default.createElement("div", {
+    return /* @__PURE__ */ import_react167.default.createElement("div", {
       style: { padding: "24px 0", maxWidth: "1200px", margin: "0 auto" }
-    }, /* @__PURE__ */ import_react161.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(card_default, {
       bordered: false,
       className: "shadow-sm",
       style: { borderRadius: "16px", overflow: "hidden" }
-    }, /* @__PURE__ */ import_react161.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react167.default.createElement(row_default2, {
       align: "middle",
       justify: "space-between",
       style: { marginBottom: "32px" }
-    }, /* @__PURE__ */ import_react161.default.createElement(col_default2, null, /* @__PURE__ */ import_react161.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(col_default2, null, /* @__PURE__ */ import_react167.default.createElement(space_default, {
       size: "middle"
-    }, /* @__PURE__ */ import_react161.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(button_default, {
       type: "default",
       shape: "circle",
-      icon: /* @__PURE__ */ import_react161.default.createElement(ArrowLeftOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react167.default.createElement(ArrowLeftOutlined_default2, null),
       onClick: onBack
-    }), /* @__PURE__ */ import_react161.default.createElement("div", null, /* @__PURE__ */ import_react161.default.createElement(Text10, {
+    }), /* @__PURE__ */ import_react167.default.createElement("div", null, /* @__PURE__ */ import_react167.default.createElement(Text13, {
       type: "secondary",
       style: { display: "block", marginBottom: -4 }
-    }, config.title, " Management"), /* @__PURE__ */ import_react161.default.createElement(Title7, {
+    }, config.title, " Management"), /* @__PURE__ */ import_react167.default.createElement(Title9, {
       level: 2,
       style: { margin: 0, fontWeight: 800 }
-    }, isEdit ? `Edit ${config.title}` : `Add New ${config.title}`))))), /* @__PURE__ */ import_react161.default.createElement(form_default, {
+    }, isEdit ? `Edit ${config.title}` : `Add New ${config.title}`))))), /* @__PURE__ */ import_react167.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
       scrollToFirstError: true,
       requiredMark: "optional"
-    }, /* @__PURE__ */ import_react161.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react167.default.createElement(row_default2, {
       gutter: [24, 0]
     }, config.fields.map((field) => {
       var _a;
-      return /* @__PURE__ */ import_react161.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react167.default.createElement(col_default2, {
         xs: 24,
         sm: field.type === "textarea" ? 24 : 12,
         lg: field.type === "textarea" ? 24 : 8,
         key: field.name
-      }, /* @__PURE__ */ import_react161.default.createElement(form_default.Item, {
+      }, /* @__PURE__ */ import_react167.default.createElement(form_default.Item, {
         name: field.name,
-        label: /* @__PURE__ */ import_react161.default.createElement(Text10, {
+        label: /* @__PURE__ */ import_react167.default.createElement(Text13, {
           strong: true
         }, field.label),
         rules: [
           { required: field.required, message: field.message },
           field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
         ].filter(Boolean)
-      }, field.type === "textarea" ? /* @__PURE__ */ import_react161.default.createElement(input_default.TextArea, {
+      }, field.type === "textarea" ? /* @__PURE__ */ import_react167.default.createElement(input_default.TextArea, {
         placeholder: field.placeholder,
         rows: field.rows || 3,
         disabled: field.readOnly || field.disabled,
         style: { borderRadius: "8px" }
-      }) : field.type === "select" ? /* @__PURE__ */ import_react161.default.createElement(select_default, {
+      }) : field.type === "select" ? /* @__PURE__ */ import_react167.default.createElement(select_default, {
         placeholder: field.placeholder,
         disabled: field.readOnly || field.disabled,
         style: { width: "100%", height: "40px", borderRadius: "8px" }
-      }, (_a = field.options) == null ? void 0 : _a.map((opt) => /* @__PURE__ */ import_react161.default.createElement(select_default.Option, {
+      }, (_a = field.options) == null ? void 0 : _a.map((opt) => /* @__PURE__ */ import_react167.default.createElement(select_default.Option, {
         key: opt,
         value: opt
-      }, opt))) : field.type === "image" || field.type === "file" ? /* @__PURE__ */ import_react161.default.createElement(upload_default, {
+      }, opt))) : field.type === "image" || field.type === "file" ? /* @__PURE__ */ import_react167.default.createElement(upload_default, {
         maxCount: 1,
         beforeUpload: () => false,
         listType: field.type === "image" ? "picture" : "text"
-      }, /* @__PURE__ */ import_react161.default.createElement(button_default, {
-        icon: /* @__PURE__ */ import_react161.default.createElement(UploadOutlined_default2, null),
+      }, /* @__PURE__ */ import_react167.default.createElement(button_default, {
+        icon: /* @__PURE__ */ import_react167.default.createElement(UploadOutlined_default2, null),
         style: { borderRadius: "8px", width: "100%", height: "40px" }
-      }, "Choose File")) : /* @__PURE__ */ import_react161.default.createElement(input_default, {
+      }, "Choose File")) : /* @__PURE__ */ import_react167.default.createElement(input_default, {
         placeholder: field.placeholder,
         disabled: field.readOnly || field.disabled,
         style: { borderRadius: "8px", height: "40px" }
       })));
-    })), doctype === DOCTYPE_TEMPLE && /* @__PURE__ */ import_react161.default.createElement("div", {
+    })), doctype === DOCTYPE_TEMPLE && /* @__PURE__ */ import_react167.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react161.default.createElement(divider_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(divider_default, {
       orientation: "left"
-    }, /* @__PURE__ */ import_react161.default.createElement(Title7, {
+    }, /* @__PURE__ */ import_react167.default.createElement(Title9, {
       level: 4,
       style: { margin: 0, color: "#4f46e5" }
-    }, "Donation Types")), /* @__PURE__ */ import_react161.default.createElement(card_default, {
+    }, "Donation Types")), /* @__PURE__ */ import_react167.default.createElement(card_default, {
       style: { background: "#f8fafc", border: "1px dashed #e2e8f0", borderRadius: "12px" },
       bodyStyle: { padding: "16px" }
-    }, /* @__PURE__ */ import_react161.default.createElement(list_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(list_default, {
       loading: loadingDTypes,
       grid: { gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 3 },
       dataSource: allDonationTypes,
-      renderItem: (item) => /* @__PURE__ */ import_react161.default.createElement(list_default.Item, null, /* @__PURE__ */ import_react161.default.createElement(card_default, {
+      renderItem: (item) => /* @__PURE__ */ import_react167.default.createElement(list_default.Item, null, /* @__PURE__ */ import_react167.default.createElement(card_default, {
         size: "small",
         hoverable: true,
         style: {
@@ -91376,560 +91895,190 @@ html body {
         },
         bodyStyle: { padding: "12px" },
         onClick: () => toggleDonationType(item.name)
-      }, /* @__PURE__ */ import_react161.default.createElement(row_default2, {
+      }, /* @__PURE__ */ import_react167.default.createElement(row_default2, {
         align: "middle",
         justify: "space-between",
         gutter: 12
-      }, /* @__PURE__ */ import_react161.default.createElement(col_default2, {
+      }, /* @__PURE__ */ import_react167.default.createElement(col_default2, {
         flex: "48px"
-      }, /* @__PURE__ */ import_react161.default.createElement(avatar_default, {
+      }, /* @__PURE__ */ import_react167.default.createElement(avatar_default, {
         src: item.donation_image,
         shape: "square",
         size: 40,
         style: { border: "1px solid #f1f5f9" }
-      })), /* @__PURE__ */ import_react161.default.createElement(col_default2, {
+      })), /* @__PURE__ */ import_react167.default.createElement(col_default2, {
         flex: "auto"
-      }, /* @__PURE__ */ import_react161.default.createElement(Text10, {
+      }, /* @__PURE__ */ import_react167.default.createElement(Text13, {
         strong: true
-      }, item.donation_type)), /* @__PURE__ */ import_react161.default.createElement(col_default2, null, /* @__PURE__ */ import_react161.default.createElement(switch_default, {
+      }, item.donation_type)), /* @__PURE__ */ import_react167.default.createElement(col_default2, null, /* @__PURE__ */ import_react167.default.createElement(switch_default, {
         checked: selectedDonationTypes.includes(item.name),
         onChange: () => toggleDonationType(item.name),
         size: "small"
       })))))
-    }))), /* @__PURE__ */ import_react161.default.createElement(divider_default, null), /* @__PURE__ */ import_react161.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react167.default.createElement(divider_default, null), /* @__PURE__ */ import_react167.default.createElement("div", {
       style: { textAlign: "right" }
-    }, /* @__PURE__ */ import_react161.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(space_default, {
       size: "middle"
-    }, /* @__PURE__ */ import_react161.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react167.default.createElement(button_default, {
       onClick: onBack,
       size: "large",
       style: { borderRadius: "8px", minWidth: "100px" }
-    }, "Cancel"), /* @__PURE__ */ import_react161.default.createElement(button_default, {
+    }, "Cancel"), /* @__PURE__ */ import_react167.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       size: "large",
       loading: creating || updating || uploading,
-      icon: /* @__PURE__ */ import_react161.default.createElement(SaveOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react167.default.createElement(SaveOutlined_default2, null),
       style: { borderRadius: "8px", minWidth: "160px", height: "45px", fontWeight: 600 }
     }, isEdit ? "Save Changes" : `Create ${config.title}`))))));
   };
   var CommonForm_default = CommonForm;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
-  var import_react163 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationPrint.jsx
-  var import_react162 = __toESM(require_react());
-  var DonationPrint = ({ donation }) => {
-    if (!donation)
-      return null;
-    const formatDate = (dateStr) => {
-      if (!dateStr)
-        return "";
-      const date4 = new Date(dateStr);
-      return `${date4.getDate().toString().padStart(2, "0")}-${(date4.getMonth() + 1).toString().padStart(2, "0")}-${date4.getFullYear()}`;
-    };
-    return /* @__PURE__ */ import_react162.default.createElement("div", {
-      className: "print-only",
-      style: {
-        padding: "40px",
-        fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-        color: "#000",
-        lineHeight: "1.6",
-        width: "100%",
-        maxWidth: "800px",
-        margin: "0 auto",
-        backgroundColor: "#fff"
-      }
-    }, /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { textAlign: "center", fontWeight: "bold", fontSize: "22px", marginBottom: "15px" }
-    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: {
-        border: "1px solid #000",
-        borderRadius: "25px",
-        padding: "8px 30px",
-        display: "inline-block",
-        margin: "0 auto 20px",
-        position: "relative",
-        left: "50%",
-        transform: "translateX(-50%)",
-        fontSize: "18px",
-        fontWeight: "bold"
-      }
-    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { textAlign: "center", marginBottom: "25px" }
-    }, /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { fontSize: "24px", fontWeight: "bold" }
-    }, donation.temple), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { fontSize: "16px", marginTop: "4px" }
-    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { fontSize: "14px", maxWidth: "600px", margin: "8px auto", textAlign: "center" }
-    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { fontSize: "18px", marginBottom: "20px", padding: "0 20px" }
-    }, /* @__PURE__ */ import_react162.default.createElement("strong", null, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0")), /* @__PURE__ */ import_react162.default.createElement("table", {
-      style: {
-        width: "100%",
-        borderCollapse: "collapse",
-        marginBottom: "20px",
-        border: "2px solid #000"
-      }
-    }, /* @__PURE__ */ import_react162.default.createElement("thead", null, /* @__PURE__ */ import_react162.default.createElement("tr", {
-      style: { backgroundColor: "#f9f9f9" }
-    }, /* @__PURE__ */ import_react162.default.createElement("th", {
-      style: { border: "1px solid #000", padding: "10px", textAlign: "center", fontSize: "18px" }
-    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react162.default.createElement("th", {
-      style: { border: "1px solid #000", padding: "10px", textAlign: "center", fontSize: "18px", width: "200px" }
-    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react162.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react162.default.createElement("tr", {
-      key: idx
-    }, /* @__PURE__ */ import_react162.default.createElement("td", {
-      style: { border: "1px solid #000", padding: "10px", fontSize: "16px" }
-    }, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react162.default.createElement("td", {
-      style: { border: "1px solid #000", padding: "10px", textAlign: "right", fontSize: "16px", fontWeight: "bold" }
-    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react162.default.createElement("tr", {
-      style: { fontWeight: "bold", backgroundColor: "#eee" }
-    }, /* @__PURE__ */ import_react162.default.createElement("td", {
-      style: { border: "1px solid #000", padding: "10px", fontSize: "18px" }
-    }, "Total"), /* @__PURE__ */ import_react162.default.createElement("td", {
-      style: { border: "1px solid #000", padding: "10px", textAlign: "right", fontSize: "18px" }
-    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { padding: "0 20px" }
-    }, donation.note && /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { marginBottom: "15px" }
-    }, /* @__PURE__ */ import_react162.default.createElement("strong", null, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { fontSize: "16px", marginBottom: "15px" }
-    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react162.default.createElement("strong", null, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react162.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react162.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react162.default.createElement("div", {
-      style: { marginTop: "30px" }
-    }, /* @__PURE__ */ import_react162.default.createElement("div", null, "\u0AA8\u0ABE\u0AA3\u0ABE \u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 - ", /* @__PURE__ */ import_react162.default.createElement("strong", null, donation.cashier || "Cashier")), /* @__PURE__ */ import_react162.default.createElement("div", null, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC"))), /* @__PURE__ */ import_react162.default.createElement("style", {
-      dangerouslySetInnerHTML: { __html: `
-                @media screen {
-                    .print-only { display: none !important; }
-                }
-                @media print {
-                    body * { visibility: hidden; }
-                    .print-only, .print-only * { visibility: visible; }
-                    .print-only { 
-                        position: absolute; 
-                        left: 0; 
-                        top: 0; 
-                        width: 100% !important; 
-                        padding: 0 !important;
-                        display: block !important;
-                    }
-                    .no-print { display: none !important; }
-                }
-            ` }
-    }));
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
+  var DonorForm = ({ id, onBack }) => {
+    return /* @__PURE__ */ import_react168.default.createElement(CommonForm_default, {
+      doctype: DOCTYPE_DONOR,
+      id,
+      onBack
+    });
   };
-  var DonationPrint_default = DonationPrint;
+  var DonorForm_default = DonorForm;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
-  var { Title: Title8, Text: Text11 } = typography_default;
-  var CommonView = ({ doctype, id, onBack, onEdit }) => {
-    const { data: doc, loading, error } = useFrappeGetDoc(doctype, id);
-    const config = formConfigs[doctype];
-    const handlePrint = () => {
-      window.print();
-    };
-    if (loading) {
-      return /* @__PURE__ */ import_react163.default.createElement("div", {
-        style: { textAlign: "center", padding: "100px" }
-      }, /* @__PURE__ */ import_react163.default.createElement(spin_default, {
-        size: "large",
-        tip: `Loading ${doctype} details...`
-      }));
-    }
-    if (error || !doc) {
-      return /* @__PURE__ */ import_react163.default.createElement("div", {
-        style: { padding: "24px" }
-      }, /* @__PURE__ */ import_react163.default.createElement(alert_default, {
-        message: "Error Loading Details",
-        description: (error == null ? void 0 : error.message) || "Document not found.",
-        type: "error",
-        showIcon: true,
-        action: /* @__PURE__ */ import_react163.default.createElement(button_default, {
-          onClick: onBack,
-          icon: /* @__PURE__ */ import_react163.default.createElement(ArrowLeftOutlined_default2, null)
-        }, "Go Back")
-      }));
-    }
-    const renderFieldValue = (field, value) => {
-      if (!value)
-        return /* @__PURE__ */ import_react163.default.createElement(Text11, {
-          type: "secondary"
-        }, "-");
-      switch (field.type) {
-        case "image":
-          return /* @__PURE__ */ import_react163.default.createElement("img", {
-            src: value,
-            alt: field.label,
-            style: { maxWidth: "100px", borderRadius: "8px" }
-          });
-        case "textarea":
-          return /* @__PURE__ */ import_react163.default.createElement("pre", {
-            style: { whiteSpace: "pre-wrap", background: "transparent", border: "none", padding: 0, margin: 0, fontSize: "inherit", fontFamily: "inherit" }
-          }, value);
-        default:
-          if (typeof value === "object")
-            return JSON.stringify(value);
-          return /* @__PURE__ */ import_react163.default.createElement(Text11, {
-            strong: true
-          }, String(value));
-      }
-    };
-    return /* @__PURE__ */ import_react163.default.createElement("div", {
-      style: { padding: "24px 0", maxWidth: "1200px", margin: "0 auto" }
-    }, /* @__PURE__ */ import_react163.default.createElement(card_default, {
-      bordered: false,
-      className: "shadow-sm",
-      style: { borderRadius: "16px" }
-    }, /* @__PURE__ */ import_react163.default.createElement(row_default2, {
-      align: "middle",
-      justify: "space-between",
-      style: { marginBottom: "32px" }
-    }, /* @__PURE__ */ import_react163.default.createElement(col_default2, null, /* @__PURE__ */ import_react163.default.createElement(space_default, {
-      size: "middle"
-    }, /* @__PURE__ */ import_react163.default.createElement(button_default, {
-      type: "default",
-      shape: "circle",
-      icon: /* @__PURE__ */ import_react163.default.createElement(ArrowLeftOutlined_default2, null),
-      onClick: onBack
-    }), /* @__PURE__ */ import_react163.default.createElement("div", null, /* @__PURE__ */ import_react163.default.createElement(Title8, {
-      level: 2,
-      style: { margin: 0, fontWeight: 800 }
-    }, "View ", (config == null ? void 0 : config.title) || doctype, "'s Details")))), /* @__PURE__ */ import_react163.default.createElement(col_default2, null, /* @__PURE__ */ import_react163.default.createElement(space_default, null, /* @__PURE__ */ import_react163.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react163.default.createElement(PrinterOutlined_default2, null),
-      onClick: handlePrint,
-      size: "large"
-    }, "Print"), /* @__PURE__ */ import_react163.default.createElement(button_default, {
-      type: "primary",
-      icon: /* @__PURE__ */ import_react163.default.createElement(EditOutlined_default2, null),
-      onClick: () => onEdit && onEdit(doc),
-      size: "large"
-    }, "Edit Details")))), /* @__PURE__ */ import_react163.default.createElement(row_default2, {
-      gutter: [32, 24]
-    }, config == null ? void 0 : config.fields.map((field) => /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12,
-      md: 8,
-      lg: 6,
-      key: field.name
-    }, /* @__PURE__ */ import_react163.default.createElement("div", {
-      style: { marginBottom: "8px" }
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true,
-      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
-    }, field.label), renderFieldValue(field, doc[field.name])))), /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12,
-      md: 8,
-      lg: 6
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true,
-      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
-    }, "Created At"), /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      strong: true
-    }, doc.creation && new Date(doc.creation).toLocaleDateString())), /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12,
-      md: 8,
-      lg: 6
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true,
-      style: { fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }
-    }, "Updated At"), /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      strong: true
-    }, doc.modified && new Date(doc.modified).toLocaleDateString()))), doctype === "Donation" && /* @__PURE__ */ import_react163.default.createElement(import_react163.default.Fragment, null, /* @__PURE__ */ import_react163.default.createElement(divider_default, null), /* @__PURE__ */ import_react163.default.createElement(DonationPrint_default, {
-      donation: doc
-    }), /* @__PURE__ */ import_react163.default.createElement(Title8, {
-      level: 4,
-      style: { marginBottom: "24px", color: "#4f46e5" }
-    }, "Donation's Payment Details"), /* @__PURE__ */ import_react163.default.createElement(row_default2, {
-      gutter: [32, 24]
-    }, /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      span: 6
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true
-    }, "Payment Type"), /* @__PURE__ */ import_react163.default.createElement(tag_default, {
-      color: "blue"
-    }, doc.payment_mode)), /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      span: 6
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true
-    }, "Total Donation Amount"), /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      strong: true,
-      style: { fontSize: "20px", color: "#10b981" }
-    }, "\u20B9", Number(doc.total_amount).toLocaleString())), /* @__PURE__ */ import_react163.default.createElement(col_default2, {
-      span: 6
-    }, /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      type: "secondary",
-      block: true
-    }, "Cashier"), /* @__PURE__ */ import_react163.default.createElement(Text11, {
-      strong: true
-    }, doc.cashier || "-"))), /* @__PURE__ */ import_react163.default.createElement(divider_default, null), /* @__PURE__ */ import_react163.default.createElement(Title8, {
-      level: 4,
-      style: { marginBottom: "24px", color: "#4f46e5" }
-    }, "Donation Items"), /* @__PURE__ */ import_react163.default.createElement(table_default, {
-      dataSource: doc.donation_items || [],
-      pagination: false,
-      rowKey: "name",
-      columns: [
-        { title: "Code", dataIndex: "donation_type", key: "donation_type" },
-        { title: "Name", dataIndex: "donation_type_name", key: "donation_type_name", render: (_, r3) => r3.donation_type },
-        {
-          title: "Donation Amount",
-          dataIndex: "amount",
-          key: "amount",
-          align: "right",
-          render: (val) => `\u20B9${Number(val).toLocaleString()}`
-        }
-      ],
-      style: { background: "#f8fafc", borderRadius: "12px" }
-    }))));
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
+  var import_react169 = __toESM(require_react());
+  var TempleList = () => {
+    return /* @__PURE__ */ import_react169.default.createElement(ListingPage_default, {
+      doctype: DOCTYPE_TEMPLE,
+      title: "Temple Management",
+      description: "View, add, edit or delete temple records",
+      columns: templeColumns,
+      basePath: "temples",
+      fields: ["name", "temple_name", "city", "state", "trust_registration_no"]
+    });
   };
-  var CommonView_default = CommonView;
+  var TempleList_default = TempleList;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/config/tableConfig.jsx
-  var import_react164 = __toESM(require_react());
-  var { Text: Text12 } = typography_default;
-  var donorColumns = [
-    {
-      title: "Donor ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Name",
-      dataIndex: "donor_name",
-      key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        strong: true
-      }, text),
-      sorter: (a, b) => a.donor_name.localeCompare(b.donor_name)
-    },
-    {
-      title: "Mobile Number",
-      dataIndex: "mobile_number",
-      key: "mobile_number"
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email"
-    },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city"
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ellipsis: true,
-      render: (text) => text || /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        type: "secondary"
-      }, "-")
-    }
-  ];
-  var templeColumns = [
-    {
-      title: "ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Temple Name",
-      dataIndex: "temple_name",
-      key: "temple_name",
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        strong: true
-      }, text),
-      sorter: (a, b) => a.temple_name.localeCompare(b.temple_name)
-    },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city"
-    },
-    {
-      title: "State",
-      dataIndex: "state",
-      key: "state"
-    },
-    {
-      title: "Registration No",
-      dataIndex: "trust_registration_no",
-      key: "trust_registration_no"
-    }
-  ];
-  var donationColumns = [
-    {
-      title: "Donation ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Donor",
-      dataIndex: "donor_name",
-      key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        strong: true
-      }, text)
-    },
-    {
-      title: "Temple",
-      dataIndex: "temple",
-      key: "temple"
-    },
-    {
-      title: "Amount",
-      dataIndex: "total_amount",
-      key: "total_amount",
-      render: (val) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        type: "success",
-        strong: true
-      }, "\u20B9", Number(val || 0).toLocaleString()),
-      sorter: (a, b) => (a.total_amount || 0) - (b.total_amount || 0)
-    },
-    {
-      title: "Payment Mode",
-      dataIndex: "payment_mode",
-      key: "payment_mode",
-      render: (mode) => /* @__PURE__ */ import_react164.default.createElement(tag_default, {
-        color: mode === "Cash" ? "green" : "blue"
-      }, mode)
-    }
-  ];
-  var donationTypeColumns = [
-    {
-      title: "ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Donation Type",
-      dataIndex: "donation_type",
-      key: "donation_type",
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(Text12, {
-        strong: true
-      }, text),
-      sorter: (a, b) => a.donation_type.localeCompare(b.donation_type)
-    },
-    {
-      title: "Donation Type Code",
-      dataIndex: "donation_type_code",
-      key: "donation_type_code",
-      render: (text) => /* @__PURE__ */ import_react164.default.createElement(tag_default, {
-        color: "orange"
-      }, text)
-    },
-    {
-      title: "Temple",
-      dataIndex: "temple",
-      key: "temple"
-    },
-    {
-      title: "Default Amount",
-      dataIndex: "default_amount",
-      key: "default_amount",
-      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
-    },
-    {
-      title: "Image",
-      dataIndex: "donation_image",
-      key: "donation_image",
-      render: (img) => img ? /* @__PURE__ */ import_react164.default.createElement("img", {
-        src: img,
-        alt: "Donation",
-        style: { width: 40, height: 40, borderRadius: 4, objectFit: "cover" }
-      }) : "-"
-    }
-  ];
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleView.jsx
+  var import_react170 = __toESM(require_react());
+  var TempleView = ({ id, onBack, onEdit }) => {
+    return /* @__PURE__ */ import_react170.default.createElement(CommonView_default, {
+      doctype: DOCTYPE_TEMPLE,
+      id,
+      onBack,
+      onEdit
+    });
+  };
+  var TempleView_default = TempleView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleForm.jsx
+  var import_react171 = __toESM(require_react());
+  var TempleForm = ({ id, onBack }) => {
+    return /* @__PURE__ */ import_react171.default.createElement(CommonForm_default, {
+      doctype: DOCTYPE_TEMPLE,
+      id,
+      onBack
+    });
+  };
+  var TempleForm_default = TempleForm;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
+  var import_react172 = __toESM(require_react());
+  var DonationList = () => {
+    return /* @__PURE__ */ import_react172.default.createElement(ListingPage_default, {
+      doctype: DOCTYPE_DONATION,
+      title: "Donation Records",
+      description: "View and track all donation transactions",
+      columns: donationColumns,
+      basePath: "donations",
+      fields: ["name", "donor_name", "temple", "total_amount", "payment_mode"]
+    });
+  };
+  var DonationList_default = DonationList;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationView.jsx
+  var import_react173 = __toESM(require_react());
+  var DonationView = ({ id, onBack, onEdit }) => {
+    return /* @__PURE__ */ import_react173.default.createElement(CommonView_default, {
+      doctype: DOCTYPE_DONATION,
+      id,
+      onBack,
+      onEdit
+    });
+  };
+  var DonationView_default = DonationView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
+  var import_react174 = __toESM(require_react());
+  var DonationTypeList = () => {
+    return /* @__PURE__ */ import_react174.default.createElement(ListingPage_default, {
+      doctype: DOCTYPE_DONATION_TYPE,
+      title: "Donation Types",
+      description: "Manage available donation categories",
+      columns: donationTypeColumns,
+      basePath: "donation-types",
+      fields: ["name", "donation_type", "donation_type_code", "donation_image"]
+    });
+  };
+  var DonationTypeList_default = DonationTypeList;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeView.jsx
+  var import_react175 = __toESM(require_react());
+  var DonationTypeView = ({ id, onBack, onEdit }) => {
+    return /* @__PURE__ */ import_react175.default.createElement(CommonView_default, {
+      doctype: DOCTYPE_DONATION_TYPE,
+      id,
+      onBack,
+      onEdit
+    });
+  };
+  var DonationTypeView_default = DonationTypeView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeForm.jsx
+  var import_react176 = __toESM(require_react());
+  var DonationTypeForm = ({ id, onBack }) => {
+    return /* @__PURE__ */ import_react176.default.createElement(CommonForm_default, {
+      doctype: DOCTYPE_DONATION_TYPE,
+      id,
+      onBack
+    });
+  };
+  var DonationTypeForm_default = DonationTypeForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
   var navigationItems = [
     {
       key: "dashboard",
-      icon: /* @__PURE__ */ import_react165.default.createElement(DashboardOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react177.default.createElement(DashboardOutlined_default2, null),
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react165.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react177.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donors",
-      icon: /* @__PURE__ */ import_react165.default.createElement(UserOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react177.default.createElement(UserOutlined_default2, null),
       label: "Donors",
-      component: /* @__PURE__ */ import_react165.default.createElement(ListingPage_default, {
-        doctype: DOCTYPE_DONOR,
-        title: "Donors Management",
-        description: "View, add, edit or delete donor records",
-        columns: donorColumns,
-        basePath: "donors",
-        fields: ["name", "donor_name", "mobile_number", "address", "city", "email"]
-      }),
+      component: /* @__PURE__ */ import_react177.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "temples",
-      icon: /* @__PURE__ */ import_react165.default.createElement(BankOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react177.default.createElement(BankOutlined_default2, null),
       label: "Temples",
-      component: /* @__PURE__ */ import_react165.default.createElement(ListingPage_default, {
-        doctype: DOCTYPE_TEMPLE,
-        title: "Temple Management",
-        description: "View, add, edit or delete temple records",
-        columns: templeColumns,
-        basePath: "temples",
-        fields: ["name", "temple_name", "city", "state", "trust_registration_no"]
-      }),
+      component: /* @__PURE__ */ import_react177.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donations",
-      icon: /* @__PURE__ */ import_react165.default.createElement(HistoryOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react177.default.createElement(HistoryOutlined_default2, null),
       label: "Donation List",
-      component: /* @__PURE__ */ import_react165.default.createElement(ListingPage_default, {
-        doctype: DOCTYPE_DONATION,
-        title: "Donation Records",
-        description: "View and track all donation transactions",
-        columns: donationColumns,
-        basePath: "donations",
-        fields: ["name", "donor_name", "temple", "total_amount", "payment_mode"]
-      }),
+      component: /* @__PURE__ */ import_react177.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
-      icon: /* @__PURE__ */ import_react165.default.createElement(ShoppingCartOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react177.default.createElement(ShoppingCartOutlined_default2, null),
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react165.default.createElement(ListingPage_default, {
-        doctype: DOCTYPE_DONATION_TYPE,
-        title: "Donation Types",
-        description: "Manage available donation categories",
-        columns: donationTypeColumns,
-        basePath: "donation-types",
-        fields: ["name", "donation_type", "donation_type_code", "donation_image"]
-      }),
+      component: /* @__PURE__ */ import_react177.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     }
   ];
@@ -91948,46 +92097,60 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react165.default.createElement("div", {
+      return /* @__PURE__ */ import_react177.default.createElement("div", {
         style: { padding: "40px", textAlign: "center" }
-      }, /* @__PURE__ */ import_react165.default.createElement("h3", null, "Access Denied"), /* @__PURE__ */ import_react165.default.createElement("p", null, "You do not have permission to view this module."));
+      }, /* @__PURE__ */ import_react177.default.createElement("h3", null, "Access Denied"), /* @__PURE__ */ import_react177.default.createElement("p", null, "You do not have permission to view this module."));
     }
+    const navigate = (key, sub, id) => {
+      if (typeof frappe !== "undefined") {
+        frappe.set_route("temple-donation", key, sub, id);
+      }
+    };
     if (targetDoctype && subRoute === "view") {
-      return /* @__PURE__ */ import_react165.default.createElement(CommonView_default, {
-        doctype: targetDoctype,
+      const viewProps = {
         id: dynamicId,
-        onBack: () => {
-          if (typeof frappe !== "undefined") {
-            frappe.set_route("temple-donation", baseKey);
-          }
-        },
-        onEdit: (doc) => {
-          if (typeof frappe !== "undefined") {
-            frappe.set_route("temple-donation", baseKey, "edit", doc.name);
-          }
-        },
-        onPrint: (doc) => {
-          window.print();
-        }
-      });
+        onBack: () => navigate(baseKey),
+        onEdit: (doc) => navigate(baseKey, "edit", doc.name)
+      };
+      switch (targetDoctype) {
+        case DOCTYPE_DONOR:
+          return /* @__PURE__ */ import_react177.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+        case DOCTYPE_TEMPLE:
+          return /* @__PURE__ */ import_react177.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+        case DOCTYPE_DONATION:
+          return /* @__PURE__ */ import_react177.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+        case DOCTYPE_DONATION_TYPE:
+          return /* @__PURE__ */ import_react177.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+        default:
+          return /* @__PURE__ */ import_react177.default.createElement(CommonView_default, __spreadValues({
+            doctype: targetDoctype
+          }, viewProps));
+      }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react165.default.createElement(Donation_default, null);
+        return /* @__PURE__ */ import_react177.default.createElement(Donation_default, null);
       }
-      return /* @__PURE__ */ import_react165.default.createElement(CommonForm_default, {
-        doctype: targetDoctype,
+      const formProps = {
         id: dynamicId,
-        onBack: () => {
-          if (typeof frappe !== "undefined") {
-            frappe.set_route("temple-donation", baseKey);
-          }
-        }
-      });
+        onBack: () => navigate(baseKey)
+      };
+      switch (targetDoctype) {
+        case DOCTYPE_DONOR:
+          return /* @__PURE__ */ import_react177.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+        case DOCTYPE_TEMPLE:
+          return /* @__PURE__ */ import_react177.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+        case DOCTYPE_DONATION_TYPE:
+          return /* @__PURE__ */ import_react177.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+        default:
+          return /* @__PURE__ */ import_react177.default.createElement(CommonForm_default, __spreadValues({
+            doctype: targetDoctype
+          }, formProps));
+      }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react165.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react177.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -91998,13 +92161,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react166 = __toESM(require_react());
-  var UserContext = (0, import_react166.createContext)();
+  var import_react178 = __toESM(require_react());
+  var UserContext = (0, import_react178.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react166.useState)(null);
-    const [roles, setRoles] = (0, import_react166.useState)([]);
-    const [loading, setLoading] = (0, import_react166.useState)(true);
-    (0, import_react166.useEffect)(() => {
+    const [user, setUser] = (0, import_react178.useState)(null);
+    const [roles, setRoles] = (0, import_react178.useState)([]);
+    const [loading, setLoading] = (0, import_react178.useState)(true);
+    (0, import_react178.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -92064,12 +92227,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react166.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react178.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react166.useContext)(UserContext);
+    const context = (0, import_react178.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -92079,9 +92242,9 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react167.useState)("dashboard");
+    const [currentRoute, setCurrentRoute] = (0, import_react179.useState)("dashboard");
     const { user, roles, logout, isAdmin } = useUser();
-    (0, import_react167.useEffect)(() => {
+    (0, import_react179.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -92108,7 +92271,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react167.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react179.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof frappe !== "undefined") {
             frappe.set_route("UserProfile", user == null ? void 0 : user.email);
@@ -92121,53 +92284,53 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react167.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react179.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
     ];
     const menuItems = getFilteredMenuItems(roles);
-    return /* @__PURE__ */ import_react167.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react179.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react167.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react179.default.createElement(layout_default2, {
       style: { minHeight: "100vh", background: "#f9fafb" }
-    }, /* @__PURE__ */ import_react167.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react179.default.createElement(Header3, {
       className: "aavatto-topbar"
-    }, /* @__PURE__ */ import_react167.default.createElement("div", {
+    }, /* @__PURE__ */ import_react179.default.createElement("div", {
       className: "aavatto-topbar-brand"
-    }, /* @__PURE__ */ import_react167.default.createElement(DashboardOutlined_default2, {
+    }, /* @__PURE__ */ import_react179.default.createElement(DashboardOutlined_default2, {
       style: { fontSize: "22px", color: "#4f46e5" }
-    }), /* @__PURE__ */ import_react167.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react167.default.createElement(menu_default2, {
+    }), /* @__PURE__ */ import_react179.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react179.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "aavatto-topbar-menu",
       disabledOverflow: true
-    }), /* @__PURE__ */ import_react167.default.createElement("div", {
+    }), /* @__PURE__ */ import_react179.default.createElement("div", {
       className: "aavatto-topbar-right"
-    }, /* @__PURE__ */ import_react167.default.createElement("div", {
+    }, /* @__PURE__ */ import_react179.default.createElement("div", {
       className: "aavatto-topbar-version",
       style: { marginRight: "16px" }
-    }, "v1.0.0"), /* @__PURE__ */ import_react167.default.createElement(dropdown_default3, {
+    }, "v1.0.0"), /* @__PURE__ */ import_react179.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight",
       arrow: true
-    }, /* @__PURE__ */ import_react167.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react179.default.createElement(space_default, {
       className: "aavatto-user-profile"
-    }, /* @__PURE__ */ import_react167.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react179.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react167.default.createElement(UserOutlined_default2, null),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react179.default.createElement(UserOutlined_default2, null),
       style: { backgroundColor: "#87d068" }
-    }), /* @__PURE__ */ import_react167.default.createElement("span", {
+    }), /* @__PURE__ */ import_react179.default.createElement("span", {
       className: "user-name-text"
-    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react167.default.createElement(Content3, {
+    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react179.default.createElement(Content3, {
       style: {
         padding: "24px 0px",
         background: "#f9fafb",
         minHeight: "calc(100vh - 64px)"
       }
-    }, /* @__PURE__ */ import_react167.default.createElement("div", {
+    }, /* @__PURE__ */ import_react179.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles)))));
   };
@@ -92186,7 +92349,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react168.default.createElement(UserProvider, null, /* @__PURE__ */ import_react168.default.createElement(App, null))
+        /* @__PURE__ */ import_react180.default.createElement(UserProvider, null, /* @__PURE__ */ import_react180.default.createElement(App, null))
       );
       this.$temple_donation = root;
     }
@@ -92240,4 +92403,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.CAVLCK2B.js.map
+//# sourceMappingURL=temple_donation.bundle.3R77XYR6.js.map

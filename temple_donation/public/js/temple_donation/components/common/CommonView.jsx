@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Typography, Row, Col, Space, Button, Divider, Table, Tag, Spin, Alert } from "antd";
 import { ArrowLeftOutlined, PrinterOutlined, EditOutlined } from "@ant-design/icons";
 import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import PageHeader from "./PageHeader";
 import DonationPrint from "../Donation/DonationPrint";
 import { formConfigs } from "../../config/formConfig";
 
@@ -56,45 +57,32 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
     };
 
     return (
-        <div style={{ padding: "24px 0", maxWidth: "1200px", margin: "0 auto" }}>
-            <Card bordered={false} className="shadow-sm" style={{ borderRadius: '16px' }}>
-                <Row align="middle" justify="space-between" style={{ marginBottom: "32px" }}>
-                    <Col>
-                        <Space size="middle">
-                            <Button
-                                type="default"
-                                shape="circle"
-                                icon={<ArrowLeftOutlined />}
-                                onClick={onBack}
-                            />
-                            <div>
-                                <Title level={2} style={{ margin: 0, fontWeight: 800 }}>
-                                    View {config?.title || doctype}'s Details
-                                </Title>
-                            </div>
-                        </Space>
-                    </Col>
-                    <Col>
-                        <Space>
-                            <Button 
-                                icon={<PrinterOutlined />} 
-                                onClick={handlePrint}
-                                size="large"
-                            >
-                                Print
-                            </Button>
-                            <Button 
-                                type="primary" 
-                                icon={<EditOutlined />} 
-                                onClick={() => onEdit && onEdit(doc)}
-                                size="large"
-                            >
-                                Edit Details
-                            </Button>
-                        </Space>
-                    </Col>
-                </Row>
-
+        <div style={{ padding: "24px 0px", maxWidth: "1200px", margin: "0 auto" }}>
+            <PageHeader
+                title={`View ${config?.title || doctype}'s Details`}
+                showBack={true}
+                onBack={onBack}
+                extra={
+                    <Space>
+                        <Button
+                            icon={<PrinterOutlined />}
+                            onClick={handlePrint}
+                            size="large"
+                        >
+                            Print
+                        </Button>
+                        <Button
+                            type="primary"
+                            icon={<EditOutlined />}
+                            onClick={() => onEdit && onEdit(doc)}
+                            size="large"
+                        >
+                            Edit Details
+                        </Button>
+                    </Space>
+                }
+            />
+            <Card bordered={false} className="shadow-sm" style={{ borderRadius: '16px', margin: '0 24px' }}>
                 <Row gutter={[32, 24]}>
                     {config?.fields.map(field => (
                         <Col xs={24} sm={12} md={8} lg={6} key={field.name}>

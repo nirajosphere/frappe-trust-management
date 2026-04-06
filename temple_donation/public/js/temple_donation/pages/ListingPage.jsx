@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Spin, Alert, Modal, message } from "antd";
 import { useFrappeGetDocList, useFrappeDeleteDoc } from "../hooks/useFrappe";
 import CommonTable from "../components/common/CommonTable";
+import PageHeader from "../components/common/PageHeader";
+import { exportToCSV } from "../utils/exportUtils";
 
 /**
  * ListingPage Component
@@ -66,6 +68,14 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
         window.print(); // Simple print trigger for now
     };
 
+    const handleExport = () => {
+        if (!data || data.length === 0) {
+            message.warning("No data to export");
+            return;
+        }
+        exportToCSV(data, columns, title);
+    };
+
     if (error) {
         return (
             <div style={{ padding: "24px" }}>
@@ -80,14 +90,18 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
     }
 
     return (
-        <div style={{ padding: "24px" }}>
+        <div style={{ padding: "24px 0px" }}>
+            <PageHeader 
+                title={title} 
+                description={description} 
+                onAdd={handleAdd} 
+                onExport={handleExport}
+                addLabel="Add New Record" 
+            />
             <CommonTable
-                title={title}
-                description={description}
                 columns={columns || []}
                 dataSource={data}
                 loading={loading}
-                onAdd={handleAdd}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 onView={handleView}

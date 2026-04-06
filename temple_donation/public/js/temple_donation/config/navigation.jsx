@@ -8,11 +8,29 @@ import {
 } from "@ant-design/icons";
 
 import Dashboard from "../pages/Dashboard";
-import ListingPage from "../pages/ListingPage";
-import Donation from "../pages/Donation";
+import DonationPOS from "../pages/Donation";
+import { 
+    DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE 
+} from "./constants";
+
+// Module Imports
+import DonorList from "../modules/Donor/DonorList";
+import DonorView from "../modules/Donor/DonorView";
+import DonorForm from "../modules/Donor/DonorForm";
+
+import TempleList from "../modules/Temple/TempleList";
+import TempleView from "../modules/Temple/TempleView";
+import TempleForm from "../modules/Temple/TempleForm";
+
+import DonationList from "../modules/Donation/DonationList";
+import DonationView from "../modules/Donation/DonationView";
+
+import DonationTypeList from "../modules/DonationType/DonationTypeList";
+import DonationTypeView from "../modules/DonationType/DonationTypeView";
+import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
+
 import CommonForm from "../components/common/CommonForm";
 import CommonView from "../components/common/CommonView";
-import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE } from "./constants";
 import { donorColumns, templeColumns, donationColumns, donationTypeColumns } from "./tableConfig";
 
 /**
@@ -31,64 +49,28 @@ export const navigationItems = [
         key: "donors",
         icon: <UserOutlined />,
         label: "Donors",
-        component: (
-            <ListingPage
-                doctype={DOCTYPE_DONOR}
-                title="Donors Management"
-                description="View, add, edit or delete donor records"
-                columns={donorColumns}
-                basePath="donors"
-                fields={["name", "donor_name", "mobile_number", "address", "city", "email"]}
-            />
-        ),
+        component: <DonorList />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "temples",
         icon: <BankOutlined />,
         label: "Temples",
-        component: (
-            <ListingPage
-                doctype={DOCTYPE_TEMPLE}
-                title="Temple Management"
-                description="View, add, edit or delete temple records"
-                columns={templeColumns}
-                basePath="temples"
-                fields={["name", "temple_name", "city", "state", "trust_registration_no"]}
-            />
-        ),
+        component: <TempleList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "donations",
         icon: <HistoryOutlined />,
         label: "Donation List",
-        component: (
-            <ListingPage
-                doctype={DOCTYPE_DONATION}
-                title="Donation Records"
-                description="View and track all donation transactions"
-                columns={donationColumns}
-                basePath="donations"
-                fields={["name", "donor_name", "temple", "total_amount", "payment_mode"]}
-            />
-        ),
+        component: <DonationList />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "donation-types",
         icon: <ShoppingCartOutlined />,
         label: "Donation Types",
-        component: (
-            <ListingPage
-                doctype={DOCTYPE_DONATION_TYPE}
-                title="Donation Types"
-                description="Manage available donation categories"
-                columns={donationTypeColumns}
-                basePath="donation-types"
-                fields={["name", "donation_type", "donation_type_code", "donation_image"]}
-            />
-        ),
+        component: <DonationTypeList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
 ];
@@ -125,47 +107,48 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         );
     }
 
+    // Helper for route handling
+    const navigate = (key, sub, id) => {
+        if (typeof frappe !== "undefined") {
+            frappe.set_route("temple-donation", key, sub, id);
+        }
+    };
+
     // Handle View Details
     if (targetDoctype && subRoute === "view") {
-        return (
-            <CommonView 
-                doctype={targetDoctype} 
-                id={dynamicId} 
-                onBack={() => {
-                    if (typeof frappe !== "undefined") {
-                        frappe.set_route("temple-donation", baseKey);
-                    }
-                }}
-                onEdit={(doc) => {
-                    if (typeof frappe !== "undefined") {
-                        frappe.set_route("temple-donation", baseKey, "edit", doc.name);
-                    }
-                }}
-                onPrint={(doc) => {
-                    window.print();
-                }}
-            />
-        );
+        const viewProps = { 
+            id: dynamicId, 
+            onBack: () => navigate(baseKey),
+            onEdit: (doc) => navigate(baseKey, "edit", doc.name)
+        };
+
+        switch(targetDoctype) {
+            case DOCTYPE_DONOR: return <DonorView {...viewProps} />;
+            case DOCTYPE_TEMPLE: return <TempleView {...viewProps} />;
+            case DOCTYPE_DONATION: return <DonationView {...viewProps} />;
+            case DOCTYPE_DONATION_TYPE: return <DonationTypeView {...viewProps} />;
+            default: return <CommonView doctype={targetDoctype} {...viewProps} />;
+        }
     }
 
     // Handle Forms (Add / Edit)
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
-        // Intercept 'Add New' for Donations to show the POS interface
+        // Special case for Donation POS
         if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-            return <Donation />;
+            return <DonationPOS />;
         }
 
-        return (
-            <CommonForm
-                doctype={targetDoctype}
-                id={dynamicId}
-                onBack={() => {
-                    if (typeof frappe !== "undefined") {
-                        frappe.set_route("temple-donation", baseKey);
-                    }
-                }}
-            />
-        );
+        const formProps = { 
+            id: dynamicId, 
+            onBack: () => navigate(baseKey)
+        };
+
+        switch(targetDoctype) {
+            case DOCTYPE_DONOR: return <DonorForm {...formProps} />;
+            case DOCTYPE_TEMPLE: return <TempleForm {...formProps} />;
+            case DOCTYPE_DONATION_TYPE: return <DonationTypeForm {...formProps} />;
+            default: return <CommonForm doctype={targetDoctype} {...formProps} />;
+        }
     }
 
     // Handle standard list views / other components
