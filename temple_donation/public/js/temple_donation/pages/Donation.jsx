@@ -19,9 +19,9 @@ const Donation = () => {
     const [submitting, setSubmitting] = useState(false);
 
     // Calculate total amount
-    const totalAmount = useMemo(() => 
+    const totalAmount = useMemo(() =>
         cartItems.reduce((acc, item) => acc + (item.amount || 0), 0)
-    , [cartItems]);
+        , [cartItems]);
 
     const handleAddToCart = useCallback((donationType) => {
         if (!selectedTemple) {
@@ -77,7 +77,7 @@ const Donation = () => {
         }
 
         setSubmitting(true);
-        
+
         const donationData = {
             donor: selectedDonor.name,
             donor_name: selectedDonor.donor_name,
@@ -127,7 +127,7 @@ const Donation = () => {
                         <HeartFilled className="text-2xl text-white" />
                     </div>
                     <div>
-                         <Text className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-400 block mb-1">
+                        <Text className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-400 block mb-1">
                             Operational POS
                         </Text>
                         <Title level={1} className="!m-0 font-black tracking-tight text-zinc-900 !text-3xl">
@@ -135,10 +135,10 @@ const Donation = () => {
                         </Title>
                     </div>
                 </Space>
-                <Button 
-                    icon={<RedoOutlined />} 
+                <Button
+                    icon={<RedoOutlined />}
                     onClick={handleReset}
-                    className="h-10 px-6 rounded-xl font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
+                    className="h-10 px-6  font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
                 >
                     Clear Transaction
                 </Button>
@@ -149,19 +149,19 @@ const Donation = () => {
                 {/* Left Side: Donor Search, Temple Selection, and Grid */}
                 <Col xs={24} lg={15}>
                     <div className="space-y-6">
-                        <DonorSection 
-                            onDonorSelect={setSelectedDonor} 
-                            selectedDonor={selectedDonor} 
+                        <DonorSection
+                            onDonorSelect={setSelectedDonor}
+                            selectedDonor={selectedDonor}
                         />
-                        
-                        <TempleSelect 
-                            onTempleSelect={setSelectedTemple} 
-                            selectedTemple={selectedTemple} 
+
+                        <TempleSelect
+                            onTempleSelect={setSelectedTemple}
+                            selectedTemple={selectedTemple}
                         />
-                        
-                        <DonationTypes 
-                            selectedTemple={selectedTemple} 
-                            onAddToCart={handleAddToCart} 
+
+                        <DonationTypes
+                            selectedTemple={selectedTemple}
+                            onAddToCart={handleAddToCart}
                         />
                     </div>
                 </Col>
@@ -169,15 +169,15 @@ const Donation = () => {
                 {/* Right Side: Cart and Payment */}
                 <Col xs={24} lg={9}>
                     <div className="space-y-6 sticky top-6">
-                        <Cart 
-                            items={cartItems} 
-                            onUpdateAmount={handleUpdateAmount} 
+                        <Cart
+                            items={cartItems}
+                            onUpdateAmount={handleUpdateAmount}
                             onRemoveItem={handleRemoveItem}
                             totalAmount={totalAmount}
                         />
-                        
-                        <PaymentSection 
-                            paymentMode={paymentMode} 
+
+                        <PaymentSection
+                            paymentMode={paymentMode}
                             onPaymentModeChange={setPaymentMode}
                             onSubmit={handleSubmit}
                             loading={submitting}

@@ -86,7 +86,7 @@ const CommonTable = ({
                     placeholder={searchPlaceholder}
                     prefix={<SearchOutlined className="text-stone-400 mr-2" />}
                     onChange={(e) => setSearchText(e.target.value)}
-                    className="max-w-md h-12 rounded-xl border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium"
+                    className="max-w-md h-12 border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium"
                     allowClear
                 />
             </div>

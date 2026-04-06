@@ -89665,12 +89665,12 @@ html body {
     }, onExport && /* @__PURE__ */ import_react150.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react150.default.createElement(ExportOutlined_default2, null),
       onClick: onExport,
-      className: "h-11 px-6 rounded-xl font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
+      className: "h-11 px-6 font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
     }, "Export Data"), onAdd && /* @__PURE__ */ import_react150.default.createElement(button_default, {
       type: "primary",
       icon: /* @__PURE__ */ import_react150.default.createElement(PlusOutlined_default2, null),
       onClick: onAdd,
-      className: "h-11 px-8 rounded-xl font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
+      className: "h-11 px-8  font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
     }, addLabel), extra))));
   };
   var PageHeader_default = PageHeader;
@@ -89742,7 +89742,7 @@ html body {
     }, "\u20B9", (stats.total_donation || 0).toLocaleString()), /* @__PURE__ */ import_react151.default.createElement("div", {
       className: "mt-2 flex items-center gap-1 text-emerald-500 font-bold text-xs"
     }, /* @__PURE__ */ import_react151.default.createElement(ArrowUpOutlined_default2, null), /* @__PURE__ */ import_react151.default.createElement("span", null, "Live Update"))), /* @__PURE__ */ import_react151.default.createElement("div", {
-      className: "h-12 w-12 bg-zinc-900 rounded-2xl flex items-center justify-center shadow-lg shadow-zinc-900/10"
+      className: "h-12 w-12 bg-zinc-900  flex items-center justify-center shadow-lg shadow-zinc-900/10"
     }, /* @__PURE__ */ import_react151.default.createElement(WalletOutlined_default2, {
       className: "text-white text-xl"
     }))))), /* @__PURE__ */ import_react151.default.createElement(col_default2, {
@@ -89760,7 +89760,7 @@ html body {
     }, stats.top_category), /* @__PURE__ */ import_react151.default.createElement("div", {
       className: "mt-2 text-zinc-400 font-medium text-xs"
     }, "Based on total collection")), /* @__PURE__ */ import_react151.default.createElement("div", {
-      className: "h-12 w-12 bg-zinc-100 rounded-2xl flex items-center justify-center"
+      className: "h-12 w-12 bg-zinc-100  flex items-center justify-center"
     }, /* @__PURE__ */ import_react151.default.createElement(AppstoreOutlined_default2, {
       className: "text-zinc-900 text-xl"
     }))))), /* @__PURE__ */ import_react151.default.createElement(col_default2, {
@@ -89778,7 +89778,7 @@ html body {
     }, stats.new_donors), /* @__PURE__ */ import_react151.default.createElement("div", {
       className: "mt-2 text-zinc-400 font-medium text-xs"
     }, "Community growth tracking")), /* @__PURE__ */ import_react151.default.createElement("div", {
-      className: "h-12 w-12 bg-zinc-100 rounded-2xl flex items-center justify-center"
+      className: "h-12 w-12 bg-zinc-100  flex items-center justify-center"
     }, /* @__PURE__ */ import_react151.default.createElement(UserAddOutlined_default2, {
       className: "text-zinc-900 text-xl"
     })))))), /* @__PURE__ */ import_react151.default.createElement(row_default2, {
@@ -89790,7 +89790,7 @@ html body {
       title: /* @__PURE__ */ import_react151.default.createElement("span", {
         className: "font-bold tracking-tight text-zinc-800"
       }, "Donations By Type"),
-      className: "h-full border-zinc-100 shadow-sm rounded-[40px] overflow-hidden",
+      className: "h-full border-zinc-100 shadow-sm  overflow-hidden",
       extra: /* @__PURE__ */ import_react151.default.createElement(PieChartOutlined_default2, {
         className: "text-zinc-300"
       })
@@ -89802,7 +89802,7 @@ html body {
       const percentage = (item.value / (stats.total_donation || 1) * 100).toFixed(1);
       return /* @__PURE__ */ import_react151.default.createElement("div", {
         key: idx,
-        className: "group flex items-center justify-between p-4 rounded-2xl border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300"
+        className: "group flex items-center justify-between p-4  border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300"
       }, /* @__PURE__ */ import_react151.default.createElement("div", {
         className: "flex items-center gap-4"
       }, /* @__PURE__ */ import_react151.default.createElement("div", {
@@ -89825,7 +89825,7 @@ html body {
       title: /* @__PURE__ */ import_react151.default.createElement("span", {
         className: "font-bold tracking-tight text-zinc-800"
       }, "Top Benefactors"),
-      className: "h-full border-zinc-100 shadow-sm rounded-[40px] overflow-hidden",
+      className: "h-full border-zinc-100 shadow-sm  overflow-hidden",
       extra: /* @__PURE__ */ import_react151.default.createElement(TrophyOutlined_default2, {
         className: "text-zinc-300"
       })
@@ -89835,7 +89835,7 @@ html body {
       className: "space-y-1"
     }, topDonors.map((donor, idx) => /* @__PURE__ */ import_react151.default.createElement("div", {
       key: idx,
-      className: "flex items-center justify-between p-4 rounded-2xl hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
+      className: "flex items-center justify-between p-4  hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
     }, /* @__PURE__ */ import_react151.default.createElement("div", {
       className: "flex items-center gap-4"
     }, /* @__PURE__ */ import_react151.default.createElement("div", {
@@ -90109,7 +90109,7 @@ html body {
       prefix: /* @__PURE__ */ import_react153.default.createElement(ProfileOutlined_default2, {
         className: "text-gray-400"
       }),
-      className: "h-11 rounded-xl"
+      className: "h-11 "
     })), /* @__PURE__ */ import_react153.default.createElement(form_default.Item, {
       name: "mobile_number",
       label: /* @__PURE__ */ import_react153.default.createElement(Text4, {
@@ -90125,7 +90125,7 @@ html body {
       prefix: /* @__PURE__ */ import_react153.default.createElement(PhoneOutlined_default2, {
         className: "text-gray-400"
       }),
-      className: "h-11 rounded-xl font-medium"
+      className: "h-11  font-medium"
     })), /* @__PURE__ */ import_react153.default.createElement(form_default.Item, {
       name: "email",
       label: /* @__PURE__ */ import_react153.default.createElement(Text4, {
@@ -90137,7 +90137,7 @@ html body {
       prefix: /* @__PURE__ */ import_react153.default.createElement(MailOutlined_default2, {
         className: "text-gray-400"
       }),
-      className: "h-11 rounded-xl"
+      className: "h-11 "
     })), /* @__PURE__ */ import_react153.default.createElement(form_default.Item, {
       name: "address",
       label: /* @__PURE__ */ import_react153.default.createElement(Text4, {
@@ -90150,7 +90150,7 @@ html body {
       prefix: /* @__PURE__ */ import_react153.default.createElement(HomeOutlined_default2, {
         className: "text-gray-400"
       }),
-      className: "rounded-xl"
+      className: ""
     })))));
   };
   var DonorModal_default = DonorModal;
@@ -90229,7 +90229,7 @@ html body {
       onChange: (e3) => handleSearch(e3.target.value),
       maxLength: 10,
       allowClear: true,
-      className: "h-12 rounded-xl text-lg font-medium border-zinc-200 bg-zinc-50/30 focus:bg-white hover:border-black focus:border-black transition-all"
+      className: "h-12  text-lg font-medium border-zinc-200 bg-zinc-50/30 focus:bg-white hover:border-black focus:border-black transition-all"
     }))), /* @__PURE__ */ import_react154.default.createElement(col_default2, {
       xs: 24,
       sm: 8,
@@ -90239,13 +90239,13 @@ html body {
       icon: /* @__PURE__ */ import_react154.default.createElement(UserAddOutlined_default2, null),
       onClick: () => setIsModalOpen(true),
       block: true,
-      className: "h-12 rounded-xl bg-black hover:bg-zinc-800 border-none font-bold shadow-lg shadow-zinc-900/10"
+      className: "h-12  bg-black hover:bg-zinc-800 border-none font-bold shadow-lg shadow-zinc-900/10"
     }, "Add Donor"))), selectedDonor && /* @__PURE__ */ import_react154.default.createElement("div", {
       className: "mt-8 animate-fadeIn"
     }, /* @__PURE__ */ import_react154.default.createElement("div", {
-      className: "bg-zinc-50/50 rounded-3xl p-6 border border-zinc-200/50 flex flex-col md:flex-row gap-6 items-center shadow-inner"
+      className: "bg-zinc-50/50  p-6 border border-zinc-200/50 flex flex-col md:flex-row gap-6 items-center shadow-inner"
     }, /* @__PURE__ */ import_react154.default.createElement("div", {
-      className: "bg-white p-5 rounded-2xl shadow-sm border border-zinc-100 relative"
+      className: "bg-white p-5  shadow-sm border border-zinc-100 relative"
     }, /* @__PURE__ */ import_react154.default.createElement(UserOutlined_default2, {
       className: "text-4xl text-zinc-900"
     }), /* @__PURE__ */ import_react154.default.createElement(CheckCircleFilled_default2, {
@@ -90283,7 +90283,7 @@ html body {
         onDonorSelect(null);
         setMobileNumber("");
       },
-      className: "rounded-xl font-bold border-zinc-200 text-zinc-500 hover:bg-zinc-50 bg-white"
+      className: " font-bold border-zinc-200 text-zinc-500 hover:bg-zinc-50 bg-white"
     }, "Change")), selectedDonor.address && /* @__PURE__ */ import_react154.default.createElement("div", {
       className: "mt-5 pt-5 border-t border-zinc-100 text-center md:text-left"
     }, /* @__PURE__ */ import_react154.default.createElement(Text5, {
@@ -90317,7 +90317,7 @@ html body {
       className: "text-zinc-500 block mb-1"
     }, "Target Temple"), /* @__PURE__ */ import_react155.default.createElement(select_default, {
       placeholder: "Search and select a temple",
-      className: "w-full h-12 rounded-xl",
+      className: "w-full h-12 ",
       value: selectedTemple,
       onChange: onTempleSelect,
       loading,
@@ -90457,7 +90457,7 @@ html body {
           formatter: (value) => `\u20B9 ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
           parser: (value) => value.replace(/₹\s?|(,*)/g, ""),
           onChange: (val) => onUpdateAmount(index2, val),
-          className: "w-full rounded-xl border-zinc-200 bg-zinc-50/30 hover:border-black focus:border-black font-black text-zinc-900 h-10 flex items-center"
+          className: "w-full  border-zinc-200 bg-zinc-50/30 hover:border-black focus:border-black font-black text-zinc-900 h-10 flex items-center"
         }), /* @__PURE__ */ import_react157.default.createElement("div", {
           className: "flex flex-wrap gap-1.5 mt-1"
         }, quickAmounts.map((q) => /* @__PURE__ */ import_react157.default.createElement("button", {
@@ -90575,7 +90575,7 @@ html body {
     }, mode.label))))), /* @__PURE__ */ import_react158.default.createElement("div", {
       className: "bg-zinc-50/80 p-5 rounded-3xl border border-zinc-200/50 mb-8 flex items-start gap-4 shadow-inner"
     }, /* @__PURE__ */ import_react158.default.createElement("div", {
-      className: "bg-white p-2 rounded-xl shadow-sm"
+      className: "bg-white p-2  shadow-sm"
     }, /* @__PURE__ */ import_react158.default.createElement(CheckCircleOutlined_default2, {
       className: "text-zinc-900 text-xl"
     })), /* @__PURE__ */ import_react158.default.createElement("div", {
@@ -90714,7 +90714,7 @@ html body {
     }, "Temple Donation"))), /* @__PURE__ */ import_react159.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react159.default.createElement(RedoOutlined_default2, null),
       onClick: handleReset,
-      className: "h-10 px-6 rounded-xl font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
+      className: "h-10 px-6  font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
     }, "Clear Transaction")), /* @__PURE__ */ import_react159.default.createElement(row_default2, {
       gutter: [24, 24]
     }, /* @__PURE__ */ import_react159.default.createElement(col_default2, {
@@ -90835,7 +90835,7 @@ html body {
         className: "text-stone-400 mr-2"
       }),
       onChange: (e3) => setSearchText(e3.target.value),
-      className: "max-w-md h-12 rounded-xl border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium",
+      className: "max-w-md h-12 border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium",
       allowClear: true
     })), /* @__PURE__ */ import_react160.default.createElement(table_default, {
       dataSource: filteredData,
@@ -91512,7 +91512,7 @@ html body {
           return /* @__PURE__ */ import_react165.default.createElement("img", {
             src: value,
             alt: field.label,
-            className: "max-w-[120px] rounded-xl shadow-sm border border-slate-200 p-1"
+            className: "max-w-[120px] shadow-sm border border-slate-200 p-1"
           });
         case "textarea":
           return /* @__PURE__ */ import_react165.default.createElement("pre", {
@@ -91539,12 +91539,12 @@ html body {
       }, /* @__PURE__ */ import_react165.default.createElement(button_default, {
         icon: /* @__PURE__ */ import_react165.default.createElement(PrinterOutlined_default2, null),
         onClick: handlePrint,
-        className: "h-11 px-6 rounded-xl font-medium"
+        className: "h-11 px-6 font-medium"
       }, "Print Details"), /* @__PURE__ */ import_react165.default.createElement(button_default, {
         type: "primary",
         icon: /* @__PURE__ */ import_react165.default.createElement(EditOutlined_default2, null),
         onClick: () => onEdit && onEdit(doc),
-        className: "h-11 px-6 rounded-xl font-semibold shadow-lg shadow-indigo-500/20"
+        className: "h-11 px-6 font-semibold shadow-lg shadow-indigo-500/20"
       }, "Edit Information"))
     }), /* @__PURE__ */ import_react165.default.createElement(card_default, {
       bordered: false,
@@ -91836,7 +91836,7 @@ html body {
         placeholder: field.placeholder,
         rows: field.rows || 4,
         disabled: field.readOnly || field.disabled,
-        className: "rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all p-4"
+        className: "border-stone-200 bg-stone-50/50 focus:bg-white transition-all p-4"
       }) : field.type === "select" ? /* @__PURE__ */ import_react167.default.createElement(select_default, {
         placeholder: field.placeholder,
         disabled: field.readOnly || field.disabled,
@@ -91851,11 +91851,11 @@ html body {
         className: "w-full"
       }, /* @__PURE__ */ import_react167.default.createElement(button_default, {
         icon: /* @__PURE__ */ import_react167.default.createElement(UploadOutlined_default2, null),
-        className: "h-12 w-full rounded-xl border-dashed border-stone-300 bg-stone-50/50 text-stone-500 hover:border-amber-500 hover:text-amber-500 font-medium"
+        className: "h-12 w-full border-dashed border-stone-300 bg-stone-50/50 text-stone-500 hover:border-amber-500 hover:text-amber-500 font-medium"
       }, "Click to ", field.type === "image" ? "upload image" : "attach file")) : /* @__PURE__ */ import_react167.default.createElement(input_default, {
         placeholder: field.placeholder,
         disabled: field.readOnly || field.disabled,
-        className: "h-12 rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all px-4"
+        className: "h-12 border-stone-200 bg-stone-50/50 focus:bg-white transition-all px-4"
       })));
     })), doctype === DOCTYPE_TEMPLE && /* @__PURE__ */ import_react167.default.createElement("div", {
       className: "mt-10"
@@ -91892,7 +91892,7 @@ html body {
           src: item.donation_image,
           shape: "square",
           size: 52,
-          className: "rounded-xl border border-stone-100"
+          className: " border border-stone-100"
         })), /* @__PURE__ */ import_react167.default.createElement(col_default2, {
           flex: "auto"
         }, /* @__PURE__ */ import_react167.default.createElement(Text14, {
@@ -91907,7 +91907,7 @@ html body {
       className: "flex items-center justify-end gap-6"
     }, /* @__PURE__ */ import_react167.default.createElement(button_default, {
       onClick: onBack,
-      className: "h-12 px-10 rounded-xl font-bold border-stone-200 text-stone-500 hover:text-stone-700 hover:border-stone-400 transition-all"
+      className: "h-12 px-10 font-bold border-stone-200 text-stone-500 hover:text-stone-700 hover:border-stone-400 transition-all"
     }, "Cancel"), /* @__PURE__ */ import_react167.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
@@ -91915,7 +91915,7 @@ html body {
       icon: /* @__PURE__ */ import_react167.default.createElement(SaveOutlined_default2, {
         className: "mr-1"
       }),
-      className: "h-12 px-12 rounded-xl font-black bg-amber-600 hover:bg-amber-500 border-none shadow-xl shadow-amber-500/30 flex items-center justify-center min-w-[200px]"
+      className: "h-12 px-12 font-black bg-amber-600 hover:bg-amber-500 border-none shadow-xl shadow-amber-500/30 flex items-center justify-center min-w-[200px]"
     }, isEdit ? "Update Information" : "Create Record"))))));
   };
   var CommonForm_default = CommonForm;
@@ -92125,7 +92125,7 @@ html body {
           key: "refresh",
           onClick: fetchData,
           loading,
-          className: "rounded-xl border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold",
+          className: " border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold",
           icon: /* @__PURE__ */ import_react177.default.createElement(SyncOutlined_default2, null)
         }, "Refresh")
       ]
@@ -92207,7 +92207,7 @@ html body {
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
       return /* @__PURE__ */ import_react178.default.createElement("div", {
-        className: "p-16 text-center bg-stone-50/50 rounded-[40px] border border-dashed border-stone-200 mt-12 animate-fadeIn"
+        className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
       }, /* @__PURE__ */ import_react178.default.createElement("div", {
         className: "text-stone-300 mb-6"
       }, /* @__PURE__ */ import_react178.default.createElement(UserOutlined_default2, {
@@ -92220,7 +92220,7 @@ html body {
         className: "flex justify-center gap-4 mt-8"
       }, /* @__PURE__ */ import_react178.default.createElement("button", {
         onClick: () => navigate("dashboard"),
-        className: "px-8 py-3 bg-zinc-900 text-white font-bold rounded-xl shadow-lg transition-all"
+        className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
     }
     const navigate = (key, sub, id) => {
@@ -92527,4 +92527,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.RZLKU7LA.js.map
+//# sourceMappingURL=temple_donation.bundle.Z2U4QH44.js.map

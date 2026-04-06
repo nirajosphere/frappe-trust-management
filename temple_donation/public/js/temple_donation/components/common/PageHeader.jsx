@@ -49,7 +49,7 @@ const PageHeader = ({
                             <Button
                                 icon={<ExportOutlined />}
                                 onClick={onExport}
-                                className="h-11 px-6 rounded-xl font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
+                                className="h-11 px-6 font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
                             >
                                 Export Data
                             </Button>
@@ -59,7 +59,7 @@ const PageHeader = ({
                                 type="primary"
                                 icon={<PlusOutlined />}
                                 onClick={onAdd}
-                                className="h-11 px-8 rounded-xl font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
+                                className="h-11 px-8  font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
                             >
                                 {addLabel}
                             </Button>

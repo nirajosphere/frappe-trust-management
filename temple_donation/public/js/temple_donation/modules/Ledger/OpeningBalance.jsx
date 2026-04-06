@@ -112,7 +112,7 @@ const OpeningBalance = () => {
                         key="refresh"
                         onClick={fetchData}
                         loading={loading}
-                        className="rounded-xl border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold"
+                        className=" border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold"
                         icon={<SyncOutlined />}
                     >
                         Refresh

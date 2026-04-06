@@ -9,8 +9,8 @@ import {
 
 import Dashboard from "../pages/Dashboard";
 import DonationPOS from "../pages/Donation";
-import { 
-    DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE 
+import {
+    DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE
 } from "./constants";
 
 // Module Imports
@@ -109,18 +109,18 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
 
     if (!hasPermission) {
         return (
-            <div className="p-16 text-center bg-stone-50/50 rounded-[40px] border border-dashed border-stone-200 mt-12 animate-fadeIn">
+            <div className="p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn">
                 <div className="text-stone-300 mb-6">
-                     <UserOutlined className="text-6xl" />
+                    <UserOutlined className="text-6xl" />
                 </div>
                 <h3 className="text-2xl font-black text-stone-800 mb-2 tracking-tight">Access Restricted</h3>
                 <p className="text-stone-400 font-medium">You do not have the required permissions to access this specific module.</p>
                 <div className="flex justify-center gap-4 mt-8">
-                    <button 
-                      onClick={() => navigate('dashboard')}
-                      className="px-8 py-3 bg-zinc-900 text-white font-bold rounded-xl shadow-lg transition-all"
+                    <button
+                        onClick={() => navigate('dashboard')}
+                        className="px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
                     >
-                      Return to Dashboard
+                        Return to Dashboard
                     </button>
                 </div>
             </div>
@@ -142,13 +142,13 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
 
     // Handle View Details
     if (targetDoctype && subRoute === "view") {
-        const viewProps = { 
-            id: dynamicId, 
+        const viewProps = {
+            id: dynamicId,
             onBack: () => navigate(baseKey),
             onEdit: (doc) => navigate(baseKey, "edit", doc.name)
         };
 
-        switch(targetDoctype) {
+        switch (targetDoctype) {
             case DOCTYPE_DONOR: return <DonorView {...viewProps} />;
             case DOCTYPE_TEMPLE: return <TempleView {...viewProps} />;
             case DOCTYPE_DONATION: return <DonationView {...viewProps} />;
@@ -164,12 +164,12 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             return <DonationPOS />;
         }
 
-        const formProps = { 
-            id: dynamicId, 
+        const formProps = {
+            id: dynamicId,
             onBack: () => navigate(baseKey)
         };
 
-        switch(targetDoctype) {
+        switch (targetDoctype) {
             case DOCTYPE_DONOR: return <DonorForm {...formProps} />;
             case DOCTYPE_TEMPLE: return <TempleForm {...formProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeForm {...formProps} />;

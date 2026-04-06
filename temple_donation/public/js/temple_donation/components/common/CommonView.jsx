@@ -44,10 +44,10 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
 
     const renderFieldValue = (field, value) => {
         if (!value) return <Text type="secondary" className="opacity-50 italic">None</Text>;
-        
+
         switch (field.type) {
             case 'image':
-                return <img src={value} alt={field.label} className="max-w-[120px] rounded-xl shadow-sm border border-slate-200 p-1" />;
+                return <img src={value} alt={field.label} className="max-w-[120px] shadow-sm border border-slate-200 p-1" />;
             case 'textarea':
                 return <pre className="whitespace-pre-wrap bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-700 text-sm font-sans">{value}</pre>;
             default:
@@ -67,7 +67,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                         <Button
                             icon={<PrinterOutlined />}
                             onClick={handlePrint}
-                            className="h-11 px-6 rounded-xl font-medium"
+                            className="h-11 px-6 font-medium"
                         >
                             Print Details
                         </Button>
@@ -75,19 +75,19 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                             type="primary"
                             icon={<EditOutlined />}
                             onClick={() => onEdit && onEdit(doc)}
-                            className="h-11 px-6 rounded-xl font-semibold shadow-lg shadow-indigo-500/20"
+                            className="h-11 px-6 font-semibold shadow-lg shadow-indigo-500/20"
                         >
                             Edit Information
                         </Button>
                     </Space>
                 }
             />
-            
+
             <Card bordered={false} className="aavatto-card !p-0 overflow-hidden">
                 <div className="p-8 bg-gradient-to-r from-amber-500/5 to-orange-500/5 dark:from-amber-500/10 dark:to-orange-500/10 border-b border-orange-100/50">
                     <Title level={4} className="!m-0 text-amber-700">Essential Information</Title>
                 </div>
-                
+
                 <div className="p-8">
                     <Row gutter={[40, 32]}>
                         {config?.fields.map(field => (
@@ -102,7 +102,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                                 </div>
                             </Col>
                         ))}
-                        
+
                         <Col xs={24} sm={12} md={8} lg={6}>
                             <div className="space-y-1.5">
                                 <Text className="text-[11px] font-bold uppercase tracking-widest text-stone-400 block">
@@ -120,7 +120,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                     <div className="p-8 border-t border-orange-100 bg-amber-50/20">
                         <Divider dashed className="!my-0 opacity-0" />
                         <DonationPrint donation={doc} />
-                        
+
                         <div className="flex items-center justify-between mb-8">
                             <Title level={4} className="!m-0 text-amber-700">Financial Summary</Title>
                             <div className="text-right">
@@ -162,16 +162,16 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                                 rowKey="name"
                                 className="premium-table-light"
                                 columns={[
-                                    { 
-                                        title: 'Item Description', 
-                                        dataIndex: 'donation_type', 
+                                    {
+                                        title: 'Item Description',
+                                        dataIndex: 'donation_type',
                                         key: 'donation_type',
                                         render: (val) => <Text className="font-semibold">{val}</Text>
                                     },
-                                    { 
-                                        title: 'Amount', 
-                                        dataIndex: 'amount', 
-                                        key: 'amount', 
+                                    {
+                                        title: 'Amount',
+                                        dataIndex: 'amount',
+                                        key: 'amount',
                                         align: 'right',
                                         render: (val) => <span className="font-bold text-slate-700 dark:text-slate-300">₹{Number(val).toLocaleString()}</span>
                                     }

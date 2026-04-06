@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Card, Typography, Space, Tooltip, Empty, Spin } from "antd";
-import { 
-    WalletOutlined, 
-    AppstoreOutlined, 
-    UserAddOutlined, 
+import {
+    WalletOutlined,
+    AppstoreOutlined,
+    UserAddOutlined,
     ArrowUpOutlined,
     TrophyOutlined,
     PieChartOutlined
@@ -57,8 +57,8 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard-container animate-fadeIn">
-            <PageHeader 
-                title="Consolidated Dashboard" 
+            <PageHeader
+                title="Consolidated Dashboard"
                 subtitle="Real-time performance analytics and donation insights."
             />
 
@@ -78,7 +78,7 @@ const Dashboard = () => {
                                         <span>Live Update</span>
                                     </div>
                                 </div>
-                                <div className="h-12 w-12 bg-zinc-900 rounded-2xl flex items-center justify-center shadow-lg shadow-zinc-900/10">
+                                <div className="h-12 w-12 bg-zinc-900  flex items-center justify-center shadow-lg shadow-zinc-900/10">
                                     <WalletOutlined className="text-white text-xl" />
                                 </div>
                             </div>
@@ -95,7 +95,7 @@ const Dashboard = () => {
                                     </Title>
                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Based on total collection</div>
                                 </div>
-                                <div className="h-12 w-12 bg-zinc-100 rounded-2xl flex items-center justify-center">
+                                <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
                                     <AppstoreOutlined className="text-zinc-900 text-xl" />
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ const Dashboard = () => {
                                     </Title>
                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Community growth tracking</div>
                                 </div>
-                                <div className="h-12 w-12 bg-zinc-100 rounded-2xl flex items-center justify-center">
+                                <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
                                     <UserAddOutlined className="text-zinc-900 text-xl" />
                                 </div>
                             </div>
@@ -123,9 +123,9 @@ const Dashboard = () => {
                 <Row gutter={[24, 24]}>
                     {/* --- Donation Types Breakdown --- */}
                     <Col xs={24} lg={14}>
-                        <Card 
+                        <Card
                             title={<span className="font-bold tracking-tight text-zinc-800">Donations By Type</span>}
-                            className="h-full border-zinc-100 shadow-sm rounded-[40px] overflow-hidden"
+                            className="h-full border-zinc-100 shadow-sm  overflow-hidden"
                             extra={<PieChartOutlined className="text-zinc-300" />}
                         >
                             <div className="py-6 px-4">
@@ -134,7 +134,7 @@ const Dashboard = () => {
                                         {typeData.map((item, idx) => {
                                             const percentage = ((item.value / (stats.total_donation || 1)) * 100).toFixed(1);
                                             return (
-                                                <div key={idx} className="group flex items-center justify-between p-4 rounded-2xl border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300">
+                                                <div key={idx} className="group flex items-center justify-between p-4  border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300">
                                                     <div className="flex items-center gap-4">
                                                         <div className="h-2 w-2 rounded-full bg-zinc-900 group-hover:scale-125 transition-transform" />
                                                         <Text className="font-bold text-zinc-700 truncate max-w-[200px]">{item.type}</Text>
@@ -156,18 +156,18 @@ const Dashboard = () => {
 
                     {/* --- Top Donors Leaderboard --- */}
                     <Col xs={24} lg={10}>
-                        <Card 
+                        <Card
                             title={<span className="font-bold tracking-tight text-zinc-800">Top Benefactors</span>}
-                            className="h-full border-zinc-100 shadow-sm rounded-[40px] overflow-hidden"
+                            className="h-full border-zinc-100 shadow-sm  overflow-hidden"
                             extra={<TrophyOutlined className="text-zinc-300" />}
                         >
                             <div className="p-4">
                                 {topDonors.length > 0 ? (
                                     <div className="space-y-1">
                                         {topDonors.map((donor, idx) => (
-                                            <div 
-                                                key={idx} 
-                                                className="flex items-center justify-between p-4 rounded-2xl hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
+                                            <div
+                                                key={idx}
+                                                className="flex items-center justify-between p-4  hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
                                             >
                                                 <div className="flex items-center gap-4">
                                                     <div className="h-8 w-8 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500">

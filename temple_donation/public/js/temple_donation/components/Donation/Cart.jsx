@@ -32,7 +32,7 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                         formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         parser={(value) => value.replace(/₹\s?|(,*)/g, "")}
                         onChange={(val) => onUpdateAmount(index, val)}
-                        className="w-full rounded-xl border-zinc-200 bg-zinc-50/30 hover:border-black focus:border-black font-black text-zinc-900 h-10 flex items-center"
+                        className="w-full  border-zinc-200 bg-zinc-50/30 hover:border-black focus:border-black font-black text-zinc-900 h-10 flex items-center"
                     />
                     <div className="flex flex-wrap gap-1.5 mt-1">
                         {quickAmounts.map(q => (
@@ -84,14 +84,14 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                     pagination={false}
                     rowKey={(record, index) => `${record.donation_type}-${index}`}
                     className="aavatto-premium-table custom-cart-table"
-                    locale={{ 
+                    locale={{
                         emptyText: (
                             <div className="py-16 bg-zinc-50/50">
-                                <Empty 
-                                    image={Empty.PRESENTED_IMAGE_SIMPLE} 
+                                <Empty
+                                    image={Empty.PRESENTED_IMAGE_SIMPLE}
                                     description={
                                         <Text className="text-zinc-300 font-bold italic">Cart is currently empty</Text>
-                                    } 
+                                    }
                                 />
                             </div>
                         )

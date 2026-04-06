@@ -131,7 +131,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
     return (
         <div className="max-w-6xl mx-auto space-y-8 py-6 mb-12">
-             <div className="flex items-center justify-between mb-8 animate-fadeIn">
+            <div className="flex items-center justify-between mb-8 animate-fadeIn">
                 <Space size="large">
                     <Button
                         icon={<ArrowLeftOutlined />}
@@ -176,10 +176,10 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                                 placeholder={field.placeholder}
                                                 rows={field.rows || 4}
                                                 disabled={field.readOnly || field.disabled}
-                                                className="rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all p-4"
+                                                className="border-stone-200 bg-stone-50/50 focus:bg-white transition-all p-4"
                                             />
                                         ) : field.type === 'select' ? (
-                                            <Select 
+                                            <Select
                                                 placeholder={field.placeholder}
                                                 disabled={field.readOnly || field.disabled}
                                                 className="h-12 w-full premium-select"
@@ -195,7 +195,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                                 listType={field.type === 'image' ? "picture" : "text"}
                                                 className="w-full"
                                             >
-                                                <Button icon={<UploadOutlined />} className="h-12 w-full rounded-xl border-dashed border-stone-300 bg-stone-50/50 text-stone-500 hover:border-amber-500 hover:text-amber-500 font-medium">
+                                                <Button icon={<UploadOutlined />} className="h-12 w-full border-dashed border-stone-300 bg-stone-50/50 text-stone-500 hover:border-amber-500 hover:text-amber-500 font-medium">
                                                     Click to {field.type === 'image' ? 'upload image' : 'attach file'}
                                                 </Button>
                                             </Upload>
@@ -203,7 +203,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                             <Input
                                                 placeholder={field.placeholder}
                                                 disabled={field.readOnly || field.disabled}
-                                                className="h-12 rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all px-4"
+                                                className="h-12 border-stone-200 bg-stone-50/50 focus:bg-white transition-all px-4"
                                             />
                                         )}
                                     </Form.Item>
@@ -231,8 +231,8 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                                         onClick={() => toggleDonationType(item.name)}
                                                         className={`
                                                             group relative overflow-hidden p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300 bg-white
-                                                            ${isSelected 
-                                                                ? 'border-amber-500 shadow-lg shadow-amber-500/10' 
+                                                            ${isSelected
+                                                                ? 'border-amber-500 shadow-lg shadow-amber-500/10'
                                                                 : 'border-transparent hover:border-stone-300 shadow-sm'}
                                                         `}
                                                     >
@@ -247,7 +247,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                                                     src={item.donation_image}
                                                                     shape="square"
                                                                     size={52}
-                                                                    className="rounded-xl border border-stone-100"
+                                                                    className=" border border-stone-100"
                                                                 />
                                                             </Col>
                                                             <Col flex="auto">
@@ -271,9 +271,9 @@ const CommonForm = ({ doctype, id, onBack }) => {
                         <Divider className="!my-10" />
 
                         <div className="flex items-center justify-end gap-6">
-                            <Button 
-                                onClick={onBack} 
-                                className="h-12 px-10 rounded-xl font-bold border-stone-200 text-stone-500 hover:text-stone-700 hover:border-stone-400 transition-all"
+                            <Button
+                                onClick={onBack}
+                                className="h-12 px-10 font-bold border-stone-200 text-stone-500 hover:text-stone-700 hover:border-stone-400 transition-all"
                             >
                                 Cancel
                             </Button>
@@ -282,7 +282,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                 htmlType="submit"
                                 loading={creating || updating || uploading}
                                 icon={<SaveOutlined className="mr-1" />}
-                                className="h-12 px-12 rounded-xl font-black bg-amber-600 hover:bg-amber-500 border-none shadow-xl shadow-amber-500/30 flex items-center justify-center min-w-[200px]"
+                                className="h-12 px-12 font-black bg-amber-600 hover:bg-amber-500 border-none shadow-xl shadow-amber-500/30 flex items-center justify-center min-w-[200px]"
                             >
                                 {isEdit ? "Update Information" : "Create Record"}
                             </Button>

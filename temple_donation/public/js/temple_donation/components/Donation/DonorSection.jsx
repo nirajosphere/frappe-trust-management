@@ -50,14 +50,14 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
     };
 
     return (
-        <Card 
+        <Card
             title={
                 <Space>
                     <UserOutlined className="text-zinc-900" />
                     <span className="font-bold tracking-tight text-zinc-800">Donor Information</span>
                 </Space>
-            } 
-            size="small" 
+            }
+            size="small"
             className="aavatto-card mb-6"
         >
             <Form layout="vertical">
@@ -71,7 +71,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                 onChange={(e) => handleSearch(e.target.value)}
                                 maxLength={10}
                                 allowClear
-                                className="h-12 rounded-xl text-lg font-medium border-zinc-200 bg-zinc-50/30 focus:bg-white hover:border-black focus:border-black transition-all"
+                                className="h-12  text-lg font-medium border-zinc-200 bg-zinc-50/30 focus:bg-white hover:border-black focus:border-black transition-all"
                             />
                         </Form.Item>
                     </Col>
@@ -82,7 +82,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                 icon={<UserAddOutlined />}
                                 onClick={() => setIsModalOpen(true)}
                                 block
-                                className="h-12 rounded-xl bg-black hover:bg-zinc-800 border-none font-bold shadow-lg shadow-zinc-900/10"
+                                className="h-12  bg-black hover:bg-zinc-800 border-none font-bold shadow-lg shadow-zinc-900/10"
                             >
                                 Add Donor
                             </Button>
@@ -92,12 +92,12 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
 
                 {selectedDonor && (
                     <div className="mt-8 animate-fadeIn">
-                        <div className="bg-zinc-50/50 rounded-3xl p-6 border border-zinc-200/50 flex flex-col md:flex-row gap-6 items-center shadow-inner">
-                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-zinc-100 relative">
+                        <div className="bg-zinc-50/50  p-6 border border-zinc-200/50 flex flex-col md:flex-row gap-6 items-center shadow-inner">
+                            <div className="bg-white p-5  shadow-sm border border-zinc-100 relative">
                                 <UserOutlined className="text-4xl text-zinc-900" />
                                 <CheckCircleFilled className="text-zinc-900 absolute -bottom-1 -right-1 text-2xl bg-white rounded-full shadow-md" />
                             </div>
-                            
+
                             <div className="flex-1 text-center md:text-left">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div className="space-y-1">
@@ -110,7 +110,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                             {selectedDonor.email && <Space size={6} className="text-xs font-bold text-zinc-500">✉️ {selectedDonor.email}</Space>}
                                         </div>
                                     </div>
-                                    
+
                                     <Button
                                         type="primary"
                                         danger
@@ -120,12 +120,12 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                             onDonorSelect(null);
                                             setMobileNumber("");
                                         }}
-                                        className="rounded-xl font-bold border-zinc-200 text-zinc-500 hover:bg-zinc-50 bg-white"
+                                        className=" font-bold border-zinc-200 text-zinc-500 hover:bg-zinc-50 bg-white"
                                     >
                                         Change
                                     </Button>
                                 </div>
-                                
+
                                 {selectedDonor.address && (
                                     <div className="mt-5 pt-5 border-t border-zinc-100 text-center md:text-left">
                                         <Text className="text-zinc-500 text-sm italic font-medium">📍 {selectedDonor.address}</Text>
