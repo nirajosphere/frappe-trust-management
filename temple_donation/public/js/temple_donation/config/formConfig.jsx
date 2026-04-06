@@ -10,29 +10,101 @@ export const formConfigs = {
         title: "Donor",
         fields: [
             {
-                name: "donor_name",
-                label: "Full Name",
-                type: "text",
-                placeholder: "Enter donor's full name",
-                required: true,
-                message: "Please enter the donor's full name!"
-            },
-            {
                 name: "mobile_number",
-                label: "Mobile Number",
+                label: "Contact No",
                 type: "text",
-                placeholder: "9876543210",
+                placeholder: "Enter Contact Number",
                 required: true,
-                message: "Please enter the mobile number!",
+                message: "Please enter contact number!",
                 pattern: /^\d{10}$/,
                 patternMessage: "Please enter a valid 10-digit number!"
             },
             {
+                name: "donor_name",
+                label: "Full Name",
+                type: "text",
+                placeholder: "Enter Donor Name",
+                required: true,
+                message: "Please enter the donor's full name!"
+            },
+            {
+                name: "email",
+                label: "Email Address",
+                type: "text",
+                placeholder: "Enter Email"
+            },
+            {
                 name: "address",
-                label: "Address (Optional)",
-                type: "textarea",
-                placeholder: "Enter full address",
-                rows: 3
+                label: "Address Line 1",
+                type: "text",
+                placeholder: "Enter Address"
+            },
+            {
+                name: "address_line_2",
+                label: "Address Line 2",
+                type: "text",
+                placeholder: "Enter Address"
+            },
+            {
+                name: "pan_card",
+                label: "Pan Card",
+                type: "text",
+                placeholder: "Enter Pan Card Number",
+                pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+                patternMessage: "Please enter a valid PAN (e.g. ABCDE1234F)"
+            },
+            {
+                name: "country",
+                label: "Country",
+                type: "text",
+                placeholder: "India",
+                defaultValue: "India"
+            },
+            {
+                name: "state",
+                label: "State",
+                type: "text",
+                placeholder: "Gujarat",
+                defaultValue: "Gujarat",
+                required: true
+            },
+            {
+                name: "city",
+                label: "City",
+                type: "text",
+                placeholder: "Enter City",
+                required: true
+            },
+            {
+                name: "pincode",
+                label: "Pincode",
+                type: "text",
+                placeholder: "Enter Pincode"
+            },
+            {
+                name: "native_place",
+                label: "Native Place",
+                type: "text",
+                placeholder: "Enter Native Place"
+            },
+            {
+                name: "date_of_birth",
+                label: "Date of Birth",
+                type: "text",
+                placeholder: "DD-MM-YYYY"
+            },
+            {
+                name: "marital_status",
+                label: "Marital Status",
+                type: "select",
+                options: ["Unmarried", "Married"],
+                defaultValue: "Unmarried"
+            },
+            {
+                name: "anniversary_date",
+                label: "Date of Anniversary",
+                type: "text",
+                placeholder: "DD-MM-YYYY"
             }
         ]
     },
@@ -111,42 +183,28 @@ export const formConfigs = {
     [DOCTYPE_DONATION]: {
         title: "Donation",
         fields: [
-            {
-                name: "donor",
-                label: "Donor",
-                type: "text",
-                placeholder: "Select Donor",
-                required: true,
-                message: "Please select a donor!"
-            },
-            {
-                name: "temple",
-                label: "Temple",
-                type: "text",
-                placeholder: "Select Temple",
-                required: true,
-                message: "Please select a temple!"
-            },
-            {
-                name: "payment_mode",
-                label: "Payment Mode",
-                type: "text",
-                placeholder: "Cash / UPI / Card",
-                required: true
-            },
-            {
-                name: "total_amount",
-                label: "Total Amount",
-                type: "text",
-                placeholder: "0.00",
-                required: true
-            },
-            {
-                name: "notes",
-                label: "Notes",
-                type: "textarea",
-                rows: 3
-            }
+            { name: "name", label: "Receipt Id", type: "text", readOnly: true },
+            { name: "cashier", label: "Donation Receiver Name", type: "text", readOnly: true },
+            { name: "temple", label: "Temple Name", type: "text", required: true },
+            { name: "print_receipt_name", label: "Print Receipt Name", type: "text" },
+            { name: "donor_name", label: "Donor Name", type: "text", required: true },
+            { name: "email", label: "Email", type: "text" },
+            { name: "address_line_1", label: "Address Line 1", type: "text" },
+            { name: "address_line_2", label: "Address Line 2", type: "text" },
+            { name: "country", label: "Country", type: "text" },
+            { name: "state", label: "State", type: "text" },
+            { name: "city", label: "City", type: "text" },
+            { name: "pincode", label: "Pincode", type: "text" },
+            { name: "contact_number", label: "Contact Number", type: "text" },
+            { name: "native_place", label: "Native Place", type: "text" },
+            { name: "date_of_birth", label: "Date of Birth", type: "text" },
+            { name: "marital_status", label: "Marital Status", type: "text" },
+            { name: "date_of_anniversary", label: "Date of Anniversary", type: "text" },
+            { name: "note", label: "Note", type: "textarea" },
+            { name: "payment_mode", label: "Payment Type", type: "text", required: true },
+            { name: "total_amount", label: "Total Donation Amount", type: "text", required: true },
+            { name: "device_name", label: "Device Name", type: "text" },
+            { name: "transaction_ref_no", label: "Transaction Ref. No.", type: "text" },
         ]
     },
     [DOCTYPE_DONATION_TYPE]: {

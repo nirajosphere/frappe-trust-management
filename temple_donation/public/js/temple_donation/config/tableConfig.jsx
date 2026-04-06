@@ -29,6 +29,16 @@ export const donorColumns = [
         key: 'mobile_number',
     },
     {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+    },
+    {
+        title: 'City',
+        dataIndex: 'city',
+        key: 'city',
+    },
+    {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
     Form, Input, Button, Card, Typography, Space, Row, Col,
-    message, Spin, Alert, Upload, Divider, Switch, List, Avatar
+    message, Spin, Alert, Upload, Divider, Switch, List, Avatar, Select
 } from "antd";
 import { ArrowLeftOutlined, SaveOutlined, UploadOutlined, CheckCircleFilled } from "@ant-design/icons";
 import {
@@ -178,6 +178,16 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                             disabled={field.readOnly || field.disabled}
                                             style={{ borderRadius: '8px' }}
                                         />
+                                    ) : field.type === 'select' ? (
+                                        <Select 
+                                            placeholder={field.placeholder}
+                                            disabled={field.readOnly || field.disabled}
+                                            style={{ width: '100%', height: '40px', borderRadius: '8px' }}
+                                        >
+                                            {field.options?.map(opt => (
+                                                <Select.Option key={opt} value={opt}>{opt}</Select.Option>
+                                            ))}
+                                        </Select>
                                     ) : field.type === 'image' || field.type === 'file' ? (
                                         <Upload
                                             maxCount={1}

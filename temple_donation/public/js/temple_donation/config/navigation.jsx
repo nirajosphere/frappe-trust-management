@@ -11,6 +11,7 @@ import Dashboard from "../pages/Dashboard";
 import ListingPage from "../pages/ListingPage";
 import Donation from "../pages/Donation";
 import CommonForm from "../components/common/CommonForm";
+import CommonView from "../components/common/CommonView";
 import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE } from "./constants";
 import { donorColumns, templeColumns, donationColumns, donationTypeColumns } from "./tableConfig";
 
@@ -37,7 +38,7 @@ export const navigationItems = [
                 description="View, add, edit or delete donor records"
                 columns={donorColumns}
                 basePath="donors"
-                fields={["name", "donor_name", "mobile_number", "address"]}
+                fields={["name", "donor_name", "mobile_number", "address", "city", "email"]}
             />
         ),
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
@@ -121,6 +122,29 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
                 <h3>Access Denied</h3>
                 <p>You do not have permission to view this module.</p>
             </div>
+        );
+    }
+
+    // Handle View Details
+    if (targetDoctype && subRoute === "view") {
+        return (
+            <CommonView 
+                doctype={targetDoctype} 
+                id={dynamicId} 
+                onBack={() => {
+                    if (typeof frappe !== "undefined") {
+                        frappe.set_route("temple-donation", baseKey);
+                    }
+                }}
+                onEdit={(doc) => {
+                    if (typeof frappe !== "undefined") {
+                        frappe.set_route("temple-donation", baseKey, "edit", doc.name);
+                    }
+                }}
+                onPrint={(doc) => {
+                    window.print();
+                }}
+            />
         );
     }
 

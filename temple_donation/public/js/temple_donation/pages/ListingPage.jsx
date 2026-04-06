@@ -56,6 +56,16 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
         });
     };
 
+    const handleView = (record) => {
+        if (typeof frappe !== "undefined" && basePath) {
+            frappe.set_route("temple-donation", basePath, "view", record.name);
+        }
+    };
+
+    const handlePrint = (record) => {
+        window.print(); // Simple print trigger for now
+    };
+
     if (error) {
         return (
             <div style={{ padding: "24px" }}>
@@ -80,6 +90,8 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
                 onAdd={handleAdd}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
+                onView={handleView}
+                onPrint={handlePrint}
                 searchPlaceholder={`Search ${doctype}s...`}
             />
         </div>
