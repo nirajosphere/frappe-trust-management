@@ -944,9 +944,9 @@
     color: var(--primary-color) !important;
   }
 
-  .ant-menu-item::after {
+  /* .ant-menu-item::after {
     border-bottom-color: var(--primary-color) !important;
-  }
+  } */
 }
 
 .aavatto-topbar-version {
