@@ -5,16 +5,25 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "dontation_type",
+  "donation_type",
+  "donation_type_code",
   "temple",
-  "default_amount"
+  "default_amount",
+  "donation_image"
  ],
  "fields": [
   {
-   "fieldname": "dontation_type",
+   "fieldname": "donation_type",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Dontation Type",
+   "label": "Donation Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "donation_type_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Donation Type Code",
    "reqd": 1
   },
   {
@@ -27,12 +36,17 @@
    "fieldname": "default_amount",
    "fieldtype": "Currency",
    "label": "Default Amount"
+  },
+  {
+   "fieldname": "donation_image",
+   "fieldtype": "Attach Image",
+   "label": "Donation Image"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-03 12:35:30.693670",
+ "modified": "2026-04-03 18:24:37.275767",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Donation Type",

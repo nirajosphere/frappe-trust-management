@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Card, Typography, Space, Row, Col, message, Spin, Alert } from "antd";
-import { ArrowLeftOutlined, SaveOutlined } from "@ant-design/icons";
-import { useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc } from "../../hooks/useFrappe";
+import { Form, Input, Button, Card, Typography, Space, Row, Col, message, Spin, Alert, Upload } from "antd";
+import { ArrowLeftOutlined, SaveOutlined, UploadOutlined } from "@ant-design/icons";
+import { useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc, useFrappeFileUpload } from "../../hooks/useFrappe";
 import { formConfigs } from "../../config/formConfig";
 
 const { Title, Text } = Typography;
@@ -21,6 +21,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
+    const { upload, loading: uploading } = useFrappeFileUpload();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(doctype, id);
 
     useEffect(() => {
@@ -33,13 +34,44 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
     const handleSave = async (values) => {
         try {
+            let doc;
+            
+            // Extract file data before saving doc as a raw object
+            const formData = { ...values };
+            const fileFields = config.fields.filter(f => f.type === 'image' || f.type === 'file');
+            
+            // Remove file field data from initial doc creation to avoid circular/invalid data
+            fileFields.forEach(f => delete formData[f.name]);
+
             if (isEdit) {
-                await updateDoc(doctype, id, values);
-                message.success(`${config.title} updated successfully!`);
+                doc = await updateDoc(doctype, id, formData);
             } else {
-                await createDoc(doctype, values);
-                message.success(`${config.title} created successfully!`);
+                doc = await createDoc(doctype, formData);
             }
+
+            const docName = isEdit ? id : doc.name;
+
+            // Handle file uploads sequentially
+            for (const field of fileFields) {
+                const fileValue = values[field.name];
+                if (fileValue && fileValue.fileList && fileValue.fileList.length > 0) {
+                    const file = fileValue.fileList[0].originFileObj;
+                    if (file) {
+                        try {
+                            await upload(file, {
+                                doctype: doctype,
+                                docname: docName,
+                                fieldname: field.name
+                            });
+                        } catch (uploadErr) {
+                            console.error(`Failed to upload ${field.label}:`, uploadErr);
+                            message.warning(`${field.label} upload failed, but record was saved.`);
+                        }
+                    }
+                }
+            }
+
+            message.success(`${config.title} ${isEdit ? 'updated' : 'created'} successfully!`);
             if (onBack) onBack();
         } catch (err) {
             message.error(err.message || "Something went wrong.");
@@ -112,6 +144,22 @@ const CommonForm = ({ doctype, id, onBack }) => {
                                             rows={field.rows || 3} 
                                             disabled={field.readOnly || field.disabled}
                                         />
+                                    ) : field.type === 'image' || field.type === 'file' ? (
+                                        <Upload 
+                                            maxCount={1}
+                                            beforeUpload={() => false}
+                                            listType={field.type === 'image' ? "picture" : "text"}
+                                            defaultFileList={isEdit && initialValues?.[field.name] ? [
+                                                {
+                                                    uid: '-1',
+                                                    name: 'Current File',
+                                                    status: 'done',
+                                                    url: initialValues[field.name],
+                                                }
+                                            ] : []}
+                                        >
+                                            <Button icon={<UploadOutlined />}>Choose File</Button>
+                                        </Upload>
                                     ) : (
                                         <Input 
                                             placeholder={field.placeholder} 
@@ -131,7 +179,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
                             <Button
                                 type="primary"
                                 htmlType="submit"
-                                loading={creating || updating}
+                                loading={creating || updating || uploading}
                                 icon={<SaveOutlined />}
                                 style={{ borderRadius: '6px', minWidth: '120px', height: '40px' }}
                             >

@@ -11,8 +11,8 @@ import Dashboard from "../pages/Dashboard";
 import ListingPage from "../pages/ListingPage";
 import Donation from "../pages/Donation";
 import CommonForm from "../components/common/CommonForm";
-import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION } from "./constants";
-import { donorColumns, templeColumns, donationColumns } from "./tableConfig";
+import { DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE } from "./constants";
+import { donorColumns, templeColumns, donationColumns, donationTypeColumns } from "./tableConfig";
 
 /**
  * Centralized navigation configuration.
@@ -70,8 +70,21 @@ export const navigationItems = [
             />
         ),
     },
-
-
+    {
+        key: "donation-types",
+        icon: <ShoppingCartOutlined />,
+        label: "Donation Types",
+        component: (
+            <ListingPage
+                doctype={DOCTYPE_DONATION_TYPE}
+                title="Donation Types"
+                description="Manage available donation categories"
+                columns={donationTypeColumns}
+                basePath="donation-types"
+                fields={["name", "donation_type", "donation_type_code", "donation_image"]}
+            />
+        ),
+    },
 ];
 
 /**
@@ -89,7 +102,8 @@ export const getComponentForRoute = (currentRoute) => {
     const doctypeMap = {
         "donors": DOCTYPE_DONOR,
         "temples": DOCTYPE_TEMPLE,
-        "donations": DOCTYPE_DONATION
+        "donations": DOCTYPE_DONATION,
+        "donation-types": DOCTYPE_DONATION_TYPE
     };
 
     const targetDoctype = doctypeMap[baseKey];

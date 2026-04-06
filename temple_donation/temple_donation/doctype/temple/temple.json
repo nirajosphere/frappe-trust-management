@@ -13,7 +13,8 @@
   "temple_address",
   "country",
   "pincode",
-  "note"
+  "note",
+  "dontatio_type"
  ],
  "fields": [
   {
@@ -58,12 +59,18 @@
    "fieldname": "note",
    "fieldtype": "Small Text",
    "label": "Note"
+  },
+  {
+   "fieldname": "dontatio_type",
+   "fieldtype": "Link",
+   "label": "Dontaion Type",
+   "options": "Donation Type"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-03 14:26:17.991753",
+ "modified": "2026-04-03 18:59:36.619593",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Temple",

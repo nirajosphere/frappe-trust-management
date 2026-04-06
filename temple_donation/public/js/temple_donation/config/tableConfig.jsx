@@ -105,3 +105,43 @@ export const donationColumns = [
     },
 ];
 
+export const donationTypeColumns = [
+    {
+        title: 'ID',
+        dataIndex: 'name',
+        key: 'name',
+        width: 150,
+        render: (text) => <Text copyable>{text}</Text>
+    },
+    {
+        title: 'Donation Type',
+        dataIndex: 'donation_type',
+        key: 'donation_type',
+        render: (text) => <Text strong>{text}</Text>,
+        sorter: (a, b) => a.donation_type.localeCompare(b.donation_type),
+    },
+    {
+        title: 'Donation Type Code',
+        dataIndex: 'donation_type_code',
+        key: 'donation_type_code',
+        render: (text) => <Tag color="orange">{text}</Tag>,
+    },
+    {
+        title: 'Temple',
+        dataIndex: 'temple',
+        key: 'temple',
+    },
+    {
+        title: 'Default Amount',
+        dataIndex: 'default_amount',
+        key: 'default_amount',
+        render: (val) => val ? `₹${Number(val).toLocaleString()}` : '-'
+    },
+    {
+        title: 'Image',
+        dataIndex: 'donation_image',
+        key: 'donation_image',
+        render: (img) => img ? <img src={img} alt="Donation" style={{ width: 40, height: 40, borderRadius: 4, objectFit: 'cover' }} /> : '-'
+    },
+];
+
