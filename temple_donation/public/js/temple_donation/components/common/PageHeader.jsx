@@ -51,9 +51,9 @@ const PageHeader = ({
                             <div className="relative group">
                                 <Input
                                     placeholder={searchPlaceholder}
-                                    prefix={<SearchOutlined className="text-zinc-400 group-focus-within:text-zinc-900 transition-colors mr-2" />}
+                                    prefix={<SearchOutlined className="mr-2" />}
                                     onChange={(e) => onSearch(e.target.value)}
-                                    className="w-72 lg:w-96 h-11 border-zinc-200 bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-lg focus:border-zinc-900 hover:border-zinc-400 transition-all font-medium rounded-xl border-2"
+                                    className="w-72 lg:w-96"
                                     allowClear
                                 />
                             </div>
@@ -62,7 +62,7 @@ const PageHeader = ({
                             <Button
                                 icon={<ExportOutlined />}
                                 onClick={onExport}
-                                className="h-11 px-6 font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
+                                className="h-10 px-6"
                             >
                                 Export Data
                             </Button>
@@ -72,7 +72,7 @@ const PageHeader = ({
                                 type="primary"
                                 icon={<PlusOutlined />}
                                 onClick={onAdd}
-                                className="h-11 px-8  font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
+                                className="h-10 px-6"
                             >
                                 {addLabel}
                             </Button>

@@ -1291,7 +1291,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React500 = require_react(), Internals = {
+        var React504 = require_react(), Internals = {
           d: {
             f: noop4,
             r: function() {
@@ -1309,7 +1309,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React500.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React504.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3161,7 +3161,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React500.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React504.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18999,14 +18999,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React500 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React504 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React500.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React504.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21799,7 +21799,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React500.version;
+          var isomorphicReactPackageVersion = React504.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21970,10 +21970,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react181 = __toESM(require_react());
+  var import_react185 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react180 = __toESM(require_react());
+  var import_react184 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -89621,7 +89621,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react178 = __toESM(require_react());
+  var import_react182 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/pages/Dashboard.jsx
   var import_react151 = __toESM(require_react());
@@ -89669,20 +89669,20 @@ html body {
     }, /* @__PURE__ */ import_react150.default.createElement(input_default, {
       placeholder: searchPlaceholder,
       prefix: /* @__PURE__ */ import_react150.default.createElement(SearchOutlined_default2, {
-        className: "text-zinc-400 group-focus-within:text-zinc-900 transition-colors mr-2"
+        className: "mr-2"
       }),
       onChange: (e3) => onSearch(e3.target.value),
-      className: "w-72 lg:w-96 h-11 border-zinc-200 bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-lg focus:border-zinc-900 hover:border-zinc-400 transition-all font-medium rounded-xl border-2",
+      className: "w-72 lg:w-96",
       allowClear: true
     })), onExport && /* @__PURE__ */ import_react150.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react150.default.createElement(ExportOutlined_default2, null),
       onClick: onExport,
-      className: "h-11 px-6 font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
+      className: "h-10 px-6"
     }, "Export Data"), onAdd && /* @__PURE__ */ import_react150.default.createElement(button_default, {
       type: "primary",
       icon: /* @__PURE__ */ import_react150.default.createElement(PlusOutlined_default2, null),
       onClick: onAdd,
-      className: "h-11 px-8  font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
+      className: "h-10 px-6"
     }, addLabel), extra))));
   };
   var PageHeader_default = PageHeader;
@@ -90966,7 +90966,7 @@ html body {
   };
   var ListingPage_default = ListingPage;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/config/tableConfig.jsx
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donorTable.jsx
   var import_react162 = __toESM(require_react());
   var { Text: Text12 } = typography_default;
   var donorColumns = [
@@ -90986,7 +90986,7 @@ html body {
       render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
         strong: true
       }, text),
-      sorter: (a, b) => a.donor_name.localeCompare(b.donor_name)
+      sorter: (a, b) => (a.donor_name || "").localeCompare(b.donor_name || "")
     },
     {
       title: "Mobile Number",
@@ -91011,132 +91011,6 @@ html body {
       render: (text) => text || /* @__PURE__ */ import_react162.default.createElement(Text12, {
         type: "secondary"
       }, "-")
-    }
-  ];
-  var templeColumns = [
-    {
-      title: "ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Temple Name",
-      dataIndex: "temple_name",
-      key: "temple_name",
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        strong: true
-      }, text),
-      sorter: (a, b) => a.temple_name.localeCompare(b.temple_name)
-    },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city"
-    },
-    {
-      title: "State",
-      dataIndex: "state",
-      key: "state"
-    },
-    {
-      title: "Registration No",
-      dataIndex: "trust_registration_no",
-      key: "trust_registration_no"
-    }
-  ];
-  var donationColumns = [
-    {
-      title: "Donation ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Donor",
-      dataIndex: "donor_name",
-      key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        strong: true
-      }, text)
-    },
-    {
-      title: "Temple",
-      dataIndex: "temple",
-      key: "temple"
-    },
-    {
-      title: "Amount",
-      dataIndex: "total_amount",
-      key: "total_amount",
-      render: (val) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        type: "success",
-        strong: true
-      }, "\u20B9", Number(val || 0).toLocaleString()),
-      sorter: (a, b) => (a.total_amount || 0) - (b.total_amount || 0)
-    },
-    {
-      title: "Payment Mode",
-      dataIndex: "payment_mode",
-      key: "payment_mode",
-      render: (mode) => /* @__PURE__ */ import_react162.default.createElement(tag_default, {
-        color: mode === "Cash" ? "green" : "blue"
-      }, mode)
-    }
-  ];
-  var donationTypeColumns = [
-    {
-      title: "ID",
-      dataIndex: "name",
-      key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        copyable: true
-      }, text)
-    },
-    {
-      title: "Donation Type",
-      dataIndex: "donation_type",
-      key: "donation_type",
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(Text12, {
-        strong: true
-      }, text),
-      sorter: (a, b) => a.donation_type.localeCompare(b.donation_type)
-    },
-    {
-      title: "Donation Type Code",
-      dataIndex: "donation_type_code",
-      key: "donation_type_code",
-      render: (text) => /* @__PURE__ */ import_react162.default.createElement(tag_default, {
-        color: "orange"
-      }, text)
-    },
-    {
-      title: "Temple",
-      dataIndex: "temple",
-      key: "temple"
-    },
-    {
-      title: "Default Amount",
-      dataIndex: "default_amount",
-      key: "default_amount",
-      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
-    },
-    {
-      title: "Image",
-      dataIndex: "donation_image",
-      key: "donation_image",
-      render: (img) => img ? /* @__PURE__ */ import_react162.default.createElement("img", {
-        src: img,
-        alt: "Donation",
-        className: "w-10 h-10 rounded-lg object-cover shadow-sm border border-stone-100"
-      }) : "-"
     }
   ];
 
@@ -91933,9 +91807,50 @@ html body {
   var DonorForm_default = DonorForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
+  var import_react170 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/templeTable.jsx
   var import_react169 = __toESM(require_react());
+  var { Text: Text15 } = typography_default;
+  var templeColumns = [
+    {
+      title: "ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react169.default.createElement(Text15, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Temple Name",
+      dataIndex: "temple_name",
+      key: "temple_name",
+      render: (text) => /* @__PURE__ */ import_react169.default.createElement(Text15, {
+        strong: true
+      }, text),
+      sorter: (a, b) => (a.temple_name || "").localeCompare(b.temple_name || "")
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      key: "city"
+    },
+    {
+      title: "State",
+      dataIndex: "state",
+      key: "state"
+    },
+    {
+      title: "Registration No",
+      dataIndex: "trust_registration_no",
+      key: "trust_registration_no"
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
   var TempleList = () => {
-    return /* @__PURE__ */ import_react169.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react170.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_TEMPLE,
       title: "Temple Management",
       description: "View, add, edit or delete temple records",
@@ -91947,9 +91862,9 @@ html body {
   var TempleList_default = TempleList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleView.jsx
-  var import_react170 = __toESM(require_react());
+  var import_react171 = __toESM(require_react());
   var TempleView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react170.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react171.default.createElement(CommonView_default, {
       doctype: DOCTYPE_TEMPLE,
       id,
       onBack,
@@ -91959,9 +91874,9 @@ html body {
   var TempleView_default = TempleView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleForm.jsx
-  var import_react171 = __toESM(require_react());
+  var import_react172 = __toESM(require_react());
   var TempleForm = ({ id, onBack }) => {
-    return /* @__PURE__ */ import_react171.default.createElement(CommonForm_default, {
+    return /* @__PURE__ */ import_react172.default.createElement(CommonForm_default, {
       doctype: DOCTYPE_TEMPLE,
       id,
       onBack
@@ -91970,9 +91885,57 @@ html body {
   var TempleForm_default = TempleForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
-  var import_react172 = __toESM(require_react());
+  var import_react174 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTable.jsx
+  var import_react173 = __toESM(require_react());
+  var { Text: Text16 } = typography_default;
+  var donationColumns = [
+    {
+      title: "Donation ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react173.default.createElement(Text16, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Donor",
+      dataIndex: "donor_name",
+      key: "donor_name",
+      render: (text) => /* @__PURE__ */ import_react173.default.createElement(Text16, {
+        strong: true
+      }, text)
+    },
+    {
+      title: "Temple",
+      dataIndex: "temple",
+      key: "temple"
+    },
+    {
+      title: "Amount",
+      dataIndex: "total_amount",
+      key: "total_amount",
+      render: (val) => /* @__PURE__ */ import_react173.default.createElement(Text16, {
+        type: "success",
+        strong: true
+      }, "\u20B9", Number(val || 0).toLocaleString()),
+      sorter: (a, b) => (a.total_amount || 0) - (b.total_amount || 0)
+    },
+    {
+      title: "Payment Mode",
+      dataIndex: "payment_mode",
+      key: "payment_mode",
+      render: (mode) => /* @__PURE__ */ import_react173.default.createElement(tag_default, {
+        color: mode === "Cash" ? "green" : "blue"
+      }, mode)
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
   var DonationList = () => {
-    return /* @__PURE__ */ import_react172.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react174.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION,
       title: "Donation Records",
       description: "View and track all donation transactions",
@@ -91984,9 +91947,9 @@ html body {
   var DonationList_default = DonationList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationView.jsx
-  var import_react173 = __toESM(require_react());
+  var import_react175 = __toESM(require_react());
   var DonationView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react173.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react175.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION,
       id,
       onBack,
@@ -91996,9 +91959,64 @@ html body {
   var DonationView_default = DonationView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
-  var import_react174 = __toESM(require_react());
+  var import_react177 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTypeTable.jsx
+  var import_react176 = __toESM(require_react());
+  var { Text: Text17 } = typography_default;
+  var donationTypeColumns = [
+    {
+      title: "ID",
+      dataIndex: "name",
+      key: "name",
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react176.default.createElement(Text17, {
+        copyable: true
+      }, text)
+    },
+    {
+      title: "Donation Type",
+      dataIndex: "donation_type",
+      key: "donation_type",
+      render: (text) => /* @__PURE__ */ import_react176.default.createElement(Text17, {
+        strong: true
+      }, text),
+      sorter: (a, b) => (a.donation_type || "").localeCompare(b.donation_type || "")
+    },
+    {
+      title: "Donation Type Code",
+      dataIndex: "donation_type_code",
+      key: "donation_type_code",
+      render: (text) => /* @__PURE__ */ import_react176.default.createElement(tag_default, {
+        color: "orange"
+      }, text)
+    },
+    {
+      title: "Temple",
+      dataIndex: "temple",
+      key: "temple"
+    },
+    {
+      title: "Default Amount",
+      dataIndex: "default_amount",
+      key: "default_amount",
+      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
+    },
+    {
+      title: "Image",
+      dataIndex: "donation_image",
+      key: "donation_image",
+      render: (img) => img ? /* @__PURE__ */ import_react176.default.createElement("img", {
+        src: img,
+        alt: "Donation",
+        className: "w-10 h-10 rounded-lg object-cover shadow-sm border border-stone-100"
+      }) : "-"
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
   var DonationTypeList = () => {
-    return /* @__PURE__ */ import_react174.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react177.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       title: "Donation Types",
       description: "Manage available donation categories",
@@ -92010,9 +92028,9 @@ html body {
   var DonationTypeList_default = DonationTypeList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeView.jsx
-  var import_react175 = __toESM(require_react());
+  var import_react178 = __toESM(require_react());
   var DonationTypeView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react175.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react178.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       id,
       onBack,
@@ -92022,9 +92040,9 @@ html body {
   var DonationTypeView_default = DonationTypeView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeForm.jsx
-  var import_react176 = __toESM(require_react());
+  var import_react179 = __toESM(require_react());
   var DonationTypeForm = ({ id, onBack }) => {
-    return /* @__PURE__ */ import_react176.default.createElement(CommonForm_default, {
+    return /* @__PURE__ */ import_react179.default.createElement(CommonForm_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       id,
       onBack
@@ -92033,11 +92051,43 @@ html body {
   var DonationTypeForm_default = DonationTypeForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var import_react177 = __toESM(require_react());
-  var { Title: Title11, Text: Text15 } = typography_default;
+  var import_react181 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
+  var import_react180 = __toESM(require_react());
+  var { Text: Text18 } = typography_default;
+  var userBalanceColumns = [
+    {
+      title: "User Name",
+      dataIndex: "full_name",
+      key: "full_name",
+      render: (text, record) => /* @__PURE__ */ import_react180.default.createElement(space_default, null, /* @__PURE__ */ import_react180.default.createElement(UserOutlined_default2, {
+        className: "text-zinc-400"
+      }), /* @__PURE__ */ import_react180.default.createElement("div", null, /* @__PURE__ */ import_react180.default.createElement("div", {
+        className: "font-bold text-zinc-900"
+      }, text || record.user_name), /* @__PURE__ */ import_react180.default.createElement("div", {
+        className: "text-xs text-zinc-400 font-medium"
+      }, record.user_name)))
+    },
+    {
+      title: "Opening Balance (Cash Only)",
+      dataIndex: "opening_balance",
+      key: "opening_balance",
+      render: (value) => /* @__PURE__ */ import_react180.default.createElement("div", {
+        className: "flex items-center gap-2"
+      }, /* @__PURE__ */ import_react180.default.createElement(WalletOutlined_default2, {
+        className: "text-zinc-400"
+      }), /* @__PURE__ */ import_react180.default.createElement("span", {
+        className: "font-bold text-lg text-zinc-900"
+      }, "\u20B9", (value == null ? void 0 : value.toLocaleString()) || "0"))
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
+  var { Title: Title11, Text: Text19 } = typography_default;
   var OpeningBalance = () => {
-    const [loading, setLoading] = (0, import_react177.useState)(false);
-    const [data, setData] = (0, import_react177.useState)([]);
+    const [loading, setLoading] = (0, import_react181.useState)(false);
+    const [data, setData] = (0, import_react181.useState)([]);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -92077,63 +92127,40 @@ html body {
         message_default.error("Reset failed");
       }
     };
-    (0, import_react177.useEffect)(() => {
+    (0, import_react181.useEffect)(() => {
       fetchData();
     }, []);
     const columns = [
-      {
-        title: "User Name",
-        dataIndex: "full_name",
-        key: "full_name",
-        render: (text, record) => /* @__PURE__ */ import_react177.default.createElement(space_default, null, /* @__PURE__ */ import_react177.default.createElement(UserOutlined_default2, {
-          className: "text-zinc-400"
-        }), /* @__PURE__ */ import_react177.default.createElement("div", null, /* @__PURE__ */ import_react177.default.createElement("div", {
-          className: "font-bold text-zinc-900"
-        }, text || record.user_name), /* @__PURE__ */ import_react177.default.createElement("div", {
-          className: "text-xs text-zinc-400 font-medium"
-        }, record.user_name)))
-      },
-      {
-        title: "Opening Balance (Cash Only)",
-        dataIndex: "opening_balance",
-        key: "opening_balance",
-        render: (value) => /* @__PURE__ */ import_react177.default.createElement("div", {
-          className: "flex items-center gap-2"
-        }, /* @__PURE__ */ import_react177.default.createElement(WalletOutlined_default2, {
-          className: "text-zinc-400"
-        }), /* @__PURE__ */ import_react177.default.createElement("span", {
-          className: "font-bold text-lg text-zinc-900"
-        }, "\u20B9", (value == null ? void 0 : value.toLocaleString()) || "0"))
-      },
+      ...userBalanceColumns,
       {
         title: "Reset Balance",
         key: "action",
         align: "right",
-        render: (_, record) => /* @__PURE__ */ import_react177.default.createElement(button_default, {
+        render: (_, record) => /* @__PURE__ */ import_react181.default.createElement(button_default, {
           type: "default",
-          icon: /* @__PURE__ */ import_react177.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react181.default.createElement(SyncOutlined_default2, null),
           className: "rounded-lg font-bold bg-zinc-100 border-zinc-200 text-zinc-700 hover:bg-zinc-900 hover:text-white transition-all",
           onClick: () => handleReset(record.user_name, record.opening_balance)
         }, "Reset Cash")
       }
     ];
-    return /* @__PURE__ */ import_react177.default.createElement("div", {
+    return /* @__PURE__ */ import_react181.default.createElement("div", {
       className: "animate-fadeIn"
-    }, /* @__PURE__ */ import_react177.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react181.default.createElement(PageHeader_default, {
       title: "User Opening Balance",
       subtitle: "Manage and Reset Hand-over Cash for each user.",
       extra: [
-        /* @__PURE__ */ import_react177.default.createElement(button_default, {
+        /* @__PURE__ */ import_react181.default.createElement(button_default, {
           key: "refresh",
           onClick: fetchData,
           loading,
           className: " border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold",
-          icon: /* @__PURE__ */ import_react177.default.createElement(SyncOutlined_default2, null)
+          icon: /* @__PURE__ */ import_react181.default.createElement(SyncOutlined_default2, null)
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react177.default.createElement("div", {
+    }), /* @__PURE__ */ import_react181.default.createElement("div", {
       className: "p-8"
-    }, /* @__PURE__ */ import_react177.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react181.default.createElement(table_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
@@ -92148,44 +92175,44 @@ html body {
   var navigationItems = [
     {
       key: "dashboard",
-      icon: /* @__PURE__ */ import_react178.default.createElement(DashboardOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(DashboardOutlined_default2, null),
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react178.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donors",
-      icon: /* @__PURE__ */ import_react178.default.createElement(UserOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(UserOutlined_default2, null),
       label: "Donors",
-      component: /* @__PURE__ */ import_react178.default.createElement(DonorList_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "temples",
-      icon: /* @__PURE__ */ import_react178.default.createElement(BankOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(BankOutlined_default2, null),
       label: "Temples",
-      component: /* @__PURE__ */ import_react178.default.createElement(TempleList_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
-      icon: /* @__PURE__ */ import_react178.default.createElement(BankOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(BankOutlined_default2, null),
       label: "Ledger",
-      component: /* @__PURE__ */ import_react178.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donations",
-      icon: /* @__PURE__ */ import_react178.default.createElement(HistoryOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(HistoryOutlined_default2, null),
       label: "Donation List",
-      component: /* @__PURE__ */ import_react178.default.createElement(DonationList_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
-      icon: /* @__PURE__ */ import_react178.default.createElement(ShoppingCartOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react182.default.createElement(ShoppingCartOutlined_default2, null),
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react178.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react182.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     }
   ];
@@ -92204,19 +92231,19 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react178.default.createElement("div", {
+      return /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react178.default.createElement("div", {
+      }, /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react178.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react182.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react178.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react182.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react178.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react182.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react178.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react178.default.createElement("button", {
+      }, /* @__PURE__ */ import_react182.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -92227,7 +92254,7 @@ html body {
       }
     };
     if (baseKey === "ledger") {
-      return /* @__PURE__ */ import_react178.default.createElement(OpeningBalance_default, null);
+      return /* @__PURE__ */ import_react182.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -92237,22 +92264,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react178.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react182.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react178.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react182.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react178.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react182.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react178.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react182.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react178.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react182.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react178.default.createElement(Donation_default, null);
+        return /* @__PURE__ */ import_react182.default.createElement(Donation_default, null);
       }
       const formProps = {
         id: dynamicId,
@@ -92260,20 +92287,20 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react178.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react182.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react178.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react182.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react178.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react182.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
         default:
-          return /* @__PURE__ */ import_react178.default.createElement(CommonForm_default, __spreadValues({
+          return /* @__PURE__ */ import_react182.default.createElement(CommonForm_default, __spreadValues({
             doctype: targetDoctype
           }, formProps));
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react178.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react182.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -92284,13 +92311,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react179 = __toESM(require_react());
-  var UserContext = (0, import_react179.createContext)();
+  var import_react183 = __toESM(require_react());
+  var UserContext = (0, import_react183.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react179.useState)(null);
-    const [roles, setRoles] = (0, import_react179.useState)([]);
-    const [loading, setLoading] = (0, import_react179.useState)(true);
-    (0, import_react179.useEffect)(() => {
+    const [user, setUser] = (0, import_react183.useState)(null);
+    const [roles, setRoles] = (0, import_react183.useState)([]);
+    const [loading, setLoading] = (0, import_react183.useState)(true);
+    (0, import_react183.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -92352,12 +92379,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react179.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react183.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react179.useContext)(UserContext);
+    const context = (0, import_react183.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -92367,11 +92394,11 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react180.useState)("dashboard");
+    const [currentRoute, setCurrentRoute] = (0, import_react184.useState)("dashboard");
     const { user, roles, logout, isAdmin } = useUser();
     console.log(isAdmin, "isAdmin");
     console.log("isAdmin");
-    (0, import_react180.useEffect)(() => {
+    (0, import_react184.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -92398,7 +92425,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react180.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react184.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof frappe !== "undefined") {
             frappe.set_route("UserProfile", user == null ? void 0 : user.email);
@@ -92411,48 +92438,48 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react180.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react184.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
     ];
     const menuItems = getFilteredMenuItems(roles);
-    return /* @__PURE__ */ import_react180.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react184.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react180.default.createElement("div", {
+    }, /* @__PURE__ */ import_react184.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react180.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react184.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react180.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react184.default.createElement(Header3, {
       className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
-    }, /* @__PURE__ */ import_react180.default.createElement("div", {
+    }, /* @__PURE__ */ import_react184.default.createElement("div", {
       className: "flex items-center"
-    }, /* @__PURE__ */ import_react180.default.createElement("div", {
+    }, /* @__PURE__ */ import_react184.default.createElement("div", {
       className: "aavatto-topbar-brand"
-    }, /* @__PURE__ */ import_react180.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react180.default.createElement(menu_default2, {
+    }, /* @__PURE__ */ import_react184.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react184.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "aavatto-topbar-menu",
       disabledOverflow: true
-    })), console.log(roles, "roles"), !isAdmin && /* @__PURE__ */ import_react180.default.createElement("div", {
+    })), console.log(roles, "roles"), !isAdmin && /* @__PURE__ */ import_react184.default.createElement("div", {
       className: "aavatto-topbar-right"
-    }, /* @__PURE__ */ import_react180.default.createElement(dropdown_default3, {
+    }, /* @__PURE__ */ import_react184.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight",
       arrow: true
-    }, /* @__PURE__ */ import_react180.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react184.default.createElement(space_default, {
       className: "aavatto-user-profile"
-    }, /* @__PURE__ */ import_react180.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react184.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react180.default.createElement(UserOutlined_default2, null),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react184.default.createElement(UserOutlined_default2, null),
       className: "bg-zinc-100 text-zinc-900"
-    }), /* @__PURE__ */ import_react180.default.createElement("span", {
+    }), /* @__PURE__ */ import_react184.default.createElement("span", {
       className: "user-name-text text-zinc-900"
-    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react180.default.createElement(Content3, {
+    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react184.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react180.default.createElement("div", {
+    }, /* @__PURE__ */ import_react184.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -92471,7 +92498,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react181.default.createElement(UserProvider, null, /* @__PURE__ */ import_react181.default.createElement(App, null))
+        /* @__PURE__ */ import_react185.default.createElement(UserProvider, null, /* @__PURE__ */ import_react185.default.createElement(App, null))
       );
       this.$temple_donation = root;
     }
@@ -92525,4 +92552,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.E3J6THDQ.js.map
+//# sourceMappingURL=temple_donation.bundle.RWD7TWO2.js.map

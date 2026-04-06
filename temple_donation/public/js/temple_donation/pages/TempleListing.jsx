@@ -1,7 +1,7 @@
 import React from "react";
 import ListingPage from "./ListingPage";
 import { DOCTYPE_TEMPLE } from "../config/constants";
-import { templeColumns } from "../config/tableConfig";
+import { templeColumns } from "../tabelcolumn/templeTable";
 
 const TempleListing = () => {
     return (

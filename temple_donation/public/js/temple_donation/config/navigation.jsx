@@ -33,7 +33,7 @@ import OpeningBalance from "../modules/Ledger/OpeningBalance";
 
 import CommonForm from "../components/common/CommonForm";
 import CommonView from "../components/common/CommonView";
-import { donorColumns, templeColumns, donationColumns, donationTypeColumns } from "./tableConfig";
+
 
 /**
  * Centralized navigation configuration.

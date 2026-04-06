@@ -1,7 +1,7 @@
 import React from "react";
 import ListingPage from "../../pages/ListingPage";
 import { DOCTYPE_DONATION } from "../../config/constants";
-import { donationColumns } from "../../config/tableConfig";
+import { donationColumns } from "../../tabelcolumn/donationTable";
 
 const DonationList = () => {
     return (
