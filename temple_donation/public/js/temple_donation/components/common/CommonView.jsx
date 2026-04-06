@@ -57,29 +57,29 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-6">
+        <div className="max-w-6xl mx-auto py-6">
             <PageHeader
-                title={`View ${config?.title || doctype}`}
-                showBack={true}
                 onBack={onBack}
+                subtitle={`Operational View / ${doctype}`}
+                title={`${config?.title || doctype} Details`}
                 extra={
-                    <Space size="middle">
+                    <>
                         <Button
                             icon={<PrinterOutlined />}
                             onClick={handlePrint}
-                            className="h-11 px-6 font-medium"
+                            className="h-10 px-6 font-bold border-zinc-200 text-zinc-600 hover:text-black rounded-xl"
                         >
-                            Print Details
+                            Print Receipt
                         </Button>
                         <Button
                             type="primary"
                             icon={<EditOutlined />}
                             onClick={() => onEdit && onEdit(doc)}
-                            className="h-11 px-6 font-semibold shadow-lg shadow-indigo-500/20"
+                            className="h-10 px-8 font-black bg-black border-none shadow-md rounded-xl shadow-zinc-200"
                         >
-                            Edit Information
+                            Modify Record
                         </Button>
-                    </Space>
+                    </>
                 }
             />
 

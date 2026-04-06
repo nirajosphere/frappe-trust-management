@@ -24,6 +24,7 @@ import TempleForm from "../modules/Temple/TempleForm";
 
 import DonationList from "../modules/Donation/DonationList";
 import DonationView from "../modules/Donation/DonationView";
+import DonationForm from "../modules/Donation/DonationForm";
 
 import DonationTypeList from "../modules/DonationType/DonationTypeList";
 import DonationTypeView from "../modules/DonationType/DonationTypeView";
@@ -31,7 +32,6 @@ import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
 
-import CommonForm from "../components/common/CommonForm";
 import CommonView from "../components/common/CommonView";
 
 
@@ -172,8 +172,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         switch (targetDoctype) {
             case DOCTYPE_DONOR: return <DonorForm {...formProps} />;
             case DOCTYPE_TEMPLE: return <TempleForm {...formProps} />;
+            case DOCTYPE_DONATION: return <DonationForm {...formProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeForm {...formProps} />;
-            default: return <CommonForm doctype={targetDoctype} {...formProps} />;
+            default: return null;
         }
     }
 
