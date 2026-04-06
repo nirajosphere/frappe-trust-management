@@ -19,30 +19,27 @@ const PageHeader = ({
     extra
 }) => {
     return (
-        <div
-            className="aavatto-page-header"
-            style={{
-                // padding: '0 24px', 
-                marginBottom: '24px',
-                background: 'transparent'
-            }}
-        >
-            <Row justify="space-between" align="middle" gutter={[16, 16]}>
+        <div className="mb-10 animate-fadeIn">
+            <Row justify="space-between" align="middle" gutter={[24, 24]}>
                 <Col flex="auto">
-                    <Space size="middle" align="start">
+                    <Space size="large" align="start">
                         {showBack && (
                             <Button
                                 icon={<ArrowLeftOutlined />}
                                 onClick={onBack}
                                 shape="circle"
-                                style={{ marginTop: '4px' }}
+                                className="h-10 w-10 flex items-center justify-center shadow-md border-none bg-white text-zinc-900 hover:scale-110 transition-transform mt-1"
                             />
                         )}
                         <div>
-                            <Title level={2} style={{ margin: 0, fontWeight: 800, letterSpacing: '-0.025em' }}>
+                            <Title level={2} className="!m-0 font-black tracking-tight text-zinc-900 lg:text-3xl">
                                 {title}
                             </Title>
-                            {description && <Text type="secondary">{description}</Text>}
+                            {description && (
+                                <Text className="text-zinc-500 font-medium text-base mt-2 block italic">
+                                    {description}
+                                </Text>
+                            )}
                         </div>
                     </Space>
                 </Col>
@@ -52,9 +49,9 @@ const PageHeader = ({
                             <Button
                                 icon={<ExportOutlined />}
                                 onClick={onExport}
-                                style={{ height: '40px', borderRadius: '8px', fontWeight: 500 }}
+                                className="h-11 px-6 rounded-xl font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
                             >
-                                Export
+                                Export Data
                             </Button>
                         )}
                         {onAdd && (
@@ -62,12 +59,7 @@ const PageHeader = ({
                                 type="primary"
                                 icon={<PlusOutlined />}
                                 onClick={onAdd}
-                                style={{
-                                    height: '40px',
-                                    borderRadius: '8px',
-                                    fontWeight: 600,
-                                    boxShadow: '0 4px 6px -1px rgb(79 70 229 / 0.2)'
-                                }}
+                                className="h-11 px-8 rounded-xl font-bold bg-black hover:bg-zinc-800 border-none shadow-lg shadow-zinc-900/10 flex items-center gap-2"
                             >
                                 {addLabel}
                             </Button>
@@ -76,8 +68,10 @@ const PageHeader = ({
                     </Space>
                 </Col>
             </Row>
+
         </div>
     );
 };
+
 
 export default PageHeader;

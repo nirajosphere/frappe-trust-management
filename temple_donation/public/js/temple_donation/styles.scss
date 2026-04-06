@@ -1,25 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* 
- * Temple Donation – Custom Page Styles (SCSS)
+ * Temple Donation – Modern Monochrome Design System (SCSS)
+ * Strictly Scoped to prevent Frappe Desk conflicts
  * ──────────────────────────────────────────
  */
 
-[data-page-route="temple-donation"] {
-  --topbar-height: 64px;
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
-  --bg-color: #f9fafb;
-  --card-bg: #ffffff;
-  --text-main: #111827;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
+.temple-donation-app {
+  /* Tailwind Utility & Component Scope */
+  @tailwind components;
+  @tailwind utilities;
+
+  /* Theme Variables */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  --primary-color: #18181b;
+  --primary-hover: #000000;
+  --primary-dark: #09090b;
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #18181b;
+  --text-muted: #71717a;
+  --border-color: #e4e4e7;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --header-bg: #ffffff;
+  --topbar-height: 70px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  background-color: var(--bg-color);
+  /* Base Reset Overrides (Scoped) */
+  font-family: var(--font-primary);
+  background-color: var(--bg-main) !important;
   color: var(--text-main);
+  min-height: calc(100vh - var(--topbar-height));
+
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    font-family: var(--font-primary);
+  }
 
   .page-head {
     display: none !important;
@@ -27,70 +45,176 @@
 
   .layout-main-section {
     padding: 0 !important;
-    background-color: var(--bg-color) !important;
+    background-color: transparent !important;
   }
 
   .layout-side-section {
-    background: #fff !important;
+    background: var(--bg-card) !important;
     border-right: 1px solid var(--border-color) !important;
     padding: 0 !important;
   }
 
+  /* Navigation Bar Styles */
   .aavatto-topbar {
-    @apply flex items-center gap-0 sticky top-0 z-[200] bg-white border-b border-[#e5e7eb] px-7 shadow-sm;
+    @apply flex items-center justify-between sticky top-0 z-[200] border-b px-8 shadow-sm transition-all duration-300;
     height: var(--topbar-height) !important;
-    line-height: var(--topbar-height) !important;
+    background-color: var(--header-bg) !important;
+    border-color: var(--border-color) !important;
   }
 
   .aavatto-topbar-brand {
-    @apply flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-primary whitespace-nowrap mr-8 flex-shrink-0;
+    @apply flex items-center gap-3 text-xl font-bold tracking-tight whitespace-nowrap mr-10 flex-shrink-0;
+    color: var(--primary-color);
   }
 
   .aavatto-topbar-menu {
     @apply flex-1 border-none bg-transparent;
     line-height: var(--topbar-height) !important;
 
-    .ant-menu-item-selected,
-    .ant-menu-item-active {
-      color: var(--primary-color) !important;
-    }
+    .ant-menu-item {
+        @apply font-medium transition-all duration-200;
+        
+        &-selected, &-active {
+            color: var(--primary-color) !important;
+        }
 
-    .ant-menu-item::after {
-      border-bottom: none !important;
+        &::after {
+            border-bottom: 2px solid var(--primary-color) !important;
+        }
     }
   }
 
-  .aavatto-topbar-version {
-    @apply text-[11px] uppercase tracking-wider text-gray-500 ml-5 flex-shrink-0;
+  .aavatto-topbar-right {
+    @apply flex items-center gap-6;
+  }
+
+  .aavatto-user-profile {
+    @apply cursor-pointer p-1.5 rounded-xl hover:bg-zinc-50 transition-all;
+    
+    .user-name-text {
+        @apply font-semibold text-sm ml-2 hidden sm:inline-block text-zinc-900;
+    }
+  }
+
+  /* Component Layouts */
+  .aavatto-content-wrapper {
+    @apply max-w-[1440px] mx-auto px-6 py-8 animate-fadeIn;
   }
 
   .aavatto-card {
-    @apply bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 mb-6;
+    @apply p-6 rounded-[24px] border transition-all duration-300;
+    background-color: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-sm);
 
     &:hover {
-      @apply shadow-md -translate-y-0.5;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
   }
 
-  /* Custom utility classes or refined AntD overrides */
-  .donation-card {
-    @apply rounded-xl border border-gray-100 overflow-hidden;
+  /* Table & List Aesthetics */
+  .aavatto-premium-table {
+    .ant-table {
+      background: transparent !important;
+    }
+    .ant-table-thead > tr > th {
+      background: #fafafa !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      font-size: 11px !important;
+      letter-spacing: 0.05em !important;
+      color: var(--text-muted) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+      padding: 16px 20px !important;
+    }
+    .ant-table-tbody > tr > td {
+      padding: 18px 20px !important;
+      border-bottom: 1px solid var(--border-color) !important;
+      transition: all 0.2s ease;
+    }
+    .ant-table-tbody > tr:hover > td {
+      background: rgba(0, 0, 0, 0.01) !important;
+    }
+  }
+
+  /* Modern Scrollbar (Scoped) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 rounded-full hover:bg-zinc-400;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fadeIn {
+      animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Donation Receipt Print Styles */
+  .donation-receipt-container {
+    padding: 60px;
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    line-height: 1.6;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 0;
+
+    .receipt-mantra {
+      text-align: center;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .receipt-no-box {
+      border: 1px solid #000;
+      padding: 8px 30px;
+      display: inline-block;
+      margin: 0 auto 30px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .temple-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .signature-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 40px;
+    }
+  }
+
+  @media print {
+    body * { visibility: hidden; }
+    .print-only, .print-only * { visibility: visible; }
+    .print-only { 
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        width: 100% !important; 
+        padding: 0 !important;
+    }
+    .no-print { display: none !important; }
   }
 }
 
-/* Animations */
-@keyframes templePageFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-#react-root {
-  animation: templePageFadeIn 0.4s ease-out;
-}

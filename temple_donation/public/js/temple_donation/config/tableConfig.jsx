@@ -151,7 +151,8 @@ export const donationTypeColumns = [
         title: 'Image',
         dataIndex: 'donation_image',
         key: 'donation_image',
-        render: (img) => img ? <img src={img} alt="Donation" style={{ width: 40, height: 40, borderRadius: 4, objectFit: 'cover' }} /> : '-'
+        render: (img) => img ? <img src={img} alt="Donation" className="w-10 h-10 rounded-lg object-cover shadow-sm border border-stone-100" /> : '-'
     },
 ];
+
 

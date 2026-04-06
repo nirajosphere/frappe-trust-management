@@ -120,23 +120,30 @@ const Donation = () => {
 
     // --- Render ---
     return (
-        <div className="donation-page">
-            <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Space>
-                    <HeartFilled style={{ fontSize: '24px', color: '#4f46e5' }} />
-                    <Title level={2} style={{ margin: 0, fontWeight: 800, letterSpacing: '-0.5px' }}>
-                        Temple Donation POS
-                    </Title>
+        <div className="donation-page py-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4 animate-fadeIn">
+                <Space size="large">
+                    <div className="h-14 w-14 bg-zinc-900 rounded-2xl flex items-center justify-center shadow-xl shadow-zinc-900/10 rotate-3 hover:rotate-0 transition-transform cursor-pointer">
+                        <HeartFilled className="text-2xl text-white" />
+                    </div>
+                    <div>
+                         <Text className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-400 block mb-1">
+                            Operational POS
+                        </Text>
+                        <Title level={1} className="!m-0 font-black tracking-tight text-zinc-900 !text-3xl">
+                            Temple Donation
+                        </Title>
+                    </div>
                 </Space>
                 <Button 
                     icon={<RedoOutlined />} 
                     onClick={handleReset}
-                    type="text"
-                    className="hover:text-primary transition-colors"
+                    className="h-10 px-6 rounded-xl font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
                 >
-                    Reset Form
+                    Clear Transaction
                 </Button>
             </div>
+
 
             <Row gutter={[24, 24]}>
                 {/* Left Side: Donor Search, Temple Selection, and Grid */}

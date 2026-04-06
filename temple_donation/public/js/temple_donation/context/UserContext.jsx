@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
                 // In Frappe, session info is usually available globally
                 const currentUser = frappe.session.user;
                 const userRoles = frappe.user_roles || [];
-                
+
                 setUser({
                     name: frappe.session.user_fullname || currentUser,
                     email: currentUser,
@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
 
                 // Logic to hide/show Frappe Header
                 // Check if user has any of the specific roles
-                const hasCustomRole = userRoles.some(role => 
+                const hasCustomRole = userRoles.some(role =>
                     ['Super Admin', 'Temple Admin', 'Cashier'].includes(role)
                 );
 
@@ -42,7 +42,7 @@ export const UserProvider = ({ children }) => {
                         container.style.paddingTop = '0px';
                         container.style.marginLeft = '0px';
                     }
-                    if(wsHeader) wsHeader.style.display = 'none';
+                    if (wsHeader) wsHeader.style.display = 'none';
                 } else {
                     // Explicitly show Frappe Header for Administrators
                     const navbar = document.querySelector('.navbar');
@@ -55,6 +55,7 @@ export const UserProvider = ({ children }) => {
         };
 
         fetchUserData();
+        console.log("UserContext.jsx: fetchUserData called in side effect");
     }, []);
 
     const logout = () => {
@@ -62,6 +63,8 @@ export const UserProvider = ({ children }) => {
             frappe.app.logout();
         }
     };
+
+    console.log("user context run")
 
     const value = {
         user,

@@ -78,7 +78,7 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
 
     if (error) {
         return (
-            <div style={{ padding: "24px" }}>
+            <div className="p-6">
                 <Alert
                     message="Connection Error"
                     description={error.message || `Failed to fetch ${doctype} list.`}
@@ -90,7 +90,8 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
     }
 
     return (
-        <div style={{ padding: "24px 0px" }}>
+        <div className="py-6 space-y-6">
+
             <PageHeader 
                 title={title} 
                 description={description} 

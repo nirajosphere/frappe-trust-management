@@ -53,8 +53,8 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
         <Card 
             title={
                 <Space>
-                    <UserOutlined className="text-primary" />
-                    <span>Donor Information</span>
+                    <UserOutlined className="text-zinc-900" />
+                    <span className="font-bold tracking-tight text-zinc-800">Donor Information</span>
                 </Space>
             } 
             size="small" 
@@ -63,15 +63,15 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
             <Form layout="vertical">
                 <Row gutter={24} align="bottom">
                     <Col xs={24} sm={16} md={18}>
-                        <Form.Item label={<Text strong className="text-gray-600">Mobile Number Search</Text>} className="mb-0">
+                        <Form.Item label={<Text strong className="text-zinc-500 ml-1">Mobile Number Search</Text>} className="mb-0">
                             <Input
                                 placeholder="Enter 10-digit mobile number"
-                                prefix={<SearchOutlined className="text-gray-400" />}
+                                prefix={<SearchOutlined className="text-zinc-400" />}
                                 value={mobileNumber}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 maxLength={10}
                                 allowClear
-                                className="h-12 rounded-xl text-lg font-medium border-gray-200 hover:border-primary focus:border-primary"
+                                className="h-12 rounded-xl text-lg font-medium border-zinc-200 bg-zinc-50/30 focus:bg-white hover:border-black focus:border-black transition-all"
                             />
                         </Form.Item>
                     </Col>
@@ -82,7 +82,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                 icon={<UserAddOutlined />}
                                 onClick={() => setIsModalOpen(true)}
                                 block
-                                className="h-12 rounded-xl bg-primary hover:bg-primary-hover border-none font-bold shadow-sm"
+                                className="h-12 rounded-xl bg-black hover:bg-zinc-800 border-none font-bold shadow-lg shadow-zinc-900/10"
                             >
                                 Add Donor
                             </Button>
@@ -91,23 +91,23 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                 </Row>
 
                 {selectedDonor && (
-                    <div className="mt-6">
-                        <div className="bg-indigo-50/50 rounded-2xl p-6 border border-indigo-100 flex flex-col md:flex-row gap-6 items-center">
-                            <div className="bg-white p-4 rounded-full shadow-sm border border-indigo-100 relative">
-                                <UserOutlined className="text-4xl text-primary" />
-                                <CheckCircleFilled className="text-green-500 absolute bottom-0 right-0 text-xl bg-white rounded-full" />
+                    <div className="mt-8 animate-fadeIn">
+                        <div className="bg-zinc-50/50 rounded-3xl p-6 border border-zinc-200/50 flex flex-col md:flex-row gap-6 items-center shadow-inner">
+                            <div className="bg-white p-5 rounded-2xl shadow-sm border border-zinc-100 relative">
+                                <UserOutlined className="text-4xl text-zinc-900" />
+                                <CheckCircleFilled className="text-zinc-900 absolute -bottom-1 -right-1 text-2xl bg-white rounded-full shadow-md" />
                             </div>
                             
                             <div className="flex-1 text-center md:text-left">
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div>
-                                        <div className="flex items-center gap-2 justify-center md:justify-start">
-                                            <Title level={4} className="!m-0 !font-bold">{selectedDonor.donor_name}</Title>
-                                            <Badge status="processing" text="Verified Donor" className="text-xs font-semibold" />
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                    <div className="space-y-1">
+                                        <div className="flex items-center gap-3 justify-center md:justify-start">
+                                            <Title level={4} className="!m-0 !font-black !text-zinc-900 tracking-tight">{selectedDonor.donor_name}</Title>
+                                            <Badge status="processing" color="black" text="Verified" className="text-[10px] font-black uppercase tracking-widest text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full" />
                                         </div>
-                                        <div className="flex flex-wrap gap-4 mt-2 justify-center md:justify-start text-gray-500">
-                                            <Space size="small"><Text className="text-gray-500 text-xs">📱 {selectedDonor.mobile_number}</Text></Space>
-                                            {selectedDonor.email && <Space size="small"><Text className="text-gray-500 text-xs">✉️ {selectedDonor.email}</Text></Space>}
+                                        <div className="flex flex-wrap gap-5 mt-3 justify-center md:justify-start text-zinc-500">
+                                            <Space size={6} className="text-xs font-bold text-zinc-500">📱 {selectedDonor.mobile_number}</Space>
+                                            {selectedDonor.email && <Space size={6} className="text-xs font-bold text-zinc-500">✉️ {selectedDonor.email}</Space>}
                                         </div>
                                     </div>
                                     
@@ -120,15 +120,15 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                                             onDonorSelect(null);
                                             setMobileNumber("");
                                         }}
-                                        className="rounded-lg font-semibold hover:bg-red-50"
+                                        className="rounded-xl font-bold border-zinc-200 text-zinc-500 hover:bg-zinc-50 bg-white"
                                     >
-                                        Change Donor
+                                        Change
                                     </Button>
                                 </div>
                                 
                                 {selectedDonor.address && (
-                                    <div className="mt-4 pt-4 border-t border-indigo-100 text-center md:text-left">
-                                        <Text type="secondary" className="text-sm">📍 {selectedDonor.address}</Text>
+                                    <div className="mt-5 pt-5 border-t border-zinc-100 text-center md:text-left">
+                                        <Text className="text-zinc-500 text-sm italic font-medium">📍 {selectedDonor.address}</Text>
                                     </div>
                                 )}
                             </div>
@@ -136,6 +136,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
                     </div>
                 )}
             </Form>
+
 
             <DonorModal
                 open={isModalOpen}

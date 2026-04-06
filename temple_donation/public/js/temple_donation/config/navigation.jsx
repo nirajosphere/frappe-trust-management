@@ -100,12 +100,22 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
 
     if (!hasPermission) {
         return (
-            <div style={{ padding: '40px', textAlign: 'center' }}>
-                <h3>Access Denied</h3>
-                <p>You do not have permission to view this module.</p>
+            <div className="p-16 text-center bg-stone-50/50 rounded-[40px] border border-dashed border-stone-200 mt-12 animate-fadeIn">
+                <div className="text-stone-300 mb-6">
+                     <UserOutlined className="text-6xl" />
+                </div>
+                <h3 className="text-2xl font-black text-stone-800 mb-2 tracking-tight">Access Restricted</h3>
+                <p className="text-stone-400 font-medium">You do not have the required permissions to access this specific module.</p>
+                <button 
+                  onClick={() => navigate('dashboard')}
+                  className="mt-8 px-8 py-3 bg-amber-600 text-white font-bold rounded-xl shadow-lg shadow-amber-600/20 hover:bg-amber-500 transition-all"
+                >
+                  Return to Dashboard
+                </button>
             </div>
         );
     }
+
 
     // Helper for route handling
     const navigate = (key, sub, id) => {

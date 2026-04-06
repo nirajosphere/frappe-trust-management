@@ -33,47 +33,43 @@ const CommonTable = ({
         title: 'Actions',
         key: 'actions',
         fixed: 'right',
-        width: 220,
+        width: 180,
         render: (_, record) => (
-            <Space size="small">
+            <Space size="middle">
                 {onView && (
                     <Button
-                        type="default"
-                        shape="circle"
-                        icon={<EyeOutlined />}
+                        type="text"
+                        icon={<EyeOutlined className="text-orange-500" />}
                         onClick={() => onView(record)}
-                        size="small"
+                        className="hover:bg-orange-50 rounded-lg"
                         title="View Details"
                     />
                 )}
                 {onPrint && (
                     <Button
-                        type="default"
-                        shape="circle"
-                        icon={<PrinterOutlined />}
+                        type="text"
+                        icon={<PrinterOutlined className="text-amber-500" />}
                         onClick={() => onPrint(record)}
-                        size="small"
+                        className="hover:bg-amber-50 rounded-lg"
                         title="Print"
                     />
                 )}
                 {onEdit && (
                     <Button
-                        type="primary"
-                        ghost
-                        shape="circle"
-                        icon={<EditOutlined />}
+                        type="text"
+                        icon={<EditOutlined className="text-amber-700" />}
                         onClick={() => onEdit(record)}
-                        size="small"
+                        className="hover:bg-amber-100/50 rounded-lg"
                         title="Edit"
                     />
                 )}
                 {onDelete && (
                     <Button
+                        type="text"
                         danger
-                        shape="circle"
                         icon={<DeleteOutlined />}
                         onClick={() => onDelete(record)}
-                        size="small"
+                        className="hover:bg-red-50 rounded-lg"
                         title="Delete"
                     />
                 )}
@@ -81,16 +77,16 @@ const CommonTable = ({
         )
     };
 
-    const finalColumns = onView || onPrint || onEdit || onDelete ? [...columns, actionColumn] : columns;
+    const finalColumns = (onView || onPrint || onEdit || onDelete) ? [...columns, actionColumn] : columns;
 
     return (
-        <Card bordered={false} className="shadow-sm listing-table-card" style={{ borderRadius: '16px' }}>
-            <div style={{ marginBottom: '24px' }}>
+        <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100">
+            <div className="p-6 border-b border-orange-50 bg-white/50 backdrop-blur-sm">
                 <Input
                     placeholder={searchPlaceholder}
-                    prefix={<SearchOutlined style={{ color: '#bfbfbf' }} />}
+                    prefix={<SearchOutlined className="text-stone-400 mr-2" />}
                     onChange={(e) => setSearchText(e.target.value)}
-                    style={{ width: '100%', maxWidth: '400px', height: '45px', borderRadius: '10px' }}
+                    className="max-w-md h-12 rounded-xl border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium"
                     allowClear
                 />
             </div>
@@ -103,8 +99,8 @@ const CommonTable = ({
                 pagination={{
                     pageSize: 10,
                     showSizeChanger: true,
-                    showTotal: (total) => `Total ${total} entries`,
-                    style: { marginTop: '24px' }
+                    showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-amber-600 font-bold">{total}</span> records</span>,
+                    className: "!m-8"
                 }}
                 className="aavatto-premium-table"
                 scroll={{ x: 'max-content' }}
@@ -112,5 +108,7 @@ const CommonTable = ({
         </Card>
     );
 };
+
+
 
 export default CommonTable;

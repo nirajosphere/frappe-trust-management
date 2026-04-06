@@ -15,6 +15,9 @@ const App = () => {
     const [currentRoute, setCurrentRoute] = useState("dashboard");
     const { user, roles, logout, isAdmin } = useUser();
 
+    console.log(isAdmin, "isAdmin");
+    console.log("isAdmin");
+
     useEffect(() => {
         const handleRoute = () => {
             if (typeof frappe !== "undefined" && frappe.get_route) {
@@ -70,55 +73,59 @@ const App = () => {
 
     return (
         <ConfigProvider theme={themeConfig}>
-            <Layout style={{ minHeight: "100vh", background: "#f9fafb" }}>
-                {/* Custom Top Navigation Bar - Now shown for ALL roles */}
-                <Header className="aavatto-topbar">
-                    {/* Brand / Logo */}
-                    <div className="aavatto-topbar-brand">
-                        <DashboardOutlined style={{ fontSize: "22px", color: "#4f46e5" }} />
-                        <span>Temple Donation</span>
-                    </div>
+            <div className="temple-donation-app">
+                <Layout className="min-h-screen">
+                    {/* Custom Top Navigation Bar */}
+                    <Header className="aavatto-topbar">
+                        <div className="flex items-center">
+                            {/* Brand / Logo */}
+                            <div className="aavatto-topbar-brand">
+                                {/* <DashboardOutlined className="text-2xl" /> */}
+                                <span>Temple Donation</span>
+                            </div>
 
-                    {/* Horizontal Menu - Filtered by role */}
-                    <Menu
-                        mode="horizontal"
-                        selectedKeys={[currentRoute.split('/')[0]]}
-                        items={menuItems}
-                        onClick={handleMenuClick}
-                        className="aavatto-topbar-menu"
-                        disabledOverflow={true}
-                    />
+                            {/* Horizontal Menu - Filtered by role */}
+                            <Menu
+                                mode="horizontal"
+                                selectedKeys={[currentRoute.split('/')[0]]}
+                                items={menuItems}
+                                onClick={handleMenuClick}
+                                className="aavatto-topbar-menu"
+                                disabledOverflow={true}
+                            />
+                        </div>
 
-                    {/* User Profile / Version section */}
-                    <div className="aavatto-topbar-right">
-                         <div className="aavatto-topbar-version" style={{ marginRight: '16px' }}>v1.0.0</div>
-                         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow>
-                            <Space className="aavatto-user-profile">
-                                <Avatar 
-                                    src={user?.image} 
-                                    icon={!user?.image && <UserOutlined />} 
-                                    style={{ backgroundColor: '#87d068' }}
-                                />
-                                <span className="user-name-text">{user?.name}</span>
-                            </Space>
-                         </Dropdown>
-                    </div>
-                </Header>
+                        {/* Right Section */}
+                        {console.log(roles, "roles")}
+                        {
+                            !isAdmin && (
+                                <div className="aavatto-topbar-right">
+                                    <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow>
+                                        <Space className="aavatto-user-profile">
+                                            <Avatar
+                                                src={user?.image}
+                                                icon={!user?.image && <UserOutlined />}
+                                                className="bg-zinc-100 text-zinc-900"
+                                            />
+                                            <span className="user-name-text text-zinc-900">{user?.name}</span>
+                                        </Space>
+                                    </Dropdown>
+                                </div>)
+                        }
+                    </Header>
 
-                {/* Page Content */}
-                <Content style={{ 
-                    padding: "24px 0px", 
-                    background: "#f9fafb", 
-                    minHeight: "calc(100vh - 64px)" 
-                }}>
-                    <div className="aavatto-content-wrapper">
-                        {getComponentForRoute(currentRoute, roles)}
-                    </div>
-                </Content>
-            </Layout>
+                    {/* Page Content */}
+                    <Content className="bg-transparent py-8">
+                        <div className="aavatto-content-wrapper">
+                            {getComponentForRoute(currentRoute, roles)}
+                        </div>
+                    </Content>
+                </Layout>
+            </div>
         </ConfigProvider>
     );
 };
+
 
 export default App;
 export { App };

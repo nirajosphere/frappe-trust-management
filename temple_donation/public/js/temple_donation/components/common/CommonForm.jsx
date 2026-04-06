@@ -109,7 +109,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
     if (isEdit && fetching) {
         return (
-            <div style={{ textAlign: 'center', padding: '100px' }}>
+            <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
                 <Spin size="large" tip={`Loading ${config.title} data...`} />
             </div>
         );
@@ -117,7 +117,7 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
     if (isEdit && fetchError) {
         return (
-            <div style={{ padding: "24px" }}>
+            <div className="p-8">
                 <Alert
                     message="Error Loading Data"
                     description={fetchError.message || `Failed to fetch ${config.title} details.`}
@@ -130,161 +130,170 @@ const CommonForm = ({ doctype, id, onBack }) => {
     }
 
     return (
-        <div style={{ padding: "24px 0", maxWidth: "1200px", margin: "0 auto" }}>
-            <Card bordered={false} className="shadow-sm" style={{ borderRadius: '16px', overflow: 'hidden' }}>
-                <Row align="middle" justify="space-between" style={{ marginBottom: "32px" }}>
-                    <Col>
-                        <Space size="middle">
-                            <Button
-                                type="default"
-                                shape="circle"
-                                icon={<ArrowLeftOutlined />}
-                                onClick={onBack}
-                            />
-                            <div>
-                                <Text type="secondary" style={{ display: 'block', marginBottom: -4 }}>
-                                    {config.title} Management
-                                </Text>
-                                <Title level={2} style={{ margin: 0, fontWeight: 800 }}>
-                                    {isEdit ? `Edit ${config.title}` : `Add New ${config.title}`}
-                                </Title>
-                            </div>
-                        </Space>
-                    </Col>
-                </Row>
+        <div className="max-w-6xl mx-auto space-y-8 py-6 mb-12">
+             <div className="flex items-center justify-between mb-8 animate-fadeIn">
+                <Space size="large">
+                    <Button
+                        icon={<ArrowLeftOutlined />}
+                        onClick={onBack}
+                        shape="circle"
+                        className="h-10 w-10 flex items-center justify-center shadow-md border-none bg-white dark:bg-slate-800 text-indigo-500 hover:scale-110 transition-transform"
+                    />
+                    <div>
+                        <Text className="text-[11px] font-bold uppercase tracking-widest text-stone-400 block mb-1">
+                            {config.title} Management
+                        </Text>
+                        <Title level={2} className="!m-0 font-black tracking-tight text-stone-800">
+                            {isEdit ? `Edit ${config.title}` : `Add New ${config.title}`}
+                        </Title>
+                    </div>
+                </Space>
+            </div>
 
-                <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={handleSave}
-                    scrollToFirstError
-                    requiredMark="optional"
-                >
-                    <Row gutter={[24, 0]}>
-                        {config.fields.map((field) => (
-                            <Col xs={24} sm={field.type === 'textarea' ? 24 : 12} lg={field.type === 'textarea' ? 24 : 8} key={field.name}>
-                                <Form.Item
-                                    name={field.name}
-                                    label={<Text strong>{field.label}</Text>}
-                                    rules={[
-                                        { required: field.required, message: field.message },
-                                        field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
-                                    ].filter(Boolean)}
-                                >
-                                    {field.type === 'textarea' ? (
-                                        <Input.TextArea
-                                            placeholder={field.placeholder}
-                                            rows={field.rows || 3}
-                                            disabled={field.readOnly || field.disabled}
-                                            style={{ borderRadius: '8px' }}
-                                        />
-                                    ) : field.type === 'select' ? (
-                                        <Select 
-                                            placeholder={field.placeholder}
-                                            disabled={field.readOnly || field.disabled}
-                                            style={{ width: '100%', height: '40px', borderRadius: '8px' }}
-                                        >
-                                            {field.options?.map(opt => (
-                                                <Select.Option key={opt} value={opt}>{opt}</Select.Option>
-                                            ))}
-                                        </Select>
-                                    ) : field.type === 'image' || field.type === 'file' ? (
-                                        <Upload
-                                            maxCount={1}
-                                            beforeUpload={() => false}
-                                            listType={field.type === 'image' ? "picture" : "text"}
-                                        >
-                                            <Button icon={<UploadOutlined />} style={{ borderRadius: '8px', width: '100%', height: '40px' }}>
-                                                Choose File
-                                            </Button>
-                                        </Upload>
-                                    ) : (
-                                        <Input
-                                            placeholder={field.placeholder}
-                                            disabled={field.readOnly || field.disabled}
-                                            style={{ borderRadius: '8px', height: '40px' }}
-                                        />
-                                    )}
-                                </Form.Item>
-                            </Col>
-                        ))}
-                    </Row>
-
-                    {/* Donation Types Assignment Logic for Temple Doctype */}
-                    {doctype === DOCTYPE_TEMPLE && (
-                        <div style={{ marginTop: '24px' }}>
-                            <Divider orientation="left">
-                                <Title level={4} style={{ margin: 0, color: '#4f46e5' }}>Donation Types</Title>
-                            </Divider>
-
-                            <Card style={{ background: '#f8fafc', border: '1px dashed #e2e8f0', borderRadius: '12px' }} bodyStyle={{ padding: '16px' }}>
-                                <List
-                                    loading={loadingDTypes}
-                                    grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 3 }}
-                                    dataSource={allDonationTypes}
-                                    renderItem={item => (
-                                        <List.Item>
-                                            <Card
-                                                size="small"
-                                                hoverable
-                                                style={{
-                                                    borderRadius: '10px',
-                                                    border: selectedDonationTypes.includes(item.name) ? '1.5px solid #4f46e5' : '1px solid #e2e8f0'
-                                                }}
-                                                bodyStyle={{ padding: '12px' }}
-                                                onClick={() => toggleDonationType(item.name)}
+            <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-2xl shadow-amber-900/5">
+                <div className="p-10">
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        onFinish={handleSave}
+                        scrollToFirstError
+                        requiredMark="optional"
+                        className="premium-form"
+                    >
+                        <Row gutter={[32, 0]}>
+                            {config.fields.map((field) => (
+                                <Col xs={24} sm={field.type === 'textarea' ? 24 : 12} lg={field.type === 'textarea' ? 24 : 8} key={field.name}>
+                                    <Form.Item
+                                        name={field.name}
+                                        label={<Text className="font-bold text-stone-700 ml-1">{field.label}</Text>}
+                                        rules={[
+                                            { required: field.required, message: field.message },
+                                            field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
+                                        ].filter(Boolean)}
+                                    >
+                                        {field.type === 'textarea' ? (
+                                            <Input.TextArea
+                                                placeholder={field.placeholder}
+                                                rows={field.rows || 4}
+                                                disabled={field.readOnly || field.disabled}
+                                                className="rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all p-4"
+                                            />
+                                        ) : field.type === 'select' ? (
+                                            <Select 
+                                                placeholder={field.placeholder}
+                                                disabled={field.readOnly || field.disabled}
+                                                className="h-12 w-full premium-select"
                                             >
-                                                <Row align="middle" justify="space-between" gutter={12}>
-                                                    <Col flex="48px">
-                                                        <Avatar
-                                                            src={item.donation_image}
-                                                            shape="square"
-                                                            size={40}
-                                                            style={{ border: '1px solid #f1f5f9' }}
-                                                        />
-                                                    </Col>
-                                                    <Col flex="auto">
-                                                        <Text strong>{item.donation_type}</Text>
-                                                    </Col>
-                                                    <Col>
-                                                        <Switch
-                                                            checked={selectedDonationTypes.includes(item.name)}
-                                                            onChange={() => toggleDonationType(item.name)}
-                                                            size="small"
-                                                        />
-                                                    </Col>
-                                                </Row>
-                                            </Card>
-                                        </List.Item>
-                                    )}
-                                />
-                            </Card>
-                        </div>
-                    )}
+                                                {field.options?.map(opt => (
+                                                    <Select.Option key={opt} value={opt}>{opt}</Select.Option>
+                                                ))}
+                                            </Select>
+                                        ) : field.type === 'image' || field.type === 'file' ? (
+                                            <Upload
+                                                maxCount={1}
+                                                beforeUpload={() => false}
+                                                listType={field.type === 'image' ? "picture" : "text"}
+                                                className="w-full"
+                                            >
+                                                <Button icon={<UploadOutlined />} className="h-12 w-full rounded-xl border-dashed border-stone-300 bg-stone-50/50 text-stone-500 hover:border-amber-500 hover:text-amber-500 font-medium">
+                                                    Click to {field.type === 'image' ? 'upload image' : 'attach file'}
+                                                </Button>
+                                            </Upload>
+                                        ) : (
+                                            <Input
+                                                placeholder={field.placeholder}
+                                                disabled={field.readOnly || field.disabled}
+                                                className="h-12 rounded-xl border-stone-200 bg-stone-50/50 focus:bg-white transition-all px-4"
+                                            />
+                                        )}
+                                    </Form.Item>
+                                </Col>
+                            ))}
+                        </Row>
 
-                    <Divider />
+                        {/* Donation Types Assignment Logic for Temple Doctype */}
+                        {doctype === DOCTYPE_TEMPLE && (
+                            <div className="mt-10">
+                                <Divider orientation="left" className="!mb-8">
+                                    <Title level={4} className="!m-0 text-amber-700 font-bold tracking-tight">Donation Types Assignment</Title>
+                                </Divider>
 
-                    <div style={{ textAlign: 'right' }}>
-                        <Space size="middle">
-                            <Button onClick={onBack} size="large" style={{ borderRadius: '8px', minWidth: '100px' }}>
+                                <div className="p-8 rounded-3xl bg-stone-50/80 border border-stone-100">
+                                    <List
+                                        loading={loadingDTypes}
+                                        grid={{ gutter: 24, xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
+                                        dataSource={allDonationTypes}
+                                        renderItem={item => {
+                                            const isSelected = selectedDonationTypes.includes(item.name);
+                                            return (
+                                                <List.Item className="!mb-6">
+                                                    <div
+                                                        onClick={() => toggleDonationType(item.name)}
+                                                        className={`
+                                                            group relative overflow-hidden p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300 bg-white
+                                                            ${isSelected 
+                                                                ? 'border-amber-500 shadow-lg shadow-amber-500/10' 
+                                                                : 'border-transparent hover:border-stone-300 shadow-sm'}
+                                                        `}
+                                                    >
+                                                        {isSelected && (
+                                                            <div className="absolute top-2 right-2 z-10">
+                                                                <CheckCircleFilled className="text-amber-500 text-lg bg-white rounded-full" />
+                                                            </div>
+                                                        )}
+                                                        <Row align="middle" gutter={16}>
+                                                            <Col>
+                                                                <Avatar
+                                                                    src={item.donation_image}
+                                                                    shape="square"
+                                                                    size={52}
+                                                                    className="rounded-xl border border-stone-100"
+                                                                />
+                                                            </Col>
+                                                            <Col flex="auto">
+                                                                <Text className={`font-bold text-sm block transition-colors ${isSelected ? 'text-amber-700' : 'text-stone-700'}`}>
+                                                                    {item.donation_type}
+                                                                </Text>
+                                                                <Text className="text-[10px] text-stone-400 uppercase tracking-widest font-bold">
+                                                                    {isSelected ? 'Enabled' : 'Disabled'}
+                                                                </Text>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                </List.Item>
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        <Divider className="!my-10" />
+
+                        <div className="flex items-center justify-end gap-6">
+                            <Button 
+                                onClick={onBack} 
+                                className="h-12 px-10 rounded-xl font-bold border-stone-200 text-stone-500 hover:text-stone-700 hover:border-stone-400 transition-all"
+                            >
                                 Cancel
                             </Button>
                             <Button
                                 type="primary"
                                 htmlType="submit"
-                                size="large"
                                 loading={creating || updating || uploading}
-                                icon={<SaveOutlined />}
-                                style={{ borderRadius: '8px', minWidth: '160px', height: '45px', fontWeight: 600 }}
+                                icon={<SaveOutlined className="mr-1" />}
+                                className="h-12 px-12 rounded-xl font-black bg-amber-600 hover:bg-amber-500 border-none shadow-xl shadow-amber-500/30 flex items-center justify-center min-w-[200px]"
                             >
-                                {isEdit ? "Save Changes" : `Create ${config.title}`}
+                                {isEdit ? "Update Information" : "Create Record"}
                             </Button>
-                        </Space>
-                    </div>
-                </Form>
+                        </div>
+
+                    </Form>
+                </div>
             </Card>
         </div>
     );
 };
+
 
 export default CommonForm;

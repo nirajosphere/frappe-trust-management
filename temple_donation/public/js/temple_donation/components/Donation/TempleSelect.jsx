@@ -12,15 +12,15 @@ const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
         <Card 
             title={
                 <Space>
-                    <EnvironmentOutlined className="text-primary" />
-                    <span>Select Temple</span>
+                    <EnvironmentOutlined className="text-zinc-900" />
+                    <span className="font-bold tracking-tight text-zinc-800">Select Temple</span>
                 </Space>
             } 
             size="small" 
             className="aavatto-card mb-6"
         >
             <div className="flex flex-col gap-2">
-                <Text strong className="text-gray-600 block mb-1">Target Temple</Text>
+                <Text strong className="text-zinc-500 block mb-1">Target Temple</Text>
                 <Select
                     placeholder="Search and select a temple"
                     className="w-full h-12 rounded-xl"
@@ -38,9 +38,9 @@ const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
                     }))}
                 />
                 {temples?.length === 0 && !loading && (
-                    <div className="mt-2 p-3 bg-amber-50 border border-amber-100 rounded-lg">
-                        <Text type="warning" className="text-amber-700 font-medium select-none">
-                            ⚠️ No temples found in the system. Please add one in Frappe.
+                    <div className="mt-2 p-3 bg-zinc-50 border border-zinc-200 rounded-lg">
+                        <Text className="text-zinc-600 font-medium select-none">
+                            ℹ️ No temples found in the system. Please add one in Frappe.
                         </Text>
                     </div>
                 )}
