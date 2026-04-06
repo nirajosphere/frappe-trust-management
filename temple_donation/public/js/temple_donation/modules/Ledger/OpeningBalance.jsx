@@ -33,7 +33,7 @@ const OpeningBalance = () => {
             if (typeof frappe !== 'undefined') {
                 const response = await frappe.call({
                     method: 'temple_donation.api.reset_user_balance',
-                    args: { 
+                    args: {
                         user_name: userName,
                         amount: currentBalance
                     }
@@ -41,10 +41,10 @@ const OpeningBalance = () => {
                 if (response.message) {
                     message.success(`Successfully handed over ₹${currentBalance.toLocaleString()}`);
                     // Immediately update local state to 0 for this user
-                    setData(prev => prev.map(user => 
-                        user.user_name === userName 
-                        ? { ...user, opening_balance: 0 } 
-                        : user
+                    setData(prev => prev.map(user =>
+                        user.user_name === userName
+                            ? { ...user, opening_balance: 0 }
+                            : user
                     ));
                 }
             }
@@ -108,9 +108,9 @@ const OpeningBalance = () => {
                 title="User Opening Balance"
                 subtitle="Manage and Reset Hand-over Cash for each user."
                 extra={[
-                    <Button 
-                        key="refresh" 
-                        onClick={fetchData} 
+                    <Button
+                        key="refresh"
+                        onClick={fetchData}
                         loading={loading}
                         className="rounded-xl border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold"
                         icon={<SyncOutlined />}

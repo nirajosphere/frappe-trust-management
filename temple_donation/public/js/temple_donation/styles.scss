@@ -9,6 +9,11 @@
  * ──────────────────────────────────────────
  */
 
+/* Hide the standard Frappe page header to prevent double headers */
+.page-head {
+    display: none !important;
+}
+
 .temple-donation-app {
   /* Theme Variables */
   --font-primary: 'Inter', sans-serif;

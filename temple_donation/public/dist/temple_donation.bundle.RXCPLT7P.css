@@ -2,6 +2,9 @@
 @import "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
 
 /* ../temple_donation/temple_donation/public/js/temple_donation/styles.css */
+.page-head {
+  display: none !important;
+}
 .container {
   width: 100%;
 }
@@ -1475,4 +1478,4 @@
     color: rgb(203 213 225 / var(--tw-text-opacity, 1));
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.LBRSKBZE.css.map */
+/*# sourceMappingURL=temple_donation.bundle.RXCPLT7P.css.map */
