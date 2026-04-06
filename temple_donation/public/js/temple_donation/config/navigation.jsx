@@ -24,6 +24,7 @@ export const navigationItems = [
         icon: <DashboardOutlined />,
         label: "Dashboard",
         component: <Dashboard />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "donors",
@@ -39,6 +40,7 @@ export const navigationItems = [
                 fields={["name", "donor_name", "mobile_number", "address"]}
             />
         ),
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "temples",
@@ -54,6 +56,7 @@ export const navigationItems = [
                 fields={["name", "temple_name", "city", "state", "trust_registration_no"]}
             />
         ),
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "donations",
@@ -69,6 +72,7 @@ export const navigationItems = [
                 fields={["name", "donor_name", "temple", "total_amount", "payment_mode"]}
             />
         ),
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "donation-types",
@@ -84,15 +88,14 @@ export const navigationItems = [
                 fields={["name", "donation_type", "donation_type_code", "donation_image"]}
             />
         ),
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
 ];
 
 /**
- * Enhanced route resolver. Parses nested paths:
- * - [doctype]/new -> Render Add Form
- * - [doctype]/edit/[id] -> Render Edit Form
+ * Enhanced route resolver with role-based access check.
  */
-export const getComponentForRoute = (currentRoute) => {
+export const getComponentForRoute = (currentRoute, userRoles = []) => {
     const parts = currentRoute.split('/');
     const baseKey = parts[0];
     const subRoute = parts[1];
@@ -107,6 +110,19 @@ export const getComponentForRoute = (currentRoute) => {
     };
 
     const targetDoctype = doctypeMap[baseKey];
+
+    // Check permissions for the base route
+    const navItem = navigationItems.find(nav => nav.key === baseKey);
+    const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+
+    if (!hasPermission) {
+        return (
+            <div style={{ padding: '40px', textAlign: 'center' }}>
+                <h3>Access Denied</h3>
+                <p>You do not have permission to view this module.</p>
+            </div>
+        );
+    }
 
     // Handle Forms (Add / Edit)
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
@@ -129,19 +145,23 @@ export const getComponentForRoute = (currentRoute) => {
     }
 
     // Handle standard list views / other components
-    const item = navigationItems.find(nav => nav.key === baseKey);
-    if (item) return item.component;
+    if (navItem) return navItem.component;
 
     // Default to Dashboard
     return <Dashboard />;
 };
 
-export const menuItems = navigationItems
-    .filter(item => !item.hidden)
-    .map(({ key, icon, label }) => ({
-        key,
-        icon,
-        label,
-    }));
+/**
+ * Get filtered menu items based on user roles.
+ */
+export const getFilteredMenuItems = (userRoles = []) => {
+    return navigationItems
+        .filter(item => !item.hidden && item.roles.some(role => userRoles.includes(role)))
+        .map(({ key, icon, label }) => ({
+            key,
+            icon,
+            label,
+        }));
+};
 
 

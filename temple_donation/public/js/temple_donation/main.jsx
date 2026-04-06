@@ -1,22 +1,8 @@
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import { HashRouter } from "react-router-dom";
-// import { App } from "./App";
-
-// const root = ReactDOM.createRoot(
-//   document.getElementById("react-root")
-// );
-
-// root.render(
-//   <HashRouter>
-//     <App />
-//   </HashRouter>
-// );
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
+import { UserProvider } from "./context/UserContext";
 import "./styles.css";
 
 const root = ReactDOM.createRoot(
@@ -24,7 +10,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <HashRouter>
-    <App />
-  </HashRouter>
+  <UserProvider>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </UserProvider>
 );

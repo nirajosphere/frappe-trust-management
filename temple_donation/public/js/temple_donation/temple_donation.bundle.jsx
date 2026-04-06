@@ -1,6 +1,7 @@
 import React from "react";
 import { App } from "./App";
 import { createRoot } from "react-dom/client";
+import { UserProvider } from "./context/UserContext";
 
 class TempleDonation {
 	constructor({ page, wrapper }) {
@@ -15,7 +16,11 @@ class TempleDonation {
 
 	setup_app() {
 		const root = createRoot(this.$wrapper.get(0));
-		root.render(<App />);
+		root.render(
+			<UserProvider>
+				<App />
+			</UserProvider>
+		);
 		this.$temple_donation = root;
 	}
 }

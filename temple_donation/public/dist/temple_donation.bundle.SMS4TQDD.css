@@ -955,4 +955,29 @@
     padding-right: 0px;
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.JMINHM5P.css.map */
+.aavatto-topbar-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.aavatto-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+.aavatto-user-profile:hover {
+  background-color: #f3f4f6;
+}
+.user-name-text {
+  font-weight: 500;
+  color: #374151;
+}
+.aavatto-full-page {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/*# sourceMappingURL=temple_donation.bundle.SMS4TQDD.css.map */
