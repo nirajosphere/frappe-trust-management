@@ -33,7 +33,8 @@ export const themeConfig = {
         },
         Card: {
             borderRadiusLG: 8,
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+            borderRadius: 8,
+            // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
         },
         Button: {
             borderRadius: 8,

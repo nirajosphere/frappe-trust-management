@@ -1,20 +1,20 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./temple_donation/public/js/temple_donation/**/*.{js,jsx,ts,tsx}",
   ],
+  important: '.temple-donation-app', // Scope all Tailwind utilities
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#4f46e5',
-          hover: '#4338ca',
+          DEFAULT: '#18181b', // Our Monochrome Black
+          hover: '#000000',
         }
       }
     },
   },
   plugins: [],
   corePlugins: {
-    preflight: false, // Disable Tailwind's reset to avoid conflicts with Bench/AntD
+    preflight: false,
   }
 }
