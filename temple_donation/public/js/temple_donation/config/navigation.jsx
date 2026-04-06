@@ -29,6 +29,8 @@ import DonationTypeList from "../modules/DonationType/DonationTypeList";
 import DonationTypeView from "../modules/DonationType/DonationTypeView";
 import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
 
+import OpeningBalance from "../modules/Ledger/OpeningBalance";
+
 import CommonForm from "../components/common/CommonForm";
 import CommonView from "../components/common/CommonView";
 import { donorColumns, templeColumns, donationColumns, donationTypeColumns } from "./tableConfig";
@@ -57,6 +59,13 @@ export const navigationItems = [
         icon: <BankOutlined />,
         label: "Temples",
         component: <TempleList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "ledger",
+        icon: <BankOutlined />,
+        label: "Ledger",
+        component: <OpeningBalance />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
@@ -106,12 +115,14 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
                 </div>
                 <h3 className="text-2xl font-black text-stone-800 mb-2 tracking-tight">Access Restricted</h3>
                 <p className="text-stone-400 font-medium">You do not have the required permissions to access this specific module.</p>
-                <button 
-                  onClick={() => navigate('dashboard')}
-                  className="mt-8 px-8 py-3 bg-amber-600 text-white font-bold rounded-xl shadow-lg shadow-amber-600/20 hover:bg-amber-500 transition-all"
-                >
-                  Return to Dashboard
-                </button>
+                <div className="flex justify-center gap-4 mt-8">
+                    <button 
+                      onClick={() => navigate('dashboard')}
+                      className="px-8 py-3 bg-zinc-900 text-white font-bold rounded-xl shadow-lg transition-all"
+                    >
+                      Return to Dashboard
+                    </button>
+                </div>
             </div>
         );
     }
@@ -123,6 +134,11 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             frappe.set_route("temple-donation", key, sub, id);
         }
     };
+
+    // Special handling for Ledger and other non-standard modules
+    if (baseKey === "ledger") {
+        return <OpeningBalance />;
+    }
 
     // Handle View Details
     if (targetDoctype && subRoute === "view") {

@@ -23,7 +23,7 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
             args: {
                 doctype: "Donation Type",
                 filters: { temple: selectedTemple },
-                fields: ["name", "dontation_type", "temple",]
+                fields: ["name", "donation_type", "temple",]
             },
             callback: (r) => {
                 setLoading(false);
@@ -85,7 +85,7 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
                                         <HeartFilled />
                                     </div>
                                     <Text className="block text-zinc-700 text-sm font-bold group-hover:text-black transition-colors">
-                                        {type.dontation_type}
+                                        {type.donation_type}
                                     </Text>
                                     <div className="mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 text-[10px] font-black text-zinc-900 uppercase tracking-widest">
                                         + Add to Cart

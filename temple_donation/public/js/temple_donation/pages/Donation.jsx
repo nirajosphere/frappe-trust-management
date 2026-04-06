@@ -32,17 +32,17 @@ const Donation = () => {
         // Check if already in cart
         const exists = cartItems.find(item => item.donation_type === donationType.name);
         if (exists) {
-            message.info(`${donationType.dontation_type} is already in the cart`);
+            message.info(`${donationType.donation_type} is already in the cart`);
             return;
         }
 
         const newItem = {
             donation_type: donationType.name,
-            dontation_type: donationType.dontation_type,
+            donation_type_label: donationType.donation_type,
             amount: 101 // Default amount
         };
         setCartItems(prev => [...prev, newItem]);
-        message.success(`Added ${donationType.dontation_type}`);
+        message.success(`Added ${donationType.donation_type}`);
     }, [cartItems, selectedTemple]);
 
     const handleUpdateAmount = useCallback((index, amount) => {
