@@ -73,10 +73,10 @@ const App = () => {
 
     return (
         <ConfigProvider theme={themeConfig}>
-            <div className="temple-donation-app">
-                <Layout className="min-h-screen">
+            <div className={`temple-donation-app`}>
+                <Layout className={`min-h-screen`}>
                     {/* Custom Top Navigation Bar */}
-                    <Header className="aavatto-topbar">
+                    <Header className={`aavatto-topbar ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center">
                             {/* Brand / Logo */}
                             <div className="aavatto-topbar-brand">

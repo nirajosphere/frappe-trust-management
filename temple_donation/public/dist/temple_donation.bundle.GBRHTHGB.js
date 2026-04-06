@@ -89637,6 +89637,8 @@ html body {
     addLabel = "Add New Record",
     showBack = false,
     onBack,
+    onSearch,
+    searchPlaceholder = "Search records...",
     extra
   }) => {
     return /* @__PURE__ */ import_react150.default.createElement("div", {
@@ -89662,7 +89664,17 @@ html body {
       className: "text-zinc-500 font-medium text-base mt-2 block italic"
     }, description)))), /* @__PURE__ */ import_react150.default.createElement(col_default2, null, /* @__PURE__ */ import_react150.default.createElement(space_default, {
       size: "middle"
-    }, onExport && /* @__PURE__ */ import_react150.default.createElement(button_default, {
+    }, onSearch && /* @__PURE__ */ import_react150.default.createElement("div", {
+      className: "relative group"
+    }, /* @__PURE__ */ import_react150.default.createElement(input_default, {
+      placeholder: searchPlaceholder,
+      prefix: /* @__PURE__ */ import_react150.default.createElement(SearchOutlined_default2, {
+        className: "text-zinc-400 group-focus-within:text-zinc-900 transition-colors mr-2"
+      }),
+      onChange: (e3) => onSearch(e3.target.value),
+      className: "w-72 lg:w-96 h-11 border-zinc-200 bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-lg focus:border-zinc-900 hover:border-zinc-400 transition-all font-medium rounded-xl border-2",
+      allowClear: true
+    })), onExport && /* @__PURE__ */ import_react150.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react150.default.createElement(ExportOutlined_default2, null),
       onClick: onExport,
       className: "h-11 px-6 font-semibold border-zinc-200 bg-white hover:border-black text-zinc-600"
@@ -90770,14 +90782,13 @@ html body {
     columns,
     dataSource,
     loading,
-    searchPlaceholder = "Search...",
+    searchText = "",
     onEdit,
     onDelete,
     onView,
     onPrint,
     rowKey = "name"
   }) => {
-    const [searchText, setSearchText] = (0, import_react160.useState)("");
     const filteredData = dataSource == null ? void 0 : dataSource.filter((item) => {
       return Object.values(item).some(
         (val) => String(val).toLowerCase().includes(searchText.toLowerCase())
@@ -90827,17 +90838,7 @@ html body {
     return /* @__PURE__ */ import_react160.default.createElement(card_default, {
       bordered: false,
       className: "aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100"
-    }, /* @__PURE__ */ import_react160.default.createElement("div", {
-      className: "p-6 border-b border-orange-50 bg-white/50 backdrop-blur-sm"
-    }, /* @__PURE__ */ import_react160.default.createElement(input_default, {
-      placeholder: searchPlaceholder,
-      prefix: /* @__PURE__ */ import_react160.default.createElement(SearchOutlined_default2, {
-        className: "text-stone-400 mr-2"
-      }),
-      onChange: (e3) => setSearchText(e3.target.value),
-      className: "max-w-md h-12 border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium",
-      allowClear: true
-    })), /* @__PURE__ */ import_react160.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react160.default.createElement(table_default, {
       dataSource: filteredData,
       columns: finalColumns,
       rowKey,
@@ -90891,6 +90892,7 @@ html body {
       orderBy: { field: "modified", order: "desc" }
     });
     const { deleteDoc } = useFrappeDeleteDoc();
+    const [searchText, setSearchText] = (0, import_react161.useState)("");
     const handleAdd = () => {
       if (typeof frappe !== "undefined" && basePath) {
         frappe.set_route("temple-donation", basePath, "new");
@@ -90950,16 +90952,18 @@ html body {
       description,
       onAdd: handleAdd,
       onExport: handleExport,
+      onSearch: setSearchText,
+      searchPlaceholder: `Search ${doctype}s...`,
       addLabel: "Add New Record"
     }), /* @__PURE__ */ import_react161.default.createElement(CommonTable_default, {
       columns: columns || [],
       dataSource: data,
       loading,
+      searchText,
       onEdit: handleEdit,
       onDelete: handleDelete,
       onView: handleView,
-      onPrint: handlePrint,
-      searchPlaceholder: `Search ${doctype}s...`
+      onPrint: handlePrint
     }));
   };
   var ListingPage_default = ListingPage;
@@ -92422,11 +92426,11 @@ html body {
     return /* @__PURE__ */ import_react180.default.createElement(config_provider_default, {
       theme: themeConfig
     }, /* @__PURE__ */ import_react180.default.createElement("div", {
-      className: "temple-donation-app"
+      className: `temple-donation-app`
     }, /* @__PURE__ */ import_react180.default.createElement(layout_default2, {
-      className: "min-h-screen"
+      className: `min-h-screen`
     }, /* @__PURE__ */ import_react180.default.createElement(Header3, {
-      className: "aavatto-topbar"
+      className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
     }, /* @__PURE__ */ import_react180.default.createElement("div", {
       className: "flex items-center"
     }, /* @__PURE__ */ import_react180.default.createElement("div", {
@@ -92527,4 +92531,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.Z2U4QH44.js.map
+//# sourceMappingURL=temple_donation.bundle.GBRHTHGB.js.map

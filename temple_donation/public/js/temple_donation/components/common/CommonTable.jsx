@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Table, Card, Typography, Row, Col, Button, Input, Space, Modal, message, Divider } from "antd";
+import React from "react";
+import { Table, Card, Typography, Row, Col, Button, Space, Modal, message, Divider } from "antd";
 import {
-    PlusOutlined, EditOutlined, DeleteOutlined, SearchOutlined,
+    PlusOutlined, EditOutlined, DeleteOutlined,
     EyeOutlined, PrinterOutlined, ExportOutlined
 } from "@ant-design/icons";
 
@@ -14,14 +14,13 @@ const CommonTable = ({
     columns,
     dataSource,
     loading,
-    searchPlaceholder = "Search...",
+    searchText = "",
     onEdit,
     onDelete,
     onView,
     onPrint,
     rowKey = "name",
 }) => {
-    const [searchText, setSearchText] = useState("");
 
     const filteredData = dataSource?.filter(item => {
         return Object.values(item).some(val =>
@@ -81,15 +80,6 @@ const CommonTable = ({
 
     return (
         <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100">
-            <div className="p-6 border-b border-orange-50 bg-white/50 backdrop-blur-sm">
-                <Input
-                    placeholder={searchPlaceholder}
-                    prefix={<SearchOutlined className="text-stone-400 mr-2" />}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    className="max-w-md h-12 border-stone-200 bg-white shadow-sm focus:shadow-md transition-all font-medium"
-                    allowClear
-                />
-            </div>
 
             <Table
                 dataSource={filteredData}

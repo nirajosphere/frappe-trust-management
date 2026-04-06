@@ -1,6 +1,6 @@
 import React from "react";
-import { Row, Col, Typography, Space, Button, Divider } from "antd";
-import { ExportOutlined, PlusOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import { Row, Col, Typography, Space, Button, Divider, Input } from "antd";
+import { ExportOutlined, PlusOutlined, ArrowLeftOutlined, SearchOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
@@ -16,6 +16,8 @@ const PageHeader = ({
     addLabel = "Add New Record",
     showBack = false,
     onBack,
+    onSearch,
+    searchPlaceholder = "Search records...",
     extra
 }) => {
     return (
@@ -45,6 +47,17 @@ const PageHeader = ({
                 </Col>
                 <Col>
                     <Space size="middle">
+                        {onSearch && (
+                            <div className="relative group">
+                                <Input
+                                    placeholder={searchPlaceholder}
+                                    prefix={<SearchOutlined className="text-zinc-400 group-focus-within:text-zinc-900 transition-colors mr-2" />}
+                                    onChange={(e) => onSearch(e.target.value)}
+                                    className="w-72 lg:w-96 h-11 border-zinc-200 bg-white/80 backdrop-blur-sm shadow-sm focus:shadow-lg focus:border-zinc-900 hover:border-zinc-400 transition-all font-medium rounded-xl border-2"
+                                    allowClear
+                                />
+                            </div>
+                        )}
                         {onExport && (
                             <Button
                                 icon={<ExportOutlined />}

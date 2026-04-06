@@ -37,7 +37,11 @@
   font-family: var(--font-primary);
   background-color: var(--bg-main) !important;
   color: var(--text-main);
-  min-height: calc(100vh - var(--topbar-height));
+  min-height: calc(100vh - 60px); // Standard
+
+  &.is-admin {
+    min-height: calc(100vh - 96px); // Desk navbar (48) + Aavatto (48)
+  }
 
   h1,
   h2,
@@ -67,21 +71,37 @@
   }
 
   /* Navigation Bar Styles */
-  .aavatto-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 200;
-    border-bottom: 1px solid var(--border-color);
-    padding-left: 2rem;
-    padding-right: 2rem;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    height: var(--topbar-height) !important;
-    background-color: var(--header-bg) !important;
-  }
+  // .aavatto-topbar {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   position: sticky;
+  //   top: 0;
+  //   z-index: 200;
+  //   border-bottom: 1px solid var(--border-color);
+  //   padding-left: 2rem;
+  //   padding-right: 2rem;
+  //   box-shadow: var(--shadow-sm);
+  //   transition: var(--transition);
+  //   height: var(--topbar-height) !important;
+  //   background-color: var(--header-bg) !important;
+  // }
+
+  // .is-admin {
+  //   position: sticky !important;
+  //   top: 48px !important;
+  // }
+
+  // &.is-admin {
+  //   .aavatto-topbar {
+  //     top: 48px !important;
+  //     height: 48px !important;
+  //   }
+
+  //   .aavatto-topbar-menu {
+  //     line-height: 48px !important;
+  //   }
+  // }
 
   .aavatto-topbar-brand {
     display: flex;

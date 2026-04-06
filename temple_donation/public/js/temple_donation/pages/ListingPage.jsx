@@ -26,6 +26,8 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
 
     const { deleteDoc } = useFrappeDeleteDoc();
 
+    const [searchText, setSearchText] = useState("");
+
     const handleAdd = () => {
         if (typeof frappe !== "undefined" && basePath) {
             frappe.set_route("temple-donation", basePath, "new");
@@ -97,17 +99,19 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
                 description={description} 
                 onAdd={handleAdd} 
                 onExport={handleExport}
+                onSearch={setSearchText}
+                searchPlaceholder={`Search ${doctype}s...`}
                 addLabel="Add New Record" 
             />
             <CommonTable
                 columns={columns || []}
                 dataSource={data}
                 loading={loading}
+                searchText={searchText}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 onView={handleView}
                 onPrint={handlePrint}
-                searchPlaceholder={`Search ${doctype}s...`}
             />
         </div>
     );

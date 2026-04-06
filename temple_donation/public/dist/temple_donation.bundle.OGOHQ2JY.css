@@ -1062,7 +1062,7 @@
 }
 .temple-donation-app {
 }
-.temple-donation-app .aavatto-topbar {
+.aavatto-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1076,6 +1076,10 @@
   transition: var(--transition);
   height: var(--topbar-height) !important;
   background-color: var(--header-bg) !important;
+}
+.is-admin {
+  position: sticky !important;
+  top: 48px !important;
 }
 .temple-donation-app .aavatto-topbar-brand {
   display: flex;
@@ -1137,7 +1141,7 @@
 }
 .temple-donation-app .aavatto-card {
   padding: 1.5rem;
-  border-radius: 24px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   transition: var(--transition);
   background-color: var(--bg-card);
@@ -1478,4 +1482,4 @@
     color: rgb(203 213 225 / var(--tw-text-opacity, 1));
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.RXCPLT7P.css.map */
+/*# sourceMappingURL=temple_donation.bundle.OGOHQ2JY.css.map */
