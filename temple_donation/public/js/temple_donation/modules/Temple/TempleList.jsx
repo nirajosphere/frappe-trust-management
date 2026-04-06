@@ -1,5 +1,5 @@
 import React from "react";
-import ListingPage from "../../pages/ListingPage";
+import ListingPage from "../../components/common/ListingPage";
 import { DOCTYPE_TEMPLE } from "../../config/constants";
 import { templeColumns } from "../../tabelcolumn/templeTable";
 

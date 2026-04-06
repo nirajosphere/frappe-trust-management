@@ -7,8 +7,8 @@ import {
     ShoppingCartOutlined,
 } from "@ant-design/icons";
 
-import Dashboard from "../pages/Dashboard";
-import DonationPOS from "../pages/Donation";
+import Dashboard from "../modules/Dashboard/Dashboard";
+import DonationPOS from "../modules/Donation/Donation";
 import {
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE
 } from "./constants";

@@ -1,5 +1,5 @@
 import React from "react";
-import ListingPage from "../../pages/ListingPage";
+import ListingPage from "../../components/common/ListingPage";
 import { DOCTYPE_DONATION } from "../../config/constants";
 import { donationColumns } from "../../tabelcolumn/donationTable";
 
