@@ -1,0 +1,27 @@
+export const donationFormFields = {
+    title: "Donation",
+    fields: [
+        { name: "name", label: "Receipt Id", type: "text", readOnly: true },
+        { name: "cashier", label: "Donation Receiver Name", type: "text", readOnly: true },
+        { name: "temple", label: "Temple Name", type: "text", required: true },
+        { name: "print_receipt_name", label: "Print Receipt Name", type: "text" },
+        { name: "donor_name", label: "Donor Name", type: "text", required: true },
+        { name: "email", label: "Email", type: "text" },
+        { name: "address_line_1", label: "Address Line 1", type: "text" },
+        { name: "address_line_2", label: "Address Line 2", type: "text" },
+        { name: "country", label: "Country", type: "text" },
+        { name: "state", label: "State", type: "text" },
+        { name: "city", label: "City", type: "text" },
+        { name: "pincode", label: "Pincode", type: "text" },
+        { name: "contact_number", label: "Contact Number", type: "text" },
+        { name: "native_place", label: "Native Place", type: "text" },
+        { name: "date_of_birth", label: "Date of Birth", type: "text" },
+        { name: "marital_status", label: "Marital Status", type: "text" },
+        { name: "date_of_anniversary", label: "Date of Anniversary", type: "text" },
+        { name: "note", label: "Note", type: "textarea" },
+        { name: "payment_mode", label: "Payment Type", type: "text", required: true },
+        { name: "total_amount", label: "Total Donation Amount", type: "text", required: true },
+        { name: "device_name", label: "Device Name", type: "text" },
+        { name: "transaction_ref_no", label: "Transaction Ref. No.", type: "text" },
+    ]
+};
