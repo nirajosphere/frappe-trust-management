@@ -28,16 +28,24 @@ const OpeningBalance = () => {
         }
     };
 
-    const handleReset = async (userName) => {
+    const handleReset = async (userName, currentBalance) => {
         try {
             if (typeof frappe !== 'undefined') {
                 const response = await frappe.call({
                     method: 'temple_donation.api.reset_user_balance',
-                    args: { user_name: userName }
+                    args: { 
+                        user_name: userName,
+                        amount: currentBalance
+                    }
                 });
                 if (response.message) {
-                    message.success(response.message.message);
-                    fetchData(); // Refresh list
+                    message.success(`Successfully handed over ₹${currentBalance.toLocaleString()}`);
+                    // Immediately update local state to 0 for this user
+                    setData(prev => prev.map(user => 
+                        user.user_name === userName 
+                        ? { ...user, opening_balance: 0 } 
+                        : user
+                    ));
                 }
             }
         } catch (error) {
@@ -86,7 +94,7 @@ const OpeningBalance = () => {
                     type="default"
                     icon={<SyncOutlined />}
                     className="rounded-lg font-bold bg-zinc-100 border-zinc-200 text-zinc-700 hover:bg-zinc-900 hover:text-white transition-all"
-                    onClick={() => handleReset(record.user_name)}
+                    onClick={() => handleReset(record.user_name, record.opening_balance)}
                 >
                     Reset Cash
                 </Button>

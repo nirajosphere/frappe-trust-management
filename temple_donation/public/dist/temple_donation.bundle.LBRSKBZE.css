@@ -1100,9 +1100,6 @@
 .temple-donation-app .aavatto-topbar-menu .ant-menu-item-active {
   color: var(--primary-color) !important;
 }
-.temple-donation-app .aavatto-topbar-menu .ant-menu-item::after {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
 .temple-donation-app .aavatto-topbar-right {
   display: flex;
   align-items: center;
@@ -1478,4 +1475,4 @@
     color: rgb(203 213 225 / var(--tw-text-opacity, 1));
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.B5VIRPZI.css.map */
+/*# sourceMappingURL=temple_donation.bundle.LBRSKBZE.css.map */
