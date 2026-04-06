@@ -32,14 +32,14 @@ const Donation = () => {
         // Check if already in cart
         const exists = cartItems.find(item => item.donation_type === donationType.name);
         if (exists) {
-            message.info(`${donationType.donation_type} is already in the cart`);
+            message.warning(`${donationType.donation_type} is already in the cart`);
             return;
         }
 
         const newItem = {
             donation_type: donationType.name,
             donation_type_label: donationType.donation_type,
-            amount: 101 // Default amount
+            amount: donationType.default_amount || 101
         };
         setCartItems(prev => [...prev, newItem]);
         message.success(`Added ${donationType.donation_type}`);
@@ -103,12 +103,9 @@ const Donation = () => {
             callback: (r) => {
                 setSubmitting(false);
                 if (r.message) {
-                    message.success("Donation submitted successfully!");
-                    handleReset();
-                    // Go back to the donation list
-                    if (typeof frappe !== "undefined") {
-                        frappe.set_route("temple-donation", "donations");
-                    }
+                    message.success("Donation processed successfully!");
+                    setSelectedDonor(null);
+                    setCartItems([]);
                 }
             },
             error: (err) => {
@@ -116,21 +113,21 @@ const Donation = () => {
                 message.error(err.message || "Failed to submit donation");
             }
         });
-    }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount, handleReset]);
+    }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount]);
 
     // --- Render ---
     return (
         <div className="donation-page py-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4 animate-fadeIn">
-                <Space size="large">
-                    <div className="h-14 w-14 bg-zinc-900 rounded-2xl flex items-center justify-center shadow-xl shadow-zinc-900/10 rotate-3 hover:rotate-0 transition-transform cursor-pointer">
-                        <HeartFilled className="text-2xl text-white" />
+            <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+                <Space size={16}>
+                    <div className="h-12 w-12 bg-zinc-900 rounded-xl flex items-center justify-center">
+                        <HeartFilled className="text-xl text-white" />
                     </div>
                     <div>
-                        <Text className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-400 block mb-1">
+                        <Text className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
                             Operational POS
                         </Text>
-                        <Title level={1} className="!m-0 font-black tracking-tight text-zinc-900 !text-3xl">
+                        <Title level={2} className="!m-0 font-bold tracking-tight text-zinc-900">
                             Temple Donation
                         </Title>
                     </div>
@@ -138,15 +135,13 @@ const Donation = () => {
                 <Button
                     icon={<RedoOutlined />}
                     onClick={handleReset}
-                    className="h-10 px-6  font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 shadow-sm transition-all"
+                    className="h-10 px-6 font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 transition-all"
                 >
-                    Clear Transaction
+                    Reset POS
                 </Button>
-            </div>
-
+            </header>
 
             <Row gutter={[24, 24]}>
-                {/* Left Side: Donor Search, Temple Selection, and Grid */}
                 <Col xs={24} lg={15}>
                     <div className="space-y-6">
                         <DonorSection
@@ -166,7 +161,6 @@ const Donation = () => {
                     </div>
                 </Col>
 
-                {/* Right Side: Cart and Payment */}
                 <Col xs={24} lg={9}>
                     <div className="space-y-6 sticky top-6">
                         <Cart
@@ -189,5 +183,6 @@ const Donation = () => {
         </div>
     );
 };
+
 
 export default Donation;

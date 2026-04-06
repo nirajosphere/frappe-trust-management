@@ -9,13 +9,13 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
 
     const columns = [
         {
-            title: "Donation Item",
-            dataIndex: "dontation_type",
-            key: "dontation_type",
+            title: "Donation Type",
+            dataIndex: "donation_type_label",
+            key: "donation_type_label",
             render: (text) => (
-                <div className="flex flex-col">
-                    <Text className="!font-black text-zinc-800 tracking-tight">{text}</Text>
-                    <Text className="text-zinc-400 text-[10px] uppercase font-black tracking-widest leading-3 mt-1">Donation Category</Text>
+                <div className="flex flex-col py-1">
+                    <Text className="!font-bold text-zinc-800">{text}</Text>
+                    <Text className="text-zinc-400 text-[10px] uppercase font-bold">Temple Fund</Text>
                 </div>
             ),
         },
@@ -25,21 +25,21 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
             key: "amount",
             width: 180,
             render: (amount, record, index) => (
-                <div className="flex flex-col gap-3 py-2">
+                <div className="flex flex-col gap-2 py-2">
                     <InputNumber
                         min={1}
                         value={amount}
                         formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         parser={(value) => value.replace(/₹\s?|(,*)/g, "")}
                         onChange={(val) => onUpdateAmount(index, val)}
-                        className="w-full  border-zinc-200 bg-zinc-50/30 hover:border-black focus:border-black font-black text-zinc-900 h-10 flex items-center"
+                        className="w-full border-zinc-200 h-9 flex items-center font-bold"
                     />
-                    <div className="flex flex-wrap gap-1.5 mt-1">
+                    <div className="flex flex-wrap gap-1">
                         {quickAmounts.map(q => (
                             <button
                                 key={q}
                                 onClick={() => onUpdateAmount(index, q)}
-                                className="px-2.5 py-1 text-[10px] bg-white border border-zinc-200 text-zinc-500 rounded-lg hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all duration-300 font-black shadow-sm"
+                                className="px-2 py-0.5 text-[10px] bg-white border border-zinc-200 text-zinc-500 rounded hover:bg-zinc-900 hover:text-white transition-all font-bold"
                             >
                                 +{q}
                             </button>
@@ -57,9 +57,9 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                     type="text"
                     danger
                     shape="circle"
-                    icon={<DeleteOutlined className="text-lg" />}
+                    icon={<DeleteOutlined />}
                     onClick={() => onRemoveItem(index)}
-                    className="hover:bg-red-50 flex items-center justify-center"
+                    className="flex items-center justify-center"
                 />
             ),
         },
@@ -74,7 +74,7 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                 </Space>
             }
             size="small"
-            className="aavatto-card !p-0 overflow-hidden flex flex-col mb-6"
+            className="aavatto-card !p-0 overflow-hidden flex flex-col"
             styles={{ body: { padding: 0 } }}
         >
             <div className="max-h-[400px] overflow-y-auto">
@@ -99,17 +99,14 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                 />
             </div>
 
-            <div className="p-8 bg-zinc-50/50 border-t border-zinc-200 mt-auto shadow-inner relative overflow-hidden">
-                <Row justify="space-between" align="middle" className="relative z-10">
+            <div className="p-6 bg-zinc-50 border-t border-zinc-200 mt-auto">
+                <Row justify="space-between" align="middle">
                     <Col>
-                        <div className="flex flex-col">
-                            <Text className="text-zinc-500 uppercase text-[10px] font-black tracking-[0.2em] mb-1">Total Payable Amount</Text>
-                            <Text className="text-zinc-400 text-[10px] font-medium leading-3 italic">Including all contributions</Text>
-                        </div>
+                        <Text className="text-zinc-500 uppercase text-[10px] font-bold tracking-widest">Total Amount</Text>
                     </Col>
                     <Col className="text-right">
-                        <div className="text-4xl font-black text-black tracking-tighter flex items-end justify-end">
-                            <span className="text-lg mb-1.5 mr-1 font-bold">₹</span>
+                        <div className="text-3xl font-bold text-black tracking-tight">
+                            <span className="text-base mr-1">₹</span>
                             {totalAmount.toLocaleString()}
                         </div>
                     </Col>
@@ -118,6 +115,5 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
         </Card>
     );
 };
-
 
 export default Cart;

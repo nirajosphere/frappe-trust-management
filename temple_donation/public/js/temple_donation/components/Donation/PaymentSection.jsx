@@ -19,10 +19,10 @@ const PaymentSection = ({
     disabled
 }) => {
     const paymentModes = [
-        { label: "Cash", value: "Cash", icon: <WalletOutlined />, color: "orange" },
-        { label: "UPI/Online", value: "UPI", icon: <QrcodeOutlined />, color: "blue" },
-        { label: "Card", value: "Card", icon: <CreditCardOutlined />, color: "purple" },
-        { label: "Cheque", value: "Cheque", icon: <ProfileOutlined />, color: "cyan" },
+        { label: "Cash", value: "Cash", icon: <WalletOutlined /> },
+        { label: "UPI", value: "UPI", icon: <QrcodeOutlined /> },
+        { label: "Card", value: "Card", icon: <CreditCardOutlined /> },
+        { label: "Cheque", value: "Cheque", icon: <ProfileOutlined /> },
     ];
 
     return (
@@ -30,45 +30,44 @@ const PaymentSection = ({
             title={
                 <Space>
                     <SafetyCertificateOutlined className="text-zinc-900" />
-                    <span className="font-bold tracking-tight text-zinc-800 text-lg">Payment Confirmation</span>
+                    <span className="font-bold tracking-tight text-zinc-800">Payment Selection</span>
                 </Space>
             }
             size="small"
             className="aavatto-card"
         >
-            <div className="mb-8 mt-2">
-                <Text className="text-zinc-400 block mb-6 uppercase text-[10px] font-black tracking-[0.2em] ml-1">
-                    Select Payment Gateway
+            <div className="mb-6 mt-2 px-1">
+                <Text className="text-zinc-400 block mb-4 uppercase text-[10px] font-bold tracking-widest">
+                    Select Mode
                 </Text>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                     {paymentModes.map(mode => (
                         <button
                             key={mode.value}
-                            onClick={() => onPaymentModeChange(mode.value)}
+                            onClick={() => !loading && onPaymentModeChange(mode.value)}
                             className={`
-                                flex flex-col items-center justify-center p-6 rounded-3xl border-2 transition-all duration-300 group
+                                flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all
                                 ${paymentMode === mode.value
-                                    ? `border-black bg-zinc-50 text-black shadow-xl shadow-zinc-900/10 ring-1 ring-black/20 scale-105 z-10 font-black`
-                                    : 'border-zinc-100 bg-white text-zinc-400 hover:border-zinc-200 hover:bg-zinc-50/50 font-bold'
+                                    ? `border-black bg-zinc-50 text-black font-bold`
+                                    : 'border-zinc-100 bg-white text-zinc-400 hover:border-zinc-200'
                                 }
+                                ${loading ? 'opacity-50 cursor-not-allowed' : ''}
                             `}
                         >
-                            <div className={`text-3xl mb-3 transition-transform duration-300 group-hover:scale-110 ${paymentMode === mode.value ? 'text-black' : 'text-zinc-300'}`}>
+                            <div className={`text-2xl mb-2 ${paymentMode === mode.value ? 'text-black' : 'text-zinc-300'}`}>
                                 {mode.icon}
                             </div>
-                            <span className="text-[11px] uppercase tracking-widest">{mode.label}</span>
+                            <span className="text-[11px] uppercase tracking-wider">{mode.label}</span>
                         </button>
                     ))}
                 </div>
             </div>
 
-            <div className="bg-zinc-50/80 p-5 rounded-3xl border border-zinc-200/50 mb-8 flex items-start gap-4 shadow-inner">
-                <div className="bg-white p-2  shadow-sm">
-                    <CheckCircleOutlined className="text-zinc-900 text-xl" />
-                </div>
-                <div className="text-[12px] leading-relaxed text-zinc-800/70 font-medium italic">
-                    By clicking Confirm, you verify that donor identity and selected donation items are accurate. This will generate an official temple receipt.
+            <div className="bg-zinc-50 p-4 rounded-xl border border-zinc-200 mb-6 flex items-start gap-3">
+                <CheckCircleOutlined className="text-zinc-900 text-lg mt-0.5" />
+                <div className="text-[11px] leading-snug text-zinc-600 font-medium italic">
+                    Verify donor identity and donation items before confirmation.
                 </div>
             </div>
 
@@ -76,31 +75,18 @@ const PaymentSection = ({
                 type="primary"
                 size="large"
                 block
-                icon={<CheckCircleOutlined className="text-xl" />}
-                onClick={onSubmit}
                 loading={loading}
                 disabled={disabled}
+                onClick={onSubmit}
                 className={`
-                    h-18 rounded-[24px] text-lg font-black tracking-tight shadow-2xl transition-all duration-300 border-none
-                    ${disabled
-                        ? 'bg-zinc-200 text-zinc-400 scale-95 opacity-50'
-                        : 'bg-black shadow-zinc-900/40 hover:scale-[1.02] hover:bg-zinc-800 active:scale-95 text-white'
-                    }
+                    h-14 rounded-xl text-base font-bold transition-all
+                    ${disabled ? 'bg-zinc-100 text-zinc-300' : 'bg-black hover:bg-zinc-800 text-white shadow-lg'}
                 `}
             >
-                {loading ? 'PROCESSING...' : 'CONFIRM donation'}
+                {loading ? 'Processing...' : 'Confirm Donation'}
             </Button>
-
-            {!disabled && (
-                <div className="mt-6 text-center animate-bounce-slow">
-                    <Tag className="rounded-full border-none px-4 py-1 font-bold text-[10px] uppercase tracking-widest bg-zinc-50 text-zinc-600 shadow-sm border border-zinc-100">
-                        Secure Transaction Ready
-                    </Tag>
-                </div>
-            )}
         </Card>
     );
 };
-
 
 export default PaymentSection;

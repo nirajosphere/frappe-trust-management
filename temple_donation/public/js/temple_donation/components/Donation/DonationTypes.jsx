@@ -20,20 +20,20 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
         setLoading(true);
         frappe.call({
             method: "frappe.client.get_list",
-            args: {
-                doctype: "Donation Type",
-                filters: { temple: selectedTemple },
-                fields: ["name", "donation_type", "temple",]
-            },
-            callback: (r) => {
-                setLoading(false);
-                if (r.message) {
-                    setDonationTypes(r.message);
-                } else {
-                    setDonationTypes([]);
+                args: {
+                    doctype: "Donation Type",
+                    filters: { temple: selectedTemple },
+                    fields: ["name", "donation_type", "temple", "default_amount"]
+                },
+                callback: (r) => {
+                    setLoading(false);
+                    if (r.message) {
+                        setDonationTypes(r.message);
+                    } else {
+                        setDonationTypes([]);
+                    }
                 }
-            }
-        });
+            });
     };
 
     if (!selectedTemple) {
@@ -65,44 +65,42 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
             {loading ? (
                 <div className="flex flex-col items-center justify-center py-20 gap-4">
                     <Spin size="large" />
-                    <Text className="text-zinc-400 animate-pulse font-bold tracking-widest uppercase text-[10px]">Fetching categories...</Text>
+                    <Text className="text-zinc-400 font-bold tracking-widest uppercase text-[10px]">Fetching categories...</Text>
                 </div>
             ) : donationTypes.length > 0 ? (
-                <Row gutter={[20, 20]}>
+                <Row gutter={[16, 16]}>
                     {donationTypes.map(type => (
                         <Col key={type.name} xs={12} sm={8} md={8} lg={6}>
                             <Card
                                 hoverable
                                 onClick={() => onAddToCart(type)}
-                                className="group relative overflow-hidden rounded-2xl border-zinc-100 hover:border-zinc-900/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white"
-                                bodyStyle={{ padding: '24px 16px', textAlign: 'center' }}
+                                className="group relative overflow-hidden rounded-xl border-zinc-200 hover:border-zinc-900 transition-all duration-300 bg-white"
+                                bodyStyle={{ padding: '20px 12px', textAlign: 'center' }}
                             >
-                                {/* Decorative background gradient (Neutral) */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/0 to-zinc-50/0 group-hover:from-zinc-50 group-hover:to-zinc-100/50 transition-all duration-500" />
-                                
                                 <div className="relative z-10">
-                                    <div className="text-3xl text-zinc-900 mb-3 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                                    <div className="text-2xl text-zinc-900 mb-2">
                                         <HeartFilled />
                                     </div>
-                                    <Text className="block text-zinc-700 text-sm font-bold group-hover:text-black transition-colors">
+                                    <Text className="block text-zinc-700 text-sm font-bold truncate">
                                         {type.donation_type}
                                     </Text>
-                                    <div className="mt-3 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 text-[10px] font-black text-zinc-900 uppercase tracking-widest">
-                                        + Add to Cart
-                                    </div>
+                                    {type.default_amount > 0 && (
+                                        <div className="mt-1">
+                                            <Text className="text-xs text-zinc-400 font-bold">₹{type.default_amount}</Text>
+                                        </div>
+                                    )}
                                 </div>
                             </Card>
                         </Col>
                     ))}
                 </Row>
             ) : (
-                <div className="py-20 border-2 border-dashed border-zinc-100 rounded-3xl bg-zinc-50/30 flex items-center justify-center">
+                <div className="py-20 border-2 border-dashed border-zinc-100 rounded-xl bg-zinc-50/30 flex items-center justify-center">
                     <Empty description="No categories found" />
                 </div>
             )}
         </Card>
     );
 };
-
 
 export default DonationTypes;
