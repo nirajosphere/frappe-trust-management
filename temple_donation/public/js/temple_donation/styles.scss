@@ -204,7 +204,7 @@
       padding: 16px 20px !important;
     }
 
-    .ant-table-tbody>tr>td {
+    .ant-table-tbody>tr:not(.ant-table-measure-row)>td {
       padding: 18px 20px !important;
       border-bottom: 1px solid var(--border-color) !important;
       transition: all 0.2s ease;

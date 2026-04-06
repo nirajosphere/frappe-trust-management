@@ -79,23 +79,24 @@ const CommonTable = ({
     const finalColumns = (onView || onPrint || onEdit || onDelete) ? [...columns, actionColumn] : columns;
 
     return (
-        <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100">
+        // <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100">
 
-            <Table
-                dataSource={filteredData}
-                columns={finalColumns}
-                rowKey={rowKey}
-                loading={loading}
-                pagination={{
-                    pageSize: 10,
-                    showSizeChanger: true,
-                    showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-amber-600 font-bold">{total}</span> records</span>,
-                    className: "!m-8"
-                }}
-                className="aavatto-premium-table"
-                scroll={{ x: 'max-content' }}
-            />
-        </Card>
+        <Table
+            dataSource={filteredData}
+            columns={finalColumns}
+            rowKey={rowKey}
+            loading={loading}
+            pagination={{
+                pageSize: 10,
+                showSizeChanger: true,
+                showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-amber-600 font-bold">{total}</span> records</span>,
+                className: "!m-8"
+            }}
+            bordered
+            className="aavatto-premium-table"
+            scroll={{ x: 'max-content' }}
+        />
+        // </Card>
     );
 };
 

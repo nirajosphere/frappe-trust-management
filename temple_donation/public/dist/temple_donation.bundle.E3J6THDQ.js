@@ -90835,10 +90835,7 @@ html body {
       }))
     };
     const finalColumns = onView || onPrint || onEdit || onDelete ? [...columns, actionColumn] : columns;
-    return /* @__PURE__ */ import_react160.default.createElement(card_default, {
-      bordered: false,
-      className: "aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100"
-    }, /* @__PURE__ */ import_react160.default.createElement(table_default, {
+    return /* @__PURE__ */ import_react160.default.createElement(table_default, {
       dataSource: filteredData,
       columns: finalColumns,
       rowKey,
@@ -90853,9 +90850,10 @@ html body {
         }, total), " records"),
         className: "!m-8"
       },
+      bordered: true,
       className: "aavatto-premium-table",
       scroll: { x: "max-content" }
-    }));
+    });
   };
   var CommonTable_default = CommonTable;
 
@@ -92135,10 +92133,6 @@ html body {
       ]
     }), /* @__PURE__ */ import_react177.default.createElement("div", {
       className: "p-8"
-    }, /* @__PURE__ */ import_react177.default.createElement(card_default, {
-      className: "rounded-[32px] border-zinc-100 shadow-sm overflow-hidden"
-    }, /* @__PURE__ */ import_react177.default.createElement("div", {
-      className: "p-2"
     }, /* @__PURE__ */ import_react177.default.createElement(table_default, {
       columns,
       dataSource: data,
@@ -92146,7 +92140,7 @@ html body {
       loading,
       pagination: false,
       className: "aavatto-premium-table"
-    })))));
+    })));
   };
   var OpeningBalance_default = OpeningBalance;
 
@@ -92531,4 +92525,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.GBRHTHGB.js.map
+//# sourceMappingURL=temple_donation.bundle.E3J6THDQ.js.map

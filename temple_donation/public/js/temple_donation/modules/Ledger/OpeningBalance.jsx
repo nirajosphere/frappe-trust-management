@@ -121,18 +121,18 @@ const OpeningBalance = () => {
             />
 
             <div className="p-8">
-                <Card className="rounded-[32px] border-zinc-100 shadow-sm overflow-hidden">
-                    <div className="p-2">
-                        <Table
-                            columns={columns}
-                            dataSource={data}
-                            rowKey="user_name"
-                            loading={loading}
-                            pagination={false}
-                            className="aavatto-premium-table"
-                        />
-                    </div>
-                </Card>
+                {/* <Card className="rounded-[32px] border-zinc-100 shadow-sm overflow-hidden"> */}
+                {/* <div className="p-2"> */}
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    rowKey="user_name"
+                    loading={loading}
+                    pagination={false}
+                    className="aavatto-premium-table"
+                />
+                {/* </div> */}
+                {/* </Card> */}
             </div>
         </div>
     );
