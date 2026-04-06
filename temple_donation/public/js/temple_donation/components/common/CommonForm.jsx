@@ -1,46 +1,69 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Card, Typography, Space, Row, Col, message, Spin, Alert, Upload } from "antd";
-import { ArrowLeftOutlined, SaveOutlined, UploadOutlined } from "@ant-design/icons";
-import { useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc, useFrappeFileUpload } from "../../hooks/useFrappe";
+import {
+    Form, Input, Button, Card, Typography, Space, Row, Col,
+    message, Spin, Alert, Upload, Divider, Switch, List, Avatar
+} from "antd";
+import { ArrowLeftOutlined, SaveOutlined, UploadOutlined, CheckCircleFilled } from "@ant-design/icons";
+import {
+    useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc,
+    useFrappeFileUpload, useFrappeGetDocList
+} from "../../hooks/useFrappe";
 import { formConfigs } from "../../config/formConfig";
+import { DOCTYPE_TEMPLE, DOCTYPE_DONATION_TYPE } from "../../config/constants";
 
 const { Title, Text } = Typography;
 
 /**
  * CommonForm Component
- *
- * Props:
- * @param {string} doctype - Doctype name
- * @param {string} id - Document name/ID (for edit mode)
- * @param {string} onBack - Navigation callback to go back
  */
 const CommonForm = ({ doctype, id, onBack }) => {
     const isEdit = !!id;
     const config = formConfigs[doctype];
     const [form] = Form.useForm();
+    const [selectedDonationTypes, setSelectedDonationTypes] = useState([]);
 
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { upload, loading: uploading } = useFrappeFileUpload();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(doctype, id);
 
+    // Fetch all donation types if we are in Temple form
+    const { data: allDonationTypes, loading: loadingDTypes } = useFrappeGetDocList(DOCTYPE_DONATION_TYPE, {
+        fields: ["name", "donation_type", "donation_image"]
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
             form.setFieldsValue(initialValues);
+
+            // Map child table 'donation_types' to selected state if it exists
+            if (doctype === DOCTYPE_TEMPLE && initialValues.donation_types) {
+                setSelectedDonationTypes(initialValues.donation_types.map(dt => dt.donation_type));
+            }
         } else if (!isEdit) {
-            form.resetFields();
+            // Set default values from config if available
+            const defaultValues = {};
+            config.fields.forEach(f => {
+                if (f.defaultValue) defaultValues[f.name] = f.defaultValue;
+            });
+            form.setFieldsValue(defaultValues);
+            setSelectedDonationTypes([]);
         }
-    }, [isEdit, initialValues, form]);
+    }, [isEdit, initialValues, form, doctype]);
 
     const handleSave = async (values) => {
         try {
             let doc;
-            
-            // Extract file data before saving doc as a raw object
             const formData = { ...values };
+
+            // For Temple, include the selected donation types as a child table
+            if (doctype === DOCTYPE_TEMPLE) {
+                formData.donation_types = selectedDonationTypes.map(name => ({
+                    donation_type: name
+                }));
+            }
+
             const fileFields = config.fields.filter(f => f.type === 'image' || f.type === 'file');
-            
-            // Remove file field data from initial doc creation to avoid circular/invalid data
             fileFields.forEach(f => delete formData[f.name]);
 
             if (isEdit) {
@@ -51,7 +74,6 @@ const CommonForm = ({ doctype, id, onBack }) => {
 
             const docName = isEdit ? id : doc.name;
 
-            // Handle file uploads sequentially
             for (const field of fileFields) {
                 const fileValue = values[field.name];
                 if (fileValue && fileValue.fileList && fileValue.fileList.length > 0) {
@@ -65,7 +87,6 @@ const CommonForm = ({ doctype, id, onBack }) => {
                             });
                         } catch (uploadErr) {
                             console.error(`Failed to upload ${field.label}:`, uploadErr);
-                            message.warning(`${field.label} upload failed, but record was saved.`);
                         }
                     }
                 }
@@ -76,6 +97,14 @@ const CommonForm = ({ doctype, id, onBack }) => {
         } catch (err) {
             message.error(err.message || "Something went wrong.");
         }
+    };
+
+    const toggleDonationType = (typeName) => {
+        setSelectedDonationTypes(prev =>
+            prev.includes(typeName)
+                ? prev.filter(t => t !== typeName)
+                : [...prev, typeName]
+        );
     };
 
     if (isEdit && fetching) {
@@ -94,30 +123,33 @@ const CommonForm = ({ doctype, id, onBack }) => {
                     description={fetchError.message || `Failed to fetch ${config.title} details.`}
                     type="error"
                     showIcon
-                    action={
-                        <Button onClick={onBack} icon={<ArrowLeftOutlined />}>Go Back</Button>
-                    }
+                    action={<Button onClick={onBack} icon={<ArrowLeftOutlined />}>Go Back</Button>}
                 />
             </div>
         );
     }
 
     return (
-        <div style={{ padding: "24px", maxWidth: "800px", margin: "0 auto" }}>
-            <Card bordered={false} className="shadow-sm" style={{ borderRadius: '12px' }}>
-                <Row align="middle" style={{ marginBottom: "24px" }} gutter={16}>
+        <div style={{ padding: "24px 0", maxWidth: "1200px", margin: "0 auto" }}>
+            <Card bordered={false} className="shadow-sm" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+                <Row align="middle" justify="space-between" style={{ marginBottom: "32px" }}>
                     <Col>
-                        <Button
-                            type="text"
-                            icon={<ArrowLeftOutlined />}
-                            onClick={onBack}
-                            style={{ fontSize: '18px' }}
-                        />
-                    </Col>
-                    <Col>
-                        <Title level={3} style={{ margin: 0, fontWeight: 800 }}>
-                            {isEdit ? `Edit ${config.title}` : `Add New ${config.title}`}
-                        </Title>
+                        <Space size="middle">
+                            <Button
+                                type="default"
+                                shape="circle"
+                                icon={<ArrowLeftOutlined />}
+                                onClick={onBack}
+                            />
+                            <div>
+                                <Text type="secondary" style={{ display: 'block', marginBottom: -4 }}>
+                                    {config.title} Management
+                                </Text>
+                                <Title level={2} style={{ margin: 0, fontWeight: 800 }}>
+                                    {isEdit ? `Edit ${config.title}` : `Add New ${config.title}`}
+                                </Title>
+                            </div>
+                        </Space>
                     </Col>
                 </Row>
 
@@ -126,44 +158,41 @@ const CommonForm = ({ doctype, id, onBack }) => {
                     layout="vertical"
                     onFinish={handleSave}
                     scrollToFirstError
+                    requiredMark="optional"
                 >
-                    <Row gutter={16}>
+                    <Row gutter={[24, 0]}>
                         {config.fields.map((field) => (
-                            <Col span={field.type === 'textarea' ? 24 : 12} key={field.name}>
+                            <Col xs={24} sm={field.type === 'textarea' ? 24 : 12} lg={field.type === 'textarea' ? 24 : 8} key={field.name}>
                                 <Form.Item
                                     name={field.name}
-                                    label={field.label}
+                                    label={<Text strong>{field.label}</Text>}
                                     rules={[
                                         { required: field.required, message: field.message },
                                         field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
                                     ].filter(Boolean)}
                                 >
                                     {field.type === 'textarea' ? (
-                                        <Input.TextArea 
-                                            placeholder={field.placeholder} 
-                                            rows={field.rows || 3} 
+                                        <Input.TextArea
+                                            placeholder={field.placeholder}
+                                            rows={field.rows || 3}
                                             disabled={field.readOnly || field.disabled}
+                                            style={{ borderRadius: '8px' }}
                                         />
                                     ) : field.type === 'image' || field.type === 'file' ? (
-                                        <Upload 
+                                        <Upload
                                             maxCount={1}
                                             beforeUpload={() => false}
                                             listType={field.type === 'image' ? "picture" : "text"}
-                                            defaultFileList={isEdit && initialValues?.[field.name] ? [
-                                                {
-                                                    uid: '-1',
-                                                    name: 'Current File',
-                                                    status: 'done',
-                                                    url: initialValues[field.name],
-                                                }
-                                            ] : []}
                                         >
-                                            <Button icon={<UploadOutlined />}>Choose File</Button>
+                                            <Button icon={<UploadOutlined />} style={{ borderRadius: '8px', width: '100%', height: '40px' }}>
+                                                Choose File
+                                            </Button>
                                         </Upload>
                                     ) : (
-                                        <Input 
-                                            placeholder={field.placeholder} 
+                                        <Input
+                                            placeholder={field.placeholder}
                                             disabled={field.readOnly || field.disabled}
+                                            style={{ borderRadius: '8px', height: '40px' }}
                                         />
                                     )}
                                 </Form.Item>
@@ -171,22 +200,77 @@ const CommonForm = ({ doctype, id, onBack }) => {
                         ))}
                     </Row>
 
-                    <Form.Item style={{ marginBottom: 0, textAlign: 'right', marginTop: '24px' }}>
-                        <Space>
-                            <Button onClick={onBack} style={{ borderRadius: '6px' }}>
+                    {/* Donation Types Assignment Logic for Temple Doctype */}
+                    {doctype === DOCTYPE_TEMPLE && (
+                        <div style={{ marginTop: '24px' }}>
+                            <Divider orientation="left">
+                                <Title level={4} style={{ margin: 0, color: '#4f46e5' }}>Donation Types</Title>
+                            </Divider>
+
+                            <Card style={{ background: '#f8fafc', border: '1px dashed #e2e8f0', borderRadius: '12px' }} bodyStyle={{ padding: '16px' }}>
+                                <List
+                                    loading={loadingDTypes}
+                                    grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 3 }}
+                                    dataSource={allDonationTypes}
+                                    renderItem={item => (
+                                        <List.Item>
+                                            <Card
+                                                size="small"
+                                                hoverable
+                                                style={{
+                                                    borderRadius: '10px',
+                                                    border: selectedDonationTypes.includes(item.name) ? '1.5px solid #4f46e5' : '1px solid #e2e8f0'
+                                                }}
+                                                bodyStyle={{ padding: '12px' }}
+                                                onClick={() => toggleDonationType(item.name)}
+                                            >
+                                                <Row align="middle" justify="space-between" gutter={12}>
+                                                    <Col flex="48px">
+                                                        <Avatar
+                                                            src={item.donation_image}
+                                                            shape="square"
+                                                            size={40}
+                                                            style={{ border: '1px solid #f1f5f9' }}
+                                                        />
+                                                    </Col>
+                                                    <Col flex="auto">
+                                                        <Text strong>{item.donation_type}</Text>
+                                                    </Col>
+                                                    <Col>
+                                                        <Switch
+                                                            checked={selectedDonationTypes.includes(item.name)}
+                                                            onChange={() => toggleDonationType(item.name)}
+                                                            size="small"
+                                                        />
+                                                    </Col>
+                                                </Row>
+                                            </Card>
+                                        </List.Item>
+                                    )}
+                                />
+                            </Card>
+                        </div>
+                    )}
+
+                    <Divider />
+
+                    <div style={{ textAlign: 'right' }}>
+                        <Space size="middle">
+                            <Button onClick={onBack} size="large" style={{ borderRadius: '8px', minWidth: '100px' }}>
                                 Cancel
                             </Button>
                             <Button
                                 type="primary"
                                 htmlType="submit"
+                                size="large"
                                 loading={creating || updating || uploading}
                                 icon={<SaveOutlined />}
-                                style={{ borderRadius: '6px', minWidth: '120px', height: '40px' }}
+                                style={{ borderRadius: '8px', minWidth: '160px', height: '45px', fontWeight: 600 }}
                             >
-                                {isEdit ? "Update Details" : `Create ${config.title}`}
+                                {isEdit ? "Save Changes" : `Create ${config.title}`}
                             </Button>
                         </Space>
-                    </Form.Item>
+                    </div>
                 </Form>
             </Card>
         </div>
