@@ -70,39 +70,6 @@
     padding: 0 !important;
   }
 
-  /* Navigation Bar Styles */
-  // .aavatto-topbar {
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: space-between;
-  //   position: sticky;
-  //   top: 0;
-  //   z-index: 200;
-  //   border-bottom: 1px solid var(--border-color);
-  //   padding-left: 2rem;
-  //   padding-right: 2rem;
-  //   box-shadow: var(--shadow-sm);
-  //   transition: var(--transition);
-  //   height: var(--topbar-height) !important;
-  //   background-color: var(--header-bg) !important;
-  // }
-
-  // .is-admin {
-  //   position: sticky !important;
-  //   top: 48px !important;
-  // }
-
-  // &.is-admin {
-  //   .aavatto-topbar {
-  //     top: 48px !important;
-  //     height: 48px !important;
-  //   }
-
-  //   .aavatto-topbar-menu {
-  //     line-height: 48px !important;
-  //   }
-  // }
-
   .aavatto-topbar-brand {
     display: flex;
     align-items: center;
@@ -164,8 +131,8 @@
   /* Component Layouts */
   .aavatto-content-wrapper {
     max-width: 1440px;
-    margin-left: auto;
-    margin-right: auto;
+    // margin-left: auto;
+    // margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     padding-top: 2rem;

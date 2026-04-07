@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Spin, Alert, Modal, message } from "antd";
-import { useFrappeGetDocList, useFrappeDeleteDoc } from "../hooks/useFrappe";
-import CommonTable from "../components/common/CommonTable";
-import PageHeader from "../components/common/PageHeader";
-import { exportToCSV } from "../utils/exportUtils";
+import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
+import CommonTable from "./CommonTable";
+import PageHeader from "./PageHeader";
+import { exportToCSV } from "../../utils/exportUtils";
 
 /**
  * ListingPage Component

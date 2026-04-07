@@ -2,11 +2,11 @@ import React, { useState, useMemo, useCallback } from "react";
 import { Row, Col, Typography, Space, Button, message } from "antd";
 import { HeartFilled, RedoOutlined } from "@ant-design/icons";
 
-import DonorSection from "../components/Donation/DonorSection";
-import TempleSelect from "../components/Donation/TempleSelect";
-import DonationTypes from "../components/Donation/DonationTypes";
-import Cart from "../components/Donation/Cart";
-import PaymentSection from "../components/Donation/PaymentSection";
+import DonorSection from "../../components/Donation/DonorSection";
+import TempleSelect from "../../components/Donation/TempleSelect";
+import DonationTypes from "../../components/Donation/DonationTypes";
+import Cart from "../../components/Donation/Cart";
+import PaymentSection from "../../components/Donation/PaymentSection";
 
 const { Title, Text } = Typography;
 

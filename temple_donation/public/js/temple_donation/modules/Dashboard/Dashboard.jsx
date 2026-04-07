@@ -8,7 +8,7 @@ import {
     TrophyOutlined,
     PieChartOutlined
 } from "@ant-design/icons";
-import PageHeader from "../components/common/PageHeader";
+import PageHeader from "../../components/common/PageHeader";
 
 const { Title, Text } = Typography;
 

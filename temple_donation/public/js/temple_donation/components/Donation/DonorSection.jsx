@@ -130,17 +130,4 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
     );
 };
 
-
-
-
-            <DonorModal
-                open={isModalOpen}
-                onCancel={() => setIsModalOpen(false)}
-                onSuccess={handleNewDonor}
-                initialMobileNumber={mobileNumber}
-            />
-        </Card>
-    );
-};
-
 export default DonorSection;
