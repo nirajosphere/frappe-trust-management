@@ -2,36 +2,12 @@
 @import "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
 
 /* ../temple_donation/temple_donation/public/js/temple_donation/styles.css */
-.page-head {
+#page-temple-donation .page-head {
   display: none !important;
 }
 .container {
   width: 100%;
-}
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
+  max-width: 1536px;
 }
 .temple-donation-app .fixed {
   position: fixed;
@@ -1131,13 +1107,10 @@
 }
 .temple-donation-app .aavatto-content-wrapper {
   max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .temple-donation-app .aavatto-card {
   padding: 1.5rem;
@@ -1482,4 +1455,4 @@
     color: rgb(203 213 225 / var(--tw-text-opacity, 1));
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.M34ZJMJV.css.map */
+/*# sourceMappingURL=temple_donation.bundle.MURAOWWM.css.map */

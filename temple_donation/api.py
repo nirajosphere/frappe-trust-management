@@ -155,3 +155,46 @@ def create_donation(data):
     frappe.db.commit()
 
     return {"name": doc.name, "message": "Donation created successfully"}
+
+@frappe.whitelist()
+def sync_user_roles(doc, method=None):
+    """
+    Automatically assigns Frappe Roles based on the custom_user_role field.
+    Mapped to before_save hook in hooks.py.
+    """
+    if not doc.get("custom_user_role"):
+        return
+        
+    role_map = {
+        "Super Admin": "System Manager",
+        "Temple Admin": "Temple Admin",
+        "Cashier": "Cashier"
+    }
+    
+    # Identify the target role from our custom field
+    selected_role = doc.custom_user_role.strip()
+    target_role = role_map.get(selected_role)
+    
+    if not target_role:
+        return
+
+    # List of roles we manage via this custom field
+    managed_roles = list(role_map.values())
+    
+    # Get current roles set on the user
+    current_roles = [r.role for r in doc.roles]
+    
+    # If the user doesn't have the target role, sync it
+    if target_role not in current_roles:
+        # 1. Remove other previously managed roles to keep it exclusive to the selection
+        filtered_roles = [r for r in doc.roles if r.role not in managed_roles or r.role == target_role]
+        doc.set("roles", filtered_roles)
+        
+        # 2. Add the target role
+        doc.append("roles", {"role": target_role})
+        
+        # 3. Ensure user type is System User for desk access
+        doc.user_type = "System User"
+        
+        # Note: No doc.save() here as this is a before_save hook. 
+        # Modifications to the doc object will be persisted automatically.

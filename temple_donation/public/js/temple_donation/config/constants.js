@@ -8,3 +8,4 @@ export const DOCTYPE_TEMPLE = "Temple";
 export const DOCTYPE_DONATION = "Donation";
 export const DOCTYPE_DONATION_TYPE = "Donation Type";
 export const DOCTYPE_DONATION_ITEM = "Donation Item";
+export const DOCTYPE_USER = "User";

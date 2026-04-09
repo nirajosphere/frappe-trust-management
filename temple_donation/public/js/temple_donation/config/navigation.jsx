@@ -10,7 +10,7 @@ import {
 import Dashboard from "../modules/Dashboard/Dashboard";
 import DonationPOS from "../modules/Donation/Donation";
 import {
-    DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE
+    DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER
 } from "./constants";
 
 // Module Imports
@@ -29,6 +29,9 @@ import DonationForm from "../modules/Donation/DonationForm";
 import DonationTypeList from "../modules/DonationType/DonationTypeList";
 import DonationTypeView from "../modules/DonationType/DonationTypeView";
 import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
+ 
+import UserList from "../modules/User/UserList";
+import UserForm from "../modules/User/UserForm";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
 
@@ -48,11 +51,18 @@ export const navigationItems = [
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
-        key: "donors",
+        key: "ledger",
+        icon: <BankOutlined />,
+        label: "Ledger",
+        component: <OpeningBalance />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "users",
         icon: <UserOutlined />,
-        label: "Donors",
-        component: <DonorList />,
-        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+        label: "Users",
+        component: <UserList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "temples",
@@ -62,25 +72,25 @@ export const navigationItems = [
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
-        key: "ledger",
-        icon: <BankOutlined />,
-        label: "Ledger",
-        component: <OpeningBalance />,
-        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
-    },
-    {
-        key: "donations",
-        icon: <HistoryOutlined />,
-        label: "Donation List",
-        component: <DonationList />,
-        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
         key: "donation-types",
         icon: <ShoppingCartOutlined />,
         label: "Donation Types",
         component: <DonationTypeList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "donors",
+        icon: <UserOutlined />,
+        label: "Donors",
+        component: <DonorList />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    },
+    {
+        key: "donations",
+        icon: <HistoryOutlined />,
+        label: "Donation",
+        component: <DonationList />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
 ];
 
@@ -98,7 +108,8 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         "donors": DOCTYPE_DONOR,
         "temples": DOCTYPE_TEMPLE,
         "donations": DOCTYPE_DONATION,
-        "donation-types": DOCTYPE_DONATION_TYPE
+        "donation-types": DOCTYPE_DONATION_TYPE,
+        "users": DOCTYPE_USER
     };
 
     const targetDoctype = doctypeMap[baseKey];
@@ -174,6 +185,7 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             case DOCTYPE_TEMPLE: return <TempleForm {...formProps} />;
             case DOCTYPE_DONATION: return <DonationForm {...formProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeForm {...formProps} />;
+            case DOCTYPE_USER: return <UserForm {...formProps} />;
             default: return null;
         }
     }

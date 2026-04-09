@@ -1291,7 +1291,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React499 = require_react(), Internals = {
+        var React502 = require_react(), Internals = {
           d: {
             f: noop4,
             r: function() {
@@ -1309,7 +1309,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React499.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React502.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3161,7 +3161,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React499.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React502.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18999,14 +18999,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React499 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React502 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React499.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React502.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21799,7 +21799,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React499.version;
+          var isomorphicReactPackageVersion = React502.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21970,10 +21970,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react184 = __toESM(require_react());
+  var import_react187 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react183 = __toESM(require_react());
+  var import_react186 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -88774,7 +88774,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react181 = __toESM(require_react());
+  var import_react184 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
   var import_react150 = __toESM(require_react());
@@ -89877,6 +89877,7 @@ html body {
   var DOCTYPE_TEMPLE = "Temple";
   var DOCTYPE_DONATION = "Donation";
   var DOCTYPE_DONATION_TYPE = "Donation Type";
+  var DOCTYPE_USER = "User";
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorList.jsx
   var import_react162 = __toESM(require_react());
@@ -90460,12 +90461,118 @@ html body {
     ]
   };
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/userFormFields.js
+  var userFormFields = {
+    title: "User",
+    fields: [
+      {
+        name: "email",
+        label: "Email Address",
+        type: "text",
+        placeholder: "Enter Email Address",
+        required: true,
+        message: "Please enter email address!",
+        pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        patternMessage: "Please enter a valid email address!"
+      },
+      {
+        name: "first_name",
+        label: "First Name",
+        type: "text",
+        placeholder: "Enter First Name",
+        required: true,
+        message: "Please enter first name!"
+      },
+      {
+        name: "last_name",
+        label: "Last Name",
+        type: "text",
+        placeholder: "Enter Last Name"
+      },
+      {
+        name: "custom_test",
+        label: "Contact Number",
+        type: "text",
+        placeholder: "Enter Contact Number",
+        required: true,
+        message: "Please enter contact number!",
+        pattern: /^\d{10}$/,
+        patternMessage: "Please enter a valid 10-digit number!"
+      },
+      {
+        name: "new_password",
+        label: "Password",
+        type: "password",
+        placeholder: "Enter Password",
+        required: true,
+        message: "Please enter password!",
+        pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
+        patternMessage: "Password must be at least 8 characters long and include at least one number and one special character."
+      },
+      {
+        name: "confirm_password",
+        label: "Confirm Password",
+        type: "password",
+        placeholder: "Enter Confirm Password",
+        required: true,
+        message: "Please confirm password!"
+      },
+      {
+        name: "custom_user_role",
+        label: "User Role",
+        type: "select",
+        placeholder: "Select Role",
+        options: ["Super Admin", "Temple Admin", "Cashier"],
+        required: true
+      },
+      {
+        name: "custom_select_temple",
+        label: "Select Temples",
+        type: "select",
+        placeholder: "Select Temples",
+        options: [],
+        required: true
+      },
+      {
+        name: "enabled",
+        label: "Account Status",
+        type: "select",
+        placeholder: "Select Status",
+        options: ["Active", "Inactive"],
+        defaultValue: "Active",
+        required: true
+      },
+      {
+        name: "custom_status",
+        label: "Status",
+        type: "select",
+        placeholder: "Select Status",
+        options: ["Active", "Inactive"],
+        defaultValue: "Active",
+        required: true
+      },
+      {
+        name: "custom_opening_balance",
+        label: "Opening Balance",
+        type: "text",
+        placeholder: "Add Opening Balance"
+      },
+      {
+        name: "custom_internal_notes",
+        label: "Internal Notes",
+        type: "textarea",
+        placeholder: "Add Note"
+      }
+    ]
+  };
+
   // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
   var formConfigs = {
     [DOCTYPE_DONOR]: donorFormFields,
     [DOCTYPE_TEMPLE]: templeFormFields,
     [DOCTYPE_DONATION]: donationFormFields,
-    [DOCTYPE_DONATION_TYPE]: donationTypeFormFields
+    [DOCTYPE_DONATION_TYPE]: donationTypeFormFields,
+    [DOCTYPE_USER]: userFormFields
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
@@ -91393,22 +91500,353 @@ html body {
   };
   var DonationTypeForm_default = DonationTypeForm;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
   var import_react180 = __toESM(require_react());
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userTable.jsx
   var import_react179 = __toESM(require_react());
-  var { Text: Text21 } = typography_default;
+  var userColumns = [
+    {
+      title: "User",
+      dataIndex: "full_name",
+      key: "full_name",
+      render: (text, record) => /* @__PURE__ */ import_react179.default.createElement("div", {
+        className: "flex items-center gap-3"
+      }, /* @__PURE__ */ import_react179.default.createElement("div", {
+        className: "h-8 w-8 rounded-full bg-zinc-100 flex items-center justify-center text-[10px] font-black text-zinc-400 border border-zinc-200 uppercase"
+      }, text ? text.substring(0, 2) : record.first_name ? record.first_name.substring(0, 2) : "UN"), /* @__PURE__ */ import_react179.default.createElement("div", {
+        className: "flex flex-col"
+      }, /* @__PURE__ */ import_react179.default.createElement("span", {
+        className: "font-bold text-zinc-800 leading-tight"
+      }, text || `${record.first_name || ""} ${record.last_name || ""}`.trim() || record.name), /* @__PURE__ */ import_react179.default.createElement("span", {
+        className: "text-[11px] text-zinc-400 font-medium lowercase"
+      }, record.email)))
+    },
+    {
+      title: "Contact",
+      dataIndex: "custom_test",
+      key: "custom_test",
+      render: (text) => /* @__PURE__ */ import_react179.default.createElement("span", {
+        className: "text-zinc-500 font-medium"
+      }, text || "N/A")
+    },
+    {
+      title: "Temples",
+      dataIndex: "custom_assigned_temples",
+      key: "custom_assigned_temples",
+      render: (temples) => /* @__PURE__ */ import_react179.default.createElement("div", {
+        className: "flex flex-wrap gap-1"
+      }, temples && temples.length > 0 ? temples.map((t2, index2) => /* @__PURE__ */ import_react179.default.createElement(tag_default, {
+        key: index2,
+        className: "bg-zinc-50 border-zinc-200 text-zinc-500 font-bold rounded-full px-2 py-0 text-[10px]"
+      }, t2.temple)) : /* @__PURE__ */ import_react179.default.createElement("span", {
+        className: "text-zinc-400 italic text-[11px]"
+      }, "Global"))
+    },
+    {
+      title: "Role",
+      dataIndex: "custom_user_role",
+      key: "custom_user_role",
+      render: (text) => /* @__PURE__ */ import_react179.default.createElement(tag_default, {
+        className: "bg-zinc-50 border-zinc-200 text-zinc-500 font-bold border-0 rounded-full px-3 py-0.5 uppercase text-[9px] tracking-wider"
+      }, text || "Standard")
+    },
+    {
+      title: "Status",
+      dataIndex: "enabled",
+      key: "enabled",
+      render: (enabled) => /* @__PURE__ */ import_react179.default.createElement(tag_default, {
+        color: enabled ? "success" : "error",
+        className: "rounded-full px-4 border-0 font-bold uppercase text-[9px]"
+      }, enabled ? "ACTIVE" : "INACTIVE")
+    }
+  ];
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
+  var UserList = () => {
+    return /* @__PURE__ */ import_react180.default.createElement(ListingPage_default, {
+      doctype: DOCTYPE_USER,
+      title: "Users Management",
+      description: "Manage temple admins, cashiers and system users.",
+      columns: userColumns,
+      basePath: "users",
+      fields: ["name", "full_name", "first_name", "last_name", "email", "custom_test", "custom_user_role", "custom_status", "enabled"]
+    });
+  };
+  var UserList_default = UserList;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserForm.jsx
+  var import_react181 = __toESM(require_react());
+  var { Title: Title14, Text: Text21 } = typography_default;
+  var UserForm = ({ id, onBack }) => {
+    const isEdit = !!id;
+    const [form] = form_default.useForm();
+    const { createDoc, loading: creating } = useFrappeCreateDoc();
+    const { updateDoc, loading: updating } = useFrappeUpdateDoc();
+    const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_USER, id);
+    const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
+    (0, import_react181.useEffect)(() => {
+      if (isEdit && initialValues) {
+        console.log("Setting form values with:", initialValues);
+        const values = __spreadValues({}, initialValues);
+        if (values.hasOwnProperty("enabled")) {
+          values.enabled = values.enabled ? "Active" : "Inactive";
+        }
+        if (values.custom_assigned_temples && Array.isArray(values.custom_assigned_temples)) {
+          values.custom_assigned_temples = values.custom_assigned_temples.map((t2) => t2.temple);
+        }
+        form.setFieldsValue(values);
+      } else if (!isEdit) {
+        const defaultValues = {};
+        userFormFields.fields.forEach((f) => {
+          if (f.defaultValue)
+            defaultValues[f.name] = f.defaultValue;
+        });
+        form.setFieldsValue(defaultValues);
+      }
+    }, [isEdit, initialValues, form]);
+    const handleSave = async (values) => {
+      try {
+        const payload = __spreadValues({}, values);
+        if (payload.enabled) {
+          payload.enabled = payload.enabled === "Active" ? 1 : 0;
+        }
+        if (payload.custom_assigned_temples && Array.isArray(payload.custom_assigned_temples)) {
+          payload.custom_assigned_temples = payload.custom_assigned_temples.map((t2) => ({ temple: t2 }));
+        }
+        delete payload.confirm_password;
+        if (isEdit) {
+          if (!payload.new_password) {
+            delete payload.new_password;
+          }
+          await updateDoc(DOCTYPE_USER, id, payload);
+          message_default.success("User updated successfully!");
+        } else {
+          await createDoc(DOCTYPE_USER, payload);
+          message_default.success("User created successfully!");
+        }
+        if (onBack)
+          onBack();
+      } catch (err) {
+        message_default.error(err.message || "Something went wrong.");
+      }
+    };
+    if (isEdit && fetching) {
+      return /* @__PURE__ */ import_react181.default.createElement("div", {
+        className: "flex flex-col items-center justify-center min-h-[400px] gap-4"
+      }, /* @__PURE__ */ import_react181.default.createElement(spin_default, {
+        size: "large"
+      }), /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        className: "text-zinc-400 font-bold uppercase tracking-widest text-[10px]"
+      }, "Fetching user record..."));
+    }
+    return /* @__PURE__ */ import_react181.default.createElement("div", {
+      className: "max-w-5xl mx-auto py-6"
+    }, /* @__PURE__ */ import_react181.default.createElement(PageHeader_default, {
+      onBack,
+      subtitle: "User & Security Management",
+      title: isEdit ? "Edit User" : "Add New User"
+    }), /* @__PURE__ */ import_react181.default.createElement(card_default, {
+      size: "small",
+      className: "aavatto-card border-zinc-100 shadow-sm rounded-xl"
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default, {
+      form,
+      layout: "vertical",
+      onFinish: handleSave,
+      scrollToFirstError: true,
+      requiredMark: false,
+      className: "p-8"
+    }, /* @__PURE__ */ import_react181.default.createElement(row_default2, {
+      gutter: [24, 0]
+    }, /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "email",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Email Address"),
+      rules: [{ required: true, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default, {
+      placeholder: "Email",
+      className: "h-10 border-zinc-200 bg-zinc-50/30 rounded-lg px-4"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "first_name",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "First Name"),
+      rules: [{ required: true, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default, {
+      placeholder: "First Name",
+      className: "h-10 border-zinc-200 bg-zinc-50/30 rounded-lg px-4"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "last_name",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Last Name")
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default, {
+      placeholder: "Last Name",
+      className: "h-10 border-zinc-200 bg-zinc-50/30 rounded-lg px-4"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_test",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Contact Number"),
+      rules: [{ required: true, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default, {
+      placeholder: "Contact",
+      className: "h-10 border-zinc-200 bg-zinc-50/30 rounded-lg px-4"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_user_role",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "User Role"),
+      rules: [{ required: true, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default, {
+      placeholder: "Select Role",
+      className: "h-10 w-full"
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Super Admin"
+    }, "Super Admin"), /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Temple Admin"
+    }, "Temple Admin"), /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Cashier"
+    }, "Cashier")))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_assigned_temples",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Select Temples"),
+      rules: [{ required: true, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default, {
+      mode: "multiple",
+      placeholder: "Select Temples",
+      className: "h-10 w-full",
+      allowClear: true
+    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      key: t2.name,
+      value: t2.name
+    }, t2.temple_name || t2.name))))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "new_password",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Password"),
+      rules: [{ required: !isEdit, message: "Required" }]
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default.Password, {
+      placeholder: "Password",
+      size: "large",
+      className: "border-zinc-200 bg-zinc-50/30 rounded-lg"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "enabled",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Account Status"),
+      rules: [{ required: true }]
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default, {
+      className: "h-10 w-full"
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Active"
+    }, "Active"), /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Inactive"
+    }, "Inactive")))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_status",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Status"),
+      rules: [{ required: true }]
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default, {
+      className: "h-10 w-full"
+    }, /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Active"
+    }, "Active"), /* @__PURE__ */ import_react181.default.createElement(select_default.Option, {
+      value: "Inactive"
+    }, "Inactive")))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_opening_balance",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Opening Balance")
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default, {
+      placeholder: "0.00",
+      className: "h-10 border-zinc-200 bg-zinc-50/30 rounded-lg px-4"
+    }))), /* @__PURE__ */ import_react181.default.createElement(col_default2, {
+      xs: 24
+    }, /* @__PURE__ */ import_react181.default.createElement(form_default.Item, {
+      name: "custom_internal_notes",
+      label: /* @__PURE__ */ import_react181.default.createElement(Text21, {
+        strong: true,
+        className: "text-zinc-500"
+      }, "Internal Notes")
+    }, /* @__PURE__ */ import_react181.default.createElement(input_default.TextArea, {
+      rows: 4,
+      placeholder: "Notes...",
+      className: "border-zinc-200 bg-zinc-50/30 rounded-lg p-4"
+    })))), /* @__PURE__ */ import_react181.default.createElement("div", {
+      className: "flex items-center justify-end gap-3 mt-10 border-t border-zinc-100 pt-8"
+    }, /* @__PURE__ */ import_react181.default.createElement(button_default, {
+      onClick: onBack,
+      className: "h-10 px-8 font-bold border-zinc-200 text-zinc-400 hover:text-zinc-900 transition-all text-xs uppercase tracking-widest"
+    }, "Cancel"), /* @__PURE__ */ import_react181.default.createElement(button_default, {
+      type: "primary",
+      htmlType: "submit",
+      loading: creating || updating,
+      icon: /* @__PURE__ */ import_react181.default.createElement(SaveOutlined_default2, null),
+      className: "h-10 px-10 font-bold bg-zinc-900 hover:bg-black border-none shadow-md flex items-center gap-2 text-xs uppercase tracking-widest"
+    }, isEdit ? "Update User" : "Create User")))));
+  };
+  var UserForm_default = UserForm;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
+  var import_react183 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
+  var import_react182 = __toESM(require_react());
+  var { Text: Text22 } = typography_default;
   var userBalanceColumns = [
     {
       title: "User Name",
       dataIndex: "full_name",
       key: "full_name",
-      render: (text, record) => /* @__PURE__ */ import_react179.default.createElement(space_default, null, /* @__PURE__ */ import_react179.default.createElement(UserOutlined_default2, {
+      render: (text, record) => /* @__PURE__ */ import_react182.default.createElement(space_default, null, /* @__PURE__ */ import_react182.default.createElement(UserOutlined_default2, {
         className: "text-zinc-400"
-      }), /* @__PURE__ */ import_react179.default.createElement("div", null, /* @__PURE__ */ import_react179.default.createElement("div", {
+      }), /* @__PURE__ */ import_react182.default.createElement("div", null, /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "font-bold text-zinc-900"
-      }, text || record.user_name), /* @__PURE__ */ import_react179.default.createElement("div", {
+      }, text || record.user_name), /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "text-xs text-zinc-400 font-medium"
       }, record.user_name)))
     },
@@ -91416,21 +91854,21 @@ html body {
       title: "Opening Balance (Cash Only)",
       dataIndex: "opening_balance",
       key: "opening_balance",
-      render: (value) => /* @__PURE__ */ import_react179.default.createElement("div", {
+      render: (value) => /* @__PURE__ */ import_react182.default.createElement("div", {
         className: "flex items-center gap-2"
-      }, /* @__PURE__ */ import_react179.default.createElement(WalletOutlined_default2, {
+      }, /* @__PURE__ */ import_react182.default.createElement(WalletOutlined_default2, {
         className: "text-zinc-400"
-      }), /* @__PURE__ */ import_react179.default.createElement("span", {
+      }), /* @__PURE__ */ import_react182.default.createElement("span", {
         className: "font-bold text-lg text-zinc-900"
       }, "\u20B9", (value == null ? void 0 : value.toLocaleString()) || "0"))
     }
   ];
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var { Title: Title14, Text: Text22 } = typography_default;
+  var { Title: Title15, Text: Text23 } = typography_default;
   var OpeningBalance = () => {
-    const [loading, setLoading] = (0, import_react180.useState)(false);
-    const [data, setData] = (0, import_react180.useState)([]);
+    const [loading, setLoading] = (0, import_react183.useState)(false);
+    const [data, setData] = (0, import_react183.useState)([]);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -91470,7 +91908,7 @@ html body {
         message_default.error("Reset failed");
       }
     };
-    (0, import_react180.useEffect)(() => {
+    (0, import_react183.useEffect)(() => {
       fetchData();
     }, []);
     const columns = [
@@ -91479,31 +91917,31 @@ html body {
         title: "Reset Balance",
         key: "action",
         align: "right",
-        render: (_, record) => /* @__PURE__ */ import_react180.default.createElement(button_default, {
+        render: (_, record) => /* @__PURE__ */ import_react183.default.createElement(button_default, {
           type: "default",
-          icon: /* @__PURE__ */ import_react180.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react183.default.createElement(SyncOutlined_default2, null),
           className: "rounded-lg font-bold bg-zinc-100 border-zinc-200 text-zinc-700 hover:bg-zinc-900 hover:text-white transition-all",
           onClick: () => handleReset(record.user_name, record.opening_balance)
         }, "Reset Cash")
       }
     ];
-    return /* @__PURE__ */ import_react180.default.createElement("div", {
+    return /* @__PURE__ */ import_react183.default.createElement("div", {
       className: "animate-fadeIn"
-    }, /* @__PURE__ */ import_react180.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react183.default.createElement(PageHeader_default, {
       title: "User Opening Balance",
       subtitle: "Manage and Reset Hand-over Cash for each user.",
       extra: [
-        /* @__PURE__ */ import_react180.default.createElement(button_default, {
+        /* @__PURE__ */ import_react183.default.createElement(button_default, {
           key: "refresh",
           onClick: fetchData,
           loading,
           className: " border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold",
-          icon: /* @__PURE__ */ import_react180.default.createElement(SyncOutlined_default2, null)
+          icon: /* @__PURE__ */ import_react183.default.createElement(SyncOutlined_default2, null)
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react180.default.createElement("div", {
+    }), /* @__PURE__ */ import_react183.default.createElement("div", {
       className: "p-8"
-    }, /* @__PURE__ */ import_react180.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react183.default.createElement(table_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
@@ -91518,45 +91956,52 @@ html body {
   var navigationItems = [
     {
       key: "dashboard",
-      icon: /* @__PURE__ */ import_react181.default.createElement(DashboardOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react184.default.createElement(DashboardOutlined_default2, null),
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react181.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react184.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
-      key: "donors",
-      icon: /* @__PURE__ */ import_react181.default.createElement(UserOutlined_default2, null),
-      label: "Donors",
-      component: /* @__PURE__ */ import_react181.default.createElement(DonorList_default, null),
-      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
-      key: "temples",
-      icon: /* @__PURE__ */ import_react181.default.createElement(BankOutlined_default2, null),
-      label: "Temples",
-      component: /* @__PURE__ */ import_react181.default.createElement(TempleList_default, null),
-      roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
-      icon: /* @__PURE__ */ import_react181.default.createElement(BankOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react184.default.createElement(BankOutlined_default2, null),
       label: "Ledger",
-      component: /* @__PURE__ */ import_react181.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react184.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
-      key: "donations",
-      icon: /* @__PURE__ */ import_react181.default.createElement(HistoryOutlined_default2, null),
-      label: "Donation List",
-      component: /* @__PURE__ */ import_react181.default.createElement(DonationList_default, null),
-      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+      key: "users",
+      icon: /* @__PURE__ */ import_react184.default.createElement(UserOutlined_default2, null),
+      label: "Users",
+      component: /* @__PURE__ */ import_react184.default.createElement(UserList_default, null),
+      roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+      key: "temples",
+      icon: /* @__PURE__ */ import_react184.default.createElement(BankOutlined_default2, null),
+      label: "Temples",
+      component: /* @__PURE__ */ import_react184.default.createElement(TempleList_default, null),
+      roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
-      icon: /* @__PURE__ */ import_react181.default.createElement(ShoppingCartOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react184.default.createElement(ShoppingCartOutlined_default2, null),
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react181.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react184.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+      key: "donors",
+      icon: /* @__PURE__ */ import_react184.default.createElement(UserOutlined_default2, null),
+      label: "Donors",
+      component: /* @__PURE__ */ import_react184.default.createElement(DonorList_default, null),
+      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    },
+    {
+      key: "donations",
+      icon: /* @__PURE__ */ import_react184.default.createElement(HistoryOutlined_default2, null),
+      label: "Donation",
+      component: /* @__PURE__ */ import_react184.default.createElement(DonationList_default, null),
+      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     }
   ];
   var getComponentForRoute = (currentRoute, userRoles = []) => {
@@ -91568,25 +92013,26 @@ html body {
       "donors": DOCTYPE_DONOR,
       "temples": DOCTYPE_TEMPLE,
       "donations": DOCTYPE_DONATION,
-      "donation-types": DOCTYPE_DONATION_TYPE
+      "donation-types": DOCTYPE_DONATION_TYPE,
+      "users": DOCTYPE_USER
     };
     const targetDoctype = doctypeMap[baseKey];
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react181.default.createElement("div", {
+      return /* @__PURE__ */ import_react184.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react181.default.createElement("div", {
+      }, /* @__PURE__ */ import_react184.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react181.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react184.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react181.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react184.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react181.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react184.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react181.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react184.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react181.default.createElement("button", {
+      }, /* @__PURE__ */ import_react184.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -91597,7 +92043,7 @@ html body {
       }
     };
     if (baseKey === "ledger") {
-      return /* @__PURE__ */ import_react181.default.createElement(OpeningBalance_default, null);
+      return /* @__PURE__ */ import_react184.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -91607,22 +92053,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react181.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react181.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react184.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react181.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react181.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react181.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react184.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react181.default.createElement(Donation_default, null);
+        return /* @__PURE__ */ import_react184.default.createElement(Donation_default, null);
       }
       const formProps = {
         id: dynamicId,
@@ -91630,20 +92076,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react181.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react181.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react184.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react181.default.createElement(DonationForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonationForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react181.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react184.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+        case DOCTYPE_USER:
+          return /* @__PURE__ */ import_react184.default.createElement(UserForm_default, __spreadValues({}, formProps));
         default:
           return null;
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react181.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react184.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -91654,13 +92102,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react182 = __toESM(require_react());
-  var UserContext = (0, import_react182.createContext)();
+  var import_react185 = __toESM(require_react());
+  var UserContext = (0, import_react185.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react182.useState)(null);
-    const [roles, setRoles] = (0, import_react182.useState)([]);
-    const [loading, setLoading] = (0, import_react182.useState)(true);
-    (0, import_react182.useEffect)(() => {
+    const [user, setUser] = (0, import_react185.useState)(null);
+    const [roles, setRoles] = (0, import_react185.useState)([]);
+    const [loading, setLoading] = (0, import_react185.useState)(true);
+    (0, import_react185.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -91722,12 +92170,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react182.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react185.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react182.useContext)(UserContext);
+    const context = (0, import_react185.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -91737,11 +92185,11 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react183.useState)("dashboard");
+    const [currentRoute, setCurrentRoute] = (0, import_react186.useState)("dashboard");
     const { user, roles, logout, isAdmin } = useUser();
     console.log(isAdmin, "isAdmin");
     console.log("isAdmin");
-    (0, import_react183.useEffect)(() => {
+    (0, import_react186.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -91768,7 +92216,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react183.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react186.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof frappe !== "undefined") {
             frappe.set_route("UserProfile", user == null ? void 0 : user.email);
@@ -91781,48 +92229,48 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react183.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react186.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
     ];
     const menuItems = getFilteredMenuItems(roles);
-    return /* @__PURE__ */ import_react183.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react186.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react183.default.createElement("div", {
+    }, /* @__PURE__ */ import_react186.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react183.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react186.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react183.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react186.default.createElement(Header3, {
       className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
-    }, /* @__PURE__ */ import_react183.default.createElement("div", {
+    }, /* @__PURE__ */ import_react186.default.createElement("div", {
       className: "flex items-center"
-    }, /* @__PURE__ */ import_react183.default.createElement("div", {
+    }, /* @__PURE__ */ import_react186.default.createElement("div", {
       className: "aavatto-topbar-brand"
-    }, /* @__PURE__ */ import_react183.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react183.default.createElement(menu_default2, {
+    }, /* @__PURE__ */ import_react186.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react186.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "aavatto-topbar-menu",
       disabledOverflow: true
-    })), console.log(roles, "roles"), !isAdmin && /* @__PURE__ */ import_react183.default.createElement("div", {
+    })), console.log(roles, "roles"), !isAdmin && /* @__PURE__ */ import_react186.default.createElement("div", {
       className: "aavatto-topbar-right"
-    }, /* @__PURE__ */ import_react183.default.createElement(dropdown_default3, {
+    }, /* @__PURE__ */ import_react186.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight",
       arrow: true
-    }, /* @__PURE__ */ import_react183.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react186.default.createElement(space_default, {
       className: "aavatto-user-profile"
-    }, /* @__PURE__ */ import_react183.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react186.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react183.default.createElement(UserOutlined_default2, null),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react186.default.createElement(UserOutlined_default2, null),
       className: "bg-zinc-100 text-zinc-900"
-    }), /* @__PURE__ */ import_react183.default.createElement("span", {
+    }), /* @__PURE__ */ import_react186.default.createElement("span", {
       className: "user-name-text text-zinc-900"
-    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react183.default.createElement(Content3, {
+    }, user == null ? void 0 : user.name))))), /* @__PURE__ */ import_react186.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react183.default.createElement("div", {
+    }, /* @__PURE__ */ import_react186.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -91841,7 +92289,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react184.default.createElement(UserProvider, null, /* @__PURE__ */ import_react184.default.createElement(App, null))
+        /* @__PURE__ */ import_react187.default.createElement(UserProvider, null, /* @__PURE__ */ import_react187.default.createElement(App, null))
       );
       this.$temple_donation = root;
     }
@@ -91895,4 +92343,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.OKIB5HJ3.js.map
+//# sourceMappingURL=temple_donation.bundle.7QEPV5UH.js.map

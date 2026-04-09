@@ -10,9 +10,9 @@
  */
 
 /* Hide the standard Frappe page header to prevent double headers */
-.page-head {
-  display: none !important;
-}
+// .page-head {
+//   display: none !important;
+// }
 
 .temple-donation-app {
   /* Theme Variables */
@@ -55,9 +55,9 @@
     font-family: var(--font-primary);
   }
 
-  .page-head {
-    display: none !important;
-  }
+  // .page-head {
+  //   display: none !important;
+  // }
 
   .layout-main-section {
     padding: 0 !important;

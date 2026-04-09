@@ -145,13 +145,11 @@ app_include_css = [
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"User": {
+		"before_save": "temple_donation.api.sync_user_roles"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
