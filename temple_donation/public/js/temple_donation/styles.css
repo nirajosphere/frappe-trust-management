@@ -1841,4 +1841,21 @@
   }
 }
 
+/* Hides standard Frappe Desk UI for Application-only users */
+body.non-admin-user .navbar,
+body.non-admin-user .sidebar,
+body.non-admin-user .layout-side-section,
+body.non-admin-user .desk-container,
+body.non-admin-user #navbar {
+    display: none !important;
+}
+
+body.non-admin-user .aavatto-topbar {
+    top: 0 !important;
+}
+
+body.non-admin-user .page-container {
+    padding-top: 0 !important;
+}
+
 /*# sourceMappingURL=styles.css.map */
