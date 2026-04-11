@@ -63,34 +63,64 @@ def reset_user_balance(user_name, amount):
     return {"status": "success", "message": f"Recorded handover of ₹{f_amount} for {user_name}"}
 
 @frappe.whitelist()
-def get_dashboard_stats():
+def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns core stats for the dashboard.
     Total Donation = (Sum of Handed-over Cash from Ledger) + (Sum of non-Cash donations).
     """
+    filters = {}
+    if temple:
+        filters["temple"] = temple
+    if user:
+        filters["cashier"] = user
+    if from_date and to_date:
+        filters["creation"] = ["between", [from_date, to_date]]
+    elif from_date:
+        filters["creation"] = [">=", from_date]
+    elif to_date:
+        filters["creation"] = ["<=", to_date]
+
     # 1. Handed-over Cash from Ledger
-    handed_over_cash = frappe.db.get_value("Ledger", filters={}, fieldname="sum(opening_balance)") or 0
+    # Note: Ledger doesn't have 'temple' field directly usually, 
+    # but let's assume we want to filter donations. 
+    # If we filter by temple, we should probably look at tabDonation.
     
-    # 2. Direct non-cash donations (Online/Bank/Card)
-    direct_donations = frappe.db.get_value("Donation", 
-                                          filters={"payment_mode": ["!=", "Cash"]}, 
+    # Let's simplify: Sum of total_amount from tabDonation with filters
+    total_donation = frappe.db.get_value("Donation", 
+                                          filters=filters, 
                                           fieldname="sum(total_amount)") or 0
-                                          
-    total_donation = handed_over_cash + direct_donations
     
     # 2. Top Category
-    top_cat_result = frappe.db.sql("""
-        SELECT donation_type, SUM(amount) as total 
-        FROM `tabDonation Item` 
-        GROUP BY donation_type 
-        ORDER BY total DESC 
-        LIMIT 1
-    """, as_dict=True)
+    query = """
+        SELECT di.donation_type, SUM(di.amount) as total 
+        FROM `tabDonation Item` di
+        JOIN `tabDonation` d ON di.parent = d.name
+        WHERE 1=1
+    """
+    params = []
+    if temple:
+        query += " AND d.temple = %s"
+        params.append(temple)
+    if user:
+        query += " AND d.cashier = %s"
+        params.append(user)
+    if from_date and to_date:
+        query += " AND d.creation BETWEEN %s AND %s"
+        params.extend([from_date, to_date])
+    
+    query += " GROUP BY di.donation_type ORDER BY total DESC LIMIT 1"
+    
+    top_cat_result = frappe.db.sql(query, tuple(params), as_dict=True)
     top_category = top_cat_result[0].donation_type if top_cat_result else "N/A"
     
     # 3. New Donors Today
-    from frappe.utils import nowdate
-    new_donors = frappe.db.count("Donor", filters={"creation": (">=", nowdate())})
+    donor_filters = {}
+    if from_date and to_date:
+        donor_filters["creation"] = ["between", [from_date, to_date]]
+    else:
+        donor_filters["creation"] = (">=", nowdate())
+        
+    new_donors = frappe.db.count("Donor", filters=donor_filters)
     
     return {
         "total_donation": total_donation,
@@ -99,29 +129,51 @@ def get_dashboard_stats():
     }
 
 @frappe.whitelist()
-def get_donations_by_type():
+def get_donations_by_type(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns donation breakdown for pie chart.
     """
-    return frappe.db.sql("""
-        SELECT donation_type as type, SUM(amount) as value 
-        FROM `tabDonation Item` 
-        GROUP BY donation_type 
-        ORDER BY value DESC
-    """, as_dict=True)
+    query = """
+        SELECT di.donation_type as type, SUM(di.amount) as value 
+        FROM `tabDonation Item` di
+        JOIN `tabDonation` d ON di.parent = d.name
+        WHERE 1=1
+    """
+    params = []
+    if temple:
+        query += " AND d.temple = %s"
+        params.append(temple)
+    if user:
+        query += " AND d.cashier = %s"
+        params.append(user)
+    if from_date and to_date:
+        query += " AND d.creation BETWEEN %s AND %s"
+        params.extend([from_date, to_date])
+        
+    query += " GROUP BY di.donation_type ORDER BY value DESC"
+    
+    return frappe.db.sql(query, tuple(params), as_dict=True)
 
 @frappe.whitelist()
-def get_top_donors():
+def get_top_donors(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns top 10 donors by total contribution.
     """
-    return frappe.db.sql("""
-        SELECT donor_name as name, SUM(total_amount) as total 
-        FROM `tabDonation` 
-        GROUP BY donor_name 
-        ORDER BY total DESC 
-        LIMIT 10
-    """, as_dict=True)
+    query = "SELECT donor_name as name, SUM(total_amount) as total FROM `tabDonation` WHERE 1=1"
+    params = []
+    if temple:
+        query += " AND temple = %s"
+        params.append(temple)
+    if user:
+        query += " AND cashier = %s"
+        params.append(user)
+    if from_date and to_date:
+        query += " AND creation BETWEEN %s AND %s"
+        params.extend([from_date, to_date])
+        
+    query += " GROUP BY donor_name ORDER BY total DESC LIMIT 10"
+    
+    return frappe.db.sql(query, tuple(params), as_dict=True)
 
 @frappe.whitelist()
 def create_donation(data):

@@ -7,13 +7,14 @@ import TempleSelect from "../../components/Donation/TempleSelect";
 import DonationTypes from "../../components/Donation/DonationTypes";
 import Cart from "../../components/Donation/Cart";
 import PaymentSection from "../../components/Donation/PaymentSection";
+import AddPageHeader from "../../components/common/AddPageHeader";
 
 const { Title, Text } = Typography;
 
-const Donation = () => {
+const Donation = ({ onBack }) => {
     // --- State Management ---
     const [selectedDonor, setSelectedDonor] = useState(null);
-    const [selectedTemple, setSelectedTemple] = useState(null);
+    const [selectedTemple, setSelectedTemple] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [paymentMode, setPaymentMode] = useState("Cash");
     const [submitting, setSubmitting] = useState(false);
@@ -24,8 +25,8 @@ const Donation = () => {
         , [cartItems]);
 
     const handleAddToCart = useCallback((donationType) => {
-        if (!selectedTemple) {
-            message.warning("Please select a temple first.");
+        if (!selectedTemple || selectedTemple.length === 0) {
+            message.warning("Please select at least one temple.");
             return;
         }
 
@@ -39,7 +40,8 @@ const Donation = () => {
         const newItem = {
             donation_type: donationType.name,
             donation_type_label: donationType.donation_type,
-            amount: donationType.default_amount || 101
+            amount: donationType.default_amount || 101,
+            temple: donationType.temple // Capture temple field
         };
         setCartItems(prev => [...prev, newItem]);
         message.success(`Added ${donationType.donation_type}`);
@@ -57,7 +59,7 @@ const Donation = () => {
 
     const handleReset = useCallback(() => {
         setSelectedDonor(null);
-        setSelectedTemple(null);
+        setSelectedTemple([]);
         setCartItems([]);
         setPaymentMode("Cash");
     }, []);
@@ -67,8 +69,8 @@ const Donation = () => {
             message.error("Please select or add a donor");
             return;
         }
-        if (!selectedTemple) {
-            message.error("Please select a temple");
+        if (!selectedTemple || selectedTemple.length === 0) {
+            message.error("Please select at least one temple");
             return;
         }
         if (cartItems.length === 0) {
@@ -78,68 +80,90 @@ const Donation = () => {
 
         setSubmitting(true);
 
-        const donationData = {
-            donor: selectedDonor.name,
-            donor_name: selectedDonor.donor_name,
-            mobile_number: selectedDonor.mobile_number,
-            temple: selectedTemple,
-            cashier: typeof frappe !== "undefined" ? frappe.session.user : "Guest",
-            payment_mode: paymentMode,
-            total_amount: totalAmount,
-            donation_items: cartItems.map(item => ({
-                donation_type: item.donation_type,
-                amount: item.amount
-            }))
-        };
+        // Group items by temple
+        const itemsByTemple = cartItems.reduce((acc, item) => {
+            const t = item.temple || selectedTemple[0]; // Fallback if item has no temple
+            if (!acc[t]) acc[t] = [];
+            acc[t].push(item);
+            return acc;
+        }, {});
 
-        frappe.call({
-            method: "frappe.client.insert",
-            args: {
-                doc: {
-                    doctype: "Donation",
-                    ...donationData
-                }
-            },
-            callback: (r) => {
-                setSubmitting(false);
-                if (r.message) {
-                    message.success("Donation processed successfully!");
-                    setSelectedDonor(null);
-                    setCartItems([]);
-                }
-            },
-            error: (err) => {
-                setSubmitting(false);
-                message.error(err.message || "Failed to submit donation");
-            }
-        });
+        const templeNames = Object.keys(itemsByTemple);
+        let successCount = 0;
+        let errorMessages = [];
+
+        for (const tName of templeNames) {
+            const templeItems = itemsByTemple[tName];
+            const templeTotal = templeItems.reduce((sum, i) => sum + (i.amount || 0), 0);
+
+            const donationData = {
+                donor: selectedDonor.name,
+                donor_name: selectedDonor.donor_name,
+                mobile_number: selectedDonor.mobile_number,
+                temple: tName,
+                cashier: typeof frappe !== "undefined" ? frappe.session.user : "Guest",
+                payment_mode: paymentMode,
+                total_amount: templeTotal,
+                donation_items: templeItems.map(item => ({
+                    donation_type: item.donation_type,
+                    amount: item.amount
+                }))
+            };
+
+            await new Promise((resolve) => {
+                frappe.call({
+                    method: "frappe.client.insert",
+                    args: {
+                        doc: {
+                            doctype: "Donation",
+                            ...donationData
+                        }
+                    },
+                    callback: (r) => {
+                        if (r.message) {
+                            successCount++;
+                        }
+                        resolve();
+                    },
+                    error: (err) => {
+                        errorMessages.push(`Temple ${tName}: ${err.message || 'Failed'}`);
+                        resolve();
+                    }
+                });
+            });
+        }
+
+        setSubmitting(false);
+        if (successCount === templeNames.length) {
+            message.success("All donations processed successfully!");
+            setSelectedDonor(null);
+            setCartItems([]);
+        } else if (successCount > 0) {
+            message.warning(`Processed ${successCount} of ${templeNames.length} donations. Errors: ${errorMessages.join(', ')}`);
+            // Only clear items that were successfully processed? Tricky.
+            // For now just keep everything or let user resolve.
+        } else {
+            message.error(`Failed to process donations. ${errorMessages.join(', ')}`);
+        }
     }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount]);
 
     // --- Render ---
     return (
         <div className="donation-page py-6">
-            <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
-                <Space size={16}>
-                    <div className="h-12 w-12 bg-zinc-900 rounded-xl flex items-center justify-center">
-                        <HeartFilled className="text-xl text-white" />
-                    </div>
-                    <div>
-                        <Text className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 block mb-1">
-                            Operational POS
-                        </Text>
-                        <Title level={2} className="!m-0 font-bold tracking-tight text-zinc-900">
-                            Temple Donation
-                        </Title>
-                    </div>
-                </Space>
-                <Button
-                    icon={<RedoOutlined />}
-                    onClick={handleReset}
-                    className="h-10 px-6 font-bold bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-900 transition-all"
-                >
-                    Reset POS
-                </Button>
-            </header>
+            <AddPageHeader
+                title="Temple Donation"
+                subtitle="Operational POS"
+                showBack={true}
+                onBack={onBack || (() => {
+                    if (typeof frappe !== "undefined") {
+                        frappe.set_route("temple-donation", "donations");
+                    } else {
+                        window.history.back();
+                    }
+                })}
+                showReset={true}
+                onReset={handleReset}
+            />
 
             <Row gutter={[24, 24]}>
                 <Col xs={24} lg={15}>

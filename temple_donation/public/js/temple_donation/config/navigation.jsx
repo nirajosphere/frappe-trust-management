@@ -172,7 +172,7 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
         // Special case for Donation POS
         if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-            return <DonationPOS />;
+            return <DonationPOS onBack={() => navigate(baseKey)} />;
         }
 
         const formProps = {

@@ -1002,12 +1002,13 @@
   --text-main: #18181b;
   --text-muted: #71717a;
   --border-color: #e4e4e7;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-premium: none;
   --header-bg: #ffffff;
   --topbar-height: 70px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: none;
   font-family: var(--font-primary);
   background-color: var(--bg-main) !important;
   color: var(--text-main);
@@ -1105,24 +1106,21 @@
 }
 .temple-donation-app {
 }
-.temple-donation-app .aavatto-content-wrapper {
-  max-width: 1440px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
 .temple-donation-app .aavatto-card {
   padding: 1.5rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  transition: var(--transition);
   background-color: var(--bg-card);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 .temple-donation-app .aavatto-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  border-color: var(--primary-color);
+}
+.temple-donation-app .zoom-effect:hover {
+  transform: none;
+}
+.temple-donation-app .shadow-hover:hover {
+  box-shadow: none !important;
 }
 .temple-donation-app {
 }
@@ -1468,4 +1466,4 @@ body.non-admin-user .aavatto-topbar {
 body.non-admin-user .page-container {
   padding-top: 0 !important;
 }
-/*# sourceMappingURL=temple_donation.bundle.SX6YAF3A.css.map */
+/*# sourceMappingURL=temple_donation.bundle.DRXNEKER.css.map */

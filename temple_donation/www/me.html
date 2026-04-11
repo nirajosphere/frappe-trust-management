@@ -1,0 +1,107 @@
+{% from "frappe/templates/includes/avatar_macro.html" import avatar %}
+{% extends "templates/web.html" %}
+
+{% block title %}
+{{ _("My Account") }}
+{% endblock %}
+
+{% block page_content %}
+{% set current_user_doc = frappe.get_doc("User", frappe.session.user) %}
+
+<div class="my-account-container">
+    <h3 class="my-account-header">{{ _("My Account") }}</h3>
+    
+    <div class="row account-info d-flex flex-column">
+        <!-- Standard Profile Section -->
+        <div class="col d-flex justify-content-between align-items-center border-bottom py-3">
+            <div>
+                <span class="my-account-avatar">
+                    {{ avatar(current_user_doc.name) }}
+                </span>
+                <span class="my-account-name ml-2">
+                    {{ current_user_doc.full_name }}
+                </span>
+            </div>
+            <div>
+                <span class="my-account-item-link">
+                    <a href="/update-profile/{{ current_user_doc.name }}">
+                        <span class="item-link-text">{{ _("Edit Profile") }}</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <!-- NEW: Temple Donation App Link -->
+        <div class="col d-flex justify-content-between align-items-center border-bottom py-3">
+            <span>
+                <div class="my-account-item font-weight-bold" style="color: #1a1a1a;">Temple Donation</div>
+                <div class="my-account-item-desc">Access the Temple Donation Management Application</div>
+            </span>
+            <span class="my-account-item-link">
+                <a href="/app/temple-donation" class="btn btn-sm btn-primary text-white" style="background-color: #18181b; border-color: #18181b;">
+                    Open App
+                </a>
+            </span>
+        </div>
+
+        <!-- Standard Reset Password -->
+        <div class="col d-flex justify-content-between align-items-center border-bottom py-3">
+            <span>
+                <div class="my-account-item">{{ _("Reset Password") }}</div>
+                <div class="my-account-item-desc">{{ _("Reset the password for your account") }}</div>
+            </span>
+            <span class="my-account-item-link">
+                <a href="/update-password">
+                    <span class="item-link-text">{{ _("Reset Password") }}</span>
+                </a>
+            </span>
+        </div>
+
+        <!-- Standard Manage Apps -->
+        <div class="col d-flex justify-content-between align-items-center border-bottom py-3">
+            <span>
+                <div class="my-account-item">{{ _("Manage third party apps") }}</div>
+                <div class="my-account-item-desc">{{ _("To manage your authorized third party apps") }}</div>
+            </span>
+            <span class="my-account-item-link">
+                <a href="/third_party_apps">
+                    <span class="item-link-text">{{ _("Manage your apps") }}</span>
+                </a>
+            </span>
+        </div>
+
+        {% if frappe.db.get_single_value("Website Settings", "show_account_deletion_link") %}
+        <div class="col d-flex justify-content-between align-items-center border-bottom py-3">
+            <span>
+                <div class="my-account-item">{{ _("Request Account Deletion") }}</div>
+                <div class="my-account-item-desc">{{ _("Send a request to delete your account") }}</div>
+            </span>
+            <span class="my-account-item-link">
+                <a href="/request-for-account-deletion?new=1">
+                    <span class="item-link-text">{{ _("Delete Account") }}</span>
+                </a>
+            </span>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    /* Minimal styling to match core while being clean */
+    .my-account-header {
+        margin-bottom: 2rem;
+        font-weight: 700;
+    }
+    .my-account-item {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+    }
+    .my-account-item-desc {
+        font-size: 0.9rem;
+        color: #71717a;
+    }
+    .border-bottom {
+        border-bottom: 1px solid #f4f4f5 !important;
+    }
+</style>
+{% endblock %}

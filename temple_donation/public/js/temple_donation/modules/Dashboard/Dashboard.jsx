@@ -1,195 +1,470 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Card, Typography, Space, Tooltip, Empty, Spin } from "antd";
+// import React, { useState, useEffect, useRef } from "react";
+// import { Row, Col, Card, Typography, Space, Tooltip, Empty, Spin } from "antd";
+// import {
+//     WalletOutlined,
+//     AppstoreOutlined,
+//     UserAddOutlined,
+//     ArrowUpOutlined,
+//     TrophyOutlined,
+//     PieChartOutlined
+// } from "@ant-design/icons";
+// import PageHeader from "../../components/common/PageHeader";
+
+// const { Title, Text } = Typography;
+
+// const Dashboard = () => {
+//     const [loading, setLoading] = useState(true);
+//     const [stats, setStats] = useState({ total_donation: 0, top_category: "N/A", new_donors: 0 });
+//     const [topDonors, setTopDonors] = useState([]);
+//     const [typeData, setTypeData] = useState([]);
+//     const chartRef = useRef(null);
+
+//     const fetchData = async () => {
+//         setLoading(true);
+//         try {
+//             if (typeof frappe !== "undefined") {
+//                 const [statsRes, typesRes, donorsRes] = await Promise.all([
+//                     frappe.call({ method: "temple_donation.api.get_dashboard_stats" }),
+//                     frappe.call({ method: "temple_donation.api.get_donations_by_type" }),
+//                     frappe.call({ method: "temple_donation.api.get_top_donors" })
+//                 ]);
+
+//                 if (statsRes.message) setStats(statsRes.message);
+//                 if (typesRes.message) setTypeData(typesRes.message);
+//                 if (donorsRes.message) setTopDonors(donorsRes.message);
+//             }
+//         } catch (error) {
+//             console.error("Dashboard fetch error:", error);
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     useEffect(() => {
+//         fetchData();
+//     }, []);
+
+//     if (loading) {
+//         return (
+//             <div className="flex flex-col items-center justify-center min-h-[600px] gap-4">
+//                 <Spin size="large" />
+//                 <Text className="text-zinc-400 font-bold tracking-widest uppercase text-[10px] animate-pulse">
+//                     Analyzing Temple Statistics...
+//                 </Text>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <div className="dashboard-container animate-fadeIn">
+//             <PageHeader
+//                 title="Consolidated Dashboard"
+//                 subtitle="Real-time performance analytics and donation insights."
+//             />
+
+//             <div className="p-8">
+//                 {/* --- Top Stat Cards --- */}
+//                 <Row gutter={[24, 24]} className="mb-10">
+//                     <Col xs={24} md={8}>
+//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
+//                             <div className="flex justify-between items-start">
+//                                 <div>
+//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Total Donation</Text>
+//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
+//                                         ₹{(stats.total_donation || 0).toLocaleString()}
+//                                     </Title>
+//                                     <div className="mt-2 flex items-center gap-1 text-emerald-500 font-bold text-xs">
+//                                         <ArrowUpOutlined />
+//                                         <span>Live Update</span>
+//                                     </div>
+//                                 </div>
+//                                 <div className="h-12 w-12 bg-zinc-900  flex items-center justify-center shadow-lg shadow-zinc-900/10">
+//                                     <WalletOutlined className="text-white text-xl" />
+//                                 </div>
+//                             </div>
+//                         </Card>
+//                     </Col>
+
+//                     <Col xs={24} md={8}>
+//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
+//                             <div className="flex justify-between items-start">
+//                                 <div>
+//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Top Category</Text>
+//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900 max-w-[200px] truncate">
+//                                         {stats.top_category}
+//                                     </Title>
+//                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Based on total collection</div>
+//                                 </div>
+//                                 <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
+//                                     <AppstoreOutlined className="text-zinc-900 text-xl" />
+//                                 </div>
+//                             </div>
+//                         </Card>
+//                     </Col>
+
+//                     <Col xs={24} md={8}>
+//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
+//                             <div className="flex justify-between items-start">
+//                                 <div>
+//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">New Donors (Today)</Text>
+//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
+//                                         {stats.new_donors}
+//                                     </Title>
+//                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Community growth tracking</div>
+//                                 </div>
+//                                 <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
+//                                     <UserAddOutlined className="text-zinc-900 text-xl" />
+//                                 </div>
+//                             </div>
+//                         </Card>
+//                     </Col>
+//                 </Row>
+
+//                 <Row gutter={[24, 24]}>
+//                     {/* --- Donation Types Breakdown --- */}
+//                     <Col xs={24} lg={14}>
+//                         <Card
+//                             title={<span className="font-bold tracking-tight text-zinc-800">Donations By Type</span>}
+//                             className="h-full border-zinc-100 shadow-sm  overflow-hidden"
+//                             extra={<PieChartOutlined className="text-zinc-300" />}
+//                         >
+//                             <div className="py-6 px-4">
+//                                 {typeData.length > 0 ? (
+//                                     <div className="flex flex-col gap-4">
+//                                         {typeData.map((item, idx) => {
+//                                             const percentage = ((item.value / (stats.total_donation || 1)) * 100).toFixed(1);
+//                                             return (
+//                                                 <div key={idx} className="group flex items-center justify-between p-4  border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300">
+//                                                     <div className="flex items-center gap-4">
+//                                                         <div className="h-2 w-2 rounded-full bg-zinc-900 group-hover:scale-125 transition-transform" />
+//                                                         <Text className="font-bold text-zinc-700 truncate max-w-[200px]">{item.type}</Text>
+//                                                     </div>
+//                                                     <div className="text-right">
+//                                                         <div className="font-black text-zinc-900">₹{item.value.toLocaleString()}</div>
+//                                                         <div className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-none mt-1">{percentage}%</div>
+//                                                     </div>
+//                                                 </div>
+//                                             );
+//                                         })}
+//                                     </div>
+//                                 ) : (
+//                                     <Empty description="No breakdown data available" />
+//                                 )}
+//                             </div>
+//                         </Card>
+//                     </Col>
+
+//                     {/* --- Top Donors Leaderboard --- */}
+//                     <Col xs={24} lg={10}>
+//                         <Card
+//                             title={<span className="font-bold tracking-tight text-zinc-800">Top Benefactors</span>}
+//                             className="h-full border-zinc-100 shadow-sm  overflow-hidden"
+//                             extra={<TrophyOutlined className="text-zinc-300" />}
+//                         >
+//                             <div className="p-4">
+//                                 {topDonors.length > 0 ? (
+//                                     <div className="space-y-1">
+//                                         {topDonors.map((donor, idx) => (
+//                                             <div
+//                                                 key={idx}
+//                                                 className="flex items-center justify-between p-4  hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
+//                                             >
+//                                                 <div className="flex items-center gap-4">
+//                                                     <div className="h-8 w-8 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500">
+//                                                         {idx + 1}
+//                                                     </div>
+//                                                     <Text className="font-semibold text-zinc-800 truncate max-w-[150px]">
+//                                                         {donor.name}
+//                                                     </Text>
+//                                                 </div>
+//                                                 <Text className="font-black text-zinc-900">
+//                                                     ₹{donor.total.toLocaleString()}
+//                                                 </Text>
+//                                             </div>
+//                                         ))}
+//                                     </div>
+//                                 ) : (
+//                                     <Empty description="No donor data" />
+//                                 )}
+//                             </div>
+//                         </Card>
+//                     </Col>
+//                 </Row>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Dashboard;
+
+import React, { useState, useEffect } from "react";
 import {
-    WalletOutlined,
-    AppstoreOutlined,
-    UserAddOutlined,
-    ArrowUpOutlined,
-    TrophyOutlined,
-    PieChartOutlined
+    Row, Col, Card, Typography, Select, DatePicker, Button,
+    Space, Empty, Spin
+} from "antd";
+import {
+    WalletOutlined, AppstoreOutlined, UserAddOutlined,
+    ArrowUpOutlined, TrophyOutlined, PieChartOutlined
 } from "@ant-design/icons";
+
+import {
+    PieChart, Pie, Cell, Tooltip as ReTooltip, ResponsiveContainer
+} from "recharts";
+
 import PageHeader from "../../components/common/PageHeader";
 
 const { Title, Text } = Typography;
+const { RangePicker } = DatePicker;
+
+const COLORS = ["#111", "#555", "#999", "#ccc"];
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
-    const [stats, setStats] = useState({ total_donation: 0, top_category: "N/A", new_donors: 0 });
-    const [topDonors, setTopDonors] = useState([]);
+
+    const [filters, setFilters] = useState({
+        temple: null,
+        user: null,
+        dateRange: null
+    });
+
+    const [stats, setStats] = useState({
+        total_donation: 0,
+        top_category: "N/A",
+        new_donors: 0
+    });
+
     const [typeData, setTypeData] = useState([]);
-    const chartRef = useRef(null);
+    const [topDonors, setTopDonors] = useState([]);
 
-    const fetchData = async () => {
-        setLoading(true);
+    const [temples, setTemples] = useState([]);
+    const [users, setUsers] = useState([]);
+
+    // 🔥 FETCH INITIAL OPTIONS
+    const fetchOptions = async () => {
         try {
-            if (typeof frappe !== "undefined") {
-                const [statsRes, typesRes, donorsRes] = await Promise.all([
-                    frappe.call({ method: "temple_donation.api.get_dashboard_stats" }),
-                    frappe.call({ method: "temple_donation.api.get_donations_by_type" }),
-                    frappe.call({ method: "temple_donation.api.get_top_donors" })
-                ]);
+            const [templeRes, userRes] = await Promise.all([
+                frappe.call({
+                    method: "frappe.client.get_list",
+                    args: {
+                        doctype: "Temple",
+                        fields: ["name", "temple_name"]
+                    }
+                }),
+                frappe.call({
+                    method: "frappe.client.get_list",
+                    args: {
+                        doctype: "User",
+                        filters: { enabled: 1 },
+                        fields: ["name", "full_name"]
+                    }
+                })
+            ]);
 
-                if (statsRes.message) setStats(statsRes.message);
-                if (typesRes.message) setTypeData(typesRes.message);
-                if (donorsRes.message) setTopDonors(donorsRes.message);
-            }
-        } catch (error) {
-            console.error("Dashboard fetch error:", error);
+            setTemples(templeRes.message || []);
+            setUsers(userRes.message || []);
+        } catch (err) {
+            console.error("Error fetching options:", err);
+        }
+    };
+
+    // 🔥 FETCH DATA WITH FILTER
+    const fetchData = async (filterParams = {}) => {
+        setLoading(true);
+
+        try {
+            const [statsRes, typesRes, donorsRes] = await Promise.all([
+                frappe.call({
+                    method: "temple_donation.api.get_dashboard_stats",
+                    args: filterParams
+                }),
+                frappe.call({
+                    method: "temple_donation.api.get_donations_by_type",
+                    args: filterParams
+                }),
+                frappe.call({
+                    method: "temple_donation.api.get_top_donors",
+                    args: filterParams
+                })
+            ]);
+
+            setStats(statsRes.message || {});
+            setTypeData(typesRes.message || []);
+            setTopDonors(donorsRes.message || []);
+
+        } catch (err) {
+            console.error(err);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
+        fetchOptions();
         fetchData();
     }, []);
 
+    // 🔥 HANDLE FILTER SUBMIT
+    const handleSubmit = () => {
+        const params = {
+            temple: filters.temple,
+            user: filters.user,
+            from_date: filters.dateRange?.[0]?.format("YYYY-MM-DD"),
+            to_date: filters.dateRange?.[1]?.format("YYYY-MM-DD")
+        };
+
+        fetchData(params);
+    };
+
+    // 🔥 CLEAR FILTER
+    const handleClear = () => {
+        setFilters({
+            temple: null,
+            user: null,
+            dateRange: null
+        });
+        fetchData();
+    };
+
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[600px] gap-4">
-                <Spin size="large" />
-                <Text className="text-zinc-400 font-bold tracking-widest uppercase text-[10px] animate-pulse">
-                    Analyzing Temple Statistics...
-                </Text>
+            <div className="flex justify-center items-center min-h-[400px]">
+                <Spin />
             </div>
         );
     }
 
     return (
-        <div className="dashboard-container animate-fadeIn">
+        <div>
             <PageHeader
-                title="Consolidated Dashboard"
-                subtitle="Real-time performance analytics and donation insights."
+                title="Dashboard"
+                subtitle="Analytics Overview"
             />
 
-            <div className="p-8">
-                {/* --- Top Stat Cards --- */}
-                <Row gutter={[24, 24]} className="mb-10">
+            <div className="p-6">
+
+                {/* 🔥 FILTER BOX */}
+                <Card className="border border-zinc-200 mb-6">
+
+                    <Row gutter={[16, 16]}>
+
+                        <Col xs={24} md={8}>
+                            <Text>Search By Temple</Text>
+                            <Select
+                                value={filters.temple}
+                                onChange={(v) => setFilters({ ...filters, temple: v })}
+                                placeholder="All"
+                                className="w-full mt-1"
+                                allowClear
+                                options={temples.map(t => ({ label: t.temple_name, value: t.name }))}
+                            />
+                        </Col>
+
+                        <Col xs={24} md={8}>
+                            <Text>Search By User</Text>
+                            <Select
+                                value={filters.user}
+                                onChange={(v) => setFilters({ ...filters, user: v })}
+                                placeholder="All"
+                                className="w-full mt-1"
+                                allowClear
+                                options={users.map(u => ({ label: u.full_name, value: u.name }))}
+                            />
+                        </Col>
+
+                        <Col xs={24} md={8}>
+                            <Text>Filter By Date</Text>
+                            <RangePicker
+                                className="w-full mt-1"
+                                onChange={(dates) => setFilters({ ...filters, dateRange: dates })}
+                            />
+                        </Col>
+
+                    </Row>
+
+                    <div className="flex justify-end gap-2 mt-4">
+                        <Button onClick={handleClear}>Clear Filter</Button>
+                        <Button type="primary" onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                    </div>
+
+                </Card>
+
+                {/* 🔥 STATS */}
+                <Row gutter={[16, 16]} className="mb-6">
+
                     <Col xs={24} md={8}>
-                        <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Total Donation</Text>
-                                    <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
-                                        ₹{(stats.total_donation || 0).toLocaleString()}
-                                    </Title>
-                                    <div className="mt-2 flex items-center gap-1 text-emerald-500 font-bold text-xs">
-                                        <ArrowUpOutlined />
-                                        <span>Live Update</span>
-                                    </div>
-                                </div>
-                                <div className="h-12 w-12 bg-zinc-900  flex items-center justify-center shadow-lg shadow-zinc-900/10">
-                                    <WalletOutlined className="text-white text-xl" />
-                                </div>
-                            </div>
+                        <Card className="border">
+                            <Text>Total Donation</Text>
+                            <Title level={3}>₹{stats.total_donation}</Title>
                         </Card>
                     </Col>
 
                     <Col xs={24} md={8}>
-                        <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Top Category</Text>
-                                    <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900 max-w-[200px] truncate">
-                                        {stats.top_category}
-                                    </Title>
-                                    <div className="mt-2 text-zinc-400 font-medium text-xs">Based on total collection</div>
-                                </div>
-                                <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
-                                    <AppstoreOutlined className="text-zinc-900 text-xl" />
-                                </div>
-                            </div>
+                        <Card className="border">
+                            <Text>Top Category</Text>
+                            <Title level={3}>{stats.top_category}</Title>
                         </Card>
                     </Col>
 
                     <Col xs={24} md={8}>
-                        <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">New Donors (Today)</Text>
-                                    <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
-                                        {stats.new_donors}
-                                    </Title>
-                                    <div className="mt-2 text-zinc-400 font-medium text-xs">Community growth tracking</div>
-                                </div>
-                                <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
-                                    <UserAddOutlined className="text-zinc-900 text-xl" />
-                                </div>
-                            </div>
+                        <Card className="border">
+                            <Text>New Donors</Text>
+                            <Title level={3}>{stats.new_donors}</Title>
                         </Card>
                     </Col>
+
                 </Row>
 
-                <Row gutter={[24, 24]}>
-                    {/* --- Donation Types Breakdown --- */}
-                    <Col xs={24} lg={14}>
-                        <Card
-                            title={<span className="font-bold tracking-tight text-zinc-800">Donations By Type</span>}
-                            className="h-full border-zinc-100 shadow-sm  overflow-hidden"
-                            extra={<PieChartOutlined className="text-zinc-300" />}
-                        >
-                            <div className="py-6 px-4">
-                                {typeData.length > 0 ? (
-                                    <div className="flex flex-col gap-4">
-                                        {typeData.map((item, idx) => {
-                                            const percentage = ((item.value / (stats.total_donation || 1)) * 100).toFixed(1);
-                                            return (
-                                                <div key={idx} className="group flex items-center justify-between p-4  border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300">
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="h-2 w-2 rounded-full bg-zinc-900 group-hover:scale-125 transition-transform" />
-                                                        <Text className="font-bold text-zinc-700 truncate max-w-[200px]">{item.type}</Text>
-                                                    </div>
-                                                    <div className="text-right">
-                                                        <div className="font-black text-zinc-900">₹{item.value.toLocaleString()}</div>
-                                                        <div className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-none mt-1">{percentage}%</div>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                ) : (
-                                    <Empty description="No breakdown data available" />
-                                )}
-                            </div>
+                {/* 🔥 CHART */}
+                <Row gutter={[16, 16]}>
+
+                    <Col xs={24} md={12}>
+                        <Card title="Donation Distribution" className="border">
+
+                            {typeData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <PieChart>
+                                        <Pie
+                                            data={typeData}
+                                            dataKey="value"
+                                            nameKey="type"
+                                            outerRadius={100}
+                                        >
+                                            {typeData.map((_, index) => (
+                                                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Pie>
+                                        <ReTooltip />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            ) : (
+                                <Empty />
+                            )}
+
                         </Card>
                     </Col>
 
-                    {/* --- Top Donors Leaderboard --- */}
-                    <Col xs={24} lg={10}>
-                        <Card
-                            title={<span className="font-bold tracking-tight text-zinc-800">Top Benefactors</span>}
-                            className="h-full border-zinc-100 shadow-sm  overflow-hidden"
-                            extra={<TrophyOutlined className="text-zinc-300" />}
-                        >
-                            <div className="p-4">
-                                {topDonors.length > 0 ? (
-                                    <div className="space-y-1">
-                                        {topDonors.map((donor, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="flex items-center justify-between p-4  hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
-                                            >
-                                                <div className="flex items-center gap-4">
-                                                    <div className="h-8 w-8 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500">
-                                                        {idx + 1}
-                                                    </div>
-                                                    <Text className="font-semibold text-zinc-800 truncate max-w-[150px]">
-                                                        {donor.name}
-                                                    </Text>
-                                                </div>
-                                                <Text className="font-black text-zinc-900">
-                                                    ₹{donor.total.toLocaleString()}
-                                                </Text>
-                                            </div>
-                                        ))}
+                    {/* 🔥 TOP DONORS */}
+                    <Col xs={24} md={12}>
+                        <Card title="Top Donors" className="border">
+
+                            {topDonors.length > 0 ? (
+                                topDonors.map((d, i) => (
+                                    <div key={i} className="flex justify-between py-2 border-b">
+                                        <span>{d.name}</span>
+                                        <span>₹{d.total}</span>
                                     </div>
-                                ) : (
-                                    <Empty description="No donor data" />
-                                )}
-                            </div>
+                                ))
+                            ) : (
+                                <Empty />
+                            )}
+
                         </Card>
                     </Col>
+
                 </Row>
+
             </div>
         </div>
     );

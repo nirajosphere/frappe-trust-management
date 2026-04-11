@@ -8,15 +8,15 @@ const { Title, Text } = Typography;
  * Robust, Modular Page Header Component
  * Handles both Form headers (with back) and Listing headers (with actions)
  */
-const PageHeader = ({ 
-    title, 
-    subtitle, 
+const PageHeader = ({
+    title,
+    subtitle,
     description, // Used in listing
-    onBack, 
-    onAdd, 
+    onBack,
+    onAdd,
     addLabel = "Add New",
-    onExport, 
-    onSearch, 
+    onExport,
+    onSearch,
     searchPlaceholder = "Search...",
     extra // Used for custom action buttons (Print, Edit, etc)
 }) => {
@@ -55,26 +55,26 @@ const PageHeader = ({
                             placeholder={searchPlaceholder}
                             prefix={<SearchOutlined className="text-zinc-400" />}
                             onChange={(e) => onSearch(e.target.value)}
-                            className="h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white rounded-xl font-medium"
+                            className="h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
                         />
                     )}
-                    
+
                     {onExport && (
-                        <Button 
-                            icon={<DownloadOutlined />} 
+                        <Button
+                            icon={<DownloadOutlined />}
                             onClick={onExport}
-                            className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold rounded-xl"
+                            className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
                         >
                             Export
                         </Button>
                     )}
 
                     {onAdd && (
-                        <Button 
-                            type="primary" 
-                            icon={<PlusOutlined />} 
+                        <Button
+                            type="primary"
+                            icon={<PlusOutlined />}
                             onClick={onAdd}
-                            className="h-10 px-6 bg-black hover:bg-zinc-800 border-none shadow-md shadow-zinc-200 font-bold rounded-xl tracking-tight"
+                            className="h-10 px-6 bg-black font-bold"
                         >
                             {addLabel}
                         </Button>
