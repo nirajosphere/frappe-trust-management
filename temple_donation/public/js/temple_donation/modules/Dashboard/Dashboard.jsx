@@ -211,6 +211,7 @@ import {
     PieChart, Pie, Cell, Tooltip as ReTooltip, ResponsiveContainer
 } from "recharts";
 
+import dayjs from "dayjs";
 import PageHeader from "../../components/common/PageHeader";
 
 const { Title, Text } = Typography;
@@ -224,7 +225,8 @@ const Dashboard = () => {
     const [filters, setFilters] = useState({
         temple: null,
         user: null,
-        dateRange: null
+        dateRange: null,
+        dateType: null
     });
 
     const [stats, setStats] = useState({
@@ -239,7 +241,7 @@ const Dashboard = () => {
     const [temples, setTemples] = useState([]);
     const [users, setUsers] = useState([]);
 
-    // 🔥 FETCH INITIAL OPTIONS
+    // 🔥 FETCH OPTIONS
     const fetchOptions = async () => {
         try {
             const [templeRes, userRes] = await Promise.all([
@@ -263,27 +265,26 @@ const Dashboard = () => {
             setTemples(templeRes.message || []);
             setUsers(userRes.message || []);
         } catch (err) {
-            console.error("Error fetching options:", err);
+            console.error(err);
         }
     };
 
-    // 🔥 FETCH DATA WITH FILTER
-    const fetchData = async (filterParams = {}) => {
+    // 🔥 FETCH DATA
+    const fetchData = async (params = {}) => {
         setLoading(true);
-
         try {
             const [statsRes, typesRes, donorsRes] = await Promise.all([
                 frappe.call({
                     method: "temple_donation.api.get_dashboard_stats",
-                    args: filterParams
+                    args: params
                 }),
                 frappe.call({
                     method: "temple_donation.api.get_donations_by_type",
-                    args: filterParams
+                    args: params
                 }),
                 frappe.call({
                     method: "temple_donation.api.get_top_donors",
-                    args: filterParams
+                    args: params
                 })
             ]);
 
@@ -303,7 +304,30 @@ const Dashboard = () => {
         fetchData();
     }, []);
 
-    // 🔥 HANDLE FILTER SUBMIT
+    // 🔥 DATE TYPE HANDLER
+    const handleDateTypeChange = (value) => {
+        let range = null;
+
+        if (value === "today") {
+            range = [dayjs().startOf("day"), dayjs().endOf("day")];
+        }
+
+        if (value === "week") {
+            range = [dayjs().startOf("week"), dayjs().endOf("week")];
+        }
+
+        if (value === "month") {
+            range = [dayjs().startOf("month"), dayjs().endOf("month")];
+        }
+
+        setFilters({
+            ...filters,
+            dateType: value,
+            dateRange: range
+        });
+    };
+
+    // 🔥 SUBMIT
     const handleSubmit = () => {
         const params = {
             temple: filters.temple,
@@ -315,12 +339,13 @@ const Dashboard = () => {
         fetchData(params);
     };
 
-    // 🔥 CLEAR FILTER
+    // 🔥 CLEAR
     const handleClear = () => {
         setFilters({
             temple: null,
             user: null,
-            dateRange: null
+            dateRange: null,
+            dateType: null
         });
         fetchData();
     };
@@ -335,18 +360,16 @@ const Dashboard = () => {
 
     return (
         <div>
-            <PageHeader
-                title="Dashboard"
-                subtitle="Analytics Overview"
-            />
+            <PageHeader title="Dashboard" subtitle="Analytics Overview" />
 
             <div className="p-6">
 
-                {/* 🔥 FILTER BOX */}
+                {/* 🔥 FILTER */}
                 <Card className="border border-zinc-200 mb-6">
 
                     <Row gutter={[16, 16]}>
 
+                        {/* TEMPLE */}
                         <Col xs={24} md={8}>
                             <Text>Search By Temple</Text>
                             <Select
@@ -355,10 +378,14 @@ const Dashboard = () => {
                                 placeholder="All"
                                 className="w-full mt-1"
                                 allowClear
-                                options={temples.map(t => ({ label: t.temple_name, value: t.name }))}
+                                options={temples.map(t => ({
+                                    label: t.temple_name,
+                                    value: t.name
+                                }))}
                             />
                         </Col>
 
+                        {/* USER */}
                         <Col xs={24} md={8}>
                             <Text>Search By User</Text>
                             <Select
@@ -367,16 +394,42 @@ const Dashboard = () => {
                                 placeholder="All"
                                 className="w-full mt-1"
                                 allowClear
-                                options={users.map(u => ({ label: u.full_name, value: u.name }))}
+                                options={users.map(u => ({
+                                    label: u.full_name,
+                                    value: u.name
+                                }))}
                             />
                         </Col>
 
+                        {/* DATE */}
                         <Col xs={24} md={8}>
                             <Text>Filter By Date</Text>
-                            <RangePicker
-                                className="w-full mt-1"
-                                onChange={(dates) => setFilters({ ...filters, dateRange: dates })}
-                            />
+
+                            <Space direction="vertical" className="w-full mt-1">
+
+                                <Select
+                                    placeholder="Select Range"
+                                    value={filters.dateType}
+                                    onChange={handleDateTypeChange}
+                                    options={[
+                                        { label: "Today", value: "today" },
+                                        { label: "This Week", value: "week" },
+                                        { label: "This Month", value: "month" },
+                                        { label: "Custom Range", value: "custom" }
+                                    ]}
+                                />
+
+                                {filters.dateType === "custom" && (
+                                    <RangePicker
+                                        className="w-full"
+                                        value={filters.dateRange}
+                                        onChange={(dates) =>
+                                            setFilters({ ...filters, dateRange: dates })
+                                        }
+                                    />
+                                )}
+
+                            </Space>
                         </Col>
 
                     </Row>
@@ -438,14 +491,12 @@ const Dashboard = () => {
                                         <ReTooltip />
                                     </PieChart>
                                 </ResponsiveContainer>
-                            ) : (
-                                <Empty />
-                            )}
+                            ) : <Empty />}
 
                         </Card>
                     </Col>
 
-                    {/* 🔥 TOP DONORS */}
+                    {/* TOP DONORS */}
                     <Col xs={24} md={12}>
                         <Card title="Top Donors" className="border">
 
@@ -456,9 +507,7 @@ const Dashboard = () => {
                                         <span>₹{d.total}</span>
                                     </div>
                                 ))
-                            ) : (
-                                <Empty />
-                            )}
+                            ) : <Empty />}
 
                         </Card>
                     </Col>

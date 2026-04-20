@@ -6,9 +6,10 @@ app_email = "shailesh@aavatto.com"
 app_license = "mit"
 
 app_include_js = [
-    "/assets/temple_donation/dist/temple_donation.bundle.js",
+    # "/assets/temple_donation/dist/temple_donation.bundle.js",
     "/assets/temple_donation/js/temple_donation/redirect.js"
 ]
+
 
 app_include_css = [
     "/assets/temple_donation/js/temple_donation/styles.css"

@@ -225,7 +225,16 @@
 }
 
 .temple-donation-app .hidden {
-  display: none;
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .temple-donation-app .md\:flex {
+    display: flex !important;
+  }
+  .temple-donation-app .md\:hidden {
+    display: none !important;
+  }
 }
 
 .temple-donation-app .h-10 {

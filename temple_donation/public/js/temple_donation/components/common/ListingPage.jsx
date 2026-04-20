@@ -35,7 +35,7 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
     };
 
     const handleEdit = (record) => {
-        if (typeof frappe !== "undefined" && basePath) {
+        if (typeof frappe !== "undefined" && basePath && record?.name) {
             frappe.set_route("temple-donation", basePath, "edit", record.name);
         }
     };
@@ -61,7 +61,7 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
     };
 
     const handleView = (record) => {
-        if (typeof frappe !== "undefined" && basePath) {
+        if (typeof frappe !== "undefined" && basePath && record?.name) {
             frappe.set_route("temple-donation", basePath, "view", record.name);
         }
     };

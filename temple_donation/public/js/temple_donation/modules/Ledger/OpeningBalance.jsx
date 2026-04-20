@@ -61,41 +61,49 @@ const OpeningBalance = () => {
     const columns = [
         ...userBalanceColumns,
         {
-            title: 'Reset Balance',
+            title: 'ACTION',
             key: 'action',
             align: 'right',
+            width: 160,
             render: (_, record) => (
                 <Button
-                    type="default"
+                    type="text"
                     icon={<SyncOutlined />}
-                    className="rounded-lg font-bold bg-zinc-100 border-zinc-200 text-zinc-700 hover:bg-zinc-900 hover:text-white transition-all"
+                    className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
                     onClick={() => handleReset(record.user_name, record.opening_balance)}
                 >
-                    Reset Cash
+                    Reset
                 </Button>
             ),
-        },
+        }
     ];
 
     return (
-        <div className="animate-fadeIn">
+        <div className="animate-fadeIn py-6 space-y-6">
             <PageHeader
-                title="User Opening Balance"
-                subtitle="Manage and Reset Hand-over Cash for each user."
+                title={
+                    <div className="flex flex-col">
+                        <span className="text-[32px] font-bold text-zinc-900">
+                            User Opening Balance
+                        </span>
+                        <span className="text-sm mt-1 text-zinc-500 font-medium">
+                            Manage and reset hand-over cash for each user
+                        </span>
+                    </div>
+                }
                 extra={[
                     <Button
                         key="refresh"
                         onClick={fetchData}
                         loading={loading}
-                        className=" border-zinc-200 hover:border-zinc-900 flex items-center gap-2 p-5 font-bold"
                         icon={<SyncOutlined />}
+                        className="flex items-center gap-2 h-9 px-4 border border-zinc-200 text-zinc-700 font-medium rounded-md bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all"
                     >
                         Refresh
                     </Button>
                 ]}
             />
-
-            <div className="p-8">
+            <div className="">
                 {/* <Card className="rounded-[32px] border-zinc-100 shadow-sm overflow-hidden"> */}
                 {/* <div className="p-2"> */}
                 <Table

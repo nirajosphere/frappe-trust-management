@@ -100,8 +100,11 @@ export const navigationItems = [
 export const getComponentForRoute = (currentRoute, userRoles = []) => {
     const parts = currentRoute.split('/');
     const baseKey = parts[0];
-    const subRoute = parts[1];
-    const dynamicId = parts[2];
+    let subRoute = parts[1];
+    let dynamicId = parts[2];
+
+    if (subRoute === "undefined") subRoute = undefined;
+    if (dynamicId === "undefined") dynamicId = undefined;
 
     // Determine target Doctype from baseKey
     const doctypeMap = {
@@ -142,7 +145,10 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     // Helper for route handling
     const navigate = (key, sub, id) => {
         if (typeof frappe !== "undefined") {
-            frappe.set_route("temple-donation", key, sub, id);
+            const route = ["temple-donation", key];
+            if (sub) route.push(sub);
+            if (id) route.push(id);
+            frappe.set_route(...route);
         }
     };
 

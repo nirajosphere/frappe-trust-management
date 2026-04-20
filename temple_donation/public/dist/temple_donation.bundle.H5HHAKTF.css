@@ -148,7 +148,15 @@
   display: grid;
 }
 .temple-donation-app .hidden {
-  display: none;
+  display: none !important;
+}
+@media (min-width: 768px) {
+  .temple-donation-app .md\:flex {
+    display: flex !important;
+  }
+  .temple-donation-app .md\:hidden {
+    display: none !important;
+  }
 }
 .temple-donation-app .h-10 {
   height: 2.5rem;
@@ -1466,4 +1474,4 @@ body.non-admin-user .aavatto-topbar {
 body.non-admin-user .page-container {
   padding-top: 0 !important;
 }
-/*# sourceMappingURL=temple_donation.bundle.DRXNEKER.css.map */
+/*# sourceMappingURL=temple_donation.bundle.H5HHAKTF.css.map */
