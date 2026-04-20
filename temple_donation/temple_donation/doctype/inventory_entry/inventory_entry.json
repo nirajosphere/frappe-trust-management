@@ -1,0 +1,81 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-04-20 11:38:40.816598",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "entry_type",
+        "reference_type",
+        "reference_name",
+        "temple",
+        "posting_date",
+        "items"
+    ],
+    "fields": [
+        {
+            "fieldname": "entry_type",
+            "label": "Entry Type",
+            "fieldtype": "Select",
+            "options": "IN\nOUT",
+            "reqd": 1
+        },
+        {
+            "fieldname": "reference_type",
+            "label": "Reference Type",
+            "fieldtype": "Select",
+            "options": "Donation\nManual\nPurchase\nUsage"
+        },
+        {
+            "fieldname": "reference_name",
+            "label": "Reference Name",
+            "fieldtype": "Dynamic Link",
+            "options": "reference_type"
+        },
+        {
+            "fieldname": "temple",
+            "label": "Temple",
+            "fieldtype": "Link",
+            "options": "Temple",
+            "reqd": 1
+        },
+        {
+            "fieldname": "posting_date",
+            "label": "Posting Date",
+            "fieldtype": "Datetime"
+        },
+        {
+            "fieldname": "items",
+            "label": "Items",
+            "fieldtype": "Table",
+            "options": "Inventory Item"
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-04-20 11:38:40.816598",
+    "modified_by": "Administrator",
+    "module": "Temple Donation",
+    "name": "Inventory Entry",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}
