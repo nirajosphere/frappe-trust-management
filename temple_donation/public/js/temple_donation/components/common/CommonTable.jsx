@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Card, Typography, Row, Col, Button, Space, Modal, message, Divider } from "antd";
+import { Table, Card, Typography, Row, Col, Button, Space, Modal, message, Divider, Popconfirm, Tooltip } from "antd";
 import {
     PlusOutlined, EditOutlined, DeleteOutlined,
     EyeOutlined, PrinterOutlined, ExportOutlined
@@ -27,55 +27,70 @@ const CommonTable = ({
             String(val).toLowerCase().includes(searchText.toLowerCase())
         );
     });
-
     const actionColumn = {
-        title: 'Actions',
-        key: 'actions',
-        fixed: 'right',
-        width: 180,
+        title: "Actions",
+        key: "actions",
+        fixed: "right",
+        width: 120,
+
         render: (_, record) => (
-            <Space size="middle">
+            <Space size={0} className="">
+
                 {onView && (
-                    <Button
-                        type="text"
-                        icon={<EyeOutlined className="text-orange-500" />}
-                        onClick={() => onView(record)}
-                        className="hover:bg-orange-50 rounded-lg"
-                        title="View Details"
-                    />
+                    <Tooltip title="View">
+                        <Button
+                            type="text"
+                            icon={<EyeOutlined />}
+                            onClick={() => onView(record)}
+                            className="px-2 border-r border-gray-200 hover:!text-orange-500"
+                        />
+                    </Tooltip>
                 )}
-                {onPrint && (
-                    <Button
-                        type="text"
-                        icon={<PrinterOutlined className="text-amber-500" />}
-                        onClick={() => onPrint(record)}
-                        className="hover:bg-amber-50 rounded-lg"
-                        title="Print"
-                    />
-                )}
+
                 {onEdit && (
-                    <Button
-                        type="text"
-                        icon={<EditOutlined className="text-amber-700" />}
-                        onClick={() => onEdit(record)}
-                        className="hover:bg-amber-100/50 rounded-lg"
-                        title="Edit"
-                    />
+                    <Tooltip title="Edit">
+                        <Button
+                            type="text"
+                            icon={<EditOutlined />}
+                            onClick={() => onEdit(record)}
+                            className="px-2 border-r border-gray-200 hover:!text-blue-500"
+                        />
+                    </Tooltip>
                 )}
+
+                {onPrint && (
+                    <Tooltip title="Print">
+                        <Button
+                            type="text"
+                            icon={<PrinterOutlined />}
+                            onClick={() => onPrint(record)}
+                            className="px-2 border-r border-gray-200 hover:!text-amber-500"
+                        />
+                    </Tooltip>
+                )}
+
                 {onDelete && (
-                    <Button
-                        type="text"
-                        danger
-                        icon={<DeleteOutlined />}
-                        onClick={() => onDelete(record)}
-                        className="hover:bg-red-50 rounded-lg"
-                        title="Delete"
-                    />
+                    <Popconfirm
+                        title="Delete?"
+                        description="This cannot be undone"
+                        onConfirm={() => onDelete(record)}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Tooltip title="Delete">
+                            <Button
+                                type="text"
+                                danger
+                                icon={<DeleteOutlined />}
+                                className="px-2 hover:!text-red-500"
+                            />
+                        </Tooltip>
+                    </Popconfirm>
                 )}
+
             </Space>
         )
     };
-
     // const actionColumn = {
     //     title: 'Actions',
     //     key: 'actions',

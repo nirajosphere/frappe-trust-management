@@ -28,7 +28,7 @@ const AddPageHeader = ({
         <div className="flex items-center justify-between mb-6 border-b border-zinc-200 pb-4">
 
             {/* LEFT */}
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
 
                 {showBack && (
                     <Button
@@ -48,8 +48,30 @@ const AddPageHeader = ({
                         </Text>
                     )}
                 </div>
-            </div>
+            </div> */}
+            <div className="flex items-center gap-4">
 
+                {showBack && (
+                    <Button
+                        type="default"
+                        icon={<ArrowLeftOutlined />}
+                        onClick={onBack || (() => window.history.back())}
+                        className="flex items-center justify-center h-9 w-9 border border-zinc-200 hover:border-zinc-400"
+                    />
+                )}
+
+                <div className="flex flex-col">
+                    <Title level={4} className="!m-0 leading-tight">
+                        {title}
+                    </Title>
+                    {subtitle && (
+                        <Text className="text-xs text-zinc-400 leading-tight">
+                            {subtitle}
+                        </Text>
+                    )}
+                </div>
+
+            </div>
             {/* RIGHT */}
             <Space>
 

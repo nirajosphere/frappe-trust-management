@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Dontation(Document):
+class Donor(Document):
 	pass

@@ -1,0 +1,41 @@
+[
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-04-20 19:11:34.070869",
+  "name": "Cashier",
+  "restrict_to_domain": null,
+  "role_name": "Cashier",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-04-21 15:36:18.159264",
+  "name": "Super Admin",
+  "restrict_to_domain": null,
+  "role_name": "Super Admin",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2026-04-21 15:36:43.432436",
+  "name": "Temple Admin",
+  "restrict_to_domain": null,
+  "role_name": "Temple Admin",
+  "two_factor_auth": 0
+ }
+]

@@ -202,19 +202,24 @@ const DonationTypeForm = ({ id, onBack }) => {
     // ✅ FIX IMAGE + EDIT DATA
     useEffect(() => {
         if (isEdit && data) {
-
-            const fileList = data.donation_image
-                ? [{
+            let fileList = [];
+            if (data.donation_image) {
+                const imageUrl = data.donation_image.startsWith('http') 
+                    ? data.donation_image 
+                    : `${window.location.origin}${data.donation_image.startsWith('/') ? '' : '/'}${data.donation_image}`;
+                
+                fileList = [{
                     uid: "-1",
                     name: "image",
                     status: "done",
-                    url: `${window.location.origin}${data.donation_image}`
-                }]
-                : [];
+                    url: imageUrl,
+                    thumbUrl: imageUrl
+                }];
+            }
 
             form.setFieldsValue({
                 ...data,
-                donation_image: { fileList }
+                donation_image: fileList
             });
         }
     }, [isEdit, data]);
@@ -222,7 +227,26 @@ const DonationTypeForm = ({ id, onBack }) => {
     const handleSave = async (values) => {
         try {
             const { donation_image, ...rest } = values;
+            
+            // If it's an existing image (string in data, array in form values)
+            // we don't want to send the fileList array to updateDoc/createDoc
+            // but we might want to keep the existing value if it hasn't changed.
 
+            if (file) {
+  const uploaded = await upload(file, {
+    doctype: DOCTYPE_DONATION_TYPE,
+    docname: docName,
+    fieldname: "donation_image"
+  });
+
+  // 🔥 IMPORTANT: update field with file_url
+  if (uploaded?.file_url) {
+    await updateDoc(DOCTYPE_DONATION_TYPE, docName, {
+      donation_image: uploaded.file_url
+    });
+  }
+}
+            
             let doc;
             if (isEdit) {
                 doc = await updateDoc(DOCTYPE_DONATION_TYPE, id, rest);
@@ -230,17 +254,29 @@ const DonationTypeForm = ({ id, onBack }) => {
                 doc = await createDoc(DOCTYPE_DONATION_TYPE, rest);
             }
 
-            const docName = isEdit ? id : doc.name;
+            const docName = isEdit ? id : (doc?.name || doc);
 
-            // Upload image
-            if (donation_image?.fileList?.length) {
-                const file = donation_image.fileList[0].originFileObj;
+            if (!docName) {
+                throw new Error("Could not determine document name for upload.");
+            }
+
+            // Handle image upload or clearing
+            if (donation_image && donation_image.length > 0) {
+                const file = donation_image[0].originFileObj;
                 if (file) {
+                    // New image selected, upload it
                     await upload(file, {
                         doctype: DOCTYPE_DONATION_TYPE,
                         docname: docName,
-                        fieldname: "donation_image"
+                        fieldname: "donation_image",
+                        is_private: 0
                     });
+                }
+                // If it's an existing image (status === 'done'), do nothing, field is already set
+            } else {
+                // Image was cleared, update the field to empty string
+                if (isEdit) {
+                    await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
                 }
             }
 
@@ -248,7 +284,8 @@ const DonationTypeForm = ({ id, onBack }) => {
             onBack && onBack();
 
         } catch (err) {
-            message.error("Error saving data");
+            console.error("Save Error:", err);
+            message.error(err.message || "Error saving data");
         }
     };
 
@@ -312,6 +349,7 @@ const DonationTypeForm = ({ id, onBack }) => {
                                         value: t.name,
                                         label: t.temple_name || t.name
                                     }))}
+                                    mode="multiple"
                                 />
                             </Form.Item>
                         </Col>
@@ -321,9 +359,11 @@ const DonationTypeForm = ({ id, onBack }) => {
                             <Form.Item
                                 name="donation_image"
                                 label="Donation Image"
-                                rules={[{ required: true, message: "Upload image" }]}
                                 valuePropName="fileList"
-                                getValueFromEvent={(e) => e && e.fileList}
+                                getValueFromEvent={(e) => {
+                                    if (Array.isArray(e)) return e;
+                                    return e && e.fileList;
+                                }}
                             >
                                 <Upload
                                     maxCount={1}
@@ -331,7 +371,9 @@ const DonationTypeForm = ({ id, onBack }) => {
                                     listType="picture-card"
                                     className="donation-upload"
                                 >
-                                    <div className="text-xs">Upload</div>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-xs font-bold uppercase tracking-widest">Upload</div>
+                                    </div>
                                 </Upload>
                             </Form.Item>
                         </Col>
