@@ -78,16 +78,11 @@ const App = () => {
             <div className={`temple-donation-app`}>
                 <Layout className={`min-h-screen`}>
                     {/* Custom Top Navigation Bar */}
-                    <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
+                    {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center w-full">
-                            {/* Brand / Logo */}
                             <div className="aavatto-topbar-brand">
-                                {/* <DashboardOutlined className="text-2xl" /> */}
                                 <span>Temple Donation</span>
                             </div>
-
-                            {/* Horizontal Menu - Desktop Only */}
-                            {/* <div className="justify-end"> */}
                             <Menu
                                 mode="horizontal"
                                 selectedKeys={[currentRoute.split('/')[0]]}
@@ -96,32 +91,70 @@ const App = () => {
                                 className="aavatto-topbar-menu hidden md:flex justify-end"
                                 disabledOverflow={true}
                             />
-                            {/* </div> */}
                         </div>
 
-                        {/* Right Section */}
                         <div className="flex items-center gap-4">
                             {!isAdmin && (
                                 <div className="aavatto-topbar-right hidden md:flex">
                                     <Dropdown menu={{ items: userMenuItems }} placement="bottomRight" arrow>
-                                        <Space className="aavatto-user-profile">
+                                        <div className="aavatto-user-profile">
                                             <Avatar
                                                 src={user?.image}
                                                 icon={!user?.image && <UserOutlined />}
                                                 className="bg-zinc-100 text-zinc-900"
                                             />
                                             <span className="user-name-text text-zinc-900">{user?.name}</span>
-                                        </Space>
+                                        </div>
                                     </Dropdown>
                                 </div>
                             )}
-
-                            {/* Mobile Menu Toggle */}
                             <Button
                                 className="md:hidden flex items-center justify-center border-none shadow-none bg-transparent"
                                 icon={<MenuOutlined style={{ fontSize: '20px' }} />}
                                 onClick={() => setMobileOpen(true)}
                             />
+                        </div>
+                    </Header> */}
+                    <Header className={`aavatto-topbar ${isAdmin ? 'is-admin' : ''}`}>
+                        <div className="aavatto-header-inner flex justify-between items-center w-full">
+
+                            {/* LEFT - LOGO */}
+                            <div className="aavatto-logo">
+                                Temple Donation
+                            </div>
+
+                            {/* CENTER - MENU */}
+
+                            <Menu
+                                mode="horizontal"
+                                selectedKeys={[currentRoute.split('/')[0]]}
+                                items={menuItems}
+                                onClick={handleMenuClick}
+                                className="aavatto-menu hidden md:flex"
+                            />
+
+                            {/* RIGHT - USER */}
+                            <div className="aavatto-right">
+                                {!isAdmin && (
+                                    <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+                                        <div className="aavatto-user">
+                                            <Avatar
+                                                src={user?.image}
+                                                icon={!user?.image && <UserOutlined />}
+                                            />
+                                            <span>{user?.name}</span>
+                                        </div>
+                                    </Dropdown>
+                                )}
+
+                                {/* Mobile button */}
+                                <Button
+                                    className="md:hidden"
+                                    icon={<MenuOutlined />}
+                                    onClick={() => setMobileOpen(true)}
+                                />
+                            </div>
+
                         </div>
                     </Header>
 

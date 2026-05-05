@@ -7,12 +7,18 @@ export const UserProvider = ({ children }) => {
     const [roles, setRoles] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    console.log(user, "user");
+    console.log(roles,);
+
     useEffect(() => {
         const fetchUserData = async () => {
             if (typeof frappe !== 'undefined') {
                 // In Frappe, session info is usually available globally
                 const currentUser = frappe.session.user;
                 const userRoles = frappe.user_roles || [];
+
+                console.log("userRoles", userRoles);
+                console.log("currentUser", currentUser);
 
                 setUser({
                     name: frappe.session.user_fullname || currentUser,

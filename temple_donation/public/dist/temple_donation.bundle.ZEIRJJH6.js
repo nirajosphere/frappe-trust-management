@@ -127136,14 +127136,9 @@ html body {
     const { data: versions, loading: versionLoading } = useFrappeGetVersions(doctype, docname);
     if (!docname)
       return null;
-    return /* @__PURE__ */ import_react236.default.createElement(card_default, {
-      className: "border border-zinc-200 mt-4"
-    }, /* @__PURE__ */ import_react236.default.createElement("div", {
+    return /* @__PURE__ */ import_react236.default.createElement("div", null, /* @__PURE__ */ import_react236.default.createElement("div", {
       className: "flex items-center justify-between px-4 py-3 border-b"
-    }, /* @__PURE__ */ import_react236.default.createElement(Text17, {
-      strong: true,
-      className: "text-sm"
-    }, "Change History")), /* @__PURE__ */ import_react236.default.createElement("div", {
+    }, /* @__PURE__ */ import_react236.default.createElement(Text17, null, "Change History")), /* @__PURE__ */ import_react236.default.createElement("div", {
       className: "p-4 space-y-4"
     }, versions.map((v) => {
       var _a, _b;
@@ -127184,7 +127179,7 @@ html body {
         type: "secondary",
         className: "text-xs"
       }, "Modified document")));
-    }), /* @__PURE__ */ import_react236.default.createElement("div", {
+    }), (versions == null ? void 0 : versions.length) >= 5 && /* @__PURE__ */ import_react236.default.createElement("div", {
       className: "flex justify-center pt-2"
     }, /* @__PURE__ */ import_react236.default.createElement(button_default, {
       type: "primary",
@@ -128276,12 +128271,16 @@ html body {
     const [user, setUser] = (0, import_react248.useState)(null);
     const [roles, setRoles] = (0, import_react248.useState)([]);
     const [loading, setLoading] = (0, import_react248.useState)(true);
+    console.log(user, "user");
+    console.log(roles);
     (0, import_react248.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
           const currentUser = frappe.session.user;
           const userRoles = frappe.user_roles || [];
+          console.log("userRoles", userRoles);
+          console.log("currentUser", currentUser);
           setUser({
             name: frappe.session.user_fullname || currentUser,
             email: currentUser,
@@ -128412,41 +128411,32 @@ html body {
     }, /* @__PURE__ */ import_react249.default.createElement(layout_default2, {
       className: `min-h-screen`
     }, /* @__PURE__ */ import_react249.default.createElement(Header3, {
-      className: `aavatto-topbar p-0 ${isAdmin ? "is-admin" : ""}`
+      className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
     }, /* @__PURE__ */ import_react249.default.createElement("div", {
-      className: "flex items-center w-full"
+      className: "aavatto-header-inner flex justify-between items-center w-full"
     }, /* @__PURE__ */ import_react249.default.createElement("div", {
-      className: "aavatto-topbar-brand"
-    }, /* @__PURE__ */ import_react249.default.createElement("span", null, "Temple Donation")), /* @__PURE__ */ import_react249.default.createElement(menu_default2, {
+      className: "aavatto-logo"
+    }, "Temple Donation"), /* @__PURE__ */ import_react249.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
-      className: "aavatto-topbar-menu hidden md:flex justify-end",
-      disabledOverflow: true
-    })), /* @__PURE__ */ import_react249.default.createElement("div", {
-      className: "flex items-center gap-4"
-    }, !isAdmin && /* @__PURE__ */ import_react249.default.createElement("div", {
-      className: "aavatto-topbar-right hidden md:flex"
-    }, /* @__PURE__ */ import_react249.default.createElement(dropdown_default3, {
+      className: "aavatto-menu hidden md:flex"
+    }), /* @__PURE__ */ import_react249.default.createElement("div", {
+      className: "aavatto-right"
+    }, !isAdmin && /* @__PURE__ */ import_react249.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
-      placement: "bottomRight",
-      arrow: true
-    }, /* @__PURE__ */ import_react249.default.createElement(space_default, {
-      className: "aavatto-user-profile"
+      placement: "bottomRight"
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+      className: "aavatto-user"
     }, /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react249.default.createElement(UserOutlined_default2, null),
-      className: "bg-zinc-100 text-zinc-900"
-    }), /* @__PURE__ */ import_react249.default.createElement("span", {
-      className: "user-name-text text-zinc-900"
-    }, user == null ? void 0 : user.name)))), /* @__PURE__ */ import_react249.default.createElement(button_default, {
-      className: "md:hidden flex items-center justify-center border-none shadow-none bg-transparent",
-      icon: /* @__PURE__ */ import_react249.default.createElement(MenuOutlined_default2, {
-        style: { fontSize: "20px" }
-      }),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react249.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react249.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react249.default.createElement(button_default, {
+      className: "md:hidden",
+      icon: /* @__PURE__ */ import_react249.default.createElement(MenuOutlined_default2, null),
       onClick: () => setMobileOpen(true)
-    }))), /* @__PURE__ */ import_react249.default.createElement(drawer_default, {
+    })))), /* @__PURE__ */ import_react249.default.createElement(drawer_default, {
       title: /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "font-bold"
       }, "Temple Donation"),
@@ -128584,4 +128574,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.UHI55YEK.js.map
+//# sourceMappingURL=temple_donation.bundle.ZEIRJJH6.js.map

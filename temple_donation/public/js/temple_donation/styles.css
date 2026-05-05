@@ -1872,3 +1872,40 @@ body.non-admin-user .page-container {
 }
 
 /*# sourceMappingURL=styles.css.map */
+
+.aavatto-topbar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0 20px;
+}
+
+.aavatto-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.aavatto-logo {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.aavatto-menu {
+  flex: 1;
+  justify-content: center;
+  border-bottom: none;
+}
+
+.aavatto-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.aavatto-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}

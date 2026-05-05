@@ -218,7 +218,7 @@ def sync_user_roles(doc, method=None):
         return
         
     role_map = {
-        "Super Admin": "System Manager",
+        "Super Admin": "Super Admin",
         "Temple Admin": "Temple Admin",
         "Cashier": "Cashier"
     }
