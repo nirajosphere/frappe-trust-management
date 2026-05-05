@@ -60,8 +60,8 @@ export const userColumns = [
 
     {
         title: "TEMPLES",
-        dataIndex: "custom_assigned_temples",
-        key: "custom_assigned_temples",
+        dataIndex: "custom_select_temple",
+        key: "custom_select_temple",
         width: 180,
         render: (temples) => (
             <div className="flex flex-wrap gap-1">
@@ -69,9 +69,9 @@ export const userColumns = [
                     temples.slice(0, 2).map((t, index) => (
                         <Tag
                             key={index}
-                            className="bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+                            className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
                         >
-                            {t.temple}
+                            {t.temple_name || t.temple}
                         </Tag>
                     ))
                 ) : (
@@ -88,11 +88,28 @@ export const userColumns = [
         dataIndex: "custom_user_role",
         key: "custom_user_role",
         width: 140,
-        render: (text) => (
-            <Tag className="bg-gray-100 border border-gray-200 text-gray-700 font-semibold rounded-full px-3 py-0 text-[10px] uppercase">
-                {text || "Standard"}
-            </Tag>
-        )
+        render: (text) => {
+            const role = text || "Standard";
+            const roleLower = role.toLowerCase();
+            
+            let config = {
+                className: "bg-gray-100 border border-gray-200 text-gray-700",
+            };
+
+            if (roleLower.includes("admin")) {
+                config.className = "bg-amber-50 border border-amber-200 text-amber-700";
+            } else if (roleLower.includes("manager")) {
+                config.className = "bg-emerald-50 border border-emerald-200 text-emerald-700";
+            } else if (roleLower.includes("cashier")) {
+                config.className = "bg-sky-50 border border-sky-200 text-sky-700";
+            }
+
+            return (
+                <Tag className={`${config.className} font-semibold rounded-full px-3 py-0 text-[10px] uppercase`}>
+                    {role}
+                </Tag>
+            );
+        }
     },
 
     {

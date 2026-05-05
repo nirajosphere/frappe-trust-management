@@ -273,6 +273,9 @@
 .temple-donation-app .justify-between {
   justify-content: space-between;
 }
+.temple-donation-app .gap-1 {
+  gap: 0.25rem;
+}
 .temple-donation-app .gap-1\.5 {
   gap: 0.375rem;
 }
@@ -1486,8 +1489,19 @@ body.non-admin-user .page-container {
   height: 64px;
 }
 .aavatto-logo {
-  font-weight: 600;
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.aavatto-logo:hover {
+  transform: scale(1.02);
+}
+.aavatto-logo img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 .aavatto-menu {
   flex: 1;
@@ -1505,4 +1519,4 @@ body.non-admin-user .page-container {
   gap: 8px;
   cursor: pointer;
 }
-/*# sourceMappingURL=temple_donation.bundle.VZSKOGGQ.css.map */
+/*# sourceMappingURL=temple_donation.bundle.IQPY3HIE.css.map */

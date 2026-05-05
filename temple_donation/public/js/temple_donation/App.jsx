@@ -118,49 +118,48 @@ const App = () => {
                     <Header className={`aavatto-topbar ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="aavatto-header-inner flex justify-between items-center w-full">
 
-                            {/* LEFT - LOGO */}
                             <div className="aavatto-logo">
-                                Temple Donation
+                                <img src="/assets/temple_donation/img/temple_donation_logo.svg" alt="Temple Donation" />
                             </div>
 
                             {/* CENTER - MENU */}
-
-                            <Menu
-                                mode="horizontal"
-                                selectedKeys={[currentRoute.split('/')[0]]}
-                                items={menuItems}
-                                onClick={handleMenuClick}
-                                className="aavatto-menu hidden md:flex"
-                            />
-
-                            {/* RIGHT - USER */}
-                            <div className="aavatto-right">
-                                {!isAdmin && (
-                                    <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-                                        <div className="aavatto-user">
-                                            <Avatar
-                                                src={user?.image}
-                                                icon={!user?.image && <UserOutlined />}
-                                            />
-                                            <span>{user?.name}</span>
-                                        </div>
-                                    </Dropdown>
-                                )}
-
-                                {/* Mobile button */}
-                                <Button
-                                    className="md:hidden"
-                                    icon={<MenuOutlined />}
-                                    onClick={() => setMobileOpen(true)}
+                            <div className="flex items-center">
+                                <Menu
+                                    mode="horizontal"
+                                    selectedKeys={[currentRoute.split('/')[0]]}
+                                    items={menuItems}
+                                    onClick={handleMenuClick}
+                                    className="aavatto-menu hidden md:flex"
                                 />
-                            </div>
 
+                                {/* RIGHT - USER */}
+                                <div className="aavatto-right">
+                                    {!isAdmin && (
+                                        <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+                                            <div className="aavatto-user">
+                                                <Avatar
+                                                    src={user?.image}
+                                                    icon={!user?.image && <UserOutlined />}
+                                                />
+                                                <span>{user?.name}</span>
+                                            </div>
+                                        </Dropdown>
+                                    )}
+
+                                    {/* Mobile button */}
+                                    <Button
+                                        className="md:hidden"
+                                        icon={<MenuOutlined />}
+                                        onClick={() => setMobileOpen(true)}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </Header>
 
                     {/* Mobile Drawer */}
                     <Drawer
-                        title={<span className="font-bold">Temple Donation</span>}
+                        title={<img src="/assets/temple_donation/img/logo.png" alt="Temple Donation" style={{ height: '40px', objectFit: 'contain' }} />}
                         placement="right"
                         onClose={() => setMobileOpen(false)}
                         open={mobileOpen}

@@ -22,3 +22,6 @@ def get_latest_bundle():
         return f"/assets/temple_donation/dist/{bundles[0][0]}"
 
     return None
+
+    return None
+

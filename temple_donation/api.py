@@ -250,3 +250,32 @@ def sync_user_roles(doc, method=None):
         
         # Note: No doc.save() here as this is a before_save hook. 
         # Modifications to the doc object will be persisted automatically.
+
+@frappe.whitelist()
+def get_children(doctype, parent_names, parenttype, parentfield):
+    """Fetches child table data for a list of parent names and enriches with temple names."""
+    if isinstance(parent_names, str):
+        import json
+        parent_names = json.loads(parent_names)
+
+    data = frappe.get_all(doctype, 
+        filters={
+            'parent': ['in', parent_names],
+            'parenttype': parenttype,
+            'parentfield': parentfield
+        },
+        fields=['*']
+    )
+
+    # Enrich with Temple names if applicable
+    temple_ids = list(set([d.temple for d in data if d.get('temple')]))
+    if temple_ids:
+        temple_map = { t.name: t.temple_name for t in frappe.get_all('Temple', 
+            filters={'name': ['in', temple_ids]}, 
+            fields=['name', 'temple_name']) 
+        }
+        for d in data:
+            if d.get('temple') in temple_map:
+                d['temple_name'] = temple_map[d.temple]
+
+    return data

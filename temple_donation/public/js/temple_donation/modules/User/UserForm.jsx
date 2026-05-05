@@ -297,9 +297,9 @@ const UserForm = ({ id, onBack }) => {
 
             values.enabled = values.enabled ? "Active" : "Inactive";
 
-            if (values.custom_assigned_temples) {
-                values.custom_assigned_temples =
-                    values.custom_assigned_temples.map(t => t.temple);
+            if (data.custom_select_temple) {
+                values.custom_select_temple =
+                    data.custom_select_temple.map(t => t.temple);
             }
 
             form.setFieldsValue(values);
@@ -316,9 +316,9 @@ const UserForm = ({ id, onBack }) => {
 
             payload.enabled = payload.enabled === "Active" ? 1 : 0;
 
-            if (payload.custom_assigned_temples) {
-                payload.custom_assigned_temples =
-                    payload.custom_assigned_temples.map(t => ({ temple: t }));
+            if (payload.custom_select_temple) {
+                payload.custom_select_temple =
+                    payload.custom_select_temple.map(t => ({ temple: t }));
             }
 
             delete payload.confirm_password;
@@ -395,7 +395,7 @@ const UserForm = ({ id, onBack }) => {
                         </Col>
 
                         <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="custom_assigned_temples" label="Temples" rules={[{ required: true }]}>
+                            <Form.Item name="custom_select_temple" label="Temples" rules={[{ required: true }]}>
                                 <Select mode="multiple">
                                     {temples?.map(t => (
                                         <Select.Option key={t.name} value={t.name}>

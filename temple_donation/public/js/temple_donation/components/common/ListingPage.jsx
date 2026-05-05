@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spin, Alert, Modal, message } from "antd";
 import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
 import CommonTable from "./CommonTable";
@@ -16,13 +16,58 @@ import { exportToCSV } from "../../utils/exportUtils";
  * @param {string} basePath - Base path for routing (e.g. 'donors')
  * @param {Array} fields - Fields to fetch from Frappe (optional, uses all if not provided)
  */
-const ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"] }) => {
+const ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"], filters = {}, childTable, childDocType }) => {
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
         fields: fields,
+        filters: filters,
         limit: 100,
         orderBy: { field: 'modified', order: 'desc' }
     });
+
+    const [enrichedData, setEnrichedData] = useState([]);
+    const [enriching, setEnriching] = useState(false);
+
+    useEffect(() => {
+        if (data && data.length > 0 && childTable) {
+            setEnriching(true);
+            const parentNames = data.map(d => d.name);
+            
+            frappe.call({
+                method: "temple_donation.api.get_children",
+                args: {
+                    doctype: childDocType || "Temple Details",
+                    parent_names: parentNames,
+                    parenttype: doctype,
+                    parentfield: childTable
+                },
+                callback: (r) => {
+                    setEnriching(false);
+                    if (r.message) {
+                        const childrenByParent = r.message.reduce((acc, child) => {
+                            if (!acc[child.parent]) acc[child.parent] = [];
+                            acc[child.parent].push(child);
+                            return acc;
+                        }, {});
+
+                        const enriched = data.map(doc => ({
+                            ...doc,
+                            [childTable]: childrenByParent[doc.name] || []
+                        }));
+                        setEnrichedData(enriched);
+                    } else {
+                        setEnrichedData(data);
+                    }
+                },
+                error: () => {
+                    setEnriching(false);
+                    setEnrichedData(data);
+                }
+            });
+        } else if (data) {
+            setEnrichedData(data);
+        }
+    }, [data, childTable, doctype]);
 
     const { deleteDoc } = useFrappeDeleteDoc();
 
@@ -105,8 +150,8 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
             />
             <CommonTable
                 columns={columns || []}
-                dataSource={data}
-                loading={loading}
+                dataSource={enrichedData}
+                loading={loading || enriching}
                 searchText={searchText}
                 onEdit={handleEdit}
                 onDelete={handleDelete}

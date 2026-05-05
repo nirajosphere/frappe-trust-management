@@ -45,49 +45,49 @@ import CommonView from "../components/common/CommonView";
 export const navigationItems = [
     {
         key: "dashboard",
-        icon: <DashboardOutlined />,
+        // icon: <DashboardOutlined />,
         label: "Dashboard",
         component: <Dashboard />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "ledger",
-        icon: <BankOutlined />,
+        // icon: <BankOutlined />,
         label: "Ledger",
         component: <OpeningBalance />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "users",
-        icon: <UserOutlined />,
+        // icon: <UserOutlined />,
         label: "Users",
         component: <UserList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "temples",
-        icon: <BankOutlined />,
+        // icon: <BankOutlined />,
         label: "Temples",
         component: <TempleList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "donation-types",
-        icon: <ShoppingCartOutlined />,
+        // icon: <ShoppingCartOutlined />,
         label: "Donation Types",
         component: <DonationTypeList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "donors",
-        icon: <UserOutlined />,
+        // icon: <UserOutlined />,
         label: "Donors",
         component: <DonorList />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
         key: "donations",
-        icon: <HistoryOutlined />,
+        // icon: <HistoryOutlined />,
         label: "Donation",
         component: <DonationList />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
