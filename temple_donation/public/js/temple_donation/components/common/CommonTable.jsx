@@ -34,7 +34,7 @@ const CommonTable = ({
         width: 120,
 
         render: (_, record) => (
-            <Space size={0} className="">
+            <Space>
 
                 {onView && (
                     <Tooltip title="View">
@@ -42,7 +42,7 @@ const CommonTable = ({
                             type="text"
                             icon={<EyeOutlined />}
                             onClick={() => onView(record)}
-                            className="px-2 border-r border-gray-200 hover:!text-orange-500"
+                            className="px-2 border border-gray-200 hover:!text-orange-500"
                         />
                     </Tooltip>
                 )}
@@ -53,7 +53,7 @@ const CommonTable = ({
                             type="text"
                             icon={<EditOutlined />}
                             onClick={() => onEdit(record)}
-                            className="px-2 border-r border-gray-200 hover:!text-blue-500"
+                            className="px-2 border border-gray-200 hover:!text-blue-500"
                         />
                     </Tooltip>
                 )}
@@ -64,7 +64,7 @@ const CommonTable = ({
                             type="text"
                             icon={<PrinterOutlined />}
                             onClick={() => onPrint(record)}
-                            className="px-2 border-r border-gray-200 hover:!text-amber-500"
+                            className="px-2 border border-gray-200 hover:!text-amber-500"
                         />
                     </Tooltip>
                 )}
@@ -82,7 +82,7 @@ const CommonTable = ({
                                 type="text"
                                 danger
                                 icon={<DeleteOutlined />}
-                                className="px-2 hover:!text-red-500"
+                                className="px-2 border border-red-200 hover:!text-red-500"
                             />
                         </Tooltip>
                     </Popconfirm>

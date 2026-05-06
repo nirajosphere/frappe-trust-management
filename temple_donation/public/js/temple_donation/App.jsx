@@ -119,7 +119,7 @@ const App = () => {
                         <div className="aavatto-header-inner flex justify-between items-center w-full">
 
                             <div className="aavatto-logo">
-                                <img src="/assets/temple_donation/img/temple_donation_logo.svg" alt="Temple Donation" />
+                                <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation" />
                             </div>
 
                             {/* CENTER - MENU */}

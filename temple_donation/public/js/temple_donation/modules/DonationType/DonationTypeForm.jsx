@@ -228,25 +228,6 @@ const DonationTypeForm = ({ id, onBack }) => {
         try {
             const { donation_image, ...rest } = values;
             
-            // If it's an existing image (string in data, array in form values)
-            // we don't want to send the fileList array to updateDoc/createDoc
-            // but we might want to keep the existing value if it hasn't changed.
-
-            if (file) {
-  const uploaded = await upload(file, {
-    doctype: DOCTYPE_DONATION_TYPE,
-    docname: docName,
-    fieldname: "donation_image"
-  });
-
-  // 🔥 IMPORTANT: update field with file_url
-  if (uploaded?.file_url) {
-    await updateDoc(DOCTYPE_DONATION_TYPE, docName, {
-      donation_image: uploaded.file_url
-    });
-  }
-}
-            
             let doc;
             if (isEdit) {
                 doc = await updateDoc(DOCTYPE_DONATION_TYPE, id, rest);
@@ -265,19 +246,23 @@ const DonationTypeForm = ({ id, onBack }) => {
                 const file = donation_image[0].originFileObj;
                 if (file) {
                     // New image selected, upload it
-                    await upload(file, {
+                    const uploaded = await upload(file, {
                         doctype: DOCTYPE_DONATION_TYPE,
                         docname: docName,
                         fieldname: "donation_image",
                         is_private: 0
                     });
+
+                    // 🔥 IMPORTANT: update field with file_url if the hook doesn't do it automatically
+                    if (uploaded?.file_url) {
+                        await updateDoc(DOCTYPE_DONATION_TYPE, docName, {
+                            donation_image: uploaded.file_url
+                        });
+                    }
                 }
-                // If it's an existing image (status === 'done'), do nothing, field is already set
-            } else {
+            } else if (isEdit && (!donation_image || donation_image.length === 0)) {
                 // Image was cleared, update the field to empty string
-                if (isEdit) {
-                    await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
-                }
+                await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
             }
 
             message.success("Saved successfully");
@@ -349,7 +334,7 @@ const DonationTypeForm = ({ id, onBack }) => {
                                         value: t.name,
                                         label: t.temple_name || t.name
                                     }))}
-                                    mode="multiple"
+                                    allowClear
                                 />
                             </Form.Item>
                         </Col>

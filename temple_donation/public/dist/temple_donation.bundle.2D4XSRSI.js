@@ -97,7 +97,7 @@
         }
         function ComponentDummy() {
         }
-        function PureComponent2(props, context, updater) {
+        function PureComponent3(props, context, updater) {
           this.props = props;
           this.context = context;
           this.refs = emptyObject;
@@ -277,9 +277,9 @@
           return newKey;
         }
         function validateChildKeys(node2) {
-          isValidElement44(node2) ? node2._store && (node2._store.validated = 1) : "object" === typeof node2 && null !== node2 && node2.$$typeof === REACT_LAZY_TYPE && ("fulfilled" === node2._payload.status ? isValidElement44(node2._payload.value) && node2._payload.value._store && (node2._payload.value._store.validated = 1) : node2._store && (node2._store.validated = 1));
+          isValidElement49(node2) ? node2._store && (node2._store.validated = 1) : "object" === typeof node2 && null !== node2 && node2.$$typeof === REACT_LAZY_TYPE && ("fulfilled" === node2._payload.status ? isValidElement49(node2._payload.value) && node2._payload.value._store && (node2._payload.value._store.validated = 1) : node2._store && (node2._store.validated = 1));
         }
-        function isValidElement44(object4) {
+        function isValidElement49(object4) {
           return "object" === typeof object4 && null !== object4 && object4.$$typeof === REACT_ELEMENT_TYPE;
         }
         function escape(key) {
@@ -350,13 +350,13 @@
             var childKey = "" === nameSoFar ? "." + getElementKey(invokeCallback, 0) : nameSoFar;
             isArrayImpl(callback) ? (escapedPrefix = "", null != childKey && (escapedPrefix = childKey.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array4, escapedPrefix, "", function(c2) {
               return c2;
-            })) : null != callback && (isValidElement44(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(
+            })) : null != callback && (isValidElement49(callback) && (null != callback.key && (invokeCallback && invokeCallback.key === callback.key || checkKeyStringCoercion(callback.key)), escapedPrefix = cloneAndReplaceKey(
               callback,
               escapedPrefix + (null == callback.key || invokeCallback && invokeCallback.key === callback.key ? "" : ("" + callback.key).replace(
                 userProvidedKeyEscapeRegex,
                 "$&/"
               ) + "/") + childKey
-            ), "" !== nameSoFar && null != invokeCallback && isValidElement44(invokeCallback) && null == invokeCallback.key && invokeCallback._store && !invokeCallback._store.validated && (escapedPrefix._store.validated = 2), callback = escapedPrefix), array4.push(callback));
+            ), "" !== nameSoFar && null != invokeCallback && isValidElement49(invokeCallback) && null == invokeCallback.key && invokeCallback._store && !invokeCallback._store.validated && (escapedPrefix._store.validated = 2), callback = escapedPrefix), array4.push(callback));
             return 1;
           }
           invokeCallback = 0;
@@ -575,8 +575,8 @@
         for (fnName in deprecatedAPIs)
           deprecatedAPIs.hasOwnProperty(fnName) && defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
         ComponentDummy.prototype = Component7.prototype;
-        deprecatedAPIs = PureComponent2.prototype = new ComponentDummy();
-        deprecatedAPIs.constructor = PureComponent2;
+        deprecatedAPIs = PureComponent3.prototype = new ComponentDummy();
+        deprecatedAPIs.constructor = PureComponent3;
         assign2(deprecatedAPIs, Component7.prototype);
         deprecatedAPIs.isPureReactComponent = true;
         var isArrayImpl = Array.isArray, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), ReactSharedInternals = {
@@ -657,7 +657,7 @@
             }) || [];
           },
           only: function(children) {
-            if (!isValidElement44(children))
+            if (!isValidElement49(children))
               throw Error(
                 "React.Children.only expected to receive a single React element child."
               );
@@ -669,7 +669,7 @@
         exports.Component = Component7;
         exports.Fragment = REACT_FRAGMENT_TYPE2;
         exports.Profiler = REACT_PROFILER_TYPE;
-        exports.PureComponent = PureComponent2;
+        exports.PureComponent = PureComponent3;
         exports.StrictMode = REACT_STRICT_MODE_TYPE;
         exports.Suspense = REACT_SUSPENSE_TYPE;
         exports.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = ReactSharedInternals;
@@ -894,7 +894,7 @@
           });
           return elementType;
         };
-        exports.isValidElement = isValidElement44;
+        exports.isValidElement = isValidElement49;
         exports.lazy = function(ctor) {
           ctor = { _status: -1, _result: ctor };
           var lazyType = {
@@ -1136,7 +1136,7 @@
           var ContextProvider = REACT_PROVIDER_TYPE;
           var Element3 = REACT_ELEMENT_TYPE;
           var ForwardRef3 = REACT_FORWARD_REF_TYPE2;
-          var Fragment39 = REACT_FRAGMENT_TYPE2;
+          var Fragment42 = REACT_FRAGMENT_TYPE2;
           var Lazy = REACT_LAZY_TYPE;
           var Memo2 = REACT_MEMO_TYPE2;
           var Portal2 = REACT_PORTAL_TYPE;
@@ -1204,7 +1204,7 @@
           exports.ContextProvider = ContextProvider;
           exports.Element = Element3;
           exports.ForwardRef = ForwardRef3;
-          exports.Fragment = Fragment39;
+          exports.Fragment = Fragment42;
           exports.Lazy = Lazy;
           exports.Memo = Memo2;
           exports.Portal = Portal2;
@@ -1295,7 +1295,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React595 = require_react(), Internals = {
+        var React612 = require_react(), Internals = {
           d: {
             f: noop6,
             r: function() {
@@ -1313,7 +1313,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React595.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React612.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3044,11 +3044,11 @@
             valueField
           );
           if (!node2.hasOwnProperty(valueField) && "undefined" !== typeof descriptor && "function" === typeof descriptor.get && "function" === typeof descriptor.set) {
-            var get7 = descriptor.get, set4 = descriptor.set;
+            var get8 = descriptor.get, set4 = descriptor.set;
             Object.defineProperty(node2, valueField, {
               configurable: true,
               get: function() {
-                return get7.call(this);
+                return get8.call(this);
               },
               set: function(value) {
                 checkFormFieldValueStringCoercion(value);
@@ -3165,7 +3165,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React595.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React612.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -19003,14 +19003,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React595 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React612 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React595.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React612.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21803,7 +21803,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React595.version;
+          var isomorphicReactPackageVersion = React612.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -22764,7 +22764,7 @@
       var isDeepKey = require_isDeepKey();
       var toKey = require_toKey();
       var toPath = require_toPath();
-      function get7(object4, path2, defaultValue) {
+      function get8(object4, path2, defaultValue) {
         if (object4 == null) {
           return defaultValue;
         }
@@ -22776,7 +22776,7 @@
             const result = object4[path2];
             if (result === void 0) {
               if (isDeepKey.isDeepKey(path2)) {
-                return get7(object4, toPath.toPath(path2), defaultValue);
+                return get8(object4, toPath.toPath(path2), defaultValue);
               } else {
                 return defaultValue;
               }
@@ -22833,7 +22833,7 @@
         }
         return current3;
       }
-      exports.get = get7;
+      exports.get = get8;
     }
   });
 
@@ -22946,10 +22946,10 @@
     "../temple_donation/node_modules/es-toolkit/dist/compat/object/property.js"(exports) {
       "use strict";
       Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-      var get7 = require_get();
+      var get8 = require_get();
       function property(path2) {
         return function(object4) {
-          return get7.get(object4, path2);
+          return get8.get(object4, path2);
         };
       }
       exports.property = property;
@@ -23612,7 +23612,7 @@
       var isMatch = require_isMatch();
       var toKey = require_toKey();
       var cloneDeep = require_cloneDeep2();
-      var get7 = require_get();
+      var get8 = require_get();
       var has3 = require_has();
       function matchesProperty(property, source) {
         switch (typeof property) {
@@ -23629,7 +23629,7 @@
         }
         source = cloneDeep.cloneDeep(source);
         return function(target) {
-          const result = get7.get(target, property);
+          const result = get8.get(target, property);
           if (result === void 0) {
             return has3.has(target, property);
           }
@@ -23713,7 +23713,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         function useSyncExternalStore$2(subscribe, getSnapshot) {
-          didWarnOld18Alpha || void 0 === React595.startTransition || (didWarnOld18Alpha = true, console.error(
+          didWarnOld18Alpha || void 0 === React612.startTransition || (didWarnOld18Alpha = true, console.error(
             "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
           ));
           var value = getSnapshot();
@@ -23723,11 +23723,11 @@
               "The result of getSnapshot should be cached to avoid an infinite loop"
             ), didWarnUncachedGetSnapshot = true);
           }
-          cachedValue = useState138({
+          cachedValue = useState140({
             inst: { value, getSnapshot }
           });
           var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
-          useLayoutEffect11(
+          useLayoutEffect13(
             function() {
               inst.value = value;
               inst.getSnapshot = getSnapshot;
@@ -23735,7 +23735,7 @@
             },
             [subscribe, value, getSnapshot]
           );
-          useEffect143(
+          useEffect144(
             function() {
               checkIfSnapshotChanged(inst) && forceUpdate({ inst });
               return subscribe(function() {
@@ -23761,8 +23761,8 @@
           return getSnapshot();
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React595 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState138 = React595.useState, useEffect143 = React595.useEffect, useLayoutEffect11 = React595.useLayoutEffect, useDebugValue3 = React595.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-        exports.useSyncExternalStore = void 0 !== React595.useSyncExternalStore ? React595.useSyncExternalStore : shim;
+        var React612 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState140 = React612.useState, useEffect144 = React612.useEffect, useLayoutEffect13 = React612.useLayoutEffect, useDebugValue3 = React612.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+        exports.useSyncExternalStore = void 0 !== React612.useSyncExternalStore ? React612.useSyncExternalStore : shim;
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -23789,15 +23789,15 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React595 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React595.useRef, useEffect143 = React595.useEffect, useMemo174 = React595.useMemo, useDebugValue3 = React595.useDebugValue;
+        var React612 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef181 = React612.useRef, useEffect144 = React612.useEffect, useMemo177 = React612.useMemo, useDebugValue3 = React612.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
-          var instRef = useRef177(null);
+          var instRef = useRef181(null);
           if (null === instRef.current) {
             var inst = { hasValue: false, value: null };
             instRef.current = inst;
           } else
             inst = instRef.current;
-          instRef = useMemo174(
+          instRef = useMemo177(
             function() {
               function memoizedSelector(nextSnapshot) {
                 if (!hasMemo) {
@@ -23833,7 +23833,7 @@
             [getSnapshot, getServerSnapshot, selector, isEqual2]
           );
           var value = useSyncExternalStore2(subscribe, instRef[0], instRef[1]);
-          useEffect143(
+          useEffect144(
             function() {
               inst.hasValue = true;
               inst.value = value;
@@ -24244,15 +24244,15 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React595 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React595.useSyncExternalStore, useRef177 = React595.useRef, useEffect143 = React595.useEffect, useMemo174 = React595.useMemo, useDebugValue3 = React595.useDebugValue;
+        var React612 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React612.useSyncExternalStore, useRef181 = React612.useRef, useEffect144 = React612.useEffect, useMemo177 = React612.useMemo, useDebugValue3 = React612.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
-          var instRef = useRef177(null);
+          var instRef = useRef181(null);
           if (null === instRef.current) {
             var inst = { hasValue: false, value: null };
             instRef.current = inst;
           } else
             inst = instRef.current;
-          instRef = useMemo174(
+          instRef = useMemo177(
             function() {
               function memoizedSelector(nextSnapshot) {
                 if (!hasMemo) {
@@ -24288,7 +24288,7 @@
             [getSnapshot, getServerSnapshot, selector, isEqual2]
           );
           var value = useSyncExternalStore2(subscribe, instRef[0], instRef[1]);
-          useEffect143(
+          useEffect144(
             function() {
               inst.hasValue = true;
               inst.value = value;
@@ -25677,11 +25677,58 @@
     }
   });
 
+  // ../temple_donation/node_modules/dayjs/plugin/relativeTime.js
+  var require_relativeTime = __commonJS({
+    "../temple_donation/node_modules/dayjs/plugin/relativeTime.js"(exports, module2) {
+      !function(r3, e4) {
+        "object" == typeof exports && "undefined" != typeof module2 ? module2.exports = e4() : "function" == typeof define && define.amd ? define(e4) : (r3 = "undefined" != typeof globalThis ? globalThis : r3 || self).dayjs_plugin_relativeTime = e4();
+      }(exports, function() {
+        "use strict";
+        return function(r3, e4, t2) {
+          r3 = r3 || {};
+          var n2 = e4.prototype, o3 = { future: "in %s", past: "%s ago", s: "a few seconds", m: "a minute", mm: "%d minutes", h: "an hour", hh: "%d hours", d: "a day", dd: "%d days", M: "a month", MM: "%d months", y: "a year", yy: "%d years" };
+          function i(r4, e6, t3, o4) {
+            return n2.fromToBase(r4, e6, t3, o4);
+          }
+          t2.en.relativeTime = o3, n2.fromToBase = function(e6, n3, i2, d2, u) {
+            for (var f, a2, s2, l2 = i2.$locale().relativeTime || o3, h = r3.thresholds || [{ l: "s", r: 44, d: "second" }, { l: "m", r: 89 }, { l: "mm", r: 44, d: "minute" }, { l: "h", r: 89 }, { l: "hh", r: 21, d: "hour" }, { l: "d", r: 35 }, { l: "dd", r: 25, d: "day" }, { l: "M", r: 45 }, { l: "MM", r: 10, d: "month" }, { l: "y", r: 17 }, { l: "yy", d: "year" }], m = h.length, c2 = 0; c2 < m; c2 += 1) {
+              var y2 = h[c2];
+              y2.d && (f = d2 ? t2(e6).diff(i2, y2.d, true) : i2.diff(e6, y2.d, true));
+              var p = (r3.rounding || Math.round)(Math.abs(f));
+              if (s2 = f > 0, p <= y2.r || !y2.r) {
+                p <= 1 && c2 > 0 && (y2 = h[c2 - 1]);
+                var v = l2[y2.l];
+                u && (p = u("" + p)), a2 = "string" == typeof v ? v.replace("%d", p) : v(p, n3, y2.l, s2);
+                break;
+              }
+            }
+            if (n3)
+              return a2;
+            var M2 = s2 ? l2.future : l2.past;
+            return "function" == typeof M2 ? M2(a2) : M2.replace("%s", a2);
+          }, n2.to = function(r4, e6) {
+            return i(r4, e6, this, true);
+          }, n2.from = function(r4, e6) {
+            return i(r4, e6, this);
+          };
+          var d = function(r4) {
+            return r4.$u ? t2.utc() : t2();
+          };
+          n2.toNow = function(r4) {
+            return this.to(d(this), r4);
+          }, n2.fromNow = function(r4) {
+            return this.from(d(this), r4);
+          };
+        };
+      });
+    }
+  });
+
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react250 = __toESM(require_react());
+  var import_react258 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react249 = __toESM(require_react());
+  var import_react257 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -28768,7 +28815,7 @@
         Object.defineProperty(ret, key, {
           configurable: true,
           enumerable: true,
-          get: function get7() {
+          get: function get8() {
             return obj[key];
           }
         });
@@ -28787,7 +28834,7 @@
     if (enableStatistic && typeof Proxy !== "undefined") {
       tokenKeys2 = /* @__PURE__ */ new Set();
       proxy = new Proxy(token2, {
-        get: function get7(obj, prop) {
+        get: function get8(obj, prop) {
           if (recording) {
             var _tokenKeys;
             (_tokenKeys = tokenKeys2) === null || _tokenKeys === void 0 || _tokenKeys.add(prop);
@@ -28872,7 +28919,7 @@
       }
     }, {
       key: "get",
-      value: function get7(keys2) {
+      value: function get8(keys2) {
         var compositeKey = this.getCompositeKey(keys2);
         var cache = this.map.get(compositeKey);
         this.lastAccessBeat.set(compositeKey, Date.now());
@@ -102256,11 +102303,11 @@ html body {
   var import_react162 = __toESM(require_react());
 
   // ../temple_donation/node_modules/@rc-component/upload/es/attr-accept.js
-  var attr_accept_default = (file2, acceptedFiles) => {
-    if (file2 && acceptedFiles) {
+  var attr_accept_default = (file, acceptedFiles) => {
+    if (file && acceptedFiles) {
       const acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(",");
-      const fileName = file2.name || "";
-      const mimeType = file2.type || "";
+      const fileName = file.name || "";
+      const mimeType = file.type || "";
       const baseMimeType = mimeType.replace(/\/.*$/, "");
       return acceptedFilesArray.some((type5) => {
         const validType = type5.trim();
@@ -102374,7 +102421,7 @@ html body {
   var traverseFileTree = async (files, isAccepted) => {
     const flattenFileList = [];
     const progressFileList = [];
-    files.forEach((file2) => progressFileList.push(file2.webkitGetAsEntry()));
+    files.forEach((file) => progressFileList.push(file.webkitGetAsEntry()));
     async function readDirectory(directory) {
       const dirReader = directory.createReader();
       const entries = [];
@@ -102394,22 +102441,22 @@ html body {
     }
     async function readFile(item) {
       return new Promise((reslove) => {
-        item.file((file2) => {
-          if (isAccepted(file2)) {
-            if (item.fullPath && !file2.webkitRelativePath) {
-              Object.defineProperties(file2, {
+        item.file((file) => {
+          if (isAccepted(file)) {
+            if (item.fullPath && !file.webkitRelativePath) {
+              Object.defineProperties(file, {
                 webkitRelativePath: {
                   writable: true
                 }
               });
-              file2.webkitRelativePath = item.fullPath.replace(/^\//, "");
-              Object.defineProperties(file2, {
+              file.webkitRelativePath = item.fullPath.replace(/^\//, "");
+              Object.defineProperties(file, {
                 webkitRelativePath: {
                   writable: false
                 }
               });
             }
-            reslove(file2);
+            reslove(file);
           } else {
             reslove(null);
           }
@@ -102422,9 +102469,9 @@ html body {
       }
       item.path = path2 || "";
       if (item.isFile) {
-        const file2 = await readFile(item);
-        if (file2) {
-          flattenFileList.push(file2);
+        const file = await readFile(item);
+        if (file) {
+          flattenFileList.push(file);
         }
       } else if (item.isDirectory) {
         const entries = await readDirectory(item);
@@ -102471,7 +102518,7 @@ html body {
       __publicField(this, "reqs", {});
       __publicField(this, "fileInput");
       __publicField(this, "_isMounted");
-      __publicField(this, "filterFile", (file2, force = false) => {
+      __publicField(this, "filterFile", (file, force = false) => {
         const {
           accept,
           directory
@@ -102493,13 +102540,13 @@ html body {
           }
         }
         const mergedFilter = filterFn || (directory || force ? (currentFile) => attr_accept_default(currentFile, acceptFormat) : () => true);
-        return mergedFilter(file2);
+        return mergedFilter(file);
       });
       __publicField(this, "onChange", (e4) => {
         const {
           files
         } = e4.target;
-        const acceptedFiles = [...files].filter((file2) => this.filterFile(file2));
+        const acceptedFiles = [...files].filter((file) => this.filterFile(file));
         this.uploadFiles(acceptedFiles);
         this.reset();
       });
@@ -102541,7 +102588,7 @@ html body {
           files = await traverseFileTree_default(Array.prototype.slice.call(items), this.filterFile);
           this.uploadFiles(files);
         } else {
-          let acceptFiles = [...files].filter((file2) => this.filterFile(file2, true));
+          let acceptFiles = [...files].filter((file) => this.filterFile(file, true));
           if (multiple === false) {
             acceptFiles = files.slice(0, 1);
           }
@@ -102574,9 +102621,9 @@ html body {
       });
       __publicField(this, "uploadFiles", (files) => {
         const originFiles = [...files];
-        const postFiles = originFiles.map((file2) => {
-          file2.uid = uid2();
-          return this.processFile(file2, originFiles);
+        const postFiles = originFiles.map((file) => {
+          file.uid = uid2();
+          return this.processFile(file, originFiles);
         });
         Promise.all(postFiles).then((fileList) => {
           const {
@@ -102589,25 +102636,25 @@ html body {
             file: origin,
             parsedFile
           })));
-          fileList.filter((file2) => file2.parsedFile !== null).forEach((file2) => {
-            this.post(file2);
+          fileList.filter((file) => file.parsedFile !== null).forEach((file) => {
+            this.post(file);
           });
         });
       });
-      __publicField(this, "processFile", async (file2, fileList) => {
+      __publicField(this, "processFile", async (file, fileList) => {
         const {
           beforeUpload
         } = this.props;
-        let transformedFile = file2;
+        let transformedFile = file;
         if (beforeUpload) {
           try {
-            transformedFile = await beforeUpload(file2, fileList);
+            transformedFile = await beforeUpload(file, fileList);
           } catch (e4) {
             transformedFile = false;
           }
           if (transformedFile === false) {
             return {
-              origin: file2,
+              origin: file,
               parsedFile: null,
               action: null,
               data: null
@@ -102619,7 +102666,7 @@ html body {
         } = this.props;
         let mergedAction;
         if (typeof action === "function") {
-          mergedAction = await action(file2);
+          mergedAction = await action(file);
         } else {
           mergedAction = action;
         }
@@ -102628,23 +102675,23 @@ html body {
         } = this.props;
         let mergedData;
         if (typeof data === "function") {
-          mergedData = await data(file2);
+          mergedData = await data(file);
         } else {
           mergedData = data;
         }
-        const parsedData = (typeof transformedFile === "object" || typeof transformedFile === "string") && transformedFile ? transformedFile : file2;
+        const parsedData = (typeof transformedFile === "object" || typeof transformedFile === "string") && transformedFile ? transformedFile : file;
         let parsedFile;
         if (parsedData instanceof File) {
           parsedFile = parsedData;
         } else {
-          parsedFile = new File([parsedData], file2.name, {
-            type: file2.type
+          parsedFile = new File([parsedData], file.name, {
+            type: file.type
           });
         }
         const mergedParsedFile = parsedFile;
-        mergedParsedFile.uid = file2.uid;
+        mergedParsedFile.uid = file.uid;
         return {
-          origin: file2,
+          origin: file,
           data: mergedData,
           parsedFile: mergedParsedFile,
           action: mergedAction
@@ -102738,12 +102785,12 @@ html body {
         uid: uid2()
       });
     }
-    abort(file2) {
+    abort(file) {
       const {
         reqs
       } = this;
-      if (file2) {
-        const uid3 = file2.uid ? file2.uid : file2;
+      if (file) {
+        const uid3 = file.uid ? file.uid : file;
         if (reqs[uid3] && reqs[uid3].abort) {
           reqs[uid3].abort();
         }
@@ -102872,8 +102919,8 @@ html body {
         this.uploader = node2;
       });
     }
-    abort(file2) {
-      this.uploader.abort(file2);
+    abort(file) {
+      this.uploader.abort(file);
     }
     render() {
       return /* @__PURE__ */ import_react163.default.createElement(AjaxUploader_default, _extends127({}, this.props, {
@@ -103517,37 +103564,37 @@ html body {
   var PictureTwoTone_default2 = RefIcon46;
 
   // ../temple_donation/node_modules/antd/es/upload/utils.js
-  function file2Obj(file2) {
-    return __spreadProps(__spreadValues({}, file2), {
-      lastModified: file2.lastModified,
-      lastModifiedDate: file2.lastModifiedDate,
-      name: file2.name,
-      size: file2.size,
-      type: file2.type,
-      uid: file2.uid,
+  function file2Obj(file) {
+    return __spreadProps(__spreadValues({}, file), {
+      lastModified: file.lastModified,
+      lastModifiedDate: file.lastModifiedDate,
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      uid: file.uid,
       percent: 0,
-      originFileObj: file2
+      originFileObj: file
     });
   }
-  function updateFileList(file2, fileList) {
+  function updateFileList(file, fileList) {
     const nextFileList = _toConsumableArray(fileList);
     const fileIndex = nextFileList.findIndex(({
       uid: uid3
-    }) => uid3 === file2.uid);
+    }) => uid3 === file.uid);
     if (fileIndex === -1) {
-      nextFileList.push(file2);
+      nextFileList.push(file);
     } else {
-      nextFileList[fileIndex] = file2;
+      nextFileList[fileIndex] = file;
     }
     return nextFileList;
   }
-  function getFileItem(file2, fileList) {
-    const matchKey = file2.uid !== void 0 ? "uid" : "name";
-    return fileList.filter((item) => item[matchKey] === file2[matchKey])[0];
+  function getFileItem(file, fileList) {
+    const matchKey = file.uid !== void 0 ? "uid" : "name";
+    return fileList.filter((item) => item[matchKey] === file[matchKey])[0];
   }
-  function removeFileItem(file2, fileList) {
-    const matchKey = file2.uid !== void 0 ? "uid" : "name";
-    const removed = fileList.filter((item) => item[matchKey] !== file2[matchKey]);
+  function removeFileItem(file, fileList) {
+    const matchKey = file.uid !== void 0 ? "uid" : "name";
+    const removed = fileList.filter((item) => item[matchKey] !== file[matchKey]);
     if (removed.length === fileList.length) {
       return null;
     }
@@ -103560,11 +103607,11 @@ html body {
     return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [""])[0];
   };
   var isImageFileType = (type5) => type5.indexOf("image/") === 0;
-  var isImageUrl = (file2) => {
-    if (file2.type && !file2.thumbUrl) {
-      return isImageFileType(file2.type);
+  var isImageUrl = (file) => {
+    if (file.type && !file.thumbUrl) {
+      return isImageFileType(file.type);
     }
-    const url2 = file2.thumbUrl || file2.url || "";
+    const url2 = file.thumbUrl || file.url || "";
     const extension = extname(url2);
     if (/^data:image\//.test(url2) || /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg|ico|heic|heif)$/i.test(extension)) {
       return true;
@@ -103578,9 +103625,9 @@ html body {
     return true;
   };
   var MEASURE_SIZE = 200;
-  function previewImage(file2) {
+  function previewImage(file) {
     return new Promise((resolve) => {
-      if (!file2.type || !isImageFileType(file2.type)) {
+      if (!file.type || !isImageFileType(file.type)) {
         resolve("");
         return;
       }
@@ -103614,24 +103661,24 @@ html body {
         resolve(dataURL);
       };
       img.crossOrigin = "anonymous";
-      if (file2.type.startsWith("image/svg+xml")) {
+      if (file.type.startsWith("image/svg+xml")) {
         const reader = new FileReader();
         reader.onload = () => {
           if (reader.result && typeof reader.result === "string") {
             img.src = reader.result;
           }
         };
-        reader.readAsDataURL(file2);
-      } else if (file2.type.startsWith("image/gif")) {
+        reader.readAsDataURL(file);
+      } else if (file.type.startsWith("image/gif")) {
         const reader = new FileReader();
         reader.onload = () => {
           if (reader.result) {
             resolve(reader.result);
           }
         };
-        reader.readAsDataURL(file2);
+        reader.readAsDataURL(file);
       } else {
-        img.src = window.URL.createObjectURL(file2);
+        img.src = window.URL.createObjectURL(file);
       }
     });
   }
@@ -103681,7 +103728,7 @@ html body {
     styles,
     locale: locale8,
     listType,
-    file: file2,
+    file,
     items,
     progress: progressProps,
     iconRender,
@@ -103702,7 +103749,7 @@ html body {
     var _a, _b;
     const {
       status
-    } = file2;
+    } = file;
     const [mergedStatus, setMergedStatus] = React510.useState(status);
     React510.useEffect(() => {
       if (status !== "removed") {
@@ -103718,12 +103765,12 @@ html body {
         clearTimeout(timer);
       };
     }, []);
-    const iconNode = iconRender(file2);
+    const iconNode = iconRender(file);
     let icon = /* @__PURE__ */ React510.createElement("div", {
       className: `${prefixCls}-icon`
     }, iconNode);
     if (listType === "picture" || listType === "picture-card" || listType === "picture-circle") {
-      if (mergedStatus === "uploading" || !file2.thumbUrl && !file2.url) {
+      if (mergedStatus === "uploading" || !file.thumbUrl && !file.url) {
         const uploadingClassName = clsx(`${prefixCls}-list-item-thumbnail`, {
           [`${prefixCls}-list-item-file`]: mergedStatus !== "uploading"
         });
@@ -103731,67 +103778,67 @@ html body {
           className: uploadingClassName
         }, iconNode);
       } else {
-        const thumbnail = (isImgUrl == null ? void 0 : isImgUrl(file2)) ? /* @__PURE__ */ React510.createElement("img", {
-          src: file2.thumbUrl || file2.url,
-          alt: file2.name,
+        const thumbnail = (isImgUrl == null ? void 0 : isImgUrl(file)) ? /* @__PURE__ */ React510.createElement("img", {
+          src: file.thumbUrl || file.url,
+          alt: file.name,
           className: `${prefixCls}-list-item-image`,
-          crossOrigin: file2.crossOrigin
+          crossOrigin: file.crossOrigin
         }) : iconNode;
         const aClassName = clsx(`${prefixCls}-list-item-thumbnail`, {
-          [`${prefixCls}-list-item-file`]: isImgUrl && !isImgUrl(file2)
+          [`${prefixCls}-list-item-file`]: isImgUrl && !isImgUrl(file)
         });
         icon = /* @__PURE__ */ React510.createElement("a", {
           className: aClassName,
-          onClick: (e4) => onPreview(file2, e4),
-          href: file2.url || file2.thumbUrl,
+          onClick: (e4) => onPreview(file, e4),
+          href: file.url || file.thumbUrl,
           target: "_blank",
           rel: "noopener noreferrer"
         }, thumbnail);
       }
     }
     const listItemClassName = clsx(`${prefixCls}-list-item`, `${prefixCls}-list-item-${mergedStatus}`, itemClassNames == null ? void 0 : itemClassNames.item);
-    const linkProps = typeof file2.linkProps === "string" ? JSON.parse(file2.linkProps) : file2.linkProps;
-    const removeIcon = (typeof showRemoveIcon === "function" ? showRemoveIcon(file2) : showRemoveIcon) ? actionIconRender(
-      (typeof customRemoveIcon === "function" ? customRemoveIcon(file2) : customRemoveIcon) || /* @__PURE__ */ React510.createElement(DeleteOutlined_default2, null),
-      () => onClose(file2),
+    const linkProps = typeof file.linkProps === "string" ? JSON.parse(file.linkProps) : file.linkProps;
+    const removeIcon = (typeof showRemoveIcon === "function" ? showRemoveIcon(file) : showRemoveIcon) ? actionIconRender(
+      (typeof customRemoveIcon === "function" ? customRemoveIcon(file) : customRemoveIcon) || /* @__PURE__ */ React510.createElement(DeleteOutlined_default2, null),
+      () => onClose(file),
       prefixCls,
       locale8.removeFile,
       true
     ) : null;
-    const downloadIcon = (typeof showDownloadIcon === "function" ? showDownloadIcon(file2) : showDownloadIcon) && mergedStatus === "done" ? actionIconRender((typeof customDownloadIcon === "function" ? customDownloadIcon(file2) : customDownloadIcon) || /* @__PURE__ */ React510.createElement(DownloadOutlined_default2, null), () => onDownload(file2), prefixCls, locale8.downloadFile) : null;
+    const downloadIcon = (typeof showDownloadIcon === "function" ? showDownloadIcon(file) : showDownloadIcon) && mergedStatus === "done" ? actionIconRender((typeof customDownloadIcon === "function" ? customDownloadIcon(file) : customDownloadIcon) || /* @__PURE__ */ React510.createElement(DownloadOutlined_default2, null), () => onDownload(file), prefixCls, locale8.downloadFile) : null;
     const downloadOrDelete = listType !== "picture-card" && listType !== "picture-circle" && /* @__PURE__ */ React510.createElement("span", {
       key: "download-delete",
       className: clsx(`${prefixCls}-list-item-actions`, {
         picture: listType === "picture"
       })
     }, downloadIcon, removeIcon);
-    const extraContent = typeof customExtra === "function" ? customExtra(file2) : customExtra;
+    const extraContent = typeof customExtra === "function" ? customExtra(file) : customExtra;
     const extra = extraContent && /* @__PURE__ */ React510.createElement("span", {
       className: `${prefixCls}-list-item-extra`
     }, extraContent);
     const listItemNameClass = clsx(`${prefixCls}-list-item-name`);
-    const fileName = file2.url ? /* @__PURE__ */ React510.createElement("a", __spreadProps(__spreadValues({
+    const fileName = file.url ? /* @__PURE__ */ React510.createElement("a", __spreadProps(__spreadValues({
       key: "view",
       target: "_blank",
       rel: "noopener noreferrer",
       className: listItemNameClass,
-      title: file2.name
+      title: file.name
     }, linkProps), {
-      href: file2.url,
-      onClick: (e4) => onPreview(file2, e4)
-    }), file2.name, extra) : /* @__PURE__ */ React510.createElement("span", {
+      href: file.url,
+      onClick: (e4) => onPreview(file, e4)
+    }), file.name, extra) : /* @__PURE__ */ React510.createElement("span", {
       key: "view",
       className: listItemNameClass,
-      onClick: (e4) => onPreview(file2, e4),
-      title: file2.name
-    }, file2.name, extra);
-    const previewIcon = (typeof showPreviewIcon === "function" ? showPreviewIcon(file2) : showPreviewIcon) && (file2.url || file2.thumbUrl) ? /* @__PURE__ */ React510.createElement("a", {
-      href: file2.url || file2.thumbUrl,
+      onClick: (e4) => onPreview(file, e4),
+      title: file.name
+    }, file.name, extra);
+    const previewIcon = (typeof showPreviewIcon === "function" ? showPreviewIcon(file) : showPreviewIcon) && (file.url || file.thumbUrl) ? /* @__PURE__ */ React510.createElement("a", {
+      href: file.url || file.thumbUrl,
       target: "_blank",
       rel: "noopener noreferrer",
-      onClick: (e4) => onPreview(file2, e4),
+      onClick: (e4) => onPreview(file, e4),
       title: locale8.previewFile
-    }, typeof customPreviewIcon === "function" ? customPreviewIcon(file2) : customPreviewIcon || /* @__PURE__ */ React510.createElement(EyeOutlined_default2, null)) : null;
+    }, typeof customPreviewIcon === "function" ? customPreviewIcon(file) : customPreviewIcon || /* @__PURE__ */ React510.createElement(EyeOutlined_default2, null)) : null;
     const pictureCardActions = (listType === "picture-card" || listType === "picture-circle") && mergedStatus !== "uploading" && /* @__PURE__ */ React510.createElement("span", {
       className: `${prefixCls}-list-item-actions`
     }, previewIcon, mergedStatus === "done" && downloadIcon, removeIcon);
@@ -103809,17 +103856,17 @@ html body {
     }, ({
       className: motionClassName
     }) => {
-      const loadingProgress = "percent" in file2 ? /* @__PURE__ */ React510.createElement(progress_default2, __spreadValues({
+      const loadingProgress = "percent" in file ? /* @__PURE__ */ React510.createElement(progress_default2, __spreadValues({
         type: "line",
-        percent: file2.percent,
-        "aria-label": file2["aria-label"],
-        "aria-labelledby": file2["aria-labelledby"]
+        percent: file.percent,
+        "aria-label": file["aria-label"],
+        "aria-labelledby": file["aria-labelledby"]
       }, progressProps)) : null;
       return /* @__PURE__ */ React510.createElement("div", {
         className: clsx(`${prefixCls}-list-item-progress`, motionClassName)
       }, loadingProgress);
     }));
-    const message2 = file2.response && typeof file2.response === "string" ? file2.response : ((_a = file2.error) == null ? void 0 : _a.statusText) || ((_b = file2.error) == null ? void 0 : _b.message) || locale8.uploadError;
+    const message2 = file.response && typeof file.response === "string" ? file.response : ((_a = file.error) == null ? void 0 : _a.statusText) || ((_b = file.error) == null ? void 0 : _b.message) || locale8.uploadError;
     const item = mergedStatus === "error" ? /* @__PURE__ */ React510.createElement(tooltip_default, {
       title: message2,
       getPopupContainer: (node2) => node2.parentNode
@@ -103828,10 +103875,10 @@ html body {
       className: clsx(`${prefixCls}-list-item-container`, className),
       style: style2,
       ref
-    }, itemRender ? itemRender(item, file2, items, {
-      download: onDownload.bind(null, file2),
-      preview: onPreview.bind(null, file2),
-      remove: onClose.bind(null, file2)
+    }, itemRender ? itemRender(item, file, items, {
+      download: onDownload.bind(null, file),
+      preview: onPreview.bind(null, file),
+      remove: onClose.bind(null, file)
     }) : item);
   });
   var ListItem_default = ListItem;
@@ -103875,13 +103922,13 @@ html body {
       if (!listType.startsWith("picture")) {
         return;
       }
-      (items || []).forEach((file2) => {
-        if (!(file2.originFileObj instanceof File || file2.originFileObj instanceof Blob) || file2.thumbUrl !== void 0) {
+      (items || []).forEach((file) => {
+        if (!(file.originFileObj instanceof File || file.originFileObj instanceof Blob) || file.thumbUrl !== void 0) {
           return;
         }
-        file2.thumbUrl = "";
-        previewFile == null ? void 0 : previewFile(file2.originFileObj).then((previewDataUrl) => {
-          file2.thumbUrl = previewDataUrl || "";
+        file.thumbUrl = "";
+        previewFile == null ? void 0 : previewFile(file.originFileObj).then((previewDataUrl) => {
+          file.thumbUrl = previewDataUrl || "";
           forceUpdate();
         });
       });
@@ -103889,31 +103936,31 @@ html body {
     React511.useEffect(() => {
       setMotionAppear(true);
     }, []);
-    const onInternalPreview = (file2, e4) => {
+    const onInternalPreview = (file, e4) => {
       if (!onPreview) {
         return;
       }
       e4 == null ? void 0 : e4.preventDefault();
-      return onPreview(file2);
+      return onPreview(file);
     };
-    const onInternalDownload = (file2) => {
+    const onInternalDownload = (file) => {
       if (typeof onDownload === "function") {
-        onDownload(file2);
-      } else if (file2.url) {
-        window.open(file2.url);
+        onDownload(file);
+      } else if (file.url) {
+        window.open(file.url);
       }
     };
-    const onInternalClose = (file2) => {
-      onRemove == null ? void 0 : onRemove(file2);
+    const onInternalClose = (file) => {
+      onRemove == null ? void 0 : onRemove(file);
     };
-    const internalIconRender = (file2) => {
+    const internalIconRender = (file) => {
       if (iconRender) {
-        return iconRender(file2, listType);
+        return iconRender(file, listType);
       }
-      const isLoading = file2.status === "uploading";
+      const isLoading = file.status === "uploading";
       if (listType.startsWith("picture")) {
         const loadingIcon = listType === "picture" ? /* @__PURE__ */ React511.createElement(LoadingOutlined_default2, null) : locale8.uploading;
-        const fileIcon = (isImgUrl == null ? void 0 : isImgUrl(file2)) ? /* @__PURE__ */ React511.createElement(PictureTwoTone_default2, null) : /* @__PURE__ */ React511.createElement(FileTwoTone_default2, null);
+        const fileIcon = (isImgUrl == null ? void 0 : isImgUrl(file)) ? /* @__PURE__ */ React511.createElement(PictureTwoTone_default2, null) : /* @__PURE__ */ React511.createElement(FileTwoTone_default2, null);
         return isLoading ? loadingIcon : fileIcon;
       }
       return isLoading ? /* @__PURE__ */ React511.createElement(LoadingOutlined_default2, null) : /* @__PURE__ */ React511.createElement(PaperClipOutlined_default2, null);
@@ -103954,9 +104001,9 @@ html body {
     const motionConfig = __spreadProps(__spreadValues({}, isPictureCardOrCirle ? {} : listItemMotion), {
       motionDeadline: 2e3,
       motionName: `${prefixCls}-${isPictureCardOrCirle ? "animate-inline" : "animate"}`,
-      keys: _toConsumableArray(items.map((file2) => ({
-        key: file2.uid,
-        file: file2
+      keys: _toConsumableArray(items.map((file) => ({
+        key: file.uid,
+        file
       }))),
       motionAppear
     });
@@ -103967,7 +104014,7 @@ html body {
       component: false
     }), ({
       key,
-      file: file2,
+      file,
       className: motionClassName,
       style: motionStyle
     }) => /* @__PURE__ */ React511.createElement(ListItem_default, {
@@ -103978,7 +104025,7 @@ html body {
       style: motionStyle,
       classNames: uploadListClassNames,
       styles,
-      file: file2,
+      file,
       items,
       progress,
       listType,
@@ -104067,13 +104114,13 @@ html body {
     }
     React512.useMemo(() => {
       const timestamp = Date.now();
-      (fileList || []).forEach((file2, index2) => {
-        if (!file2.uid && !Object.isFrozen(file2)) {
-          file2.uid = `__AUTO__${timestamp}_${index2}__`;
+      (fileList || []).forEach((file, index2) => {
+        if (!file.uid && !Object.isFrozen(file)) {
+          file.uid = `__AUTO__${timestamp}_${index2}__`;
         }
       });
     }, [fileList]);
-    const onInternalChange = (file2, changedFileList, event) => {
+    const onInternalChange = (file, changedFileList, event) => {
       let cloneList = _toConsumableArray(changedFileList);
       let exceedMaxCount = false;
       if (maxCount === 1) {
@@ -104086,31 +104133,31 @@ html body {
         setMergedFileList(cloneList);
       });
       const changeInfo = {
-        file: file2,
+        file,
         fileList: cloneList
       };
       if (event) {
         changeInfo.event = event;
       }
-      if (!exceedMaxCount || file2.status === "removed" || cloneList.some((f) => f.uid === file2.uid)) {
+      if (!exceedMaxCount || file.status === "removed" || cloneList.some((f) => f.uid === file.uid)) {
         (0, import_react_dom8.flushSync)(() => {
           onChange == null ? void 0 : onChange(changeInfo);
         });
       }
     };
-    const mergedBeforeUpload = async (file2, fileListArgs) => {
+    const mergedBeforeUpload = async (file, fileListArgs) => {
       const {
         beforeUpload
       } = props;
-      let parsedFile = file2;
+      let parsedFile = file;
       if (beforeUpload) {
-        const result = await beforeUpload(file2, fileListArgs);
+        const result = await beforeUpload(file, fileListArgs);
         if (result === false) {
           return false;
         }
-        delete file2[LIST_IGNORE];
+        delete file[LIST_IGNORE];
         if (result === LIST_IGNORE) {
-          Object.defineProperty(file2, LIST_IGNORE, {
+          Object.defineProperty(file, LIST_IGNORE, {
             value: true,
             configurable: true
           });
@@ -104159,17 +104206,17 @@ html body {
         onInternalChange(triggerFileObj, newFileList);
       });
     };
-    const onSuccess = (response, file2, xhr) => {
+    const onSuccess = (response, file, xhr) => {
       try {
         if (typeof response === "string") {
           response = JSON.parse(response);
         }
       } catch (e4) {
       }
-      if (!getFileItem(file2, mergedFileList)) {
+      if (!getFileItem(file, mergedFileList)) {
         return;
       }
-      const targetItem = file2Obj(file2);
+      const targetItem = file2Obj(file);
       targetItem.status = "done";
       targetItem.percent = 100;
       targetItem.response = response;
@@ -104177,37 +104224,37 @@ html body {
       const nextFileList = updateFileList(targetItem, mergedFileList);
       onInternalChange(targetItem, nextFileList);
     };
-    const onProgress = (e4, file2) => {
-      if (!getFileItem(file2, mergedFileList)) {
+    const onProgress = (e4, file) => {
+      if (!getFileItem(file, mergedFileList)) {
         return;
       }
-      const targetItem = file2Obj(file2);
+      const targetItem = file2Obj(file);
       targetItem.status = "uploading";
       targetItem.percent = e4.percent;
       const nextFileList = updateFileList(targetItem, mergedFileList);
       onInternalChange(targetItem, nextFileList, e4);
     };
-    const onError = (error, response, file2) => {
-      if (!getFileItem(file2, mergedFileList)) {
+    const onError = (error, response, file) => {
+      if (!getFileItem(file, mergedFileList)) {
         return;
       }
-      const targetItem = file2Obj(file2);
+      const targetItem = file2Obj(file);
       targetItem.error = error;
       targetItem.response = response;
       targetItem.status = "error";
       const nextFileList = updateFileList(targetItem, mergedFileList);
       onInternalChange(targetItem, nextFileList);
     };
-    const handleRemove = (file2) => {
+    const handleRemove = (file) => {
       let currentFile;
-      Promise.resolve(typeof onRemove === "function" ? onRemove(file2) : onRemove).then((ret) => {
+      Promise.resolve(typeof onRemove === "function" ? onRemove(file) : onRemove).then((ret) => {
         var _a;
         if (ret === false) {
           return;
         }
-        const removedFileList = removeFileItem(file2, mergedFileList);
+        const removedFileList = removeFileItem(file, mergedFileList);
         if (removedFileList) {
-          currentFile = __spreadProps(__spreadValues({}, file2), {
+          currentFile = __spreadProps(__spreadValues({}, file), {
             status: "removed"
           });
           mergedFileList == null ? void 0 : mergedFileList.forEach((item) => {
@@ -104333,7 +104380,7 @@ html body {
     const mergedStyle = __spreadValues(__spreadValues({}, contextStyle), style2);
     if (type5 === "drag") {
       const dragCls = clsx(hashId, prefixCls, `${prefixCls}-drag`, {
-        [`${prefixCls}-drag-uploading`]: mergedFileList.some((file2) => file2.status === "uploading"),
+        [`${prefixCls}-drag-uploading`]: mergedFileList.some((file) => file.status === "uploading"),
         [`${prefixCls}-drag-hover`]: dragState === "dragover",
         [`${prefixCls}-disabled`]: mergedDisabled,
         [`${prefixCls}-rtl`]: direction === "rtl"
@@ -104428,14 +104475,14 @@ html body {
     true ? warning_default2(majorVersion >= 18, "version", `antd v6 no longer supports React versions below 18. Please upgrade to React 18 or higher.`) : void 0;
   }
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/AppstoreOutlined.js
   var React514 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ArrowLeftOutlined.js
-  var ArrowLeftOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" } }] }, "name": "arrow-left", "theme": "outlined" };
-  var ArrowLeftOutlined_default = ArrowLeftOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/AppstoreOutlined.js
+  var AppstoreOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V612h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200z" } }] }, "name": "appstore", "theme": "outlined" };
+  var AppstoreOutlined_default = AppstoreOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/AppstoreOutlined.js
   function _extends132() {
     _extends132 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104450,24 +104497,24 @@ html body {
     };
     return _extends132.apply(this, arguments);
   }
-  var ArrowLeftOutlined2 = (props, ref) => /* @__PURE__ */ React514.createElement(AntdIcon_default, _extends132({}, props, {
+  var AppstoreOutlined2 = (props, ref) => /* @__PURE__ */ React514.createElement(AntdIcon_default, _extends132({}, props, {
     ref,
-    icon: ArrowLeftOutlined_default
+    icon: AppstoreOutlined_default
   }));
-  var RefIcon48 = /* @__PURE__ */ React514.forwardRef(ArrowLeftOutlined2);
+  var RefIcon48 = /* @__PURE__ */ React514.forwardRef(AppstoreOutlined2);
   if (true) {
-    RefIcon48.displayName = "ArrowLeftOutlined";
+    RefIcon48.displayName = "AppstoreOutlined";
   }
-  var ArrowLeftOutlined_default2 = RefIcon48;
+  var AppstoreOutlined_default2 = RefIcon48;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/AreaChartOutlined.js
   var React515 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HeartFilled.js
-  var HeartFilled = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M923 283.6a260.04 260.04 0 00-56.9-82.8 264.4 264.4 0 00-84-55.5A265.34 265.34 0 00679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 00-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9z" } }] }, "name": "heart", "theme": "filled" };
-  var HeartFilled_default = HeartFilled;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/AreaChartOutlined.js
+  var AreaChartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M888 792H200V168c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v688c0 4.4 3.6 8 8 8h752c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm-616-64h536c4.4 0 8-3.6 8-8V284c0-7.2-8.7-10.7-13.7-5.7L592 488.6l-125.4-124a8.03 8.03 0 00-11.3 0l-189 189.6a7.87 7.87 0 00-2.3 5.6V720c0 4.4 3.6 8 8 8z" } }] }, "name": "area-chart", "theme": "outlined" };
+  var AreaChartOutlined_default = AreaChartOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/AreaChartOutlined.js
   function _extends133() {
     _extends133 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104482,24 +104529,24 @@ html body {
     };
     return _extends133.apply(this, arguments);
   }
-  var HeartFilled2 = (props, ref) => /* @__PURE__ */ React515.createElement(AntdIcon_default, _extends133({}, props, {
+  var AreaChartOutlined2 = (props, ref) => /* @__PURE__ */ React515.createElement(AntdIcon_default, _extends133({}, props, {
     ref,
-    icon: HeartFilled_default
+    icon: AreaChartOutlined_default
   }));
-  var RefIcon49 = /* @__PURE__ */ React515.forwardRef(HeartFilled2);
+  var RefIcon49 = /* @__PURE__ */ React515.forwardRef(AreaChartOutlined2);
   if (true) {
-    RefIcon49.displayName = "HeartFilled";
+    RefIcon49.displayName = "AreaChartOutlined";
   }
-  var HeartFilled_default2 = RefIcon49;
+  var AreaChartOutlined_default2 = RefIcon49;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
   var React516 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/LogoutOutlined.js
-  var LogoutOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 01-112.7 75.9A352.8 352.8 0 01512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 01-112.7-75.9 353.28 353.28 0 01-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 000-12.6z" } }] }, "name": "logout", "theme": "outlined" };
-  var LogoutOutlined_default = LogoutOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ArrowLeftOutlined.js
+  var ArrowLeftOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" } }] }, "name": "arrow-left", "theme": "outlined" };
+  var ArrowLeftOutlined_default = ArrowLeftOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ArrowLeftOutlined.js
   function _extends134() {
     _extends134 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104514,24 +104561,24 @@ html body {
     };
     return _extends134.apply(this, arguments);
   }
-  var LogoutOutlined2 = (props, ref) => /* @__PURE__ */ React516.createElement(AntdIcon_default, _extends134({}, props, {
+  var ArrowLeftOutlined2 = (props, ref) => /* @__PURE__ */ React516.createElement(AntdIcon_default, _extends134({}, props, {
     ref,
-    icon: LogoutOutlined_default
+    icon: ArrowLeftOutlined_default
   }));
-  var RefIcon50 = /* @__PURE__ */ React516.forwardRef(LogoutOutlined2);
+  var RefIcon50 = /* @__PURE__ */ React516.forwardRef(ArrowLeftOutlined2);
   if (true) {
-    RefIcon50.displayName = "LogoutOutlined";
+    RefIcon50.displayName = "ArrowLeftOutlined";
   }
-  var LogoutOutlined_default2 = RefIcon50;
+  var ArrowLeftOutlined_default2 = RefIcon50;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MenuOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
   var React517 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/MenuOutlined.js
-  var MenuOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z" } }] }, "name": "menu", "theme": "outlined" };
-  var MenuOutlined_default = MenuOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HeartFilled.js
+  var HeartFilled = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M923 283.6a260.04 260.04 0 00-56.9-82.8 264.4 264.4 0 00-84-55.5A265.34 265.34 0 00679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 00-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9z" } }] }, "name": "heart", "theme": "filled" };
+  var HeartFilled_default = HeartFilled;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MenuOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HeartFilled.js
   function _extends135() {
     _extends135 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104546,24 +104593,24 @@ html body {
     };
     return _extends135.apply(this, arguments);
   }
-  var MenuOutlined2 = (props, ref) => /* @__PURE__ */ React517.createElement(AntdIcon_default, _extends135({}, props, {
+  var HeartFilled2 = (props, ref) => /* @__PURE__ */ React517.createElement(AntdIcon_default, _extends135({}, props, {
     ref,
-    icon: MenuOutlined_default
+    icon: HeartFilled_default
   }));
-  var RefIcon51 = /* @__PURE__ */ React517.forwardRef(MenuOutlined2);
+  var RefIcon51 = /* @__PURE__ */ React517.forwardRef(HeartFilled2);
   if (true) {
-    RefIcon51.displayName = "MenuOutlined";
+    RefIcon51.displayName = "HeartFilled";
   }
-  var MenuOutlined_default2 = RefIcon51;
+  var HeartFilled_default2 = RefIcon51;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PrinterOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HistoryOutlined.js
   var React518 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/PrinterOutlined.js
-  var PrinterOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M820 436h-40c-4.4 0-8 3.6-8 8v40c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-40c0-4.4-3.6-8-8-8zm32-104H732V120c0-4.4-3.6-8-8-8H300c-4.4 0-8 3.6-8 8v212H172c-44.2 0-80 35.8-80 80v328c0 17.7 14.3 32 32 32h168v132c0 4.4 3.6 8 8 8h424c4.4 0 8-3.6 8-8V772h168c17.7 0 32-14.3 32-32V412c0-44.2-35.8-80-80-80zM360 180h304v152H360V180zm304 664H360V568h304v276zm200-140H732V500H292v204H160V412c0-6.6 5.4-12 12-12h680c6.6 0 12 5.4 12 12v292z" } }] }, "name": "printer", "theme": "outlined" };
-  var PrinterOutlined_default = PrinterOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/HistoryOutlined.js
+  var HistoryOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M536.1 273H488c-4.4 0-8 3.6-8 8v275.3c0 2.6 1.2 5 3.3 6.5l165.3 120.7c3.6 2.6 8.6 1.9 11.2-1.7l28.6-39c2.7-3.7 1.9-8.7-1.7-11.2L544.1 528.5V281c0-4.4-3.6-8-8-8zm219.8 75.2l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3L752.9 334.1a8 8 0 003 14.1zm167.7 301.1l-56.7-19.5a8 8 0 00-10.1 4.8c-1.9 5.1-3.9 10.1-6 15.1-17.8 42.1-43.3 80-75.9 112.5a353 353 0 01-112.5 75.9 352.18 352.18 0 01-137.7 27.8c-47.8 0-94.1-9.3-137.7-27.8a353 353 0 01-112.5-75.9c-32.5-32.5-58-70.4-75.9-112.5A353.44 353.44 0 01171 512c0-47.8 9.3-94.2 27.8-137.8 17.8-42.1 43.3-80 75.9-112.5a353 353 0 01112.5-75.9C430.6 167.3 477 158 524.8 158s94.1 9.3 137.7 27.8A353 353 0 01775 261.7c10.2 10.3 19.8 21 28.6 32.3l59.8-46.8C784.7 146.6 662.2 81.9 524.6 82 285 82.1 92.6 276.7 95 516.4 97.4 751.9 288.9 942 524.8 942c185.5 0 343.5-117.6 403.7-282.3 1.5-4.2-.7-8.9-4.9-10.4z" } }] }, "name": "history", "theme": "outlined" };
+  var HistoryOutlined_default = HistoryOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PrinterOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/HistoryOutlined.js
   function _extends136() {
     _extends136 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104578,24 +104625,24 @@ html body {
     };
     return _extends136.apply(this, arguments);
   }
-  var PrinterOutlined2 = (props, ref) => /* @__PURE__ */ React518.createElement(AntdIcon_default, _extends136({}, props, {
+  var HistoryOutlined2 = (props, ref) => /* @__PURE__ */ React518.createElement(AntdIcon_default, _extends136({}, props, {
     ref,
-    icon: PrinterOutlined_default
+    icon: HistoryOutlined_default
   }));
-  var RefIcon52 = /* @__PURE__ */ React518.forwardRef(PrinterOutlined2);
+  var RefIcon52 = /* @__PURE__ */ React518.forwardRef(HistoryOutlined2);
   if (true) {
-    RefIcon52.displayName = "PrinterOutlined";
+    RefIcon52.displayName = "HistoryOutlined";
   }
-  var PrinterOutlined_default2 = RefIcon52;
+  var HistoryOutlined_default2 = RefIcon52;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
   var React519 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/RedoOutlined.js
-  var RedoOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z" } }] }, "name": "redo", "theme": "outlined" };
-  var RedoOutlined_default = RedoOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/LogoutOutlined.js
+  var LogoutOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 01-112.7 75.9A352.8 352.8 0 01512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 01-112.7-75.9 353.28 353.28 0 01-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 000-12.6z" } }] }, "name": "logout", "theme": "outlined" };
+  var LogoutOutlined_default = LogoutOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js
   function _extends137() {
     _extends137 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104610,24 +104657,24 @@ html body {
     };
     return _extends137.apply(this, arguments);
   }
-  var RedoOutlined2 = (props, ref) => /* @__PURE__ */ React519.createElement(AntdIcon_default, _extends137({}, props, {
+  var LogoutOutlined2 = (props, ref) => /* @__PURE__ */ React519.createElement(AntdIcon_default, _extends137({}, props, {
     ref,
-    icon: RedoOutlined_default
+    icon: LogoutOutlined_default
   }));
-  var RefIcon53 = /* @__PURE__ */ React519.forwardRef(RedoOutlined2);
+  var RefIcon53 = /* @__PURE__ */ React519.forwardRef(LogoutOutlined2);
   if (true) {
-    RefIcon53.displayName = "RedoOutlined";
+    RefIcon53.displayName = "LogoutOutlined";
   }
-  var RedoOutlined_default2 = RefIcon53;
+  var LogoutOutlined_default2 = RefIcon53;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MenuOutlined.js
   var React520 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SaveOutlined.js
-  var SaveOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M893.3 293.3L730.7 130.7c-7.5-7.5-16.7-13-26.7-16V112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V338.5c0-17-6.7-33.2-18.7-45.2zM384 184h256v104H384V184zm456 656H184V184h136v136c0 17.7 14.3 32 32 32h320c17.7 0 32-14.3 32-32V205.8l136 136V840zM512 442c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144-64.5-144-144-144zm0 224c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z" } }] }, "name": "save", "theme": "outlined" };
-  var SaveOutlined_default = SaveOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/MenuOutlined.js
+  var MenuOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z" } }] }, "name": "menu", "theme": "outlined" };
+  var MenuOutlined_default = MenuOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/MenuOutlined.js
   function _extends138() {
     _extends138 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104642,24 +104689,24 @@ html body {
     };
     return _extends138.apply(this, arguments);
   }
-  var SaveOutlined2 = (props, ref) => /* @__PURE__ */ React520.createElement(AntdIcon_default, _extends138({}, props, {
+  var MenuOutlined2 = (props, ref) => /* @__PURE__ */ React520.createElement(AntdIcon_default, _extends138({}, props, {
     ref,
-    icon: SaveOutlined_default
+    icon: MenuOutlined_default
   }));
-  var RefIcon54 = /* @__PURE__ */ React520.forwardRef(SaveOutlined2);
+  var RefIcon54 = /* @__PURE__ */ React520.forwardRef(MenuOutlined2);
   if (true) {
-    RefIcon54.displayName = "SaveOutlined";
+    RefIcon54.displayName = "MenuOutlined";
   }
-  var SaveOutlined_default2 = RefIcon54;
+  var MenuOutlined_default2 = RefIcon54;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PieChartOutlined.js
   var React521 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ShoppingCartOutlined.js
-  var ShoppingCartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "0 0 1024 1024", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z" } }] }, "name": "shopping-cart", "theme": "outlined" };
-  var ShoppingCartOutlined_default = ShoppingCartOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/PieChartOutlined.js
+  var PieChartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M864 518H506V160c0-4.4-3.6-8-8-8h-26a398.46 398.46 0 00-282.8 117.1 398.19 398.19 0 00-85.7 127.1A397.61 397.61 0 0072 552a398.46 398.46 0 00117.1 282.8c36.7 36.7 79.5 65.6 127.1 85.7A397.61 397.61 0 00472 952a398.46 398.46 0 00282.8-117.1c36.7-36.7 65.6-79.5 85.7-127.1A397.61 397.61 0 00872 552v-26c0-4.4-3.6-8-8-8zM705.7 787.8A331.59 331.59 0 01470.4 884c-88.1-.4-170.9-34.9-233.2-97.2C174.5 724.1 140 640.7 140 552c0-88.7 34.5-172.1 97.2-234.8 54.6-54.6 124.9-87.9 200.8-95.5V586h364.3c-7.7 76.3-41.3 147-96.6 201.8zM952 462.4l-2.6-28.2c-8.5-92.1-49.4-179-115.2-244.6A399.4 399.4 0 00589 74.6L560.7 72c-4.7-.4-8.7 3.2-8.7 7.9V464c0 4.4 3.6 8 8 8l384-1c4.7 0 8.4-4 8-8.6zm-332.2-58.2V147.6a332.24 332.24 0 01166.4 89.8c45.7 45.6 77 103.6 90 166.1l-256.4.7z" } }] }, "name": "pie-chart", "theme": "outlined" };
+  var PieChartOutlined_default = PieChartOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PieChartOutlined.js
   function _extends139() {
     _extends139 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104674,24 +104721,24 @@ html body {
     };
     return _extends139.apply(this, arguments);
   }
-  var ShoppingCartOutlined2 = (props, ref) => /* @__PURE__ */ React521.createElement(AntdIcon_default, _extends139({}, props, {
+  var PieChartOutlined2 = (props, ref) => /* @__PURE__ */ React521.createElement(AntdIcon_default, _extends139({}, props, {
     ref,
-    icon: ShoppingCartOutlined_default
+    icon: PieChartOutlined_default
   }));
-  var RefIcon55 = /* @__PURE__ */ React521.forwardRef(ShoppingCartOutlined2);
+  var RefIcon55 = /* @__PURE__ */ React521.forwardRef(PieChartOutlined2);
   if (true) {
-    RefIcon55.displayName = "ShoppingCartOutlined";
+    RefIcon55.displayName = "PieChartOutlined";
   }
-  var ShoppingCartOutlined_default2 = RefIcon55;
+  var PieChartOutlined_default2 = RefIcon55;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SyncOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PrinterOutlined.js
   var React522 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SyncOutlined.js
-  var SyncOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z" } }] }, "name": "sync", "theme": "outlined" };
-  var SyncOutlined_default = SyncOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/PrinterOutlined.js
+  var PrinterOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M820 436h-40c-4.4 0-8 3.6-8 8v40c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-40c0-4.4-3.6-8-8-8zm32-104H732V120c0-4.4-3.6-8-8-8H300c-4.4 0-8 3.6-8 8v212H172c-44.2 0-80 35.8-80 80v328c0 17.7 14.3 32 32 32h168v132c0 4.4 3.6 8 8 8h424c4.4 0 8-3.6 8-8V772h168c17.7 0 32-14.3 32-32V412c0-44.2-35.8-80-80-80zM360 180h304v152H360V180zm304 664H360V568h304v276zm200-140H732V500H292v204H160V412c0-6.6 5.4-12 12-12h680c6.6 0 12 5.4 12 12v292z" } }] }, "name": "printer", "theme": "outlined" };
+  var PrinterOutlined_default = PrinterOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SyncOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/PrinterOutlined.js
   function _extends140() {
     _extends140 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104706,24 +104753,24 @@ html body {
     };
     return _extends140.apply(this, arguments);
   }
-  var SyncOutlined2 = (props, ref) => /* @__PURE__ */ React522.createElement(AntdIcon_default, _extends140({}, props, {
+  var PrinterOutlined2 = (props, ref) => /* @__PURE__ */ React522.createElement(AntdIcon_default, _extends140({}, props, {
     ref,
-    icon: SyncOutlined_default
+    icon: PrinterOutlined_default
   }));
-  var RefIcon56 = /* @__PURE__ */ React522.forwardRef(SyncOutlined2);
+  var RefIcon56 = /* @__PURE__ */ React522.forwardRef(PrinterOutlined2);
   if (true) {
-    RefIcon56.displayName = "SyncOutlined";
+    RefIcon56.displayName = "PrinterOutlined";
   }
-  var SyncOutlined_default2 = RefIcon56;
+  var PrinterOutlined_default2 = RefIcon56;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
   var React523 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserOutlined.js
-  var UserOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" } }] }, "name": "user", "theme": "outlined" };
-  var UserOutlined_default = UserOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/RedoOutlined.js
+  var RedoOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z" } }] }, "name": "redo", "theme": "outlined" };
+  var RedoOutlined_default = RedoOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/RedoOutlined.js
   function _extends141() {
     _extends141 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104738,24 +104785,24 @@ html body {
     };
     return _extends141.apply(this, arguments);
   }
-  var UserOutlined2 = (props, ref) => /* @__PURE__ */ React523.createElement(AntdIcon_default, _extends141({}, props, {
+  var RedoOutlined2 = (props, ref) => /* @__PURE__ */ React523.createElement(AntdIcon_default, _extends141({}, props, {
     ref,
-    icon: UserOutlined_default
+    icon: RedoOutlined_default
   }));
-  var RefIcon57 = /* @__PURE__ */ React523.forwardRef(UserOutlined2);
+  var RefIcon57 = /* @__PURE__ */ React523.forwardRef(RedoOutlined2);
   if (true) {
-    RefIcon57.displayName = "UserOutlined";
+    RefIcon57.displayName = "RedoOutlined";
   }
-  var UserOutlined_default2 = RefIcon57;
+  var RedoOutlined_default2 = RefIcon57;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
   var React524 = __toESM(require_react());
 
-  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/WalletOutlined.js
-  var WalletOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 464H528V448h312v128zm0 264H184V184h656v200H496c-17.7 0-32 14.3-32 32v192c0 17.7 14.3 32 32 32h344v200zM580 512a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "wallet", "theme": "outlined" };
-  var WalletOutlined_default = WalletOutlined;
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SaveOutlined.js
+  var SaveOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M893.3 293.3L730.7 130.7c-7.5-7.5-16.7-13-26.7-16V112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V338.5c0-17-6.7-33.2-18.7-45.2zM384 184h256v104H384V184zm456 656H184V184h136v136c0 17.7 14.3 32 32 32h320c17.7 0 32-14.3 32-32V205.8l136 136V840zM512 442c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144-64.5-144-144-144zm0 224c-44.2 0-80-35.8-80-80s35.8-80 80-80 80 35.8 80 80-35.8 80-80 80z" } }] }, "name": "save", "theme": "outlined" };
+  var SaveOutlined_default = SaveOutlined;
 
-  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SaveOutlined.js
   function _extends142() {
     _extends142 = Object.assign ? Object.assign.bind() : function(target) {
       for (var i = 1; i < arguments.length; i++) {
@@ -104770,15 +104817,207 @@ html body {
     };
     return _extends142.apply(this, arguments);
   }
-  var WalletOutlined2 = (props, ref) => /* @__PURE__ */ React524.createElement(AntdIcon_default, _extends142({}, props, {
+  var SaveOutlined2 = (props, ref) => /* @__PURE__ */ React524.createElement(AntdIcon_default, _extends142({}, props, {
+    ref,
+    icon: SaveOutlined_default
+  }));
+  var RefIcon58 = /* @__PURE__ */ React524.forwardRef(SaveOutlined2);
+  if (true) {
+    RefIcon58.displayName = "SaveOutlined";
+  }
+  var SaveOutlined_default2 = RefIcon58;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  var React525 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/ShoppingCartOutlined.js
+  var ShoppingCartOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "0 0 1024 1024", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z" } }] }, "name": "shopping-cart", "theme": "outlined" };
+  var ShoppingCartOutlined_default = ShoppingCartOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/ShoppingCartOutlined.js
+  function _extends143() {
+    _extends143 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends143.apply(this, arguments);
+  }
+  var ShoppingCartOutlined2 = (props, ref) => /* @__PURE__ */ React525.createElement(AntdIcon_default, _extends143({}, props, {
+    ref,
+    icon: ShoppingCartOutlined_default
+  }));
+  var RefIcon59 = /* @__PURE__ */ React525.forwardRef(ShoppingCartOutlined2);
+  if (true) {
+    RefIcon59.displayName = "ShoppingCartOutlined";
+  }
+  var ShoppingCartOutlined_default2 = RefIcon59;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SyncOutlined.js
+  var React526 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/SyncOutlined.js
+  var SyncOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z" } }] }, "name": "sync", "theme": "outlined" };
+  var SyncOutlined_default = SyncOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/SyncOutlined.js
+  function _extends144() {
+    _extends144 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends144.apply(this, arguments);
+  }
+  var SyncOutlined2 = (props, ref) => /* @__PURE__ */ React526.createElement(AntdIcon_default, _extends144({}, props, {
+    ref,
+    icon: SyncOutlined_default
+  }));
+  var RefIcon60 = /* @__PURE__ */ React526.forwardRef(SyncOutlined2);
+  if (true) {
+    RefIcon60.displayName = "SyncOutlined";
+  }
+  var SyncOutlined_default2 = RefIcon60;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/TrophyOutlined.js
+  var React527 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/TrophyOutlined.js
+  var TrophyOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M868 160h-92v-40c0-4.4-3.6-8-8-8H256c-4.4 0-8 3.6-8 8v40h-92a44 44 0 00-44 44v148c0 81.7 60 149.6 138.2 162C265.7 630.2 359 721.7 476 734.5v105.2H280c-17.7 0-32 14.3-32 32V904c0 4.4 3.6 8 8 8h512c4.4 0 8-3.6 8-8v-32.3c0-17.7-14.3-32-32-32H548V734.5C665 721.7 758.3 630.2 773.8 514 852 501.6 912 433.7 912 352V204a44 44 0 00-44-44zM184 352V232h64v207.6a91.99 91.99 0 01-64-87.6zm520 128c0 49.1-19.1 95.4-53.9 130.1-34.8 34.8-81 53.9-130.1 53.9h-16c-49.1 0-95.4-19.1-130.1-53.9-34.8-34.8-53.9-81-53.9-130.1V184h384v296zm136-128c0 41-26.9 75.8-64 87.6V232h64v120z" } }] }, "name": "trophy", "theme": "outlined" };
+  var TrophyOutlined_default = TrophyOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/TrophyOutlined.js
+  function _extends145() {
+    _extends145 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends145.apply(this, arguments);
+  }
+  var TrophyOutlined2 = (props, ref) => /* @__PURE__ */ React527.createElement(AntdIcon_default, _extends145({}, props, {
+    ref,
+    icon: TrophyOutlined_default
+  }));
+  var RefIcon61 = /* @__PURE__ */ React527.forwardRef(TrophyOutlined2);
+  if (true) {
+    RefIcon61.displayName = "TrophyOutlined";
+  }
+  var TrophyOutlined_default2 = RefIcon61;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  var React528 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserAddOutlined.js
+  var UserAddOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M678.3 642.4c24.2-13 51.9-20.4 81.4-20.4h.1c3 0 4.4-3.6 2.2-5.6a371.67 371.67 0 00-103.7-65.8c-.4-.2-.8-.3-1.2-.5C719.2 505 759.6 431.7 759.6 349c0-137-110.8-248-247.5-248S264.7 212 264.7 349c0 82.7 40.4 156 102.6 201.1-.4.2-.8.3-1.2.5-44.7 18.9-84.8 46-119.3 80.6a373.42 373.42 0 00-80.4 119.5A373.6 373.6 0 00137 888.8a8 8 0 008 8.2h59.9c4.3 0 7.9-3.5 8-7.8 2-77.2 32.9-149.5 87.6-204.3C357 628.2 432.2 597 512.2 597c56.7 0 111.1 15.7 158 45.1a8.1 8.1 0 008.1.3zM512.2 521c-45.8 0-88.9-17.9-121.4-50.4A171.2 171.2 0 01340.5 349c0-45.9 17.9-89.1 50.3-121.6S466.3 177 512.2 177s88.9 17.9 121.4 50.4A171.2 171.2 0 01683.9 349c0 45.9-17.9 89.1-50.3 121.6C601.1 503.1 558 521 512.2 521zM880 759h-84v-84c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v84h-84c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h84v84c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-84h84c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8z" } }] }, "name": "user-add", "theme": "outlined" };
+  var UserAddOutlined_default = UserAddOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserAddOutlined.js
+  function _extends146() {
+    _extends146 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends146.apply(this, arguments);
+  }
+  var UserAddOutlined2 = (props, ref) => /* @__PURE__ */ React528.createElement(AntdIcon_default, _extends146({}, props, {
+    ref,
+    icon: UserAddOutlined_default
+  }));
+  var RefIcon62 = /* @__PURE__ */ React528.forwardRef(UserAddOutlined2);
+  if (true) {
+    RefIcon62.displayName = "UserAddOutlined";
+  }
+  var UserAddOutlined_default2 = RefIcon62;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  var React529 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/UserOutlined.js
+  var UserOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z" } }] }, "name": "user", "theme": "outlined" };
+  var UserOutlined_default = UserOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/UserOutlined.js
+  function _extends147() {
+    _extends147 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends147.apply(this, arguments);
+  }
+  var UserOutlined2 = (props, ref) => /* @__PURE__ */ React529.createElement(AntdIcon_default, _extends147({}, props, {
+    ref,
+    icon: UserOutlined_default
+  }));
+  var RefIcon63 = /* @__PURE__ */ React529.forwardRef(UserOutlined2);
+  if (true) {
+    RefIcon63.displayName = "UserOutlined";
+  }
+  var UserOutlined_default2 = RefIcon63;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  var React530 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/@ant-design/icons-svg/es/asn/WalletOutlined.js
+  var WalletOutlined = { "icon": { "tag": "svg", "attrs": { "viewBox": "64 64 896 896", "focusable": "false" }, "children": [{ "tag": "path", "attrs": { "d": "M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-40 464H528V448h312v128zm0 264H184V184h656v200H496c-17.7 0-32 14.3-32 32v192c0 17.7 14.3 32 32 32h344v200zM580 512a40 40 0 1080 0 40 40 0 10-80 0z" } }] }, "name": "wallet", "theme": "outlined" };
+  var WalletOutlined_default = WalletOutlined;
+
+  // ../temple_donation/node_modules/@ant-design/icons/es/icons/WalletOutlined.js
+  function _extends148() {
+    _extends148 = Object.assign ? Object.assign.bind() : function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends148.apply(this, arguments);
+  }
+  var WalletOutlined2 = (props, ref) => /* @__PURE__ */ React530.createElement(AntdIcon_default, _extends148({}, props, {
     ref,
     icon: WalletOutlined_default
   }));
-  var RefIcon58 = /* @__PURE__ */ React524.forwardRef(WalletOutlined2);
+  var RefIcon64 = /* @__PURE__ */ React530.forwardRef(WalletOutlined2);
   if (true) {
-    RefIcon58.displayName = "WalletOutlined";
+    RefIcon64.displayName = "WalletOutlined";
   }
-  var WalletOutlined_default2 = RefIcon58;
+  var WalletOutlined_default2 = RefIcon64;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/theme.js
   var themeConfig = {
@@ -104837,13 +105076,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react247 = __toESM(require_react());
+  var import_react255 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
-  var import_react211 = __toESM(require_react());
+  var import_react219 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/container/Surface.js
-  var React525 = __toESM(require_react());
+  var React531 = __toESM(require_react());
   var import_react166 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/util/svgPropertiesAndEvents.js
@@ -105214,18 +105453,30 @@ html body {
     }
     return result;
   }
+  function svgPropertiesAndEventsFromUnknown(input) {
+    if (input == null) {
+      return null;
+    }
+    if (/* @__PURE__ */ (0, import_react165.isValidElement)(input)) {
+      return svgPropertiesAndEvents(input.props);
+    }
+    if (typeof input === "object" && !Array.isArray(input)) {
+      return svgPropertiesAndEvents(input);
+    }
+    return null;
+  }
 
   // ../temple_donation/node_modules/recharts/es6/container/Surface.js
   var _excluded6 = ["children", "width", "height", "viewBox", "className", "style", "title", "desc"];
-  function _extends143() {
-    return _extends143 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends149() {
+    return _extends149 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends143.apply(null, arguments);
+    }, _extends149.apply(null, arguments);
   }
   function _objectWithoutProperties5(e4, t2) {
     if (null == e4)
@@ -105268,28 +105519,28 @@ html body {
       y: 0
     };
     var layerClass = clsx("recharts-surface", className);
-    return /* @__PURE__ */ React525.createElement("svg", _extends143({}, svgPropertiesAndEvents(others), {
+    return /* @__PURE__ */ React531.createElement("svg", _extends149({}, svgPropertiesAndEvents(others), {
       className: layerClass,
       width,
       height,
       style: style2,
       viewBox: "".concat(svgView.x, " ").concat(svgView.y, " ").concat(svgView.width, " ").concat(svgView.height),
       ref
-    }), /* @__PURE__ */ React525.createElement("title", null, title), /* @__PURE__ */ React525.createElement("desc", null, desc), children);
+    }), /* @__PURE__ */ React531.createElement("title", null, title), /* @__PURE__ */ React531.createElement("desc", null, desc), children);
   });
 
   // ../temple_donation/node_modules/recharts/es6/container/Layer.js
-  var React526 = __toESM(require_react());
+  var React532 = __toESM(require_react());
   var _excluded7 = ["children", "className"];
-  function _extends144() {
-    return _extends144 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends150() {
+    return _extends150 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends144.apply(null, arguments);
+    }, _extends150.apply(null, arguments);
   }
   function _objectWithoutProperties6(e4, t2) {
     if (null == e4)
@@ -105314,13 +105565,13 @@ html body {
       }
     return t2;
   }
-  var Layer = /* @__PURE__ */ React526.forwardRef((props, ref) => {
+  var Layer = /* @__PURE__ */ React532.forwardRef((props, ref) => {
     var {
       children,
       className
     } = props, others = _objectWithoutProperties6(props, _excluded7);
     var layerClass = clsx("recharts-layer", className);
-    return /* @__PURE__ */ React526.createElement("g", _extends144({
+    return /* @__PURE__ */ React532.createElement("g", _extends150({
       className: layerClass
     }, svgPropertiesAndEvents(others), {
       ref
@@ -105332,7 +105583,7 @@ html body {
   var LegendPortalContext = /* @__PURE__ */ (0, import_react167.createContext)(null);
 
   // ../temple_donation/node_modules/recharts/es6/shape/Symbols.js
-  var React527 = __toESM(require_react());
+  var React533 = __toESM(require_react());
 
   // ../temple_donation/node_modules/d3-shape/src/constant.js
   function constant_default(x2) {
@@ -106464,15 +106715,15 @@ html body {
 
   // ../temple_donation/node_modules/recharts/es6/shape/Symbols.js
   var _excluded8 = ["type", "size", "sizeType"];
-  function _extends145() {
-    return _extends145 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends151() {
+    return _extends151 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends145.apply(null, arguments);
+    }, _extends151.apply(null, arguments);
   }
   function ownKeys20(e4, r3) {
     var t2 = Object.keys(e4);
@@ -106608,7 +106859,7 @@ html body {
     } = props;
     var filteredProps = svgPropertiesAndEvents(props);
     if (isNumber2(cx) && isNumber2(cy) && isNumber2(size)) {
-      return /* @__PURE__ */ React527.createElement("path", _extends145({}, filteredProps, {
+      return /* @__PURE__ */ React533.createElement("path", _extends151({}, filteredProps, {
         className: clsx("recharts-symbols", className),
         transform: "translate(".concat(cx, ", ").concat(cy, ")"),
         d: getPath3()
@@ -108987,6 +109238,108 @@ html body {
     return offset3;
   };
   var isCategoricalAxis = (layout, axisType) => layout === "horizontal" && axisType === "xAxis" || layout === "vertical" && axisType === "yAxis" || layout === "centric" && axisType === "angleAxis" || layout === "radial" && axisType === "radiusAxis";
+  var getCoordinatesOfGrid = (ticks2, minValue, maxValue, syncWithTicks) => {
+    if (syncWithTicks) {
+      return ticks2.map((entry) => entry.coordinate);
+    }
+    var hasMin, hasMax;
+    var values = ticks2.map((entry) => {
+      if (entry.coordinate === minValue) {
+        hasMin = true;
+      }
+      if (entry.coordinate === maxValue) {
+        hasMax = true;
+      }
+      return entry.coordinate;
+    });
+    if (!hasMin) {
+      values.push(minValue);
+    }
+    if (!hasMax) {
+      values.push(maxValue);
+    }
+    return values;
+  };
+  var getTicksOfAxis = (axis, isGrid, isAll) => {
+    if (!axis) {
+      return null;
+    }
+    var {
+      duplicateDomain,
+      type: type5,
+      range: range5,
+      scale,
+      realScaleType,
+      isCategorical,
+      categoricalDomain,
+      tickCount,
+      ticks: ticks2,
+      niceTicks,
+      axisType
+    } = axis;
+    if (!scale) {
+      return null;
+    }
+    var offsetForBand = realScaleType === "scaleBand" && scale.bandwidth ? scale.bandwidth() / 2 : 2;
+    var offset3 = (isGrid || isAll) && type5 === "category" && scale.bandwidth ? scale.bandwidth() / offsetForBand : 0;
+    offset3 = axisType === "angleAxis" && range5 && range5.length >= 2 ? mathSign(range5[0] - range5[1]) * 2 * offset3 : offset3;
+    if (isGrid && (ticks2 || niceTicks)) {
+      var result = (ticks2 || niceTicks || []).map((entry, index2) => {
+        var scaleContent = duplicateDomain ? duplicateDomain.indexOf(entry) : entry;
+        var scaled = scale.map(scaleContent);
+        if (!isWellBehavedNumber(scaled)) {
+          return null;
+        }
+        return {
+          coordinate: scaled + offset3,
+          value: entry,
+          offset: offset3,
+          index: index2
+        };
+      }).filter(isNotNil);
+      return result;
+    }
+    if (isCategorical && categoricalDomain) {
+      return categoricalDomain.map((entry, index2) => {
+        var scaled = scale.map(entry);
+        if (!isWellBehavedNumber(scaled)) {
+          return null;
+        }
+        return {
+          coordinate: scaled + offset3,
+          value: entry,
+          index: index2,
+          offset: offset3
+        };
+      }).filter(isNotNil);
+    }
+    if (scale.ticks && !isAll && tickCount != null) {
+      return scale.ticks(tickCount).map((entry, index2) => {
+        var scaled = scale.map(entry);
+        if (!isWellBehavedNumber(scaled)) {
+          return null;
+        }
+        return {
+          coordinate: scaled + offset3,
+          value: entry,
+          index: index2,
+          offset: offset3
+        };
+      }).filter(isNotNil);
+    }
+    return scale.domain().map((entry, index2) => {
+      var scaled = scale.map(entry);
+      if (!isWellBehavedNumber(scaled)) {
+        return null;
+      }
+      return {
+        coordinate: scaled + offset3,
+        value: duplicateDomain ? duplicateDomain[entry] : entry,
+        index: index2,
+        offset: offset3
+      };
+    }).filter(isNotNil);
+  };
   var offsetSign = (series) => {
     var _series$;
     var n2 = series.length;
@@ -109075,6 +109428,34 @@ html body {
     });
     return result;
   };
+  function getNormalizedStackId(publicStackId) {
+    return publicStackId == null ? void 0 : String(publicStackId);
+  }
+  function getCateCoordinateOfLine(_ref2) {
+    var {
+      axis,
+      ticks: ticks2,
+      bandSize,
+      entry,
+      index: index2,
+      dataKey
+    } = _ref2;
+    if (axis.type === "category") {
+      if (!axis.allowDuplicatedCategory && axis.dataKey && !isNullish(entry[axis.dataKey])) {
+        var matchedTick = findEntryInArray(ticks2, "value", entry[axis.dataKey]);
+        if (matchedTick) {
+          return matchedTick.coordinate + bandSize / 2;
+        }
+      }
+      return ticks2 !== null && ticks2 !== void 0 && ticks2[index2] ? ticks2[index2].coordinate + bandSize / 2 : null;
+    }
+    var value = getValueByDataKey(entry, !isNullish(dataKey) ? dataKey : axis.dataKey);
+    var scaled = axis.scale.map(value);
+    if (!isNumber2(scaled)) {
+      return null;
+    }
+    return scaled;
+  }
   var getDomainOfSingle = (data) => {
     var flat = data.flat(2).filter(isNumber2);
     return [Math.min(...flat), Math.max(...flat)];
@@ -109301,7 +109682,7 @@ html body {
   }));
 
   // ../temple_donation/node_modules/recharts/es6/context/PanoramaContext.js
-  var React528 = __toESM(require_react());
+  var React534 = __toESM(require_react());
   var import_react172 = __toESM(require_react());
   var PanoramaContext = /* @__PURE__ */ (0, import_react172.createContext)(null);
   var useIsPanorama = () => (0, import_react172.useContext)(PanoramaContext) != null;
@@ -109316,7 +109697,7 @@ html body {
   }));
 
   // ../temple_donation/node_modules/recharts/es6/component/ResponsiveContainer.js
-  var React529 = __toESM(require_react());
+  var React535 = __toESM(require_react());
   var import_react173 = __toESM(require_react());
   var import_throttle = __toESM(require_throttle2());
 
@@ -109431,15 +109812,15 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/component/ResponsiveContainer.js
-  function _extends146() {
-    return _extends146 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends152() {
+    return _extends152 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends146.apply(null, arguments);
+    }, _extends152.apply(null, arguments);
   }
   function ownKeys24(e4, r3) {
     var t2 = Object.keys(e4);
@@ -109498,7 +109879,7 @@ html body {
     if (!isAcceptableSize(size)) {
       return null;
     }
-    return /* @__PURE__ */ React529.createElement(ResponsiveContainerContext.Provider, {
+    return /* @__PURE__ */ React535.createElement(ResponsiveContainerContext.Provider, {
       value: size
     }, children);
   }
@@ -109589,7 +109970,7 @@ html body {
       maxHeight
     });
     warn(calculatedWidth != null && calculatedWidth > 0 || calculatedHeight != null && calculatedHeight > 0, "The width(%s) and height(%s) of chart should be greater than 0,\n       please check the style of container, or the props width(%s) and height(%s),\n       or add a minWidth(%s) or minHeight(%s) or use aspect(%s) to control the\n       height and width.", calculatedWidth, calculatedHeight, width, height, minWidth, minHeight, aspect);
-    return /* @__PURE__ */ React529.createElement("div", {
+    return /* @__PURE__ */ React535.createElement("div", {
       id: id ? "".concat(id) : void 0,
       className: clsx("recharts-responsive-container", className),
       style: _objectSpread24(_objectSpread24({}, style2), {}, {
@@ -109600,12 +109981,12 @@ html body {
         maxHeight
       }),
       ref: containerRef
-    }, /* @__PURE__ */ React529.createElement("div", {
+    }, /* @__PURE__ */ React535.createElement("div", {
       style: getInnerDivStyle({
         width,
         height
       })
-    }, /* @__PURE__ */ React529.createElement(ResponsiveContainerContextProvider, {
+    }, /* @__PURE__ */ React535.createElement(ResponsiveContainerContextProvider, {
       width: calculatedWidth,
       height: calculatedHeight
     }, children)));
@@ -109633,12 +110014,12 @@ html body {
       maxHeight: props.maxHeight
     });
     if (isNumber2(calculatedWidth) && isNumber2(calculatedHeight)) {
-      return /* @__PURE__ */ React529.createElement(ResponsiveContainerContextProvider, {
+      return /* @__PURE__ */ React535.createElement(ResponsiveContainerContextProvider, {
         width: calculatedWidth,
         height: calculatedHeight
       }, props.children);
     }
-    return /* @__PURE__ */ React529.createElement(SizeDetectorContainer, _extends146({}, props, {
+    return /* @__PURE__ */ React535.createElement(SizeDetectorContainer, _extends152({}, props, {
       width,
       height,
       ref
@@ -109696,6 +110077,13 @@ html body {
   };
   var selectChartLayout = (state) => state.layout.layoutType;
   var useChartLayout = () => useAppSelector(selectChartLayout);
+  var useCartesianChartLayout = () => {
+    var layout = useChartLayout();
+    if (layout === "horizontal" || layout === "vertical") {
+      return layout;
+    }
+    return void 0;
+  };
   var selectPolarChartLayout = (state) => {
     var layout = state.layout.layoutType;
     if (layout === "centric" || layout === "radial") {
@@ -110488,7 +110876,7 @@ html body {
   var legendReducer = legendSlice.reducer;
 
   // ../temple_donation/node_modules/react-redux/dist/react-redux.mjs
-  var React530 = __toESM(require_react(), 1);
+  var React536 = __toESM(require_react(), 1);
   var import_with_selector2 = __toESM(require_with_selector2(), 1);
   var REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref");
   var REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo");
@@ -110629,7 +111017,7 @@ html body {
   var isDOM2 = /* @__PURE__ */ canUseDOM();
   var isRunningInReactNative = () => typeof navigator !== "undefined" && navigator.product === "ReactNative";
   var isReactNative = /* @__PURE__ */ isRunningInReactNative();
-  var getUseIsomorphicLayoutEffect = () => isDOM2 || isReactNative ? React530.useLayoutEffect : React530.useEffect;
+  var getUseIsomorphicLayoutEffect = () => isDOM2 || isReactNative ? React536.useLayoutEffect : React536.useEffect;
   var useIsomorphicLayoutEffect2 = /* @__PURE__ */ getUseIsomorphicLayoutEffect();
   function is3(x2, y2) {
     if (x2 === y2) {
@@ -110679,25 +111067,25 @@ html body {
   var gT = typeof globalThis !== "undefined" ? globalThis : {};
   function getContext() {
     var _a;
-    if (!React530.createContext)
+    if (!React536.createContext)
       return {};
     const contextMap = (_a = gT[ContextKey]) != null ? _a : gT[ContextKey] = /* @__PURE__ */ new Map();
-    let realContext = contextMap.get(React530.createContext);
+    let realContext = contextMap.get(React536.createContext);
     if (!realContext) {
-      realContext = React530.createContext(
+      realContext = React536.createContext(
         null
       );
       if (true) {
         realContext.displayName = "ReactRedux";
       }
-      contextMap.set(React530.createContext, realContext);
+      contextMap.set(React536.createContext, realContext);
     }
     return realContext;
   }
   var ReactReduxContext = /* @__PURE__ */ getContext();
   function Provider(providerProps) {
     const { children, context, serverState, store } = providerProps;
-    const contextValue = React530.useMemo(() => {
+    const contextValue = React536.useMemo(() => {
       const subscription = createSubscription(store);
       const baseContextValue = {
         store,
@@ -110714,7 +111102,7 @@ html body {
         });
       }
     }, [store, serverState]);
-    const previousState = React530.useMemo(() => store.getState(), [store]);
+    const previousState = React536.useMemo(() => store.getState(), [store]);
     useIsomorphicLayoutEffect2(() => {
       const { subscription } = contextValue;
       subscription.onStateChange = subscription.notifyNestedSubs;
@@ -110728,7 +111116,7 @@ html body {
       };
     }, [contextValue, previousState]);
     const Context3 = context || ReactReduxContext;
-    return /* @__PURE__ */ React530.createElement(Context3.Provider, { value: contextValue }, children);
+    return /* @__PURE__ */ React536.createElement(Context3.Provider, { value: contextValue }, children);
   }
   var Provider_default = Provider;
 
@@ -110783,22 +111171,22 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/component/Tooltip.js
-  var React538 = __toESM(require_react());
+  var React544 = __toESM(require_react());
   var import_react184 = __toESM(require_react());
   var import_react_dom10 = __toESM(require_react_dom());
 
   // ../temple_donation/node_modules/recharts/es6/component/DefaultTooltipContent.js
-  var React531 = __toESM(require_react());
+  var React537 = __toESM(require_react());
   var import_sortBy3 = __toESM(require_sortBy2());
-  function _extends147() {
-    return _extends147 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends153() {
+    return _extends153 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends147.apply(null, arguments);
+    }, _extends153.apply(null, arguments);
   }
   function ownKeys25(e4, r3) {
     var t2 = Object.keys(e4);
@@ -110913,21 +111301,21 @@ html body {
           var finalItemStyle = _objectSpread25(_objectSpread25({}, defaultDefaultTooltipContentProps.itemStyle), {}, {
             color: entry.color || defaultDefaultTooltipContentProps.itemStyle.color
           }, itemStyle);
-          return /* @__PURE__ */ React531.createElement("li", {
+          return /* @__PURE__ */ React537.createElement("li", {
             className: "recharts-tooltip-item",
             key: "tooltip-item-".concat(i),
             style: finalItemStyle
-          }, isNumOrStr(finalName) ? /* @__PURE__ */ React531.createElement("span", {
+          }, isNumOrStr(finalName) ? /* @__PURE__ */ React537.createElement("span", {
             className: "recharts-tooltip-item-name"
-          }, finalName) : null, isNumOrStr(finalName) ? /* @__PURE__ */ React531.createElement("span", {
+          }, finalName) : null, isNumOrStr(finalName) ? /* @__PURE__ */ React537.createElement("span", {
             className: "recharts-tooltip-item-separator"
-          }, separator) : null, /* @__PURE__ */ React531.createElement("span", {
+          }, separator) : null, /* @__PURE__ */ React537.createElement("span", {
             className: "recharts-tooltip-item-value"
-          }, finalValue), /* @__PURE__ */ React531.createElement("span", {
+          }, finalValue), /* @__PURE__ */ React537.createElement("span", {
             className: "recharts-tooltip-item-unit"
           }, entry.unit || ""));
         });
-        return /* @__PURE__ */ React531.createElement("ul", {
+        return /* @__PURE__ */ React537.createElement("ul", {
           className: "recharts-tooltip-item-list",
           style: listStyle
         }, items);
@@ -110949,17 +111337,17 @@ html body {
       role: "status",
       "aria-live": "assertive"
     } : {};
-    return /* @__PURE__ */ React531.createElement("div", _extends147({
+    return /* @__PURE__ */ React537.createElement("div", _extends153({
       className: wrapperCN,
       style: finalStyle
-    }, accessibilityAttributes), /* @__PURE__ */ React531.createElement("p", {
+    }, accessibilityAttributes), /* @__PURE__ */ React537.createElement("p", {
       className: labelCN,
       style: finalLabelStyle
-    }, /* @__PURE__ */ React531.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), renderContent2());
+    }, /* @__PURE__ */ React537.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), renderContent2());
   };
 
   // ../temple_donation/node_modules/recharts/es6/component/TooltipBoundingBox.js
-  var React532 = __toESM(require_react());
+  var React538 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/util/tooltip/translate.js
   var CSS_CLASS_PREFIX = "recharts-tooltip-wrapper";
@@ -111175,14 +111563,14 @@ html body {
   function TooltipBoundingBoxImpl(props) {
     var _props$coordinate3, _props$coordinate4, _props$coordinate$x2, _props$coordinate5, _props$coordinate$y2, _props$coordinate6;
     var prefersReducedMotion = usePrefersReducedMotion();
-    var [state, setState] = React532.useState(() => ({
+    var [state, setState] = React538.useState(() => ({
       dismissed: false,
       dismissedAtCoordinate: {
         x: 0,
         y: 0
       }
     }));
-    React532.useEffect(() => {
+    React538.useEffect(() => {
       var handleKeyDown = (event) => {
         if (event.key === "Escape") {
           var _props$coordinate$x, _props$coordinate, _props$coordinate$y, _props$coordinate2;
@@ -111239,7 +111627,7 @@ html body {
     var outerStyle = _objectSpread26(_objectSpread26({}, positionStyle), {}, {
       visibility: !state.dismissed && props.active && props.hasPayload ? "visible" : "hidden"
     }, props.wrapperStyle);
-    return /* @__PURE__ */ React532.createElement("div", {
+    return /* @__PURE__ */ React538.createElement("div", {
       xmlns: "http://www.w3.org/1999/xhtml",
       tabIndex: -1,
       className: cssClasses,
@@ -111247,7 +111635,7 @@ html body {
       ref: props.innerRef
     }, props.children);
   }
-  var TooltipBoundingBox = /* @__PURE__ */ React532.memo(TooltipBoundingBoxImpl);
+  var TooltipBoundingBox = /* @__PURE__ */ React538.memo(TooltipBoundingBoxImpl);
 
   // ../temple_donation/node_modules/recharts/es6/context/accessibilityContext.js
   var useAccessibilityLayer = () => {
@@ -111256,20 +111644,20 @@ html body {
   };
 
   // ../temple_donation/node_modules/recharts/es6/component/Cursor.js
-  var React537 = __toESM(require_react());
+  var React543 = __toESM(require_react());
   var import_react181 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/shape/Curve.js
-  var React533 = __toESM(require_react());
-  function _extends148() {
-    return _extends148 = Object.assign ? Object.assign.bind() : function(n2) {
+  var React539 = __toESM(require_react());
+  function _extends154() {
+    return _extends154 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends148.apply(null, arguments);
+    }, _extends154.apply(null, arguments);
   }
   function ownKeys27(e4, r3) {
     var t2 = Object.keys(e4);
@@ -111401,7 +111789,7 @@ html body {
       connectNulls: props.connectNulls
     };
     var realPath = points && points.length ? getPath(getPathInput) : path2;
-    return /* @__PURE__ */ React533.createElement("path", _extends148({}, svgPropertiesNoEvents(props), adaptEventHandlers(props), {
+    return /* @__PURE__ */ React539.createElement("path", _extends154({}, svgPropertiesNoEvents(props), adaptEventHandlers(props), {
       className: clsx("recharts-curve", className),
       d: realPath === null ? void 0 : realPath,
       ref: pathRef
@@ -111409,17 +111797,17 @@ html body {
   };
 
   // ../temple_donation/node_modules/recharts/es6/shape/Cross.js
-  var React534 = __toESM(require_react());
+  var React540 = __toESM(require_react());
   var _excluded9 = ["x", "y", "top", "left", "width", "height", "className"];
-  function _extends149() {
-    return _extends149 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends155() {
+    return _extends155 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends149.apply(null, arguments);
+    }, _extends155.apply(null, arguments);
   }
   function ownKeys28(e4, r3) {
     var t2 = Object.keys(e4);
@@ -111508,7 +111896,7 @@ html body {
     if (!isNumber2(x2) || !isNumber2(y2) || !isNumber2(width) || !isNumber2(height) || !isNumber2(top) || !isNumber2(left)) {
       return null;
     }
-    return /* @__PURE__ */ React534.createElement("path", _extends149({}, svgPropertiesAndEvents(props), {
+    return /* @__PURE__ */ React540.createElement("path", _extends155({}, svgPropertiesAndEvents(props), {
       className: clsx("recharts-cross", className),
       d: getPath2(x2, y2, width, height, top, left)
     }));
@@ -111528,7 +111916,7 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/shape/Rectangle.js
-  var React535 = __toESM(require_react());
+  var React541 = __toESM(require_react());
   var import_react179 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/animation/JavascriptAnimate.js
@@ -112087,15 +112475,15 @@ html body {
     }
     return ("string" === r3 ? String : Number)(t2);
   }
-  function _extends150() {
-    return _extends150 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends156() {
+    return _extends156 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends150.apply(null, arguments);
+    }, _extends156.apply(null, arguments);
   }
   function _objectWithoutProperties9(e4, t2) {
     if (null == e4)
@@ -112225,7 +112613,7 @@ html body {
       var _svgPropertiesAndEven = svgPropertiesAndEvents(props), {
         radius: _2
       } = _svgPropertiesAndEven, otherPathProps = _objectWithoutProperties9(_svgPropertiesAndEven, _excluded10);
-      return /* @__PURE__ */ React535.createElement("path", _extends150({}, otherPathProps, {
+      return /* @__PURE__ */ React541.createElement("path", _extends156({}, otherPathProps, {
         x: round2(x2),
         y: round2(y2),
         width: round2(width),
@@ -112242,7 +112630,7 @@ html body {
     var from3 = "0px ".concat(totalLength === -1 ? 1 : totalLength, "px");
     var to2 = "".concat(totalLength, "px ").concat(totalLength, "px");
     var transition = getTransitionVal(["strokeDasharray"], animationDuration, typeof animationEasing === "string" ? animationEasing : defaultRectangleProps.animationEasing);
-    return /* @__PURE__ */ React535.createElement(JavascriptAnimate, {
+    return /* @__PURE__ */ React541.createElement(JavascriptAnimate, {
       animationId,
       key: animationId,
       canBegin: totalLength > 0,
@@ -112279,7 +112667,7 @@ html body {
       var _svgPropertiesAndEven2 = svgPropertiesAndEvents(props), {
         radius: _3
       } = _svgPropertiesAndEven2, otherPathProps2 = _objectWithoutProperties9(_svgPropertiesAndEven2, _excluded23);
-      return /* @__PURE__ */ React535.createElement("path", _extends150({}, otherPathProps2, {
+      return /* @__PURE__ */ React541.createElement("path", _extends156({}, otherPathProps2, {
         radius: typeof radius2 === "number" ? radius2 : void 0,
         className: layerClass,
         d: getRectanglePath(currX, currY, currWidth, currHeight, radius2),
@@ -112491,7 +112879,7 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/shape/Sector.js
-  var React536 = __toESM(require_react());
+  var React542 = __toESM(require_react());
   var _templateObject10;
   var _templateObject22;
   var _templateObject32;
@@ -112499,15 +112887,15 @@ html body {
   var _templateObject52;
   var _templateObject62;
   var _templateObject72;
-  function _extends151() {
-    return _extends151 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends157() {
+    return _extends157 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends151.apply(null, arguments);
+    }, _extends157.apply(null, arguments);
   }
   function _taggedTemplateLiteral2(e4, t2) {
     return t2 || (t2 = e4.slice(0)), Object.freeze(Object.defineProperties(e4, { raw: { value: Object.freeze(t2) } }));
@@ -112712,7 +113100,7 @@ html body {
         endAngle
       });
     }
-    return /* @__PURE__ */ React536.createElement("path", _extends151({}, svgPropertiesAndEvents(props), {
+    return /* @__PURE__ */ React542.createElement("path", _extends157({}, svgPropertiesAndEvents(props), {
       className: layerClass,
       d: path2
     }));
@@ -112777,6 +113165,12 @@ html body {
     };
   });
   var selectChartDataWithIndexesIfNotInPanoramaPosition4 = (state, _unused1, _unused2, isPanorama) => {
+    if (isPanorama) {
+      return selectChartDataAndAlwaysIgnoreIndexes(state);
+    }
+    return selectChartDataWithIndexes(state);
+  };
+  var selectChartDataWithIndexesIfNotInPanoramaPosition3 = (state, _unused1, isPanorama) => {
     if (isPanorama) {
       return selectChartDataAndAlwaysIgnoreIndexes(state);
     }
@@ -113106,6 +113500,7 @@ html body {
   var selectSyncId = (state) => state.rootProps.syncId;
   var selectSyncMethod = (state) => state.rootProps.syncMethod;
   var selectEventEmitter = (state) => state.options.eventEmitter;
+  var selectChartBaseValue = (state) => state.rootProps.baseValue;
 
   // ../temple_donation/node_modules/recharts/es6/zIndex/DefaultZIndexes.js
   var DefaultZIndexes = {
@@ -119121,15 +119516,15 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/component/Cursor.js
-  function _extends152() {
-    return _extends152 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends158() {
+    return _extends158 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends152.apply(null, arguments);
+    }, _extends158.apply(null, arguments);
   }
   function ownKeys40(e4, r3) {
     var t2 = Object.keys(e4);
@@ -119244,9 +119639,9 @@ html body {
       payloadIndex: activeTooltipIndex,
       className: clsx("recharts-tooltip-cursor", extraClassName)
     });
-    return /* @__PURE__ */ React537.createElement(ZIndexLayer, {
+    return /* @__PURE__ */ React543.createElement(ZIndexLayer, {
       zIndex: (_props$zIndex = props.zIndex) !== null && _props$zIndex !== void 0 ? _props$zIndex : preferredZIndex
-    }, /* @__PURE__ */ React537.createElement(RenderCursor, {
+    }, /* @__PURE__ */ React543.createElement(RenderCursor, {
       cursor,
       cursorComp,
       cursorProps
@@ -119260,7 +119655,7 @@ html body {
     if (tooltipAxisBandSize == null || offset3 == null || layout == null || chartName == null) {
       return null;
     }
-    return /* @__PURE__ */ React537.createElement(CursorInternal, _extends152({}, props, {
+    return /* @__PURE__ */ React543.createElement(CursorInternal, _extends158({}, props, {
       offset: offset3,
       layout,
       tooltipAxisBandSize,
@@ -119673,13 +120068,13 @@ html body {
     return entry.dataKey;
   }
   function renderContent(content, props) {
-    if (/* @__PURE__ */ React538.isValidElement(content)) {
-      return /* @__PURE__ */ React538.cloneElement(content, props);
+    if (/* @__PURE__ */ React544.isValidElement(content)) {
+      return /* @__PURE__ */ React544.cloneElement(content, props);
     }
     if (typeof content === "function") {
-      return /* @__PURE__ */ React538.createElement(content, props);
+      return /* @__PURE__ */ React544.createElement(content, props);
     }
-    return /* @__PURE__ */ React538.createElement(DefaultTooltipContent, props);
+    return /* @__PURE__ */ React544.createElement(DefaultTooltipContent, props);
   }
   var emptyPayload = [];
   var defaultTooltipProps = {
@@ -119779,7 +120174,7 @@ html body {
       coordinate,
       accessibilityLayer
     });
-    var tooltipElement = /* @__PURE__ */ React538.createElement(TooltipBoundingBox, {
+    var tooltipElement = /* @__PURE__ */ React544.createElement(TooltipBoundingBox, {
       allowEscapeViewBox,
       animationDuration,
       animationEasing,
@@ -119797,7 +120192,7 @@ html body {
       innerRef: updateBoundingBox,
       hasPortalFromProps: Boolean(portalFromProps)
     }, renderContent(content, tooltipContentProps));
-    return /* @__PURE__ */ React538.createElement(React538.Fragment, null, /* @__PURE__ */ (0, import_react_dom10.createPortal)(tooltipElement, tooltipPortal), finalIsActive && /* @__PURE__ */ React538.createElement(Cursor, {
+    return /* @__PURE__ */ React544.createElement(React544.Fragment, null, /* @__PURE__ */ (0, import_react_dom10.createPortal)(tooltipElement, tooltipPortal), finalIsActive && /* @__PURE__ */ React544.createElement(Cursor, {
       cursor,
       tooltipEventType,
       coordinate,
@@ -119811,7 +120206,7 @@ html body {
   Cell2.displayName = "Cell";
 
   // ../temple_donation/node_modules/recharts/es6/component/Text.js
-  var React539 = __toESM(require_react());
+  var React545 = __toESM(require_react());
   var import_react185 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/util/LRUCache.js
@@ -120140,15 +120535,15 @@ html body {
   // ../temple_donation/node_modules/recharts/es6/component/Text.js
   var _excluded12 = ["x", "y", "lineHeight", "capHeight", "fill", "scaleToFit", "textAnchor", "verticalAnchor"];
   var _excluded24 = ["dx", "dy", "angle", "className", "breakAll"];
-  function _extends153() {
-    return _extends153 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends159() {
+    return _extends159 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends153.apply(null, arguments);
+    }, _extends159.apply(null, arguments);
   }
   function _objectWithoutProperties11(e4, t2) {
     if (null == e4)
@@ -120400,7 +120795,7 @@ html body {
     if (transforms.length) {
       textProps.transform = transforms.join(" ");
     }
-    return /* @__PURE__ */ React539.createElement("text", _extends153({}, svgPropertiesAndEvents(textProps), {
+    return /* @__PURE__ */ React545.createElement("text", _extends159({}, svgPropertiesAndEvents(textProps), {
       ref,
       x: x2,
       y: y2,
@@ -120409,7 +120804,7 @@ html body {
       fill: fill.includes("url") ? DEFAULT_FILL : fill
     }), wordsByLines.map((line2, index2) => {
       var words = line2.words.join(breakAll ? "" : " ");
-      return /* @__PURE__ */ React539.createElement("tspan", {
+      return /* @__PURE__ */ React545.createElement("tspan", {
         x: x2,
         dy: index2 === 0 ? startDy : lineHeight,
         key: "".concat(words, "-").concat(index2)
@@ -120419,7 +120814,7 @@ html body {
   Text2.displayName = "Text";
 
   // ../temple_donation/node_modules/recharts/es6/component/Label.js
-  var React540 = __toESM(require_react());
+  var React546 = __toESM(require_react());
   var import_react186 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/cartesian/getCartesianPosition.js
@@ -120694,17 +121089,39 @@ html body {
     }
     return ("string" === r3 ? String : Number)(t2);
   }
-  function _extends154() {
-    return _extends154 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends160() {
+    return _extends160 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends154.apply(null, arguments);
+    }, _extends160.apply(null, arguments);
   }
   var CartesianLabelContext = /* @__PURE__ */ (0, import_react186.createContext)(null);
+  var CartesianLabelContextProvider = (_ref2) => {
+    var {
+      x: x2,
+      y: y2,
+      upperWidth,
+      lowerWidth,
+      width,
+      height,
+      children
+    } = _ref2;
+    var viewBox = (0, import_react186.useMemo)(() => ({
+      x: x2,
+      y: y2,
+      upperWidth,
+      lowerWidth,
+      width,
+      height
+    }), [x2, y2, upperWidth, lowerWidth, width, height]);
+    return /* @__PURE__ */ React546.createElement(CartesianLabelContext.Provider, {
+      value: viewBox
+    }, children);
+  };
   var useCartesianLabelContext = () => {
     var labelChildContext = (0, import_react186.useContext)(CartesianLabelContext);
     var chartContext = useViewBox();
@@ -120774,13 +121191,13 @@ html body {
     var endPoint = polarToCartesian(cx, cy, radius2, labelAngle + (direction ? 1 : -1) * 359);
     var path2 = "M".concat(startPoint.x, ",").concat(startPoint.y, "\n    A").concat(radius2, ",").concat(radius2, ",0,1,").concat(direction ? 0 : 1, ",\n    ").concat(endPoint.x, ",").concat(endPoint.y);
     var id = isNullish(labelProps.id) ? uniqueId("recharts-radial-line-") : labelProps.id;
-    return /* @__PURE__ */ React540.createElement("text", _extends154({}, attrs, {
+    return /* @__PURE__ */ React546.createElement("text", _extends160({}, attrs, {
       dominantBaseline: "central",
       className: clsx("recharts-radial-bar-label", className)
-    }), /* @__PURE__ */ React540.createElement("defs", null, /* @__PURE__ */ React540.createElement("path", {
+    }), /* @__PURE__ */ React546.createElement("defs", null, /* @__PURE__ */ React546.createElement("path", {
       id,
       d: path2
-    })), /* @__PURE__ */ React540.createElement("textPath", {
+    })), /* @__PURE__ */ React546.createElement("textPath", {
       xlinkHref: "#".concat(id)
     }, label));
   };
@@ -120945,9 +121362,9 @@ html body {
         height: cartesianResult.height
       } : {});
     }
-    return /* @__PURE__ */ React540.createElement(ZIndexLayer, {
+    return /* @__PURE__ */ React546.createElement(ZIndexLayer, {
       zIndex: props.zIndex
-    }, /* @__PURE__ */ React540.createElement(Text2, _extends154({
+    }, /* @__PURE__ */ React546.createElement(Text2, _extends160({
       ref: labelRef,
       className: clsx("recharts-label", className)
     }, attrs, positionAttrs, {
@@ -120956,21 +121373,72 @@ html body {
     }), label));
   }
   Label.displayName = "Label";
+  var parseLabel = (label, viewBox, labelRef) => {
+    if (!label) {
+      return null;
+    }
+    var commonProps = {
+      viewBox,
+      labelRef
+    };
+    if (label === true) {
+      return /* @__PURE__ */ React546.createElement(Label, _extends160({
+        key: "label-implicit"
+      }, commonProps));
+    }
+    if (isNumOrStr(label)) {
+      return /* @__PURE__ */ React546.createElement(Label, _extends160({
+        key: "label-implicit",
+        value: label
+      }, commonProps));
+    }
+    if (/* @__PURE__ */ (0, import_react186.isValidElement)(label)) {
+      if (label.type === Label) {
+        return /* @__PURE__ */ (0, import_react186.cloneElement)(label, _objectSpread45({
+          key: "label-implicit"
+        }, commonProps));
+      }
+      return /* @__PURE__ */ React546.createElement(Label, _extends160({
+        key: "label-implicit",
+        content: label
+      }, commonProps));
+    }
+    if (isLabelContentAFunction(label)) {
+      return /* @__PURE__ */ React546.createElement(Label, _extends160({
+        key: "label-implicit",
+        content: label
+      }, commonProps));
+    }
+    if (label && typeof label === "object") {
+      return /* @__PURE__ */ React546.createElement(Label, _extends160({}, label, {
+        key: "label-implicit"
+      }, commonProps));
+    }
+    return null;
+  };
+  function CartesianLabelFromLabelProp(_ref3) {
+    var {
+      label,
+      labelRef
+    } = _ref3;
+    var viewBox = useCartesianLabelContext();
+    return parseLabel(label, viewBox, labelRef) || null;
+  }
 
   // ../temple_donation/node_modules/recharts/es6/component/LabelList.js
-  var React541 = __toESM(require_react());
+  var React547 = __toESM(require_react());
   var import_react187 = __toESM(require_react());
   var _excluded14 = ["valueAccessor"];
   var _excluded26 = ["dataKey", "clockWise", "id", "textBreakAll", "zIndex"];
-  function _extends155() {
-    return _extends155 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends161() {
+    return _extends161 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends155.apply(null, arguments);
+    }, _extends161.apply(null, arguments);
   }
   function _objectWithoutProperties13(e4, t2) {
     if (null == e4)
@@ -121029,9 +121497,9 @@ html body {
     if (!data || !data.length) {
       return null;
     }
-    return /* @__PURE__ */ React541.createElement(ZIndexLayer, {
+    return /* @__PURE__ */ React547.createElement(ZIndexLayer, {
       zIndex: zIndex !== null && zIndex !== void 0 ? zIndex : DefaultZIndexes.label
-    }, /* @__PURE__ */ React541.createElement(Layer, {
+    }, /* @__PURE__ */ React547.createElement(Layer, {
       className: "recharts-label-list"
     }, data.map((entry, index2) => {
       var _restProps$fill;
@@ -121039,7 +121507,7 @@ html body {
       var idProps = isNullish(id) ? {} : {
         id: "".concat(id, "-").concat(index2)
       };
-      return /* @__PURE__ */ React541.createElement(Label, _extends155({
+      return /* @__PURE__ */ React547.createElement(Label, _extends161({
         key: "label-".concat(index2)
       }, svgPropertiesAndEvents(entry), others, idProps, {
         fill: (_restProps$fill = restProps.fill) !== null && _restProps$fill !== void 0 ? _restProps$fill : entry.fill,
@@ -121061,18 +121529,18 @@ html body {
       return null;
     }
     if (label === true) {
-      return /* @__PURE__ */ React541.createElement(LabelList, {
+      return /* @__PURE__ */ React547.createElement(LabelList, {
         key: "labelList-implicit"
       });
     }
-    if (/* @__PURE__ */ React541.isValidElement(label) || isLabelContentAFunction(label)) {
-      return /* @__PURE__ */ React541.createElement(LabelList, {
+    if (/* @__PURE__ */ React547.isValidElement(label) || isLabelContentAFunction(label)) {
+      return /* @__PURE__ */ React547.createElement(LabelList, {
         key: "labelList-implicit",
         content: label
       });
     }
     if (typeof label === "object") {
-      return /* @__PURE__ */ React541.createElement(LabelList, _extends155({
+      return /* @__PURE__ */ React547.createElement(LabelList, _extends161({
         key: "labelList-implicit"
       }, label, {
         type: String(label.type)
@@ -121080,6 +121548,37 @@ html body {
     }
     return null;
   }
+
+  // ../temple_donation/node_modules/recharts/es6/shape/Dot.js
+  var React548 = __toESM(require_react());
+  function _extends162() {
+    return _extends162 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends162.apply(null, arguments);
+  }
+  var Dot = (props) => {
+    var {
+      cx,
+      cy,
+      r: r3,
+      className
+    } = props;
+    var layerClass = clsx("recharts-dot", className);
+    if (isNumber2(cx) && isNumber2(cy) && isNumber2(r3)) {
+      return /* @__PURE__ */ React548.createElement("circle", _extends162({}, svgPropertiesNoEvents(props), adaptEventHandlers(props), {
+        className: layerClass,
+        cx,
+        cy,
+        r: r3
+      }));
+    }
+    return null;
+  };
 
   // ../temple_donation/node_modules/recharts/es6/state/selectors/polarSelectors.js
   var selectUnfilteredPolarItems = (state) => state.graphicalItems.polarItems;
@@ -121160,7 +121659,7 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/polar/Pie.js
-  var React546 = __toESM(require_react());
+  var React553 = __toESM(require_react());
   var import_react195 = __toESM(require_react());
   var import_get10 = __toESM(require_get2());
 
@@ -121319,14 +121818,20 @@ html body {
     });
     return result;
   }
+  var isClipDot = (dot) => {
+    if (dot && typeof dot === "object" && "clipDot" in dot) {
+      return Boolean(dot.clipDot);
+    }
+    return true;
+  };
 
   // ../temple_donation/node_modules/recharts/es6/util/ActiveShapeUtils.js
-  var React543 = __toESM(require_react());
+  var React550 = __toESM(require_react());
   var import_react190 = __toESM(require_react());
   var import_isPlainObject = __toESM(require_isPlainObject2());
 
   // ../temple_donation/node_modules/recharts/es6/shape/Trapezoid.js
-  var React542 = __toESM(require_react());
+  var React549 = __toESM(require_react());
   var import_react189 = __toESM(require_react());
   var _templateObject11;
   var _templateObject23;
@@ -121373,15 +121878,15 @@ html body {
     }
     return ("string" === r3 ? String : Number)(t2);
   }
-  function _extends156() {
-    return _extends156 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends163() {
+    return _extends163 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends156.apply(null, arguments);
+    }, _extends163.apply(null, arguments);
   }
   function _taggedTemplateLiteral3(e4, t2) {
     return t2 || (t2 = e4.slice(0)), Object.freeze(Object.defineProperties(e4, { raw: { value: Object.freeze(t2) } }));
@@ -121447,7 +121952,7 @@ html body {
     }
     var layerClass = clsx("recharts-trapezoid", className);
     if (!isUpdateAnimationActive) {
-      return /* @__PURE__ */ React542.createElement("g", null, /* @__PURE__ */ React542.createElement("path", _extends156({}, svgPropertiesAndEvents(trapezoidProps), {
+      return /* @__PURE__ */ React549.createElement("g", null, /* @__PURE__ */ React549.createElement("path", _extends163({}, svgPropertiesAndEvents(trapezoidProps), {
         className: layerClass,
         d: getTrapezoidPath(x2, y2, upperWidth, lowerWidth, height)
       })));
@@ -121460,7 +121965,7 @@ html body {
     var from3 = "0px ".concat(totalLength === -1 ? 1 : totalLength, "px");
     var to2 = "".concat(totalLength, "px ").concat(totalLength, "px");
     var transition = getTransitionVal(["strokeDasharray"], animationDuration, animationEasing);
-    return /* @__PURE__ */ React542.createElement(JavascriptAnimate, {
+    return /* @__PURE__ */ React549.createElement(JavascriptAnimate, {
       animationId,
       key: animationId,
       canBegin: totalLength > 0,
@@ -121487,7 +121992,7 @@ html body {
       } : {
         strokeDasharray: from3
       };
-      return /* @__PURE__ */ React542.createElement("path", _extends156({}, svgPropertiesAndEvents(trapezoidProps), {
+      return /* @__PURE__ */ React549.createElement("path", _extends163({}, svgPropertiesAndEvents(trapezoidProps), {
         className: layerClass,
         d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
         ref: pathRef,
@@ -121574,18 +122079,18 @@ html body {
     } = _ref2;
     switch (shapeType) {
       case "rectangle":
-        return /* @__PURE__ */ React543.createElement(Rectangle, elementProps);
+        return /* @__PURE__ */ React550.createElement(Rectangle, elementProps);
       case "trapezoid":
-        return /* @__PURE__ */ React543.createElement(Trapezoid, elementProps);
+        return /* @__PURE__ */ React550.createElement(Trapezoid, elementProps);
       case "sector":
-        return /* @__PURE__ */ React543.createElement(Sector, elementProps);
+        return /* @__PURE__ */ React550.createElement(Sector, elementProps);
       case "symbols":
         if (isSymbolsProps(shapeType, elementProps)) {
-          return /* @__PURE__ */ React543.createElement(Symbols, elementProps);
+          return /* @__PURE__ */ React550.createElement(Symbols, elementProps);
         }
         break;
       case "curve":
-        return /* @__PURE__ */ React543.createElement(Curve, elementProps);
+        return /* @__PURE__ */ React550.createElement(Curve, elementProps);
       default:
         return null;
     }
@@ -121610,23 +122115,23 @@ html body {
       shape = option(props, props.index);
     } else if ((0, import_isPlainObject.default)(option) && typeof option !== "boolean") {
       var nextProps = defaultPropTransformer(option, props);
-      shape = /* @__PURE__ */ React543.createElement(ShapeSelector, {
+      shape = /* @__PURE__ */ React550.createElement(ShapeSelector, {
         shapeType,
         elementProps: nextProps
       });
     } else {
       var elementProps = props;
-      shape = /* @__PURE__ */ React543.createElement(ShapeSelector, {
+      shape = /* @__PURE__ */ React550.createElement(ShapeSelector, {
         shapeType,
         elementProps
       });
     }
     if (props.isActive) {
-      return /* @__PURE__ */ React543.createElement(Layer, {
+      return /* @__PURE__ */ React550.createElement(Layer, {
         className: activeClassName
       }, shape);
     }
-    return /* @__PURE__ */ React543.createElement(Layer, {
+    return /* @__PURE__ */ React550.createElement(Layer, {
       className: inActiveClassName
     }, shape);
   }
@@ -121700,6 +122205,37 @@ html body {
 
   // ../temple_donation/node_modules/recharts/es6/state/SetLegendPayload.js
   var import_react192 = __toESM(require_react());
+  function SetLegendPayload(_ref2) {
+    var {
+      legendPayload
+    } = _ref2;
+    var dispatch = useAppDispatch();
+    var isPanorama = useIsPanorama();
+    var prevPayloadRef = (0, import_react192.useRef)(null);
+    (0, import_react192.useLayoutEffect)(() => {
+      if (isPanorama) {
+        return;
+      }
+      if (prevPayloadRef.current === null) {
+        dispatch(addLegendPayload(legendPayload));
+      } else if (prevPayloadRef.current !== legendPayload) {
+        dispatch(replaceLegendPayload({
+          prev: prevPayloadRef.current,
+          next: legendPayload
+        }));
+      }
+      prevPayloadRef.current = legendPayload;
+    }, [dispatch, isPanorama, legendPayload]);
+    (0, import_react192.useLayoutEffect)(() => {
+      return () => {
+        if (prevPayloadRef.current) {
+          dispatch(removeLegendPayload(prevPayloadRef.current));
+          prevPayloadRef.current = null;
+        }
+      };
+    }, [dispatch]);
+    return null;
+  }
   function SetPolarLegendPayload(_ref2) {
     var {
       legendPayload
@@ -121733,17 +122269,17 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/context/RegisterGraphicalItemId.js
-  var React545 = __toESM(require_react());
+  var React552 = __toESM(require_react());
   var import_react193 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/util/useId.js
-  var React544 = __toESM(require_react());
+  var React551 = __toESM(require_react());
   var _ref;
   var useIdFallback = () => {
-    var [id] = React544.useState(() => uniqueId("uid-"));
+    var [id] = React551.useState(() => uniqueId("uid-"));
     return id;
   };
-  var useId3 = (_ref = React544["useId".toString()]) !== null && _ref !== void 0 ? _ref : useIdFallback;
+  var useId3 = (_ref = React551["useId".toString()]) !== null && _ref !== void 0 ? _ref : useIdFallback;
 
   // ../temple_donation/node_modules/recharts/es6/util/useUniqueId.js
   function useUniqueId(prefix2, customId) {
@@ -121763,7 +122299,7 @@ html body {
       children
     } = _ref2;
     var resolvedId = useUniqueId("recharts-".concat(type5), id);
-    return /* @__PURE__ */ React545.createElement(GraphicalItemIdContext.Provider, {
+    return /* @__PURE__ */ React552.createElement(GraphicalItemIdContext.Provider, {
       value: resolvedId
     }, children(resolvedId));
   };
@@ -121849,6 +122385,31 @@ html body {
   var graphicalItemsReducer = graphicalItemsSlice.reducer;
 
   // ../temple_donation/node_modules/recharts/es6/state/SetGraphicalItem.js
+  var SetCartesianGraphicalItemImpl = (props) => {
+    var dispatch = useAppDispatch();
+    var prevPropsRef = (0, import_react194.useRef)(null);
+    (0, import_react194.useLayoutEffect)(() => {
+      if (prevPropsRef.current === null) {
+        dispatch(addCartesianGraphicalItem(props));
+      } else if (prevPropsRef.current !== props) {
+        dispatch(replaceCartesianGraphicalItem({
+          prev: prevPropsRef.current,
+          next: props
+        }));
+      }
+      prevPropsRef.current = props;
+    }, [dispatch, props]);
+    (0, import_react194.useLayoutEffect)(() => {
+      return () => {
+        if (prevPropsRef.current) {
+          dispatch(removeCartesianGraphicalItem(prevPropsRef.current));
+          prevPropsRef.current = null;
+        }
+      };
+    }, [dispatch]);
+    return null;
+  };
+  var SetCartesianGraphicalItem = /* @__PURE__ */ (0, import_react194.memo)(SetCartesianGraphicalItemImpl);
   var SetPolarGraphicalItemImpl = (props) => {
     var dispatch = useAppDispatch();
     var prevPropsRef = (0, import_react194.useRef)(null);
@@ -121880,15 +122441,15 @@ html body {
   var _excluded27 = ["onMouseEnter", "onClick", "onMouseLeave"];
   var _excluded32 = ["id"];
   var _excluded42 = ["id"];
-  function _extends157() {
-    return _extends157 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends164() {
+    return _extends164 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends157.apply(null, arguments);
+    }, _extends164.apply(null, arguments);
   }
   function _objectWithoutProperties15(e4, t2) {
     if (null == e4)
@@ -121959,7 +122520,7 @@ html body {
     if (legendPayload == null) {
       return null;
     }
-    return /* @__PURE__ */ React546.createElement(SetPolarLegendPayload, {
+    return /* @__PURE__ */ React553.createElement(SetPolarLegendPayload, {
       legendPayload
     });
   }
@@ -121967,7 +122528,7 @@ html body {
     if (activeShape == null || typeof activeShape === "boolean" || typeof activeShape === "function") {
       return void 0;
     }
-    if (/* @__PURE__ */ React546.isValidElement(activeShape)) {
+    if (/* @__PURE__ */ React553.isValidElement(activeShape)) {
       var _activeShape$props;
       var _fill = (_activeShape$props = activeShape.props) === null || _activeShape$props === void 0 ? void 0 : _activeShape$props.fill;
       return typeof _fill === "string" ? _fill : void 0;
@@ -121977,7 +122538,7 @@ html body {
     } = activeShape;
     return typeof fill === "string" ? fill : void 0;
   }
-  var SetPieTooltipEntrySettings = /* @__PURE__ */ React546.memo((_ref2) => {
+  var SetPieTooltipEntrySettings = /* @__PURE__ */ React553.memo((_ref2) => {
     var {
       dataKey,
       nameKey,
@@ -122022,7 +122583,7 @@ html body {
         graphicalItemId: id
       }
     };
-    return /* @__PURE__ */ React546.createElement(SetTooltipEntrySettings, {
+    return /* @__PURE__ */ React553.createElement(SetTooltipEntrySettings, {
       tooltipEntrySettings
     });
   });
@@ -122068,8 +122629,8 @@ html body {
     return sign2 * deltaAngle;
   };
   var renderLabelLineItem = (option, props) => {
-    if (/* @__PURE__ */ React546.isValidElement(option)) {
-      return /* @__PURE__ */ React546.cloneElement(option, props);
+    if (/* @__PURE__ */ React553.isValidElement(option)) {
+      return /* @__PURE__ */ React553.cloneElement(option, props);
     }
     if (typeof option === "function") {
       return option(props);
@@ -122078,24 +122639,24 @@ html body {
     var {
       key
     } = props, otherProps = _objectWithoutProperties15(props, _excluded16);
-    return /* @__PURE__ */ React546.createElement(Curve, _extends157({}, otherProps, {
+    return /* @__PURE__ */ React553.createElement(Curve, _extends164({}, otherProps, {
       type: "linear",
       className
     }));
   };
   var renderLabelItem = (option, props, value) => {
-    if (/* @__PURE__ */ React546.isValidElement(option)) {
-      return /* @__PURE__ */ React546.cloneElement(option, props);
+    if (/* @__PURE__ */ React553.isValidElement(option)) {
+      return /* @__PURE__ */ React553.cloneElement(option, props);
     }
     var label = value;
     if (typeof option === "function") {
       label = option(props);
-      if (/* @__PURE__ */ React546.isValidElement(label)) {
+      if (/* @__PURE__ */ React553.isValidElement(label)) {
         return label;
       }
     }
     var className = clsx("recharts-pie-label-text", getClassNameFromUnknown(option));
-    return /* @__PURE__ */ React546.createElement(Text2, _extends157({}, props, {
+    return /* @__PURE__ */ React553.createElement(Text2, _extends164({}, props, {
       alignmentBaseline: "middle",
       className
     }), label);
@@ -122135,12 +122696,12 @@ html body {
         points: [polarToCartesian(entry.cx, entry.cy, entry.outerRadius, midAngle), endPoint],
         key: "line"
       });
-      return /* @__PURE__ */ React546.createElement(ZIndexLayer, {
+      return /* @__PURE__ */ React553.createElement(ZIndexLayer, {
         zIndex: DefaultZIndexes.label,
         key: "label-".concat(entry.startAngle, "-").concat(entry.endAngle, "-").concat(entry.midAngle, "-").concat(i)
-      }, /* @__PURE__ */ React546.createElement(Layer, null, labelLine && renderLabelLineItem(labelLine, lineProps), renderLabelItem(label, labelProps, getValueByDataKey(entry, dataKey))));
+      }, /* @__PURE__ */ React553.createElement(Layer, null, labelLine && renderLabelLineItem(labelLine, lineProps), renderLabelItem(label, labelProps, getValueByDataKey(entry, dataKey))));
     });
-    return /* @__PURE__ */ React546.createElement(Layer, {
+    return /* @__PURE__ */ React553.createElement(Layer, {
       className: "recharts-pie-labels"
     }, labels);
   }
@@ -122154,11 +122715,11 @@ html body {
       label
     } = props;
     if (typeof label === "object" && label != null && "position" in label) {
-      return /* @__PURE__ */ React546.createElement(LabelListFromLabelProp, {
+      return /* @__PURE__ */ React553.createElement(LabelListFromLabelProp, {
         label
       });
     }
-    return /* @__PURE__ */ React546.createElement(PieLabels, {
+    return /* @__PURE__ */ React553.createElement(PieLabels, {
       sectors,
       props,
       showLabels
@@ -122187,7 +122748,7 @@ html body {
     if (sectors == null || sectors.length === 0) {
       return null;
     }
-    return /* @__PURE__ */ React546.createElement(React546.Fragment, null, sectors.map((entry, i) => {
+    return /* @__PURE__ */ React553.createElement(React553.Fragment, null, sectors.map((entry, i) => {
       if ((entry === null || entry === void 0 ? void 0 : entry.startAngle) === 0 && (entry === null || entry === void 0 ? void 0 : entry.endAngle) === 0 && sectors.length !== 1)
         return null;
       var graphicalItemMatches = activeGraphicalItemId == null || activeGraphicalItemId === id;
@@ -122200,7 +122761,7 @@ html body {
         [DATA_ITEM_INDEX_ATTRIBUTE_NAME]: i,
         [DATA_ITEM_GRAPHICAL_ITEM_ID_ATTRIBUTE_NAME]: id
       });
-      return /* @__PURE__ */ React546.createElement(Layer, _extends157({
+      return /* @__PURE__ */ React553.createElement(Layer, _extends164({
         key: "sector-".concat(entry === null || entry === void 0 ? void 0 : entry.startAngle, "-").concat(entry === null || entry === void 0 ? void 0 : entry.endAngle, "-").concat(entry.midAngle, "-").concat(i),
         tabIndex: -1,
         className: "recharts-pie-sector"
@@ -122208,7 +122769,7 @@ html body {
         onMouseEnter: onMouseEnterFromContext(entry, i),
         onMouseLeave: onMouseLeaveFromContext(entry, i),
         onClick: onClickFromContext(entry, i)
-      }), /* @__PURE__ */ React546.createElement(Shape, _extends157({
+      }), /* @__PURE__ */ React553.createElement(Shape, _extends164({
         option: shape !== null && shape !== void 0 ? shape : sectorOptions,
         index: i,
         shapeType: "sector",
@@ -122327,7 +122888,7 @@ html body {
         fill: entry.fill
       }));
     }, [sectors, showLabels]);
-    return /* @__PURE__ */ React546.createElement(PolarLabelListContextProvider, {
+    return /* @__PURE__ */ React553.createElement(PolarLabelListContextProvider, {
       value: showLabels ? labelListEntries : void 0
     }, children);
   }
@@ -122363,10 +122924,10 @@ html body {
       }
       setIsAnimating(true);
     }, [onAnimationStart]);
-    return /* @__PURE__ */ React546.createElement(PieLabelListProvider, {
+    return /* @__PURE__ */ React553.createElement(PieLabelListProvider, {
       showLabels: !isAnimating,
       sectors
-    }, /* @__PURE__ */ React546.createElement(JavascriptAnimate, {
+    }, /* @__PURE__ */ React553.createElement(JavascriptAnimate, {
       animationId,
       begin: animationBegin,
       duration: animationDuration,
@@ -122406,7 +122967,7 @@ html body {
         }
       });
       previousSectorsRef.current = stepData;
-      return /* @__PURE__ */ React546.createElement(Layer, null, /* @__PURE__ */ React546.createElement(PieSectors, {
+      return /* @__PURE__ */ React553.createElement(Layer, null, /* @__PURE__ */ React553.createElement(PieSectors, {
         sectors: stepData,
         activeShape,
         inactiveShape,
@@ -122414,7 +122975,7 @@ html body {
         shape: props.shape,
         id
       }));
-    }), /* @__PURE__ */ React546.createElement(PieLabelList, {
+    }), /* @__PURE__ */ React553.createElement(PieLabelList, {
       showLabels: !isAnimating,
       sectors,
       props
@@ -122459,14 +123020,14 @@ html body {
     var layerClass = clsx("recharts-pie", className);
     if (hide || sectors == null) {
       previousSectorsRef.current = null;
-      return /* @__PURE__ */ React546.createElement(Layer, {
+      return /* @__PURE__ */ React553.createElement(Layer, {
         tabIndex: rootTabIndex,
         className: layerClass
       });
     }
-    return /* @__PURE__ */ React546.createElement(ZIndexLayer, {
+    return /* @__PURE__ */ React553.createElement(ZIndexLayer, {
       zIndex: props.zIndex
-    }, /* @__PURE__ */ React546.createElement(SetPieTooltipEntrySettings, {
+    }, /* @__PURE__ */ React553.createElement(SetPieTooltipEntrySettings, {
       dataKey: props.dataKey,
       nameKey: props.nameKey,
       sectors,
@@ -122478,10 +123039,10 @@ html body {
       tooltipType: props.tooltipType,
       id,
       activeShape: props.activeShape
-    }), /* @__PURE__ */ React546.createElement(Layer, {
+    }), /* @__PURE__ */ React553.createElement(Layer, {
       tabIndex: rootTabIndex,
       className: layerClass
-    }, /* @__PURE__ */ React546.createElement(SectorsWithAnimation, {
+    }, /* @__PURE__ */ React553.createElement(SectorsWithAnimation, {
       props: _objectSpread49(_objectSpread49({}, propsWithoutId), {}, {
         sectors
       }),
@@ -122495,10 +123056,10 @@ html body {
       id: externalId
     } = props, propsWithoutId = _objectWithoutProperties15(props, _excluded42);
     var presentationProps = svgPropertiesNoEvents(propsWithoutId);
-    return /* @__PURE__ */ React546.createElement(RegisterGraphicalItemId, {
+    return /* @__PURE__ */ React553.createElement(RegisterGraphicalItemId, {
       id: externalId,
       type: "pie"
-    }, (id) => /* @__PURE__ */ React546.createElement(React546.Fragment, null, /* @__PURE__ */ React546.createElement(SetPolarGraphicalItem, {
+    }, (id) => /* @__PURE__ */ React553.createElement(React553.Fragment, null, /* @__PURE__ */ React553.createElement(SetPolarGraphicalItem, {
       type: "pie",
       id,
       data: propsWithoutId.data,
@@ -122522,16 +123083,19 @@ html body {
       cornerRadius: propsWithoutId.cornerRadius,
       presentationProps,
       maxRadius: props.maxRadius
-    }), /* @__PURE__ */ React546.createElement(SetPiePayloadLegend, _extends157({}, propsWithoutId, {
+    }), /* @__PURE__ */ React553.createElement(SetPiePayloadLegend, _extends164({}, propsWithoutId, {
       id
-    })), /* @__PURE__ */ React546.createElement(PieImpl, _extends157({}, propsWithoutId, {
+    })), /* @__PURE__ */ React553.createElement(PieImpl, _extends164({}, propsWithoutId, {
       id
     }))));
   }
   var Pie = PieFn;
   Pie.displayName = "Pie";
 
-  // ../temple_donation/node_modules/recharts/es6/state/cartesianAxisSlice.js
+  // ../temple_donation/node_modules/recharts/es6/component/Dots.js
+  var React554 = __toESM(require_react());
+  var import_react196 = __toESM(require_react());
+  var _excluded17 = ["points"];
   function ownKeys50(e4, r3) {
     var t2 = Object.keys(e4);
     if (Object.getOwnPropertySymbols) {
@@ -122572,6 +123136,162 @@ html body {
     }
     return ("string" === r3 ? String : Number)(t2);
   }
+  function _extends165() {
+    return _extends165 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends165.apply(null, arguments);
+  }
+  function _objectWithoutProperties16(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose16(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose16(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function DotItem(_ref2) {
+    var {
+      option,
+      dotProps,
+      className
+    } = _ref2;
+    if (/* @__PURE__ */ (0, import_react196.isValidElement)(option)) {
+      return /* @__PURE__ */ (0, import_react196.cloneElement)(option, dotProps);
+    }
+    if (typeof option === "function") {
+      return option(dotProps);
+    }
+    var finalClassName = clsx(className, typeof option !== "boolean" ? option.className : "");
+    var _ref22 = dotProps !== null && dotProps !== void 0 ? dotProps : {}, {
+      points
+    } = _ref22, props = _objectWithoutProperties16(_ref22, _excluded17);
+    return /* @__PURE__ */ React554.createElement(Dot, _extends165({}, props, {
+      className: finalClassName
+    }));
+  }
+  function shouldRenderDots(points, dot) {
+    if (points == null) {
+      return false;
+    }
+    if (dot) {
+      return true;
+    }
+    return points.length === 1;
+  }
+  function Dots(_ref3) {
+    var {
+      points,
+      dot,
+      className,
+      dotClassName,
+      dataKey,
+      baseProps,
+      needClip,
+      clipPathId,
+      zIndex = DefaultZIndexes.scatter
+    } = _ref3;
+    if (!shouldRenderDots(points, dot)) {
+      return null;
+    }
+    var clipDot = isClipDot(dot);
+    var customDotProps = svgPropertiesAndEventsFromUnknown(dot);
+    var dots = points.map((entry, i) => {
+      var _entry$x, _entry$y;
+      var dotProps = _objectSpread50(_objectSpread50(_objectSpread50({
+        r: 3
+      }, baseProps), customDotProps), {}, {
+        index: i,
+        cx: (_entry$x = entry.x) !== null && _entry$x !== void 0 ? _entry$x : void 0,
+        cy: (_entry$y = entry.y) !== null && _entry$y !== void 0 ? _entry$y : void 0,
+        dataKey,
+        value: entry.value,
+        payload: entry.payload,
+        points
+      });
+      return /* @__PURE__ */ React554.createElement(DotItem, {
+        key: "dot-".concat(i),
+        option: dot,
+        dotProps,
+        className: dotClassName
+      });
+    });
+    var layerProps = {};
+    if (needClip && clipPathId != null) {
+      layerProps.clipPath = "url(#clipPath-".concat(clipDot ? "" : "dots-").concat(clipPathId, ")");
+    }
+    return /* @__PURE__ */ React554.createElement(ZIndexLayer, {
+      zIndex
+    }, /* @__PURE__ */ React554.createElement(Layer, _extends165({
+      className
+    }, layerProps), dots));
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/component/ActivePoints.js
+  var React555 = __toESM(require_react());
+  var import_react197 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/recharts/es6/state/cartesianAxisSlice.js
+  function ownKeys51(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread51(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys51(Object(t2), true).forEach(function(r4) {
+        _defineProperty63(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys51(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty63(e4, r3, t2) {
+    return (r3 = _toPropertyKey62(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey62(t2) {
+    var i = _toPrimitive62(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive62(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  var defaultAxisId = 0;
   var initialState8 = {
     xAxis: {},
     yAxis: {},
@@ -122675,7 +123395,7 @@ html body {
             return;
           }
           var newHistory = [...history, width].slice(-3);
-          state.yAxis[id] = _objectSpread50(_objectSpread50({}, axis), {}, {
+          state.yAxis[id] = _objectSpread51(_objectSpread51({}, axis), {}, {
             width,
             widthHistory: newHistory
           });
@@ -122724,16 +123444,128 @@ html body {
   var usePlotArea = () => {
     return useAppSelector(selectPlotArea);
   };
+  var useActiveTooltipDataPoints = () => {
+    return useAppSelector(selectActiveTooltipDataPoints);
+  };
+
+  // ../temple_donation/node_modules/recharts/es6/component/ActivePoints.js
+  function ownKeys52(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread52(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys52(Object(t2), true).forEach(function(r4) {
+        _defineProperty64(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys52(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty64(e4, r3, t2) {
+    return (r3 = _toPropertyKey63(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey63(t2) {
+    var i = _toPrimitive63(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive63(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  var ActivePoint = (_ref2) => {
+    var {
+      point: point4,
+      childIndex,
+      mainColor,
+      activeDot,
+      dataKey,
+      clipPath
+    } = _ref2;
+    if (activeDot === false || point4.x == null || point4.y == null) {
+      return null;
+    }
+    var dotPropsTyped = {
+      index: childIndex,
+      dataKey,
+      cx: point4.x,
+      cy: point4.y,
+      r: 4,
+      fill: mainColor !== null && mainColor !== void 0 ? mainColor : "none",
+      strokeWidth: 2,
+      stroke: "#fff",
+      payload: point4.payload,
+      value: point4.value
+    };
+    var dotProps = _objectSpread52(_objectSpread52(_objectSpread52({}, dotPropsTyped), svgPropertiesNoEventsFromUnknown(activeDot)), adaptEventHandlers(activeDot));
+    var dot;
+    if (/* @__PURE__ */ (0, import_react197.isValidElement)(activeDot)) {
+      dot = /* @__PURE__ */ (0, import_react197.cloneElement)(activeDot, dotProps);
+    } else if (typeof activeDot === "function") {
+      dot = activeDot(dotProps);
+    } else {
+      dot = /* @__PURE__ */ React555.createElement(Dot, dotProps);
+    }
+    return /* @__PURE__ */ React555.createElement(Layer, {
+      className: "recharts-active-dot",
+      clipPath
+    }, dot);
+  };
+  function ActivePoints(_ref2) {
+    var {
+      points,
+      mainColor,
+      activeDot,
+      itemDataKey,
+      clipPath,
+      zIndex = DefaultZIndexes.activeDot
+    } = _ref2;
+    var activeTooltipIndex = useAppSelector(selectActiveTooltipIndex);
+    var activeDataPoints = useActiveTooltipDataPoints();
+    if (points == null || activeDataPoints == null) {
+      return null;
+    }
+    var activePoint = points.find((p) => activeDataPoints.includes(p.payload));
+    if (isNullish(activePoint)) {
+      return null;
+    }
+    return /* @__PURE__ */ React555.createElement(ZIndexLayer, {
+      zIndex
+    }, /* @__PURE__ */ React555.createElement(ActivePoint, {
+      point: activePoint,
+      childIndex: Number(activeTooltipIndex),
+      mainColor,
+      dataKey: itemDataKey,
+      activeDot,
+      clipPath
+    }));
+  }
 
   // ../temple_donation/node_modules/recharts/es6/context/chartDataContext.js
-  var import_react196 = __toESM(require_react());
+  var import_react198 = __toESM(require_react());
   var ChartDataContextProvider = (props) => {
     var {
       chartData
     } = props;
     var dispatch = useAppDispatch();
     var isPanorama = useIsPanorama();
-    (0, import_react196.useEffect)(() => {
+    (0, import_react198.useEffect)(() => {
       if (isPanorama) {
         return () => {
         };
@@ -122775,6 +123607,23 @@ html body {
     setBrushSettings
   } = brushSlice.actions;
   var brushReducer = brushSlice.reducer;
+
+  // ../temple_donation/node_modules/recharts/es6/util/CartesianUtils.js
+  function normalizeAngle(angle) {
+    return (angle % 180 + 180) % 180;
+  }
+  var getAngledRectangleWidth = function getAngledRectangleWidth2(_ref4) {
+    var {
+      width,
+      height
+    } = _ref4;
+    var angle = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
+    var normalizedAngle = normalizeAngle(angle);
+    var angleRadians = normalizedAngle * Math.PI / 180;
+    var angleThreshold = Math.atan(height / width);
+    var angledWidth = angleRadians > angleThreshold && angleRadians < Math.PI - angleThreshold ? height / Math.sin(angleRadians) : width / Math.cos(angleRadians);
+    return Math.abs(angledWidth);
+  };
 
   // ../temple_donation/node_modules/recharts/es6/state/referenceElementsSlice.js
   var initialState10 = {
@@ -122826,14 +123675,14 @@ html body {
   var referenceElementsReducer = referenceElementsSlice.reducer;
 
   // ../temple_donation/node_modules/recharts/es6/container/ClipPathProvider.js
-  var React547 = __toESM(require_react());
-  var import_react197 = __toESM(require_react());
-  var ClipPathIdContext = /* @__PURE__ */ (0, import_react197.createContext)(void 0);
+  var React556 = __toESM(require_react());
+  var import_react199 = __toESM(require_react());
+  var ClipPathIdContext = /* @__PURE__ */ (0, import_react199.createContext)(void 0);
   var ClipPathProvider = (_ref2) => {
     var {
       children
     } = _ref2;
-    var [clipPathId] = (0, import_react197.useState)("".concat(uniqueId("recharts"), "-clip"));
+    var [clipPathId] = (0, import_react199.useState)("".concat(uniqueId("recharts"), "-clip"));
     var plotArea = usePlotArea();
     if (plotArea == null) {
       return null;
@@ -122844,16 +123693,417 @@ html body {
       width,
       height
     } = plotArea;
-    return /* @__PURE__ */ React547.createElement(ClipPathIdContext.Provider, {
+    return /* @__PURE__ */ React556.createElement(ClipPathIdContext.Provider, {
       value: clipPathId
-    }, /* @__PURE__ */ React547.createElement("defs", null, /* @__PURE__ */ React547.createElement("clipPath", {
+    }, /* @__PURE__ */ React556.createElement("defs", null, /* @__PURE__ */ React556.createElement("clipPath", {
       id: clipPathId
-    }, /* @__PURE__ */ React547.createElement("rect", {
+    }, /* @__PURE__ */ React556.createElement("rect", {
       x: x2,
       y: y2,
       height,
       width
     }))), children);
+  };
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/CartesianAxis.js
+  var React557 = __toESM(require_react());
+  var import_react200 = __toESM(require_react());
+  var import_get11 = __toESM(require_get2());
+
+  // ../temple_donation/node_modules/recharts/es6/util/getEveryNth.js
+  function getEveryNth(array4, n2) {
+    if (n2 < 1) {
+      return [];
+    }
+    if (n2 === 1) {
+      return array4;
+    }
+    var result = [];
+    for (var i = 0; i < array4.length; i += n2) {
+      var item = array4[i];
+      if (item !== void 0) {
+        result.push(item);
+      }
+    }
+    return result;
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/util/TickUtils.js
+  function getAngledTickWidth(contentSize, unitSize, angle) {
+    var size = {
+      width: contentSize.width + unitSize.width,
+      height: contentSize.height + unitSize.height
+    };
+    return getAngledRectangleWidth(size, angle);
+  }
+  function getTickBoundaries(viewBox, sign2, sizeKey) {
+    var isWidth = sizeKey === "width";
+    var {
+      x: x2,
+      y: y2,
+      width,
+      height
+    } = viewBox;
+    if (sign2 === 1) {
+      return {
+        start: isWidth ? x2 : y2,
+        end: isWidth ? x2 + width : y2 + height
+      };
+    }
+    return {
+      start: isWidth ? x2 + width : y2 + height,
+      end: isWidth ? x2 : y2
+    };
+  }
+  function isVisible(sign2, tickPosition, getSize3, start, end) {
+    if (sign2 * tickPosition < sign2 * start || sign2 * tickPosition > sign2 * end) {
+      return false;
+    }
+    var size = getSize3();
+    return sign2 * (tickPosition - sign2 * size / 2 - start) >= 0 && sign2 * (tickPosition + sign2 * size / 2 - end) <= 0;
+  }
+  function getNumberIntervalTicks(ticks2, interval) {
+    return getEveryNth(ticks2, interval + 1);
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/getEquidistantTicks.js
+  function getEquidistantTicks(sign2, boundaries, getTickSize, ticks2, minTickGap) {
+    var result = (ticks2 || []).slice();
+    var {
+      start: initialStart,
+      end
+    } = boundaries;
+    var index2 = 0;
+    var stepsize = 1;
+    var start = initialStart;
+    var _loop = function _loop2() {
+      var entry = ticks2 === null || ticks2 === void 0 ? void 0 : ticks2[index2];
+      if (entry === void 0) {
+        return {
+          v: getEveryNth(ticks2, stepsize)
+        };
+      }
+      var i = index2;
+      var size;
+      var getSize3 = () => {
+        if (size === void 0) {
+          size = getTickSize(entry, i);
+        }
+        return size;
+      };
+      var tickCoord = entry.coordinate;
+      var isShow = index2 === 0 || isVisible(sign2, tickCoord, getSize3, start, end);
+      if (!isShow) {
+        index2 = 0;
+        start = initialStart;
+        stepsize += 1;
+      }
+      if (isShow) {
+        start = tickCoord + sign2 * (getSize3() / 2 + minTickGap);
+        index2 += stepsize;
+      }
+    }, _ret;
+    while (stepsize <= result.length) {
+      _ret = _loop();
+      if (_ret)
+        return _ret.v;
+    }
+    return [];
+  }
+  function getEquidistantPreserveEndTicks(sign2, boundaries, getTickSize, ticks2, minTickGap) {
+    var result = (ticks2 || []).slice();
+    var len = result.length;
+    if (len === 0) {
+      return [];
+    }
+    var {
+      start: initialStart,
+      end
+    } = boundaries;
+    for (var stepsize = 1; stepsize <= len; stepsize++) {
+      var offset3 = (len - 1) % stepsize;
+      var start = initialStart;
+      var ok = true;
+      var _loop2 = function _loop22() {
+        var entry = ticks2[index2];
+        if (entry == null) {
+          return 0;
+        }
+        var i = index2;
+        var size;
+        var getSize3 = () => {
+          if (size === void 0) {
+            size = getTickSize(entry, i);
+          }
+          return size;
+        };
+        var tickCoord = entry.coordinate;
+        var isShow = index2 === offset3 || isVisible(sign2, tickCoord, getSize3, start, end);
+        if (!isShow) {
+          ok = false;
+          return 1;
+        }
+        if (isShow) {
+          start = tickCoord + sign2 * (getSize3() / 2 + minTickGap);
+        }
+      }, _ret2;
+      for (var index2 = offset3; index2 < len; index2 += stepsize) {
+        _ret2 = _loop2();
+        if (_ret2 === 0)
+          continue;
+        if (_ret2 === 1)
+          break;
+      }
+      if (ok) {
+        var finalTicks = [];
+        for (var _index = offset3; _index < len; _index += stepsize) {
+          var tick = ticks2[_index];
+          if (tick != null) {
+            finalTicks.push(tick);
+          }
+        }
+        return finalTicks;
+      }
+    }
+    return [];
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/getTicks.js
+  function ownKeys53(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread53(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys53(Object(t2), true).forEach(function(r4) {
+        _defineProperty65(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys53(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty65(e4, r3, t2) {
+    return (r3 = _toPropertyKey64(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey64(t2) {
+    var i = _toPrimitive64(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive64(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  function getTicksEnd(sign2, boundaries, getTickSize, ticks2, minTickGap) {
+    var result = (ticks2 || []).slice();
+    var len = result.length;
+    var {
+      start
+    } = boundaries;
+    var {
+      end
+    } = boundaries;
+    var _loop = function _loop2(i2) {
+      var initialEntry = result[i2];
+      if (initialEntry == null) {
+        return 1;
+      }
+      var entry = initialEntry;
+      var size;
+      var getSize3 = () => {
+        if (size === void 0) {
+          size = getTickSize(initialEntry, i2);
+        }
+        return size;
+      };
+      if (i2 === len - 1) {
+        var gap = sign2 * (entry.coordinate + sign2 * getSize3() / 2 - end);
+        result[i2] = entry = _objectSpread53(_objectSpread53({}, entry), {}, {
+          tickCoord: gap > 0 ? entry.coordinate - gap * sign2 : entry.coordinate
+        });
+      } else {
+        result[i2] = entry = _objectSpread53(_objectSpread53({}, entry), {}, {
+          tickCoord: entry.coordinate
+        });
+      }
+      if (entry.tickCoord != null) {
+        var isShow = isVisible(sign2, entry.tickCoord, getSize3, start, end);
+        if (isShow) {
+          end = entry.tickCoord - sign2 * (getSize3() / 2 + minTickGap);
+          result[i2] = _objectSpread53(_objectSpread53({}, entry), {}, {
+            isShow: true
+          });
+        }
+      }
+    };
+    for (var i = len - 1; i >= 0; i--) {
+      if (_loop(i))
+        continue;
+    }
+    return result;
+  }
+  function getTicksStart(sign2, boundaries, getTickSize, ticks2, minTickGap, preserveEnd) {
+    var result = (ticks2 || []).slice();
+    var len = result.length;
+    var {
+      start,
+      end
+    } = boundaries;
+    if (preserveEnd) {
+      var tail = ticks2[len - 1];
+      if (tail != null) {
+        var tailSize = getTickSize(tail, len - 1);
+        var tailGap = sign2 * (tail.coordinate + sign2 * tailSize / 2 - end);
+        result[len - 1] = tail = _objectSpread53(_objectSpread53({}, tail), {}, {
+          tickCoord: tailGap > 0 ? tail.coordinate - tailGap * sign2 : tail.coordinate
+        });
+        if (tail.tickCoord != null) {
+          var isTailShow = isVisible(sign2, tail.tickCoord, () => tailSize, start, end);
+          if (isTailShow) {
+            end = tail.tickCoord - sign2 * (tailSize / 2 + minTickGap);
+            result[len - 1] = _objectSpread53(_objectSpread53({}, tail), {}, {
+              isShow: true
+            });
+          }
+        }
+      }
+    }
+    var count = preserveEnd ? len - 1 : len;
+    var _loop2 = function _loop22(i2) {
+      var initialEntry = result[i2];
+      if (initialEntry == null) {
+        return 1;
+      }
+      var entry = initialEntry;
+      var size;
+      var getSize3 = () => {
+        if (size === void 0) {
+          size = getTickSize(initialEntry, i2);
+        }
+        return size;
+      };
+      if (i2 === 0) {
+        var gap = sign2 * (entry.coordinate - sign2 * getSize3() / 2 - start);
+        result[i2] = entry = _objectSpread53(_objectSpread53({}, entry), {}, {
+          tickCoord: gap < 0 ? entry.coordinate - gap * sign2 : entry.coordinate
+        });
+      } else {
+        result[i2] = entry = _objectSpread53(_objectSpread53({}, entry), {}, {
+          tickCoord: entry.coordinate
+        });
+      }
+      if (entry.tickCoord != null) {
+        var isShow = isVisible(sign2, entry.tickCoord, getSize3, start, end);
+        if (isShow) {
+          start = entry.tickCoord + sign2 * (getSize3() / 2 + minTickGap);
+          result[i2] = _objectSpread53(_objectSpread53({}, entry), {}, {
+            isShow: true
+          });
+        }
+      }
+    };
+    for (var i = 0; i < count; i++) {
+      if (_loop2(i))
+        continue;
+    }
+    return result;
+  }
+  function getTicks(props, fontSize, letterSpacing) {
+    var {
+      tick,
+      ticks: ticks2,
+      viewBox,
+      minTickGap,
+      orientation,
+      interval,
+      tickFormatter,
+      unit: unit4,
+      angle
+    } = props;
+    if (!ticks2 || !ticks2.length || !tick) {
+      return [];
+    }
+    if (isNumber2(interval) || Global.isSsr) {
+      var _getNumberIntervalTic;
+      return (_getNumberIntervalTic = getNumberIntervalTicks(ticks2, isNumber2(interval) ? interval : 0)) !== null && _getNumberIntervalTic !== void 0 ? _getNumberIntervalTic : [];
+    }
+    var candidates = [];
+    var sizeKey = orientation === "top" || orientation === "bottom" ? "width" : "height";
+    var unitSize = unit4 && sizeKey === "width" ? getStringSize(unit4, {
+      fontSize,
+      letterSpacing
+    }) : {
+      width: 0,
+      height: 0
+    };
+    var getTickSize = (content, index2) => {
+      var value = typeof tickFormatter === "function" ? tickFormatter(content.value, index2) : content.value;
+      return sizeKey === "width" ? getAngledTickWidth(getStringSize(value, {
+        fontSize,
+        letterSpacing
+      }), unitSize, angle) : getStringSize(value, {
+        fontSize,
+        letterSpacing
+      })[sizeKey];
+    };
+    var tick0 = ticks2[0];
+    var tick1 = ticks2[1];
+    var sign2 = ticks2.length >= 2 && tick0 != null && tick1 != null ? mathSign(tick1.coordinate - tick0.coordinate) : 1;
+    var boundaries = getTickBoundaries(viewBox, sign2, sizeKey);
+    if (interval === "equidistantPreserveStart") {
+      return getEquidistantTicks(sign2, boundaries, getTickSize, ticks2, minTickGap);
+    }
+    if (interval === "equidistantPreserveEnd") {
+      return getEquidistantPreserveEndTicks(sign2, boundaries, getTickSize, ticks2, minTickGap);
+    }
+    if (interval === "preserveStart" || interval === "preserveStartEnd") {
+      candidates = getTicksStart(sign2, boundaries, getTickSize, ticks2, minTickGap, interval === "preserveStartEnd");
+    } else {
+      candidates = getTicksEnd(sign2, boundaries, getTickSize, ticks2, minTickGap);
+    }
+    return candidates.filter((entry) => entry.isShow);
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/util/YAxisUtils.js
+  var getCalculatedYAxisWidth = (_ref2) => {
+    var {
+      ticks: ticks2,
+      label,
+      labelGapWithTick = 5,
+      tickSize = 0,
+      tickMargin = 0
+    } = _ref2;
+    var maxTickWidth = 0;
+    if (ticks2) {
+      Array.from(ticks2).forEach((tickNode) => {
+        if (tickNode) {
+          var bbox = tickNode.getBoundingClientRect();
+          if (bbox.width > maxTickWidth) {
+            maxTickWidth = bbox.width;
+          }
+        }
+      });
+      var labelWidth = label ? label.getBoundingClientRect().width : 0;
+      var tickWidth = tickSize + tickMargin;
+      var updatedYAxisWidth = maxTickWidth + tickWidth + labelWidth + (label ? labelGapWithTick : 0);
+      return Math.round(updatedYAxisWidth);
+    }
+    return 0;
   };
 
   // ../temple_donation/node_modules/recharts/es6/state/renderedTicksSlice.js
@@ -122887,6 +124137,905 @@ html body {
     removeRenderedTicks
   } = renderedTicksSlice.actions;
   var renderedTicksReducer = renderedTicksSlice.reducer;
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/CartesianAxis.js
+  var _excluded18 = ["axisLine", "width", "height", "className", "hide", "ticks", "axisType", "axisId"];
+  function _objectWithoutProperties17(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose17(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose17(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function _extends166() {
+    return _extends166 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends166.apply(null, arguments);
+  }
+  function ownKeys54(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread54(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys54(Object(t2), true).forEach(function(r4) {
+        _defineProperty66(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys54(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty66(e4, r3, t2) {
+    return (r3 = _toPropertyKey65(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey65(t2) {
+    var i = _toPrimitive65(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive65(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  var defaultCartesianAxisProps = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    viewBox: {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0
+    },
+    orientation: "bottom",
+    ticks: [],
+    stroke: "#666",
+    tickLine: true,
+    axisLine: true,
+    tick: true,
+    mirror: false,
+    minTickGap: 5,
+    tickSize: 6,
+    tickMargin: 2,
+    interval: "preserveEnd",
+    zIndex: DefaultZIndexes.axis
+  };
+  function AxisLine(axisLineProps) {
+    var {
+      x: x2,
+      y: y2,
+      width,
+      height,
+      orientation,
+      mirror,
+      axisLine,
+      otherSvgProps
+    } = axisLineProps;
+    if (!axisLine) {
+      return null;
+    }
+    var props = _objectSpread54(_objectSpread54(_objectSpread54({}, otherSvgProps), svgPropertiesNoEvents(axisLine)), {}, {
+      fill: "none"
+    });
+    if (orientation === "top" || orientation === "bottom") {
+      var needHeight = +(orientation === "top" && !mirror || orientation === "bottom" && mirror);
+      props = _objectSpread54(_objectSpread54({}, props), {}, {
+        x1: x2,
+        y1: y2 + needHeight * height,
+        x2: x2 + width,
+        y2: y2 + needHeight * height
+      });
+    } else {
+      var needWidth = +(orientation === "left" && !mirror || orientation === "right" && mirror);
+      props = _objectSpread54(_objectSpread54({}, props), {}, {
+        x1: x2 + needWidth * width,
+        y1: y2,
+        x2: x2 + needWidth * width,
+        y2: y2 + height
+      });
+    }
+    return /* @__PURE__ */ React557.createElement("line", _extends166({}, props, {
+      className: clsx("recharts-cartesian-axis-line", (0, import_get11.default)(axisLine, "className"))
+    }));
+  }
+  function getTickLineCoord(data, x2, y2, width, height, orientation, tickSize, mirror, tickMargin) {
+    var x1, x22, y1, y22, tx, ty;
+    var sign2 = mirror ? -1 : 1;
+    var finalTickSize = data.tickSize || tickSize;
+    var tickCoord = isNumber2(data.tickCoord) ? data.tickCoord : data.coordinate;
+    switch (orientation) {
+      case "top":
+        x1 = x22 = data.coordinate;
+        y22 = y2 + +!mirror * height;
+        y1 = y22 - sign2 * finalTickSize;
+        ty = y1 - sign2 * tickMargin;
+        tx = tickCoord;
+        break;
+      case "left":
+        y1 = y22 = data.coordinate;
+        x22 = x2 + +!mirror * width;
+        x1 = x22 - sign2 * finalTickSize;
+        tx = x1 - sign2 * tickMargin;
+        ty = tickCoord;
+        break;
+      case "right":
+        y1 = y22 = data.coordinate;
+        x22 = x2 + +mirror * width;
+        x1 = x22 + sign2 * finalTickSize;
+        tx = x1 + sign2 * tickMargin;
+        ty = tickCoord;
+        break;
+      default:
+        x1 = x22 = data.coordinate;
+        y22 = y2 + +mirror * height;
+        y1 = y22 + sign2 * finalTickSize;
+        ty = y1 + sign2 * tickMargin;
+        tx = tickCoord;
+        break;
+    }
+    return {
+      line: {
+        x1,
+        y1,
+        x2: x22,
+        y2: y22
+      },
+      tick: {
+        x: tx,
+        y: ty
+      }
+    };
+  }
+  function getTickTextAnchor(orientation, mirror) {
+    switch (orientation) {
+      case "left":
+        return mirror ? "start" : "end";
+      case "right":
+        return mirror ? "end" : "start";
+      default:
+        return "middle";
+    }
+  }
+  function getTickVerticalAnchor(orientation, mirror) {
+    switch (orientation) {
+      case "left":
+      case "right":
+        return "middle";
+      case "top":
+        return mirror ? "start" : "end";
+      default:
+        return mirror ? "end" : "start";
+    }
+  }
+  function TickItem(props) {
+    var {
+      option,
+      tickProps,
+      value
+    } = props;
+    var tickItem;
+    var combinedClassName = clsx(tickProps.className, "recharts-cartesian-axis-tick-value");
+    if (/* @__PURE__ */ React557.isValidElement(option)) {
+      tickItem = /* @__PURE__ */ React557.cloneElement(option, _objectSpread54(_objectSpread54({}, tickProps), {}, {
+        className: combinedClassName
+      }));
+    } else if (typeof option === "function") {
+      tickItem = option(_objectSpread54(_objectSpread54({}, tickProps), {}, {
+        className: combinedClassName
+      }));
+    } else {
+      var className = "recharts-cartesian-axis-tick-value";
+      if (typeof option !== "boolean") {
+        className = clsx(className, getClassNameFromUnknown(option));
+      }
+      tickItem = /* @__PURE__ */ React557.createElement(Text2, _extends166({}, tickProps, {
+        className
+      }), value);
+    }
+    return tickItem;
+  }
+  function RenderedTicksReporter(_ref2) {
+    var {
+      ticks: ticks2,
+      axisType,
+      axisId
+    } = _ref2;
+    var dispatch = useAppDispatch();
+    (0, import_react200.useEffect)(() => {
+      if (axisId == null || axisType == null) {
+        return noop4;
+      }
+      var tickItems = ticks2.map((tick) => ({
+        value: tick.value,
+        coordinate: tick.coordinate,
+        offset: tick.offset,
+        index: tick.index
+      }));
+      dispatch(setRenderedTicks({
+        ticks: tickItems,
+        axisId,
+        axisType
+      }));
+      return () => {
+        dispatch(removeRenderedTicks({
+          axisId,
+          axisType
+        }));
+      };
+    }, [dispatch, ticks2, axisId, axisType]);
+    return null;
+  }
+  var Ticks = /* @__PURE__ */ (0, import_react200.forwardRef)((props, ref) => {
+    var {
+      ticks: ticks2 = [],
+      tick,
+      tickLine,
+      stroke,
+      tickFormatter,
+      unit: unit4,
+      padding,
+      tickTextProps,
+      orientation,
+      mirror,
+      x: x2,
+      y: y2,
+      width,
+      height,
+      tickSize,
+      tickMargin,
+      fontSize,
+      letterSpacing,
+      getTicksConfig,
+      events,
+      axisType,
+      axisId
+    } = props;
+    var finalTicks = getTicks(_objectSpread54(_objectSpread54({}, getTicksConfig), {}, {
+      ticks: ticks2
+    }), fontSize, letterSpacing);
+    var axisProps = svgPropertiesNoEvents(getTicksConfig);
+    var customTickProps = svgPropertiesNoEventsFromUnknown(tick);
+    var textAnchor = isValidTextAnchor(axisProps.textAnchor) ? axisProps.textAnchor : getTickTextAnchor(orientation, mirror);
+    var verticalAnchor = getTickVerticalAnchor(orientation, mirror);
+    var tickLinePropsObject = {};
+    if (typeof tickLine === "object") {
+      tickLinePropsObject = tickLine;
+    }
+    var tickLineProps = _objectSpread54(_objectSpread54({}, axisProps), {}, {
+      fill: "none"
+    }, tickLinePropsObject);
+    var tickLineCoords = finalTicks.map((entry) => _objectSpread54({
+      entry
+    }, getTickLineCoord(entry, x2, y2, width, height, orientation, tickSize, mirror, tickMargin)));
+    var tickLines = tickLineCoords.map((_ref2) => {
+      var {
+        entry,
+        line: lineCoord
+      } = _ref2;
+      return /* @__PURE__ */ React557.createElement(Layer, {
+        className: "recharts-cartesian-axis-tick",
+        key: "tick-".concat(entry.value, "-").concat(entry.coordinate, "-").concat(entry.tickCoord)
+      }, tickLine && /* @__PURE__ */ React557.createElement("line", _extends166({}, tickLineProps, lineCoord, {
+        className: clsx("recharts-cartesian-axis-tick-line", (0, import_get11.default)(tickLine, "className"))
+      })));
+    });
+    var tickLabels = tickLineCoords.map((_ref3, i) => {
+      var _ref4, _tickTextProps$angle;
+      var {
+        entry,
+        tick: tickCoord
+      } = _ref3;
+      var tickProps = _objectSpread54(_objectSpread54(_objectSpread54(_objectSpread54({
+        verticalAnchor
+      }, axisProps), {}, {
+        textAnchor,
+        stroke: "none",
+        fill: stroke
+      }, tickCoord), {}, {
+        index: i,
+        payload: entry,
+        visibleTicksCount: finalTicks.length,
+        tickFormatter,
+        padding
+      }, tickTextProps), {}, {
+        angle: (_ref4 = (_tickTextProps$angle = tickTextProps === null || tickTextProps === void 0 ? void 0 : tickTextProps.angle) !== null && _tickTextProps$angle !== void 0 ? _tickTextProps$angle : axisProps.angle) !== null && _ref4 !== void 0 ? _ref4 : 0
+      });
+      var finalTickProps = _objectSpread54(_objectSpread54({}, tickProps), customTickProps);
+      return /* @__PURE__ */ React557.createElement(Layer, _extends166({
+        className: "recharts-cartesian-axis-tick-label",
+        key: "tick-label-".concat(entry.value, "-").concat(entry.coordinate, "-").concat(entry.tickCoord)
+      }, adaptEventsOfChild(events, entry, i)), tick && /* @__PURE__ */ React557.createElement(TickItem, {
+        option: tick,
+        tickProps: finalTickProps,
+        value: "".concat(typeof tickFormatter === "function" ? tickFormatter(entry.value, i) : entry.value).concat(unit4 || "")
+      }));
+    });
+    return /* @__PURE__ */ React557.createElement("g", {
+      className: "recharts-cartesian-axis-ticks recharts-".concat(axisType, "-ticks")
+    }, /* @__PURE__ */ React557.createElement(RenderedTicksReporter, {
+      ticks: finalTicks,
+      axisId,
+      axisType
+    }), tickLabels.length > 0 && /* @__PURE__ */ React557.createElement(ZIndexLayer, {
+      zIndex: DefaultZIndexes.label
+    }, /* @__PURE__ */ React557.createElement("g", {
+      className: "recharts-cartesian-axis-tick-labels recharts-".concat(axisType, "-tick-labels"),
+      ref
+    }, tickLabels)), tickLines.length > 0 && /* @__PURE__ */ React557.createElement("g", {
+      className: "recharts-cartesian-axis-tick-lines recharts-".concat(axisType, "-tick-lines")
+    }, tickLines));
+  });
+  var CartesianAxisComponent = /* @__PURE__ */ (0, import_react200.forwardRef)((props, ref) => {
+    var {
+      axisLine,
+      width,
+      height,
+      className,
+      hide,
+      ticks: ticks2,
+      axisType,
+      axisId
+    } = props, rest = _objectWithoutProperties17(props, _excluded18);
+    var [fontSize, setFontSize] = (0, import_react200.useState)("");
+    var [letterSpacing, setLetterSpacing] = (0, import_react200.useState)("");
+    var tickRefs = (0, import_react200.useRef)(null);
+    (0, import_react200.useImperativeHandle)(ref, () => ({
+      getCalculatedWidth: () => {
+        var _props$labelRef;
+        return getCalculatedYAxisWidth({
+          ticks: tickRefs.current,
+          label: (_props$labelRef = props.labelRef) === null || _props$labelRef === void 0 ? void 0 : _props$labelRef.current,
+          labelGapWithTick: 5,
+          tickSize: props.tickSize,
+          tickMargin: props.tickMargin
+        });
+      }
+    }));
+    var layerRef = (0, import_react200.useCallback)((el) => {
+      if (el) {
+        var tickNodes = el.getElementsByClassName("recharts-cartesian-axis-tick-value");
+        tickRefs.current = tickNodes;
+        var tick = tickNodes[0];
+        if (tick) {
+          var computedStyle = window.getComputedStyle(tick);
+          var calculatedFontSize = computedStyle.fontSize;
+          var calculatedLetterSpacing = computedStyle.letterSpacing;
+          if (calculatedFontSize !== fontSize || calculatedLetterSpacing !== letterSpacing) {
+            setFontSize(calculatedFontSize);
+            setLetterSpacing(calculatedLetterSpacing);
+          }
+        }
+      }
+    }, [fontSize, letterSpacing]);
+    if (hide) {
+      return null;
+    }
+    if (width != null && width <= 0 || height != null && height <= 0) {
+      return null;
+    }
+    return /* @__PURE__ */ React557.createElement(ZIndexLayer, {
+      zIndex: props.zIndex
+    }, /* @__PURE__ */ React557.createElement(Layer, {
+      className: clsx("recharts-cartesian-axis", className)
+    }, /* @__PURE__ */ React557.createElement(AxisLine, {
+      x: props.x,
+      y: props.y,
+      width,
+      height,
+      orientation: props.orientation,
+      mirror: props.mirror,
+      axisLine,
+      otherSvgProps: svgPropertiesNoEvents(props)
+    }), /* @__PURE__ */ React557.createElement(Ticks, {
+      ref: layerRef,
+      axisType,
+      events: rest,
+      fontSize,
+      getTicksConfig: props,
+      height: props.height,
+      letterSpacing,
+      mirror: props.mirror,
+      orientation: props.orientation,
+      padding: props.padding,
+      stroke: props.stroke,
+      tick: props.tick,
+      tickFormatter: props.tickFormatter,
+      tickLine: props.tickLine,
+      tickMargin: props.tickMargin,
+      tickSize: props.tickSize,
+      tickTextProps: props.tickTextProps,
+      ticks: ticks2,
+      unit: props.unit,
+      width: props.width,
+      x: props.x,
+      y: props.y,
+      axisId
+    }), /* @__PURE__ */ React557.createElement(CartesianLabelContextProvider, {
+      x: props.x,
+      y: props.y,
+      width: props.width,
+      height: props.height,
+      lowerWidth: props.width,
+      upperWidth: props.width
+    }, /* @__PURE__ */ React557.createElement(CartesianLabelFromLabelProp, {
+      label: props.label,
+      labelRef: props.labelRef
+    }), props.children)));
+  });
+  var CartesianAxis = /* @__PURE__ */ React557.forwardRef((outsideProps, ref) => {
+    var props = resolveDefaultProps(outsideProps, defaultCartesianAxisProps);
+    return /* @__PURE__ */ React557.createElement(CartesianAxisComponent, _extends166({}, props, {
+      ref
+    }));
+  });
+  CartesianAxis.displayName = "CartesianAxis";
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/CartesianGrid.js
+  var React558 = __toESM(require_react());
+  var _excluded19 = ["x1", "y1", "x2", "y2", "key"];
+  var _excluded28 = ["offset"];
+  var _excluded33 = ["xAxisId", "yAxisId"];
+  var _excluded43 = ["xAxisId", "yAxisId"];
+  function ownKeys55(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread55(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys55(Object(t2), true).forEach(function(r4) {
+        _defineProperty67(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys55(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty67(e4, r3, t2) {
+    return (r3 = _toPropertyKey66(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey66(t2) {
+    var i = _toPrimitive66(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive66(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  function _extends167() {
+    return _extends167 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends167.apply(null, arguments);
+  }
+  function _objectWithoutProperties18(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose18(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose18(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  var Background = (props) => {
+    var {
+      fill
+    } = props;
+    if (!fill || fill === "none") {
+      return null;
+    }
+    var {
+      fillOpacity,
+      x: x2,
+      y: y2,
+      width,
+      height,
+      ry
+    } = props;
+    return /* @__PURE__ */ React558.createElement("rect", {
+      x: x2,
+      y: y2,
+      ry,
+      width,
+      height,
+      stroke: "none",
+      fill,
+      fillOpacity,
+      className: "recharts-cartesian-grid-bg"
+    });
+  };
+  function LineItem(_ref2) {
+    var {
+      option,
+      lineItemProps
+    } = _ref2;
+    var lineItem;
+    if (/* @__PURE__ */ React558.isValidElement(option)) {
+      lineItem = /* @__PURE__ */ React558.cloneElement(option, lineItemProps);
+    } else if (typeof option === "function") {
+      lineItem = option(lineItemProps);
+    } else {
+      var _svgPropertiesNoEvent;
+      var {
+        x1,
+        y1,
+        x2,
+        y2,
+        key
+      } = lineItemProps, others = _objectWithoutProperties18(lineItemProps, _excluded19);
+      var _ref22 = (_svgPropertiesNoEvent = svgPropertiesNoEvents(others)) !== null && _svgPropertiesNoEvent !== void 0 ? _svgPropertiesNoEvent : {}, {
+        offset: __
+      } = _ref22, restOfFilteredProps = _objectWithoutProperties18(_ref22, _excluded28);
+      lineItem = /* @__PURE__ */ React558.createElement("line", _extends167({}, restOfFilteredProps, {
+        x1,
+        y1,
+        x2,
+        y2,
+        fill: "none",
+        key
+      }));
+    }
+    return lineItem;
+  }
+  function HorizontalGridLines(props) {
+    var {
+      x: x2,
+      width,
+      horizontal = true,
+      horizontalPoints
+    } = props;
+    if (!horizontal || !horizontalPoints || !horizontalPoints.length) {
+      return null;
+    }
+    var {
+      xAxisId,
+      yAxisId
+    } = props, otherLineItemProps = _objectWithoutProperties18(props, _excluded33);
+    var items = horizontalPoints.map((entry, i) => {
+      var lineItemProps = _objectSpread55(_objectSpread55({}, otherLineItemProps), {}, {
+        x1: x2,
+        y1: entry,
+        x2: x2 + width,
+        y2: entry,
+        key: "line-".concat(i),
+        index: i
+      });
+      return /* @__PURE__ */ React558.createElement(LineItem, {
+        key: "line-".concat(i),
+        option: horizontal,
+        lineItemProps
+      });
+    });
+    return /* @__PURE__ */ React558.createElement("g", {
+      className: "recharts-cartesian-grid-horizontal"
+    }, items);
+  }
+  function VerticalGridLines(props) {
+    var {
+      y: y2,
+      height,
+      vertical = true,
+      verticalPoints
+    } = props;
+    if (!vertical || !verticalPoints || !verticalPoints.length) {
+      return null;
+    }
+    var {
+      xAxisId,
+      yAxisId
+    } = props, otherLineItemProps = _objectWithoutProperties18(props, _excluded43);
+    var items = verticalPoints.map((entry, i) => {
+      var lineItemProps = _objectSpread55(_objectSpread55({}, otherLineItemProps), {}, {
+        x1: entry,
+        y1: y2,
+        x2: entry,
+        y2: y2 + height,
+        key: "line-".concat(i),
+        index: i
+      });
+      return /* @__PURE__ */ React558.createElement(LineItem, {
+        option: vertical,
+        lineItemProps,
+        key: "line-".concat(i)
+      });
+    });
+    return /* @__PURE__ */ React558.createElement("g", {
+      className: "recharts-cartesian-grid-vertical"
+    }, items);
+  }
+  function HorizontalStripes(props) {
+    var {
+      horizontalFill,
+      fillOpacity,
+      x: x2,
+      y: y2,
+      width,
+      height,
+      horizontalPoints,
+      horizontal = true
+    } = props;
+    if (!horizontal || !horizontalFill || !horizontalFill.length || horizontalPoints == null) {
+      return null;
+    }
+    var roundedSortedHorizontalPoints = horizontalPoints.map((e4) => Math.round(e4 + y2 - y2)).sort((a2, b) => a2 - b);
+    if (y2 !== roundedSortedHorizontalPoints[0]) {
+      roundedSortedHorizontalPoints.unshift(0);
+    }
+    var items = roundedSortedHorizontalPoints.map((entry, i) => {
+      var nextPoint = roundedSortedHorizontalPoints[i + 1];
+      var lastStripe = nextPoint == null;
+      var lineHeight = lastStripe ? y2 + height - entry : nextPoint - entry;
+      if (lineHeight <= 0) {
+        return null;
+      }
+      var colorIndex = i % horizontalFill.length;
+      return /* @__PURE__ */ React558.createElement("rect", {
+        key: "react-".concat(i),
+        y: entry,
+        x: x2,
+        height: lineHeight,
+        width,
+        stroke: "none",
+        fill: horizontalFill[colorIndex],
+        fillOpacity,
+        className: "recharts-cartesian-grid-bg"
+      });
+    });
+    return /* @__PURE__ */ React558.createElement("g", {
+      className: "recharts-cartesian-gridstripes-horizontal"
+    }, items);
+  }
+  function VerticalStripes(props) {
+    var {
+      vertical = true,
+      verticalFill,
+      fillOpacity,
+      x: x2,
+      y: y2,
+      width,
+      height,
+      verticalPoints
+    } = props;
+    if (!vertical || !verticalFill || !verticalFill.length) {
+      return null;
+    }
+    var roundedSortedVerticalPoints = verticalPoints.map((e4) => Math.round(e4 + x2 - x2)).sort((a2, b) => a2 - b);
+    if (x2 !== roundedSortedVerticalPoints[0]) {
+      roundedSortedVerticalPoints.unshift(0);
+    }
+    var items = roundedSortedVerticalPoints.map((entry, i) => {
+      var nextPoint = roundedSortedVerticalPoints[i + 1];
+      var lastStripe = nextPoint == null;
+      var lineWidth = lastStripe ? x2 + width - entry : nextPoint - entry;
+      if (lineWidth <= 0) {
+        return null;
+      }
+      var colorIndex = i % verticalFill.length;
+      return /* @__PURE__ */ React558.createElement("rect", {
+        key: "react-".concat(i),
+        x: entry,
+        y: y2,
+        width: lineWidth,
+        height,
+        stroke: "none",
+        fill: verticalFill[colorIndex],
+        fillOpacity,
+        className: "recharts-cartesian-grid-bg"
+      });
+    });
+    return /* @__PURE__ */ React558.createElement("g", {
+      className: "recharts-cartesian-gridstripes-vertical"
+    }, items);
+  }
+  var defaultVerticalCoordinatesGenerator = (_ref3, syncWithTicks) => {
+    var {
+      xAxis,
+      width,
+      height,
+      offset: offset3
+    } = _ref3;
+    return getCoordinatesOfGrid(getTicks(_objectSpread55(_objectSpread55(_objectSpread55({}, defaultCartesianAxisProps), xAxis), {}, {
+      ticks: getTicksOfAxis(xAxis, true),
+      viewBox: {
+        x: 0,
+        y: 0,
+        width,
+        height
+      }
+    })), offset3.left, offset3.left + offset3.width, syncWithTicks);
+  };
+  var defaultHorizontalCoordinatesGenerator = (_ref4, syncWithTicks) => {
+    var {
+      yAxis,
+      width,
+      height,
+      offset: offset3
+    } = _ref4;
+    return getCoordinatesOfGrid(getTicks(_objectSpread55(_objectSpread55(_objectSpread55({}, defaultCartesianAxisProps), yAxis), {}, {
+      ticks: getTicksOfAxis(yAxis, true),
+      viewBox: {
+        x: 0,
+        y: 0,
+        width,
+        height
+      }
+    })), offset3.top, offset3.top + offset3.height, syncWithTicks);
+  };
+  var defaultCartesianGridProps = {
+    horizontal: true,
+    vertical: true,
+    horizontalPoints: [],
+    verticalPoints: [],
+    stroke: "#ccc",
+    fill: "none",
+    verticalFill: [],
+    horizontalFill: [],
+    xAxisId: 0,
+    yAxisId: 0,
+    syncWithTicks: false,
+    zIndex: DefaultZIndexes.grid
+  };
+  function CartesianGrid(props) {
+    var chartWidth = useChartWidth();
+    var chartHeight = useChartHeight();
+    var offset3 = useOffsetInternal();
+    var propsIncludingDefaults = _objectSpread55(_objectSpread55({}, resolveDefaultProps(props, defaultCartesianGridProps)), {}, {
+      x: isNumber2(props.x) ? props.x : offset3.left,
+      y: isNumber2(props.y) ? props.y : offset3.top,
+      width: isNumber2(props.width) ? props.width : offset3.width,
+      height: isNumber2(props.height) ? props.height : offset3.height
+    });
+    var {
+      xAxisId,
+      yAxisId,
+      x: x2,
+      y: y2,
+      width,
+      height,
+      syncWithTicks,
+      horizontalValues,
+      verticalValues
+    } = propsIncludingDefaults;
+    var isPanorama = useIsPanorama();
+    var xAxis = useAppSelector((state) => selectAxisPropsNeededForCartesianGridTicksGenerator(state, "xAxis", xAxisId, isPanorama));
+    var yAxis = useAppSelector((state) => selectAxisPropsNeededForCartesianGridTicksGenerator(state, "yAxis", yAxisId, isPanorama));
+    if (!isPositiveNumber(width) || !isPositiveNumber(height) || !isNumber2(x2) || !isNumber2(y2)) {
+      return null;
+    }
+    var verticalCoordinatesGenerator = propsIncludingDefaults.verticalCoordinatesGenerator || defaultVerticalCoordinatesGenerator;
+    var horizontalCoordinatesGenerator = propsIncludingDefaults.horizontalCoordinatesGenerator || defaultHorizontalCoordinatesGenerator;
+    var {
+      horizontalPoints,
+      verticalPoints
+    } = propsIncludingDefaults;
+    if ((!horizontalPoints || !horizontalPoints.length) && typeof horizontalCoordinatesGenerator === "function") {
+      var isHorizontalValues = horizontalValues && horizontalValues.length;
+      var generatorResult = horizontalCoordinatesGenerator({
+        yAxis: yAxis ? _objectSpread55(_objectSpread55({}, yAxis), {}, {
+          ticks: isHorizontalValues ? horizontalValues : yAxis.ticks
+        }) : void 0,
+        width: chartWidth !== null && chartWidth !== void 0 ? chartWidth : width,
+        height: chartHeight !== null && chartHeight !== void 0 ? chartHeight : height,
+        offset: offset3
+      }, isHorizontalValues ? true : syncWithTicks);
+      warn(Array.isArray(generatorResult), "horizontalCoordinatesGenerator should return Array but instead it returned [".concat(typeof generatorResult, "]"));
+      if (Array.isArray(generatorResult)) {
+        horizontalPoints = generatorResult;
+      }
+    }
+    if ((!verticalPoints || !verticalPoints.length) && typeof verticalCoordinatesGenerator === "function") {
+      var isVerticalValues = verticalValues && verticalValues.length;
+      var _generatorResult = verticalCoordinatesGenerator({
+        xAxis: xAxis ? _objectSpread55(_objectSpread55({}, xAxis), {}, {
+          ticks: isVerticalValues ? verticalValues : xAxis.ticks
+        }) : void 0,
+        width: chartWidth !== null && chartWidth !== void 0 ? chartWidth : width,
+        height: chartHeight !== null && chartHeight !== void 0 ? chartHeight : height,
+        offset: offset3
+      }, isVerticalValues ? true : syncWithTicks);
+      warn(Array.isArray(_generatorResult), "verticalCoordinatesGenerator should return Array but instead it returned [".concat(typeof _generatorResult, "]"));
+      if (Array.isArray(_generatorResult)) {
+        verticalPoints = _generatorResult;
+      }
+    }
+    return /* @__PURE__ */ React558.createElement(ZIndexLayer, {
+      zIndex: propsIncludingDefaults.zIndex
+    }, /* @__PURE__ */ React558.createElement("g", {
+      className: "recharts-cartesian-grid"
+    }, /* @__PURE__ */ React558.createElement(Background, {
+      fill: propsIncludingDefaults.fill,
+      fillOpacity: propsIncludingDefaults.fillOpacity,
+      x: propsIncludingDefaults.x,
+      y: propsIncludingDefaults.y,
+      width: propsIncludingDefaults.width,
+      height: propsIncludingDefaults.height,
+      ry: propsIncludingDefaults.ry
+    }), /* @__PURE__ */ React558.createElement(HorizontalStripes, _extends167({}, propsIncludingDefaults, {
+      horizontalPoints
+    })), /* @__PURE__ */ React558.createElement(VerticalStripes, _extends167({}, propsIncludingDefaults, {
+      verticalPoints
+    })), /* @__PURE__ */ React558.createElement(HorizontalGridLines, _extends167({}, propsIncludingDefaults, {
+      offset: offset3,
+      horizontalPoints,
+      xAxis,
+      yAxis
+    })), /* @__PURE__ */ React558.createElement(VerticalGridLines, _extends167({}, propsIncludingDefaults, {
+      offset: offset3,
+      verticalPoints,
+      xAxis,
+      yAxis
+    }))));
+  }
+  CartesianGrid.displayName = "CartesianGrid";
 
   // ../temple_donation/node_modules/recharts/es6/state/errorBarSlice.js
   var initialState12 = {};
@@ -122932,9 +125081,1474 @@ html body {
   } = errorBarSlice.actions;
   var errorBarReducer = errorBarSlice.reducer;
 
+  // ../temple_donation/node_modules/recharts/es6/cartesian/GraphicalItemClipPath.js
+  var React559 = __toESM(require_react());
+  function useNeedsClip(xAxisId, yAxisId) {
+    var _xAxis$allowDataOverf, _yAxis$allowDataOverf;
+    var xAxis = useAppSelector((state) => selectXAxisSettings(state, xAxisId));
+    var yAxis = useAppSelector((state) => selectYAxisSettings(state, yAxisId));
+    var needClipX = (_xAxis$allowDataOverf = xAxis === null || xAxis === void 0 ? void 0 : xAxis.allowDataOverflow) !== null && _xAxis$allowDataOverf !== void 0 ? _xAxis$allowDataOverf : implicitXAxis.allowDataOverflow;
+    var needClipY = (_yAxis$allowDataOverf = yAxis === null || yAxis === void 0 ? void 0 : yAxis.allowDataOverflow) !== null && _yAxis$allowDataOverf !== void 0 ? _yAxis$allowDataOverf : implicitYAxis.allowDataOverflow;
+    var needClip = needClipX || needClipY;
+    return {
+      needClip,
+      needClipX,
+      needClipY
+    };
+  }
+  function GraphicalItemClipPath(_ref2) {
+    var {
+      xAxisId,
+      yAxisId,
+      clipPathId
+    } = _ref2;
+    var plotArea = usePlotArea();
+    var {
+      needClipX,
+      needClipY,
+      needClip
+    } = useNeedsClip(xAxisId, yAxisId);
+    if (!needClip || !plotArea) {
+      return null;
+    }
+    var {
+      x: x2,
+      y: y2,
+      width,
+      height
+    } = plotArea;
+    return /* @__PURE__ */ React559.createElement("clipPath", {
+      id: "clipPath-".concat(clipPathId)
+    }, /* @__PURE__ */ React559.createElement("rect", {
+      x: needClipX ? x2 : x2 - width / 2,
+      y: needClipY ? y2 : y2 - height / 2,
+      width: needClipX ? width : width * 2,
+      height: needClipY ? height : height * 2
+    }));
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/util/getRadiusAndStrokeWidthFromDot.js
+  function getRadiusAndStrokeWidthFromDot(dot) {
+    var props = svgPropertiesNoEventsFromUnknown(dot);
+    var defaultR = 3;
+    var defaultStrokeWidth = 2;
+    if (props != null) {
+      var {
+        r: r3,
+        strokeWidth
+      } = props;
+      var realR = Number(r3);
+      var realStrokeWidth = Number(strokeWidth);
+      if (Number.isNaN(realR) || realR < 0) {
+        realR = defaultR;
+      }
+      if (Number.isNaN(realStrokeWidth) || realStrokeWidth < 0) {
+        realStrokeWidth = defaultStrokeWidth;
+      }
+      return {
+        r: realR,
+        strokeWidth: realStrokeWidth
+      };
+    }
+    return {
+      r: defaultR,
+      strokeWidth: defaultStrokeWidth
+    };
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/Area.js
+  var React560 = __toESM(require_react());
+  var import_react201 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/recharts/es6/state/selectors/graphicalItemSelectors.js
+  function selectXAxisIdFromGraphicalItemId(state, id) {
+    var _state$graphicalItems, _state$graphicalItems2;
+    return (_state$graphicalItems = (_state$graphicalItems2 = state.graphicalItems.cartesianItems.find((item) => item.id === id)) === null || _state$graphicalItems2 === void 0 ? void 0 : _state$graphicalItems2.xAxisId) !== null && _state$graphicalItems !== void 0 ? _state$graphicalItems : defaultAxisId;
+  }
+  function selectYAxisIdFromGraphicalItemId(state, id) {
+    var _state$graphicalItems3, _state$graphicalItems4;
+    return (_state$graphicalItems3 = (_state$graphicalItems4 = state.graphicalItems.cartesianItems.find((item) => item.id === id)) === null || _state$graphicalItems4 === void 0 ? void 0 : _state$graphicalItems4.yAxisId) !== null && _state$graphicalItems3 !== void 0 ? _state$graphicalItems3 : defaultAxisId;
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/state/selectors/areaSelectors.js
+  var selectXAxisWithScale = (state, graphicalItemId, isPanorama) => selectAxisWithScale(state, "xAxis", selectXAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
+  var selectXAxisTicks = (state, graphicalItemId, isPanorama) => selectTicksOfGraphicalItem(state, "xAxis", selectXAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
+  var selectYAxisWithScale = (state, graphicalItemId, isPanorama) => selectAxisWithScale(state, "yAxis", selectYAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
+  var selectYAxisTicks = (state, graphicalItemId, isPanorama) => selectTicksOfGraphicalItem(state, "yAxis", selectYAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
+  var selectBandSize = createSelector([selectChartLayout, selectXAxisWithScale, selectYAxisWithScale, selectXAxisTicks, selectYAxisTicks], (layout, xAxis, yAxis, xAxisTicks, yAxisTicks) => {
+    if (isCategoricalAxis(layout, "xAxis")) {
+      return getBandSizeOfAxis(xAxis, xAxisTicks, false);
+    }
+    return getBandSizeOfAxis(yAxis, yAxisTicks, false);
+  });
+  var pickAreaId = (_state, id) => id;
+  var selectSynchronisedAreaSettings = createSelector([selectUnfilteredCartesianItems, pickAreaId], (graphicalItems, id) => graphicalItems.filter((item) => item.type === "area").find((item) => item.id === id));
+  var selectNumericalAxisType = (state) => {
+    var layout = selectChartLayout(state);
+    var isXAxisCategorical = isCategoricalAxis(layout, "xAxis");
+    return isXAxisCategorical ? "yAxis" : "xAxis";
+  };
+  var selectNumericalAxisIdFromGraphicalItemId = (state, graphicalItemId) => {
+    var axisType = selectNumericalAxisType(state);
+    if (axisType === "yAxis") {
+      return selectYAxisIdFromGraphicalItemId(state, graphicalItemId);
+    }
+    return selectXAxisIdFromGraphicalItemId(state, graphicalItemId);
+  };
+  var selectNumericalAxisStackGroups = (state, graphicalItemId, isPanorama) => selectStackGroups(state, selectNumericalAxisType(state), selectNumericalAxisIdFromGraphicalItemId(state, graphicalItemId), isPanorama);
+  var selectGraphicalItemStackedData = createSelector([selectSynchronisedAreaSettings, selectNumericalAxisStackGroups], (areaSettings, stackGroups) => {
+    var _stackGroups$stackId;
+    if (areaSettings == null || stackGroups == null) {
+      return void 0;
+    }
+    var {
+      stackId
+    } = areaSettings;
+    var stackSeriesIdentifier = getStackSeriesIdentifier(areaSettings);
+    if (stackId == null || stackSeriesIdentifier == null) {
+      return void 0;
+    }
+    var groups = (_stackGroups$stackId = stackGroups[stackId]) === null || _stackGroups$stackId === void 0 ? void 0 : _stackGroups$stackId.stackedData;
+    var found = groups === null || groups === void 0 ? void 0 : groups.find((v) => v.key === stackSeriesIdentifier);
+    if (found == null) {
+      return void 0;
+    }
+    return found.map((item) => [item[0], item[1]]);
+  });
+  var selectArea = createSelector([selectChartLayout, selectXAxisWithScale, selectYAxisWithScale, selectXAxisTicks, selectYAxisTicks, selectGraphicalItemStackedData, selectChartDataWithIndexesIfNotInPanoramaPosition3, selectBandSize, selectSynchronisedAreaSettings, selectChartBaseValue], (layout, xAxis, yAxis, xAxisTicks, yAxisTicks, stackedData, _ref2, bandSize, areaSettings, chartBaseValue) => {
+    var {
+      chartData,
+      dataStartIndex,
+      dataEndIndex
+    } = _ref2;
+    if (areaSettings == null || layout !== "horizontal" && layout !== "vertical" || xAxis == null || yAxis == null || xAxisTicks == null || yAxisTicks == null || xAxisTicks.length === 0 || yAxisTicks.length === 0 || bandSize == null) {
+      return void 0;
+    }
+    var {
+      data
+    } = areaSettings;
+    var displayedData;
+    if (data && data.length > 0) {
+      displayedData = data;
+    } else {
+      displayedData = chartData === null || chartData === void 0 ? void 0 : chartData.slice(dataStartIndex, dataEndIndex + 1);
+    }
+    if (displayedData == null) {
+      return void 0;
+    }
+    return computeArea({
+      layout,
+      xAxis,
+      yAxis,
+      xAxisTicks,
+      yAxisTicks,
+      dataStartIndex,
+      areaSettings,
+      stackedData,
+      displayedData,
+      chartBaseValue,
+      bandSize
+    });
+  });
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/Area.js
+  var _excluded20 = ["id"];
+  var _excluded29 = ["activeDot", "animationBegin", "animationDuration", "animationEasing", "connectNulls", "dot", "fill", "fillOpacity", "hide", "isAnimationActive", "legendType", "stroke", "xAxisId", "yAxisId"];
+  function _extends168() {
+    return _extends168 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends168.apply(null, arguments);
+  }
+  function _objectWithoutProperties19(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose19(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose19(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function ownKeys56(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread56(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys56(Object(t2), true).forEach(function(r4) {
+        _defineProperty68(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys56(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty68(e4, r3, t2) {
+    return (r3 = _toPropertyKey67(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey67(t2) {
+    var i = _toPrimitive67(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive67(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  function getLegendItemColor(stroke, fill) {
+    return stroke && stroke !== "none" ? stroke : fill;
+  }
+  var computeLegendPayloadFromAreaData = (props) => {
+    var {
+      dataKey,
+      name,
+      stroke,
+      fill,
+      legendType,
+      hide
+    } = props;
+    return [{
+      inactive: hide,
+      dataKey,
+      type: legendType,
+      color: getLegendItemColor(stroke, fill),
+      value: getTooltipNameProp(name, dataKey),
+      payload: props
+    }];
+  };
+  var SetAreaTooltipEntrySettings = /* @__PURE__ */ React560.memo((_ref2) => {
+    var {
+      dataKey,
+      data,
+      stroke,
+      strokeWidth,
+      fill,
+      name,
+      hide,
+      unit: unit4,
+      tooltipType,
+      id
+    } = _ref2;
+    var tooltipEntrySettings = {
+      dataDefinedOnItem: data,
+      getPosition: noop4,
+      settings: {
+        stroke,
+        strokeWidth,
+        fill,
+        dataKey,
+        nameKey: void 0,
+        name: getTooltipNameProp(name, dataKey),
+        hide,
+        type: tooltipType,
+        color: getLegendItemColor(stroke, fill),
+        unit: unit4,
+        graphicalItemId: id
+      }
+    };
+    return /* @__PURE__ */ React560.createElement(SetTooltipEntrySettings, {
+      tooltipEntrySettings
+    });
+  });
+  function AreaDotsWrapper(_ref2) {
+    var {
+      clipPathId,
+      points,
+      props
+    } = _ref2;
+    var {
+      needClip,
+      dot,
+      dataKey
+    } = props;
+    var areaProps = svgPropertiesNoEvents(props);
+    return /* @__PURE__ */ React560.createElement(Dots, {
+      points,
+      dot,
+      className: "recharts-area-dots",
+      dotClassName: "recharts-area-dot",
+      dataKey,
+      baseProps: areaProps,
+      needClip,
+      clipPathId
+    });
+  }
+  function AreaLabelListProvider(_ref3) {
+    var {
+      showLabels,
+      children,
+      points
+    } = _ref3;
+    var labelListEntries = points.map((point4) => {
+      var _point$x, _point$y;
+      var viewBox = {
+        x: (_point$x = point4.x) !== null && _point$x !== void 0 ? _point$x : 0,
+        y: (_point$y = point4.y) !== null && _point$y !== void 0 ? _point$y : 0,
+        width: 0,
+        lowerWidth: 0,
+        upperWidth: 0,
+        height: 0
+      };
+      return _objectSpread56(_objectSpread56({}, viewBox), {}, {
+        value: point4.value,
+        payload: point4.payload,
+        parentViewBox: void 0,
+        viewBox,
+        fill: void 0
+      });
+    });
+    return /* @__PURE__ */ React560.createElement(CartesianLabelListContextProvider, {
+      value: showLabels ? labelListEntries : void 0
+    }, children);
+  }
+  function StaticArea(_ref4) {
+    var {
+      points,
+      baseLine,
+      needClip,
+      clipPathId,
+      props
+    } = _ref4;
+    var {
+      layout,
+      type: type5,
+      stroke,
+      connectNulls,
+      isRange
+    } = props;
+    var {
+      id
+    } = props, propsWithoutId = _objectWithoutProperties19(props, _excluded20);
+    var allOtherProps = svgPropertiesNoEvents(propsWithoutId);
+    var propsWithEvents = svgPropertiesAndEvents(propsWithoutId);
+    return /* @__PURE__ */ React560.createElement(React560.Fragment, null, (points === null || points === void 0 ? void 0 : points.length) > 1 && /* @__PURE__ */ React560.createElement(Layer, {
+      clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : void 0
+    }, /* @__PURE__ */ React560.createElement(Curve, _extends168({}, propsWithEvents, {
+      id,
+      points,
+      connectNulls,
+      type: type5,
+      baseLine,
+      layout,
+      stroke: "none",
+      className: "recharts-area-area"
+    })), stroke !== "none" && /* @__PURE__ */ React560.createElement(Curve, _extends168({}, allOtherProps, {
+      className: "recharts-area-curve",
+      layout,
+      type: type5,
+      connectNulls,
+      fill: "none",
+      points
+    })), stroke !== "none" && isRange && Array.isArray(baseLine) && /* @__PURE__ */ React560.createElement(Curve, _extends168({}, allOtherProps, {
+      className: "recharts-area-curve",
+      layout,
+      type: type5,
+      connectNulls,
+      fill: "none",
+      points: baseLine
+    }))), /* @__PURE__ */ React560.createElement(AreaDotsWrapper, {
+      points,
+      props: propsWithoutId,
+      clipPathId
+    }));
+  }
+  function VerticalRect(_ref5) {
+    var _points$, _points;
+    var {
+      alpha: alpha2,
+      baseLine,
+      points,
+      strokeWidth
+    } = _ref5;
+    var startY = (_points$ = points[0]) === null || _points$ === void 0 ? void 0 : _points$.y;
+    var endY = (_points = points[points.length - 1]) === null || _points === void 0 ? void 0 : _points.y;
+    if (!isWellBehavedNumber(startY) || !isWellBehavedNumber(endY)) {
+      return null;
+    }
+    var height = alpha2 * Math.abs(startY - endY);
+    var maxX = Math.max(...points.map((entry) => entry.x || 0));
+    if (isNumber2(baseLine)) {
+      maxX = Math.max(baseLine, maxX);
+    } else if (baseLine && Array.isArray(baseLine) && baseLine.length) {
+      maxX = Math.max(...baseLine.map((entry) => entry.x || 0), maxX);
+    }
+    if (isNumber2(maxX)) {
+      return /* @__PURE__ */ React560.createElement("rect", {
+        x: 0,
+        y: startY < endY ? startY : startY - height,
+        width: maxX + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1),
+        height: Math.floor(height)
+      });
+    }
+    return null;
+  }
+  function HorizontalRect(_ref6) {
+    var _points$2, _points2;
+    var {
+      alpha: alpha2,
+      baseLine,
+      points,
+      strokeWidth
+    } = _ref6;
+    var startX = (_points$2 = points[0]) === null || _points$2 === void 0 ? void 0 : _points$2.x;
+    var endX = (_points2 = points[points.length - 1]) === null || _points2 === void 0 ? void 0 : _points2.x;
+    if (!isWellBehavedNumber(startX) || !isWellBehavedNumber(endX)) {
+      return null;
+    }
+    var width = alpha2 * Math.abs(startX - endX);
+    var maxY = Math.max(...points.map((entry) => entry.y || 0));
+    if (isNumber2(baseLine)) {
+      maxY = Math.max(baseLine, maxY);
+    } else if (baseLine && Array.isArray(baseLine) && baseLine.length) {
+      maxY = Math.max(...baseLine.map((entry) => entry.y || 0), maxY);
+    }
+    if (isNumber2(maxY)) {
+      return /* @__PURE__ */ React560.createElement("rect", {
+        x: startX < endX ? startX : startX - width,
+        y: 0,
+        width,
+        height: Math.floor(maxY + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1))
+      });
+    }
+    return null;
+  }
+  function ClipRect(_ref7) {
+    var {
+      alpha: alpha2,
+      layout,
+      points,
+      baseLine,
+      strokeWidth
+    } = _ref7;
+    if (layout === "vertical") {
+      return /* @__PURE__ */ React560.createElement(VerticalRect, {
+        alpha: alpha2,
+        points,
+        baseLine,
+        strokeWidth
+      });
+    }
+    return /* @__PURE__ */ React560.createElement(HorizontalRect, {
+      alpha: alpha2,
+      points,
+      baseLine,
+      strokeWidth
+    });
+  }
+  function AreaWithAnimation(_ref8) {
+    var {
+      needClip,
+      clipPathId,
+      props,
+      previousPointsRef,
+      previousBaselineRef
+    } = _ref8;
+    var {
+      points,
+      baseLine,
+      isAnimationActive,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      onAnimationStart,
+      onAnimationEnd
+    } = props;
+    var animationInput = (0, import_react201.useMemo)(() => ({
+      points,
+      baseLine
+    }), [points, baseLine]);
+    var animationId = useAnimationId(animationInput, "recharts-area-");
+    var layout = useCartesianChartLayout();
+    var [isAnimating, setIsAnimating] = (0, import_react201.useState)(false);
+    var showLabels = !isAnimating;
+    var handleAnimationEnd = (0, import_react201.useCallback)(() => {
+      if (typeof onAnimationEnd === "function") {
+        onAnimationEnd();
+      }
+      setIsAnimating(false);
+    }, [onAnimationEnd]);
+    var handleAnimationStart = (0, import_react201.useCallback)(() => {
+      if (typeof onAnimationStart === "function") {
+        onAnimationStart();
+      }
+      setIsAnimating(true);
+    }, [onAnimationStart]);
+    if (layout == null) {
+      return null;
+    }
+    var prevPoints = previousPointsRef.current;
+    var prevBaseLine = previousBaselineRef.current;
+    return /* @__PURE__ */ React560.createElement(AreaLabelListProvider, {
+      showLabels,
+      points
+    }, props.children, /* @__PURE__ */ React560.createElement(JavascriptAnimate, {
+      animationId,
+      begin: animationBegin,
+      duration: animationDuration,
+      isActive: isAnimationActive,
+      easing: animationEasing,
+      onAnimationEnd: handleAnimationEnd,
+      onAnimationStart: handleAnimationStart,
+      key: animationId
+    }, (t2) => {
+      if (prevPoints) {
+        var prevPointsDiffFactor = prevPoints.length / points.length;
+        var stepPoints = t2 === 1 ? points : points.map((entry, index2) => {
+          var prevPointIndex = Math.floor(index2 * prevPointsDiffFactor);
+          if (prevPoints[prevPointIndex]) {
+            var prev2 = prevPoints[prevPointIndex];
+            return _objectSpread56(_objectSpread56({}, entry), {}, {
+              x: interpolate(prev2.x, entry.x, t2),
+              y: interpolate(prev2.y, entry.y, t2)
+            });
+          }
+          return entry;
+        });
+        var stepBaseLine;
+        if (isNumber2(baseLine)) {
+          stepBaseLine = interpolate(prevBaseLine, baseLine, t2);
+        } else if (isNullish(baseLine) || isNan(baseLine)) {
+          stepBaseLine = interpolate(prevBaseLine, 0, t2);
+        } else {
+          stepBaseLine = baseLine.map((entry, index2) => {
+            var prevPointIndex = Math.floor(index2 * prevPointsDiffFactor);
+            if (Array.isArray(prevBaseLine) && prevBaseLine[prevPointIndex]) {
+              var prev2 = prevBaseLine[prevPointIndex];
+              return _objectSpread56(_objectSpread56({}, entry), {}, {
+                x: interpolate(prev2.x, entry.x, t2),
+                y: interpolate(prev2.y, entry.y, t2)
+              });
+            }
+            return entry;
+          });
+        }
+        if (t2 > 0) {
+          previousPointsRef.current = stepPoints;
+          previousBaselineRef.current = stepBaseLine;
+        }
+        return /* @__PURE__ */ React560.createElement(StaticArea, {
+          points: stepPoints,
+          baseLine: stepBaseLine,
+          needClip,
+          clipPathId,
+          props
+        });
+      }
+      if (t2 > 0) {
+        previousPointsRef.current = points;
+        previousBaselineRef.current = baseLine;
+      }
+      return /* @__PURE__ */ React560.createElement(Layer, null, isAnimationActive && /* @__PURE__ */ React560.createElement("defs", null, /* @__PURE__ */ React560.createElement("clipPath", {
+        id: "animationClipPath-".concat(clipPathId)
+      }, /* @__PURE__ */ React560.createElement(ClipRect, {
+        alpha: t2,
+        points,
+        baseLine,
+        layout,
+        strokeWidth: props.strokeWidth
+      }))), /* @__PURE__ */ React560.createElement(Layer, {
+        clipPath: "url(#animationClipPath-".concat(clipPathId, ")")
+      }, /* @__PURE__ */ React560.createElement(StaticArea, {
+        points,
+        baseLine,
+        needClip,
+        clipPathId,
+        props
+      })));
+    }), /* @__PURE__ */ React560.createElement(LabelListFromLabelProp, {
+      label: props.label
+    }));
+  }
+  function RenderArea(_ref9) {
+    var {
+      needClip,
+      clipPathId,
+      props
+    } = _ref9;
+    var previousPointsRef = (0, import_react201.useRef)(null);
+    var previousBaselineRef = (0, import_react201.useRef)();
+    return /* @__PURE__ */ React560.createElement(AreaWithAnimation, {
+      needClip,
+      clipPathId,
+      props,
+      previousPointsRef,
+      previousBaselineRef
+    });
+  }
+  var AreaWithState = class extends import_react201.PureComponent {
+    render() {
+      var {
+        hide,
+        dot,
+        points,
+        className,
+        top,
+        left,
+        needClip,
+        xAxisId,
+        yAxisId,
+        width,
+        height,
+        id,
+        baseLine,
+        zIndex
+      } = this.props;
+      if (hide) {
+        return null;
+      }
+      var layerClass = clsx("recharts-area", className);
+      var clipPathId = id;
+      var {
+        r: r3,
+        strokeWidth
+      } = getRadiusAndStrokeWidthFromDot(dot);
+      var clipDot = isClipDot(dot);
+      var dotSize = r3 * 2 + strokeWidth;
+      var activePointsClipPath = needClip ? "url(#clipPath-".concat(clipDot ? "" : "dots-").concat(clipPathId, ")") : void 0;
+      return /* @__PURE__ */ React560.createElement(ZIndexLayer, {
+        zIndex
+      }, /* @__PURE__ */ React560.createElement(Layer, {
+        className: layerClass
+      }, needClip && /* @__PURE__ */ React560.createElement("defs", null, /* @__PURE__ */ React560.createElement(GraphicalItemClipPath, {
+        clipPathId,
+        xAxisId,
+        yAxisId
+      }), !clipDot && /* @__PURE__ */ React560.createElement("clipPath", {
+        id: "clipPath-dots-".concat(clipPathId)
+      }, /* @__PURE__ */ React560.createElement("rect", {
+        x: left - dotSize / 2,
+        y: top - dotSize / 2,
+        width: width + dotSize,
+        height: height + dotSize
+      }))), /* @__PURE__ */ React560.createElement(RenderArea, {
+        needClip,
+        clipPathId,
+        props: this.props
+      })), /* @__PURE__ */ React560.createElement(ActivePoints, {
+        points,
+        mainColor: getLegendItemColor(this.props.stroke, this.props.fill),
+        itemDataKey: this.props.dataKey,
+        activeDot: this.props.activeDot,
+        clipPath: activePointsClipPath
+      }), this.props.isRange && Array.isArray(baseLine) && /* @__PURE__ */ React560.createElement(ActivePoints, {
+        points: baseLine,
+        mainColor: getLegendItemColor(this.props.stroke, this.props.fill),
+        itemDataKey: this.props.dataKey,
+        activeDot: this.props.activeDot,
+        clipPath: activePointsClipPath
+      }));
+    }
+  };
+  var defaultAreaProps = {
+    activeDot: true,
+    animationBegin: 0,
+    animationDuration: 1500,
+    animationEasing: "ease",
+    connectNulls: false,
+    dot: false,
+    fill: "#3182bd",
+    fillOpacity: 0.6,
+    hide: false,
+    isAnimationActive: "auto",
+    legendType: "line",
+    stroke: "#3182bd",
+    strokeWidth: 1,
+    type: "linear",
+    label: false,
+    xAxisId: 0,
+    yAxisId: 0,
+    zIndex: DefaultZIndexes.area
+  };
+  function AreaImpl(props) {
+    var _useAppSelector;
+    var {
+      activeDot,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      connectNulls,
+      dot,
+      fill,
+      fillOpacity,
+      hide,
+      isAnimationActive,
+      legendType,
+      stroke,
+      xAxisId,
+      yAxisId
+    } = props, everythingElse = _objectWithoutProperties19(props, _excluded29);
+    var layout = useChartLayout();
+    var chartName = useChartName();
+    var {
+      needClip
+    } = useNeedsClip(xAxisId, yAxisId);
+    var isPanorama = useIsPanorama();
+    var {
+      points,
+      isRange,
+      baseLine
+    } = (_useAppSelector = useAppSelector((state) => selectArea(state, props.id, isPanorama))) !== null && _useAppSelector !== void 0 ? _useAppSelector : {};
+    var plotArea = usePlotArea();
+    if (layout !== "horizontal" && layout !== "vertical" || plotArea == null) {
+      return null;
+    }
+    if (chartName !== "AreaChart" && chartName !== "ComposedChart") {
+      return null;
+    }
+    var {
+      height,
+      width,
+      x: left,
+      y: top
+    } = plotArea;
+    if (!points || !points.length) {
+      return null;
+    }
+    return /* @__PURE__ */ React560.createElement(AreaWithState, _extends168({}, everythingElse, {
+      activeDot,
+      animationBegin,
+      animationDuration,
+      animationEasing,
+      baseLine,
+      connectNulls,
+      dot,
+      fill,
+      fillOpacity,
+      height,
+      hide,
+      layout,
+      isAnimationActive,
+      isRange,
+      legendType,
+      needClip,
+      points,
+      stroke,
+      width,
+      left,
+      top,
+      xAxisId,
+      yAxisId
+    }));
+  }
+  var getBaseValue = (layout, chartBaseValue, itemBaseValue, xAxis, yAxis) => {
+    var baseValue = itemBaseValue !== null && itemBaseValue !== void 0 ? itemBaseValue : chartBaseValue;
+    if (isNumber2(baseValue)) {
+      return baseValue;
+    }
+    var numericAxis = layout === "horizontal" ? yAxis : xAxis;
+    var domain = numericAxis.scale.domain();
+    if (numericAxis.type === "number") {
+      var domainMax = Math.max(domain[0], domain[1]);
+      var domainMin = Math.min(domain[0], domain[1]);
+      if (baseValue === "dataMin") {
+        return domainMin;
+      }
+      if (baseValue === "dataMax") {
+        return domainMax;
+      }
+      return domainMax < 0 ? domainMax : Math.max(Math.min(domain[0], domain[1]), 0);
+    }
+    if (baseValue === "dataMin") {
+      return domain[0];
+    }
+    if (baseValue === "dataMax") {
+      return domain[1];
+    }
+    return domain[0];
+  };
+  function computeArea(_ref0) {
+    var {
+      areaSettings: {
+        connectNulls,
+        baseValue: itemBaseValue,
+        dataKey
+      },
+      stackedData,
+      layout,
+      chartBaseValue,
+      xAxis,
+      yAxis,
+      displayedData,
+      dataStartIndex,
+      xAxisTicks,
+      yAxisTicks,
+      bandSize
+    } = _ref0;
+    var hasStack = stackedData && stackedData.length;
+    var baseValue = getBaseValue(layout, chartBaseValue, itemBaseValue, xAxis, yAxis);
+    var isHorizontalLayout = layout === "horizontal";
+    var isRange = false;
+    var points = displayedData.map((entry, index2) => {
+      var _valueAsArray$, _valueAsArray, _xAxis$scale$map;
+      var valueAsArray;
+      if (hasStack) {
+        valueAsArray = stackedData[dataStartIndex + index2];
+      } else {
+        var rawValue = getValueByDataKey(entry, dataKey);
+        if (!Array.isArray(rawValue)) {
+          valueAsArray = [baseValue, rawValue];
+        } else {
+          valueAsArray = rawValue;
+          isRange = true;
+        }
+      }
+      var value1 = (_valueAsArray$ = (_valueAsArray = valueAsArray) === null || _valueAsArray === void 0 ? void 0 : _valueAsArray[1]) !== null && _valueAsArray$ !== void 0 ? _valueAsArray$ : null;
+      var isBreakPoint = value1 == null || hasStack && !connectNulls && getValueByDataKey(entry, dataKey) == null;
+      if (isHorizontalLayout) {
+        var _yAxis$scale$map;
+        return {
+          x: getCateCoordinateOfLine({
+            axis: xAxis,
+            ticks: xAxisTicks,
+            bandSize,
+            entry,
+            index: index2
+          }),
+          y: isBreakPoint ? null : (_yAxis$scale$map = yAxis.scale.map(value1)) !== null && _yAxis$scale$map !== void 0 ? _yAxis$scale$map : null,
+          value: valueAsArray,
+          payload: entry
+        };
+      }
+      return {
+        x: isBreakPoint ? null : (_xAxis$scale$map = xAxis.scale.map(value1)) !== null && _xAxis$scale$map !== void 0 ? _xAxis$scale$map : null,
+        y: getCateCoordinateOfLine({
+          axis: yAxis,
+          ticks: yAxisTicks,
+          bandSize,
+          entry,
+          index: index2
+        }),
+        value: valueAsArray,
+        payload: entry
+      };
+    });
+    var baseLine;
+    if (hasStack || isRange) {
+      baseLine = points.map((entry) => {
+        var _xAxis$scale$map2;
+        var x2 = Array.isArray(entry.value) ? entry.value[0] : null;
+        if (isHorizontalLayout) {
+          var _yAxis$scale$map2;
+          return {
+            x: entry.x,
+            y: x2 != null && entry.y != null ? (_yAxis$scale$map2 = yAxis.scale.map(x2)) !== null && _yAxis$scale$map2 !== void 0 ? _yAxis$scale$map2 : null : null,
+            payload: entry.payload
+          };
+        }
+        return {
+          x: x2 != null ? (_xAxis$scale$map2 = xAxis.scale.map(x2)) !== null && _xAxis$scale$map2 !== void 0 ? _xAxis$scale$map2 : null : null,
+          y: entry.y,
+          payload: entry.payload
+        };
+      });
+    } else {
+      baseLine = isHorizontalLayout ? yAxis.scale.map(baseValue) : xAxis.scale.map(baseValue);
+    }
+    return {
+      points,
+      baseLine: baseLine !== null && baseLine !== void 0 ? baseLine : 0,
+      isRange
+    };
+  }
+  function AreaFn(outsideProps) {
+    var props = resolveDefaultProps(outsideProps, defaultAreaProps);
+    var isPanorama = useIsPanorama();
+    return /* @__PURE__ */ React560.createElement(RegisterGraphicalItemId, {
+      id: props.id,
+      type: "area"
+    }, (id) => /* @__PURE__ */ React560.createElement(React560.Fragment, null, /* @__PURE__ */ React560.createElement(SetLegendPayload, {
+      legendPayload: computeLegendPayloadFromAreaData(props)
+    }), /* @__PURE__ */ React560.createElement(SetAreaTooltipEntrySettings, {
+      dataKey: props.dataKey,
+      data: props.data,
+      stroke: props.stroke,
+      strokeWidth: props.strokeWidth,
+      fill: props.fill,
+      name: props.name,
+      hide: props.hide,
+      unit: props.unit,
+      tooltipType: props.tooltipType,
+      id
+    }), /* @__PURE__ */ React560.createElement(SetCartesianGraphicalItem, {
+      type: "area",
+      id,
+      data: props.data,
+      dataKey: props.dataKey,
+      xAxisId: props.xAxisId,
+      yAxisId: props.yAxisId,
+      zAxisId: 0,
+      stackId: getNormalizedStackId(props.stackId),
+      hide: props.hide,
+      barSize: void 0,
+      baseValue: props.baseValue,
+      isPanorama,
+      connectNulls: props.connectNulls
+    }), /* @__PURE__ */ React560.createElement(AreaImpl, _extends168({}, props, {
+      id
+    }))));
+  }
+  var Area = /* @__PURE__ */ React560.memo(AreaFn, propsAreEqual);
+  Area.displayName = "Area";
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/XAxis.js
+  var React561 = __toESM(require_react());
+  var import_react202 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/recharts/es6/util/axisPropsAreEqual.js
+  var _excluded21 = ["domain", "range"];
+  var _excluded210 = ["domain", "range"];
+  function _objectWithoutProperties20(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose20(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose20(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function shortArraysAreEqual(arr1, arr2) {
+    if (arr1 === arr2) {
+      return true;
+    }
+    if (Array.isArray(arr1) && arr1.length === 2 && Array.isArray(arr2) && arr2.length === 2) {
+      return arr1[0] === arr2[0] && arr1[1] === arr2[1];
+    }
+    return false;
+  }
+  function axisPropsAreEqual(prevProps, nextProps) {
+    if (prevProps === nextProps) {
+      return true;
+    }
+    var {
+      domain: prevDomain,
+      range: prevRange
+    } = prevProps, prevRest = _objectWithoutProperties20(prevProps, _excluded21);
+    var {
+      domain: nextDomain,
+      range: nextRange
+    } = nextProps, nextRest = _objectWithoutProperties20(nextProps, _excluded210);
+    if (!shortArraysAreEqual(prevDomain, nextDomain)) {
+      return false;
+    }
+    if (!shortArraysAreEqual(prevRange, nextRange)) {
+      return false;
+    }
+    return propsAreEqual(prevRest, nextRest);
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/XAxis.js
+  var _excluded30 = ["type"];
+  var _excluded211 = ["dangerouslySetInnerHTML", "ticks", "scale"];
+  var _excluded34 = ["id", "scale"];
+  function _extends169() {
+    return _extends169 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends169.apply(null, arguments);
+  }
+  function ownKeys57(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread57(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys57(Object(t2), true).forEach(function(r4) {
+        _defineProperty69(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys57(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty69(e4, r3, t2) {
+    return (r3 = _toPropertyKey68(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey68(t2) {
+    var i = _toPrimitive68(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive68(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  function _objectWithoutProperties21(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose21(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose21(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function SetXAxisSettings(props) {
+    var dispatch = useAppDispatch();
+    var prevSettingsRef = (0, import_react202.useRef)(null);
+    var layout = useCartesianChartLayout();
+    var {
+      type: typeFromProps
+    } = props, restProps = _objectWithoutProperties21(props, _excluded30);
+    var evaluatedType = getAxisTypeBasedOnLayout(layout, "xAxis", typeFromProps);
+    var settings = (0, import_react202.useMemo)(() => {
+      if (evaluatedType == null) {
+        return void 0;
+      }
+      return _objectSpread57(_objectSpread57({}, restProps), {}, {
+        type: evaluatedType
+      });
+    }, [restProps, evaluatedType]);
+    (0, import_react202.useLayoutEffect)(() => {
+      if (settings == null) {
+        return;
+      }
+      if (prevSettingsRef.current === null) {
+        dispatch(addXAxis(settings));
+      } else if (prevSettingsRef.current !== settings) {
+        dispatch(replaceXAxis({
+          prev: prevSettingsRef.current,
+          next: settings
+        }));
+      }
+      prevSettingsRef.current = settings;
+    }, [settings, dispatch]);
+    (0, import_react202.useLayoutEffect)(() => {
+      return () => {
+        if (prevSettingsRef.current) {
+          dispatch(removeXAxis(prevSettingsRef.current));
+          prevSettingsRef.current = null;
+        }
+      };
+    }, [dispatch]);
+    return null;
+  }
+  var XAxisImpl = (props) => {
+    var {
+      xAxisId,
+      className
+    } = props;
+    var viewBox = useAppSelector(selectAxisViewBox);
+    var isPanorama = useIsPanorama();
+    var axisType = "xAxis";
+    var cartesianTickItems = useAppSelector((state) => selectTicksOfAxis(state, axisType, xAxisId, isPanorama));
+    var axisSize = useAppSelector((state) => selectXAxisSize(state, xAxisId));
+    var position3 = useAppSelector((state) => selectXAxisPosition(state, xAxisId));
+    var synchronizedSettings = useAppSelector((state) => selectXAxisSettingsNoDefaults(state, xAxisId));
+    if (axisSize == null || position3 == null || synchronizedSettings == null) {
+      return null;
+    }
+    var {
+      dangerouslySetInnerHTML,
+      ticks: ticks2,
+      scale: del
+    } = props, allOtherProps = _objectWithoutProperties21(props, _excluded211);
+    var {
+      id,
+      scale: del2
+    } = synchronizedSettings, restSynchronizedSettings = _objectWithoutProperties21(synchronizedSettings, _excluded34);
+    return /* @__PURE__ */ React561.createElement(CartesianAxis, _extends169({}, allOtherProps, restSynchronizedSettings, {
+      x: position3.x,
+      y: position3.y,
+      width: axisSize.width,
+      height: axisSize.height,
+      className: clsx("recharts-".concat(axisType, " ").concat(axisType), className),
+      viewBox,
+      ticks: cartesianTickItems,
+      axisType,
+      axisId: xAxisId
+    }));
+  };
+  var xAxisDefaultProps = {
+    allowDataOverflow: implicitXAxis.allowDataOverflow,
+    allowDecimals: implicitXAxis.allowDecimals,
+    allowDuplicatedCategory: implicitXAxis.allowDuplicatedCategory,
+    angle: implicitXAxis.angle,
+    axisLine: defaultCartesianAxisProps.axisLine,
+    height: implicitXAxis.height,
+    hide: false,
+    includeHidden: implicitXAxis.includeHidden,
+    interval: implicitXAxis.interval,
+    label: false,
+    minTickGap: implicitXAxis.minTickGap,
+    mirror: implicitXAxis.mirror,
+    orientation: implicitXAxis.orientation,
+    padding: implicitXAxis.padding,
+    reversed: implicitXAxis.reversed,
+    scale: implicitXAxis.scale,
+    tick: implicitXAxis.tick,
+    tickCount: implicitXAxis.tickCount,
+    tickLine: defaultCartesianAxisProps.tickLine,
+    tickSize: defaultCartesianAxisProps.tickSize,
+    type: implicitXAxis.type,
+    niceTicks: implicitXAxis.niceTicks,
+    xAxisId: 0
+  };
+  var XAxisSettingsDispatcher = (outsideProps) => {
+    var props = resolveDefaultProps(outsideProps, xAxisDefaultProps);
+    return /* @__PURE__ */ React561.createElement(React561.Fragment, null, /* @__PURE__ */ React561.createElement(SetXAxisSettings, {
+      allowDataOverflow: props.allowDataOverflow,
+      allowDecimals: props.allowDecimals,
+      allowDuplicatedCategory: props.allowDuplicatedCategory,
+      angle: props.angle,
+      dataKey: props.dataKey,
+      domain: props.domain,
+      height: props.height,
+      hide: props.hide,
+      id: props.xAxisId,
+      includeHidden: props.includeHidden,
+      interval: props.interval,
+      minTickGap: props.minTickGap,
+      mirror: props.mirror,
+      name: props.name,
+      orientation: props.orientation,
+      padding: props.padding,
+      reversed: props.reversed,
+      scale: props.scale,
+      tick: props.tick,
+      tickCount: props.tickCount,
+      tickFormatter: props.tickFormatter,
+      ticks: props.ticks,
+      type: props.type,
+      unit: props.unit,
+      niceTicks: props.niceTicks
+    }), /* @__PURE__ */ React561.createElement(XAxisImpl, props));
+  };
+  var XAxis = /* @__PURE__ */ React561.memo(XAxisSettingsDispatcher, axisPropsAreEqual);
+  XAxis.displayName = "XAxis";
+
+  // ../temple_donation/node_modules/recharts/es6/cartesian/YAxis.js
+  var React562 = __toESM(require_react());
+  var import_react203 = __toESM(require_react());
+  var _excluded31 = ["type"];
+  var _excluded212 = ["dangerouslySetInnerHTML", "ticks", "scale"];
+  var _excluded35 = ["id", "scale"];
+  function _extends170() {
+    return _extends170 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends170.apply(null, arguments);
+  }
+  function ownKeys58(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread58(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys58(Object(t2), true).forEach(function(r4) {
+        _defineProperty70(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys58(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty70(e4, r3, t2) {
+    return (r3 = _toPropertyKey69(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey69(t2) {
+    var i = _toPrimitive69(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive69(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  function _objectWithoutProperties22(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose22(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose22(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function SetYAxisSettings(props) {
+    var dispatch = useAppDispatch();
+    var prevSettingsRef = (0, import_react203.useRef)(null);
+    var layout = useCartesianChartLayout();
+    var {
+      type: typeFromProps
+    } = props, restProps = _objectWithoutProperties22(props, _excluded31);
+    var evaluatedType = getAxisTypeBasedOnLayout(layout, "yAxis", typeFromProps);
+    var settings = (0, import_react203.useMemo)(() => {
+      if (evaluatedType == null) {
+        return void 0;
+      }
+      return _objectSpread58(_objectSpread58({}, restProps), {}, {
+        type: evaluatedType
+      });
+    }, [evaluatedType, restProps]);
+    (0, import_react203.useLayoutEffect)(() => {
+      if (settings == null) {
+        return;
+      }
+      if (prevSettingsRef.current === null) {
+        dispatch(addYAxis(settings));
+      } else if (prevSettingsRef.current !== settings) {
+        dispatch(replaceYAxis({
+          prev: prevSettingsRef.current,
+          next: settings
+        }));
+      }
+      prevSettingsRef.current = settings;
+    }, [settings, dispatch]);
+    (0, import_react203.useLayoutEffect)(() => {
+      return () => {
+        if (prevSettingsRef.current) {
+          dispatch(removeYAxis(prevSettingsRef.current));
+          prevSettingsRef.current = null;
+        }
+      };
+    }, [dispatch]);
+    return null;
+  }
+  function YAxisImpl(props) {
+    var {
+      yAxisId,
+      className,
+      width,
+      label
+    } = props;
+    var cartesianAxisRef = (0, import_react203.useRef)(null);
+    var labelRef = (0, import_react203.useRef)(null);
+    var viewBox = useAppSelector(selectAxisViewBox);
+    var isPanorama = useIsPanorama();
+    var dispatch = useAppDispatch();
+    var axisType = "yAxis";
+    var axisSize = useAppSelector((state) => selectYAxisSize(state, yAxisId));
+    var position3 = useAppSelector((state) => selectYAxisPosition(state, yAxisId));
+    var cartesianTickItems = useAppSelector((state) => selectTicksOfAxis(state, axisType, yAxisId, isPanorama));
+    var synchronizedSettings = useAppSelector((state) => selectYAxisSettingsNoDefaults(state, yAxisId));
+    (0, import_react203.useLayoutEffect)(() => {
+      if (width !== "auto" || !axisSize || isLabelContentAFunction(label) || /* @__PURE__ */ (0, import_react203.isValidElement)(label) || synchronizedSettings == null) {
+        return;
+      }
+      var axisComponent = cartesianAxisRef.current;
+      if (!axisComponent) {
+        return;
+      }
+      var updatedYAxisWidth = axisComponent.getCalculatedWidth();
+      if (Math.round(axisSize.width) !== Math.round(updatedYAxisWidth)) {
+        dispatch(updateYAxisWidth({
+          id: yAxisId,
+          width: updatedYAxisWidth
+        }));
+      }
+    }, [
+      cartesianTickItems,
+      axisSize,
+      dispatch,
+      label,
+      yAxisId,
+      width,
+      synchronizedSettings
+    ]);
+    if (axisSize == null || position3 == null || synchronizedSettings == null) {
+      return null;
+    }
+    var {
+      dangerouslySetInnerHTML,
+      ticks: ticks2,
+      scale: del
+    } = props, allOtherProps = _objectWithoutProperties22(props, _excluded212);
+    var {
+      id,
+      scale: del2
+    } = synchronizedSettings, restSynchronizedSettings = _objectWithoutProperties22(synchronizedSettings, _excluded35);
+    return /* @__PURE__ */ React562.createElement(CartesianAxis, _extends170({}, allOtherProps, restSynchronizedSettings, {
+      ref: cartesianAxisRef,
+      labelRef,
+      x: position3.x,
+      y: position3.y,
+      tickTextProps: width === "auto" ? {
+        width: void 0
+      } : {
+        width
+      },
+      width: axisSize.width,
+      height: axisSize.height,
+      className: clsx("recharts-".concat(axisType, " ").concat(axisType), className),
+      viewBox,
+      ticks: cartesianTickItems,
+      axisType,
+      axisId: yAxisId
+    }));
+  }
+  var yAxisDefaultProps = {
+    allowDataOverflow: implicitYAxis.allowDataOverflow,
+    allowDecimals: implicitYAxis.allowDecimals,
+    allowDuplicatedCategory: implicitYAxis.allowDuplicatedCategory,
+    angle: implicitYAxis.angle,
+    axisLine: defaultCartesianAxisProps.axisLine,
+    hide: false,
+    includeHidden: implicitYAxis.includeHidden,
+    interval: implicitYAxis.interval,
+    label: false,
+    minTickGap: implicitYAxis.minTickGap,
+    mirror: implicitYAxis.mirror,
+    orientation: implicitYAxis.orientation,
+    padding: implicitYAxis.padding,
+    reversed: implicitYAxis.reversed,
+    scale: implicitYAxis.scale,
+    tick: implicitYAxis.tick,
+    tickCount: implicitYAxis.tickCount,
+    tickLine: defaultCartesianAxisProps.tickLine,
+    tickSize: defaultCartesianAxisProps.tickSize,
+    type: implicitYAxis.type,
+    niceTicks: implicitYAxis.niceTicks,
+    width: implicitYAxis.width,
+    yAxisId: 0
+  };
+  var YAxisSettingsDispatcher = (outsideProps) => {
+    var props = resolveDefaultProps(outsideProps, yAxisDefaultProps);
+    return /* @__PURE__ */ React562.createElement(React562.Fragment, null, /* @__PURE__ */ React562.createElement(SetYAxisSettings, {
+      interval: props.interval,
+      id: props.yAxisId,
+      scale: props.scale,
+      type: props.type,
+      domain: props.domain,
+      allowDataOverflow: props.allowDataOverflow,
+      dataKey: props.dataKey,
+      allowDuplicatedCategory: props.allowDuplicatedCategory,
+      allowDecimals: props.allowDecimals,
+      tickCount: props.tickCount,
+      padding: props.padding,
+      includeHidden: props.includeHidden,
+      reversed: props.reversed,
+      ticks: props.ticks,
+      width: props.width,
+      orientation: props.orientation,
+      mirror: props.mirror,
+      hide: props.hide,
+      unit: props.unit,
+      name: props.name,
+      angle: props.angle,
+      minTickGap: props.minTickGap,
+      tick: props.tick,
+      tickFormatter: props.tickFormatter,
+      niceTicks: props.niceTicks
+    }), /* @__PURE__ */ React562.createElement(YAxisImpl, props));
+  };
+  var YAxis = /* @__PURE__ */ React562.memo(YAxisSettingsDispatcher, axisPropsAreEqual);
+  YAxis.displayName = "YAxis";
+
+  // ../temple_donation/node_modules/recharts/es6/chart/CartesianChart.js
+  var React568 = __toESM(require_react());
+  var import_react213 = __toESM(require_react());
+
   // ../temple_donation/node_modules/recharts/es6/state/RechartsStoreProvider.js
-  var React548 = __toESM(require_react());
-  var import_react198 = __toESM(require_react());
+  var React563 = __toESM(require_react());
+  var import_react204 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/state/selectors/selectActivePropsFromChartPointer.js
   var pickChartPointer = (_state, chartPointer) => chartPointer;
@@ -123619,7 +127233,7 @@ html body {
       reduxStoreName
     } = _ref2;
     var isPanorama = useIsPanorama();
-    var storeRef = (0, import_react198.useRef)(null);
+    var storeRef = (0, import_react204.useRef)(null);
     if (isPanorama) {
       return children;
     }
@@ -123627,14 +127241,14 @@ html body {
       storeRef.current = createRechartsStore(preloadedState, reduxStoreName);
     }
     var nonNullContext = RechartsReduxContext;
-    return /* @__PURE__ */ React548.createElement(Provider_default, {
+    return /* @__PURE__ */ React563.createElement(Provider_default, {
       context: nonNullContext,
       store: storeRef.current
     }, children);
   }
 
   // ../temple_donation/node_modules/recharts/es6/state/ReportMainChartProps.js
-  var import_react199 = __toESM(require_react());
+  var import_react205 = __toESM(require_react());
   function ReportMainChartPropsImpl(_ref2) {
     var {
       layout,
@@ -123642,7 +127256,7 @@ html body {
     } = _ref2;
     var dispatch = useAppDispatch();
     var isPanorama = useIsPanorama();
-    (0, import_react199.useEffect)(() => {
+    (0, import_react205.useEffect)(() => {
       if (!isPanorama) {
         dispatch(setLayout(layout));
         dispatch(setMargin(margin));
@@ -123650,48 +127264,48 @@ html body {
     }, [dispatch, isPanorama, layout, margin]);
     return null;
   }
-  var ReportMainChartProps = /* @__PURE__ */ (0, import_react199.memo)(ReportMainChartPropsImpl, propsAreEqual);
+  var ReportMainChartProps = /* @__PURE__ */ (0, import_react205.memo)(ReportMainChartPropsImpl, propsAreEqual);
 
   // ../temple_donation/node_modules/recharts/es6/state/ReportChartProps.js
-  var import_react200 = __toESM(require_react());
+  var import_react206 = __toESM(require_react());
   function ReportChartProps(props) {
     var dispatch = useAppDispatch();
-    (0, import_react200.useEffect)(() => {
+    (0, import_react206.useEffect)(() => {
       dispatch(updateOptions(props));
     }, [dispatch, props]);
     return null;
   }
 
   // ../temple_donation/node_modules/recharts/es6/state/ReportEventSettings.js
-  var import_react201 = __toESM(require_react());
+  var import_react207 = __toESM(require_react());
   var ReportEventSettingsImpl = (props) => {
     var dispatch = useAppDispatch();
-    (0, import_react201.useEffect)(() => {
+    (0, import_react207.useEffect)(() => {
       dispatch(setEventSettings(props));
     }, [dispatch, props]);
     return null;
   };
-  var ReportEventSettings = /* @__PURE__ */ (0, import_react201.memo)(ReportEventSettingsImpl, propsAreEqual);
+  var ReportEventSettings = /* @__PURE__ */ (0, import_react207.memo)(ReportEventSettingsImpl, propsAreEqual);
 
   // ../temple_donation/node_modules/recharts/es6/chart/CategoricalChart.js
-  var React552 = __toESM(require_react());
-  var import_react206 = __toESM(require_react());
+  var React567 = __toESM(require_react());
+  var import_react212 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/container/RootSurface.js
-  var React550 = __toESM(require_react());
-  var import_react203 = __toESM(require_react());
+  var React565 = __toESM(require_react());
+  var import_react209 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/zIndex/ZIndexPortal.js
-  var React549 = __toESM(require_react());
-  var import_react202 = __toESM(require_react());
+  var React564 = __toESM(require_react());
+  var import_react208 = __toESM(require_react());
   function ZIndexSvgPortal(_ref2) {
     var {
       zIndex,
       isPanorama
     } = _ref2;
-    var ref = (0, import_react202.useRef)(null);
+    var ref = (0, import_react208.useRef)(null);
     var dispatch = useAppDispatch();
-    (0, import_react202.useLayoutEffect)(() => {
+    (0, import_react208.useLayoutEffect)(() => {
       if (ref.current) {
         dispatch(registerZIndexPortalElement({
           zIndex,
@@ -123706,7 +127320,7 @@ html body {
         }));
       };
     }, [dispatch, zIndex, isPanorama]);
-    return /* @__PURE__ */ React549.createElement("g", {
+    return /* @__PURE__ */ React564.createElement("g", {
       tabIndex: -1,
       ref,
       className: "recharts-zIndex-layer_".concat(zIndex)
@@ -123723,11 +127337,11 @@ html body {
     }
     var allNegativeZIndexes = allRegisteredZIndexes.filter((zIndex) => zIndex < 0);
     var allPositiveZIndexes = allRegisteredZIndexes.filter((zIndex) => zIndex > 0);
-    return /* @__PURE__ */ React549.createElement(React549.Fragment, null, allNegativeZIndexes.map((zIndex) => /* @__PURE__ */ React549.createElement(ZIndexSvgPortal, {
+    return /* @__PURE__ */ React564.createElement(React564.Fragment, null, allNegativeZIndexes.map((zIndex) => /* @__PURE__ */ React564.createElement(ZIndexSvgPortal, {
       key: zIndex,
       zIndex,
       isPanorama
-    })), children, allPositiveZIndexes.map((zIndex) => /* @__PURE__ */ React549.createElement(ZIndexSvgPortal, {
+    })), children, allPositiveZIndexes.map((zIndex) => /* @__PURE__ */ React564.createElement(ZIndexSvgPortal, {
       key: zIndex,
       zIndex,
       isPanorama
@@ -123735,11 +127349,11 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/container/RootSurface.js
-  var _excluded17 = ["children"];
-  function _objectWithoutProperties16(e4, t2) {
+  var _excluded36 = ["children"];
+  function _objectWithoutProperties23(e4, t2) {
     if (null == e4)
       return {};
-    var o3, r3, i = _objectWithoutPropertiesLoose16(e4, t2);
+    var o3, r3, i = _objectWithoutPropertiesLoose23(e4, t2);
     if (Object.getOwnPropertySymbols) {
       var n2 = Object.getOwnPropertySymbols(e4);
       for (r3 = 0; r3 < n2.length; r3++)
@@ -123747,7 +127361,7 @@ html body {
     }
     return i;
   }
-  function _objectWithoutPropertiesLoose16(r3, e4) {
+  function _objectWithoutPropertiesLoose23(r3, e4) {
     if (null == r3)
       return {};
     var t2 = {};
@@ -123759,22 +127373,22 @@ html body {
       }
     return t2;
   }
-  function _extends158() {
-    return _extends158 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends171() {
+    return _extends171 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends158.apply(null, arguments);
+    }, _extends171.apply(null, arguments);
   }
   var FULL_WIDTH_AND_HEIGHT = {
     width: "100%",
     height: "100%",
     display: "block"
   };
-  var MainChartSurface = /* @__PURE__ */ (0, import_react203.forwardRef)((props, ref) => {
+  var MainChartSurface = /* @__PURE__ */ (0, import_react209.forwardRef)((props, ref) => {
     var width = useChartWidth();
     var height = useChartHeight();
     var hasAccessibilityLayer = useAccessibilityLayer();
@@ -123800,7 +127414,7 @@ html body {
         role = hasAccessibilityLayer ? "application" : void 0;
       }
     }
-    return /* @__PURE__ */ React550.createElement(Surface, _extends158({}, otherAttributes, {
+    return /* @__PURE__ */ React565.createElement(Surface, _extends171({}, otherAttributes, {
       title,
       desc,
       role,
@@ -123825,41 +127439,41 @@ html body {
       y: y2,
       x: x2
     } = brushDimensions;
-    return /* @__PURE__ */ React550.createElement(Surface, {
+    return /* @__PURE__ */ React565.createElement(Surface, {
       width,
       height,
       x: x2,
       y: y2
     }, children);
   };
-  var RootSurface = /* @__PURE__ */ (0, import_react203.forwardRef)((_ref2, ref) => {
+  var RootSurface = /* @__PURE__ */ (0, import_react209.forwardRef)((_ref2, ref) => {
     var {
       children
-    } = _ref2, rest = _objectWithoutProperties16(_ref2, _excluded17);
+    } = _ref2, rest = _objectWithoutProperties23(_ref2, _excluded36);
     var isPanorama = useIsPanorama();
     if (isPanorama) {
-      return /* @__PURE__ */ React550.createElement(BrushPanoramaSurface, null, /* @__PURE__ */ React550.createElement(AllZIndexPortals, {
+      return /* @__PURE__ */ React565.createElement(BrushPanoramaSurface, null, /* @__PURE__ */ React565.createElement(AllZIndexPortals, {
         isPanorama: true
       }, children));
     }
-    return /* @__PURE__ */ React550.createElement(MainChartSurface, _extends158({
+    return /* @__PURE__ */ React565.createElement(MainChartSurface, _extends171({
       ref
-    }, rest), /* @__PURE__ */ React550.createElement(AllZIndexPortals, {
+    }, rest), /* @__PURE__ */ React565.createElement(AllZIndexPortals, {
       isPanorama: false
     }, children));
   });
 
   // ../temple_donation/node_modules/recharts/es6/chart/RechartsWrapper.js
-  var React551 = __toESM(require_react());
-  var import_react205 = __toESM(require_react());
+  var React566 = __toESM(require_react());
+  var import_react211 = __toESM(require_react());
 
   // ../temple_donation/node_modules/recharts/es6/util/useReportScale.js
-  var import_react204 = __toESM(require_react());
+  var import_react210 = __toESM(require_react());
   function useReportScale() {
     var dispatch = useAppDispatch();
-    var [ref, setRef] = (0, import_react204.useState)(null);
+    var [ref, setRef] = (0, import_react210.useState)(null);
     var scale = useAppSelector(selectContainerScale);
-    (0, import_react204.useEffect)(() => {
+    (0, import_react210.useEffect)(() => {
       if (ref == null) {
         return;
       }
@@ -123873,7 +127487,7 @@ html body {
   }
 
   // ../temple_donation/node_modules/recharts/es6/chart/RechartsWrapper.js
-  function ownKeys51(e4, r3) {
+  function ownKeys59(e4, r3) {
     var t2 = Object.keys(e4);
     if (Object.getOwnPropertySymbols) {
       var o3 = Object.getOwnPropertySymbols(e4);
@@ -123883,25 +127497,25 @@ html body {
     }
     return t2;
   }
-  function _objectSpread51(e4) {
+  function _objectSpread59(e4) {
     for (var r3 = 1; r3 < arguments.length; r3++) {
       var t2 = null != arguments[r3] ? arguments[r3] : {};
-      r3 % 2 ? ownKeys51(Object(t2), true).forEach(function(r4) {
-        _defineProperty63(e4, r4, t2[r4]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys51(Object(t2)).forEach(function(r4) {
+      r3 % 2 ? ownKeys59(Object(t2), true).forEach(function(r4) {
+        _defineProperty71(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys59(Object(t2)).forEach(function(r4) {
         Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
       });
     }
     return e4;
   }
-  function _defineProperty63(e4, r3, t2) {
-    return (r3 = _toPropertyKey62(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  function _defineProperty71(e4, r3, t2) {
+    return (r3 = _toPropertyKey70(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
   }
-  function _toPropertyKey62(t2) {
-    var i = _toPrimitive62(t2, "string");
+  function _toPropertyKey70(t2) {
+    var i = _toPrimitive70(t2, "string");
     return "symbol" == typeof i ? i : i + "";
   }
-  function _toPrimitive62(t2, r3) {
+  function _toPrimitive70(t2, r3) {
     if ("object" != typeof t2 || !t2)
       return t2;
     var e4 = t2[Symbol.toPrimitive];
@@ -123913,15 +127527,15 @@ html body {
     }
     return ("string" === r3 ? String : Number)(t2);
   }
-  function _extends159() {
-    return _extends159 = Object.assign ? Object.assign.bind() : function(n2) {
+  function _extends172() {
+    return _extends172 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends159.apply(null, arguments);
+    }, _extends172.apply(null, arguments);
   }
   var EventSynchronizer = () => {
     useSynchronisedEventsFromOtherCharts();
@@ -123939,14 +127553,14 @@ html body {
     }
     return 0;
   }
-  var ResponsiveDiv = /* @__PURE__ */ (0, import_react205.forwardRef)((props, ref) => {
+  var ResponsiveDiv = /* @__PURE__ */ (0, import_react211.forwardRef)((props, ref) => {
     var _props$style, _props$style2;
-    var observerRef = (0, import_react205.useRef)(null);
-    var [sizes, setSizes] = (0, import_react205.useState)({
+    var observerRef = (0, import_react211.useRef)(null);
+    var [sizes, setSizes] = (0, import_react211.useState)({
       containerWidth: getNumberOrZero((_props$style = props.style) === null || _props$style === void 0 ? void 0 : _props$style.width),
       containerHeight: getNumberOrZero((_props$style2 = props.style) === null || _props$style2 === void 0 ? void 0 : _props$style2.height)
     });
-    var setContainerSize = (0, import_react205.useCallback)((newWidth, newHeight) => {
+    var setContainerSize = (0, import_react211.useCallback)((newWidth, newHeight) => {
       setSizes((prevState) => {
         var roundedWidth = Math.round(newWidth);
         var roundedHeight = Math.round(newHeight);
@@ -123959,7 +127573,7 @@ html body {
         };
       });
     }, []);
-    var innerRef = (0, import_react205.useCallback)((node2) => {
+    var innerRef = (0, import_react211.useCallback)((node2) => {
       if (typeof ref === "function") {
         ref(node2);
       }
@@ -123989,7 +127603,7 @@ html body {
         observerRef.current = observer2;
       }
     }, [ref, setContainerSize]);
-    (0, import_react205.useEffect)(() => {
+    (0, import_react211.useEffect)(() => {
       return () => {
         var observer2 = observerRef.current;
         if (observer2 != null) {
@@ -123997,23 +127611,23 @@ html body {
         }
       };
     }, [setContainerSize]);
-    return /* @__PURE__ */ React551.createElement(React551.Fragment, null, /* @__PURE__ */ React551.createElement(ReportChartSize, {
+    return /* @__PURE__ */ React566.createElement(React566.Fragment, null, /* @__PURE__ */ React566.createElement(ReportChartSize, {
       width: sizes.containerWidth,
       height: sizes.containerHeight
-    }), /* @__PURE__ */ React551.createElement("div", _extends159({
+    }), /* @__PURE__ */ React566.createElement("div", _extends172({
       ref: innerRef
     }, props)));
   });
-  var ReadSizeOnceDiv = /* @__PURE__ */ (0, import_react205.forwardRef)((props, ref) => {
+  var ReadSizeOnceDiv = /* @__PURE__ */ (0, import_react211.forwardRef)((props, ref) => {
     var {
       width,
       height
     } = props;
-    var [sizes, setSizes] = (0, import_react205.useState)({
+    var [sizes, setSizes] = (0, import_react211.useState)({
       containerWidth: getNumberOrZero(width),
       containerHeight: getNumberOrZero(height)
     });
-    var setContainerSize = (0, import_react205.useCallback)((newWidth, newHeight) => {
+    var setContainerSize = (0, import_react211.useCallback)((newWidth, newHeight) => {
       setSizes((prevState) => {
         var roundedWidth = Math.round(newWidth);
         var roundedHeight = Math.round(newHeight);
@@ -124026,7 +127640,7 @@ html body {
         };
       });
     }, []);
-    var innerRef = (0, import_react205.useCallback)((node2) => {
+    var innerRef = (0, import_react211.useCallback)((node2) => {
       if (typeof ref === "function") {
         ref(node2);
       }
@@ -124038,53 +127652,53 @@ html body {
         setContainerSize(containerWidth, containerHeight);
       }
     }, [ref, setContainerSize]);
-    return /* @__PURE__ */ React551.createElement(React551.Fragment, null, /* @__PURE__ */ React551.createElement(ReportChartSize, {
+    return /* @__PURE__ */ React566.createElement(React566.Fragment, null, /* @__PURE__ */ React566.createElement(ReportChartSize, {
       width: sizes.containerWidth,
       height: sizes.containerHeight
-    }), /* @__PURE__ */ React551.createElement("div", _extends159({
+    }), /* @__PURE__ */ React566.createElement("div", _extends172({
       ref: innerRef
     }, props)));
   });
-  var StaticDiv = /* @__PURE__ */ (0, import_react205.forwardRef)((props, ref) => {
+  var StaticDiv = /* @__PURE__ */ (0, import_react211.forwardRef)((props, ref) => {
     var {
       width,
       height
     } = props;
-    return /* @__PURE__ */ React551.createElement(React551.Fragment, null, /* @__PURE__ */ React551.createElement(ReportChartSize, {
+    return /* @__PURE__ */ React566.createElement(React566.Fragment, null, /* @__PURE__ */ React566.createElement(ReportChartSize, {
       width,
       height
-    }), /* @__PURE__ */ React551.createElement("div", _extends159({
+    }), /* @__PURE__ */ React566.createElement("div", _extends172({
       ref
     }, props)));
   });
-  var NonResponsiveDiv = /* @__PURE__ */ (0, import_react205.forwardRef)((props, ref) => {
+  var NonResponsiveDiv = /* @__PURE__ */ (0, import_react211.forwardRef)((props, ref) => {
     var {
       width,
       height
     } = props;
     if (typeof width === "string" || typeof height === "string") {
-      return /* @__PURE__ */ React551.createElement(ReadSizeOnceDiv, _extends159({}, props, {
+      return /* @__PURE__ */ React566.createElement(ReadSizeOnceDiv, _extends172({}, props, {
         ref
       }));
     }
     if (typeof width === "number" && typeof height === "number") {
-      return /* @__PURE__ */ React551.createElement(StaticDiv, _extends159({}, props, {
+      return /* @__PURE__ */ React566.createElement(StaticDiv, _extends172({}, props, {
         width,
         height,
         ref
       }));
     }
-    return /* @__PURE__ */ React551.createElement(React551.Fragment, null, /* @__PURE__ */ React551.createElement(ReportChartSize, {
+    return /* @__PURE__ */ React566.createElement(React566.Fragment, null, /* @__PURE__ */ React566.createElement(ReportChartSize, {
       width,
       height
-    }), /* @__PURE__ */ React551.createElement("div", _extends159({
+    }), /* @__PURE__ */ React566.createElement("div", _extends172({
       ref
     }, props)));
   });
   function getWrapperDivComponent(responsive) {
     return responsive ? ResponsiveDiv : NonResponsiveDiv;
   }
-  var RechartsWrapper = /* @__PURE__ */ (0, import_react205.forwardRef)((props, ref) => {
+  var RechartsWrapper = /* @__PURE__ */ (0, import_react211.forwardRef)((props, ref) => {
     var {
       children,
       className,
@@ -124105,15 +127719,15 @@ html body {
       responsive,
       dispatchTouchEvents = true
     } = props;
-    var containerRef = (0, import_react205.useRef)(null);
+    var containerRef = (0, import_react211.useRef)(null);
     var dispatch = useAppDispatch();
-    var [tooltipPortal, setTooltipPortal] = (0, import_react205.useState)(null);
-    var [legendPortal, setLegendPortal] = (0, import_react205.useState)(null);
+    var [tooltipPortal, setTooltipPortal] = (0, import_react211.useState)(null);
+    var [legendPortal, setLegendPortal] = (0, import_react211.useState)(null);
     var setScaleRef = useReportScale();
     var responsiveContainerCalculations = useResponsiveContainerContext();
     var width = (responsiveContainerCalculations === null || responsiveContainerCalculations === void 0 ? void 0 : responsiveContainerCalculations.width) > 0 ? responsiveContainerCalculations.width : widthFromProps;
     var height = (responsiveContainerCalculations === null || responsiveContainerCalculations === void 0 ? void 0 : responsiveContainerCalculations.height) > 0 ? responsiveContainerCalculations.height : heightFromProps;
-    var innerRef = (0, import_react205.useCallback)((node2) => {
+    var innerRef = (0, import_react211.useCallback)((node2) => {
       setScaleRef(node2);
       if (typeof ref === "function") {
         ref(node2);
@@ -124124,74 +127738,74 @@ html body {
         containerRef.current = node2;
       }
     }, [setScaleRef, ref, setTooltipPortal, setLegendPortal]);
-    var myOnClick = (0, import_react205.useCallback)((e4) => {
+    var myOnClick = (0, import_react211.useCallback)((e4) => {
       dispatch(mouseClickAction(e4));
       dispatch(externalEventAction({
         handler: onClick,
         reactEvent: e4
       }));
     }, [dispatch, onClick]);
-    var myOnMouseEnter = (0, import_react205.useCallback)((e4) => {
+    var myOnMouseEnter = (0, import_react211.useCallback)((e4) => {
       dispatch(mouseMoveAction(e4));
       dispatch(externalEventAction({
         handler: onMouseEnter,
         reactEvent: e4
       }));
     }, [dispatch, onMouseEnter]);
-    var myOnMouseLeave = (0, import_react205.useCallback)((e4) => {
+    var myOnMouseLeave = (0, import_react211.useCallback)((e4) => {
       dispatch(mouseLeaveChart());
       dispatch(externalEventAction({
         handler: onMouseLeave,
         reactEvent: e4
       }));
     }, [dispatch, onMouseLeave]);
-    var myOnMouseMove = (0, import_react205.useCallback)((e4) => {
+    var myOnMouseMove = (0, import_react211.useCallback)((e4) => {
       dispatch(mouseMoveAction(e4));
       dispatch(externalEventAction({
         handler: onMouseMove,
         reactEvent: e4
       }));
     }, [dispatch, onMouseMove]);
-    var onFocus = (0, import_react205.useCallback)(() => {
+    var onFocus = (0, import_react211.useCallback)(() => {
       dispatch(focusAction());
     }, [dispatch]);
-    var onBlur = (0, import_react205.useCallback)(() => {
+    var onBlur = (0, import_react211.useCallback)(() => {
       dispatch(blurAction());
     }, [dispatch]);
-    var onKeyDown2 = (0, import_react205.useCallback)((e4) => {
+    var onKeyDown2 = (0, import_react211.useCallback)((e4) => {
       dispatch(keyDownAction(e4.key));
     }, [dispatch]);
-    var myOnContextMenu = (0, import_react205.useCallback)((e4) => {
+    var myOnContextMenu = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onContextMenu,
         reactEvent: e4
       }));
     }, [dispatch, onContextMenu]);
-    var myOnDoubleClick = (0, import_react205.useCallback)((e4) => {
+    var myOnDoubleClick = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onDoubleClick,
         reactEvent: e4
       }));
     }, [dispatch, onDoubleClick]);
-    var myOnMouseDown = (0, import_react205.useCallback)((e4) => {
+    var myOnMouseDown = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onMouseDown,
         reactEvent: e4
       }));
     }, [dispatch, onMouseDown]);
-    var myOnMouseUp = (0, import_react205.useCallback)((e4) => {
+    var myOnMouseUp = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onMouseUp,
         reactEvent: e4
       }));
     }, [dispatch, onMouseUp]);
-    var myOnTouchStart = (0, import_react205.useCallback)((e4) => {
+    var myOnTouchStart = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onTouchStart,
         reactEvent: e4
       }));
     }, [dispatch, onTouchStart]);
-    var myOnTouchMove = (0, import_react205.useCallback)((e4) => {
+    var myOnTouchMove = (0, import_react211.useCallback)((e4) => {
       if (dispatchTouchEvents) {
         dispatch(touchEventAction(e4));
       }
@@ -124200,22 +127814,22 @@ html body {
         reactEvent: e4
       }));
     }, [dispatch, dispatchTouchEvents, onTouchMove]);
-    var myOnTouchEnd = (0, import_react205.useCallback)((e4) => {
+    var myOnTouchEnd = (0, import_react211.useCallback)((e4) => {
       dispatch(externalEventAction({
         handler: onTouchEnd,
         reactEvent: e4
       }));
     }, [dispatch, onTouchEnd]);
     var WrapperDiv = getWrapperDivComponent(responsive);
-    return /* @__PURE__ */ React551.createElement(TooltipPortalContext.Provider, {
+    return /* @__PURE__ */ React566.createElement(TooltipPortalContext.Provider, {
       value: tooltipPortal
-    }, /* @__PURE__ */ React551.createElement(LegendPortalContext.Provider, {
+    }, /* @__PURE__ */ React566.createElement(LegendPortalContext.Provider, {
       value: legendPortal
-    }, /* @__PURE__ */ React551.createElement(WrapperDiv, {
+    }, /* @__PURE__ */ React566.createElement(WrapperDiv, {
       width: width !== null && width !== void 0 ? width : style2 === null || style2 === void 0 ? void 0 : style2.width,
       height: height !== null && height !== void 0 ? height : style2 === null || style2 === void 0 ? void 0 : style2.height,
       className: clsx("recharts-wrapper", className),
-      style: _objectSpread51({
+      style: _objectSpread59({
         position: "relative",
         cursor: "default",
         width,
@@ -124236,15 +127850,15 @@ html body {
       onTouchMove: myOnTouchMove,
       onTouchStart: myOnTouchStart,
       ref: innerRef
-    }, /* @__PURE__ */ React551.createElement(EventSynchronizer, null), children)));
+    }, /* @__PURE__ */ React566.createElement(EventSynchronizer, null), children)));
   });
 
   // ../temple_donation/node_modules/recharts/es6/chart/CategoricalChart.js
-  var _excluded18 = ["width", "height", "responsive", "children", "className", "style", "compact", "title", "desc"];
-  function _objectWithoutProperties17(e4, t2) {
+  var _excluded37 = ["width", "height", "responsive", "children", "className", "style", "compact", "title", "desc"];
+  function _objectWithoutProperties24(e4, t2) {
     if (null == e4)
       return {};
-    var o3, r3, i = _objectWithoutPropertiesLoose17(e4, t2);
+    var o3, r3, i = _objectWithoutPropertiesLoose24(e4, t2);
     if (Object.getOwnPropertySymbols) {
       var n2 = Object.getOwnPropertySymbols(e4);
       for (r3 = 0; r3 < n2.length; r3++)
@@ -124252,7 +127866,7 @@ html body {
     }
     return i;
   }
-  function _objectWithoutPropertiesLoose17(r3, e4) {
+  function _objectWithoutPropertiesLoose24(r3, e4) {
     if (null == r3)
       return {};
     var t2 = {};
@@ -124264,7 +127878,7 @@ html body {
       }
     return t2;
   }
-  var CategoricalChart = /* @__PURE__ */ (0, import_react206.forwardRef)((props, ref) => {
+  var CategoricalChart = /* @__PURE__ */ (0, import_react212.forwardRef)((props, ref) => {
     var {
       width,
       height,
@@ -124275,19 +127889,19 @@ html body {
       compact,
       title,
       desc
-    } = props, others = _objectWithoutProperties17(props, _excluded18);
+    } = props, others = _objectWithoutProperties24(props, _excluded37);
     var attrs = svgPropertiesNoEvents(others);
     if (compact) {
-      return /* @__PURE__ */ React552.createElement(React552.Fragment, null, /* @__PURE__ */ React552.createElement(ReportChartSize, {
+      return /* @__PURE__ */ React567.createElement(React567.Fragment, null, /* @__PURE__ */ React567.createElement(ReportChartSize, {
         width,
         height
-      }), /* @__PURE__ */ React552.createElement(RootSurface, {
+      }), /* @__PURE__ */ React567.createElement(RootSurface, {
         otherAttributes: attrs,
         title,
         desc
       }, children));
     }
-    return /* @__PURE__ */ React552.createElement(RechartsWrapper, {
+    return /* @__PURE__ */ React567.createElement(RechartsWrapper, {
       className,
       style: style2,
       width,
@@ -124304,68 +127918,26 @@ html body {
       onTouchStart: props.onTouchStart,
       onTouchMove: props.onTouchMove,
       onTouchEnd: props.onTouchEnd
-    }, /* @__PURE__ */ React552.createElement(RootSurface, {
+    }, /* @__PURE__ */ React567.createElement(RootSurface, {
       otherAttributes: attrs,
       title,
       desc,
       ref
-    }, /* @__PURE__ */ React552.createElement(ClipPathProvider, null, children)));
+    }, /* @__PURE__ */ React567.createElement(ClipPathProvider, null, children)));
   });
 
-  // ../temple_donation/node_modules/recharts/es6/chart/PieChart.js
-  var React554 = __toESM(require_react());
-  var import_react209 = __toESM(require_react());
-
-  // ../temple_donation/node_modules/recharts/es6/chart/PolarChart.js
-  var import_react208 = __toESM(require_react());
-  var React553 = __toESM(require_react());
-
-  // ../temple_donation/node_modules/recharts/es6/state/ReportPolarOptions.js
-  var import_react207 = __toESM(require_react());
-  function ReportPolarOptions(props) {
-    var dispatch = useAppDispatch();
-    (0, import_react207.useEffect)(() => {
-      dispatch(updatePolarOptions(props));
-    }, [dispatch, props]);
-    return null;
-  }
-
-  // ../temple_donation/node_modules/recharts/es6/chart/PolarChart.js
-  var _excluded19 = ["layout"];
-  function _extends160() {
-    return _extends160 = Object.assign ? Object.assign.bind() : function(n2) {
+  // ../temple_donation/node_modules/recharts/es6/chart/CartesianChart.js
+  function _extends173() {
+    return _extends173 = Object.assign ? Object.assign.bind() : function(n2) {
       for (var e4 = 1; e4 < arguments.length; e4++) {
         var t2 = arguments[e4];
         for (var r3 in t2)
           ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
       }
       return n2;
-    }, _extends160.apply(null, arguments);
+    }, _extends173.apply(null, arguments);
   }
-  function _objectWithoutProperties18(e4, t2) {
-    if (null == e4)
-      return {};
-    var o3, r3, i = _objectWithoutPropertiesLoose18(e4, t2);
-    if (Object.getOwnPropertySymbols) {
-      var n2 = Object.getOwnPropertySymbols(e4);
-      for (r3 = 0; r3 < n2.length; r3++)
-        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
-    }
-    return i;
-  }
-  function _objectWithoutPropertiesLoose18(r3, e4) {
-    if (null == r3)
-      return {};
-    var t2 = {};
-    for (var n2 in r3)
-      if ({}.hasOwnProperty.call(r3, n2)) {
-        if (-1 !== e4.indexOf(n2))
-          continue;
-        t2[n2] = r3[n2];
-      }
-    return t2;
-  }
-  function ownKeys52(e4, r3) {
+  function ownKeys60(e4, r3) {
     var t2 = Object.keys(e4);
     if (Object.getOwnPropertySymbols) {
       var o3 = Object.getOwnPropertySymbols(e4);
@@ -124375,25 +127947,25 @@ html body {
     }
     return t2;
   }
-  function _objectSpread52(e4) {
+  function _objectSpread60(e4) {
     for (var r3 = 1; r3 < arguments.length; r3++) {
       var t2 = null != arguments[r3] ? arguments[r3] : {};
-      r3 % 2 ? ownKeys52(Object(t2), true).forEach(function(r4) {
-        _defineProperty64(e4, r4, t2[r4]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys52(Object(t2)).forEach(function(r4) {
+      r3 % 2 ? ownKeys60(Object(t2), true).forEach(function(r4) {
+        _defineProperty72(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys60(Object(t2)).forEach(function(r4) {
         Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
       });
     }
     return e4;
   }
-  function _defineProperty64(e4, r3, t2) {
-    return (r3 = _toPropertyKey63(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  function _defineProperty72(e4, r3, t2) {
+    return (r3 = _toPropertyKey71(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
   }
-  function _toPropertyKey63(t2) {
-    var i = _toPrimitive63(t2, "string");
+  function _toPropertyKey71(t2) {
+    var i = _toPrimitive71(t2, "string");
     return "symbol" == typeof i ? i : i + "";
   }
-  function _toPrimitive63(t2, r3) {
+  function _toPrimitive71(t2, r3) {
     if ("object" != typeof t2 || !t2)
       return t2;
     var e4 = t2[Symbol.toPrimitive];
@@ -124411,12 +127983,169 @@ html body {
     bottom: 5,
     left: 5
   };
-  var defaultPolarChartProps = _objectSpread52({
+  var defaultCartesianChartProps = _objectSpread60({
+    accessibilityLayer: true,
+    barCategoryGap: "10%",
+    barGap: 4,
+    layout: "horizontal",
+    margin: defaultMargin,
+    responsive: false,
+    reverseStackOrder: false,
+    stackOffset: "none",
+    syncMethod: "index"
+  }, initialEventSettingsState);
+  var CartesianChart = /* @__PURE__ */ (0, import_react213.forwardRef)(function CartesianChart2(props, ref) {
+    var _categoricalChartProp;
+    var rootChartProps = resolveDefaultProps(props.categoricalChartProps, defaultCartesianChartProps);
+    var {
+      chartName,
+      defaultTooltipEventType,
+      validateTooltipEventTypes,
+      tooltipPayloadSearcher,
+      categoricalChartProps
+    } = props;
+    var options = {
+      chartName,
+      defaultTooltipEventType,
+      validateTooltipEventTypes,
+      tooltipPayloadSearcher,
+      eventEmitter: void 0
+    };
+    return /* @__PURE__ */ React568.createElement(RechartsStoreProvider, {
+      preloadedState: {
+        options
+      },
+      reduxStoreName: (_categoricalChartProp = categoricalChartProps.id) !== null && _categoricalChartProp !== void 0 ? _categoricalChartProp : chartName
+    }, /* @__PURE__ */ React568.createElement(ChartDataContextProvider, {
+      chartData: categoricalChartProps.data
+    }), /* @__PURE__ */ React568.createElement(ReportMainChartProps, {
+      layout: rootChartProps.layout,
+      margin: rootChartProps.margin
+    }), /* @__PURE__ */ React568.createElement(ReportEventSettings, {
+      throttleDelay: rootChartProps.throttleDelay,
+      throttledEvents: rootChartProps.throttledEvents
+    }), /* @__PURE__ */ React568.createElement(ReportChartProps, {
+      baseValue: rootChartProps.baseValue,
+      accessibilityLayer: rootChartProps.accessibilityLayer,
+      barCategoryGap: rootChartProps.barCategoryGap,
+      maxBarSize: rootChartProps.maxBarSize,
+      stackOffset: rootChartProps.stackOffset,
+      barGap: rootChartProps.barGap,
+      barSize: rootChartProps.barSize,
+      syncId: rootChartProps.syncId,
+      syncMethod: rootChartProps.syncMethod,
+      className: rootChartProps.className,
+      reverseStackOrder: rootChartProps.reverseStackOrder
+    }), /* @__PURE__ */ React568.createElement(CategoricalChart, _extends173({}, rootChartProps, {
+      ref
+    })));
+  });
+
+  // ../temple_donation/node_modules/recharts/es6/chart/PieChart.js
+  var React570 = __toESM(require_react());
+  var import_react216 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/recharts/es6/chart/PolarChart.js
+  var import_react215 = __toESM(require_react());
+  var React569 = __toESM(require_react());
+
+  // ../temple_donation/node_modules/recharts/es6/state/ReportPolarOptions.js
+  var import_react214 = __toESM(require_react());
+  function ReportPolarOptions(props) {
+    var dispatch = useAppDispatch();
+    (0, import_react214.useEffect)(() => {
+      dispatch(updatePolarOptions(props));
+    }, [dispatch, props]);
+    return null;
+  }
+
+  // ../temple_donation/node_modules/recharts/es6/chart/PolarChart.js
+  var _excluded38 = ["layout"];
+  function _extends174() {
+    return _extends174 = Object.assign ? Object.assign.bind() : function(n2) {
+      for (var e4 = 1; e4 < arguments.length; e4++) {
+        var t2 = arguments[e4];
+        for (var r3 in t2)
+          ({}).hasOwnProperty.call(t2, r3) && (n2[r3] = t2[r3]);
+      }
+      return n2;
+    }, _extends174.apply(null, arguments);
+  }
+  function _objectWithoutProperties25(e4, t2) {
+    if (null == e4)
+      return {};
+    var o3, r3, i = _objectWithoutPropertiesLoose25(e4, t2);
+    if (Object.getOwnPropertySymbols) {
+      var n2 = Object.getOwnPropertySymbols(e4);
+      for (r3 = 0; r3 < n2.length; r3++)
+        o3 = n2[r3], -1 === t2.indexOf(o3) && {}.propertyIsEnumerable.call(e4, o3) && (i[o3] = e4[o3]);
+    }
+    return i;
+  }
+  function _objectWithoutPropertiesLoose25(r3, e4) {
+    if (null == r3)
+      return {};
+    var t2 = {};
+    for (var n2 in r3)
+      if ({}.hasOwnProperty.call(r3, n2)) {
+        if (-1 !== e4.indexOf(n2))
+          continue;
+        t2[n2] = r3[n2];
+      }
+    return t2;
+  }
+  function ownKeys61(e4, r3) {
+    var t2 = Object.keys(e4);
+    if (Object.getOwnPropertySymbols) {
+      var o3 = Object.getOwnPropertySymbols(e4);
+      r3 && (o3 = o3.filter(function(r4) {
+        return Object.getOwnPropertyDescriptor(e4, r4).enumerable;
+      })), t2.push.apply(t2, o3);
+    }
+    return t2;
+  }
+  function _objectSpread61(e4) {
+    for (var r3 = 1; r3 < arguments.length; r3++) {
+      var t2 = null != arguments[r3] ? arguments[r3] : {};
+      r3 % 2 ? ownKeys61(Object(t2), true).forEach(function(r4) {
+        _defineProperty73(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys61(Object(t2)).forEach(function(r4) {
+        Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
+      });
+    }
+    return e4;
+  }
+  function _defineProperty73(e4, r3, t2) {
+    return (r3 = _toPropertyKey72(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  }
+  function _toPropertyKey72(t2) {
+    var i = _toPrimitive72(t2, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _toPrimitive72(t2, r3) {
+    if ("object" != typeof t2 || !t2)
+      return t2;
+    var e4 = t2[Symbol.toPrimitive];
+    if (void 0 !== e4) {
+      var i = e4.call(t2, r3 || "default");
+      if ("object" != typeof i)
+        return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r3 ? String : Number)(t2);
+  }
+  var defaultMargin2 = {
+    top: 5,
+    right: 5,
+    bottom: 5,
+    left: 5
+  };
+  var defaultPolarChartProps = _objectSpread61({
     accessibilityLayer: true,
     stackOffset: "none",
     barCategoryGap: "10%",
     barGap: 4,
-    margin: defaultMargin,
+    margin: defaultMargin2,
     reverseStackOrder: false,
     syncMethod: "index",
     layout: "radial",
@@ -124426,12 +128155,12 @@ html body {
     innerRadius: 0,
     outerRadius: "80%"
   }, initialEventSettingsState);
-  var PolarChart = /* @__PURE__ */ (0, import_react208.forwardRef)(function PolarChart2(props, ref) {
+  var PolarChart = /* @__PURE__ */ (0, import_react215.forwardRef)(function PolarChart2(props, ref) {
     var _polarChartProps$id;
     var polarChartProps = resolveDefaultProps(props.categoricalChartProps, defaultPolarChartProps);
     var {
       layout
-    } = polarChartProps, otherCategoricalProps = _objectWithoutProperties18(polarChartProps, _excluded19);
+    } = polarChartProps, otherCategoricalProps = _objectWithoutProperties25(polarChartProps, _excluded38);
     var {
       chartName,
       defaultTooltipEventType,
@@ -124445,20 +128174,20 @@ html body {
       tooltipPayloadSearcher,
       eventEmitter: void 0
     };
-    return /* @__PURE__ */ React553.createElement(RechartsStoreProvider, {
+    return /* @__PURE__ */ React569.createElement(RechartsStoreProvider, {
       preloadedState: {
         options
       },
       reduxStoreName: (_polarChartProps$id = polarChartProps.id) !== null && _polarChartProps$id !== void 0 ? _polarChartProps$id : chartName
-    }, /* @__PURE__ */ React553.createElement(ChartDataContextProvider, {
+    }, /* @__PURE__ */ React569.createElement(ChartDataContextProvider, {
       chartData: polarChartProps.data
-    }), /* @__PURE__ */ React553.createElement(ReportMainChartProps, {
+    }), /* @__PURE__ */ React569.createElement(ReportMainChartProps, {
       layout,
       margin: polarChartProps.margin
-    }), /* @__PURE__ */ React553.createElement(ReportEventSettings, {
+    }), /* @__PURE__ */ React569.createElement(ReportEventSettings, {
       throttleDelay: polarChartProps.throttleDelay,
       throttledEvents: polarChartProps.throttledEvents
-    }), /* @__PURE__ */ React553.createElement(ReportChartProps, {
+    }), /* @__PURE__ */ React569.createElement(ReportChartProps, {
       baseValue: void 0,
       accessibilityLayer: polarChartProps.accessibilityLayer,
       barCategoryGap: polarChartProps.barCategoryGap,
@@ -124470,20 +128199,20 @@ html body {
       syncMethod: polarChartProps.syncMethod,
       className: polarChartProps.className,
       reverseStackOrder: polarChartProps.reverseStackOrder
-    }), /* @__PURE__ */ React553.createElement(ReportPolarOptions, {
+    }), /* @__PURE__ */ React569.createElement(ReportPolarOptions, {
       cx: polarChartProps.cx,
       cy: polarChartProps.cy,
       startAngle: polarChartProps.startAngle,
       endAngle: polarChartProps.endAngle,
       innerRadius: polarChartProps.innerRadius,
       outerRadius: polarChartProps.outerRadius
-    }), /* @__PURE__ */ React553.createElement(CategoricalChart, _extends160({}, otherCategoricalProps, {
+    }), /* @__PURE__ */ React569.createElement(CategoricalChart, _extends174({}, otherCategoricalProps, {
       ref
     })));
   });
 
   // ../temple_donation/node_modules/recharts/es6/chart/PieChart.js
-  function ownKeys53(e4, r3) {
+  function ownKeys62(e4, r3) {
     var t2 = Object.keys(e4);
     if (Object.getOwnPropertySymbols) {
       var o3 = Object.getOwnPropertySymbols(e4);
@@ -124493,25 +128222,25 @@ html body {
     }
     return t2;
   }
-  function _objectSpread53(e4) {
+  function _objectSpread62(e4) {
     for (var r3 = 1; r3 < arguments.length; r3++) {
       var t2 = null != arguments[r3] ? arguments[r3] : {};
-      r3 % 2 ? ownKeys53(Object(t2), true).forEach(function(r4) {
-        _defineProperty65(e4, r4, t2[r4]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys53(Object(t2)).forEach(function(r4) {
+      r3 % 2 ? ownKeys62(Object(t2), true).forEach(function(r4) {
+        _defineProperty74(e4, r4, t2[r4]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e4, Object.getOwnPropertyDescriptors(t2)) : ownKeys62(Object(t2)).forEach(function(r4) {
         Object.defineProperty(e4, r4, Object.getOwnPropertyDescriptor(t2, r4));
       });
     }
     return e4;
   }
-  function _defineProperty65(e4, r3, t2) {
-    return (r3 = _toPropertyKey64(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
+  function _defineProperty74(e4, r3, t2) {
+    return (r3 = _toPropertyKey73(r3)) in e4 ? Object.defineProperty(e4, r3, { value: t2, enumerable: true, configurable: true, writable: true }) : e4[r3] = t2, e4;
   }
-  function _toPropertyKey64(t2) {
-    var i = _toPrimitive64(t2, "string");
+  function _toPropertyKey73(t2) {
+    var i = _toPrimitive73(t2, "string");
     return "symbol" == typeof i ? i : i + "";
   }
-  function _toPrimitive64(t2, r3) {
+  function _toPrimitive73(t2, r3) {
     if ("object" != typeof t2 || !t2)
       return t2;
     var e4 = t2[Symbol.toPrimitive];
@@ -124524,14 +128253,14 @@ html body {
     return ("string" === r3 ? String : Number)(t2);
   }
   var allowedTooltipTypes = ["item"];
-  var defaultPieChartProps = _objectSpread53(_objectSpread53({}, defaultPolarChartProps), {}, {
+  var defaultPieChartProps = _objectSpread62(_objectSpread62({}, defaultPolarChartProps), {}, {
     layout: "centric",
     startAngle: 0,
     endAngle: 360
   });
-  var PieChart = /* @__PURE__ */ (0, import_react209.forwardRef)((props, ref) => {
+  var PieChart = /* @__PURE__ */ (0, import_react216.forwardRef)((props, ref) => {
     var propsWithDefaults = resolveDefaultProps(props, defaultPieChartProps);
-    return /* @__PURE__ */ React554.createElement(PolarChart, {
+    return /* @__PURE__ */ React570.createElement(PolarChart, {
       chartName: "PieChart",
       defaultTooltipEventType: "item",
       validateTooltipEventTypes: allowedTooltipTypes,
@@ -124541,11 +128270,27 @@ html body {
     });
   });
 
+  // ../temple_donation/node_modules/recharts/es6/chart/AreaChart.js
+  var React571 = __toESM(require_react());
+  var import_react217 = __toESM(require_react());
+  var allowedTooltipTypes2 = ["axis"];
+  var AreaChart = /* @__PURE__ */ (0, import_react217.forwardRef)((props, ref) => {
+    return /* @__PURE__ */ React571.createElement(CartesianChart, {
+      chartName: "AreaChart",
+      defaultTooltipEventType: "axis",
+      validateTooltipEventTypes: allowedTooltipTypes2,
+      tooltipPayloadSearcher: arrayTooltipSearcher,
+      categoricalChartProps: props,
+      ref
+    });
+  });
+
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
   var import_dayjs3 = __toESM(require_dayjs_min());
+  var import_relativeTime = __toESM(require_relativeTime());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/PageHeader.jsx
-  var import_react210 = __toESM(require_react());
+  var import_react218 = __toESM(require_react());
   var { Title: Title3, Text: Text3 } = typography_default;
   var PageHeader = ({
     title,
@@ -124559,69 +128304,72 @@ html body {
     searchPlaceholder = "Search...",
     extra
   }) => {
-    return /* @__PURE__ */ import_react210.default.createElement("header", {
+    return /* @__PURE__ */ import_react218.default.createElement("header", {
       className: "mb-8"
-    }, /* @__PURE__ */ import_react210.default.createElement("div", {
+    }, /* @__PURE__ */ import_react218.default.createElement("div", {
       className: "flex flex-col md:flex-row md:items-center justify-between gap-4"
-    }, /* @__PURE__ */ import_react210.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react218.default.createElement(space_default, {
       size: 16,
       align: "start"
-    }, onBack && /* @__PURE__ */ import_react210.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react210.default.createElement(ArrowLeftOutlined_default2, null),
+    }, onBack && /* @__PURE__ */ import_react218.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react218.default.createElement(ArrowLeftOutlined_default2, null),
       onClick: onBack,
       className: "h-10 w-10 flex items-center justify-center hover:text-black border-zinc-200 transition-all font-bold mt-1"
-    }), /* @__PURE__ */ import_react210.default.createElement("div", null, subtitle && /* @__PURE__ */ import_react210.default.createElement(Text3, {
+    }), /* @__PURE__ */ import_react218.default.createElement("div", null, subtitle && /* @__PURE__ */ import_react218.default.createElement(Text3, {
       className: "text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 block mb-1"
-    }, subtitle), /* @__PURE__ */ import_react210.default.createElement(Title3, {
+    }, subtitle), /* @__PURE__ */ import_react218.default.createElement(Title3, {
       level: 2,
       className: "!m-0 font-bold tracking-tight text-zinc-900 leading-none"
-    }, title), description && /* @__PURE__ */ import_react210.default.createElement(Text3, {
+    }, title), description && /* @__PURE__ */ import_react218.default.createElement(Text3, {
       className: "text-zinc-400 text-sm mt-1 block"
-    }, description))), /* @__PURE__ */ import_react210.default.createElement("div", {
+    }, description))), /* @__PURE__ */ import_react218.default.createElement("div", {
       className: "flex items-center gap-3"
-    }, onSearch && /* @__PURE__ */ import_react210.default.createElement(input_default, {
+    }, onSearch && /* @__PURE__ */ import_react218.default.createElement(input_default, {
       placeholder: searchPlaceholder,
-      prefix: /* @__PURE__ */ import_react210.default.createElement(SearchOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react218.default.createElement(SearchOutlined_default2, {
         className: "text-zinc-400"
       }),
       onChange: (e4) => onSearch(e4.target.value),
       className: "h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
-    }), onExport && /* @__PURE__ */ import_react210.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react210.default.createElement(DownloadOutlined_default2, null),
+    }), onExport && /* @__PURE__ */ import_react218.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react218.default.createElement(DownloadOutlined_default2, null),
       onClick: onExport,
       className: "h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
-    }, "Export"), onAdd && /* @__PURE__ */ import_react210.default.createElement(button_default, {
+    }, "Export"), onAdd && /* @__PURE__ */ import_react218.default.createElement(button_default, {
       type: "primary",
-      icon: /* @__PURE__ */ import_react210.default.createElement(PlusOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react218.default.createElement(PlusOutlined_default2, null),
       onClick: onAdd,
       className: "h-10 px-6 bg-black font-bold"
-    }, addLabel), extra && /* @__PURE__ */ import_react210.default.createElement("div", {
+    }, addLabel), extra && /* @__PURE__ */ import_react218.default.createElement("div", {
       className: "flex items-center gap-3"
     }, extra))));
   };
   var PageHeader_default = PageHeader;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
+  import_dayjs3.default.extend(import_relativeTime.default);
   var { Title: Title4, Text: Text4 } = typography_default;
   var { RangePicker: RangePicker2 } = date_picker_default;
   var COLORS = ["#111", "#555", "#999", "#ccc"];
   var Dashboard = () => {
-    const [loading, setLoading] = (0, import_react211.useState)(true);
-    const [filters, setFilters] = (0, import_react211.useState)({
+    const [loading, setLoading] = (0, import_react219.useState)(true);
+    const [filters, setFilters] = (0, import_react219.useState)({
       temple: null,
       user: null,
       dateRange: null,
       dateType: null
     });
-    const [stats, setStats] = (0, import_react211.useState)({
+    const [stats, setStats] = (0, import_react219.useState)({
       total_donation: 0,
       top_category: "N/A",
       new_donors: 0
     });
-    const [typeData, setTypeData] = (0, import_react211.useState)([]);
-    const [topDonors, setTopDonors] = (0, import_react211.useState)([]);
-    const [temples, setTemples] = (0, import_react211.useState)([]);
-    const [users, setUsers] = (0, import_react211.useState)([]);
+    const [typeData, setTypeData] = (0, import_react219.useState)([]);
+    const [topDonors, setTopDonors] = (0, import_react219.useState)([]);
+    const [trendData, setTrendData] = (0, import_react219.useState)([]);
+    const [recentDonations, setRecentDonations] = (0, import_react219.useState)([]);
+    const [temples, setTemples] = (0, import_react219.useState)([]);
+    const [users, setUsers] = (0, import_react219.useState)([]);
     const fetchOptions = async () => {
       try {
         const [templeRes, userRes] = await Promise.all([
@@ -124650,7 +128398,7 @@ html body {
     const fetchData = async (params = {}) => {
       setLoading(true);
       try {
-        const [statsRes, typesRes, donorsRes] = await Promise.all([
+        const [statsRes, typesRes, donorsRes, trendRes, recentRes] = await Promise.all([
           frappe.call({
             method: "temple_donation.api.get_dashboard_stats",
             args: params
@@ -124662,18 +128410,28 @@ html body {
           frappe.call({
             method: "temple_donation.api.get_top_donors",
             args: params
+          }),
+          frappe.call({
+            method: "temple_donation.api.get_monthly_donations",
+            args: { temple: params.temple, user: params.user }
+          }),
+          frappe.call({
+            method: "temple_donation.api.get_recent_donations",
+            args: { temple: params.temple, user: params.user, limit: 5 }
           })
         ]);
         setStats(statsRes.message || {});
         setTypeData(typesRes.message || []);
         setTopDonors(donorsRes.message || []);
+        setTrendData(trendRes.message || []);
+        setRecentDonations(recentRes.message || []);
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
-    (0, import_react211.useEffect)(() => {
+    (0, import_react219.useEffect)(() => {
       fetchOptions();
       fetchData();
     }, []);
@@ -124712,24 +128470,24 @@ html body {
       });
       fetchData();
     };
-    if (loading) {
-      return /* @__PURE__ */ import_react211.default.createElement("div", {
-        className: "flex justify-center items-center min-h-[400px]"
-      }, /* @__PURE__ */ import_react211.default.createElement(spin_default, null));
+    if (loading && !stats.total_donation) {
+      return /* @__PURE__ */ import_react219.default.createElement("div", {
+        className: "flex justify-center items-center min-h-[90vh]"
+      }, /* @__PURE__ */ import_react219.default.createElement(spin_default, null));
     }
-    return /* @__PURE__ */ import_react211.default.createElement("div", null, /* @__PURE__ */ import_react211.default.createElement(PageHeader_default, {
+    return /* @__PURE__ */ import_react219.default.createElement("div", {
+      className: "py-6"
+    }, /* @__PURE__ */ import_react219.default.createElement(PageHeader_default, {
       title: "Dashboard",
-      subtitle: "Analytics Overview"
-    }), /* @__PURE__ */ import_react211.default.createElement("div", {
-      className: "p-6"
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
+      description: "Analytics Overview"
+    }), /* @__PURE__ */ import_react219.default.createElement(card_default, {
       className: "border border-zinc-200 mb-6"
-    }, /* @__PURE__ */ import_react211.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(row_default2, {
       gutter: [16, 16]
-    }, /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "Search By Temple"), /* @__PURE__ */ import_react211.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(Text4, null, "Search By Temple"), /* @__PURE__ */ import_react219.default.createElement(select_default, {
       value: filters.temple,
       onChange: (v) => setFilters(__spreadProps(__spreadValues({}, filters), { temple: v })),
       placeholder: "All",
@@ -124739,10 +128497,10 @@ html body {
         label: t2.temple_name,
         value: t2.name
       }))
-    })), /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    })), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "Search By User"), /* @__PURE__ */ import_react211.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(Text4, null, "Search By User"), /* @__PURE__ */ import_react219.default.createElement(select_default, {
       value: filters.user,
       onChange: (v) => setFilters(__spreadProps(__spreadValues({}, filters), { user: v })),
       placeholder: "All",
@@ -124752,104 +128510,179 @@ html body {
         label: u.full_name,
         value: u.name
       }))
-    })), /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    })), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "Filter By Date"), /* @__PURE__ */ import_react211.default.createElement(space_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(Text4, null, "Filter By Date"), /* @__PURE__ */ import_react219.default.createElement(space_default, {
       direction: "vertical",
       className: "w-full mt-1"
-    }, /* @__PURE__ */ import_react211.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(select_default, {
       placeholder: "Select Range",
       value: filters.dateType,
       onChange: handleDateTypeChange,
+      className: "w-full",
       options: [
         { label: "Today", value: "today" },
         { label: "This Week", value: "week" },
         { label: "This Month", value: "month" },
         { label: "Custom Range", value: "custom" }
       ]
-    }), filters.dateType === "custom" && /* @__PURE__ */ import_react211.default.createElement(RangePicker2, {
+    }), filters.dateType === "custom" && /* @__PURE__ */ import_react219.default.createElement(RangePicker2, {
       className: "w-full",
       value: filters.dateRange,
       onChange: (dates) => setFilters(__spreadProps(__spreadValues({}, filters), { dateRange: dates }))
-    })))), /* @__PURE__ */ import_react211.default.createElement("div", {
+    })))), /* @__PURE__ */ import_react219.default.createElement("div", {
       className: "flex justify-end gap-2 mt-4"
-    }, /* @__PURE__ */ import_react211.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(button_default, {
       onClick: handleClear
-    }, "Clear Filter"), /* @__PURE__ */ import_react211.default.createElement(button_default, {
+    }, "Clear Filter"), /* @__PURE__ */ import_react219.default.createElement(button_default, {
       type: "primary",
       onClick: handleSubmit
-    }, "Submit"))), /* @__PURE__ */ import_react211.default.createElement(row_default2, {
+    }, "Submit"))), /* @__PURE__ */ import_react219.default.createElement(row_default2, {
       gutter: [16, 16],
       className: "mb-6"
-    }, /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
       className: "border"
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "Total Donation"), /* @__PURE__ */ import_react211.default.createElement(Title4, {
-      level: 3
-    }, "\u20B9", stats.total_donation))), /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(space_default, {
+      align: "center",
+      className: "mb-2"
+    }, /* @__PURE__ */ import_react219.default.createElement(WalletOutlined_default2, {
+      className: "text-zinc-400"
+    }), /* @__PURE__ */ import_react219.default.createElement(Text4, null, "Total Donation")), /* @__PURE__ */ import_react219.default.createElement(Title4, {
+      level: 3,
+      className: "!m-0"
+    }, "\u20B9", (stats.total_donation || 0).toLocaleString()))), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
       className: "border"
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "Top Category"), /* @__PURE__ */ import_react211.default.createElement(Title4, {
-      level: 3
-    }, stats.top_category))), /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(space_default, {
+      align: "center",
+      className: "mb-2"
+    }, /* @__PURE__ */ import_react219.default.createElement(AppstoreOutlined_default2, {
+      className: "text-zinc-400"
+    }), /* @__PURE__ */ import_react219.default.createElement(Text4, null, "Top Category")), /* @__PURE__ */ import_react219.default.createElement(Title4, {
+      level: 3,
+      className: "!m-0 truncate"
+    }, stats.top_category))), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
       className: "border"
-    }, /* @__PURE__ */ import_react211.default.createElement(Text4, null, "New Donors"), /* @__PURE__ */ import_react211.default.createElement(Title4, {
-      level: 3
-    }, stats.new_donors)))), /* @__PURE__ */ import_react211.default.createElement(row_default2, {
-      gutter: [16, 16]
-    }, /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react219.default.createElement(space_default, {
+      align: "center",
+      className: "mb-2"
+    }, /* @__PURE__ */ import_react219.default.createElement(UserAddOutlined_default2, {
+      className: "text-zinc-400"
+    }), /* @__PURE__ */ import_react219.default.createElement(Text4, null, "New Donors")), /* @__PURE__ */ import_react219.default.createElement(Title4, {
+      level: 3,
+      className: "!m-0"
+    }, stats.new_donors)))), /* @__PURE__ */ import_react219.default.createElement(row_default2, {
+      gutter: [16, 16],
+      className: "mb-6"
+    }, /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
-      title: "Donation Distribution",
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react219.default.createElement(space_default, null, /* @__PURE__ */ import_react219.default.createElement(PieChartOutlined_default2, null), " Donation Distribution"),
       className: "border"
-    }, typeData.length > 0 ? /* @__PURE__ */ import_react211.default.createElement(ResponsiveContainer, {
+    }, typeData.length > 0 ? /* @__PURE__ */ import_react219.default.createElement(ResponsiveContainer, {
       width: "100%",
       height: 300
-    }, /* @__PURE__ */ import_react211.default.createElement(PieChart, null, /* @__PURE__ */ import_react211.default.createElement(Pie, {
+    }, /* @__PURE__ */ import_react219.default.createElement(PieChart, null, /* @__PURE__ */ import_react219.default.createElement(Pie, {
       data: typeData,
       dataKey: "value",
       nameKey: "type",
-      outerRadius: 100
-    }, typeData.map((_2, index2) => /* @__PURE__ */ import_react211.default.createElement(Cell2, {
+      outerRadius: 100,
+      stroke: "none"
+    }, typeData.map((_2, index2) => /* @__PURE__ */ import_react219.default.createElement(Cell2, {
       key: index2,
       fill: COLORS[index2 % COLORS.length]
-    }))), /* @__PURE__ */ import_react211.default.createElement(Tooltip3, null))) : /* @__PURE__ */ import_react211.default.createElement(empty_default2, null))), /* @__PURE__ */ import_react211.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react219.default.createElement(Tooltip3, null))) : /* @__PURE__ */ import_react219.default.createElement(empty_default2, null))), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react211.default.createElement(card_default, {
-      title: "Top Donors",
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react219.default.createElement(space_default, null, /* @__PURE__ */ import_react219.default.createElement(AreaChartOutlined_default2, null), " Collection Trend"),
       className: "border"
-    }, topDonors.length > 0 ? topDonors.map((d, i) => /* @__PURE__ */ import_react211.default.createElement("div", {
+    }, trendData.length > 0 ? /* @__PURE__ */ import_react219.default.createElement(ResponsiveContainer, {
+      width: "100%",
+      height: 300
+    }, /* @__PURE__ */ import_react219.default.createElement(AreaChart, {
+      data: trendData
+    }, /* @__PURE__ */ import_react219.default.createElement(CartesianGrid, {
+      strokeDasharray: "3 3",
+      vertical: false
+    }), /* @__PURE__ */ import_react219.default.createElement(XAxis, {
+      dataKey: "month",
+      axisLine: false,
+      tickLine: false
+    }), /* @__PURE__ */ import_react219.default.createElement(YAxis, {
+      axisLine: false,
+      tickLine: false
+    }), /* @__PURE__ */ import_react219.default.createElement(Tooltip3, null), /* @__PURE__ */ import_react219.default.createElement(Area, {
+      type: "monotone",
+      dataKey: "amount",
+      stroke: "#111",
+      fill: "#f4f4f5"
+    }))) : /* @__PURE__ */ import_react219.default.createElement(empty_default2, null)))), /* @__PURE__ */ import_react219.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react219.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react219.default.createElement(space_default, null, /* @__PURE__ */ import_react219.default.createElement(TrophyOutlined_default2, null), " Top Donors"),
+      className: "border"
+    }, topDonors.length > 0 ? topDonors.map((d, i) => /* @__PURE__ */ import_react219.default.createElement("div", {
       key: i,
-      className: "flex justify-between py-2 border-b"
-    }, /* @__PURE__ */ import_react211.default.createElement("span", null, d.name), /* @__PURE__ */ import_react211.default.createElement("span", null, "\u20B9", d.total))) : /* @__PURE__ */ import_react211.default.createElement(empty_default2, null))))));
+      className: "flex justify-between py-3 border-b last:border-0"
+    }, /* @__PURE__ */ import_react219.default.createElement(Text4, {
+      "font-semibold": true
+    }, d.name), /* @__PURE__ */ import_react219.default.createElement(Text4, {
+      "font-bold": true
+    }, "\u20B9", d.total.toLocaleString()))) : /* @__PURE__ */ import_react219.default.createElement(empty_default2, null))), /* @__PURE__ */ import_react219.default.createElement(col_default2, {
+      xs: 24,
+      md: 12
+    }, /* @__PURE__ */ import_react219.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react219.default.createElement(space_default, null, /* @__PURE__ */ import_react219.default.createElement(HistoryOutlined_default2, null), " Recent Activity"),
+      className: "border"
+    }, recentDonations.length > 0 ? recentDonations.map((d, i) => /* @__PURE__ */ import_react219.default.createElement("div", {
+      key: i,
+      className: "flex items-center justify-between py-3 border-b last:border-0"
+    }, /* @__PURE__ */ import_react219.default.createElement(space_default, null, /* @__PURE__ */ import_react219.default.createElement(avatar_default, {
+      size: "small",
+      className: "bg-zinc-800"
+    }, d.initials), /* @__PURE__ */ import_react219.default.createElement("div", null, /* @__PURE__ */ import_react219.default.createElement(Text4, {
+      className: "block font-medium"
+    }, d.donor_name), /* @__PURE__ */ import_react219.default.createElement(Text4, {
+      className: "text-zinc-400 text-xs"
+    }, (0, import_dayjs3.default)(d.creation).fromNow()))), /* @__PURE__ */ import_react219.default.createElement("div", {
+      className: "text-right"
+    }, /* @__PURE__ */ import_react219.default.createElement(Text4, {
+      className: "block font-bold"
+    }, "\u20B9", d.total_amount.toLocaleString()), /* @__PURE__ */ import_react219.default.createElement(tag_default, {
+      className: "m-0 border-none bg-zinc-100 text-zinc-500 text-[10px]"
+    }, d.category)))) : /* @__PURE__ */ import_react219.default.createElement(empty_default2, null)))));
   };
   var Dashboard_default = Dashboard;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/Donation.jsx
-  var import_react220 = __toESM(require_react());
+  var import_react228 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorSection.jsx
-  var import_react214 = __toESM(require_react());
+  var import_react222 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorModal.jsx
-  var import_react213 = __toESM(require_react());
+  var import_react221 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/hooks/useFrappe.js
-  var import_react212 = __toESM(require_react());
+  var import_react220 = __toESM(require_react());
   var useFrappeGetDocList = (doctype, options = {}) => {
-    const [data, setData] = (0, import_react212.useState)([]);
-    const [loading, setLoading] = (0, import_react212.useState)(true);
-    const [error, setError] = (0, import_react212.useState)(null);
+    const [data, setData] = (0, import_react220.useState)([]);
+    const [loading, setLoading] = (0, import_react220.useState)(true);
+    const [error, setError] = (0, import_react220.useState)(null);
     const fetchData = () => {
       if (typeof frappe === "undefined") {
         setLoading(false);
@@ -124875,14 +128708,14 @@ html body {
         }
       });
     };
-    (0, import_react212.useEffect)(() => {
+    (0, import_react220.useEffect)(() => {
       fetchData();
     }, []);
     return { data, loading, error, mutate: fetchData };
   };
   var useFrappeCreateDoc = () => {
-    const [loading, setLoading] = (0, import_react212.useState)(false);
-    const [error, setError] = (0, import_react212.useState)(null);
+    const [loading, setLoading] = (0, import_react220.useState)(false);
+    const [error, setError] = (0, import_react220.useState)(null);
     const createDoc = (doctype, data) => {
       setLoading(true);
       return new Promise((resolve, reject) => {
@@ -124909,8 +128742,8 @@ html body {
     return { createDoc, loading, error };
   };
   var useFrappeUpdateDoc = () => {
-    const [loading, setLoading] = (0, import_react212.useState)(false);
-    const [error, setError] = (0, import_react212.useState)(null);
+    const [loading, setLoading] = (0, import_react220.useState)(false);
+    const [error, setError] = (0, import_react220.useState)(null);
     const updateDoc = (doctype, name, data) => {
       setLoading(true);
       return new Promise((resolve, reject) => {
@@ -124939,14 +128772,14 @@ html body {
     return { updateDoc, loading, error };
   };
   var useFrappeFileUpload = () => {
-    const [loading, setLoading] = (0, import_react212.useState)(false);
-    const [error, setError] = (0, import_react212.useState)(null);
-    const upload2 = (file2, args) => {
+    const [loading, setLoading] = (0, import_react220.useState)(false);
+    const [error, setError] = (0, import_react220.useState)(null);
+    const upload2 = (file, args) => {
       setLoading(true);
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
-        formData.append("file", file2);
+        formData.append("file", file);
         formData.append("is_private", args.is_private || 0);
         formData.append("doctype", args.doctype);
         formData.append("docname", args.docname);
@@ -124976,8 +128809,8 @@ html body {
     return { upload: upload2, loading, error };
   };
   var useFrappeDeleteDoc = () => {
-    const [loading, setLoading] = (0, import_react212.useState)(false);
-    const [error, setError] = (0, import_react212.useState)(null);
+    const [loading, setLoading] = (0, import_react220.useState)(false);
+    const [error, setError] = (0, import_react220.useState)(null);
     const deleteDoc = (doctype, name) => {
       setLoading(true);
       return new Promise((resolve, reject) => {
@@ -124999,9 +128832,9 @@ html body {
     return { deleteDoc, loading, error };
   };
   var useFrappeGetDoc = (doctype, name) => {
-    const [data, setData] = (0, import_react212.useState)(null);
-    const [loading, setLoading] = (0, import_react212.useState)(true);
-    const [error, setError] = (0, import_react212.useState)(null);
+    const [data, setData] = (0, import_react220.useState)(null);
+    const [loading, setLoading] = (0, import_react220.useState)(true);
+    const [error, setError] = (0, import_react220.useState)(null);
     const fetchData = () => {
       if (!name || typeof frappe === "undefined") {
         setLoading(false);
@@ -125022,15 +128855,15 @@ html body {
         }
       });
     };
-    (0, import_react212.useEffect)(() => {
+    (0, import_react220.useEffect)(() => {
       fetchData();
     }, [doctype, name]);
     return { data, loading, error, mutate: fetchData };
   };
   var useFrappeGetVersions = (doctype, docname) => {
-    const [data, setData] = (0, import_react212.useState)([]);
-    const [loading, setLoading] = (0, import_react212.useState)(false);
-    const [page, setPage] = (0, import_react212.useState)(0);
+    const [data, setData] = (0, import_react220.useState)([]);
+    const [loading, setLoading] = (0, import_react220.useState)(false);
+    const [page, setPage] = (0, import_react220.useState)(0);
     const fetchVersions = async (reset = false) => {
       if (!docname)
         return;
@@ -125055,7 +128888,7 @@ html body {
       }
       setLoading(false);
     };
-    (0, import_react212.useEffect)(() => {
+    (0, import_react220.useEffect)(() => {
       fetchVersions(true);
     }, [doctype, docname]);
     return { data, loading, fetchMore: () => fetchVersions(false) };
@@ -125065,7 +128898,7 @@ html body {
   var DonorModal = ({ open: open2, onCancel, onSuccess, initialMobileNumber }) => {
     const [form] = form_default.useForm();
     const { createDoc, loading } = useFrappeCreateDoc();
-    (0, import_react213.useEffect)(() => {
+    (0, import_react221.useEffect)(() => {
       if (open2) {
         if (initialMobileNumber) {
           form.setFieldsValue({
@@ -125088,7 +128921,7 @@ html body {
         message_default.error(err.message || "Failed to create donor");
       }
     };
-    return /* @__PURE__ */ import_react213.default.createElement(modal_default, {
+    return /* @__PURE__ */ import_react221.default.createElement(modal_default, {
       title: "Add New Donor",
       open: open2,
       onCancel,
@@ -125097,40 +128930,40 @@ html body {
       okText: "Save",
       cancelText: "Cancel",
       width: 450
-    }, /* @__PURE__ */ import_react213.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react221.default.createElement(form_default, {
       form,
       layout: "vertical",
       autoComplete: "off"
-    }, /* @__PURE__ */ import_react213.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react221.default.createElement(form_default.Item, {
       name: "donor_name",
       label: "Full Name",
       rules: [
         { required: true, message: "Please enter donor name" }
       ]
-    }, /* @__PURE__ */ import_react213.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react221.default.createElement(input_default, {
       placeholder: "Enter full name"
-    })), /* @__PURE__ */ import_react213.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react221.default.createElement(form_default.Item, {
       name: "mobile_number",
       label: "Mobile Number",
       rules: [
         { required: true, message: "Enter mobile number" },
         { pattern: /^\d{10}$/, message: "Enter valid 10-digit number" }
       ]
-    }, /* @__PURE__ */ import_react213.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react221.default.createElement(input_default, {
       maxLength: 10,
       placeholder: "10-digit number"
-    })), /* @__PURE__ */ import_react213.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react221.default.createElement(form_default.Item, {
       name: "email",
       label: "Email (Optional)",
       rules: [
         { type: "email", message: "Enter valid email" }
       ]
-    }, /* @__PURE__ */ import_react213.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react221.default.createElement(input_default, {
       placeholder: "example@gmail.com"
-    })), /* @__PURE__ */ import_react213.default.createElement(form_default.Item, {
+    })), /* @__PURE__ */ import_react221.default.createElement(form_default.Item, {
       name: "address",
       label: "Address (Optional)"
-    }, /* @__PURE__ */ import_react213.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react221.default.createElement(input_default.TextArea, {
       rows: 3,
       placeholder: "Enter address"
     }))));
@@ -125140,8 +128973,8 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonorSection.jsx
   var { Text: Text5 } = typography_default;
   var DonorSection = ({ selectedDonor, onDonorSelect }) => {
-    const [mobile, setMobile] = (0, import_react214.useState)("");
-    const [modal, setModal] = (0, import_react214.useState)(false);
+    const [mobile, setMobile] = (0, import_react222.useState)("");
+    const [modal, setModal] = (0, import_react222.useState)(false);
     const search = (val) => {
       setMobile(val);
       if (val.length === 10) {
@@ -125164,27 +128997,27 @@ html body {
         onDonorSelect(null);
       }
     };
-    return /* @__PURE__ */ import_react214.default.createElement(card_default, {
+    return /* @__PURE__ */ import_react222.default.createElement(card_default, {
       title: "Donor Information",
       size: "small"
-    }, /* @__PURE__ */ import_react214.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react222.default.createElement(input_default, {
       placeholder: "Enter mobile number",
       value: mobile,
       onChange: (e4) => search(e4.target.value),
       maxLength: 10
-    }), !selectedDonor && mobile.length === 10 && /* @__PURE__ */ import_react214.default.createElement(button_default, {
+    }), !selectedDonor && mobile.length === 10 && /* @__PURE__ */ import_react222.default.createElement(button_default, {
       onClick: () => setModal(true),
       style: { marginTop: 8 }
-    }, "Add Donor"), selectedDonor && /* @__PURE__ */ import_react214.default.createElement("div", {
+    }, "Add Donor"), selectedDonor && /* @__PURE__ */ import_react222.default.createElement("div", {
       style: { marginTop: 12 }
-    }, /* @__PURE__ */ import_react214.default.createElement(Text5, {
+    }, /* @__PURE__ */ import_react222.default.createElement(Text5, {
       strong: true
-    }, selectedDonor.donor_name), /* @__PURE__ */ import_react214.default.createElement("br", null), /* @__PURE__ */ import_react214.default.createElement(Text5, {
+    }, selectedDonor.donor_name), /* @__PURE__ */ import_react222.default.createElement("br", null), /* @__PURE__ */ import_react222.default.createElement(Text5, {
       type: "secondary"
-    }, selectedDonor.mobile_number), /* @__PURE__ */ import_react214.default.createElement("br", null), /* @__PURE__ */ import_react214.default.createElement(button_default, {
+    }, selectedDonor.mobile_number), /* @__PURE__ */ import_react222.default.createElement("br", null), /* @__PURE__ */ import_react222.default.createElement(button_default, {
       danger: true,
       onClick: () => onDonorSelect(null)
-    }, "Change")), /* @__PURE__ */ import_react214.default.createElement(DonorModal_default, {
+    }, "Change")), /* @__PURE__ */ import_react222.default.createElement(DonorModal_default, {
       open: modal,
       onCancel: () => setModal(false),
       onSuccess: onDonorSelect
@@ -125193,15 +129026,15 @@ html body {
   var DonorSection_default = DonorSection;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/TempleSelect.jsx
-  var import_react215 = __toESM(require_react());
+  var import_react223 = __toESM(require_react());
   var TempleSelect = ({ selectedTemple, onTempleSelect }) => {
     const { data, loading } = useFrappeGetDocList("Temple", {
       fields: ["name", "temple_name"]
     });
-    return /* @__PURE__ */ import_react215.default.createElement(card_default, {
+    return /* @__PURE__ */ import_react223.default.createElement(card_default, {
       title: "Select Temple",
       size: "small"
-    }, /* @__PURE__ */ import_react215.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react223.default.createElement(select_default, {
       mode: "multiple",
       style: { width: "100%" },
       placeholder: "Select temples",
@@ -125221,12 +129054,12 @@ html body {
   var TempleSelect_default = TempleSelect;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationTypes.jsx
-  var import_react216 = __toESM(require_react());
+  var import_react224 = __toESM(require_react());
   var { Text: Text6 } = typography_default;
   var DonationTypes = ({ selectedTemple, onAddToCart }) => {
-    const [donationTypes, setDonationTypes] = (0, import_react216.useState)([]);
-    const [loading, setLoading] = (0, import_react216.useState)(false);
-    (0, import_react216.useEffect)(() => {
+    const [donationTypes, setDonationTypes] = (0, import_react224.useState)([]);
+    const [loading, setLoading] = (0, import_react224.useState)(false);
+    (0, import_react224.useEffect)(() => {
       if (selectedTemple && selectedTemple.length > 0) {
         fetchData();
       } else {
@@ -125258,61 +129091,61 @@ html body {
       });
     };
     if (!selectedTemple || selectedTemple.length === 0) {
-      return /* @__PURE__ */ import_react216.default.createElement(card_default, {
+      return /* @__PURE__ */ import_react224.default.createElement(card_default, {
         size: "small"
-      }, /* @__PURE__ */ import_react216.default.createElement(empty_default2, {
+      }, /* @__PURE__ */ import_react224.default.createElement(empty_default2, {
         description: "Select at least one temple"
       }));
     }
-    return /* @__PURE__ */ import_react216.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react216.default.createElement(space_default, {
+    return /* @__PURE__ */ import_react224.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react224.default.createElement(space_default, {
         size: 8
-      }, /* @__PURE__ */ import_react216.default.createElement(HeartFilled_default2, {
+      }, /* @__PURE__ */ import_react224.default.createElement(HeartFilled_default2, {
         className: "text-zinc-900"
-      }), /* @__PURE__ */ import_react216.default.createElement("span", {
+      }), /* @__PURE__ */ import_react224.default.createElement("span", {
         className: "font-bold tracking-tight text-zinc-800"
       }, "Donation Types")),
       size: "small",
       className: "shadow-sm border-zinc-200"
-    }, loading ? /* @__PURE__ */ import_react216.default.createElement("div", {
+    }, loading ? /* @__PURE__ */ import_react224.default.createElement("div", {
       className: "flex justify-center py-10"
-    }, /* @__PURE__ */ import_react216.default.createElement(spin_default, null)) : donationTypes.length > 0 ? /* @__PURE__ */ import_react216.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react224.default.createElement(spin_default, null)) : donationTypes.length > 0 ? /* @__PURE__ */ import_react224.default.createElement(row_default2, {
       gutter: [12, 12]
-    }, donationTypes.map((type5) => /* @__PURE__ */ import_react216.default.createElement(col_default2, {
+    }, donationTypes.map((type5) => /* @__PURE__ */ import_react224.default.createElement(col_default2, {
       xs: 12,
       sm: 8,
       md: 6,
       key: type5.name
-    }, /* @__PURE__ */ import_react216.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react224.default.createElement(card_default, {
       onClick: () => onAddToCart(type5),
       className: "border border-zinc-200 hover:border-zinc-400 transition-colors cursor-pointer",
       bodyStyle: { padding: 12 }
-    }, /* @__PURE__ */ import_react216.default.createElement("div", {
+    }, /* @__PURE__ */ import_react224.default.createElement("div", {
       className: "!h-10 w-full mb-2 bg-zinc-100 flex items-center justify-center rounded overflow-hidden"
-    }, /* @__PURE__ */ import_react216.default.createElement(image_default, {
+    }, /* @__PURE__ */ import_react224.default.createElement(image_default, {
       src: type5.donation_image,
       alt: type5.donation_type,
       className: "h-full w-full",
       style: { objectFit: "cover", height: "200px", width: "200px" },
       fallback: "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png",
       preview: false
-    })), /* @__PURE__ */ import_react216.default.createElement(Text6, {
+    })), /* @__PURE__ */ import_react224.default.createElement(Text6, {
       strong: true,
       className: "block text-center"
-    }, type5.donation_type), /* @__PURE__ */ import_react216.default.createElement(Text6, {
+    }, type5.donation_type), /* @__PURE__ */ import_react224.default.createElement(Text6, {
       type: "secondary",
       className: "block text-center text-[11px]"
-    }, type5.temple_name), type5.default_amount > 0 && /* @__PURE__ */ import_react216.default.createElement(Text6, {
+    }, type5["temple.temple_name"] || type5.temple), type5.default_amount > 0 && /* @__PURE__ */ import_react224.default.createElement(Text6, {
       type: "secondary",
       className: "block text-center mt-1"
-    }, "\u20B9 ", type5.default_amount))))) : /* @__PURE__ */ import_react216.default.createElement(empty_default2, {
+    }, "\u20B9 ", type5.default_amount))))) : /* @__PURE__ */ import_react224.default.createElement(empty_default2, {
       description: "No donation types found"
     }));
   };
   var DonationTypes_default = DonationTypes;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/Cart.jsx
-  var import_react217 = __toESM(require_react());
+  var import_react225 = __toESM(require_react());
   var { Text: Text7 } = typography_default;
   var Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
     const quickAmounts = [101, 201, 501, 1001, 2100, 5100];
@@ -125320,9 +129153,9 @@ html body {
       {
         title: "Donation Type",
         dataIndex: "donation_type_label",
-        render: (text, record) => /* @__PURE__ */ import_react217.default.createElement("div", null, /* @__PURE__ */ import_react217.default.createElement(Text7, {
+        render: (text, record) => /* @__PURE__ */ import_react225.default.createElement("div", null, /* @__PURE__ */ import_react225.default.createElement(Text7, {
           strong: true
-        }, text), /* @__PURE__ */ import_react217.default.createElement("div", null, /* @__PURE__ */ import_react217.default.createElement(Text7, {
+        }, text), /* @__PURE__ */ import_react225.default.createElement("div", null, /* @__PURE__ */ import_react225.default.createElement(Text7, {
           type: "secondary",
           style: { fontSize: 10 }
         }, record.temple)))
@@ -125331,16 +129164,16 @@ html body {
         title: "Amount (\u20B9)",
         dataIndex: "amount",
         width: 180,
-        render: (amount, record, index2) => /* @__PURE__ */ import_react217.default.createElement("div", null, /* @__PURE__ */ import_react217.default.createElement(input_number_default, {
+        render: (amount, record, index2) => /* @__PURE__ */ import_react225.default.createElement("div", null, /* @__PURE__ */ import_react225.default.createElement(input_number_default, {
           min: 1,
           value: amount,
           formatter: (value) => `\u20B9 ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
           parser: (value) => value.replace(/₹\s?|(,*)/g, ""),
           onChange: (val) => onUpdateAmount(index2, val),
           style: { width: "100%", height: 40 }
-        }), /* @__PURE__ */ import_react217.default.createElement("div", {
+        }), /* @__PURE__ */ import_react225.default.createElement("div", {
           style: { marginTop: 6 }
-        }, quickAmounts.map((q2) => /* @__PURE__ */ import_react217.default.createElement(button_default, {
+        }, quickAmounts.map((q2) => /* @__PURE__ */ import_react225.default.createElement(button_default, {
           key: q2,
           size: "small",
           onClick: () => onUpdateAmount(index2, q2),
@@ -125350,51 +129183,51 @@ html body {
       {
         title: "",
         width: 50,
-        render: (_2, __, index2) => /* @__PURE__ */ import_react217.default.createElement(button_default, {
+        render: (_2, __, index2) => /* @__PURE__ */ import_react225.default.createElement(button_default, {
           danger: true,
-          icon: /* @__PURE__ */ import_react217.default.createElement(DeleteOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react225.default.createElement(DeleteOutlined_default2, null),
           onClick: () => onRemoveItem(index2)
         })
       }
     ];
-    return /* @__PURE__ */ import_react217.default.createElement(card_default, {
-      title: /* @__PURE__ */ import_react217.default.createElement(space_default, null, /* @__PURE__ */ import_react217.default.createElement(ShoppingCartOutlined_default2, null), " Selection Cart"),
+    return /* @__PURE__ */ import_react225.default.createElement(card_default, {
+      title: /* @__PURE__ */ import_react225.default.createElement(space_default, null, /* @__PURE__ */ import_react225.default.createElement(ShoppingCartOutlined_default2, null), " Selection Cart"),
       size: "small"
-    }, /* @__PURE__ */ import_react217.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react225.default.createElement(table_default, {
       columns,
       dataSource: items,
       pagination: false,
       rowKey: (r3, i) => i,
       locale: {
-        emptyText: /* @__PURE__ */ import_react217.default.createElement(empty_default2, {
+        emptyText: /* @__PURE__ */ import_react225.default.createElement(empty_default2, {
           description: "Cart is empty"
         })
       }
-    }), /* @__PURE__ */ import_react217.default.createElement("div", {
+    }), /* @__PURE__ */ import_react225.default.createElement("div", {
       style: { marginTop: 16, borderTop: "1px solid #eee", paddingTop: 12 }
-    }, /* @__PURE__ */ import_react217.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react225.default.createElement(row_default2, {
       justify: "space-between"
-    }, /* @__PURE__ */ import_react217.default.createElement(Text7, null, "Total Amount"), /* @__PURE__ */ import_react217.default.createElement(Text7, {
+    }, /* @__PURE__ */ import_react225.default.createElement(Text7, null, "Total Amount"), /* @__PURE__ */ import_react225.default.createElement(Text7, {
       strong: true
     }, "\u20B9 ", totalAmount.toLocaleString()))));
   };
   var Cart_default = Cart;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/PaymentSection.jsx
-  var import_react218 = __toESM(require_react());
+  var import_react226 = __toESM(require_react());
   var PaymentSection = ({ paymentMode, onPaymentModeChange, onSubmit, loading, disabled }) => {
     const modes = ["Cash", "UPI", "Card", "Cheque"];
-    return /* @__PURE__ */ import_react218.default.createElement(card_default, {
+    return /* @__PURE__ */ import_react226.default.createElement(card_default, {
       title: "Payment Selection",
       size: "small"
-    }, /* @__PURE__ */ import_react218.default.createElement("div", {
+    }, /* @__PURE__ */ import_react226.default.createElement("div", {
       style: { marginBottom: 12 }
-    }, modes.map((m) => /* @__PURE__ */ import_react218.default.createElement(button_default, {
+    }, modes.map((m) => /* @__PURE__ */ import_react226.default.createElement(button_default, {
       key: m,
       type: paymentMode === m ? "primary" : "default",
       onClick: () => onPaymentModeChange(m),
       style: { marginRight: 8 }
-    }, m))), /* @__PURE__ */ import_react218.default.createElement(button_default, {
+    }, m))), /* @__PURE__ */ import_react226.default.createElement(button_default, {
       type: "primary",
       block: true,
       loading,
@@ -125405,7 +129238,7 @@ html body {
   var PaymentSection_default = PaymentSection;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/AddPageHeader.jsx
-  var import_react219 = __toESM(require_react());
+  var import_react227 = __toESM(require_react());
   var { Text: Text8, Title: Title5 } = typography_default;
   var AddPageHeader = ({
     title = "Page Title",
@@ -125420,32 +129253,32 @@ html body {
     showAdd = false,
     disableReset = false
   }) => {
-    return /* @__PURE__ */ import_react219.default.createElement("div", {
+    return /* @__PURE__ */ import_react227.default.createElement("div", {
       className: "flex items-center justify-between mb-6 border-b border-zinc-200 pb-4"
-    }, /* @__PURE__ */ import_react219.default.createElement("div", {
+    }, /* @__PURE__ */ import_react227.default.createElement("div", {
       className: "flex items-center gap-4"
-    }, showBack && /* @__PURE__ */ import_react219.default.createElement(button_default, {
+    }, showBack && /* @__PURE__ */ import_react227.default.createElement(button_default, {
       type: "default",
-      icon: /* @__PURE__ */ import_react219.default.createElement(ArrowLeftOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react227.default.createElement(ArrowLeftOutlined_default2, null),
       onClick: onBack || (() => window.history.back()),
       className: "flex items-center justify-center h-9 w-9 border border-zinc-200 hover:border-zinc-400"
-    }), /* @__PURE__ */ import_react219.default.createElement("div", {
+    }), /* @__PURE__ */ import_react227.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react219.default.createElement(Title5, {
+    }, /* @__PURE__ */ import_react227.default.createElement(Title5, {
       level: 4,
       className: "!m-0 leading-tight"
-    }, title), subtitle && /* @__PURE__ */ import_react219.default.createElement(Text8, {
+    }, title), subtitle && /* @__PURE__ */ import_react227.default.createElement(Text8, {
       className: "text-xs text-zinc-400 leading-tight"
-    }, subtitle))), /* @__PURE__ */ import_react219.default.createElement(space_default, null, showAdd && /* @__PURE__ */ import_react219.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react219.default.createElement(PlusOutlined_default2, null),
+    }, subtitle))), /* @__PURE__ */ import_react227.default.createElement(space_default, null, showAdd && /* @__PURE__ */ import_react227.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react227.default.createElement(PlusOutlined_default2, null),
       onClick: onAdd,
       className: "h-10 border border-zinc-200"
-    }, "Add"), showEdit && /* @__PURE__ */ import_react219.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react219.default.createElement(EditOutlined_default2, null),
+    }, "Add"), showEdit && /* @__PURE__ */ import_react227.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react227.default.createElement(EditOutlined_default2, null),
       onClick: onEdit,
       className: "h-10 border border-zinc-200"
-    }, "Edit"), showReset && /* @__PURE__ */ import_react219.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react219.default.createElement(RedoOutlined_default2, null),
+    }, "Edit"), showReset && /* @__PURE__ */ import_react227.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react227.default.createElement(RedoOutlined_default2, null),
       onClick: onReset,
       disabled: disableReset,
       className: "h-10 border border-zinc-200"
@@ -125456,16 +129289,16 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/Donation.jsx
   var { Title: Title6, Text: Text9 } = typography_default;
   var Donation = ({ onBack }) => {
-    const [selectedDonor, setSelectedDonor] = (0, import_react220.useState)(null);
-    const [selectedTemple, setSelectedTemple] = (0, import_react220.useState)([]);
-    const [cartItems, setCartItems] = (0, import_react220.useState)([]);
-    const [paymentMode, setPaymentMode] = (0, import_react220.useState)("Cash");
-    const [submitting, setSubmitting] = (0, import_react220.useState)(false);
-    const totalAmount = (0, import_react220.useMemo)(
+    const [selectedDonor, setSelectedDonor] = (0, import_react228.useState)(null);
+    const [selectedTemple, setSelectedTemple] = (0, import_react228.useState)([]);
+    const [cartItems, setCartItems] = (0, import_react228.useState)([]);
+    const [paymentMode, setPaymentMode] = (0, import_react228.useState)("Cash");
+    const [submitting, setSubmitting] = (0, import_react228.useState)(false);
+    const totalAmount = (0, import_react228.useMemo)(
       () => cartItems.reduce((acc, item) => acc + (item.amount || 0), 0),
       [cartItems]
     );
-    const handleAddToCart = (0, import_react220.useCallback)((donationType) => {
+    const handleAddToCart = (0, import_react228.useCallback)((donationType) => {
       if (!selectedTemple || selectedTemple.length === 0) {
         message_default.warning("Please select at least one temple.");
         return;
@@ -125484,21 +129317,21 @@ html body {
       setCartItems((prev2) => [...prev2, newItem]);
       message_default.success(`Added ${donationType.donation_type}`);
     }, [cartItems, selectedTemple]);
-    const handleUpdateAmount = (0, import_react220.useCallback)((index2, amount) => {
+    const handleUpdateAmount = (0, import_react228.useCallback)((index2, amount) => {
       const newItems = [...cartItems];
       newItems[index2].amount = parseFloat(amount) || 0;
       setCartItems(newItems);
     }, [cartItems]);
-    const handleRemoveItem = (0, import_react220.useCallback)((index2) => {
+    const handleRemoveItem = (0, import_react228.useCallback)((index2) => {
       setCartItems((prev2) => prev2.filter((_2, i) => i !== index2));
     }, []);
-    const handleReset = (0, import_react220.useCallback)(() => {
+    const handleReset = (0, import_react228.useCallback)(() => {
       setSelectedDonor(null);
       setSelectedTemple([]);
       setCartItems([]);
       setPaymentMode("Cash");
     }, []);
-    const handleSubmit = (0, import_react220.useCallback)(async () => {
+    const handleSubmit = (0, import_react228.useCallback)(async () => {
       if (!selectedDonor) {
         message_default.error("Please select or add a donor");
         return;
@@ -125570,9 +129403,9 @@ html body {
         message_default.error(`Failed to process donations. ${errorMessages.join(", ")}`);
       }
     }, [selectedDonor, selectedTemple, cartItems, paymentMode, totalAmount]);
-    return /* @__PURE__ */ import_react220.default.createElement("div", {
+    return /* @__PURE__ */ import_react228.default.createElement("div", {
       className: "donation-page py-6"
-    }, /* @__PURE__ */ import_react220.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react228.default.createElement(AddPageHeader_default, {
       title: "Temple Donation",
       subtitle: "Operational POS",
       showBack: true,
@@ -125585,33 +129418,33 @@ html body {
       }),
       showReset: true,
       onReset: handleReset
-    }), /* @__PURE__ */ import_react220.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react228.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react220.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react228.default.createElement(col_default2, {
       xs: 24,
       lg: 15
-    }, /* @__PURE__ */ import_react220.default.createElement("div", {
+    }, /* @__PURE__ */ import_react228.default.createElement("div", {
       className: "space-y-6"
-    }, /* @__PURE__ */ import_react220.default.createElement(DonorSection_default, {
+    }, /* @__PURE__ */ import_react228.default.createElement(DonorSection_default, {
       onDonorSelect: setSelectedDonor,
       selectedDonor
-    }), /* @__PURE__ */ import_react220.default.createElement(TempleSelect_default, {
+    }), /* @__PURE__ */ import_react228.default.createElement(TempleSelect_default, {
       onTempleSelect: setSelectedTemple,
       selectedTemple
-    }), /* @__PURE__ */ import_react220.default.createElement(DonationTypes_default, {
+    }), /* @__PURE__ */ import_react228.default.createElement(DonationTypes_default, {
       selectedTemple,
       onAddToCart: handleAddToCart
-    }))), /* @__PURE__ */ import_react220.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
       xs: 24,
       lg: 9
-    }, /* @__PURE__ */ import_react220.default.createElement("div", {
+    }, /* @__PURE__ */ import_react228.default.createElement("div", {
       className: "space-y-6 sticky top-6"
-    }, /* @__PURE__ */ import_react220.default.createElement(Cart_default, {
+    }, /* @__PURE__ */ import_react228.default.createElement(Cart_default, {
       items: cartItems,
       onUpdateAmount: handleUpdateAmount,
       onRemoveItem: handleRemoveItem,
       totalAmount
-    }), /* @__PURE__ */ import_react220.default.createElement(PaymentSection_default, {
+    }), /* @__PURE__ */ import_react228.default.createElement(PaymentSection_default, {
       paymentMode,
       onPaymentModeChange: setPaymentMode,
       onSubmit: handleSubmit,
@@ -125629,13 +129462,13 @@ html body {
   var DOCTYPE_USER = "User";
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorList.jsx
-  var import_react224 = __toESM(require_react());
+  var import_react232 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ListingPage.jsx
-  var import_react222 = __toESM(require_react());
+  var import_react230 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonTable.jsx
-  var import_react221 = __toESM(require_react());
+  var import_react229 = __toESM(require_react());
   var { Title: Title7, Text: Text10 } = typography_default;
   var CommonTable = ({
     columns,
@@ -125658,47 +129491,44 @@ html body {
       key: "actions",
       fixed: "right",
       width: 120,
-      render: (_2, record) => /* @__PURE__ */ import_react221.default.createElement(space_default, {
-        size: 0,
-        className: ""
-      }, onView && /* @__PURE__ */ import_react221.default.createElement(tooltip_default, {
+      render: (_2, record) => /* @__PURE__ */ import_react229.default.createElement(space_default, null, onView && /* @__PURE__ */ import_react229.default.createElement(tooltip_default, {
         title: "View"
-      }, /* @__PURE__ */ import_react221.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react229.default.createElement(button_default, {
         type: "text",
-        icon: /* @__PURE__ */ import_react221.default.createElement(EyeOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react229.default.createElement(EyeOutlined_default2, null),
         onClick: () => onView(record),
-        className: "px-2 border-r border-gray-200 hover:!text-orange-500"
-      })), onEdit && /* @__PURE__ */ import_react221.default.createElement(tooltip_default, {
+        className: "px-2 border border-gray-200 hover:!text-orange-500"
+      })), onEdit && /* @__PURE__ */ import_react229.default.createElement(tooltip_default, {
         title: "Edit"
-      }, /* @__PURE__ */ import_react221.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react229.default.createElement(button_default, {
         type: "text",
-        icon: /* @__PURE__ */ import_react221.default.createElement(EditOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react229.default.createElement(EditOutlined_default2, null),
         onClick: () => onEdit(record),
-        className: "px-2 border-r border-gray-200 hover:!text-blue-500"
-      })), onPrint && /* @__PURE__ */ import_react221.default.createElement(tooltip_default, {
+        className: "px-2 border border-gray-200 hover:!text-blue-500"
+      })), onPrint && /* @__PURE__ */ import_react229.default.createElement(tooltip_default, {
         title: "Print"
-      }, /* @__PURE__ */ import_react221.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react229.default.createElement(button_default, {
         type: "text",
-        icon: /* @__PURE__ */ import_react221.default.createElement(PrinterOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react229.default.createElement(PrinterOutlined_default2, null),
         onClick: () => onPrint(record),
-        className: "px-2 border-r border-gray-200 hover:!text-amber-500"
-      })), onDelete && /* @__PURE__ */ import_react221.default.createElement(popconfirm_default, {
+        className: "px-2 border border-gray-200 hover:!text-amber-500"
+      })), onDelete && /* @__PURE__ */ import_react229.default.createElement(popconfirm_default, {
         title: "Delete?",
         description: "This cannot be undone",
         onConfirm: () => onDelete(record),
         okText: "Yes",
         cancelText: "No"
-      }, /* @__PURE__ */ import_react221.default.createElement(tooltip_default, {
+      }, /* @__PURE__ */ import_react229.default.createElement(tooltip_default, {
         title: "Delete"
-      }, /* @__PURE__ */ import_react221.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react229.default.createElement(button_default, {
         type: "text",
         danger: true,
-        icon: /* @__PURE__ */ import_react221.default.createElement(DeleteOutlined_default2, null),
-        className: "px-2 hover:!text-red-500"
+        icon: /* @__PURE__ */ import_react229.default.createElement(DeleteOutlined_default2, null),
+        className: "px-2 border border-red-200 hover:!text-red-500"
       }))))
     };
     const finalColumns = onView || onPrint || onEdit || onDelete ? [...columns, actionColumn] : columns;
-    return /* @__PURE__ */ import_react221.default.createElement(table_default, {
+    return /* @__PURE__ */ import_react229.default.createElement(table_default, {
       dataSource: filteredData,
       columns: finalColumns,
       rowKey,
@@ -125706,9 +129536,9 @@ html body {
       pagination: {
         pageSize: 10,
         showSizeChanger: true,
-        showTotal: (total) => /* @__PURE__ */ import_react221.default.createElement("span", {
+        showTotal: (total) => /* @__PURE__ */ import_react229.default.createElement("span", {
           className: "font-medium text-stone-500"
-        }, "Total ", /* @__PURE__ */ import_react221.default.createElement("span", {
+        }, "Total ", /* @__PURE__ */ import_react229.default.createElement("span", {
           className: "text-amber-600 font-bold"
         }, total), " records"),
         className: "!m-8"
@@ -125753,9 +129583,9 @@ html body {
       limit: 100,
       orderBy: { field: "modified", order: "desc" }
     });
-    const [enrichedData, setEnrichedData] = (0, import_react222.useState)([]);
-    const [enriching, setEnriching] = (0, import_react222.useState)(false);
-    (0, import_react222.useEffect)(() => {
+    const [enrichedData, setEnrichedData] = (0, import_react230.useState)([]);
+    const [enriching, setEnriching] = (0, import_react230.useState)(false);
+    (0, import_react230.useEffect)(() => {
       if (data && data.length > 0 && childTable) {
         setEnriching(true);
         const parentNames = data.map((d) => d.name);
@@ -125794,7 +129624,7 @@ html body {
       }
     }, [data, childTable, doctype]);
     const { deleteDoc } = useFrappeDeleteDoc();
-    const [searchText, setSearchText] = (0, import_react222.useState)("");
+    const [searchText, setSearchText] = (0, import_react230.useState)("");
     const handleAdd = () => {
       if (typeof frappe !== "undefined" && basePath) {
         frappe.set_route("temple-donation", basePath, "new");
@@ -125838,18 +129668,18 @@ html body {
       exportToCSV(data, columns, title);
     };
     if (error) {
-      return /* @__PURE__ */ import_react222.default.createElement("div", {
+      return /* @__PURE__ */ import_react230.default.createElement("div", {
         className: "p-6"
-      }, /* @__PURE__ */ import_react222.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react230.default.createElement(alert_default, {
         message: "Connection Error",
         description: error.message || `Failed to fetch ${doctype} list.`,
         type: "error",
         showIcon: true
       }));
     }
-    return /* @__PURE__ */ import_react222.default.createElement("div", {
+    return /* @__PURE__ */ import_react230.default.createElement("div", {
       className: "py-6 space-y-6"
-    }, /* @__PURE__ */ import_react222.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react230.default.createElement(PageHeader_default, {
       title,
       description,
       onAdd: handleAdd,
@@ -125857,7 +129687,7 @@ html body {
       onSearch: setSearchText,
       searchPlaceholder: `Search ${doctype}s...`,
       addLabel: "Add New Record"
-    }), /* @__PURE__ */ import_react222.default.createElement(CommonTable_default, {
+    }), /* @__PURE__ */ import_react230.default.createElement(CommonTable_default, {
       columns: columns || [],
       dataSource: enrichedData,
       loading: loading || enriching,
@@ -125871,7 +129701,7 @@ html body {
   var ListingPage_default = ListingPage;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donorTable.jsx
-  var import_react223 = __toESM(require_react());
+  var import_react231 = __toESM(require_react());
   var { Text: Text11 } = typography_default;
   var donorColumns = [
     {
@@ -125879,7 +129709,7 @@ html body {
       dataIndex: "name",
       key: "name",
       width: 150,
-      render: (text) => /* @__PURE__ */ import_react223.default.createElement(Text11, {
+      render: (text) => /* @__PURE__ */ import_react231.default.createElement(Text11, {
         copyable: true
       }, text)
     },
@@ -125887,7 +129717,7 @@ html body {
       title: "Name",
       dataIndex: "donor_name",
       key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react223.default.createElement(Text11, {
+      render: (text) => /* @__PURE__ */ import_react231.default.createElement(Text11, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.donor_name || "").localeCompare(b.donor_name || "")
@@ -125912,7 +129742,7 @@ html body {
       dataIndex: "address",
       key: "address",
       ellipsis: true,
-      render: (text) => text || /* @__PURE__ */ import_react223.default.createElement(Text11, {
+      render: (text) => text || /* @__PURE__ */ import_react231.default.createElement(Text11, {
         type: "secondary"
       }, "-")
     }
@@ -125920,7 +129750,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorList.jsx
   var DonorList = () => {
-    return /* @__PURE__ */ import_react224.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react232.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONOR,
       title: "Donors Management",
       description: "View, add, edit or delete donor records",
@@ -125932,13 +129762,13 @@ html body {
   var DonorList_default = DonorList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
-  var import_react227 = __toESM(require_react());
+  var import_react235 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
-  var import_react226 = __toESM(require_react());
+  var import_react234 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationPrint.jsx
-  var import_react225 = __toESM(require_react());
+  var import_react233 = __toESM(require_react());
   var DonationPrint = ({ donation }) => {
     if (!donation)
       return null;
@@ -125948,59 +129778,59 @@ html body {
       const date5 = new Date(dateStr);
       return `${date5.getDate().toString().padStart(2, "0")}-${(date5.getMonth() + 1).toString().padStart(2, "0")}-${date5.getFullYear()}`;
     };
-    return /* @__PURE__ */ import_react225.default.createElement("div", {
+    return /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "print-only donation-receipt-container"
-    }, /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "receipt-mantra"
-    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "receipt-no-box"
-    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "temple-header"
-    }, /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "temple-name"
-    }, donation.temple), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, donation.temple), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "trust-no"
-    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "temple-description"
-    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "donor-info-bar"
-    }, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0"), /* @__PURE__ */ import_react225.default.createElement("table", {
+    }, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0"), /* @__PURE__ */ import_react233.default.createElement("table", {
       className: "receipt-table"
-    }, /* @__PURE__ */ import_react225.default.createElement("thead", null, /* @__PURE__ */ import_react225.default.createElement("tr", null, /* @__PURE__ */ import_react225.default.createElement("th", {
+    }, /* @__PURE__ */ import_react233.default.createElement("thead", null, /* @__PURE__ */ import_react233.default.createElement("tr", null, /* @__PURE__ */ import_react233.default.createElement("th", {
       style: { textAlign: "center" }
-    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react225.default.createElement("th", {
+    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react233.default.createElement("th", {
       style: { textAlign: "center", width: "200px" }
-    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react225.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react225.default.createElement("tr", {
+    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react233.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react233.default.createElement("tr", {
       key: idx
-    }, /* @__PURE__ */ import_react225.default.createElement("td", null, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react225.default.createElement("td", {
+    }, /* @__PURE__ */ import_react233.default.createElement("td", null, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react233.default.createElement("td", {
       style: { textAlign: "right", fontWeight: "bold" }
-    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react225.default.createElement("tr", {
+    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react233.default.createElement("tr", {
       className: "total-row"
-    }, /* @__PURE__ */ import_react225.default.createElement("td", null, "Total Amount (\u0A95\u0AC1\u0AB2 \u0AB0\u0A95\u0AAE)"), /* @__PURE__ */ import_react225.default.createElement("td", {
+    }, /* @__PURE__ */ import_react233.default.createElement("td", null, "Total Amount (\u0A95\u0AC1\u0AB2 \u0AB0\u0A95\u0AAE)"), /* @__PURE__ */ import_react233.default.createElement("td", {
       style: { textAlign: "right" }
-    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "receipt-footer"
-    }, donation.note && /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, donation.note && /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "mb-4"
-    }, /* @__PURE__ */ import_react225.default.createElement("strong", {
+    }, /* @__PURE__ */ import_react233.default.createElement("strong", {
       className: "text-black"
-    }, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "footer-summary"
-    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react225.default.createElement("strong", {
+    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react233.default.createElement("strong", {
       className: "text-black text-lg"
-    }, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react225.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react225.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react233.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react233.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "signature-section"
-    }, /* @__PURE__ */ import_react225.default.createElement("div", null, /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, /* @__PURE__ */ import_react233.default.createElement("div", null, /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "text-[10px] uppercase tracking-widest text-zinc-400 font-bold mb-1"
-    }, "\u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 \u0AB9\u0AB8\u0ACD\u0AA4\u0ABE\u0A95\u0ACD\u0AB7\u0AB0"), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 \u0AB9\u0AB8\u0ACD\u0AA4\u0ABE\u0A95\u0ACD\u0AB7\u0AB0"), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "font-bold text-black border-b border-zinc-900 pb-1"
-    }, donation.cashier || "Cashier"), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, donation.cashier || "Cashier"), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "text-[10px] text-zinc-500 mt-1"
-    }, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC")), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC")), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "text-right"
-    }, /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "text-[10px] uppercase tracking-widest text-zinc-400 font-bold mb-1"
-    }, "\u0AA4\u0ABE\u0AB0\u0AC0\u0A96"), /* @__PURE__ */ import_react225.default.createElement("div", {
+    }, "\u0AA4\u0ABE\u0AB0\u0AC0\u0A96"), /* @__PURE__ */ import_react233.default.createElement("div", {
       className: "font-bold text-black"
     }, formatDate(donation.creation))))));
   };
@@ -126376,126 +130206,126 @@ html body {
     const config = formConfigs[doctype];
     const handlePrint = () => window.print();
     if (loading) {
-      return /* @__PURE__ */ import_react226.default.createElement("div", {
+      return /* @__PURE__ */ import_react234.default.createElement("div", {
         className: "flex justify-center items-center min-h-[300px]"
-      }, /* @__PURE__ */ import_react226.default.createElement(spin_default, {
+      }, /* @__PURE__ */ import_react234.default.createElement(spin_default, {
         size: "large"
       }));
     }
     if (error || !doc) {
-      return /* @__PURE__ */ import_react226.default.createElement("div", {
+      return /* @__PURE__ */ import_react234.default.createElement("div", {
         className: "p-6"
-      }, /* @__PURE__ */ import_react226.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react234.default.createElement(alert_default, {
         message: "Failed to load data",
         description: (error == null ? void 0 : error.message) || "No document found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react226.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react234.default.createElement(button_default, {
           onClick: onBack,
-          icon: /* @__PURE__ */ import_react226.default.createElement(ArrowLeftOutlined_default2, null)
+          icon: /* @__PURE__ */ import_react234.default.createElement(ArrowLeftOutlined_default2, null)
         }, "Back")
       }));
     }
     const renderValue = (field, value) => {
       if (!value)
-        return /* @__PURE__ */ import_react226.default.createElement(Text12, {
+        return /* @__PURE__ */ import_react234.default.createElement(Text12, {
           type: "secondary"
         }, "\u2014");
       if (field.type === "image") {
-        return /* @__PURE__ */ import_react226.default.createElement("img", {
+        return /* @__PURE__ */ import_react234.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-20 h-20 object-cover rounded-lg border"
         });
       }
       if (field.type === "textarea") {
-        return /* @__PURE__ */ import_react226.default.createElement("div", {
+        return /* @__PURE__ */ import_react234.default.createElement("div", {
           className: "bg-gray-50 p-3 rounded text-sm whitespace-pre-wrap"
         }, value);
       }
-      return /* @__PURE__ */ import_react226.default.createElement(Text12, {
+      return /* @__PURE__ */ import_react234.default.createElement(Text12, {
         strong: true
       }, String(value));
     };
-    return /* @__PURE__ */ import_react226.default.createElement("div", {
+    return /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "max-w-7xl mx-auto p-6 space-y-6"
-    }, /* @__PURE__ */ import_react226.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react234.default.createElement(PageHeader_default, {
       onBack,
       title: `${(config == null ? void 0 : config.title) || doctype} Details`,
       subtitle: `View Mode`,
-      extra: /* @__PURE__ */ import_react226.default.createElement("div", {
+      extra: /* @__PURE__ */ import_react234.default.createElement("div", {
         className: "flex gap-2"
-      }, /* @__PURE__ */ import_react226.default.createElement(button_default, {
-        icon: /* @__PURE__ */ import_react226.default.createElement(PrinterOutlined_default2, null),
+      }, /* @__PURE__ */ import_react234.default.createElement(button_default, {
+        icon: /* @__PURE__ */ import_react234.default.createElement(PrinterOutlined_default2, null),
         onClick: handlePrint
-      }, "Print"), /* @__PURE__ */ import_react226.default.createElement(button_default, {
+      }, "Print"), /* @__PURE__ */ import_react234.default.createElement(button_default, {
         type: "primary",
-        icon: /* @__PURE__ */ import_react226.default.createElement(EditOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react234.default.createElement(EditOutlined_default2, null),
         onClick: () => onEdit && onEdit(doc)
       }, "Edit"))
-    }), /* @__PURE__ */ import_react226.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react234.default.createElement(card_default, {
       className: "rounded-xl shadow-sm"
-    }, /* @__PURE__ */ import_react226.default.createElement(Title8, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Title8, {
       level: 5,
       className: "mb-6"
-    }, "Basic Information"), /* @__PURE__ */ import_react226.default.createElement(row_default2, {
+    }, "Basic Information"), /* @__PURE__ */ import_react234.default.createElement(row_default2, {
       gutter: [24, 20]
-    }, config == null ? void 0 : config.fields.map((field) => /* @__PURE__ */ import_react226.default.createElement(col_default2, {
+    }, config == null ? void 0 : config.fields.map((field) => /* @__PURE__ */ import_react234.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8,
       lg: 6,
       key: field.name
-    }, /* @__PURE__ */ import_react226.default.createElement("div", null, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement("div", null, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       className: "text-xs text-gray-400 uppercase"
-    }, field.label), /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, field.label), /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "mt-1"
-    }, renderValue(field, doc[field.name]))))), /* @__PURE__ */ import_react226.default.createElement(col_default2, {
+    }, renderValue(field, doc[field.name]))))), /* @__PURE__ */ import_react234.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8,
       lg: 6
-    }, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       className: "text-xs text-gray-400 uppercase"
-    }, "Document ID"), /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, "Document ID"), /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "mt-1"
-    }, /* @__PURE__ */ import_react226.default.createElement(tag_default, null, id))))), doctype === "Donation" && /* @__PURE__ */ import_react226.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react234.default.createElement(tag_default, null, id))))), doctype === "Donation" && /* @__PURE__ */ import_react234.default.createElement(card_default, {
       className: "rounded-xl shadow-sm"
-    }, /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "flex justify-between items-center mb-6"
-    }, /* @__PURE__ */ import_react226.default.createElement(Title8, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Title8, {
       level: 5
-    }, "Financial Summary"), /* @__PURE__ */ import_react226.default.createElement(Title8, {
+    }, "Financial Summary"), /* @__PURE__ */ import_react234.default.createElement(Title8, {
       level: 3,
       className: "text-green-600 m-0"
-    }, "\u20B9", Number(doc.total_amount || 0).toLocaleString())), /* @__PURE__ */ import_react226.default.createElement(row_default2, {
+    }, "\u20B9", Number(doc.total_amount || 0).toLocaleString())), /* @__PURE__ */ import_react234.default.createElement(row_default2, {
       gutter: [16, 16],
       className: "mb-6"
-    }, /* @__PURE__ */ import_react226.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react234.default.createElement(col_default2, {
       span: 8
-    }, /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "p-4 border rounded-lg"
-    }, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       type: "secondary"
-    }, "Payment Mode"), /* @__PURE__ */ import_react226.default.createElement("div", null, /* @__PURE__ */ import_react226.default.createElement(tag_default, {
+    }, "Payment Mode"), /* @__PURE__ */ import_react234.default.createElement("div", null, /* @__PURE__ */ import_react234.default.createElement(tag_default, {
       color: "blue"
-    }, doc.payment_mode)))), /* @__PURE__ */ import_react226.default.createElement(col_default2, {
+    }, doc.payment_mode)))), /* @__PURE__ */ import_react234.default.createElement(col_default2, {
       span: 8
-    }, /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "p-4 border rounded-lg"
-    }, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       type: "secondary"
-    }, "Handled By"), /* @__PURE__ */ import_react226.default.createElement("div", null, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, "Handled By"), /* @__PURE__ */ import_react234.default.createElement("div", null, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       strong: true
-    }, doc.cashier || "System")))), /* @__PURE__ */ import_react226.default.createElement(col_default2, {
+    }, doc.cashier || "System")))), /* @__PURE__ */ import_react234.default.createElement(col_default2, {
       span: 8
-    }, /* @__PURE__ */ import_react226.default.createElement("div", {
+    }, /* @__PURE__ */ import_react234.default.createElement("div", {
       className: "p-4 border rounded-lg"
-    }, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       type: "secondary"
-    }, "Reference"), /* @__PURE__ */ import_react226.default.createElement("div", null, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, "Reference"), /* @__PURE__ */ import_react234.default.createElement("div", null, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       code: true
-    }, doc.reference_no || "N/A"))))), /* @__PURE__ */ import_react226.default.createElement(table_default, {
+    }, doc.reference_no || "N/A"))))), /* @__PURE__ */ import_react234.default.createElement(table_default, {
       dataSource: doc.donation_items || [],
       pagination: false,
       rowKey: "name",
@@ -126512,23 +130342,23 @@ html body {
           render: (val) => `\u20B9${Number(val).toLocaleString()}`
         }
       ]
-    }), /* @__PURE__ */ import_react226.default.createElement(divider_default, null), /* @__PURE__ */ import_react226.default.createElement(DonationPrint_default, {
+    }), /* @__PURE__ */ import_react234.default.createElement(divider_default, null), /* @__PURE__ */ import_react234.default.createElement(DonationPrint_default, {
       donation: doc
-    })), /* @__PURE__ */ import_react226.default.createElement(card_default, {
+    })), /* @__PURE__ */ import_react234.default.createElement(card_default, {
       className: "rounded-xl shadow-sm"
-    }, /* @__PURE__ */ import_react226.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react234.default.createElement(row_default2, {
       justify: "space-between"
-    }, /* @__PURE__ */ import_react226.default.createElement(col_default2, null, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react234.default.createElement(col_default2, null, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       type: "secondary"
-    }, "Created"), /* @__PURE__ */ import_react226.default.createElement("div", null, doc.creation && new Date(doc.creation).toLocaleString())), /* @__PURE__ */ import_react226.default.createElement(col_default2, null, /* @__PURE__ */ import_react226.default.createElement(Text12, {
+    }, "Created"), /* @__PURE__ */ import_react234.default.createElement("div", null, doc.creation && new Date(doc.creation).toLocaleString())), /* @__PURE__ */ import_react234.default.createElement(col_default2, null, /* @__PURE__ */ import_react234.default.createElement(Text12, {
       type: "secondary"
-    }, "Last Updated"), /* @__PURE__ */ import_react226.default.createElement("div", null, doc.modified && new Date(doc.modified).toLocaleString())))));
+    }, "Last Updated"), /* @__PURE__ */ import_react234.default.createElement("div", null, doc.modified && new Date(doc.modified).toLocaleString())))));
   };
   var CommonView_default = CommonView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
   var DonorView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react227.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react235.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONOR,
       id,
       onBack,
@@ -126538,7 +130368,7 @@ html body {
   var DonorView_default = DonorView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
-  var import_react228 = __toESM(require_react());
+  var import_react236 = __toESM(require_react());
   var import_dayjs4 = __toESM(require_dayjs_min());
   var { Text: Text13 } = typography_default;
   var DonorForm = ({ id, onBack }) => {
@@ -126547,7 +130377,7 @@ html body {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-    (0, import_react228.useEffect)(() => {
+    (0, import_react236.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, data), {
           date_of_birth: data.date_of_birth ? (0, import_dayjs4.default)(data.date_of_birth) : null,
@@ -126581,192 +130411,192 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react228.default.createElement(spin_default, null);
+      return /* @__PURE__ */ import_react236.default.createElement(spin_default, null);
     if (error) {
-      return /* @__PURE__ */ import_react228.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react236.default.createElement(alert_default, {
         message: "Error loading donor",
         type: "error",
-        action: /* @__PURE__ */ import_react228.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react236.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     }
-    return /* @__PURE__ */ import_react228.default.createElement("div", {
+    return /* @__PURE__ */ import_react236.default.createElement("div", {
       className: "px-3 sm:px-4 py-4"
-    }, /* @__PURE__ */ import_react228.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donor" : "Add Donor",
       subtitle: "Donor Management"
-    }), /* @__PURE__ */ import_react228.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react236.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react228.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react236.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "mobile_number",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Contact No"),
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Contact No"),
       rules: [
         { required: true, message: "Enter mobile" },
         { pattern: /^\d{10}$/, message: "Invalid number" }
       ]
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       maxLength: 10,
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "donor_name",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Full Name"),
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Full Name"),
       rules: [{ required: true, message: "Enter name" }]
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "email",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Email")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Email")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "address",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Address Line 1")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Address Line 1")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "address_line_2",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Address Line 2")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Address Line 2")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "pan_card",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "PAN"),
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "PAN"),
       rules: [
         { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }
       ]
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "country",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Country")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Country")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "state",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "State"),
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "State"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "city",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "City"),
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "City"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "pincode",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Pincode")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Pincode")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "native_place",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Native Place")
-    }, /* @__PURE__ */ import_react228.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Native Place")
+    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "date_of_birth",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Date of Birth")
-    }, /* @__PURE__ */ import_react228.default.createElement(date_picker_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Date of Birth")
+    }, /* @__PURE__ */ import_react236.default.createElement(date_picker_default, {
       className: "w-full h-10",
       format: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "marital_status",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Marital Status")
-    }, /* @__PURE__ */ import_react228.default.createElement(select_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Marital Status")
+    }, /* @__PURE__ */ import_react236.default.createElement(select_default, {
       options: [
         { label: "Unmarried", value: "Unmarried" },
         { label: "Married", value: "Married" }
       ]
-    }))), /* @__PURE__ */ import_react228.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react228.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
       name: "anniversary_date",
-      label: /* @__PURE__ */ import_react228.default.createElement(Text13, null, "Anniversary")
-    }, /* @__PURE__ */ import_react228.default.createElement(date_picker_default, {
+      label: /* @__PURE__ */ import_react236.default.createElement(Text13, null, "Anniversary")
+    }, /* @__PURE__ */ import_react236.default.createElement(date_picker_default, {
       className: "w-full h-10",
       format: "DD-MM-YYYY"
-    })))), /* @__PURE__ */ import_react228.default.createElement("div", {
+    })))), /* @__PURE__ */ import_react236.default.createElement("div", {
       className: "flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4"
-    }, /* @__PURE__ */ import_react228.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react236.default.createElement(button_default, {
       onClick: onBack,
       className: "h-10 px-6"
-    }, "Cancel"), /* @__PURE__ */ import_react228.default.createElement(button_default, {
+    }, "Cancel"), /* @__PURE__ */ import_react236.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react228.default.createElement(SaveOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react236.default.createElement(SaveOutlined_default2, null),
       className: "h-10 px-6 bg-black border-black"
     }, isEdit ? "Update" : "Save")))));
   };
   var DonorForm_default = DonorForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
-  var import_react230 = __toESM(require_react());
+  var import_react238 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/templeTable.jsx
-  var import_react229 = __toESM(require_react());
+  var import_react237 = __toESM(require_react());
   var { Text: Text14 } = typography_default;
   var templeColumns = [
     {
@@ -126774,7 +130604,7 @@ html body {
       dataIndex: "name",
       key: "name",
       width: 150,
-      render: (text) => /* @__PURE__ */ import_react229.default.createElement(Text14, {
+      render: (text) => /* @__PURE__ */ import_react237.default.createElement(Text14, {
         copyable: true
       }, text)
     },
@@ -126782,7 +130612,7 @@ html body {
       title: "Temple Name",
       dataIndex: "temple_name",
       key: "temple_name",
-      render: (text) => /* @__PURE__ */ import_react229.default.createElement(Text14, {
+      render: (text) => /* @__PURE__ */ import_react237.default.createElement(Text14, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.temple_name || "").localeCompare(b.temple_name || "")
@@ -126806,7 +130636,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
   var TempleList = () => {
-    return /* @__PURE__ */ import_react230.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react238.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_TEMPLE,
       title: "Temple Management",
       description: "View, add, edit or delete temple records",
@@ -126818,9 +130648,9 @@ html body {
   var TempleList_default = TempleList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleView.jsx
-  var import_react231 = __toESM(require_react());
+  var import_react239 = __toESM(require_react());
   var TempleView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react231.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react239.default.createElement(CommonView_default, {
       doctype: DOCTYPE_TEMPLE,
       id,
       onBack,
@@ -126830,12 +130660,12 @@ html body {
   var TempleView_default = TempleView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleForm.jsx
-  var import_react232 = __toESM(require_react());
+  var import_react240 = __toESM(require_react());
   var { Text: Text15 } = typography_default;
   var TempleForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = form_default.useForm();
-    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react232.useState)([]);
+    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react240.useState)([]);
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_TEMPLE, id);
@@ -126843,7 +130673,7 @@ html body {
       DOCTYPE_DONATION_TYPE,
       { fields: ["name", "donation_type"] }
     );
-    (0, import_react232.useEffect)(() => {
+    (0, import_react240.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(data);
         if (data.donation_types) {
@@ -126883,124 +130713,124 @@ html body {
       );
     };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react232.default.createElement(spin_default, null);
+      return /* @__PURE__ */ import_react240.default.createElement(spin_default, null);
     if (isEdit && error) {
-      return /* @__PURE__ */ import_react232.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react240.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error"
       });
     }
-    return /* @__PURE__ */ import_react232.default.createElement("div", {
+    return /* @__PURE__ */ import_react240.default.createElement("div", {
       className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react232.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react240.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Temple" : "Add Temple",
       subtitle: "Temple Management"
-    }), /* @__PURE__ */ import_react232.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react240.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react232.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react240.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl mb-6"
-    }, /* @__PURE__ */ import_react232.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "temple_name",
       label: "Temple Name",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "trust_registration_no",
       label: "Trust Registration No",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "country",
       label: "Country"
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "state",
       label: "State",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "city",
       label: "City",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Pincode",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default, null))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default, null))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "temple_address",
       label: "Temple Address",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default.TextArea, {
       rows: 3
-    }))), /* @__PURE__ */ import_react232.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
       xs: 24,
       lg: 8
-    }, /* @__PURE__ */ import_react232.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
       name: "note",
       label: "Note"
-    }, /* @__PURE__ */ import_react232.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react240.default.createElement(input_default.TextArea, {
       rows: 3
-    }))))), /* @__PURE__ */ import_react232.default.createElement(card_default, {
+    }))))), /* @__PURE__ */ import_react240.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl mb-6"
-    }, /* @__PURE__ */ import_react232.default.createElement(Text15, {
+    }, /* @__PURE__ */ import_react240.default.createElement(Text15, {
       strong: true,
       className: "block mb-3"
-    }, "Donation Types"), /* @__PURE__ */ import_react232.default.createElement("div", {
+    }, "Donation Types"), /* @__PURE__ */ import_react240.default.createElement("div", {
       className: "flex flex-wrap gap-2"
     }, donationTypes == null ? void 0 : donationTypes.map((item) => {
       const active = selectedDonationTypes.includes(item.name);
-      return /* @__PURE__ */ import_react232.default.createElement("div", {
+      return /* @__PURE__ */ import_react240.default.createElement("div", {
         key: item.name,
         onClick: () => toggleDonationType(item.name),
         className: `px-4 py-2 border rounded-md cursor-pointer
                                     ${active ? "bg-black text-white border-black" : "bg-white border-zinc-300"}`
       }, item.donation_type);
-    }))), /* @__PURE__ */ import_react232.default.createElement("div", {
+    }))), /* @__PURE__ */ import_react240.default.createElement("div", {
       className: "flex justify-end gap-2"
-    }, /* @__PURE__ */ import_react232.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react240.default.createElement(button_default, {
       onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react232.default.createElement(button_default, {
+    }, "Cancel"), /* @__PURE__ */ import_react240.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react232.default.createElement(SaveOutlined_default2, null)
+      icon: /* @__PURE__ */ import_react240.default.createElement(SaveOutlined_default2, null)
     }, isEdit ? "Update" : "Save"))));
   };
   var TempleForm_default = TempleForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
-  var import_react234 = __toESM(require_react());
+  var import_react242 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTable.jsx
-  var import_react233 = __toESM(require_react());
+  var import_react241 = __toESM(require_react());
   var { Text: Text16 } = typography_default;
   var donationColumns = [
     {
@@ -127008,7 +130838,7 @@ html body {
       dataIndex: "name",
       key: "name",
       width: 150,
-      render: (text) => /* @__PURE__ */ import_react233.default.createElement(Text16, {
+      render: (text) => /* @__PURE__ */ import_react241.default.createElement(Text16, {
         copyable: true
       }, text)
     },
@@ -127016,7 +130846,7 @@ html body {
       title: "Donor",
       dataIndex: "donor_name",
       key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react233.default.createElement(Text16, {
+      render: (text) => /* @__PURE__ */ import_react241.default.createElement(Text16, {
         strong: true
       }, text)
     },
@@ -127029,7 +130859,7 @@ html body {
       title: "Amount",
       dataIndex: "total_amount",
       key: "total_amount",
-      render: (val) => /* @__PURE__ */ import_react233.default.createElement(Text16, {
+      render: (val) => /* @__PURE__ */ import_react241.default.createElement(Text16, {
         type: "success",
         strong: true
       }, "\u20B9", Number(val || 0).toLocaleString()),
@@ -127039,7 +130869,7 @@ html body {
       title: "Payment Mode",
       dataIndex: "payment_mode",
       key: "payment_mode",
-      render: (mode) => /* @__PURE__ */ import_react233.default.createElement(tag_default, {
+      render: (mode) => /* @__PURE__ */ import_react241.default.createElement(tag_default, {
         color: mode === "Cash" ? "green" : "blue"
       }, mode)
     }
@@ -127047,7 +130877,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
   var DonationList = () => {
-    return /* @__PURE__ */ import_react234.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react242.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION,
       title: "Donation Records",
       description: "View and track all donation transactions",
@@ -127059,9 +130889,9 @@ html body {
   var DonationList_default = DonationList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationView.jsx
-  var import_react235 = __toESM(require_react());
+  var import_react243 = __toESM(require_react());
   var DonationView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react235.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react243.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION,
       id,
       onBack,
@@ -127071,19 +130901,19 @@ html body {
   var DonationView_default = DonationView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationForm.jsx
-  var import_react237 = __toESM(require_react());
+  var import_react245 = __toESM(require_react());
   var import_dayjs5 = __toESM(require_dayjs_min());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ChangeHistory.jsx
-  var import_react236 = __toESM(require_react());
+  var import_react244 = __toESM(require_react());
   var { Title: Title9, Text: Text17 } = typography_default;
   var ChangeHistory = ({ doctype, docname }) => {
     const { data: versions, loading: versionLoading } = useFrappeGetVersions(doctype, docname);
     if (!docname)
       return null;
-    return /* @__PURE__ */ import_react236.default.createElement("div", null, /* @__PURE__ */ import_react236.default.createElement("div", {
+    return /* @__PURE__ */ import_react244.default.createElement("div", null, /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "flex items-center justify-between px-4 py-3 border-b"
-    }, /* @__PURE__ */ import_react236.default.createElement(Text17, null, "Change History")), /* @__PURE__ */ import_react236.default.createElement("div", {
+    }, /* @__PURE__ */ import_react244.default.createElement(Text17, null, "Change History")), /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "p-4 space-y-4"
     }, versions.map((v) => {
       var _a, _b;
@@ -127092,41 +130922,41 @@ html body {
         changes = JSON.parse(v.data || "{}");
       } catch (e4) {
       }
-      return /* @__PURE__ */ import_react236.default.createElement("div", {
+      return /* @__PURE__ */ import_react244.default.createElement("div", {
         key: v.name,
         className: "flex gap-3 mb-3"
-      }, /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "flex-shrink-0"
-      }, /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "w-8 h-8 rounded-full bg-zinc-200 flex items-center justify-center text-xs font-bold"
-      }, (_a = v.owner) == null ? void 0 : _a.charAt(0))), /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, (_a = v.owner) == null ? void 0 : _a.charAt(0))), /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "flex-1"
-      }, /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "flex justify-between items-center mb-1"
-      }, /* @__PURE__ */ import_react236.default.createElement(Text17, {
+      }, /* @__PURE__ */ import_react244.default.createElement(Text17, {
         strong: true,
         className: "text-sm"
-      }, v.owner), /* @__PURE__ */ import_react236.default.createElement(Text17, {
+      }, v.owner), /* @__PURE__ */ import_react244.default.createElement(Text17, {
         type: "secondary",
         className: "text-xs"
-      }, new Date(v.creation).toLocaleString())), ((_b = changes.changed) == null ? void 0 : _b.length) ? /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, new Date(v.creation).toLocaleString())), ((_b = changes.changed) == null ? void 0 : _b.length) ? /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "bg-zinc-50 border rounded px-3 py-2 space-y-1"
-      }, changes.changed.map(([field, oldVal, newVal]) => /* @__PURE__ */ import_react236.default.createElement("div", {
+      }, changes.changed.map(([field, oldVal, newVal]) => /* @__PURE__ */ import_react244.default.createElement("div", {
         key: field,
         className: "text-xs flex flex-wrap gap-2 items-center"
-      }, /* @__PURE__ */ import_react236.default.createElement("span", {
+      }, /* @__PURE__ */ import_react244.default.createElement("span", {
         className: "px-2 py-[2px] bg-white border rounded text-zinc-500 capitalize"
-      }, field.replace(/_/g, " ")), /* @__PURE__ */ import_react236.default.createElement("span", {
+      }, field.replace(/_/g, " ")), /* @__PURE__ */ import_react244.default.createElement("span", {
         className: "text-red-400 line-through"
-      }, oldVal || "None"), /* @__PURE__ */ import_react236.default.createElement("span", null, "\u2192"), /* @__PURE__ */ import_react236.default.createElement("span", {
+      }, oldVal || "None"), /* @__PURE__ */ import_react244.default.createElement("span", null, "\u2192"), /* @__PURE__ */ import_react244.default.createElement("span", {
         className: "text-green-500 font-medium"
-      }, newVal || "None")))) : /* @__PURE__ */ import_react236.default.createElement(Text17, {
+      }, newVal || "None")))) : /* @__PURE__ */ import_react244.default.createElement(Text17, {
         type: "secondary",
         className: "text-xs"
       }, "Modified document")));
-    }), (versions == null ? void 0 : versions.length) >= 5 && /* @__PURE__ */ import_react236.default.createElement("div", {
+    }), (versions == null ? void 0 : versions.length) >= 5 && /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "flex justify-center pt-2"
-    }, /* @__PURE__ */ import_react236.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
       type: "primary",
       onClick: () => fetchMore && fetchMore(),
       loading: versionLoading
@@ -127141,7 +130971,7 @@ html body {
     const [form] = form_default.useForm();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONATION, id);
-    (0, import_react237.useEffect)(() => {
+    (0, import_react245.useEffect)(() => {
       if (isEdit && initialValues) {
         const vals = __spreadValues({}, initialValues);
         if (vals.dob)
@@ -127166,236 +130996,236 @@ html body {
       }
     };
     if (fetching)
-      return /* @__PURE__ */ import_react237.default.createElement("div", {
+      return /* @__PURE__ */ import_react245.default.createElement("div", {
         className: "p-20 text-center"
-      }, /* @__PURE__ */ import_react237.default.createElement(spin_default, null));
+      }, /* @__PURE__ */ import_react245.default.createElement(spin_default, null));
     if (fetchError)
-      return /* @__PURE__ */ import_react237.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react245.default.createElement(alert_default, {
         message: "Error",
         description: fetchError.message,
         type: "error"
       });
-    return /* @__PURE__ */ import_react237.default.createElement("div", {
+    return /* @__PURE__ */ import_react245.default.createElement("div", {
       className: "px-3 sm:px-4 py-4"
-    }, /* @__PURE__ */ import_react237.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(AddPageHeader_default, {
       onBack,
       title: "Edit Donation",
       subtitle: "Donation Entry"
-    }), /* @__PURE__ */ import_react237.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react245.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react237.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react245.default.createElement(row_default2, {
       gutter: [24, 16]
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "name",
       hidden: true
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, null)), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, null)), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "name_on_receipt",
       label: "Name on Receipt"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "donor_name",
       label: "Donor Name"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "cashier",
       label: "Donation Receiver Name"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "email",
       label: "Email"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "address_line_1",
       label: "Address Line 1"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Address Line 1"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "address_line_2",
       label: "Address Line 2"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Address Line 2"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "country",
       label: "Country"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "state",
       label: "State"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "city",
       label: "City"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Pincode"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter pincode"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "contact_number",
       label: "Contact Number"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "native_place",
       label: "Native Place"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Native Place"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "dob",
       label: "Date of Birth"
-    }, /* @__PURE__ */ import_react237.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
       className: "h-10 w-full",
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "marital_status",
       label: "Marital Status"
-    }, /* @__PURE__ */ import_react237.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(select_default, {
       className: "h-10 w-full",
       placeholder: "Unmarried"
-    }, /* @__PURE__ */ import_react237.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react245.default.createElement(select_default.Option, {
       value: "Unmarried"
-    }, "Unmarried"), /* @__PURE__ */ import_react237.default.createElement(select_default.Option, {
+    }, "Unmarried"), /* @__PURE__ */ import_react245.default.createElement(select_default.Option, {
       value: "Married"
-    }, "Married")))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }, "Married")))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "date_of_anniversary",
       label: "Date of Anniversary"
-    }, /* @__PURE__ */ import_react237.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
       className: "h-10 w-full",
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react237.default.createElement(typography_default.Title, {
+    }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
       level: 5,
       className: "text-[#a84422] mt-4 mb-2"
-    }, "Donation Items")), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }, "Donation Items")), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "thakorji_thal",
       label: "Thakorji Thal"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "lease_land_receipt",
       label: "Lease Land receipt"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react237.default.createElement(typography_default.Title, {
+    }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
       level: 5,
       className: "text-[#a84422] mt-4 mb-2"
-    }, "Donation Payments")), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }, "Donation Payments")), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "payment_mode",
       label: "Donation Payment Type"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10 bg-zinc-50"
-    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "total_amount",
       label: "Donation Total Amount"
-    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10 bg-zinc-50 text-zinc-500 font-medium"
-    })))), /* @__PURE__ */ import_react237.default.createElement("div", {
+    })))), /* @__PURE__ */ import_react245.default.createElement("div", {
       className: "flex flex-col sm:flex-row justify-between items-center mt-10 pt-6 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react237.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(button_default, {
       onClick: onBack,
       className: "h-10 px-8 text-[#a84422] border-[#a84422] hover:bg-[#a84422] hover:text-white transition-colors"
-    }, "Back"), /* @__PURE__ */ import_react237.default.createElement(button_default, {
+    }, "Back"), /* @__PURE__ */ import_react245.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       loading: updating,
       className: "h-10 px-8 bg-[#9c3e1e] hover:bg-[#853418] border-none font-medium text-white shadow-md"
-    }, "Update Donation")))), isEdit && /* @__PURE__ */ import_react237.default.createElement(ChangeHistory_default, {
+    }, "Update Donation")))), isEdit && /* @__PURE__ */ import_react245.default.createElement(ChangeHistory_default, {
       doctype: DOCTYPE_DONATION,
       docname: id
     }));
@@ -127403,17 +131233,17 @@ html body {
   var DonationForm_default = DonationForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
-  var import_react239 = __toESM(require_react());
+  var import_react247 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTypeTable.jsx
-  var import_react238 = __toESM(require_react());
+  var import_react246 = __toESM(require_react());
   var { Text: Text19 } = typography_default;
   var donationTypeColumns = [
     {
       title: "Donation Type",
       dataIndex: "donation_type",
       key: "donation_type",
-      render: (text) => /* @__PURE__ */ import_react238.default.createElement(Text19, {
+      render: (text) => /* @__PURE__ */ import_react246.default.createElement(Text19, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.donation_type || "").localeCompare(b.donation_type || "")
@@ -127432,10 +131262,10 @@ html body {
         if (!img)
           return "-";
         const src = img.startsWith("http") ? img : `${window.location.origin}${img.startsWith("/") ? "" : "/"}${img}`;
-        return /* @__PURE__ */ import_react238.default.createElement("img", {
+        return /* @__PURE__ */ import_react246.default.createElement("img", {
           src,
           alt: "Donation",
-          className: "w-10 h-10 rounded-lg object-cover shadow-sm border border-stone-100"
+          className: "w-10 h-10 object-cover"
         });
       }
     }
@@ -127443,7 +131273,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
   var DonationTypeList = () => {
-    return /* @__PURE__ */ import_react239.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react247.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       title: "Donation Types",
       description: "Manage available donation categories",
@@ -127455,9 +131285,9 @@ html body {
   var DonationTypeList_default = DonationTypeList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeView.jsx
-  var import_react240 = __toESM(require_react());
+  var import_react248 = __toESM(require_react());
   var DonationTypeView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react240.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react248.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       id,
       onBack,
@@ -127467,7 +131297,7 @@ html body {
   var DonationTypeView_default = DonationTypeView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeForm.jsx
-  var import_react241 = __toESM(require_react());
+  var import_react249 = __toESM(require_react());
   var { Text: Text20 } = typography_default;
   var DonationTypeForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -127479,7 +131309,7 @@ html body {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, {
       fields: ["name", "temple_name"]
     });
-    (0, import_react241.useEffect)(() => {
+    (0, import_react249.useEffect)(() => {
       if (isEdit && data) {
         let fileList = [];
         if (data.donation_image) {
@@ -127500,18 +131330,6 @@ html body {
     const handleSave = async (values) => {
       try {
         const _a = values, { donation_image } = _a, rest = __objRest(_a, ["donation_image"]);
-        if (file) {
-          const uploaded = await upload2(file, {
-            doctype: DOCTYPE_DONATION_TYPE,
-            docname: docName,
-            fieldname: "donation_image"
-          });
-          if (uploaded == null ? void 0 : uploaded.file_url) {
-            await updateDoc(DOCTYPE_DONATION_TYPE, docName, {
-              donation_image: uploaded.file_url
-            });
-          }
-        }
         let doc;
         if (isEdit) {
           doc = await updateDoc(DOCTYPE_DONATION_TYPE, id, rest);
@@ -127523,19 +131341,22 @@ html body {
           throw new Error("Could not determine document name for upload.");
         }
         if (donation_image && donation_image.length > 0) {
-          const file2 = donation_image[0].originFileObj;
-          if (file2) {
-            await upload2(file2, {
+          const file = donation_image[0].originFileObj;
+          if (file) {
+            const uploaded = await upload2(file, {
               doctype: DOCTYPE_DONATION_TYPE,
               docname: docName,
               fieldname: "donation_image",
               is_private: 0
             });
+            if (uploaded == null ? void 0 : uploaded.file_url) {
+              await updateDoc(DOCTYPE_DONATION_TYPE, docName, {
+                donation_image: uploaded.file_url
+              });
+            }
           }
-        } else {
-          if (isEdit) {
-            await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
-          }
+        } else if (isEdit && (!donation_image || donation_image.length === 0)) {
+          await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
         }
         message_default.success("Saved successfully");
         onBack && onBack();
@@ -127545,67 +131366,67 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react241.default.createElement(spin_default, null);
+      return /* @__PURE__ */ import_react249.default.createElement(spin_default, null);
     if (error) {
-      return /* @__PURE__ */ import_react241.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react249.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error",
-        action: /* @__PURE__ */ import_react241.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react249.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     }
-    return /* @__PURE__ */ import_react241.default.createElement("div", {
+    return /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "px-3 sm:px-4 py-4"
-    }, /* @__PURE__ */ import_react241.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donation Type" : "Add Donation Type",
       subtitle: "Donation Setup"
-    }), /* @__PURE__ */ import_react241.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react249.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react241.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react241.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react249.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react241.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "donation_type",
-      label: /* @__PURE__ */ import_react241.default.createElement(Text20, null, "Donation Type"),
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Donation Type"),
       rules: [{ required: true, message: "Enter type" }]
-    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "default_amount",
-      label: /* @__PURE__ */ import_react241.default.createElement(Text20, null, "Default Amount")
-    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Default Amount")
+    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "temple",
-      label: /* @__PURE__ */ import_react241.default.createElement(Text20, null, "Temple")
-    }, /* @__PURE__ */ import_react241.default.createElement(select_default, {
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Temple")
+    }, /* @__PURE__ */ import_react249.default.createElement(select_default, {
       placeholder: "Select Temple",
       className: "h-10",
       options: temples == null ? void 0 : temples.map((t2) => ({
         value: t2.name,
         label: t2.temple_name || t2.name
       })),
-      mode: "multiple"
-    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
+      allowClear: true
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "donation_image",
       label: "Donation Image",
       valuePropName: "fileList",
@@ -127614,35 +131435,35 @@ html body {
           return e4;
         return e4 && e4.fileList;
       }
-    }, /* @__PURE__ */ import_react241.default.createElement(upload_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(upload_default, {
       maxCount: 1,
       beforeUpload: () => false,
       listType: "picture-card",
       className: "donation-upload"
-    }, /* @__PURE__ */ import_react241.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col items-center"
-    }, /* @__PURE__ */ import_react241.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "text-xs font-bold uppercase tracking-widest"
-    }, "Upload")))))), /* @__PURE__ */ import_react241.default.createElement("div", {
+    }, "Upload")))))), /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4"
-    }, /* @__PURE__ */ import_react241.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(button_default, {
       onClick: onBack,
       className: "h-10 px-6"
-    }, "Cancel"), /* @__PURE__ */ import_react241.default.createElement(button_default, {
+    }, "Cancel"), /* @__PURE__ */ import_react249.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       loading: creating || updating || uploading,
-      icon: /* @__PURE__ */ import_react241.default.createElement(SaveOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react249.default.createElement(SaveOutlined_default2, null),
       className: "h-10 px-6 bg-black border-black"
     }, isEdit ? "Update" : "Save")))));
   };
   var DonationTypeForm_default = DonationTypeForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
-  var import_react243 = __toESM(require_react());
+  var import_react251 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userTable.jsx
-  var import_react242 = __toESM(require_react());
+  var import_react250 = __toESM(require_react());
   var userColumns = [
     {
       title: "USER",
@@ -127652,19 +131473,17 @@ html body {
       render: (text, record) => {
         const name = text || `${record.first_name || ""} ${record.last_name || ""}`.trim() || record.name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react242.default.createElement("div", {
+        return /* @__PURE__ */ import_react250.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, record.user_image ? /* @__PURE__ */ import_react242.default.createElement("img", {
+        }, /* @__PURE__ */ import_react250.default.createElement(avatar_default, {
           src: record.user_image,
-          alt: name,
-          className: "h-9 w-9 rounded-full object-cover border border-gray-200"
-        }) : /* @__PURE__ */ import_react242.default.createElement("div", {
-          className: "h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-semibold text-gray-500 border border-gray-200"
-        }, initials), /* @__PURE__ */ import_react242.default.createElement("div", {
+          size: 26,
+          className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
+        }, initials), /* @__PURE__ */ import_react250.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react242.default.createElement("span", {
+        }, /* @__PURE__ */ import_react250.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react242.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react250.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.email || "no-email")));
       }
@@ -127674,7 +131493,7 @@ html body {
       dataIndex: "custom_test",
       key: "custom_test",
       width: 180,
-      render: (text) => /* @__PURE__ */ import_react242.default.createElement("span", {
+      render: (text) => /* @__PURE__ */ import_react250.default.createElement("span", {
         className: "text-gray-600 text-sm font-medium"
       }, text || "N/A")
     },
@@ -127683,12 +131502,12 @@ html body {
       dataIndex: "custom_select_temple",
       key: "custom_select_temple",
       width: 180,
-      render: (temples) => /* @__PURE__ */ import_react242.default.createElement("div", {
+      render: (temples) => /* @__PURE__ */ import_react250.default.createElement("div", {
         className: "flex flex-wrap gap-1"
-      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react242.default.createElement(tag_default, {
+      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react250.default.createElement(tag_default, {
         key: index2,
         className: "!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
-      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react242.default.createElement("span", {
+      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react250.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Global"))
     },
@@ -127710,7 +131529,7 @@ html body {
         } else if (roleLower.includes("cashier")) {
           config.className = "bg-sky-50 border border-sky-200 text-sky-700";
         }
-        return /* @__PURE__ */ import_react242.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react250.default.createElement(tag_default, {
           className: `${config.className} font-semibold rounded-full px-3 py-0 text-[10px] uppercase`
         }, role);
       }
@@ -127720,7 +131539,7 @@ html body {
       dataIndex: "enabled",
       key: "enabled",
       width: 140,
-      render: (enabled) => /* @__PURE__ */ import_react242.default.createElement(tag_default, {
+      render: (enabled) => /* @__PURE__ */ import_react250.default.createElement(tag_default, {
         color: enabled ? "success" : "error",
         className: "rounded-full px-3 py-[2px] border-0 font-semibold text-[10px]"
       }, enabled ? "ACTIVE" : "INACTIVE")
@@ -127729,7 +131548,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
   var UserList = () => {
-    return /* @__PURE__ */ import_react243.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react251.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_USER,
       title: "Users Management",
       description: "Manage temple admins, cashiers and system users.",
@@ -127746,7 +131565,7 @@ html body {
   var UserList_default = UserList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserForm.jsx
-  var import_react244 = __toESM(require_react());
+  var import_react252 = __toESM(require_react());
   var { Text: Text21 } = typography_default;
   var UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -127757,7 +131576,7 @@ html body {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, {
       fields: ["name", "temple_name"]
     });
-    (0, import_react244.useEffect)(() => {
+    (0, import_react252.useEffect)(() => {
       if (isEdit && data) {
         const values = __spreadValues({}, data);
         values.enabled = values.enabled ? "Active" : "Inactive";
@@ -127794,148 +131613,148 @@ html body {
       }
     };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react244.default.createElement(spin_default, null);
+      return /* @__PURE__ */ import_react252.default.createElement(spin_default, null);
     if (isEdit && error)
-      return /* @__PURE__ */ import_react244.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react252.default.createElement(alert_default, {
         message: "Error loading",
         type: "error"
       });
-    return /* @__PURE__ */ import_react244.default.createElement("div", {
+    return /* @__PURE__ */ import_react252.default.createElement("div", {
       className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react244.default.createElement(AddPageHeader_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit User" : "Add User",
       subtitle: "User Management"
-    }), /* @__PURE__ */ import_react244.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react252.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl"
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react244.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "email",
       label: "Email",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "first_name",
       label: "First Name",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "last_name",
       label: "Last Name"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_test",
       label: "Contact Number",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_user_role",
       label: "User Role",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default, null, /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Super Admin"
-    }, "Super Admin"), /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, "Super Admin"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Temple Admin"
-    }, "Temple Admin"), /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, "Temple Admin"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Cashier"
-    }, "Cashier")))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Cashier")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_select_temple",
       label: "Temples",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
       mode: "multiple"
-    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       key: t2.name,
       value: t2.name
-    }, t2.temple_name))))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, t2.temple_name))))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "new_password",
       label: "Password",
       rules: [{ required: !isEdit }]
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default.Password, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default.Password, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "enabled",
       label: "Account Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default, null, /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
-    }, "Active"), /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
-    }, "Inactive")))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Inactive")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_status",
       label: "Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default, null, /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
-    }, "Active"), /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
-    }, "Inactive")))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Inactive")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_opening_balance",
       label: "Opening Balance"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_internal_notes",
       label: "Notes"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default.TextArea, {
       rows: 4
-    })))), /* @__PURE__ */ import_react244.default.createElement("div", {
+    })))), /* @__PURE__ */ import_react252.default.createElement("div", {
       className: "flex justify-end gap-2 mt-6"
-    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(button_default, {
       onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    }, "Cancel"), /* @__PURE__ */ import_react252.default.createElement(button_default, {
       type: "primary",
       htmlType: "submit",
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react244.default.createElement(SaveOutlined_default2, null)
+      icon: /* @__PURE__ */ import_react252.default.createElement(SaveOutlined_default2, null)
     }, isEdit ? "Update" : "Save")))));
   };
   var UserForm_default = UserForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var import_react246 = __toESM(require_react());
+  var import_react254 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
-  var import_react245 = __toESM(require_react());
+  var import_react253 = __toESM(require_react());
   var userBalanceColumns = [
     {
       title: "USER",
@@ -127945,15 +131764,15 @@ html body {
       render: (text, record) => {
         const name = text || record.user_name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react245.default.createElement("div", {
+        return /* @__PURE__ */ import_react253.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, /* @__PURE__ */ import_react245.default.createElement("div", {
+        }, /* @__PURE__ */ import_react253.default.createElement("div", {
           className: "h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-semibold text-gray-500 border border-gray-200"
-        }, initials), /* @__PURE__ */ import_react245.default.createElement("div", {
+        }, initials), /* @__PURE__ */ import_react253.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react245.default.createElement("span", {
+        }, /* @__PURE__ */ import_react253.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react245.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react253.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.user_name)));
       }
@@ -127964,11 +131783,11 @@ html body {
       key: "opening_balance",
       align: "center",
       width: 220,
-      render: (value) => /* @__PURE__ */ import_react245.default.createElement("div", {
+      render: (value) => /* @__PURE__ */ import_react253.default.createElement("div", {
         className: "flex items-center justify-center gap-2"
-      }, /* @__PURE__ */ import_react245.default.createElement(WalletOutlined_default2, {
+      }, /* @__PURE__ */ import_react253.default.createElement(WalletOutlined_default2, {
         className: "text-gray-400 text-sm"
-      }), /* @__PURE__ */ import_react245.default.createElement("span", {
+      }), /* @__PURE__ */ import_react253.default.createElement("span", {
         className: "font-semibold text-gray-900 text-base"
       }, "\u20B9", Number(value || 0).toLocaleString()))
     }
@@ -127977,8 +131796,8 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
   var { Title: Title10, Text: Text22 } = typography_default;
   var OpeningBalance = () => {
-    const [loading, setLoading] = (0, import_react246.useState)(false);
-    const [data, setData] = (0, import_react246.useState)([]);
+    const [loading, setLoading] = (0, import_react254.useState)(false);
+    const [data, setData] = (0, import_react254.useState)([]);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -128018,7 +131837,7 @@ html body {
         message_default.error("Reset failed");
       }
     };
-    (0, import_react246.useEffect)(() => {
+    (0, import_react254.useEffect)(() => {
       fetchData();
     }, []);
     const columns = [
@@ -128028,36 +131847,36 @@ html body {
         key: "action",
         align: "right",
         width: 160,
-        render: (_2, record) => /* @__PURE__ */ import_react246.default.createElement(button_default, {
+        render: (_2, record) => /* @__PURE__ */ import_react254.default.createElement(button_default, {
           type: "text",
-          icon: /* @__PURE__ */ import_react246.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react254.default.createElement(SyncOutlined_default2, null),
           className: "text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all",
           onClick: () => handleReset(record.user_name, record.opening_balance)
         }, "Reset")
       }
     ];
-    return /* @__PURE__ */ import_react246.default.createElement("div", {
+    return /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "animate-fadeIn py-6 space-y-6"
-    }, /* @__PURE__ */ import_react246.default.createElement(PageHeader_default, {
-      title: /* @__PURE__ */ import_react246.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement(PageHeader_default, {
+      title: /* @__PURE__ */ import_react254.default.createElement("div", {
         className: "flex flex-col"
-      }, /* @__PURE__ */ import_react246.default.createElement("span", {
+      }, /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-[32px] font-bold text-zinc-900"
-      }, "User Opening Balance"), /* @__PURE__ */ import_react246.default.createElement("span", {
+      }, "User Opening Balance"), /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-sm mt-1 text-zinc-500 font-medium"
       }, "Manage and reset hand-over cash for each user")),
       extra: [
-        /* @__PURE__ */ import_react246.default.createElement(button_default, {
+        /* @__PURE__ */ import_react254.default.createElement(button_default, {
           key: "refresh",
           onClick: fetchData,
           loading,
-          icon: /* @__PURE__ */ import_react246.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react254.default.createElement(SyncOutlined_default2, null),
           className: "flex items-center gap-2 h-9 px-4 border border-zinc-200 text-zinc-700 font-medium rounded-md bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all"
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react246.default.createElement("div", {
+    }), /* @__PURE__ */ import_react254.default.createElement("div", {
       className: ""
-    }, /* @__PURE__ */ import_react246.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(table_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
@@ -128073,43 +131892,43 @@ html body {
     {
       key: "dashboard",
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react247.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
       label: "Ledger",
-      component: /* @__PURE__ */ import_react247.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "users",
       label: "Users",
-      component: /* @__PURE__ */ import_react247.default.createElement(UserList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(UserList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "temples",
       label: "Temples",
-      component: /* @__PURE__ */ import_react247.default.createElement(TempleList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react247.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donors",
       label: "Donors",
-      component: /* @__PURE__ */ import_react247.default.createElement(DonorList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donations",
       label: "Donation",
-      component: /* @__PURE__ */ import_react247.default.createElement(DonationList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     }
   ];
@@ -128133,19 +131952,19 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react247.default.createElement("div", {
+      return /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react247.default.createElement("div", {
+      }, /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react247.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react255.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react247.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react255.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react247.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react255.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react247.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react247.default.createElement("button", {
+      }, /* @__PURE__ */ import_react255.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -128161,7 +131980,7 @@ html body {
       }
     };
     if (baseKey === "ledger") {
-      return /* @__PURE__ */ import_react247.default.createElement(OpeningBalance_default, null);
+      return /* @__PURE__ */ import_react255.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -128171,22 +131990,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react247.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react247.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react247.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react247.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react247.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react255.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react247.default.createElement(Donation_default, {
+        return /* @__PURE__ */ import_react255.default.createElement(Donation_default, {
           onBack: () => navigate(baseKey)
         });
       }
@@ -128196,22 +132015,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react247.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react247.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react247.default.createElement(DonationForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react247.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react247.default.createElement(UserForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(UserForm_default, __spreadValues({}, formProps));
         default:
           return null;
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react247.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react255.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -128222,15 +132041,15 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react248 = __toESM(require_react());
-  var UserContext = (0, import_react248.createContext)();
+  var import_react256 = __toESM(require_react());
+  var UserContext = (0, import_react256.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react248.useState)(null);
-    const [roles, setRoles] = (0, import_react248.useState)([]);
-    const [loading, setLoading] = (0, import_react248.useState)(true);
+    const [user, setUser] = (0, import_react256.useState)(null);
+    const [roles, setRoles] = (0, import_react256.useState)([]);
+    const [loading, setLoading] = (0, import_react256.useState)(true);
     console.log(user, "user");
     console.log(roles);
-    (0, import_react248.useEffect)(() => {
+    (0, import_react256.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -128294,12 +132113,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react248.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react256.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react248.useContext)(UserContext);
+    const context = (0, import_react256.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -128309,12 +132128,12 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react249.useState)("dashboard");
-    const [mobileOpen, setMobileOpen] = (0, import_react249.useState)(false);
+    const [currentRoute, setCurrentRoute] = (0, import_react257.useState)("dashboard");
+    const [mobileOpen, setMobileOpen] = (0, import_react257.useState)(false);
     const { user, roles, logout, isAdmin } = useUser();
     console.log(isAdmin, "isAdmin");
     console.log("isAdmin");
-    (0, import_react249.useEffect)(() => {
+    (0, import_react257.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -128342,7 +132161,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react249.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof frappe !== "undefined") {
             frappe.set_route("UserProfile", user == null ? void 0 : user.email);
@@ -128355,51 +132174,51 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react249.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react257.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
     ];
     const menuItems = getFilteredMenuItems(roles);
-    return /* @__PURE__ */ import_react249.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react257.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react249.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react257.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react249.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react257.default.createElement(Header3, {
       className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-header-inner flex justify-between items-center w-full"
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-logo"
-    }, /* @__PURE__ */ import_react249.default.createElement("img", {
-      src: "/assets/temple_donation/img/temple_donation_logo.svg",
+    }, /* @__PURE__ */ import_react257.default.createElement("img", {
+      src: "/assets/temple_donation/img/logo.svg",
       alt: "Temple Donation"
-    })), /* @__PURE__ */ import_react249.default.createElement("div", {
+    })), /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex items-center"
-    }, /* @__PURE__ */ import_react249.default.createElement(menu_default2, {
+    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "aavatto-menu hidden md:flex"
-    }), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }), /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-right"
-    }, !isAdmin && /* @__PURE__ */ import_react249.default.createElement(dropdown_default3, {
+    }, !isAdmin && /* @__PURE__ */ import_react257.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight"
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-user"
-    }, /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react249.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react249.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react249.default.createElement(button_default, {
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react257.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react257.default.createElement(button_default, {
       className: "md:hidden",
-      icon: /* @__PURE__ */ import_react249.default.createElement(MenuOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react257.default.createElement(MenuOutlined_default2, null),
       onClick: () => setMobileOpen(true)
-    }))))), /* @__PURE__ */ import_react249.default.createElement(drawer_default, {
-      title: /* @__PURE__ */ import_react249.default.createElement("img", {
+    }))))), /* @__PURE__ */ import_react257.default.createElement(drawer_default, {
+      title: /* @__PURE__ */ import_react257.default.createElement("img", {
         src: "/assets/temple_donation/img/logo.png",
         alt: "Temple Donation",
         style: { height: "40px", objectFit: "contain" }
@@ -128409,34 +132228,34 @@ html body {
       open: mobileOpen,
       width: 280,
       bodyStyle: { padding: 0 }
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex flex-col h-full"
-    }, /* @__PURE__ */ import_react249.default.createElement(menu_default2, {
+    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "inline",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "border-none"
-    }), !isAdmin && /* @__PURE__ */ import_react249.default.createElement("div", {
+    }), !isAdmin && /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "mt-auto p-4 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex items-center gap-3 px-3 py-2"
-    }, /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: /* @__PURE__ */ import_react249.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react249.default.createElement("div", {
+      icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react249.default.createElement("span", {
+    }, /* @__PURE__ */ import_react257.default.createElement("span", {
       className: "text-sm font-bold text-zinc-900"
-    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react249.default.createElement("span", {
+    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react257.default.createElement("span", {
       className: "text-[10px] text-zinc-400 uppercase tracking-widest"
-    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react249.default.createElement(menu_default2, {
+    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "inline",
       items: userMenuItems,
       className: "border-none mt-2"
-    })))), /* @__PURE__ */ import_react249.default.createElement(Content3, {
+    })))), /* @__PURE__ */ import_react257.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -128456,7 +132275,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react250.default.createElement(UserProvider, null, /* @__PURE__ */ import_react250.default.createElement(App_default, null))
+        /* @__PURE__ */ import_react258.default.createElement(UserProvider, null, /* @__PURE__ */ import_react258.default.createElement(App_default, null))
       );
       this.$temple_donation = root;
     }
@@ -128538,4 +132357,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.NSYJU5MF.js.map
+//# sourceMappingURL=temple_donation.bundle.2D4XSRSI.js.map

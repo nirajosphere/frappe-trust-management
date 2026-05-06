@@ -195,13 +195,11 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
                                     {type.donation_type}
                                 </Text>
 
-                                {/* TEMPLE NAME */}
                                 <Text
                                     type="secondary"
                                     className="block text-center text-[11px]"
                                 >
-                                    {type.temple_name}
-                                    {/* {type["temple.temple_name"] || type.temple} */}
+                                    {type["temple.temple_name"] || type.temple}
                                 </Text>
 
                                 {/* AMOUNT */}

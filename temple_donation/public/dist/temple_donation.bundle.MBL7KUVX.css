@@ -1491,15 +1491,11 @@ body.non-admin-user .page-container {
 .aavatto-logo {
   display: flex;
   align-items: center;
-  transition: transform 0.2s ease;
   cursor: pointer;
 }
-.aavatto-logo:hover {
-  transform: scale(1.02);
-}
 .aavatto-logo img {
-  height: 48px;
-  width: auto;
+  height: auto;
+  width: 130px;
   object-fit: contain;
   display: block;
 }
@@ -1519,4 +1515,4 @@ body.non-admin-user .page-container {
   gap: 8px;
   cursor: pointer;
 }
-/*# sourceMappingURL=temple_donation.bundle.IQPY3HIE.css.map */
+/*# sourceMappingURL=temple_donation.bundle.MBL7KUVX.css.map */

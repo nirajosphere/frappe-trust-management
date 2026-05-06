@@ -1,5 +1,5 @@
 import React from "react";
-import { Tag, Space } from "antd";
+import { Tag, Space, Avatar } from "antd";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 
 export const userColumns = [
@@ -20,18 +20,13 @@ export const userColumns = [
             return (
                 <div className="flex items-center gap-3">
 
-                    {/* Avatar */}
-                    {record.user_image ? (
-                        <img
-                            src={record.user_image}
-                            alt={name}
-                            className="h-9 w-9 rounded-full object-cover border border-gray-200"
-                        />
-                    ) : (
-                        <div className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-semibold text-gray-500 border border-gray-200">
-                            {initials}
-                        </div>
-                    )}
+                    <Avatar 
+                        src={record.user_image} 
+                        size={26}
+                        className="bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
+                    >
+                        {initials}
+                    </Avatar>
 
                     {/* Name + Email */}
                     <div className="flex flex-col min-w-0">
@@ -49,7 +44,7 @@ export const userColumns = [
     {
         title: "CONTACT",
         dataIndex: "custom_test",
-        key: "custom_test",
+        key: "custom_test", 
         width: 180,
         render: (text) => (
             <span className="text-gray-600 text-sm font-medium">

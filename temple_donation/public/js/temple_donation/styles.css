@@ -232,6 +232,7 @@
   .temple-donation-app .md\:flex {
     display: flex !important;
   }
+
   .temple-donation-app .md\:hidden {
     display: none !important;
   }
@@ -1893,17 +1894,12 @@ body.non-admin-user .page-container {
 .aavatto-logo {
   display: flex;
   align-items: center;
-  transition: transform 0.2s ease;
   cursor: pointer;
 }
 
-.aavatto-logo:hover {
-  transform: scale(1.02);
-}
-
 .aavatto-logo img {
-  height: 48px;
-  width: auto;
+  height: auto;
+  width: 130px;
   object-fit: contain;
   display: block;
 }

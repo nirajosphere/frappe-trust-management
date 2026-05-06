@@ -42,7 +42,7 @@ export const donationTypeColumns = [
         render: (img) => {
             if (!img) return '-';
             const src = img.startsWith('http') ? img : `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
-            return <img src={src} alt="Donation" className="w-10 h-10 rounded-lg object-cover shadow-sm border border-stone-100" />;
+            return <img src={src} alt="Donation" className="w-10 h-10 object-cover" />;
         }
     },
 ];
