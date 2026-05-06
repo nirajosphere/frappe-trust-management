@@ -196,7 +196,11 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
             <DonorModal
                 open={modal}
                 onCancel={() => setModal(false)}
-                onSuccess={onDonorSelect}
+                onSuccess={(newDonor) => {
+                    onDonorSelect(newDonor);
+                    setModal(false);
+                }}
+                initialMobileNumber={mobile}
             />
         </Card>
     );

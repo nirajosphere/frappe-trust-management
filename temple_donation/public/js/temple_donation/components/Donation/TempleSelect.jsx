@@ -77,6 +77,7 @@ const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
                 filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
+                allowClear
             />
         </Card>
     );

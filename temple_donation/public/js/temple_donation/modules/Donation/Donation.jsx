@@ -19,32 +19,45 @@ const Donation = ({ onBack }) => {
     const [paymentMode, setPaymentMode] = useState("Cash");
     const [submitting, setSubmitting] = useState(false);
 
+    // Synchronize cart with selected temples
+    // If a temple is unselected, remove its items from the cart
+    React.useEffect(() => {
+        if (!selectedTemple || selectedTemple.length === 0) {
+            setCartItems([]);
+        } else {
+            setCartItems(prev => prev.filter(item => selectedTemple.includes(item.temple)));
+        }
+    }, [selectedTemple]);
+
     // Calculate total amount
     const totalAmount = useMemo(() =>
         cartItems.reduce((acc, item) => acc + (item.amount || 0), 0)
         , [cartItems]);
 
-    const handleAddToCart = useCallback((donationType) => {
+    const handleToggleCart = useCallback((donationType) => {
         if (!selectedTemple || selectedTemple.length === 0) {
             message.warning("Please select at least one temple.");
             return;
         }
 
         // Check if already in cart
-        const exists = cartItems.find(item => item.donation_type === donationType.name);
-        if (exists) {
-            message.warning(`${donationType.donation_type} is already in the cart`);
-            return;
+        const existingIndex = cartItems.findIndex(item => item.donation_type === donationType.name);
+        
+        if (existingIndex > -1) {
+            // Remove if exists
+            setCartItems(prev => prev.filter((_, i) => i !== existingIndex));
+            message.info(`Removed ${donationType.donation_type}`);
+        } else {
+            // Add if not exists
+            const newItem = {
+                donation_type: donationType.name,
+                donation_type_label: donationType.donation_type,
+                amount: donationType.default_amount || 101,
+                temple: donationType.temple
+            };
+            setCartItems(prev => [...prev, newItem]);
+            message.success(`Added ${donationType.donation_type}`);
         }
-
-        const newItem = {
-            donation_type: donationType.name,
-            donation_type_label: donationType.donation_type,
-            amount: donationType.default_amount || 101,
-            temple: donationType.temple // Capture temple field
-        };
-        setCartItems(prev => [...prev, newItem]);
-        message.success(`Added ${donationType.donation_type}`);
     }, [cartItems, selectedTemple]);
 
     const handleUpdateAmount = useCallback((index, amount) => {
@@ -180,7 +193,8 @@ const Donation = ({ onBack }) => {
 
                         <DonationTypes
                             selectedTemple={selectedTemple}
-                            onAddToCart={handleAddToCart}
+                            onToggleCart={handleToggleCart}
+                            cartItems={cartItems}
                         />
                     </div>
                 </Col>

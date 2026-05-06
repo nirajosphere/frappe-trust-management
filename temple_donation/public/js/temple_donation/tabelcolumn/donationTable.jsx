@@ -4,13 +4,13 @@ import { Typography, Tag } from "antd";
 const { Text } = Typography;
 
 export const donationColumns = [
-    {
-        title: 'Donation ID',
-        dataIndex: 'name',
-        key: 'name',
-        width: 150,
-        render: (text) => <Text copyable>{text}</Text>
-    },
+    // {
+    //     title: 'Donation ID',
+    //     dataIndex: 'name',
+    //     key: 'name',
+    //     width: 150,
+    //     render: (text) => <Text copyable>{text}</Text>
+    // },
     {
         title: 'Donor',
         dataIndex: 'donor_name',
@@ -19,8 +19,8 @@ export const donationColumns = [
     },
     {
         title: 'Temple',
-        dataIndex: 'temple',
         key: 'temple',
+        render: (_, record) => <Text>{record["temple.temple_name"] || record.temple_name}</Text>,
     },
     {
         title: 'Amount',

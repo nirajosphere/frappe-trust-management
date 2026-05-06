@@ -103,12 +103,12 @@
 // export default DonationTypes;
 
 import React, { useState, useEffect } from "react";
-import { Card, Row, Col, Spin, Empty, Typography, Space, Image } from "antd";
-import { HeartFilled } from "@ant-design/icons";
+import { Card, Row, Col, Spin, Empty, Typography, Space, Checkbox } from "antd";
+import { HeartFilled, CheckCircleFilled } from "@ant-design/icons";
 
 const { Text } = Typography;
 
-const DonationTypes = ({ selectedTemple, onAddToCart }) => {
+const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
     const [donationTypes, setDonationTypes] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -136,7 +136,7 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
                     "default_amount",
                     "donation_image",
                     "temple",
-                    "temple.temple_name" // 👈 important
+                    "temple.temple_name"
                 ]
             },
             callback: (r) => {
@@ -171,49 +171,66 @@ const DonationTypes = ({ selectedTemple, onAddToCart }) => {
                 </div>
             ) : donationTypes.length > 0 ? (
                 <Row gutter={[12, 12]}>
-                    {donationTypes.map((type) => (
-                        <Col xs={12} sm={8} md={6} key={type.name}>
-                            <Card
-                                onClick={() => onAddToCart(type)}
-                                className="border border-zinc-200 hover:border-zinc-400 transition-colors cursor-pointer"
-                                bodyStyle={{ padding: 12 }}
-                            >
-                                {/* IMAGE */}
-                                <div className="!h-10 w-full mb-2 bg-zinc-100 flex items-center justify-center rounded overflow-hidden">
-                                    <Image
-                                        src={type.donation_image}
-                                        alt={type.donation_type}
-                                        className="h-full w-full"
-                                        style={{ objectFit: 'cover', height: "200px", width: "200px" }}
-                                        fallback="/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"
-                                        preview={false}
-                                    />
-                                </div>
+                    {donationTypes.map((type) => {
+                        const isSelected = cartItems.some(item => item.donation_type === type.name);
 
-                                {/* DONATION NAME */}
-                                <Text strong className="block text-center">
-                                    {type.donation_type}
-                                </Text>
-
-                                <Text
-                                    type="secondary"
-                                    className="block text-center text-[11px]"
+                        return (
+                            <Col xs={12} sm={8} md={6} key={type.name} className="flex">
+                                <Card
+                                    onClick={() => onToggleCart(type)}
+                                    className={`relative border transition-all duration-300 cursor-pointer w-full h-full overflow-hidden ${
+                                        isSelected 
+                                        ? "border-zinc-900 ring-1 ring-zinc-900 bg-zinc-50/50" 
+                                        : "border-zinc-200 hover:border-zinc-400"
+                                    }`}
+                                    bodyStyle={{ padding: 12, height: '100%', display: 'flex', flexDirection: 'column' }}
                                 >
-                                    {type["temple.temple_name"] || type.temple}
-                                </Text>
+                                    {/* SELECTION INDICATOR */}
+                                    {isSelected && (
+                                        <div className="absolute top-2 right-2 z-10 animate-in fade-in zoom-in duration-300">
+                                            <CheckCircleFilled className="text-zinc-900 text-lg bg-white rounded-full" />
+                                        </div>
+                                    )}
 
-                                {/* AMOUNT */}
-                                {type.default_amount > 0 && (
+                                    {/* IMAGE */}
+                                    <div className={`relative h-[220px] w-full mb-3 rounded-xl overflow-hidden border flex items-center justify-center p-3 transition-colors ${
+                                        isSelected ? "bg-white border-zinc-900/10" : "bg-white border-zinc-200"
+                                    }`}>
+                                        <img
+                                            src={
+                                                type.donation_image ||
+                                                "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"
+                                            }
+                                            alt={type.donation_type}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+
+                                    {/* DONATION NAME */}
+                                    <Text strong className={`block text-center transition-colors ${isSelected ? "text-zinc-900" : "text-zinc-800"}`}>
+                                        {type.donation_type}
+                                    </Text>
+
                                     <Text
                                         type="secondary"
-                                        className="block text-center mt-1"
+                                        className="block text-center text-[11px]"
                                     >
-                                        ₹ {type.default_amount}
+                                        {type["temple.temple_name"] || type.temple}
                                     </Text>
-                                )}
-                            </Card>
-                        </Col>
-                    ))}
+
+                                    {/* AMOUNT */}
+                                    {type.default_amount > 0 && (
+                                        <Text
+                                            type="secondary"
+                                            className="block text-center mt-auto pt-2"
+                                        >
+                                            ₹ {type.default_amount}
+                                        </Text>
+                                    )}
+                                </Card>
+                            </Col>
+                        );
+                    })}
                 </Row>
             ) : (
                 <Empty description="No donation types found" />

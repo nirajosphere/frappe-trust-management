@@ -47,7 +47,7 @@ const DonationForm = ({ id, onBack }) => {
 
 
     return (
-    <div className="px-3 sm:px-4 py-4">
+    <div className="max-w-6xl mx-auto p-4">
 
         <AddPageHeader
             onBack={onBack}
