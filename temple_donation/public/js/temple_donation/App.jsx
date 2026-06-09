@@ -16,8 +16,8 @@ const App = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const { user, roles, logout, isAdmin } = useUser();
 
-    console.log(isAdmin, "isAdmin");
-    console.log("isAdmin");
+    // console.log(isAdmin, "isAdmin");
+    // console.log("isAdmin");
 
     useEffect(() => {
         const handleRoute = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Card, Typography, Row, Col, Spin, Alert, DatePicker, Select
+    Form, Input, Button, Card, Typography, Row, Col, Alert, DatePicker, Select
 } from "antd";
 import dayjs from "dayjs";
 import { SaveOutlined } from "@ant-design/icons";
@@ -9,7 +9,8 @@ import {
 } from "../../hooks/useFrappe";
 import { DOCTYPE_DONATION } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
-import ChangeHistory from "../../components/common/ChangeHistory";
+import ActivityLog from "../../components/common/ActivityLog";
+import PageLoader from "../../components/common/PageLoader";
 
 const { Text } = Typography;
 
@@ -42,7 +43,7 @@ const DonationForm = ({ id, onBack }) => {
         }
     };
 
-    if (fetching) return <div className="p-20 text-center"><Spin /></div>;
+    if (fetching) return <PageLoader />;
     if (fetchError) return <Alert message="Error" description={fetchError.message} type="error" />;
 
 
@@ -206,7 +207,7 @@ const DonationForm = ({ id, onBack }) => {
             </Form>
         </Card>
 
-        {isEdit && <ChangeHistory doctype={DOCTYPE_DONATION} docname={id} />}
+        {isEdit && <ActivityLog doctype={DOCTYPE_DONATION} docname={id} />}
     </div>
 );
 };

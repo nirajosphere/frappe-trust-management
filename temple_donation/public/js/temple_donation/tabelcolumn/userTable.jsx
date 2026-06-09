@@ -1,6 +1,7 @@
 import React from "react";
 import { Tag, Space, Avatar } from "antd";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { getTagConfig } from "../utils/tagUtils";
 
 export const userColumns = [
     {
@@ -20,8 +21,8 @@ export const userColumns = [
             return (
                 <div className="flex items-center gap-3">
 
-                    <Avatar 
-                        src={record.user_image} 
+                    <Avatar
+                        src={record.user_image}
                         size={26}
                         className="bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
                     >
@@ -44,7 +45,7 @@ export const userColumns = [
     {
         title: "CONTACT",
         dataIndex: "custom_test",
-        key: "custom_test", 
+        key: "custom_test",
         width: 180,
         render: (text) => (
             <span className="text-gray-600 text-sm font-medium">
@@ -64,7 +65,8 @@ export const userColumns = [
                     temples.slice(0, 2).map((t, index) => (
                         <Tag
                             key={index}
-                            className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+                            color="blue"
+                            className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
                         >
                             {t.temple_name || t.temple}
                         </Tag>
@@ -84,24 +86,21 @@ export const userColumns = [
         key: "custom_user_role",
         width: 140,
         render: (text) => {
-            const role = text || "Standard";
-            const roleLower = role.toLowerCase();
-            
-            let config = {
-                className: "bg-gray-100 border border-gray-200 text-gray-700",
-            };
-
-            if (roleLower.includes("admin")) {
-                config.className = "bg-amber-50 border border-amber-200 text-amber-700";
-            } else if (roleLower.includes("manager")) {
-                config.className = "bg-emerald-50 border border-emerald-200 text-emerald-700";
-            } else if (roleLower.includes("cashier")) {
-                config.className = "bg-sky-50 border border-sky-200 text-sky-700";
-            }
+            const config = getTagConfig(text);
 
             return (
-                <Tag className={`${config.className} font-semibold rounded-full px-3 py-0 text-[10px] uppercase`}>
-                    {role}
+                // <Tag
+                //     color={config.color}
+                //     variant={config.variant}
+                //     className="font-semibold rounded-full px-3 py-0 text-[10px] uppercase border-0"
+                // >
+                //     {config.label}
+                // </Tag>
+                <Tag
+                    color={config.color}
+                    className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+                >
+                    {config.label}
                 </Tag>
             );
         }
@@ -112,15 +111,20 @@ export const userColumns = [
         dataIndex: "enabled",
         key: "enabled",
         width: 140,
-        render: (enabled) => (
-            <Tag
-                color={enabled ? "success" : "error"}
-                className="rounded-full px-3 py-[2px] border-0 font-semibold text-[10px]"
-            >
-                {enabled ? "ACTIVE" : "INACTIVE"}
-            </Tag>
-        )
+        render: (enabled) => {
+            const config = getTagConfig(enabled ? "Active" : "Inactive");
+            return (
+                <Tag
+                    color={config.color}
+                    className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+                >
+                    {config.label}
+                </Tag>
+            );
+        }
     },
+
+    // className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
 
     // {
     //     title: "ACTIONS",

@@ -14,7 +14,8 @@
   "country",
   "pincode",
   "note",
-  "dontatio_type"
+  "dontatio_type",
+  "donation_types"
  ],
  "fields": [
   {
@@ -65,12 +66,18 @@
    "fieldtype": "Link",
    "label": "Dontaion Type",
    "options": "Donation Type"
+  },
+  {
+   "fieldname": "donation_types",
+   "fieldtype": "Table MultiSelect",
+   "label": "Donation Types",
+   "options": "Temple Donation Type"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-09 16:26:31.174315",
+ "modified": "2026-05-12 15:05:15.350152",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Temple",
@@ -108,5 +115,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "temple_name"
+ "title_field": "temple_name",
+ "track_changes": 1
 }

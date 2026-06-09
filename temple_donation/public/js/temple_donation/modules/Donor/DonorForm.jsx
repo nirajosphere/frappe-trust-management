@@ -150,7 +150,7 @@
 import React, { useEffect } from "react";
 import {
     Form, Input, Button, Card, Typography, Row, Col,
-    message, Spin, Alert, Select, DatePicker
+    message, Alert, Select, DatePicker
 } from "antd";
 import { ArrowLeftOutlined, SaveOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -160,6 +160,8 @@ import {
 import { DOCTYPE_DONOR } from "../../config/constants";
 import PageHeader from "../../components/common/PageHeader";
 import AddPageHeader from "../../components/common/AddPageHeader";
+import ActivityLog from "../../components/common/ActivityLog";
+import PageLoader from "../../components/common/PageLoader";
 
 const { Text } = Typography;
 
@@ -209,7 +211,7 @@ const DonorForm = ({ id, onBack }) => {
         }
     };
 
-    if (loading) return <Spin />;
+    if (loading) return <PageLoader />;
 
     if (error) {
         return (
@@ -378,6 +380,8 @@ const DonorForm = ({ id, onBack }) => {
 
                 </Form>
             </Card>
+
+            {isEdit && <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />}
         </div>
     );
 };

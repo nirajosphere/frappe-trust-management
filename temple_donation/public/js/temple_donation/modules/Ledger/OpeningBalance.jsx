@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, message, Card, Typography, Tag } from 'antd';
+import { Table, Button, Space, message, Card, Typography, Tag, Popconfirm } from 'antd';
 import { SyncOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
 import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
@@ -66,14 +66,23 @@ const OpeningBalance = () => {
             align: 'right',
             width: 160,
             render: (_, record) => (
-                <Button
-                    type="text"
-                    icon={<SyncOutlined />}
-                    className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
-                    onClick={() => handleReset(record.user_name, record.opening_balance)}
+                <Popconfirm
+                    placement="leftTop"
+                    title="Hand Over Cash"
+                    description={`Reset ₹${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`}
+                    onConfirm={() => handleReset(record.user_name, record.opening_balance)}
+                    okText="Confirm"
+                    cancelText="Cancel"
+                    okButtonProps={{ className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" }}
                 >
-                    Reset
-                </Button>
+                    <Button
+                        type="text"
+                        icon={<SyncOutlined />}
+                        className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
+                    >
+                        Reset
+                    </Button>
+                </Popconfirm>
             ),
         }
     ];
@@ -81,16 +90,8 @@ const OpeningBalance = () => {
     return (
         <div className="animate-fadeIn py-6 space-y-6">
             <PageHeader
-                title={
-                    <div className="flex flex-col">
-                        <span className="text-[32px] font-bold text-zinc-900">
-                            User Opening Balance
-                        </span>
-                        <span className="text-sm mt-1 text-zinc-500 font-medium">
-                            Manage and reset hand-over cash for each user
-                        </span>
-                    </div>
-                }
+                title="User Opening Balance"
+                description="Manage and reset hand-over cash for each user"
                 extra={[
                     <Button
                         key="refresh"
@@ -104,8 +105,6 @@ const OpeningBalance = () => {
                 ]}
             />
             <div className="">
-                {/* <Card className="rounded-[32px] border-zinc-100 shadow-sm overflow-hidden"> */}
-                {/* <div className="p-2"> */}
                 <Table
                     columns={columns}
                     dataSource={data}
@@ -114,8 +113,6 @@ const OpeningBalance = () => {
                     pagination={false}
                     className="aavatto-premium-table"
                 />
-                {/* </div> */}
-                {/* </Card> */}
             </div>
         </div>
     );

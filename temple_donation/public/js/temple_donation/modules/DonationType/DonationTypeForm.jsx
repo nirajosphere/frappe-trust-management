@@ -168,7 +168,7 @@
 import React, { useEffect } from "react";
 import {
     Form, Input, Button, Card, Typography, Row, Col,
-    message, Spin, Alert, Upload, Select
+    message, Alert, Upload, Select
 } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 
@@ -182,6 +182,8 @@ import {
 
 import { DOCTYPE_DONATION_TYPE, DOCTYPE_TEMPLE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
+import ActivityLog from "../../components/common/ActivityLog";
+import PageLoader from "../../components/common/PageLoader";
 
 const { Text } = Typography;
 
@@ -274,7 +276,7 @@ const DonationTypeForm = ({ id, onBack }) => {
         }
     };
 
-    if (loading) return <Spin />;
+    if (loading) return <PageLoader />;
 
     if (error) {
         return (
@@ -386,6 +388,8 @@ const DonationTypeForm = ({ id, onBack }) => {
 
                 </Form>
             </Card>
+
+            {isEdit && <ActivityLog doctype={DOCTYPE_DONATION_TYPE} docname={id} />}
         </div>
     );
 };

@@ -1,62 +1,30 @@
-// import React from "react";
-// import { Typography, Space } from "antd";
-// import { UserOutlined, WalletOutlined } from "@ant-design/icons";
-
-// const { Text } = Typography;
-
-// export const userBalanceColumns = [
-//     {
-//         title: 'User Name',
-//         dataIndex: 'full_name',
-//         key: 'full_name',
-//         render: (text, record) => (
-//             <Space>
-//                 <UserOutlined className="text-zinc-400" />
-//                 <div>
-//                     <div className="font-bold text-zinc-900">{text || record.user_name}</div>
-//                     <div className="text-xs text-zinc-400 font-medium">{record.user_name}</div>
-//                 </div>
-//             </Space>
-//         )
-//     },
-//     {
-//         title: 'Opening Balance (Cash Only)',
-//         dataIndex: 'opening_balance',
-//         key: 'opening_balance',
-//         render: (value) => (
-//             <div className="flex items-center gap-2">
-//                 <WalletOutlined className="text-zinc-400" />
-//                 <span className="font-bold text-lg text-zinc-900">
-//                     ₹{value?.toLocaleString() || '0'}
-//                 </span>
-//             </div>
-//         )
-//     },
-// ];
-
 import React from "react";
-import { Space } from "antd";
-import { WalletOutlined } from "@ant-design/icons";
+import { Space, Avatar, Typography, Tag } from "antd";
+import { WalletOutlined, UserOutlined } from "@ant-design/icons";
+import { getTagConfig } from "../utils/tagUtils";
+
+const { Text } = Typography;
 
 export const userBalanceColumns = [
     {
         title: 'USER',
         dataIndex: 'full_name',
         key: 'full_name',
-        width: 260,
+        width: 250,
         render: (text, record) => {
             const name = text || record.user_name || "Unknown";
             const initials = name.substring(0, 2).toUpperCase();
 
             return (
                 <div className="flex items-center gap-3">
-
-                    {/* Avatar */}
-                    <div className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-semibold text-gray-500 border border-gray-200">
+                    <Avatar
+                        src={record.user_image}
+                        size={26}
+                        className="bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
+                    >
                         {initials}
-                    </div>
+                    </Avatar>
 
-                    {/* Name */}
                     <div className="flex flex-col min-w-0">
                         <span className="font-semibold text-gray-800 text-sm">
                             {name}
@@ -71,17 +39,58 @@ export const userBalanceColumns = [
     },
 
     {
+        title: "ROLE",
+        dataIndex: "custom_user_role",
+        key: "custom_user_role",
+        width: 140,
+        render: (text) => {
+            console.log(text, 'text');
+            const config = getTagConfig(text);
+            console.log(config, 'config');
+            return (
+                <Tag color={config.color} className="font-bold rounded-full px-3 py-0 text-[10px] border-0">
+                    {config.label}
+                </Tag>
+            );
+        }
+    },
+
+    {
+        title: "TEMPLES",
+        dataIndex: "custom_select_temple",
+        key: "custom_select_temple",
+        width: 180,
+        render: (temples) => (
+            <div className="flex flex-wrap gap-1">
+                {temples && temples.length > 0 ? (
+                    temples.slice(0, 2).map((t, index) => (
+                        <Tag
+                            key={index}
+                            className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+                        >
+                            {t.temple_name || t.temple}
+                        </Tag>
+                    ))
+                ) : (
+                    <span className="text-gray-400 text-xs italic">
+                        Not Assigned
+                    </span>
+                )}
+            </div>
+        )
+    },
+
+    {
         title: 'OPENING BALANCE',
         dataIndex: 'opening_balance',
         key: 'opening_balance',
-        align: 'center',
-        width: 220,
+        align: 'right',
+        width: 180,
         render: (value) => (
-            <div className="flex items-center justify-center gap-2">
-                <WalletOutlined className="text-gray-400 text-sm" />
-                <span className="font-semibold text-gray-900 text-base">
+            <div className="flex items-center justify-end gap-2 pr-4">
+                <Text strong className="text-zinc-900 text-base">
                     ₹{Number(value || 0).toLocaleString()}
-                </span>
+                </Text>
             </div>
         )
     }

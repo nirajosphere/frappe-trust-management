@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
     Row, Col, Card, Typography, Select, DatePicker, Button,
-    Space, Empty, Spin, Avatar, Tag
+    Space, Empty, Avatar, Tag
 } from "antd";
 import {
     WalletOutlined, AppstoreOutlined, UserAddOutlined,
@@ -17,6 +17,7 @@ import {
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PageHeader from "../../components/common/PageHeader";
+import PageLoader from "../../components/common/PageLoader";
 
 dayjs.extend(relativeTime);
 
@@ -169,11 +170,7 @@ const Dashboard = () => {
     };
 
     if (loading && !stats.total_donation) {
-        return (
-            <div className="flex justify-center items-center min-h-[90vh]">
-                <Spin />
-            </div>
-        );
+        return <PageLoader />;
     }
 
     return (

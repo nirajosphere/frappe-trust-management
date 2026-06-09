@@ -1,7 +1,7 @@
 $(document).ready(() => {
     // Check if user is logged in
 
-    console.log("Hello")
+    // console.log("Hello")
 
     if (frappe.session.user && frappe.session.user !== "Guest") {
 

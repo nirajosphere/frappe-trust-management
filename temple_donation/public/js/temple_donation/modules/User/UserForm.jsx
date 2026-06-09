@@ -263,7 +263,7 @@
 import React, { useEffect } from "react";
 import {
     Form, Input, Button, Card, Typography, Row, Col,
-    message, Spin, Alert, Select
+    message, Alert, Select
 } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 
@@ -276,6 +276,8 @@ import {
 
 import { DOCTYPE_USER, DOCTYPE_TEMPLE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
+import ActivityLog from "../../components/common/ActivityLog";
+import PageLoader from "../../components/common/PageLoader";
 
 const { Text } = Typography;
 
@@ -340,7 +342,7 @@ const UserForm = ({ id, onBack }) => {
         }
     };
 
-    if (isEdit && loading) return <Spin />;
+    if (isEdit && loading) return <PageLoader />;
 
     if (isEdit && error) return <Alert message="Error loading" type="error" />;
 
@@ -465,6 +467,8 @@ const UserForm = ({ id, onBack }) => {
                 </Form>
 
             </Card>
+
+            {isEdit && <ActivityLog doctype={DOCTYPE_USER} docname={id} />}
         </div>
     );
 };

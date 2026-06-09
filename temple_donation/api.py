@@ -7,11 +7,27 @@ def get_user_balances():
     """
     Fetch a list of active users and calculate their current cash sum from donations
     SINCE the last handover (recorded in Ledger).
+    Excludes Administrator and Guest users.
     """
-    users = frappe.get_all("User", filters={"enabled": 1}, fields=["name as user_name", "full_name"])
+    users = frappe.get_all("User", 
+        filters={
+            "enabled": 1, 
+            "name": ["not in", ["Administrator", "Guest"]]
+        }, 
+        fields=["name as user_name", "full_name", "custom_user_role", "user_image"])
     
     # For each user, find the last reset date/time from the 'Ledger' doctype
     for user in users:
+        # Fetch assigned temples and enrich with names
+        temples = frappe.get_all("Temple Details", 
+            filters={"parent": user.user_name}, 
+            fields=["temple"])
+        
+        for t in temples:
+            t["temple_name"] = frappe.db.get_value("Temple", t.temple, "temple_name") or t.temple
+            
+        user["custom_select_temple"] = temples
+
         last_reset = frappe.db.get_value("Ledger", 
                                         filters={"user": user.user_name}, 
                                         fieldname="max(reset_date)")

@@ -7,8 +7,8 @@ export const UserProvider = ({ children }) => {
     const [roles, setRoles] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    console.log(user, "user");
-    console.log(roles,);
+    // console.log(user, "user");
+    // console.log(roles,);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -17,8 +17,8 @@ export const UserProvider = ({ children }) => {
                 const currentUser = frappe.session.user;
                 const userRoles = frappe.user_roles || [];
 
-                console.log("userRoles", userRoles);
-                console.log("currentUser", currentUser);
+                // console.log("userRoles", userRoles);
+                // console.log("currentUser", currentUser);
 
                 setUser({
                     name: frappe.session.user_fullname || currentUser,

@@ -212,7 +212,6 @@ import {
   Divider,
   Table,
   Tag,
-  Spin,
   Alert
 } from "antd";
 import {
@@ -224,6 +223,7 @@ import { useFrappeGetDoc } from "../../hooks/useFrappe";
 import PageHeader from "./PageHeader";
 import DonationPrint from "../Donation/DonationPrint";
 import { formConfigs } from "../../config/formConfig";
+import PageLoader from "./PageLoader";
 
 const { Title, Text } = Typography;
 
@@ -233,13 +233,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
 
   const handlePrint = () => window.print();
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[300px]">
-        <Spin size="large" />
-      </div>
-    );
-  }
+  if (loading) return <PageLoader />;
 
   if (error || !doc) {
     return (

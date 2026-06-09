@@ -67,7 +67,7 @@
 //     );
 // };
 
-// export default ChangeHistory;
+// export default ActivityLog;
 
 
 import React from "react";
@@ -81,8 +81,8 @@ import { useFrappeGetVersions } from "../../hooks/useFrappe";
 
 const { Title, Text } = Typography;
 
-const ChangeHistory = ({ doctype, docname }) => {
-    const { data: versions, loading: versionLoading } =
+const ActivityLog = ({ doctype, docname }) => {
+    const { data: versions, loading: versionLoading, fetchMore } =
         useFrappeGetVersions(doctype, docname);
 
     if (!docname) return null;
@@ -181,13 +181,21 @@ const ChangeHistory = ({ doctype, docname }) => {
         // </Card>
         <div>
 
-            <div className="flex items-center justify-between px-4 py-3 border-b">
-                <Text>Change History</Text>
+            <div className="flex items-center justify-between px-5 py-3 border-b bg-zinc-50/50">
+                <Text strong className="text-zinc-500 uppercase tracking-widest text-[10px] flex items-center gap-2">
+                    <ClockCircleOutlined className="text-zinc-400" />
+                    Activity Timeline
+                </Text>
             </div>
 
             <div className="p-4 space-y-4">
-
-                {versions.map((v) => {
+                {versionLoading ? (
+                    <div className="py-10 flex flex-col items-center justify-center gap-2">
+                        <Spin size="small" />
+                        <Text className="text-[10px] text-zinc-400 uppercase tracking-widest">Fetching history...</Text>
+                    </div>
+                ) : versions && versions.length > 0 ? (
+                    versions.map((v) => {
                     let changes = {};
                     try {
                         changes = JSON.parse(v.data || "{}");
@@ -246,7 +254,12 @@ const ChangeHistory = ({ doctype, docname }) => {
                             </div>
                         </div>
                     );
-                })}
+                })
+            ) : (
+                <div className="py-8 text-center bg-zinc-50/50 rounded-lg border border-dashed border-zinc-200 mx-4">
+                    <Text className="text-zinc-400 text-xs italic">Audit trail empty for this document</Text>
+                </div>
+            )}
 
                 {/* Load More */}
                 {versions?.length >= 5 && (
@@ -262,4 +275,4 @@ const ChangeHistory = ({ doctype, docname }) => {
     );
 };
 
-export default ChangeHistory;
+export default ActivityLog;

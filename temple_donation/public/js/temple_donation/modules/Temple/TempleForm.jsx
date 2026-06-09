@@ -211,8 +211,10 @@ import {
     Row,
     Col,
     message,
-    Spin,
-    Alert
+    Alert,
+    Switch,
+    List,
+    Avatar
 } from "antd";
 import { ArrowLeftOutlined, SaveOutlined } from "@ant-design/icons";
 
@@ -225,6 +227,8 @@ import {
 
 import { DOCTYPE_TEMPLE, DOCTYPE_DONATION_TYPE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
+import ActivityLog from "../../components/common/ActivityLog";
+import PageLoader from "../../components/common/PageLoader";
 
 const { Text } = Typography;
 
@@ -239,7 +243,7 @@ const TempleForm = ({ id, onBack }) => {
 
     const { data: donationTypes } = useFrappeGetDocList(
         DOCTYPE_DONATION_TYPE,
-        { fields: ["name", "donation_type"] }
+        { fields: ["name", "donation_type", "donation_image"] }
     );
 
     // 👉 Prefill
@@ -247,10 +251,14 @@ const TempleForm = ({ id, onBack }) => {
         if (isEdit && data) {
             form.setFieldsValue(data);
 
-            if (data.donation_types) {
+            // Check for child table first, then fallback to singular field
+            if (data.donation_types && Array.isArray(data.donation_types) && data.donation_types.length > 0) {
                 setSelectedDonationTypes(
                     data.donation_types.map(d => d.donation_type)
                 );
+            } else if (data.dontatio_type) {
+                // Support for the legacy misspelled singular field
+                setSelectedDonationTypes([data.dontatio_type]);
             }
         } else {
             form.setFieldsValue({
@@ -266,6 +274,7 @@ const TempleForm = ({ id, onBack }) => {
             const payload = {
                 ...values,
                 donation_types: selectedDonationTypes.map(name => ({
+                    doctype: "Temple Donation Type",
                     donation_type: name
                 }))
             };
@@ -293,7 +302,7 @@ const TempleForm = ({ id, onBack }) => {
     };
 
     // 👉 Loading
-    if (isEdit && loading) return <Spin />;
+    if (isEdit && loading) return <PageLoader />;
 
     if (isEdit && error) {
         return <Alert message="Error loading data" type="error" />;
@@ -316,59 +325,57 @@ const TempleForm = ({ id, onBack }) => {
 
                     <Row gutter={[16, 0]}>
 
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="temple_name" label="Temple Name" rules={[{ required: true }]}>
-                                <Input />
+                        <Col xs={24} md={8}>
+                            <Form.Item name="temple_name" label={<span>Temple Name <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
-                        {/* <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="temple_id" label="Temple ID" rules={[{ required: true }]}>
-                                <Input />
-                            </Form.Item>
-                        </Col> */}
-
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="trust_registration_no" label="Trust Registration No" rules={[{ required: true }]}>
-                                <Input />
+                        <Col xs={24} md={8}>
+                            <Form.Item name="temple_id" label={<span>Temple Id <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10 border-red-200" />
                             </Form.Item>
                         </Col>
 
-
-
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="country" label="Country">
-                                <Input />
+                        <Col xs={24} md={8}>
+                            <Form.Item name="trust_registration_no" label={<span>Trust Registration No. <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="state" label="State" rules={[{ required: true }]}>
-                                <Input />
+                        <Col xs={24} md={16}>
+                            <Form.Item name="temple_address" label={<span>Temple Address <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="city" label="City" rules={[{ required: true }]}>
-                                <Input />
+                        <Col xs={24} md={8}>
+                            <Form.Item name="country" label={<span>Country <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" placeholder="India" />
                             </Form.Item>
                         </Col>
 
-                        <Col xs={24} sm={12} lg={8}>
-                            <Form.Item name="pincode" label="Pincode" rules={[{ required: true }]}>
-                                <Input />
+                        <Col xs={24} md={12}>
+                            <Form.Item name="state" label={<span>State <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
-                        <Col xs={24} lg={8}>
-                            <Form.Item name="temple_address" label="Temple Address" rules={[{ required: true }]}>
-                                <Input.TextArea rows={3} />
+                        <Col xs={24} md={12}>
+                            <Form.Item name="city" label={<span>City <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
-                        <Col xs={24} lg={8}>
+                        <Col xs={24} md={12}>
+                            <Form.Item name="pincode" label={<span>Pincode <span className="text-red-500">*</span></span>}>
+                                <Input className="h-10" />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
                             <Form.Item name="note" label="Note">
-                                <Input.TextArea rows={3} />
+                                <Input className="h-10" />
                             </Form.Item>
                         </Col>
 
@@ -377,27 +384,46 @@ const TempleForm = ({ id, onBack }) => {
                 </Card>
 
                 {/* 🔥 DONATION TYPES */}
-                <Card className="border border-zinc-200 rounded-xl mb-6">
-
-                    <Text strong className="block mb-3">Donation Types</Text>
-
-                    <div className="flex flex-wrap gap-2">
-                        {donationTypes?.map(item => {
-                            const active = selectedDonationTypes.includes(item.name);
-
-                            return (
-                                <div
-                                    key={item.name}
-                                    onClick={() => toggleDonationType(item.name)}
-                                    className={`px-4 py-2 border rounded-md cursor-pointer
-                                    ${active ? "bg-black text-white border-black" : "bg-white border-zinc-300"}`}
-                                >
-                                    {item.donation_type}
-                                </div>
-                            );
-                        })}
+                <Card className="border border-zinc-200 rounded-xl mb-6 shadow-sm overflow-hidden">
+                    <div className="px-5 py-3 border-b bg-zinc-50/30">
+                        <Text strong className="text-zinc-800">Donation Types</Text>
                     </div>
 
+                    <div className="max-h-[400px] overflow-y-auto">
+                        <List
+                            dataSource={donationTypes}
+                            className="donation-type-list"
+                            renderItem={item => {
+                                const active = selectedDonationTypes.includes(item.name);
+                                return (
+                                    <List.Item
+                                        className="px-5 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-100 last:border-0"
+                                        actions={[
+                                            <Switch
+                                                checked={active}
+                                                onChange={() => toggleDonationType(item.name)}
+                                                className={active ? 'bg-zinc-800' : 'bg-zinc-200'}
+                                            />
+                                        ]}
+                                    >
+                                        <List.Item.Meta
+                                            avatar={
+                                                <Avatar
+                                                    src={item.donation_image}
+                                                    shape="square"
+                                                    size="large"
+                                                    className="bg-zinc-100 rounded-lg border border-zinc-200"
+                                                >
+                                                    {item.donation_type?.charAt(0)}
+                                                </Avatar>
+                                            }
+                                            title={<Text strong className="text-zinc-700">{item.donation_type}</Text>}
+                                        />
+                                    </List.Item>
+                                );
+                            }}
+                        />
+                    </div>
                 </Card>
 
                 {/* 🔥 BUTTONS */}
@@ -419,6 +445,8 @@ const TempleForm = ({ id, onBack }) => {
                 </div>
 
             </Form>
+
+            {isEdit && <ActivityLog doctype={DOCTYPE_TEMPLE} docname={id} />}
         </div>
     );
 };
