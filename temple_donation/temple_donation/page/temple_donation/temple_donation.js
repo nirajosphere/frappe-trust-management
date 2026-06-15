@@ -36,21 +36,10 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
             <div style="width: 180px; height: 180px; margin-bottom: 16px; filter: drop-shadow(0 12px 24px rgba(234, 179, 8, 0.18)); position: relative; display: flex; align-items: center; justify-content: center;">
               <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0) 70%); border-radius: 50%; animation: pulseGlowInit 3s ease-in-out infinite alternate; z-index: 1;"></div>
               <svg viewBox="0 0 200 200" style="position: relative; z-index: 2; width: 100%; height: 100%;" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="temple-gradient-init" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#eab308" />
-                    <stop offset="100%" stop-color="#ca8a04" />
-                  </linearGradient>
-                  <linearGradient id="flag-gradient-init" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#ea580c" />
-                    <stop offset="50%" stop-color="#f97316" />
-                    <stop offset="100%" stop-color="#fb923c" />
-                  </linearGradient>
-                </defs>
-                <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="url(#temple-gradient-init)" opacity="0.9" />
-                <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="url(#temple-gradient-init)" />
-                <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="url(#temple-gradient-init)" opacity="0.95" />
-                <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="url(#temple-gradient-init)" />
+                <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
+                <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
+                <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
+                <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
                 <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
                 <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
                 <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
@@ -60,7 +49,7 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
                 <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
                 <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" stroke-width="2.5" stroke-linecap="round" />
                 <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                <path fill="url(#flag-gradient-init)" stroke="#ea580c" stroke-width="0.5" stroke-linejoin="round">
+                <path fill="#f97316" stroke="#ea580c" stroke-width="0.5" stroke-linejoin="round">
                   <animate
                     attributeName="d"
                     dur="1.8s"

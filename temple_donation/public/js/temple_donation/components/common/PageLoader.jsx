@@ -1,7 +1,7 @@
 import React from "react";
 import TempleFlagLoader from "./TempleFlagLoader";
 
-const PageLoader = ({ minHeight = "90vh", size = "medium", className = "", text = "", subtext = "" }) => {
+const PageLoader = ({ minHeight = "calc(100vh - 180px)", size = "medium", className = "", text = "", subtext = "" }) => {
     const flagSize = size === "large" ? "large" : size === "small" ? "small" : "medium";
     
     return (

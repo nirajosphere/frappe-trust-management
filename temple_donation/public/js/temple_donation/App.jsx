@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button } from "antd";
+import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin } from "antd";
 import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
 
 // Centralized Configs
@@ -9,6 +9,9 @@ import { useUser } from "./context/UserContext";
 import TempleFlagLoader from "./components/common/TempleFlagLoader";
 
 import "./styles.css";
+
+// Configure default global loading indicator for all Ant Design Spin instances
+Spin.setDefaultIndicator(<TempleFlagLoader size="small" />);
 
 const { Header, Content } = Layout;
 

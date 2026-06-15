@@ -128249,47 +128249,20 @@ html body {
           viewBox: "0 0 200 200",
           className: "temple-svg",
           xmlns: "http://www.w3.org/2000/svg"
-        }, /* @__PURE__ */ import_react216.default.createElement("defs", null, /* @__PURE__ */ import_react216.default.createElement("linearGradient", {
-          id: "temple-gradient",
-          x1: "0%",
-          y1: "0%",
-          x2: "0%",
-          y2: "100%"
-        }, /* @__PURE__ */ import_react216.default.createElement("stop", {
-          offset: "0%",
-          stopColor: "#eab308"
-        }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-          offset: "100%",
-          stopColor: "#ca8a04"
-        })), /* @__PURE__ */ import_react216.default.createElement("linearGradient", {
-          id: "flag-gradient",
-          x1: "0%",
-          y1: "0%",
-          x2: "100%",
-          y2: "0%"
-        }, /* @__PURE__ */ import_react216.default.createElement("stop", {
-          offset: "0%",
-          stopColor: "#ea580c"
-        }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-          offset: "50%",
-          stopColor: "#f97316"
-        }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-          offset: "100%",
-          stopColor: "#fb923c"
-        }))), /* @__PURE__ */ import_react216.default.createElement("path", {
+        }, /* @__PURE__ */ import_react216.default.createElement("path", {
           d: "M 50,160 L 150,160 L 145,150 L 55,150 Z",
-          fill: "url(#temple-gradient)",
+          fill: "#eab308",
           opacity: "0.9"
         }), /* @__PURE__ */ import_react216.default.createElement("path", {
           d: "M 60,150 L 140,150 L 136,140 L 64,140 Z",
-          fill: "url(#temple-gradient)"
+          fill: "#eab308"
         }), /* @__PURE__ */ import_react216.default.createElement("path", {
           d: "M 68,140 L 132,140 L 128,128 L 72,128 Z",
-          fill: "url(#temple-gradient)",
+          fill: "#eab308",
           opacity: "0.95"
         }), /* @__PURE__ */ import_react216.default.createElement("path", {
           d: "M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z",
-          fill: "url(#temple-gradient)"
+          fill: "#eab308"
         }), /* @__PURE__ */ import_react216.default.createElement("line", {
           x1: "82",
           y1: "115",
@@ -128347,7 +128320,7 @@ html body {
           r: "1.5",
           fill: "#eab308"
         }), /* @__PURE__ */ import_react216.default.createElement("path", {
-          fill: "url(#flag-gradient)",
+          fill: "#f97316",
           stroke: "#ea580c",
           strokeWidth: "0.5",
           strokeLinejoin: "round"
@@ -128382,47 +128355,20 @@ html body {
       viewBox: "0 0 200 200",
       className: "temple-svg",
       xmlns: "http://www.w3.org/2000/svg"
-    }, /* @__PURE__ */ import_react216.default.createElement("defs", null, /* @__PURE__ */ import_react216.default.createElement("linearGradient", {
-      id: "temple-gradient-inline",
-      x1: "0%",
-      y1: "0%",
-      x2: "0%",
-      y2: "100%"
-    }, /* @__PURE__ */ import_react216.default.createElement("stop", {
-      offset: "0%",
-      stopColor: "#eab308"
-    }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-      offset: "100%",
-      stopColor: "#ca8a04"
-    })), /* @__PURE__ */ import_react216.default.createElement("linearGradient", {
-      id: "flag-gradient-inline",
-      x1: "0%",
-      y1: "0%",
-      x2: "100%",
-      y2: "0%"
-    }, /* @__PURE__ */ import_react216.default.createElement("stop", {
-      offset: "0%",
-      stopColor: "#ea580c"
-    }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-      offset: "50%",
-      stopColor: "#f97316"
-    }), /* @__PURE__ */ import_react216.default.createElement("stop", {
-      offset: "100%",
-      stopColor: "#fb923c"
-    }))), /* @__PURE__ */ import_react216.default.createElement("path", {
+    }, /* @__PURE__ */ import_react216.default.createElement("path", {
       d: "M 50,160 L 150,160 L 145,150 L 55,150 Z",
-      fill: "url(#temple-gradient-inline)",
+      fill: "#eab308",
       opacity: "0.9"
     }), /* @__PURE__ */ import_react216.default.createElement("path", {
       d: "M 60,150 L 140,150 L 136,140 L 64,140 Z",
-      fill: "url(#temple-gradient-inline)"
+      fill: "#eab308"
     }), /* @__PURE__ */ import_react216.default.createElement("path", {
       d: "M 68,140 L 132,140 L 128,128 L 72,128 Z",
-      fill: "url(#temple-gradient-inline)",
+      fill: "#eab308",
       opacity: "0.95"
     }), /* @__PURE__ */ import_react216.default.createElement("path", {
       d: "M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z",
-      fill: "url(#temple-gradient-inline)"
+      fill: "#eab308"
     }), /* @__PURE__ */ import_react216.default.createElement("line", {
       x1: "82",
       y1: "115",
@@ -128480,7 +128426,7 @@ html body {
       r: "1.5",
       fill: "#eab308"
     }), /* @__PURE__ */ import_react216.default.createElement("path", {
-      fill: "url(#flag-gradient-inline)",
+      fill: "#f97316",
       stroke: "#ea580c",
       strokeWidth: "0.5",
       strokeLinejoin: "round"
@@ -128489,16 +128435,16 @@ html body {
       dur: "1.8s",
       repeatCount: "indefinite",
       values: "\n                                    M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z;\n                                    M 100,12 Q 115,10 128,4 T 155,24 Q 130,22 115,30 T 100,34 Z;\n                                    M 100,12 Q 115,18 128,12 T 155,26 Q 130,18 115,26 T 100,34 Z;\n                                    M 100,12 Q 115,10 128,4 T 155,22 Q 130,28 115,20 T 100,34 Z;\n                                    M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z\n                                "
-    })))), text && /* @__PURE__ */ import_react216.default.createElement("h3", {
+    })))), size !== "small" && text && /* @__PURE__ */ import_react216.default.createElement("h3", {
       className: "temple-loading-text-inline"
-    }, text), subtext && /* @__PURE__ */ import_react216.default.createElement("p", {
+    }, text), size !== "small" && subtext && /* @__PURE__ */ import_react216.default.createElement("p", {
       className: "temple-loading-subtext-inline"
     }, subtext)));
   };
   var TempleFlagLoader_default = TempleFlagLoader;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/PageLoader.jsx
-  var PageLoader = ({ minHeight = "90vh", size = "medium", className = "", text = "", subtext = "" }) => {
+  var PageLoader = ({ minHeight = "calc(100vh - 180px)", size = "medium", className = "", text = "", subtext = "" }) => {
     const flagSize = size === "large" ? "large" : size === "small" ? "small" : "medium";
     return /* @__PURE__ */ import_react217.default.createElement("div", {
       className: `flex justify-center items-center ${className}`,
@@ -132547,6 +132493,9 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
+  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react256.default.createElement(TempleFlagLoader_default, {
+    size: "small"
+  }));
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
     const [currentRoute, setCurrentRoute] = (0, import_react256.useState)("dashboard");
@@ -132787,4 +132736,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.HRTSFBBF.js.map
+//# sourceMappingURL=temple_donation.bundle.EC46H3VX.js.map

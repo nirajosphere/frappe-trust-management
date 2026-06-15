@@ -1826,7 +1826,8 @@ body:has(#temple-initial-loader) #freeze,
 body:has(#temple-initial-loader) .freeze-container,
 body:has(#temple-initial-loader) .desk-loading-loader,
 body:has(#temple-initial-loader) .loading-indicator,
-body:has(#temple-initial-loader) #spinner {
+body:has(#temple-initial-loader) #spinner,
+body:has(#temple-initial-loader) #loading-screen {
   display: none !important;
 }
 
@@ -1835,7 +1836,8 @@ body:has(#temple-initial-loader) #spinner {
 .splash-screen,
 #splash-screen,
 .page-loading,
-.loading-indicator {
+.loading-indicator,
+#loading-screen {
   display: none !important;
 }
 

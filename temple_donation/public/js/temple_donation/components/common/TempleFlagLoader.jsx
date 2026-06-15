@@ -17,21 +17,10 @@ const TempleFlagLoader = ({
                     <div className="temple-svg-container" style={{ width: `${svgSize}px`, height: `${svgSize}px` }}>
                         <div className="temple-bg-glow" style={{ width: `${svgSize * 0.83}px`, height: `${svgSize * 0.83}px` }}></div>
                         <svg viewBox="0 0 200 200" className="temple-svg" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="temple-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stopColor="#eab308" />
-                                    <stop offset="100%" stopColor="#ca8a04" />
-                                </linearGradient>
-                                <linearGradient id="flag-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="#ea580c" />
-                                    <stop offset="50%" stopColor="#f97316" />
-                                    <stop offset="100%" stopColor="#fb923c" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="url(#temple-gradient)" opacity="0.9" />
-                            <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="url(#temple-gradient)" />
-                            <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="url(#temple-gradient)" opacity="0.95" />
-                            <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="url(#temple-gradient)" />
+                            <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
+                            <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
+                            <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
+                            <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
                             <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
                             <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
                             <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
@@ -41,7 +30,7 @@ const TempleFlagLoader = ({
                             <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
                             <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" strokeWidth="2.5" strokeLinecap="round" />
                             <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                            <path fill="url(#flag-gradient)" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
+                            <path fill="#f97316" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
                                 <animate
                                     attributeName="d"
                                     dur="1.8s"
@@ -74,21 +63,10 @@ const TempleFlagLoader = ({
                 <div className="temple-svg-container" style={{ width: `${svgSize}px`, height: `${svgSize}px` }}>
                     <div className="temple-bg-glow" style={{ width: `${svgSize * 0.83}px`, height: `${svgSize * 0.83}px` }}></div>
                     <svg viewBox="0 0 200 200" className="temple-svg" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="temple-gradient-inline" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="#eab308" />
-                                <stop offset="100%" stopColor="#ca8a04" />
-                            </linearGradient>
-                            <linearGradient id="flag-gradient-inline" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#ea580c" />
-                                <stop offset="50%" stopColor="#f97316" />
-                                <stop offset="100%" stopColor="#fb923c" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="url(#temple-gradient-inline)" opacity="0.9" />
-                        <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="url(#temple-gradient-inline)" />
-                        <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="url(#temple-gradient-inline)" opacity="0.95" />
-                        <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="url(#temple-gradient-inline)" />
+                        <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
+                        <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
+                        <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
+                        <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
                         <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
                         <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
                         <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
@@ -98,7 +76,7 @@ const TempleFlagLoader = ({
                         <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
                         <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" strokeWidth="2.5" strokeLinecap="round" />
                         <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                        <path fill="url(#flag-gradient-inline)" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
+                        <path fill="#f97316" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
                             <animate
                                 attributeName="d"
                                 dur="1.8s"
@@ -114,8 +92,8 @@ const TempleFlagLoader = ({
                         </path>
                     </svg>
                 </div>
-                {text && <h3 className="temple-loading-text-inline">{text}</h3>}
-                {subtext && <p className="temple-loading-subtext-inline">{subtext}</p>}
+                {size !== "small" && text && <h3 className="temple-loading-text-inline">{text}</h3>}
+                {size !== "small" && subtext && <p className="temple-loading-subtext-inline">{subtext}</p>}
             </div>
         </div>
     );

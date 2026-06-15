@@ -1488,13 +1488,15 @@ body:has(#temple-initial-loader) #freeze,
 body:has(#temple-initial-loader) .freeze-container,
 body:has(#temple-initial-loader) .desk-loading-loader,
 body:has(#temple-initial-loader) .loading-indicator,
-body:has(#temple-initial-loader) #spinner {
+body:has(#temple-initial-loader) #spinner,
+body:has(#temple-initial-loader) #loading-screen {
   display: none !important;
 }
 .splash-screen,
 #splash-screen,
 .page-loading,
-.loading-indicator {
+.loading-indicator,
+#loading-screen {
   display: none !important;
 }
 .navbar-brand img[src*=frappe],
@@ -1664,4 +1666,4 @@ body:has(#temple-initial-loader) #spinner {
     color: rgb(203 213 225 / var(--tw-text-opacity, 1));
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.AR3WULZ2.css.map */
+/*# sourceMappingURL=temple_donation.bundle.OSR3T3XZ.css.map */

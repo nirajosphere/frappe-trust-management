@@ -465,7 +465,8 @@ body:has(#temple-initial-loader) {
   .freeze-container,
   .desk-loading-loader,
   .loading-indicator,
-  #spinner {
+  #spinner,
+  #loading-screen {
     display: none !important;
   }
 }
@@ -474,13 +475,14 @@ body:has(#temple-initial-loader) {
 .splash-screen,
 #splash-screen,
 .page-loading,
-.loading-indicator {
+.loading-indicator,
+#loading-screen {
   display: none !important;
 }
 
 /* Hide default Frappe logo in website navbar */
-.navbar-brand img[src*="frappe"],
-.navbar-brand img[src*="logo-write"],
-.navbar-brand img[src*="frappe-framework-logo"] {
-  display: none !important;
-}
+// .navbar-brand img[src*="frappe"],
+// .navbar-brand img[src*="logo-write"],
+// .navbar-brand img[src*="frappe-framework-logo"] {
+//   display: none !important;
+// }
