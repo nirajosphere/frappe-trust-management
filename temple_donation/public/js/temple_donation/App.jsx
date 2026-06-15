@@ -6,6 +6,7 @@ import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@
 import { themeConfig } from "./config/theme";
 import { getFilteredMenuItems, getComponentForRoute } from "./config/navigation";
 import { useUser } from "./context/UserContext";
+import TempleFlagLoader from "./components/common/TempleFlagLoader";
 
 import "./styles.css";
 
@@ -14,10 +15,17 @@ const { Header, Content } = Layout;
 const App = () => {
     const [currentRoute, setCurrentRoute] = useState("dashboard");
     const [mobileOpen, setMobileOpen] = useState(false);
-    const { user, roles, logout, isAdmin } = useUser();
+    const { user, roles, logout, isAdmin, loading } = useUser();
 
-    // console.log(isAdmin, "isAdmin");
-    // console.log("isAdmin");
+    useEffect(() => {
+        if (!loading) {
+            // Remove the static initial loader from document.body if present
+            const initLoader = document.getElementById("temple-initial-loader");
+            if (initLoader) {
+                initLoader.remove();
+            }
+        }
+    }, [loading]);
 
     useEffect(() => {
         const handleRoute = () => {
@@ -72,6 +80,10 @@ const App = () => {
 
     // Navigation items filtered by role
     const menuItems = getFilteredMenuItems(roles);
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <ConfigProvider theme={themeConfig}>

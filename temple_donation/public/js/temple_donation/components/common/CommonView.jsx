@@ -254,28 +254,96 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
   }
 
   const renderValue = (field, value) => {
-    if (!value) return <Text type="secondary">—</Text>;
+  if (
+    value === null ||
+    value === undefined ||
+    value === "" ||
+    (Array.isArray(value) && value.length === 0)
+  ) {
+    return <Text type="secondary">—</Text>;
+  }
 
-    if (field.type === "image") {
-      return (
-        <img
-          src={value}
-          alt={field.label}
-          className="w-20 h-20 object-cover rounded-lg border"
-        />
-      );
-    }
+  // Image
+  if (field.type === "image") {
+    return (
+      <img
+        src={value}
+        alt={field.label}
+        className="w-20 h-20 object-cover rounded-lg border"
+      />
+    );
+  }
 
-    if (field.type === "textarea") {
-      return (
-        <div className="bg-gray-50 p-3 rounded text-sm whitespace-pre-wrap">
-          {value}
-        </div>
-      );
-    }
+  // Textarea
+  if (field.type === "textarea") {
+    return (
+      <div className="bg-gray-50 p-3 rounded text-sm whitespace-pre-wrap">
+        {value}
+      </div>
+    );
+  }
 
-    return <Text strong>{String(value)}</Text>;
-  };
+  // Temple Multi Select
+  if (field.name === "custom_select_temple" && Array.isArray(value)) {
+    return (
+      <div className="flex flex-wrap gap-1">
+        {value.map((item) => (
+          <Tag color="blue" key={item.name}>
+            {item.temple}
+          </Tag>
+        ))}
+      </div>
+    );
+  }
+
+  // User Roles
+  if (field.name === "roles" && Array.isArray(value)) {
+    return (
+      <div className="flex flex-wrap gap-1">
+        {value.map((item) => (
+          <Tag color="green" key={item.name}>
+            {item.role}
+          </Tag>
+        ))}
+      </div>
+    );
+  }
+
+  // Enabled Status
+  if (field.name === "enabled") {
+    return (
+      <Tag color={Number(value) === 1 ? "green" : "red"}>
+        {Number(value) === 1 ? "Active" : "Inactive"}
+      </Tag>
+    );
+  }
+
+  // Generic Array
+  if (Array.isArray(value)) {
+    return (
+      <div className="flex flex-wrap gap-1">
+        {value.map((item, index) => (
+          <Tag key={index}>
+            {typeof item === "object"
+              ? item.name || JSON.stringify(item)
+              : String(item)}
+          </Tag>
+        ))}
+      </div>
+    );
+  }
+
+  // Generic Object
+  if (typeof value === "object") {
+    return (
+      <pre className="text-xs bg-gray-50 p-2 rounded">
+        {JSON.stringify(value, null, 2)}
+      </pre>
+    );
+  }
+
+  return <Text strong>{String(value)}</Text>;
+};
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">

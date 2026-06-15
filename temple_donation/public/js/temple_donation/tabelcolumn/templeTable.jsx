@@ -4,13 +4,13 @@ import { Typography } from "antd";
 const { Text } = Typography;
 
 export const templeColumns = [
-    {
-        title: 'ID',
-        dataIndex: 'name',
-        key: 'name',
-        width: 150,
-        render: (text) => <Text copyable>{text}</Text>
-    },
+    // {
+    //     title: 'ID',
+    //     dataIndex: 'name',
+    //     key: 'name',
+    //     width: 150,
+    //     render: (text) => <Text copyable>{text}</Text>
+    // },
     {
         title: 'Temple Name',
         dataIndex: 'temple_name',

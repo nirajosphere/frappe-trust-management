@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
     Row, Col, Card, Typography, Select, DatePicker, Button,
-    Space, Empty, Avatar, Tag
+    Space, Empty, Avatar, Tag, Spin
 } from "antd";
 import {
     WalletOutlined, AppstoreOutlined, UserAddOutlined,
@@ -49,33 +49,75 @@ const Dashboard = () => {
 
     const [temples, setTemples] = useState([]);
     const [users, setUsers] = useState([]);
+    const [optionsLoading, setOptionsLoading] = useState({ temple: false, user: false });
 
-    // 🔥 FETCH OPTIONS
-    const fetchOptions = async () => {
+    const templeSearchTimer = useRef(null);
+    const userSearchTimer = useRef(null);
+
+    const buildFilterParams = useCallback((filterState = filters) => ({
+        temple: filterState.temple,
+        user: filterState.user,
+        from_date: filterState.dateRange?.[0]?.format("YYYY-MM-DD"),
+        to_date: filterState.dateRange?.[1]?.format("YYYY-MM-DD")
+    }), [filters]);
+
+    const searchTemples = async (searchText = "") => {
+        setOptionsLoading((prev) => ({ ...prev, temple: true }));
         try {
-            const [templeRes, userRes] = await Promise.all([
-                frappe.call({
-                    method: "frappe.client.get_list",
-                    args: {
-                        doctype: "Temple",
-                        fields: ["name", "temple_name"]
-                    }
-                }),
-                frappe.call({
-                    method: "frappe.client.get_list",
-                    args: {
-                        doctype: "User",
-                        filters: { enabled: 1 },
-                        fields: ["name", "full_name"]
-                    }
-                })
-            ]);
-
-            setTemples(templeRes.message || []);
-            setUsers(userRes.message || []);
+            const args = {
+                doctype: "Temple",
+                fields: ["name", "temple_name"],
+                limit_page_length: 50,
+                order_by: "temple_name asc"
+            };
+            if (searchText?.trim()) {
+                args.or_filters = [
+                    ["temple_name", "like", `%${searchText.trim()}%`],
+                    ["name", "like", `%${searchText.trim()}%`]
+                ];
+            }
+            const res = await frappe.call({ method: "frappe.client.get_list", args });
+            setTemples(res.message || []);
         } catch (err) {
             console.error(err);
+        } finally {
+            setOptionsLoading((prev) => ({ ...prev, temple: false }));
         }
+    };
+
+    const searchUsers = async (searchText = "") => {
+        setOptionsLoading((prev) => ({ ...prev, user: true }));
+        try {
+            const args = {
+                doctype: "User",
+                fields: ["name", "full_name"],
+                filters: { enabled: 1, name: ["not in", ["Administrator", "Guest"]] },
+                limit_page_length: 50,
+                order_by: "full_name asc"
+            };
+            if (searchText?.trim()) {
+                args.or_filters = [
+                    ["full_name", "like", `%${searchText.trim()}%`],
+                    ["name", "like", `%${searchText.trim()}%`]
+                ];
+            }
+            const res = await frappe.call({ method: "frappe.client.get_list", args });
+            setUsers(res.message || []);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setOptionsLoading((prev) => ({ ...prev, user: false }));
+        }
+    };
+
+    const handleTempleSearch = (value) => {
+        clearTimeout(templeSearchTimer.current);
+        templeSearchTimer.current = setTimeout(() => searchTemples(value), 300);
+    };
+
+    const handleUserSearch = (value) => {
+        clearTimeout(userSearchTimer.current);
+        userSearchTimer.current = setTimeout(() => searchUsers(value), 300);
     };
 
     // 🔥 FETCH DATA
@@ -119,7 +161,8 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        fetchOptions();
+        searchTemples();
+        searchUsers();
         fetchData();
     }, []);
 
@@ -146,16 +189,21 @@ const Dashboard = () => {
         });
     };
 
+    const handleTempleChange = (value) => {
+        const nextFilters = { ...filters, temple: value };
+        setFilters(nextFilters);
+        fetchData(buildFilterParams(nextFilters));
+    };
+
+    const handleUserChange = (value) => {
+        const nextFilters = { ...filters, user: value };
+        setFilters(nextFilters);
+        fetchData(buildFilterParams(nextFilters));
+    };
+
     // 🔥 SUBMIT
     const handleSubmit = () => {
-        const params = {
-            temple: filters.temple,
-            user: filters.user,
-            from_date: filters.dateRange?.[0]?.format("YYYY-MM-DD"),
-            to_date: filters.dateRange?.[1]?.format("YYYY-MM-DD")
-        };
-
-        fetchData(params);
+        fetchData(buildFilterParams());
     };
 
     // 🔥 CLEAR
@@ -185,13 +233,19 @@ const Dashboard = () => {
                         <Col xs={24} md={8}>
                             <Text>Search By Temple</Text>
                             <Select
+                                showSearch
                                 value={filters.temple}
-                                onChange={(v) => setFilters({ ...filters, temple: v })}
-                                placeholder="All"
+                                onChange={handleTempleChange}
+                                onSearch={handleTempleSearch}
+                                onClear={() => searchTemples()}
+                                placeholder="Search temple..."
                                 className="w-full mt-1"
                                 allowClear
+                                loading={optionsLoading.temple}
+                                filterOption={false}
+                                notFoundContent={optionsLoading.temple ? "Loading..." : "No temples found"}
                                 options={temples.map(t => ({
-                                    label: t.temple_name,
+                                    label: t.temple_name || t.name,
                                     value: t.name
                                 }))}
                             />
@@ -201,13 +255,19 @@ const Dashboard = () => {
                         <Col xs={24} md={8}>
                             <Text>Search By User</Text>
                             <Select
+                                showSearch
                                 value={filters.user}
-                                onChange={(v) => setFilters({ ...filters, user: v })}
-                                placeholder="All"
+                                onChange={handleUserChange}
+                                onSearch={handleUserSearch}
+                                onClear={() => searchUsers()}
+                                placeholder="Search user..."
                                 className="w-full mt-1"
                                 allowClear
+                                loading={optionsLoading.user}
+                                filterOption={false}
+                                notFoundContent={optionsLoading.user ? "Loading..." : "No users found"}
                                 options={users.map(u => ({
-                                    label: u.full_name,
+                                    label: u.full_name || u.name,
                                     value: u.name
                                 }))}
                             />
@@ -257,6 +317,7 @@ const Dashboard = () => {
                 </Card>
 
                 {/* 🔥 STATS */}
+                <Spin spinning={loading}>
                 <Row gutter={[16, 16]} className="mb-6">
 
                     <Col xs={24} md={8}>
@@ -381,6 +442,7 @@ const Dashboard = () => {
                     </Col>
 
                 </Row>
+                </Spin>
         </div>
     );
 };
