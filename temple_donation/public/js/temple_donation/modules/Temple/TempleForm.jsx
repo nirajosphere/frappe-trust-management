@@ -229,6 +229,7 @@ import { DOCTYPE_TEMPLE, DOCTYPE_DONATION_TYPE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -301,6 +302,16 @@ const TempleForm = ({ id, onBack }) => {
         );
     };
 
+    const allSelected = donationTypes && donationTypes.length > 0 && selectedDonationTypes.length === donationTypes.length;
+
+    const handleSelectAllChange = (checked) => {
+        if (checked) {
+            setSelectedDonationTypes(donationTypes.map(d => d.name));
+        } else {
+            setSelectedDonationTypes([]);
+        }
+    };
+
     // 👉 Loading
     if (isEdit && loading) return <PageLoader />;
 
@@ -309,7 +320,7 @@ const TempleForm = ({ id, onBack }) => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-6xl mx-auto p-4 pb-24">
 
             {/* HEADER */}
             <AddPageHeader
@@ -323,7 +334,7 @@ const TempleForm = ({ id, onBack }) => {
                 {/* 🔥 FORM */}
                 <Card className="border border-zinc-200 rounded-xl mb-6">
 
-                    <Row gutter={[16, 0]}>
+                    <Row gutter={[16, 16]}>
 
                         <Col xs={24} md={8}>
                             <Form.Item name="temple_name" label={<span>Temple Name <span className="text-red-500">*</span></span>}>
@@ -385,8 +396,18 @@ const TempleForm = ({ id, onBack }) => {
 
                 {/* 🔥 DONATION TYPES */}
                 <Card className="border border-zinc-200 rounded-xl mb-6 shadow-sm overflow-hidden">
-                    <div className="px-5 py-3 border-b bg-zinc-50/30">
+                    <div className="px-5 py-3 border-b bg-zinc-50/30 flex justify-between items-center">
                         <Text strong className="text-zinc-800">Donation Types</Text>
+                        {donationTypes && donationTypes.length > 0 && (
+                            <div className="flex items-center gap-2">
+                                <Text className="text-zinc-600 font-medium select-none text-xs">Select All</Text>
+                                <Switch
+                                    checked={allSelected}
+                                    onChange={handleSelectAllChange}
+                                    className={allSelected ? 'bg-zinc-800' : 'bg-zinc-200'}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="max-h-[400px] overflow-y-auto">
@@ -426,23 +447,11 @@ const TempleForm = ({ id, onBack }) => {
                     </div>
                 </Card>
 
-                {/* 🔥 BUTTONS */}
-                <div className="flex justify-end gap-2">
-
-                    <Button onClick={onBack}>
-                        Cancel
-                    </Button>
-
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        loading={creating || updating}
-                        icon={<SaveOutlined />}
-                    >
-                        {isEdit ? "Update" : "Save"}
-                    </Button>
-
-                </div>
+                <FormFooter
+                    onCancel={onBack}
+                    loading={creating || updating}
+                    isEdit={isEdit}
+                />
 
             </Form>
 

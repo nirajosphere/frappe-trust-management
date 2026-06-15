@@ -11,6 +11,7 @@ import { DOCTYPE_DONATION } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -48,7 +49,7 @@ const DonationForm = ({ id, onBack }) => {
 
 
     return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4 pb-24">
 
         <AddPageHeader
             onBack={onBack}
@@ -188,21 +189,12 @@ const DonationForm = ({ id, onBack }) => {
 
                 </Row>
 
-                {/* ACTIONS */}
-                <div className="flex flex-col sm:flex-row justify-between items-center mt-10 pt-6 border-t border-zinc-100">
-                    <Button onClick={onBack} className="h-10 px-8 text-[#a84422] border-[#a84422] hover:bg-[#a84422] hover:text-white transition-colors">
-                        Back
-                    </Button>
-
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        loading={updating}
-                        className="h-10 px-8 bg-[#9c3e1e] hover:bg-[#853418] border-none font-medium text-white shadow-md"
-                    >
-                        Update Donation
-                    </Button>
-                </div>
+                <FormFooter
+                    onCancel={onBack}
+                    loading={updating}
+                    cancelText="Back"
+                    saveText="Update Donation"
+                />
 
             </Form>
         </Card>

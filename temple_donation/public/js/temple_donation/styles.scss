@@ -129,6 +129,75 @@
     }
   }
 
+  .aavatto-topbar {
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    height: var(--topbar-height) !important;
+    line-height: var(--topbar-height) !important;
+    padding: 0 1.5rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .aavatto-logo {
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      img {
+        height: 38px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+      }
+    }
+
+    .aavatto-menu {
+      border: none !important;
+      background: transparent !important;
+      line-height: var(--topbar-height) !important;
+      flex: 1;
+      justify-content: flex-end;
+
+      .ant-menu-item {
+        font-weight: 500;
+        transition: var(--transition);
+
+        &-selected,
+        &-active {
+          color: var(--primary-color) !important;
+        }
+
+        &::after {
+          border-bottom: 2px solid var(--primary-color) !important;
+        }
+      }
+    }
+
+    .aavatto-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-left: 1.5rem;
+    }
+
+    .aavatto-user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-main);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #f4f4f5;
+      }
+    }
+  }
+
   /* Component Layouts */
   .aavatto-content-wrapper {
     max-width: 1536px;

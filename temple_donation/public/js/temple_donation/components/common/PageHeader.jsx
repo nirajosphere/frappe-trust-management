@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Space, Button, Input } from "antd";
+import { Typography, Space, Button, Input, Dropdown } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
@@ -60,13 +60,25 @@ const PageHeader = ({
                     )}
 
                     {onExport && (
-                        <Button
-                            icon={<DownloadOutlined />}
-                            onClick={onExport}
-                            className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
+                        <Dropdown
+                            menu={{
+                                items: [
+                                    { key: "csv", label: "Export to CSV" },
+                                    { key: "excel", label: "Export to Excel" },
+                                    { key: "pdf", label: "Export to PDF" }
+                                ],
+                                onClick: ({ key }) => onExport(key)
+                            }}
+                            trigger={["click"]}
+                            placement="bottomRight"
                         >
-                            Export
-                        </Button>
+                            <Button
+                                icon={<DownloadOutlined />}
+                                className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
+                            >
+                                Export
+                            </Button>
+                        </Dropdown>
                     )}
 
                     {onAdd && (

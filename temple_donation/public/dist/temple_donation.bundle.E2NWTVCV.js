@@ -1295,7 +1295,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React609 = require_react(), Internals = {
+        var React610 = require_react(), Internals = {
           d: {
             f: noop6,
             r: function() {
@@ -1313,7 +1313,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React609.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React610.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3165,7 +3165,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React609.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React610.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -19003,14 +19003,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React609 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React610 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React609.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React610.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21803,7 +21803,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React609.version;
+          var isomorphicReactPackageVersion = React610.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -23713,7 +23713,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         function useSyncExternalStore$2(subscribe, getSnapshot) {
-          didWarnOld18Alpha || void 0 === React609.startTransition || (didWarnOld18Alpha = true, console.error(
+          didWarnOld18Alpha || void 0 === React610.startTransition || (didWarnOld18Alpha = true, console.error(
             "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
           ));
           var value = getSnapshot();
@@ -23761,8 +23761,8 @@
           return getSnapshot();
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React609 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState133 = React609.useState, useEffect138 = React609.useEffect, useLayoutEffect13 = React609.useLayoutEffect, useDebugValue3 = React609.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-        exports.useSyncExternalStore = void 0 !== React609.useSyncExternalStore ? React609.useSyncExternalStore : shim;
+        var React610 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState133 = React610.useState, useEffect138 = React610.useEffect, useLayoutEffect13 = React610.useLayoutEffect, useDebugValue3 = React610.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+        exports.useSyncExternalStore = void 0 !== React610.useSyncExternalStore ? React610.useSyncExternalStore : shim;
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -23789,7 +23789,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React609 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React609.useRef, useEffect138 = React609.useEffect, useMemo173 = React609.useMemo, useDebugValue3 = React609.useDebugValue;
+        var React610 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React610.useRef, useEffect138 = React610.useEffect, useMemo173 = React610.useMemo, useDebugValue3 = React610.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -24244,7 +24244,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React609 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React609.useSyncExternalStore, useRef177 = React609.useRef, useEffect138 = React609.useEffect, useMemo173 = React609.useMemo, useDebugValue3 = React609.useDebugValue;
+        var React610 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React610.useSyncExternalStore, useRef177 = React610.useRef, useEffect138 = React610.useEffect, useMemo173 = React610.useMemo, useDebugValue3 = React610.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -25725,10 +25725,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react257 = __toESM(require_react());
+  var import_react258 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react256 = __toESM(require_react());
+  var import_react257 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -104950,7 +104950,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react254 = __toESM(require_react());
+  var import_react255 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
   var import_react218 = __toESM(require_react());
@@ -128205,11 +128205,21 @@ html body {
       }),
       onChange: (e4) => onSearch(e4.target.value),
       className: "h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
-    }), onExport && /* @__PURE__ */ import_react215.default.createElement(button_default, {
+    }), onExport && /* @__PURE__ */ import_react215.default.createElement(dropdown_default3, {
+      menu: {
+        items: [
+          { key: "csv", label: "Export to CSV" },
+          { key: "excel", label: "Export to Excel" },
+          { key: "pdf", label: "Export to PDF" }
+        ],
+        onClick: ({ key }) => onExport(key)
+      },
+      trigger: ["click"],
+      placement: "bottomRight"
+    }, /* @__PURE__ */ import_react215.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react215.default.createElement(DownloadOutlined_default2, null),
-      onClick: onExport,
       className: "h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
-    }, "Export"), onAdd && /* @__PURE__ */ import_react215.default.createElement(button_default, {
+    }, "Export")), onAdd && /* @__PURE__ */ import_react215.default.createElement(button_default, {
       type: "primary",
       icon: /* @__PURE__ */ import_react215.default.createElement(PlusOutlined_default2, null),
       onClick: onAdd,
@@ -129763,6 +129773,113 @@ html body {
     link.click();
     document.body.removeChild(link);
   };
+  var exportToExcel = (data, columns, filename) => {
+    if (!data || data.length === 0)
+      return;
+    const cols = columns.filter((col) => col.title && col.title !== "Actions");
+    let tableHtml = '<table border="1"><thead><tr style="background-color: #18181b; color: #ffffff; font-weight: bold;">';
+    cols.forEach((col) => {
+      tableHtml += `<th>${col.title}</th>`;
+    });
+    tableHtml += "</tr></thead><tbody>";
+    data.forEach((item, index2) => {
+      tableHtml += `<tr style="${index2 % 2 === 0 ? "background-color: #fafafa;" : ""}">`;
+      cols.forEach((col) => {
+        const val = item[col.dataIndex] || "";
+        tableHtml += `<td>${String(val)}</td>`;
+      });
+      tableHtml += "</tr>";
+    });
+    tableHtml += "</tbody></table>";
+    const excelTemplate = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+        <head>
+            <!--[if gte mso 9]>
+            <xml>
+                <x:ExcelWorkbook>
+                    <x:ExcelWorksheets>
+                        <x:ExcelWorksheet>
+                            <x:Name>Sheet 1</x:Name>
+                            <x:WorksheetOptions>
+                                <x:DisplayGridlines/>
+                            </x:WorksheetOptions>
+                        </x:ExcelWorksheet>
+                    </x:ExcelWorksheets>
+                </x:ExcelWorkbook>
+            </xml>
+            <![endif]-->
+            <meta charset="utf-8">
+        </head>
+        <body>${tableHtml}</body>
+        </html>
+    `;
+    const blob = new Blob([excelTemplate], { type: "application/vnd.ms-excel;charset=utf-8;" });
+    const url2 = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url2);
+    link.setAttribute("download", `${filename.replace(/\s+/g, "_")}_export.xls`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  var exportToPDF = (data, columns, filename) => {
+    if (!data || data.length === 0)
+      return;
+    const cols = columns.filter((col) => col.title && col.title !== "Actions");
+    let tableRows = "";
+    data.forEach((item, index2) => {
+      let cells = "";
+      cols.forEach((col) => {
+        const val = item[col.dataIndex] || "";
+        cells += `<td style="padding: 10px; border-bottom: 1px solid #e4e4e7; font-size: 13px;">${val}</td>`;
+      });
+      tableRows += `<tr style="${index2 % 2 === 0 ? "background-color: #fafafa;" : ""}">${cells}</tr>`;
+    });
+    let tableHeaders = "";
+    cols.forEach((col) => {
+      tableHeaders += `<th style="padding: 12px 10px; text-align: left; background-color: #18181b; color: white; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">${col.title}</th>`;
+    });
+    const printWindow = window.open("", "_blank");
+    if (!printWindow)
+      return;
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>${filename}</title>
+            <style>
+                body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #18181b; padding: 40px; margin: 0; }
+                .header { margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #18181b; padding-bottom: 15px; }
+                .title { font-size: 24px; font-weight: 700; margin: 0; }
+                .date { font-size: 14px; color: #71717a; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <div>
+                    <h1 class="title">${filename}</h1>
+                </div>
+                <div class="date">Generated on: ${new Date().toLocaleDateString()}</div>
+            </div>
+            <table>
+                <thead>
+                    <tr>${tableHeaders}</tr>
+                </thead>
+                <tbody>
+                    ${tableRows}
+                </tbody>
+            </table>
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() { window.close(); }, 500);
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+  };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ListingPage.jsx
   var ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"], filters = {}, childTable, childDocType }) => {
@@ -129849,12 +129966,18 @@ html body {
     const handlePrint = (record) => {
       window.print();
     };
-    const handleExport = () => {
+    const handleExport = (format4) => {
       if (!data || data.length === 0) {
         message_default.warning("No data to export");
         return;
       }
-      exportToCSV(data, columns, title);
+      if (format4 === "csv") {
+        exportToCSV(data, columns, title);
+      } else if (format4 === "excel") {
+        exportToExcel(data, columns, title);
+      } else if (format4 === "pdf") {
+        exportToPDF(data, columns, title);
+      }
     };
     if (error) {
       return /* @__PURE__ */ import_react229.default.createElement("div", {
@@ -130586,7 +130709,7 @@ html body {
   var DonorView_default = DonorView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
-  var import_react236 = __toESM(require_react());
+  var import_react237 = __toESM(require_react());
   var import_dayjs4 = __toESM(require_dayjs_min());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ActivityLog.jsx
@@ -130698,6 +130821,82 @@ html body {
   };
   var ActivityLog_default = ActivityLog;
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/FormFooter.jsx
+  var import_react236 = __toESM(require_react());
+  var FormFooter = ({
+    onCancel,
+    loading = false,
+    isEdit = false,
+    saveText,
+    cancelText = "Cancel",
+    onSubmit
+  }) => {
+    const footerStyle = {
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: "rgba(255, 255, 255, 0.8)",
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
+      borderTop: "1px solid rgba(228, 228, 231, 0.6)",
+      paddingTop: "14px",
+      paddingBottom: "14px",
+      zIndex: 9999,
+      boxShadow: "0 -4px 16px -6px rgba(0, 0, 0, 0.08)",
+      transition: "all 0.25s ease-in-out"
+    };
+    const innerStyle = {
+      maxWidth: "1152px",
+      marginLeft: "auto",
+      marginRight: "auto",
+      paddingLeft: "24px",
+      paddingRight: "24px",
+      display: "flex",
+      justifyContent: "flex-end",
+      gap: "12px"
+    };
+    const cancelButtonStyle = {
+      height: "40px",
+      paddingLeft: "24px",
+      paddingRight: "24px",
+      fontWeight: 500,
+      color: "#52525b",
+      borderColor: "#e4e4e7",
+      borderRadius: "8px"
+    };
+    const saveButtonStyle = {
+      height: "40px",
+      paddingLeft: "24px",
+      paddingRight: "24px",
+      fontWeight: 500,
+      backgroundColor: "#18181b",
+      borderColor: "#18181b",
+      color: "#ffffff",
+      borderRadius: "8px",
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
+    };
+    return /* @__PURE__ */ import_react236.default.createElement("div", {
+      style: footerStyle
+    }, /* @__PURE__ */ import_react236.default.createElement("div", {
+      style: innerStyle
+    }, /* @__PURE__ */ import_react236.default.createElement(button_default, {
+      onClick: onCancel,
+      style: cancelButtonStyle
+    }, cancelText), /* @__PURE__ */ import_react236.default.createElement(button_default, {
+      type: "primary",
+      htmlType: onSubmit ? "button" : "submit",
+      onClick: onSubmit,
+      loading,
+      icon: /* @__PURE__ */ import_react236.default.createElement(SaveOutlined_default2, null),
+      style: saveButtonStyle
+    }, saveText || (isEdit ? "Update" : "Save"))));
+  };
+  var FormFooter_default = FormFooter;
+
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
   var { Text: Text14 } = typography_default;
   var DonorForm = ({ id, onBack }) => {
@@ -130706,7 +130905,7 @@ html body {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-    (0, import_react236.useEffect)(() => {
+    (0, import_react237.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, data), {
           date_of_birth: data.date_of_birth ? (0, import_dayjs4.default)(data.date_of_birth) : null,
@@ -130740,184 +130939,177 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react236.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react237.default.createElement(PageLoader_default, null);
     if (error) {
-      return /* @__PURE__ */ import_react236.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react237.default.createElement(alert_default, {
         message: "Error loading donor",
         type: "error",
-        action: /* @__PURE__ */ import_react236.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react237.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     }
-    return /* @__PURE__ */ import_react236.default.createElement("div", {
-      className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react236.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react237.default.createElement("div", {
+      className: "max-w-6xl mx-auto p-4 pb-24"
+    }, /* @__PURE__ */ import_react237.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donor" : "Add Donor",
       subtitle: "Donor Management"
-    }), /* @__PURE__ */ import_react236.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react237.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react236.default.createElement(row_default2, {
-      gutter: [16, 0]
-    }, /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react237.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "mobile_number",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Contact No"),
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Contact No"),
       rules: [
         { required: true, message: "Enter mobile" },
         { pattern: /^\d{10}$/, message: "Invalid number" }
       ]
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       maxLength: 10,
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "donor_name",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Full Name"),
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Full Name"),
       rules: [{ required: true, message: "Enter name" }]
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "email",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Email")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Email")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "address",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Address Line 1")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Address Line 1")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "address_line_2",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Address Line 2")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Address Line 2")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "pan_card",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "PAN"),
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "PAN"),
       rules: [
         { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }
       ]
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "country",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Country")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Country")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "state",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "State"),
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "State"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "city",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "City"),
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "City"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "pincode",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Pincode")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Pincode")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "native_place",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Native Place")
-    }, /* @__PURE__ */ import_react236.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Native Place")
+    }, /* @__PURE__ */ import_react237.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "date_of_birth",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Date of Birth")
-    }, /* @__PURE__ */ import_react236.default.createElement(date_picker_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Date of Birth")
+    }, /* @__PURE__ */ import_react237.default.createElement(date_picker_default, {
       className: "w-full h-10",
       format: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "marital_status",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Marital Status")
-    }, /* @__PURE__ */ import_react236.default.createElement(select_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Marital Status")
+    }, /* @__PURE__ */ import_react237.default.createElement(select_default, {
       options: [
         { label: "Unmarried", value: "Unmarried" },
         { label: "Married", value: "Married" }
       ]
-    }))), /* @__PURE__ */ import_react236.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react237.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react236.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react237.default.createElement(form_default.Item, {
       name: "anniversary_date",
-      label: /* @__PURE__ */ import_react236.default.createElement(Text14, null, "Anniversary")
-    }, /* @__PURE__ */ import_react236.default.createElement(date_picker_default, {
+      label: /* @__PURE__ */ import_react237.default.createElement(Text14, null, "Anniversary")
+    }, /* @__PURE__ */ import_react237.default.createElement(date_picker_default, {
       className: "w-full h-10",
       format: "DD-MM-YYYY"
-    })))), /* @__PURE__ */ import_react236.default.createElement("div", {
-      className: "flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4"
-    }, /* @__PURE__ */ import_react236.default.createElement(button_default, {
-      onClick: onBack,
-      className: "h-10 px-6"
-    }, "Cancel"), /* @__PURE__ */ import_react236.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+    })))), /* @__PURE__ */ import_react237.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react236.default.createElement(SaveOutlined_default2, null),
-      className: "h-10 px-6 bg-black border-black"
-    }, isEdit ? "Update" : "Save")))), isEdit && /* @__PURE__ */ import_react236.default.createElement(ActivityLog_default, {
+      isEdit
+    }))), isEdit && /* @__PURE__ */ import_react237.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONOR,
       docname: id
     }));
@@ -130925,17 +131117,17 @@ html body {
   var DonorForm_default = DonorForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
-  var import_react238 = __toESM(require_react());
+  var import_react239 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/templeTable.jsx
-  var import_react237 = __toESM(require_react());
+  var import_react238 = __toESM(require_react());
   var { Text: Text15 } = typography_default;
   var templeColumns = [
     {
       title: "Temple Name",
       dataIndex: "temple_name",
       key: "temple_name",
-      render: (text) => /* @__PURE__ */ import_react237.default.createElement(Text15, {
+      render: (text) => /* @__PURE__ */ import_react238.default.createElement(Text15, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.temple_name || "").localeCompare(b.temple_name || "")
@@ -130959,7 +131151,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
   var TempleList = () => {
-    return /* @__PURE__ */ import_react238.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react239.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_TEMPLE,
       title: "Temple Management",
       description: "View, add, edit or delete temple records",
@@ -130971,9 +131163,9 @@ html body {
   var TempleList_default = TempleList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleView.jsx
-  var import_react239 = __toESM(require_react());
+  var import_react240 = __toESM(require_react());
   var TempleView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react239.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react240.default.createElement(CommonView_default, {
       doctype: DOCTYPE_TEMPLE,
       id,
       onBack,
@@ -130983,12 +131175,12 @@ html body {
   var TempleView_default = TempleView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleForm.jsx
-  var import_react240 = __toESM(require_react());
+  var import_react241 = __toESM(require_react());
   var { Text: Text16 } = typography_default;
   var TempleForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = form_default.useForm();
-    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react240.useState)([]);
+    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react241.useState)([]);
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_TEMPLE, id);
@@ -130996,7 +131188,7 @@ html body {
       DOCTYPE_DONATION_TYPE,
       { fields: ["name", "donation_type", "donation_image"] }
     );
-    (0, import_react240.useEffect)(() => {
+    (0, import_react241.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(data);
         if (data.donation_types && Array.isArray(data.donation_types) && data.donation_types.length > 0) {
@@ -131038,164 +131230,175 @@ html body {
         (prev2) => prev2.includes(name) ? prev2.filter((n2) => n2 !== name) : [...prev2, name]
       );
     };
+    const allSelected = donationTypes && donationTypes.length > 0 && selectedDonationTypes.length === donationTypes.length;
+    const handleSelectAllChange = (checked) => {
+      if (checked) {
+        setSelectedDonationTypes(donationTypes.map((d) => d.name));
+      } else {
+        setSelectedDonationTypes([]);
+      }
+    };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react240.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react241.default.createElement(PageLoader_default, null);
     if (isEdit && error) {
-      return /* @__PURE__ */ import_react240.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react241.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error"
       });
     }
-    return /* @__PURE__ */ import_react240.default.createElement("div", {
-      className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react240.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react241.default.createElement("div", {
+      className: "max-w-6xl mx-auto p-4 pb-24"
+    }, /* @__PURE__ */ import_react241.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Temple" : "Add Temple",
       subtitle: "Temple Management"
-    }), /* @__PURE__ */ import_react240.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react241.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react240.default.createElement(card_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl mb-6"
-    }, /* @__PURE__ */ import_react240.default.createElement(row_default2, {
-      gutter: [16, 0]
-    }, /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react241.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "temple_name",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Temple Name ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Temple Name ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "temple_id",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Temple Id ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Temple Id ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10 border-red-200"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "trust_registration_no",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Trust Registration No. ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Trust Registration No. ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 16
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "temple_address",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Temple Address ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Temple Address ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 8
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "country",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Country ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Country ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10",
       placeholder: "India"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "state",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "State ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "State ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "city",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "City ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "City ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "pincode",
-      label: /* @__PURE__ */ import_react240.default.createElement("span", null, "Pincode ", /* @__PURE__ */ import_react240.default.createElement("span", {
+      label: /* @__PURE__ */ import_react241.default.createElement("span", null, "Pincode ", /* @__PURE__ */ import_react241.default.createElement("span", {
         className: "text-red-500"
       }, "*"))
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react240.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react241.default.createElement(col_default2, {
       xs: 24,
       md: 12
-    }, /* @__PURE__ */ import_react240.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react241.default.createElement(form_default.Item, {
       name: "note",
       label: "Note"
-    }, /* @__PURE__ */ import_react240.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(input_default, {
       className: "h-10"
-    }))))), /* @__PURE__ */ import_react240.default.createElement(card_default, {
+    }))))), /* @__PURE__ */ import_react241.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl mb-6 shadow-sm overflow-hidden"
-    }, /* @__PURE__ */ import_react240.default.createElement("div", {
-      className: "px-5 py-3 border-b bg-zinc-50/30"
-    }, /* @__PURE__ */ import_react240.default.createElement(Text16, {
+    }, /* @__PURE__ */ import_react241.default.createElement("div", {
+      className: "px-5 py-3 border-b bg-zinc-50/30 flex justify-between items-center"
+    }, /* @__PURE__ */ import_react241.default.createElement(Text16, {
       strong: true,
       className: "text-zinc-800"
-    }, "Donation Types")), /* @__PURE__ */ import_react240.default.createElement("div", {
+    }, "Donation Types"), donationTypes && donationTypes.length > 0 && /* @__PURE__ */ import_react241.default.createElement("div", {
+      className: "flex items-center gap-2"
+    }, /* @__PURE__ */ import_react241.default.createElement(Text16, {
+      className: "text-zinc-600 font-medium select-none text-xs"
+    }, "Select All"), /* @__PURE__ */ import_react241.default.createElement(switch_default, {
+      checked: allSelected,
+      onChange: handleSelectAllChange,
+      className: allSelected ? "bg-zinc-800" : "bg-zinc-200"
+    }))), /* @__PURE__ */ import_react241.default.createElement("div", {
       className: "max-h-[400px] overflow-y-auto"
-    }, /* @__PURE__ */ import_react240.default.createElement(list_default, {
+    }, /* @__PURE__ */ import_react241.default.createElement(list_default, {
       dataSource: donationTypes,
       className: "donation-type-list",
       renderItem: (item) => {
         var _a;
         const active = selectedDonationTypes.includes(item.name);
-        return /* @__PURE__ */ import_react240.default.createElement(list_default.Item, {
+        return /* @__PURE__ */ import_react241.default.createElement(list_default.Item, {
           className: "px-5 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-100 last:border-0",
           actions: [
-            /* @__PURE__ */ import_react240.default.createElement(switch_default, {
+            /* @__PURE__ */ import_react241.default.createElement(switch_default, {
               checked: active,
               onChange: () => toggleDonationType(item.name),
               className: active ? "bg-zinc-800" : "bg-zinc-200"
             })
           ]
-        }, /* @__PURE__ */ import_react240.default.createElement(list_default.Item.Meta, {
-          avatar: /* @__PURE__ */ import_react240.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react241.default.createElement(list_default.Item.Meta, {
+          avatar: /* @__PURE__ */ import_react241.default.createElement(avatar_default, {
             src: item.donation_image,
             shape: "square",
             size: "large",
             className: "bg-zinc-100 rounded-lg border border-zinc-200"
           }, (_a = item.donation_type) == null ? void 0 : _a.charAt(0)),
-          title: /* @__PURE__ */ import_react240.default.createElement(Text16, {
+          title: /* @__PURE__ */ import_react241.default.createElement(Text16, {
             strong: true,
             className: "text-zinc-700"
           }, item.donation_type)
         }));
       }
-    }))), /* @__PURE__ */ import_react240.default.createElement("div", {
-      className: "flex justify-end gap-2"
-    }, /* @__PURE__ */ import_react240.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react240.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+    }))), /* @__PURE__ */ import_react241.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react240.default.createElement(SaveOutlined_default2, null)
-    }, isEdit ? "Update" : "Save"))), isEdit && /* @__PURE__ */ import_react240.default.createElement(ActivityLog_default, {
+      isEdit
+    })), isEdit && /* @__PURE__ */ import_react241.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_TEMPLE,
       docname: id
     }));
@@ -131203,30 +131406,30 @@ html body {
   var TempleForm_default = TempleForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
-  var import_react242 = __toESM(require_react());
+  var import_react243 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTable.jsx
-  var import_react241 = __toESM(require_react());
+  var import_react242 = __toESM(require_react());
   var { Text: Text17 } = typography_default;
   var donationColumns = [
     {
       title: "Donor",
       dataIndex: "donor_name",
       key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react241.default.createElement(Text17, {
+      render: (text) => /* @__PURE__ */ import_react242.default.createElement(Text17, {
         strong: true
       }, text)
     },
     {
       title: "Temple",
       key: "temple",
-      render: (_2, record) => /* @__PURE__ */ import_react241.default.createElement(Text17, null, record["temple.temple_name"] || record.temple_name)
+      render: (_2, record) => /* @__PURE__ */ import_react242.default.createElement(Text17, null, record["temple.temple_name"] || record.temple_name)
     },
     {
       title: "Amount",
       dataIndex: "total_amount",
       key: "total_amount",
-      render: (val) => /* @__PURE__ */ import_react241.default.createElement(Text17, {
+      render: (val) => /* @__PURE__ */ import_react242.default.createElement(Text17, {
         type: "success",
         strong: true
       }, "\u20B9", Number(val || 0).toLocaleString()),
@@ -131236,7 +131439,7 @@ html body {
       title: "Payment Mode",
       dataIndex: "payment_mode",
       key: "payment_mode",
-      render: (mode) => /* @__PURE__ */ import_react241.default.createElement(tag_default, {
+      render: (mode) => /* @__PURE__ */ import_react242.default.createElement(tag_default, {
         color: mode === "Cash" ? "green" : "blue"
       }, mode)
     }
@@ -131244,7 +131447,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
   var DonationList = () => {
-    return /* @__PURE__ */ import_react242.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react243.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION,
       title: "Donation Records",
       description: "View and track all donation transactions",
@@ -131256,9 +131459,9 @@ html body {
   var DonationList_default = DonationList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationView.jsx
-  var import_react243 = __toESM(require_react());
+  var import_react244 = __toESM(require_react());
   var DonationView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react243.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react244.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION,
       id,
       onBack,
@@ -131268,7 +131471,7 @@ html body {
   var DonationView_default = DonationView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationForm.jsx
-  var import_react244 = __toESM(require_react());
+  var import_react245 = __toESM(require_react());
   var import_dayjs5 = __toESM(require_dayjs_min());
   var { Text: Text18 } = typography_default;
   var DonationForm = ({ id, onBack }) => {
@@ -131276,7 +131479,7 @@ html body {
     const [form] = form_default.useForm();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONATION, id);
-    (0, import_react244.useEffect)(() => {
+    (0, import_react245.useEffect)(() => {
       if (isEdit && initialValues) {
         const vals = __spreadValues({}, initialValues);
         if (vals.dob)
@@ -131301,234 +131504,229 @@ html body {
       }
     };
     if (fetching)
-      return /* @__PURE__ */ import_react244.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react245.default.createElement(PageLoader_default, null);
     if (fetchError)
-      return /* @__PURE__ */ import_react244.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react245.default.createElement(alert_default, {
         message: "Error",
         description: fetchError.message,
         type: "error"
       });
-    return /* @__PURE__ */ import_react244.default.createElement("div", {
-      className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react244.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react245.default.createElement("div", {
+      className: "max-w-6xl mx-auto p-4 pb-24"
+    }, /* @__PURE__ */ import_react245.default.createElement(AddPageHeader_default, {
       onBack,
       title: "Edit Donation",
       subtitle: "Donation Entry"
-    }), /* @__PURE__ */ import_react244.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react245.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react244.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react245.default.createElement(row_default2, {
       gutter: [24, 16]
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "name",
       hidden: true
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, null)), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, null)), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "name_on_receipt",
       label: "Name on Receipt"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "donor_name",
       label: "Donor Name"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "cashier",
       label: "Donation Receiver Name"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "email",
       label: "Email"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "address_line_1",
       label: "Address Line 1"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Address Line 1"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "address_line_2",
       label: "Address Line 2"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Address Line 2"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "country",
       label: "Country"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "state",
       label: "State"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "city",
       label: "City"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Pincode"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter pincode"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "contact_number",
       label: "Contact Number"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "native_place",
       label: "Native Place"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10",
       placeholder: "Enter Native Place"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "dob",
       label: "Date of Birth"
-    }, /* @__PURE__ */ import_react244.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
       className: "h-10 w-full",
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "marital_status",
       label: "Marital Status"
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(select_default, {
       className: "h-10 w-full",
       placeholder: "Unmarried"
-    }, /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react245.default.createElement(select_default.Option, {
       value: "Unmarried"
-    }, "Unmarried"), /* @__PURE__ */ import_react244.default.createElement(select_default.Option, {
+    }, "Unmarried"), /* @__PURE__ */ import_react245.default.createElement(select_default.Option, {
       value: "Married"
-    }, "Married")))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Married")))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "date_of_anniversary",
       label: "Date of Anniversary"
-    }, /* @__PURE__ */ import_react244.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
       className: "h-10 w-full",
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react244.default.createElement(typography_default.Title, {
+    }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
       level: 5,
       className: "text-[#a84422] mt-4 mb-2"
-    }, "Donation Items")), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Donation Items")), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "thakorji_thal",
       label: "Thakorji Thal"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "lease_land_receipt",
       label: "Lease Land receipt"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react244.default.createElement(typography_default.Title, {
+    }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
       level: 5,
       className: "text-[#a84422] mt-4 mb-2"
-    }, "Donation Payments")), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }, "Donation Payments")), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "payment_mode",
       label: "Donation Payment Type"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       className: "h-10 bg-zinc-50"
-    }))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react244.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
       name: "total_amount",
       label: "Donation Total Amount"
-    }, /* @__PURE__ */ import_react244.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
       type: "number",
       className: "h-10 bg-zinc-50 text-zinc-500 font-medium"
-    })))), /* @__PURE__ */ import_react244.default.createElement("div", {
-      className: "flex flex-col sm:flex-row justify-between items-center mt-10 pt-6 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
-      onClick: onBack,
-      className: "h-10 px-8 text-[#a84422] border-[#a84422] hover:bg-[#a84422] hover:text-white transition-colors"
-    }, "Back"), /* @__PURE__ */ import_react244.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+    })))), /* @__PURE__ */ import_react245.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: updating,
-      className: "h-10 px-8 bg-[#9c3e1e] hover:bg-[#853418] border-none font-medium text-white shadow-md"
-    }, "Update Donation")))), isEdit && /* @__PURE__ */ import_react244.default.createElement(ActivityLog_default, {
+      cancelText: "Back",
+      saveText: "Update Donation"
+    }))), isEdit && /* @__PURE__ */ import_react245.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONATION,
       docname: id
     }));
@@ -131536,17 +131734,17 @@ html body {
   var DonationForm_default = DonationForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
-  var import_react246 = __toESM(require_react());
+  var import_react247 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTypeTable.jsx
-  var import_react245 = __toESM(require_react());
+  var import_react246 = __toESM(require_react());
   var { Text: Text19 } = typography_default;
   var donationTypeColumns = [
     {
       title: "Donation Type",
       dataIndex: "donation_type",
       key: "donation_type",
-      render: (text) => /* @__PURE__ */ import_react245.default.createElement(Text19, {
+      render: (text) => /* @__PURE__ */ import_react246.default.createElement(Text19, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.donation_type || "").localeCompare(b.donation_type || "")
@@ -131565,7 +131763,7 @@ html body {
         if (!img)
           return "-";
         const src = img.startsWith("http") ? img : `${window.location.origin}${img.startsWith("/") ? "" : "/"}${img}`;
-        return /* @__PURE__ */ import_react245.default.createElement("img", {
+        return /* @__PURE__ */ import_react246.default.createElement("img", {
           src,
           alt: "Donation",
           className: "w-10 h-10 object-cover"
@@ -131576,7 +131774,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
   var DonationTypeList = () => {
-    return /* @__PURE__ */ import_react246.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react247.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       title: "Donation Types",
       description: "Manage available donation categories",
@@ -131588,9 +131786,9 @@ html body {
   var DonationTypeList_default = DonationTypeList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeView.jsx
-  var import_react247 = __toESM(require_react());
+  var import_react248 = __toESM(require_react());
   var DonationTypeView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react247.default.createElement(CommonView_default, {
+    return /* @__PURE__ */ import_react248.default.createElement(CommonView_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       id,
       onBack,
@@ -131600,7 +131798,7 @@ html body {
   var DonationTypeView_default = DonationTypeView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeForm.jsx
-  var import_react248 = __toESM(require_react());
+  var import_react249 = __toESM(require_react());
   var { Text: Text20 } = typography_default;
   var DonationTypeForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -131612,7 +131810,7 @@ html body {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, {
       fields: ["name", "temple_name"]
     });
-    (0, import_react248.useEffect)(() => {
+    (0, import_react249.useEffect)(() => {
       if (isEdit && data) {
         let fileList = [];
         if (data.donation_image) {
@@ -131669,57 +131867,57 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react248.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react249.default.createElement(PageLoader_default, null);
     if (error) {
-      return /* @__PURE__ */ import_react248.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react249.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error",
-        action: /* @__PURE__ */ import_react248.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react249.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     }
-    return /* @__PURE__ */ import_react248.default.createElement("div", {
-      className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react248.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react249.default.createElement("div", {
+      className: "max-w-6xl mx-auto p-4 pb-24"
+    }, /* @__PURE__ */ import_react249.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donation Type" : "Add Donation Type",
       subtitle: "Donation Setup"
-    }), /* @__PURE__ */ import_react248.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react249.default.createElement(card_default, {
       className: "border border-zinc-200"
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 0]
-    }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react249.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "donation_type",
-      label: /* @__PURE__ */ import_react248.default.createElement(Text20, null, "Donation Type"),
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Donation Type"),
       rules: [{ required: true, message: "Enter type" }]
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "default_amount",
-      label: /* @__PURE__ */ import_react248.default.createElement(Text20, null, "Default Amount")
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Default Amount")
+    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
       className: "h-10"
-    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       md: 8
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "temple",
-      label: /* @__PURE__ */ import_react248.default.createElement(Text20, null, "Temple")
-    }, /* @__PURE__ */ import_react248.default.createElement(select_default, {
+      label: /* @__PURE__ */ import_react249.default.createElement(Text20, null, "Temple")
+    }, /* @__PURE__ */ import_react249.default.createElement(select_default, {
       placeholder: "Select Temple",
       className: "h-10",
       options: temples == null ? void 0 : temples.map((t2) => ({
@@ -131727,9 +131925,9 @@ html body {
         label: t2.temple_name || t2.name
       })),
       allowClear: true
-    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
       name: "donation_image",
       label: "Donation Image",
       valuePropName: "fileList",
@@ -131738,27 +131936,20 @@ html body {
           return e4;
         return e4 && e4.fileList;
       }
-    }, /* @__PURE__ */ import_react248.default.createElement(upload_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(upload_default, {
       maxCount: 1,
       beforeUpload: () => false,
       listType: "picture-card",
       className: "donation-upload"
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col items-center"
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "text-xs font-bold uppercase tracking-widest"
-    }, "Upload")))))), /* @__PURE__ */ import_react248.default.createElement("div", {
-      className: "flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4"
-    }, /* @__PURE__ */ import_react248.default.createElement(button_default, {
-      onClick: onBack,
-      className: "h-10 px-6"
-    }, "Cancel"), /* @__PURE__ */ import_react248.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+    }, "Upload")))))), /* @__PURE__ */ import_react249.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: creating || updating || uploading,
-      icon: /* @__PURE__ */ import_react248.default.createElement(SaveOutlined_default2, null),
-      className: "h-10 px-6 bg-black border-black"
-    }, isEdit ? "Update" : "Save")))), isEdit && /* @__PURE__ */ import_react248.default.createElement(ActivityLog_default, {
+      isEdit
+    }))), isEdit && /* @__PURE__ */ import_react249.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       docname: id
     }));
@@ -131766,10 +131957,10 @@ html body {
   var DonationTypeForm_default = DonationTypeForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
-  var import_react250 = __toESM(require_react());
+  var import_react251 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userTable.jsx
-  var import_react249 = __toESM(require_react());
+  var import_react250 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/utils/tagUtils.js
   var TAG_CONFIG = {
@@ -131814,17 +132005,17 @@ html body {
       render: (text, record) => {
         const name = text || `${record.first_name || ""} ${record.last_name || ""}`.trim() || record.name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react249.default.createElement("div", {
+        return /* @__PURE__ */ import_react250.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react250.default.createElement(avatar_default, {
           src: record.user_image,
           size: 26,
           className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-        }, initials), /* @__PURE__ */ import_react249.default.createElement("div", {
+        }, initials), /* @__PURE__ */ import_react250.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react249.default.createElement("span", {
+        }, /* @__PURE__ */ import_react250.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react249.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react250.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.email || "no-email")));
       }
@@ -131834,7 +132025,7 @@ html body {
       dataIndex: "custom_test",
       key: "custom_test",
       width: 180,
-      render: (text) => /* @__PURE__ */ import_react249.default.createElement("span", {
+      render: (text) => /* @__PURE__ */ import_react250.default.createElement("span", {
         className: "text-gray-600 text-sm font-medium"
       }, text || "N/A")
     },
@@ -131843,13 +132034,13 @@ html body {
       dataIndex: "custom_select_temple",
       key: "custom_select_temple",
       width: 180,
-      render: (temples) => /* @__PURE__ */ import_react249.default.createElement("div", {
+      render: (temples) => /* @__PURE__ */ import_react250.default.createElement("div", {
         className: "flex flex-wrap gap-1"
-      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react249.default.createElement(tag_default, {
+      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react250.default.createElement(tag_default, {
         key: index2,
         color: "blue",
         className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
-      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react249.default.createElement("span", {
+      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react250.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Global"))
     },
@@ -131860,7 +132051,7 @@ html body {
       width: 140,
       render: (text) => {
         const config = getTagConfig(text);
-        return /* @__PURE__ */ import_react249.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react250.default.createElement(tag_default, {
           color: config.color,
           className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
         }, config.label);
@@ -131873,7 +132064,7 @@ html body {
       width: 140,
       render: (enabled) => {
         const config = getTagConfig(enabled ? "Active" : "Inactive");
-        return /* @__PURE__ */ import_react249.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react250.default.createElement(tag_default, {
           color: config.color,
           className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
         }, config.label);
@@ -131883,7 +132074,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
   var UserList = () => {
-    return /* @__PURE__ */ import_react250.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react251.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_USER,
       title: "Users Management",
       description: "Manage temple admins, cashiers and system users.",
@@ -131900,7 +132091,7 @@ html body {
   var UserList_default = UserList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserForm.jsx
-  var import_react251 = __toESM(require_react());
+  var import_react252 = __toESM(require_react());
   var { Text: Text21 } = typography_default;
   var UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -131911,7 +132102,7 @@ html body {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, {
       fields: ["name", "temple_name"]
     });
-    (0, import_react251.useEffect)(() => {
+    (0, import_react252.useEffect)(() => {
       if (isEdit && data) {
         const values = __spreadValues({}, data);
         values.enabled = values.enabled ? "Active" : "Inactive";
@@ -131948,140 +132139,135 @@ html body {
       }
     };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react251.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react252.default.createElement(PageLoader_default, null);
     if (isEdit && error)
-      return /* @__PURE__ */ import_react251.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react252.default.createElement(alert_default, {
         message: "Error loading",
         type: "error"
       });
-    return /* @__PURE__ */ import_react251.default.createElement("div", {
-      className: "max-w-6xl mx-auto p-4"
-    }, /* @__PURE__ */ import_react251.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react252.default.createElement("div", {
+      className: "max-w-6xl mx-auto p-4 pb-24"
+    }, /* @__PURE__ */ import_react252.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit User" : "Add User",
       subtitle: "User Management"
-    }), /* @__PURE__ */ import_react251.default.createElement(card_default, {
+    }), /* @__PURE__ */ import_react252.default.createElement(card_default, {
       className: "border border-zinc-200 rounded-xl"
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave
-    }, /* @__PURE__ */ import_react251.default.createElement(row_default2, {
-      gutter: [16, 0]
-    }, /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "email",
       label: "Email",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "first_name",
       label: "First Name",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "last_name",
       label: "Last Name"
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_test",
       label: "Contact Number",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_user_role",
       label: "User Role",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(select_default, null, /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Super Admin"
-    }, "Super Admin"), /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, "Super Admin"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Temple Admin"
-    }, "Temple Admin"), /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, "Temple Admin"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Cashier"
-    }, "Cashier")))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, "Cashier")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_select_temple",
       label: "Temples",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
       mode: "multiple"
-    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       key: t2.name,
       value: t2.name
-    }, t2.temple_name))))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, t2.temple_name))))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "new_password",
       label: "Password",
       rules: [{ required: !isEdit }]
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default.Password, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default.Password, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "enabled",
       label: "Account Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(select_default, null, /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
-    }, "Active"), /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
-    }, "Inactive")))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, "Inactive")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_status",
       label: "Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react251.default.createElement(select_default, null, /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
-    }, "Active"), /* @__PURE__ */ import_react251.default.createElement(select_default.Option, {
+    }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
-    }, "Inactive")))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, "Inactive")))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_opening_balance",
       label: "Opening Balance"
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default, null))), /* @__PURE__ */ import_react251.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react251.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_internal_notes",
       label: "Notes"
-    }, /* @__PURE__ */ import_react251.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default.TextArea, {
       rows: 4
-    })))), /* @__PURE__ */ import_react251.default.createElement("div", {
-      className: "flex justify-end gap-2 mt-6"
-    }, /* @__PURE__ */ import_react251.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react251.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+    })))), /* @__PURE__ */ import_react252.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: creating || updating,
-      icon: /* @__PURE__ */ import_react251.default.createElement(SaveOutlined_default2, null)
-    }, isEdit ? "Update" : "Save")))), isEdit && /* @__PURE__ */ import_react251.default.createElement(ActivityLog_default, {
+      isEdit
+    }))), isEdit && /* @__PURE__ */ import_react252.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_USER,
       docname: id
     }));
@@ -132089,10 +132275,10 @@ html body {
   var UserForm_default = UserForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var import_react253 = __toESM(require_react());
+  var import_react254 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
-  var import_react252 = __toESM(require_react());
+  var import_react253 = __toESM(require_react());
   var { Text: Text22 } = typography_default;
   var userBalanceColumns = [
     {
@@ -132103,17 +132289,17 @@ html body {
       render: (text, record) => {
         const name = text || record.user_name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react252.default.createElement("div", {
+        return /* @__PURE__ */ import_react253.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, /* @__PURE__ */ import_react252.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react253.default.createElement(avatar_default, {
           src: record.user_image,
           size: 26,
           className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-        }, initials), /* @__PURE__ */ import_react252.default.createElement("div", {
+        }, initials), /* @__PURE__ */ import_react253.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react252.default.createElement("span", {
+        }, /* @__PURE__ */ import_react253.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react252.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react253.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.user_name)));
       }
@@ -132127,7 +132313,7 @@ html body {
         console.log(text, "text");
         const config = getTagConfig(text);
         console.log(config, "config");
-        return /* @__PURE__ */ import_react252.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react253.default.createElement(tag_default, {
           color: config.color,
           className: "font-bold rounded-full px-3 py-0 text-[10px] border-0"
         }, config.label);
@@ -132138,12 +132324,12 @@ html body {
       dataIndex: "custom_select_temple",
       key: "custom_select_temple",
       width: 180,
-      render: (temples) => /* @__PURE__ */ import_react252.default.createElement("div", {
+      render: (temples) => /* @__PURE__ */ import_react253.default.createElement("div", {
         className: "flex flex-wrap gap-1"
-      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react252.default.createElement(tag_default, {
+      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react253.default.createElement(tag_default, {
         key: index2,
         className: "!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
-      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react252.default.createElement("span", {
+      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react253.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Not Assigned"))
     },
@@ -132153,9 +132339,9 @@ html body {
       key: "opening_balance",
       align: "right",
       width: 180,
-      render: (value) => /* @__PURE__ */ import_react252.default.createElement("div", {
+      render: (value) => /* @__PURE__ */ import_react253.default.createElement("div", {
         className: "flex items-center justify-end gap-2 pr-4"
-      }, /* @__PURE__ */ import_react252.default.createElement(Text22, {
+      }, /* @__PURE__ */ import_react253.default.createElement(Text22, {
         strong: true,
         className: "text-zinc-900 text-base"
       }, "\u20B9", Number(value || 0).toLocaleString()))
@@ -132165,8 +132351,8 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
   var { Title: Title9, Text: Text23 } = typography_default;
   var OpeningBalance = () => {
-    const [loading, setLoading] = (0, import_react253.useState)(false);
-    const [data, setData] = (0, import_react253.useState)([]);
+    const [loading, setLoading] = (0, import_react254.useState)(false);
+    const [data, setData] = (0, import_react254.useState)([]);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -132206,7 +132392,7 @@ html body {
         message_default.error("Reset failed");
       }
     };
-    (0, import_react253.useEffect)(() => {
+    (0, import_react254.useEffect)(() => {
       fetchData();
     }, []);
     const columns = [
@@ -132216,7 +132402,7 @@ html body {
         key: "action",
         align: "right",
         width: 160,
-        render: (_2, record) => /* @__PURE__ */ import_react253.default.createElement(popconfirm_default, {
+        render: (_2, record) => /* @__PURE__ */ import_react254.default.createElement(popconfirm_default, {
           placement: "leftTop",
           title: "Hand Over Cash",
           description: `Reset \u20B9${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`,
@@ -132224,30 +132410,30 @@ html body {
           okText: "Confirm",
           cancelText: "Cancel",
           okButtonProps: { className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" }
-        }, /* @__PURE__ */ import_react253.default.createElement(button_default, {
+        }, /* @__PURE__ */ import_react254.default.createElement(button_default, {
           type: "text",
-          icon: /* @__PURE__ */ import_react253.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react254.default.createElement(SyncOutlined_default2, null),
           className: "text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
         }, "Reset"))
       }
     ];
-    return /* @__PURE__ */ import_react253.default.createElement("div", {
+    return /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "animate-fadeIn py-6 space-y-6"
-    }, /* @__PURE__ */ import_react253.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(PageHeader_default, {
       title: "User Opening Balance",
       description: "Manage and reset hand-over cash for each user",
       extra: [
-        /* @__PURE__ */ import_react253.default.createElement(button_default, {
+        /* @__PURE__ */ import_react254.default.createElement(button_default, {
           key: "refresh",
           onClick: fetchData,
           loading,
-          icon: /* @__PURE__ */ import_react253.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react254.default.createElement(SyncOutlined_default2, null),
           className: "flex items-center gap-2 h-9 px-4 border border-zinc-200 text-zinc-700 font-medium rounded-md bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all"
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react253.default.createElement("div", {
+    }), /* @__PURE__ */ import_react254.default.createElement("div", {
       className: ""
-    }, /* @__PURE__ */ import_react253.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(table_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
@@ -132263,43 +132449,43 @@ html body {
     {
       key: "dashboard",
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react254.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
       label: "Ledger",
-      component: /* @__PURE__ */ import_react254.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "users",
       label: "Users",
-      component: /* @__PURE__ */ import_react254.default.createElement(UserList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(UserList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "temples",
       label: "Temples",
-      component: /* @__PURE__ */ import_react254.default.createElement(TempleList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react254.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donors",
       label: "Donors",
-      component: /* @__PURE__ */ import_react254.default.createElement(DonorList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donations",
       label: "Donation",
-      component: /* @__PURE__ */ import_react254.default.createElement(DonationList_default, null),
+      component: /* @__PURE__ */ import_react255.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     }
   ];
@@ -132323,19 +132509,19 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react254.default.createElement("div", {
+      return /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react254.default.createElement("div", {
+      }, /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react254.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react255.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react254.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react255.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react254.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react255.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react254.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react255.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react254.default.createElement("button", {
+      }, /* @__PURE__ */ import_react255.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -132351,7 +132537,7 @@ html body {
       }
     };
     if (baseKey === "ledger") {
-      return /* @__PURE__ */ import_react254.default.createElement(OpeningBalance_default, null);
+      return /* @__PURE__ */ import_react255.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -132361,22 +132547,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react254.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react254.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react254.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react254.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react254.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react255.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react254.default.createElement(Donation_default, {
+        return /* @__PURE__ */ import_react255.default.createElement(Donation_default, {
           onBack: () => navigate(baseKey)
         });
       }
@@ -132386,22 +132572,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react254.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react254.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react254.default.createElement(DonationForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react254.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react254.default.createElement(UserForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react255.default.createElement(UserForm_default, __spreadValues({}, formProps));
         default:
           return null;
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react254.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react255.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -132412,13 +132598,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react255 = __toESM(require_react());
-  var UserContext = (0, import_react255.createContext)();
+  var import_react256 = __toESM(require_react());
+  var UserContext = (0, import_react256.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react255.useState)(null);
-    const [roles, setRoles] = (0, import_react255.useState)([]);
-    const [loading, setLoading] = (0, import_react255.useState)(true);
-    (0, import_react255.useEffect)(() => {
+    const [user, setUser] = (0, import_react256.useState)(null);
+    const [roles, setRoles] = (0, import_react256.useState)([]);
+    const [loading, setLoading] = (0, import_react256.useState)(true);
+    (0, import_react256.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -132480,12 +132666,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react255.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react256.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react255.useContext)(UserContext);
+    const context = (0, import_react256.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -132493,15 +132679,15 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react256.default.createElement(TempleFlagLoader_default, {
+  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react257.default.createElement(TempleFlagLoader_default, {
     size: "small"
   }));
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react256.useState)("dashboard");
-    const [mobileOpen, setMobileOpen] = (0, import_react256.useState)(false);
+    const [currentRoute, setCurrentRoute] = (0, import_react257.useState)("dashboard");
+    const [mobileOpen, setMobileOpen] = (0, import_react257.useState)(false);
     const { user, roles, logout, isAdmin, loading } = useUser();
-    (0, import_react256.useEffect)(() => {
+    (0, import_react257.useEffect)(() => {
       if (!loading) {
         const initLoader = document.getElementById("temple-initial-loader");
         if (initLoader) {
@@ -132509,7 +132695,7 @@ html body {
         }
       }
     }, [loading]);
-    (0, import_react256.useEffect)(() => {
+    (0, import_react257.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -132537,7 +132723,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react256.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof frappe !== "undefined") {
             frappe.set_route("UserProfile", user == null ? void 0 : user.email);
@@ -132550,54 +132736,115 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react256.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react257.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
     ];
     const menuItems = getFilteredMenuItems(roles);
+    const headerStyle = {
+      background: "#ffffff",
+      borderBottom: "1px solid #e4e4e7",
+      height: "70px",
+      lineHeight: "70px",
+      padding: "0 24px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03)"
+    };
+    const headerInnerStyle = {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      width: "100%",
+      maxWidth: "1536px",
+      marginLeft: "auto",
+      marginRight: "auto"
+    };
+    const logoContainerStyle = {
+      display: "flex",
+      alignItems: "center",
+      height: "70px",
+      flexShrink: 0
+    };
+    const logoImgStyle = {
+      height: "38px",
+      width: "auto",
+      objectFit: "contain",
+      display: "block"
+    };
+    const rightContainerStyle = {
+      display: "flex",
+      alignItems: "center",
+      gap: "24px"
+    };
+    const menuStyle = {
+      border: "none",
+      background: "transparent",
+      lineHeight: "70px",
+      minWidth: "400px"
+    };
+    const rightActionsStyle = {
+      display: "flex",
+      alignItems: "center",
+      gap: "16px"
+    };
+    const userProfileStyle = {
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      cursor: "pointer",
+      fontWeight: 500,
+      color: "#18181b",
+      padding: "4px 8px",
+      borderRadius: "6px"
+    };
     if (loading) {
       return null;
     }
-    return /* @__PURE__ */ import_react256.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react257.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react256.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react257.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react256.default.createElement(Header3, {
-      className: `aavatto-topbar ${isAdmin ? "is-admin" : ""}`
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
-      className: "aavatto-header-inner flex justify-between items-center w-full"
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
-      className: "aavatto-logo"
-    }, /* @__PURE__ */ import_react256.default.createElement("img", {
+    }, /* @__PURE__ */ import_react257.default.createElement(Header3, {
+      style: headerStyle
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: headerInnerStyle
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: logoContainerStyle
+    }, /* @__PURE__ */ import_react257.default.createElement("img", {
       src: "/assets/temple_donation/img/logo.svg",
-      alt: "Temple Donation"
-    })), /* @__PURE__ */ import_react256.default.createElement("div", {
-      className: "flex items-center"
-    }, /* @__PURE__ */ import_react256.default.createElement(menu_default2, {
+      alt: "Temple Donation",
+      style: logoImgStyle
+    })), /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: rightContainerStyle
+    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "horizontal",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
-      className: "aavatto-menu hidden md:flex"
-    }), /* @__PURE__ */ import_react256.default.createElement("div", {
-      className: "aavatto-right"
-    }, !isAdmin && /* @__PURE__ */ import_react256.default.createElement(dropdown_default3, {
+      style: menuStyle,
+      className: "hidden md:flex"
+    }), /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: rightActionsStyle
+    }, !isAdmin && /* @__PURE__ */ import_react257.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight"
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
-      className: "aavatto-user"
-    }, /* @__PURE__ */ import_react256.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: userProfileStyle
+    }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react256.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react256.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react256.default.createElement(button_default, {
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react257.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react257.default.createElement(button_default, {
       className: "md:hidden",
-      icon: /* @__PURE__ */ import_react256.default.createElement(MenuOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react257.default.createElement(MenuOutlined_default2, null),
       onClick: () => setMobileOpen(true)
-    }))))), /* @__PURE__ */ import_react256.default.createElement(drawer_default, {
-      title: /* @__PURE__ */ import_react256.default.createElement("img", {
+    }))))), /* @__PURE__ */ import_react257.default.createElement(drawer_default, {
+      title: /* @__PURE__ */ import_react257.default.createElement("img", {
         src: "/assets/temple_donation/img/logo.png",
         alt: "Temple Donation",
         style: { height: "40px", objectFit: "contain" }
@@ -132607,34 +132854,34 @@ html body {
       open: mobileOpen,
       width: 280,
       bodyStyle: { padding: 0 }
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex flex-col h-full"
-    }, /* @__PURE__ */ import_react256.default.createElement(menu_default2, {
+    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "inline",
       selectedKeys: [currentRoute.split("/")[0]],
       items: menuItems,
       onClick: handleMenuClick,
       className: "border-none"
-    }), !isAdmin && /* @__PURE__ */ import_react256.default.createElement("div", {
+    }), !isAdmin && /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "mt-auto p-4 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex items-center gap-3 px-3 py-2"
-    }, /* @__PURE__ */ import_react256.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: /* @__PURE__ */ import_react256.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react256.default.createElement("div", {
+      icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react256.default.createElement("span", {
+    }, /* @__PURE__ */ import_react257.default.createElement("span", {
       className: "text-sm font-bold text-zinc-900"
-    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react256.default.createElement("span", {
+    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react257.default.createElement("span", {
       className: "text-[10px] text-zinc-400 uppercase tracking-widest"
-    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react256.default.createElement(menu_default2, {
+    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
       mode: "inline",
       items: userMenuItems,
       className: "border-none mt-2"
-    })))), /* @__PURE__ */ import_react256.default.createElement(Content3, {
+    })))), /* @__PURE__ */ import_react257.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react256.default.createElement("div", {
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -132654,7 +132901,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react257.default.createElement(UserProvider, null, /* @__PURE__ */ import_react257.default.createElement(App_default, null))
+        /* @__PURE__ */ import_react258.default.createElement(UserProvider, null, /* @__PURE__ */ import_react258.default.createElement(App_default, null))
       );
       this.$temple_donation = root;
     }
@@ -132736,4 +132983,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.EC46H3VX.js.map
+//# sourceMappingURL=temple_donation.bundle.E2NWTVCV.js.map

@@ -36,6 +36,10 @@
   }
 }
 
+.temple-donation-app .collapse{
+  visibility: collapse;
+}
+
 .temple-donation-app .static{
   position: static;
 }
@@ -355,6 +359,10 @@
   flex-shrink: 0;
 }
 
+.temple-donation-app .border-collapse{
+  border-collapse: collapse;
+}
+
 .temple-donation-app .rotate-180{
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -544,11 +552,6 @@
   border-style: none;
 }
 
-.temple-donation-app .border-\[\#a84422\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(168 68 34 / var(--tw-border-opacity, 1));
-}
-
 .temple-donation-app .border-amber-100{
   --tw-border-opacity: 1;
   border-color: rgb(254 243 199 / var(--tw-border-opacity, 1));
@@ -635,11 +638,6 @@
 .temple-donation-app .\!bg-zinc-800{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1)) !important;
-}
-
-.temple-donation-app .bg-\[\#9c3e1e\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 62 30 / var(--tw-bg-opacity, 1));
 }
 
 .temple-donation-app .bg-amber-50{
@@ -926,6 +924,10 @@
 
 .temple-donation-app .pb-20{
   padding-bottom: 5rem;
+}
+
+.temple-donation-app .pb-24{
+  padding-bottom: 6rem;
 }
 
 .temple-donation-app .pb-4{
@@ -1335,8 +1337,19 @@
   --tw-ring-color: rgb(24 24 27 / var(--tw-ring-opacity, 1));
 }
 
+.temple-donation-app .blur{
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .temple-donation-app .filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.temple-donation-app .transition{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .temple-donation-app .transition-all{
@@ -1353,6 +1366,10 @@
 
 .temple-donation-app .duration-300{
   transition-duration: 300ms;
+}
+
+.temple-donation-app .ease-in-out{
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 
@@ -1471,6 +1488,75 @@
   font-size: 0.875rem;
   margin-left: 0.5rem;
   color: #18181b;
+}
+
+.temple-donation-app .aavatto-topbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  height: var(--topbar-height) !important;
+  line-height: var(--topbar-height) !important;
+  padding: 0 1.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-logo img {
+  height: 38px;
+  width: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-menu {
+  border: none !important;
+  background: transparent !important;
+  line-height: var(--topbar-height) !important;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-menu .ant-menu-item {
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-menu .ant-menu-item-selected, .temple-donation-app .aavatto-topbar .aavatto-menu .ant-menu-item-active {
+  color: var(--primary-color) !important;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-menu .ant-menu-item::after {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1.5rem;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-main);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s;
+}
+
+.temple-donation-app .aavatto-topbar .aavatto-user:hover {
+  background: #f4f4f5;
 }
 
 .temple-donation-app {
@@ -1843,12 +1929,6 @@ body:has(#temple-initial-loader) #loading-screen {
 
 /* Hide default Frappe logo in website navbar */
 
-.navbar-brand img[src*=frappe],
-.navbar-brand img[src*=logo-write],
-.navbar-brand img[src*=frappe-framework-logo] {
-  display: none !important;
-}
-
 .temple-donation-app .last\:mb-0:last-child{
   margin-bottom: 0px;
 }
@@ -1880,16 +1960,6 @@ body:has(#temple-initial-loader) #loading-screen {
 .temple-donation-app .hover\:\!bg-zinc-800:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1)) !important;
-}
-
-.temple-donation-app .hover\:bg-\[\#853418\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(133 52 24 / var(--tw-bg-opacity, 1));
-}
-
-.temple-donation-app .hover\:bg-\[\#a84422\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 68 34 / var(--tw-bg-opacity, 1));
 }
 
 .temple-donation-app .hover\:bg-amber-100\/50:hover{
@@ -1979,12 +2049,6 @@ body:has(#temple-initial-loader) #loading-screen {
 .temple-donation-app .focus\:bg-white:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-@media (min-width: 640px){
-  .temple-donation-app .sm\:flex-row{
-    flex-direction: row;
-  }
 }
 
 @media (min-width: 768px){

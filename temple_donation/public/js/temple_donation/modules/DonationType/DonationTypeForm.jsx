@@ -184,6 +184,7 @@ import { DOCTYPE_DONATION_TYPE, DOCTYPE_TEMPLE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -289,7 +290,7 @@ const DonationTypeForm = ({ id, onBack }) => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-6xl mx-auto p-4 pb-24">
 
             <AddPageHeader
                 onBack={onBack}
@@ -300,7 +301,7 @@ const DonationTypeForm = ({ id, onBack }) => {
             <Card className="border border-zinc-200">
                 <Form form={form} layout="vertical" onFinish={handleSave}>
 
-                    <Row gutter={[16, 0]}>
+                    <Row gutter={[16, 16]}>
 
                         {/* Donation Type */}
                         <Col xs={24} sm={12} md={8}>
@@ -367,24 +368,11 @@ const DonationTypeForm = ({ id, onBack }) => {
 
                     </Row>
 
-                    {/* ACTIONS */}
-                    <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4">
-
-                        <Button onClick={onBack} className="h-10 px-6">
-                            Cancel
-                        </Button>
-
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={creating || updating || uploading}
-                            icon={<SaveOutlined />}
-                            className="h-10 px-6 bg-black border-black"
-                        >
-                            {isEdit ? "Update" : "Save"}
-                        </Button>
-
-                    </div>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={creating || updating || uploading}
+                        isEdit={isEdit}
+                    />
 
                 </Form>
             </Card>

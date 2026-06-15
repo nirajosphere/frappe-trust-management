@@ -162,6 +162,7 @@ import PageHeader from "../../components/common/PageHeader";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -224,7 +225,7 @@ const DonorForm = ({ id, onBack }) => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-6xl mx-auto p-4 pb-24">
 
             <AddPageHeader
                 onBack={onBack}
@@ -235,7 +236,7 @@ const DonorForm = ({ id, onBack }) => {
             <Card className="border border-zinc-200">
                 <Form form={form} layout="vertical" onFinish={handleSave}>
 
-                    <Row gutter={[16, 0]}>
+                    <Row gutter={[16, 16]}>
 
                         {/* CONTACT */}
                         <Col xs={24} sm={12} md={8}>
@@ -359,24 +360,11 @@ const DonorForm = ({ id, onBack }) => {
 
                     </Row>
 
-                    {/* ACTIONS */}
-                    <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6 border-t pt-4">
-
-                        <Button onClick={onBack} className="h-10 px-6">
-                            Cancel
-                        </Button>
-
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={creating || updating}
-                            icon={<SaveOutlined />}
-                            className="h-10 px-6 bg-black border-black"
-                        >
-                            {isEdit ? "Update" : "Save"}
-                        </Button>
-
-                    </div>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={creating || updating}
+                        isEdit={isEdit}
+                    />
 
                 </Form>
             </Card>

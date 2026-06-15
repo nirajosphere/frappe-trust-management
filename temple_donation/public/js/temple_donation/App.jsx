@@ -84,6 +84,73 @@ const App = () => {
     // Navigation items filtered by role
     const menuItems = getFilteredMenuItems(roles);
 
+    const headerStyle = {
+        background: "#ffffff",
+        borderBottom: "1px solid #e4e4e7",
+        height: "70px",
+        lineHeight: "70px",
+        padding: "0 24px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03)"
+    };
+
+    const headerInnerStyle = {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+        maxWidth: "1536px",
+        marginLeft: "auto",
+        marginRight: "auto"
+    };
+
+    const logoContainerStyle = {
+        display: "flex",
+        alignItems: "center",
+        height: "70px",
+        flexShrink: 0
+    };
+
+    const logoImgStyle = {
+        height: "38px",
+        width: "auto",
+        objectFit: "contain",
+        display: "block"
+    };
+
+    const rightContainerStyle = {
+        display: "flex",
+        alignItems: "center",
+        gap: "24px"
+    };
+
+    const menuStyle = {
+        border: "none",
+        background: "transparent",
+        lineHeight: "70px",
+        minWidth: "400px"
+    };
+
+    const rightActionsStyle = {
+        display: "flex",
+        alignItems: "center",
+        gap: "16px"
+    };
+
+    const userProfileStyle = {
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        cursor: "pointer",
+        fontWeight: 500,
+        color: "#18181b",
+        padding: "4px 8px",
+        borderRadius: "6px"
+    };
+
     if (loading) {
         return null;
     }
@@ -130,28 +197,29 @@ const App = () => {
                             />
                         </div>
                     </Header> */}
-                    <Header className={`aavatto-topbar ${isAdmin ? 'is-admin' : ''}`}>
-                        <div className="aavatto-header-inner flex justify-between items-center w-full">
+                    <Header style={headerStyle}>
+                        <div style={headerInnerStyle}>
 
-                            <div className="aavatto-logo">
-                                <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation" />
+                            <div style={logoContainerStyle}>
+                                <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation" style={logoImgStyle} />
                             </div>
 
                             {/* CENTER - MENU */}
-                            <div className="flex items-center">
+                            <div style={rightContainerStyle}>
                                 <Menu
                                     mode="horizontal"
                                     selectedKeys={[currentRoute.split('/')[0]]}
                                     items={menuItems}
                                     onClick={handleMenuClick}
-                                    className="aavatto-menu hidden md:flex"
+                                    style={menuStyle}
+                                    className="hidden md:flex"
                                 />
 
                                 {/* RIGHT - USER */}
-                                <div className="aavatto-right">
+                                <div style={rightActionsStyle}>
                                     {!isAdmin && (
                                         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-                                            <div className="aavatto-user">
+                                            <div style={userProfileStyle}>
                                                 <Avatar
                                                     src={user?.image}
                                                     icon={!user?.image && <UserOutlined />}

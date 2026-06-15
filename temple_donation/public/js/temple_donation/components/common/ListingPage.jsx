@@ -3,7 +3,7 @@ import { Spin, Alert, Modal, message } from "antd";
 import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
 import CommonTable from "./CommonTable";
 import PageHeader from "./PageHeader";
-import { exportToCSV } from "../../utils/exportUtils";
+import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils";
 
 /**
  * ListingPage Component
@@ -115,12 +115,18 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
         window.print(); // Simple print trigger for now
     };
 
-    const handleExport = () => {
+    const handleExport = (format) => {
         if (!data || data.length === 0) {
             message.warning("No data to export");
             return;
         }
-        exportToCSV(data, columns, title);
+        if (format === "csv") {
+            exportToCSV(data, columns, title);
+        } else if (format === "excel") {
+            exportToExcel(data, columns, title);
+        } else if (format === "pdf") {
+            exportToPDF(data, columns, title);
+        }
     };
 
     if (error) {

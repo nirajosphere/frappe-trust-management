@@ -278,6 +278,7 @@ import { DOCTYPE_USER, DOCTYPE_TEMPLE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -347,7 +348,7 @@ const UserForm = ({ id, onBack }) => {
     if (isEdit && error) return <Alert message="Error loading" type="error" />;
 
     return (
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-6xl mx-auto p-4 pb-24">
 
             {/* HEADER */}
             <AddPageHeader
@@ -360,7 +361,7 @@ const UserForm = ({ id, onBack }) => {
 
                 <Form layout="vertical" form={form} onFinish={handleSave}>
 
-                    <Row gutter={[16, 0]}>
+                    <Row gutter={[16, 16]}>
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="email" label="Email" rules={[{ required: true }]}>
@@ -446,23 +447,11 @@ const UserForm = ({ id, onBack }) => {
 
                     </Row>
 
-                    {/* BUTTONS */}
-                    <div className="flex justify-end gap-2 mt-6">
-
-                        <Button onClick={onBack}>
-                            Cancel
-                        </Button>
-
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={creating || updating}
-                            icon={<SaveOutlined />}
-                        >
-                            {isEdit ? "Update" : "Save"}
-                        </Button>
-
-                    </div>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={creating || updating}
+                        isEdit={isEdit}
+                    />
 
                 </Form>
 
