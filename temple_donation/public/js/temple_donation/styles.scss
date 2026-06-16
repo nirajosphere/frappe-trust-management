@@ -555,3 +555,18 @@ body:has(#temple-initial-loader) {
 // .navbar-brand img[src*="frappe-framework-logo"] {
 //   display: none !important;
 // }
+
+/* Force hide Frappe top navbar and page sidebar for non-admin users */
+body.non-admin-user {
+  .navbar,
+  .layout-side-section,
+  .page-side-bar {
+    display: none !important;
+  }
+  
+  .layout-main-section-wrapper,
+  .page-container {
+    padding-top: 0px !important;
+    margin-left: 0px !important;
+  }
+}

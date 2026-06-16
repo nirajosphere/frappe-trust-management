@@ -132654,8 +132654,8 @@ html body {
           const hasCustomRole = userRoles.some(
             (role) => ["Super Admin", "Temple Admin", "Cashier"].includes(role)
           );
-          const isAdministrator = currentUser === "Administrator" || userRoles.includes("Administrator") || userRoles.includes("System Manager");
-          if (hasCustomRole && !isAdministrator) {
+          const isAdministrator = currentUser === "Administrator";
+          if (!isAdministrator) {
             const navbar = document.querySelector(".navbar");
             const sidebar = document.querySelector(".page-side-bar");
             const container = document.querySelector(".page-container");
@@ -132698,7 +132698,7 @@ html body {
       isSuperAdmin: roles.includes("Super Admin"),
       isTempleAdmin: roles.includes("Temple Admin"),
       isCashier: roles.includes("Cashier"),
-      isAdmin: (user == null ? void 0 : user.email) === "Administrator" || roles.includes("Administrator") || roles.includes("System Manager"),
+      isAdmin: (user == null ? void 0 : user.email) === "Administrator",
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
     return /* @__PURE__ */ import_react256.default.createElement(UserContext.Provider, {
@@ -133085,4 +133085,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.2HC6JB3G.js.map
+//# sourceMappingURL=temple_donation.bundle.ACUSRJZO.js.map

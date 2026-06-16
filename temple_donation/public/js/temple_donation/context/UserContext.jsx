@@ -33,10 +33,10 @@ export const UserProvider = ({ children }) => {
                     ['Super Admin', 'Temple Admin', 'Cashier'].includes(role)
                 );
 
-                const isAdministrator = currentUser === 'Administrator' || userRoles.includes('Administrator') || userRoles.includes('System Manager');
+                const isAdministrator = currentUser === 'Administrator';
 
-                if (hasCustomRole && !isAdministrator) {
-                    // Hide Frappe Navbar and Sidebar for custom roles
+                if (!isAdministrator) {
+                    // Hide Frappe Navbar and Sidebar for non-admin users
                     const navbar = document.querySelector('.navbar');
                     const sidebar = document.querySelector('.page-side-bar');
                     const container = document.querySelector('.page-container');
@@ -80,7 +80,7 @@ export const UserProvider = ({ children }) => {
         isSuperAdmin: roles.includes('Super Admin'),
         isTempleAdmin: roles.includes('Temple Admin'),
         isCashier: roles.includes('Cashier'),
-        isAdmin: user?.email === 'Administrator' || roles.includes('Administrator') || roles.includes('System Manager'),
+        isAdmin: user?.email === 'Administrator',
         hasRole: (roleList) => roleList.some(role => roles.includes(role))
     };
 

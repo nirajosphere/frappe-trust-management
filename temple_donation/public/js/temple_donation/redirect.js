@@ -7,7 +7,7 @@ $(document).ready(() => {
 
         const check_and_redirect = () => {
             const roles = frappe.user_roles || [];
-            const isAdmin = roles.includes("System Manager") || frappe.session.user === "Administrator";
+            const isAdmin = frappe.session.user === "Administrator";
 
             if (!isAdmin) {
                 const current_route = frappe.get_route();
@@ -19,6 +19,9 @@ $(document).ready(() => {
                     frappe.set_route("temple-donation");
                 }
 
+                // Add class to body immediately for CSS-based hiding fallback
+                document.body.classList.add("non-admin-user");
+
                 // Force Hide Frappe UI Elements
                 setTimeout(() => {
                     const navbar = document.querySelector(".navbar");
@@ -27,9 +30,6 @@ $(document).ready(() => {
 
                     if (navbar) navbar.style.setProperty('display', 'none', 'important');
                     if (sidebar) sidebar.style.setProperty('display', 'none', 'important');
-
-                    // Add class to body for CSS-based hiding fallback
-                    document.body.classList.add("non-admin-user");
                 }, 100);
             }
         };
