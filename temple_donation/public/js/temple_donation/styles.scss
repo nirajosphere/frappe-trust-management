@@ -797,3 +797,66 @@ body[data-path="login"] {
     display: none !important;
   }
 }
+
+/* Glassmorphism Tags styling */
+.tag-glass {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  padding: 3px 10px !important;
+  font-size: 10px !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid !important;
+  transition: all 0.2s ease !important;
+
+  /* Glass color variants */
+  &.tag-glass-magenta {
+    background-color: rgba(255, 240, 246, 0.55) !important;
+    border-color: rgba(255, 173, 210, 0.55) !important;
+    color: #c41d7f !important;
+  }
+
+  &.tag-glass-geekblue {
+    background-color: rgba(240, 245, 255, 0.55) !important;
+    border-color: rgba(173, 198, 255, 0.55) !important;
+    color: #1d39c4 !important;
+  }
+
+  &.tag-glass-cyan {
+    background-color: rgba(230, 255, 251, 0.55) !important;
+    border-color: rgba(135, 232, 222, 0.55) !important;
+    color: #08979c !important;
+  }
+
+  &.tag-glass-green {
+    background-color: rgba(246, 255, 237, 0.55) !important;
+    border-color: rgba(183, 235, 143, 0.55) !important;
+    color: #389e0d !important;
+  }
+
+  &.tag-glass-lime {
+    background-color: rgba(252, 255, 230, 0.55) !important;
+    border-color: rgba(234, 245, 173, 0.55) !important;
+    color: #7cb305 !important;
+  }
+
+  &.tag-glass-volcano {
+    background-color: rgba(255, 242, 232, 0.55) !important;
+    border-color: rgba(255, 187, 150, 0.55) !important;
+    color: #d4380d !important;
+  }
+
+  &.tag-glass-gray {
+    background-color: rgba(243, 244, 246, 0.55) !important;
+    border-color: rgba(229, 231, 235, 0.55) !important;
+    color: #4b5563 !important;
+  }
+}
+
+

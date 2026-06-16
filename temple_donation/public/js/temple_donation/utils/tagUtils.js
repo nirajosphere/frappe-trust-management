@@ -52,37 +52,42 @@
 export const TAG_CONFIG = {
     "super admin": {
         color: "magenta",
+        glassClass: "tag-glass-magenta"
     },
 
     "temple admin": {
         color: "geekblue",
+        glassClass: "tag-glass-geekblue"
     },
 
     manager: {
         color: "green",
+        glassClass: "tag-glass-green"
     },
 
     cashier: {
         color: "cyan",
+        glassClass: "tag-glass-cyan"
     },
 
     active: {
         color: "lime",
+        glassClass: "tag-glass-green"
     },
 
     inactive: {
         color: "volcano",
+        glassClass: "tag-glass-volcano"
     },
 
     default: {
         color: "default",
+        glassClass: "tag-glass-gray"
     },
 };
 
 export const getTagConfig = (value = "") => {
     const key = String(value).toLowerCase();
-
-    console.log(key, 'key');
 
     const matchedKey =
         Object.keys(TAG_CONFIG)

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, message, Card, Typography, Tag, Popconfirm } from 'antd';
-import { SyncOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
+import { Button, message, Popconfirm } from 'antd';
+import { SyncOutlined } from '@ant-design/icons';
 import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
-
-const { Title, Text } = Typography;
+import CommonTable from '../../components/common/CommonTable';
 
 const OpeningBalance = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
     const fetchData = async () => {
         setLoading(true);
@@ -92,6 +92,8 @@ const OpeningBalance = () => {
             <PageHeader
                 title="User Opening Balance"
                 description="Manage and reset hand-over cash for each user"
+                onSearch={setSearchText}
+                searchPlaceholder="Search users..."
                 extra={[
                     <Button
                         key="refresh"
@@ -104,18 +106,16 @@ const OpeningBalance = () => {
                     </Button>
                 ]}
             />
-            <div className="">
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    rowKey="user_name"
-                    loading={loading}
-                    pagination={false}
-                    className="aavatto-premium-table"
-                />
-            </div>
+            <CommonTable
+                columns={columns}
+                dataSource={data}
+                rowKey="user_name"
+                loading={loading}
+                searchText={searchText}
+            />
         </div>
     );
 };
 
 export default OpeningBalance;
+

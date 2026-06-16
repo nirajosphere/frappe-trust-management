@@ -131441,6 +131441,7 @@ html body {
       dataIndex: "payment_mode",
       key: "payment_mode",
       render: (mode) => /* @__PURE__ */ import_react242.default.createElement(tag_default, {
+        className: `tag-glass tag-glass-${mode === "Cash" ? "green" : "blue"}`,
         color: mode === "Cash" ? "green" : "blue"
       }, mode)
     },
@@ -131984,30 +131985,36 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/utils/tagUtils.js
   var TAG_CONFIG = {
     "super admin": {
-      color: "magenta"
+      color: "magenta",
+      glassClass: "tag-glass-magenta"
     },
     "temple admin": {
-      color: "geekblue"
+      color: "geekblue",
+      glassClass: "tag-glass-geekblue"
     },
     manager: {
-      color: "green"
+      color: "green",
+      glassClass: "tag-glass-green"
     },
     cashier: {
-      color: "cyan"
+      color: "cyan",
+      glassClass: "tag-glass-cyan"
     },
     active: {
-      color: "lime"
+      color: "lime",
+      glassClass: "tag-glass-green"
     },
     inactive: {
-      color: "volcano"
+      color: "volcano",
+      glassClass: "tag-glass-volcano"
     },
     default: {
-      color: "default"
+      color: "default",
+      glassClass: "tag-glass-gray"
     }
   };
   var getTagConfig = (value = "") => {
     const key = String(value).toLowerCase();
-    console.log(key, "key");
     const matchedKey = Object.keys(TAG_CONFIG).sort((a2, b) => b.length - a2.length).find((item) => key.includes(item)) || "default";
     return __spreadProps(__spreadValues({}, TAG_CONFIG[matchedKey]), {
       label: value || "Standard"
@@ -132057,8 +132064,7 @@ html body {
         className: "flex flex-wrap gap-1"
       }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react250.default.createElement(tag_default, {
         key: index2,
-        color: "blue",
-        className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+        className: "tag-glass tag-glass-gray !m-0"
       }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react250.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Global"))
@@ -132071,8 +132077,7 @@ html body {
       render: (text) => {
         const config = getTagConfig(text);
         return /* @__PURE__ */ import_react250.default.createElement(tag_default, {
-          color: config.color,
-          className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       }
     },
@@ -132084,8 +132089,7 @@ html body {
       render: (enabled) => {
         const config = getTagConfig(enabled ? "Active" : "Inactive");
         return /* @__PURE__ */ import_react250.default.createElement(tag_default, {
-          color: config.color,
-          className: "!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       }
     }
@@ -132345,12 +132349,9 @@ html body {
       key: "custom_user_role",
       width: 140,
       render: (text) => {
-        console.log(text, "text");
         const config = getTagConfig(text);
-        console.log(config, "config");
         return /* @__PURE__ */ import_react253.default.createElement(tag_default, {
-          color: config.color,
-          className: "font-bold rounded-full px-3 py-0 text-[10px] border-0"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       }
     },
@@ -132363,7 +132364,7 @@ html body {
         className: "flex flex-wrap gap-1"
       }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react253.default.createElement(tag_default, {
         key: index2,
-        className: "!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+        className: "tag-glass tag-glass-gray !m-0"
       }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react253.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Not Assigned"))
@@ -132384,10 +132385,10 @@ html body {
   ];
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var { Title: Title9, Text: Text23 } = typography_default;
   var OpeningBalance = () => {
     const [loading, setLoading] = (0, import_react254.useState)(false);
     const [data, setData] = (0, import_react254.useState)([]);
+    const [searchText, setSearchText] = (0, import_react254.useState)("");
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -132457,6 +132458,8 @@ html body {
     }, /* @__PURE__ */ import_react254.default.createElement(PageHeader_default, {
       title: "User Opening Balance",
       description: "Manage and reset hand-over cash for each user",
+      onSearch: setSearchText,
+      searchPlaceholder: "Search users...",
       extra: [
         /* @__PURE__ */ import_react254.default.createElement(button_default, {
           key: "refresh",
@@ -132466,16 +132469,13 @@ html body {
           className: "flex items-center gap-2 h-9 px-4 border border-zinc-200 text-zinc-700 font-medium rounded-md bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all"
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react254.default.createElement("div", {
-      className: ""
-    }, /* @__PURE__ */ import_react254.default.createElement(table_default, {
+    }), /* @__PURE__ */ import_react254.default.createElement(CommonTable_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
       loading,
-      pagination: false,
-      className: "aavatto-premium-table"
-    })));
+      searchText
+    }));
   };
   var OpeningBalance_default = OpeningBalance;
 
@@ -132768,7 +132768,7 @@ html body {
         icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof window !== "undefined") {
-            window.location.href = `/update-profile/${user == null ? void 0 : user.email}`;
+            window.location.href = "/me";
           }
         }
       },
@@ -133085,4 +133085,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.EXJMBUXY.js.map
+//# sourceMappingURL=temple_donation.bundle.F4OHSFPP.js.map

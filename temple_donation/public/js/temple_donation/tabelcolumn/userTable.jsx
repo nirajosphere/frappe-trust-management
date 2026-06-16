@@ -65,8 +65,7 @@ export const userColumns = [
                     temples.slice(0, 2).map((t, index) => (
                         <Tag
                             key={index}
-                            color="blue"
-                            className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
+                            className="tag-glass tag-glass-gray !m-0"
                         >
                             {t.temple_name || t.temple}
                         </Tag>
@@ -87,19 +86,8 @@ export const userColumns = [
         width: 140,
         render: (text) => {
             const config = getTagConfig(text);
-
             return (
-                // <Tag
-                //     color={config.color}
-                //     variant={config.variant}
-                //     className="font-semibold rounded-full px-3 py-0 text-[10px] uppercase border-0"
-                // >
-                //     {config.label}
-                // </Tag>
-                <Tag
-                    color={config.color}
-                    className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
-                >
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                     {config.label}
                 </Tag>
             );
@@ -114,10 +102,7 @@ export const userColumns = [
         render: (enabled) => {
             const config = getTagConfig(enabled ? "Active" : "Inactive");
             return (
-                <Tag
-                    color={config.color}
-                    className="!m-0 font-medium rounded-full px-2 py-[2px] text-[10px] border border-gray-200"
-                >
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                     {config.label}
                 </Tag>
             );

@@ -34,7 +34,12 @@ export const donationColumns = [
         dataIndex: 'payment_mode',
         key: 'payment_mode',
         render: (mode) => (
-            <Tag color={mode === 'Cash' ? 'green' : 'blue'}>{mode}</Tag>
+            <Tag
+                className={`tag-glass tag-glass-${mode === 'Cash' ? 'green' : 'blue'}`}
+                color={mode === 'Cash' ? 'green' : 'blue'}
+            >
+                {mode}
+            </Tag>
         ),
     },
     {

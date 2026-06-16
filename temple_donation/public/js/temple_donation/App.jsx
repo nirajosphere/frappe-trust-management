@@ -74,7 +74,7 @@ const App = () => {
             icon: <UserOutlined />,
             onClick: () => {
                 if (typeof window !== 'undefined') {
-                    window.location.href = `/update-profile/${user?.email}`;
+                    window.location.href = '/me';
                 }
             }
         },

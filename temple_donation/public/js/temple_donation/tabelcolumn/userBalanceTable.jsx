@@ -44,11 +44,9 @@ export const userBalanceColumns = [
         key: "custom_user_role",
         width: 140,
         render: (text) => {
-            console.log(text, 'text');
             const config = getTagConfig(text);
-            console.log(config, 'config');
             return (
-                <Tag color={config.color} className="font-bold rounded-full px-3 py-0 text-[10px] border-0">
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                     {config.label}
                 </Tag>
             );
@@ -66,7 +64,7 @@ export const userBalanceColumns = [
                     temples.slice(0, 2).map((t, index) => (
                         <Tag
                             key={index}
-                            className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+                            className="tag-glass tag-glass-gray !m-0"
                         >
                             {t.temple_name || t.temple}
                         </Tag>
