@@ -132115,6 +132115,10 @@ html body {
   var UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = form_default.useForm();
+    const userRoles = typeof frappe !== "undefined" ? frappe.user_roles || [] : [];
+    const isUserAdmin = userRoles.includes("System Manager") || userRoles.includes("Super Admin") || userRoles.includes("Administrator") || userRoles.includes("Temple Admin");
+    const isSelfProfile = isEdit && id === (typeof frappe !== "undefined" ? frappe.session.user : "");
+    const disableAdminFields = isSelfProfile && !isUserAdmin;
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
@@ -132186,7 +132190,9 @@ html body {
       name: "email",
       label: "Email",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, {
+      disabled: isEdit
+    }))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24,
       sm: 12,
       lg: 8
@@ -132217,7 +132223,9 @@ html body {
       name: "custom_user_role",
       label: "User Role",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
+      disabled: disableAdminFields
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Super Admin"
     }, "Super Admin"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Temple Admin"
@@ -132232,7 +132240,8 @@ html body {
       label: "Temples",
       rules: [{ required: true }]
     }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
-      mode: "multiple"
+      mode: "multiple",
+      disabled: disableAdminFields
     }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       key: t2.name,
       value: t2.name
@@ -132252,7 +132261,9 @@ html body {
       name: "enabled",
       label: "Account Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
+      disabled: disableAdminFields
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
     }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
@@ -132264,7 +132275,9 @@ html body {
       name: "custom_status",
       label: "Status",
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react252.default.createElement(select_default, null, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default, {
+      disabled: disableAdminFields
+    }, /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Active"
     }, "Active"), /* @__PURE__ */ import_react252.default.createElement(select_default.Option, {
       value: "Inactive"
@@ -132275,13 +132288,16 @@ html body {
     }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_opening_balance",
       label: "Opening Balance"
-    }, /* @__PURE__ */ import_react252.default.createElement(input_default, null))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react252.default.createElement(input_default, {
+      disabled: disableAdminFields
+    }))), /* @__PURE__ */ import_react252.default.createElement(col_default2, {
       xs: 24
     }, /* @__PURE__ */ import_react252.default.createElement(form_default.Item, {
       name: "custom_internal_notes",
       label: "Notes"
     }, /* @__PURE__ */ import_react252.default.createElement(input_default.TextArea, {
-      rows: 4
+      rows: 4,
+      disabled: disableAdminFields
     })))), /* @__PURE__ */ import_react252.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: creating || updating,
@@ -133069,4 +133085,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.THTT5LXE.js.map
+//# sourceMappingURL=temple_donation.bundle.2HC6JB3G.js.map

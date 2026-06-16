@@ -286,6 +286,11 @@ const UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = Form.useForm();
 
+    const userRoles = typeof frappe !== "undefined" ? (frappe.user_roles || []) : [];
+    const isUserAdmin = userRoles.includes("System Manager") || userRoles.includes("Super Admin") || userRoles.includes("Administrator") || userRoles.includes("Temple Admin");
+    const isSelfProfile = isEdit && id === (typeof frappe !== "undefined" ? frappe.session.user : "");
+    const disableAdminFields = isSelfProfile && !isUserAdmin;
+
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
@@ -365,7 +370,7 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="email" label="Email" rules={[{ required: true }]}>
-                                <Input />
+                                <Input disabled={isEdit} />
                             </Form.Item>
                         </Col>
 
@@ -389,7 +394,7 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="custom_user_role" label="User Role" rules={[{ required: true }]}>
-                                <Select>
+                                <Select disabled={disableAdminFields}>
                                     <Select.Option value="Super Admin">Super Admin</Select.Option>
                                     <Select.Option value="Temple Admin">Temple Admin</Select.Option>
                                     <Select.Option value="Cashier">Cashier</Select.Option>
@@ -399,7 +404,7 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="custom_select_temple" label="Temples" rules={[{ required: true }]}>
-                                <Select mode="multiple">
+                                <Select mode="multiple" disabled={disableAdminFields}>
                                     {temples?.map(t => (
                                         <Select.Option key={t.name} value={t.name}>
                                             {t.temple_name}
@@ -417,7 +422,7 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="enabled" label="Account Status" rules={[{ required: true }]}>
-                                <Select>
+                                <Select disabled={disableAdminFields}>
                                     <Select.Option value="Active">Active</Select.Option>
                                     <Select.Option value="Inactive">Inactive</Select.Option>
                                 </Select>
@@ -426,7 +431,7 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="custom_status" label="Status" rules={[{ required: true }]}>
-                                <Select>
+                                <Select disabled={disableAdminFields}>
                                     <Select.Option value="Active">Active</Select.Option>
                                     <Select.Option value="Inactive">Inactive</Select.Option>
                                 </Select>
@@ -435,13 +440,13 @@ const UserForm = ({ id, onBack }) => {
 
                         <Col xs={24} sm={12} lg={8}>
                             <Form.Item name="custom_opening_balance" label="Opening Balance">
-                                <Input />
+                                <Input disabled={disableAdminFields} />
                             </Form.Item>
                         </Col>
 
                         <Col xs={24}>
                             <Form.Item name="custom_internal_notes" label="Notes">
-                                <Input.TextArea rows={4} />
+                                <Input.TextArea rows={4} disabled={disableAdminFields} />
                             </Form.Item>
                         </Col>
 
