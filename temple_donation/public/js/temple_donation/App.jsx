@@ -73,8 +73,8 @@ const App = () => {
             label: 'My Profile',
             icon: <UserOutlined />,
             onClick: () => {
-                if (typeof frappe !== 'undefined') {
-                    frappe.set_route('UserProfile', user?.email);
+                if (typeof window !== 'undefined') {
+                    window.location.href = `/update-profile/${user?.email}`;
                 }
             }
         },

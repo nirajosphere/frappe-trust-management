@@ -132767,8 +132767,8 @@ html body {
         label: "My Profile",
         icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null),
         onClick: () => {
-          if (typeof frappe !== "undefined") {
-            frappe.set_route("UserProfile", user == null ? void 0 : user.email);
+          if (typeof window !== "undefined") {
+            window.location.href = `/update-profile/${user == null ? void 0 : user.email}`;
           }
         }
       },
@@ -133085,4 +133085,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.ACUSRJZO.js.map
+//# sourceMappingURL=temple_donation.bundle.EXJMBUXY.js.map

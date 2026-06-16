@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block page_content %}
+<script>
+    window.location.href = "/app/temple-donation";
+</script>
+
 {% set current_user_doc = frappe.get_doc("User", frappe.session.user) %}
 
 <div class="my-account-container">

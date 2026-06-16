@@ -39,8 +39,8 @@ app_include_css = [
 # app_include_js = "/assets/temple_donation/js/temple_donation.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/temple_donation/css/temple_donation.css"
-# web_include_js = "/assets/temple_donation/js/temple_donation.js"
+web_include_css = "/assets/temple_donation/js/temple_donation/styles.css"
+web_include_js = "/assets/temple_donation/js/temple_donation/web_custom.js"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "temple_donation/public/scss/website"
@@ -70,9 +70,11 @@ app_include_css = [
 # home_page = "login"
 
 # website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
+role_home_page = {
+	"Temple Admin": "app/temple-donation",
+	"Cashier": "app/temple-donation",
+	"Super Admin": "app/temple-donation"
+}
 
 # Generators
 # ----------
