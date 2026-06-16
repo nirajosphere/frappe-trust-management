@@ -69,15 +69,16 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: #e0e7ff;
+    background: #18181b !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     font-weight: 700;
-    color: #4f46e5;
+    color: #ffffff !important;
     overflow: hidden;
     flex-shrink: 0;
+    border: 2px solid #e4e4e7;
   }
   .profile-avatar img {
     width: 100%;
@@ -184,15 +185,16 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: #e0e7ff;
+    background: #18181b !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     font-weight: 700;
-    color: #4f46e5;
+    color: #ffffff !important;
     overflow: hidden;
     flex-shrink: 0;
+    border: 2px solid #e4e4e7;
   }
   .avatar-upload .avatar-preview img {
     width: 100%;
@@ -201,18 +203,17 @@
   }
   .avatar-upload .btn-upload-avatar {
     padding: 8px 16px;
-    border: 1px solid #ddd;
+    border: none;
     border-radius: 8px;
-    background: #fff;
-    color: #333;
+    background: #18181b !important;
+    color: #ffffff !important;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s;
   }
   .avatar-upload .btn-upload-avatar:hover {
-    background: #f5f5f5;
-    border-color: #ccc;
+    background: #27272a !important;
   }
 
   /* ===== Buttons ===== */
@@ -241,7 +242,7 @@
     padding: 10px 28px;
     border: none;
     border-radius: 8px;
-    background: #4f46e5;
+    background: #18181b !important;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
@@ -250,7 +251,7 @@
     font-family: 'Inter', sans-serif;
   }
   .btn-save:hover {
-    background: #4338ca;
+    background: #27272a !important;
   }
   .btn-save:disabled {
     opacity: 0.5;
@@ -260,17 +261,17 @@
   /* ===== Edit toggle ===== */
   .btn-edit-profile {
     padding: 8px 20px;
-    border: 1px solid #ddd;
+    border: none;
     border-radius: 8px;
-    background: #fff;
-    color: #333;
+    background: #18181b !important;
+    color: #fff;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s;
     font-family: 'Inter', sans-serif;
   }
-  .btn-edit-profile:hover { background: #f5f5f5; }
+  .btn-edit-profile:hover { background: #27272a !important; }
 
   /* ===== Toast ===== */
   .toast-msg {
@@ -332,11 +333,28 @@
   <div id="view-mode">
     <!-- Personal Info Card -->
     <div class="profile-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;">
         <div class="profile-card-title" style="border:none;margin:0;padding:0;">Personal Information</div>
         <button class="btn-edit-profile" onclick="toggleEdit()">Edit</button>
       </div>
       <div style="border-bottom:1px solid #f0f0f0;margin-bottom:24px;"></div>
+      
+      <!-- Profile Picture at the top -->
+      <div class="form-row" style="margin-bottom:24px;">
+        <div class="field-group">
+          <label>Profile Picture</label>
+          <div class="avatar-upload">
+            <div class="avatar-preview">
+              {% if user_doc.user_image %}
+                <img src="{{ user_doc.user_image }}" alt="avatar">
+              {% else %}
+                {{ (user_doc.first_name or "U")[0] | upper }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-row">
         <div class="field-group">
           <label>First Name</label>
@@ -351,20 +369,6 @@
         <div class="field-group">
           <label>Middle Name</label>
           <div class="field-value {{ 'empty' if not user_doc.middle_name }}">{{ user_doc.middle_name or "Not set" }}</div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field-group">
-          <label>Profile Picture</label>
-          <div class="avatar-upload">
-            <div class="avatar-preview">
-              {% if user_doc.user_image %}
-                <img src="{{ user_doc.user_image }}" alt="avatar">
-              {% else %}
-                {{ (user_doc.first_name or "U")[0] | upper }}
-              {% endif %}
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -400,24 +404,13 @@
     <form id="profile-form" onsubmit="saveProfile(event)">
       <!-- Personal Info Card -->
       <div class="profile-card">
-        <div class="profile-card-title">Personal Information</div>
-        <div class="form-row">
-          <div class="field-group">
-            <label>First Name *</label>
-            <input type="text" id="first_name" name="first_name" value="{{ user_doc.first_name or '' }}" required>
-          </div>
-          <div class="field-group">
-            <label>Last Name</label>
-            <input type="text" id="last_name" name="last_name" value="{{ user_doc.last_name or '' }}">
-          </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;">
+          <div class="profile-card-title" style="border:none;margin:0;padding:0;">Personal Information</div>
         </div>
-        <div class="form-row single">
-          <div class="field-group">
-            <label>Middle Name</label>
-            <input type="text" id="middle_name" name="middle_name" value="{{ user_doc.middle_name or '' }}">
-          </div>
-        </div>
-        <div class="form-row">
+        <div style="border-bottom:1px solid #f0f0f0;margin-bottom:24px;"></div>
+        
+        <!-- Profile Picture at the top -->
+        <div class="form-row" style="margin-bottom:24px;">
           <div class="field-group">
             <label>Profile Picture</label>
             <div class="avatar-upload">
@@ -434,11 +427,31 @@
             </div>
           </div>
         </div>
+
+        <div class="form-row">
+          <div class="field-group">
+            <label>First Name *</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user_doc.first_name or '' }}" required>
+          </div>
+          <div class="field-group">
+            <label>Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="{{ user_doc.last_name or '' }}">
+          </div>
+        </div>
+        <div class="form-row single">
+          <div class="field-group">
+            <label>Middle Name</label>
+            <input type="text" id="middle_name" name="middle_name" value="{{ user_doc.middle_name or '' }}">
+          </div>
+        </div>
       </div>
 
       <!-- Contact Card -->
       <div class="profile-card">
-        <div class="profile-card-title">Contact & Preferences</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;">
+          <div class="profile-card-title" style="border:none;margin:0;padding:0;">Contact & Preferences</div>
+        </div>
+        <div style="border-bottom:1px solid #f0f0f0;margin-bottom:24px;"></div>
         <div class="form-row">
           <div class="field-group">
             <label>Phone</label>
@@ -476,6 +489,8 @@
 
 {% block script %}
 <script>
+const userName = {{ user_doc.name | tojson }};
+
 function toggleEdit() {
   var viewMode = document.getElementById('view-mode');
   var editMode = document.getElementById('edit-mode');
@@ -514,7 +529,7 @@ function handleAvatarUpload(input) {
   var formData = new FormData();
   formData.append('file', file);
   formData.append('doctype', 'User');
-  formData.append('docname', frappe.boot.user.name);
+  formData.append('docname', userName);
   formData.append('fieldname', 'user_image');
   formData.append('is_private', '0');
 
@@ -549,7 +564,7 @@ function saveProfile(e) {
     user_image: document.getElementById('user_image').value
   };
 
-  fetch('/api/resource/User/' + encodeURIComponent(frappe.boot.user.name), {
+  fetch('/api/resource/User/' + encodeURIComponent(userName), {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
