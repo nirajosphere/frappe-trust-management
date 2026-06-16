@@ -130020,9 +130020,10 @@ html body {
       title: "Donor ID",
       dataIndex: "name",
       key: "name",
-      width: 150,
+      width: 180,
       render: (text) => /* @__PURE__ */ import_react230.default.createElement(Text11, {
-        copyable: true
+        copyable: true,
+        style: { whiteSpace: "nowrap" }
       }, text)
     },
     {
@@ -131442,6 +131443,12 @@ html body {
       render: (mode) => /* @__PURE__ */ import_react242.default.createElement(tag_default, {
         color: mode === "Cash" ? "green" : "blue"
       }, mode)
+    },
+    {
+      title: "Receiver",
+      dataIndex: "cashier",
+      key: "cashier",
+      render: (text) => /* @__PURE__ */ import_react242.default.createElement(Text17, null, text)
     }
   ];
 
@@ -131453,7 +131460,7 @@ html body {
       description: "View and track all donation transactions",
       columns: donationColumns,
       basePath: "donations",
-      fields: ["name", "donor_name", "temple", "temple.temple_name", "total_amount", "payment_mode"]
+      fields: ["name", "donor_name", "temple", "temple.temple_name", "total_amount", "payment_mode", "cashier"]
     });
   };
   var DonationList_default = DonationList;
@@ -131479,6 +131486,7 @@ html body {
     const [form] = form_default.useForm();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONATION, id);
+    const { data: donationTypesList } = useFrappeGetDocList("Donation Type", { fields: ["name", "donation_type"], limit: 500 });
     (0, import_react245.useEffect)(() => {
       if (isEdit && initialValues) {
         const vals = __spreadValues({}, initialValues);
@@ -131496,6 +131504,11 @@ html body {
           formattedValues.dob = values.dob.format("YYYY-MM-DD");
         if (values.date_of_anniversary && values.date_of_anniversary.format)
           formattedValues.date_of_anniversary = values.date_of_anniversary.format("YYYY-MM-DD");
+        if (formattedValues.donation_items && Array.isArray(formattedValues.donation_items)) {
+          formattedValues.donation_items = formattedValues.donation_items.map((item) => __spreadProps(__spreadValues({}, item), {
+            amount: parseFloat(item.amount) || 0
+          }));
+        }
         await updateDoc(DOCTYPE_DONATION, id, formattedValues);
         if (onBack)
           onBack();
@@ -131681,24 +131694,30 @@ html body {
     }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
       level: 5,
       className: "text-[#a84422] mt-4 mb-2"
-    }, "Donation Items")), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
-      name: "thakorji_thal",
-      label: "Thakorji Thal"
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      type: "number",
-      className: "h-10"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
-      name: "lease_land_receipt",
-      label: "Lease Land receipt"
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      type: "number",
-      className: "h-10"
+    }, "Donation Items")), /* @__PURE__ */ import_react245.default.createElement(form_default.List, {
+      name: "donation_items"
+    }, (fields) => /* @__PURE__ */ import_react245.default.createElement(import_react245.default.Fragment, null, fields.map((_a) => {
+      var _b = _a, { key, name: fieldName } = _b, restField = __objRest(_b, ["key", "name"]);
+      const itemVal = form.getFieldValue(["donation_items", fieldName]);
+      const dTypeRecord = donationTypesList == null ? void 0 : donationTypesList.find((t2) => t2.name === (itemVal == null ? void 0 : itemVal.donation_type));
+      const label = dTypeRecord ? dTypeRecord.donation_type : (itemVal == null ? void 0 : itemVal.donation_type) || "Donation Item";
+      return /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+        xs: 24,
+        sm: 12,
+        key
+      }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
+        name: [fieldName, "amount"],
+        label
+      }), /* @__PURE__ */ import_react245.default.createElement(input_default, {
+        type: "number",
+        className: "h-10"
+      })), /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+        name: [fieldName, "name"],
+        hidden: true
+      }, /* @__PURE__ */ import_react245.default.createElement(input_default, null)), /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+        name: [fieldName, "donation_type"],
+        hidden: true
+      }, /* @__PURE__ */ import_react245.default.createElement(input_default, null)));
     }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
       xs: 24
     }, /* @__PURE__ */ import_react245.default.createElement(typography_default.Title, {
@@ -133050,4 +133069,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.S7COIJQM.js.map
+//# sourceMappingURL=temple_donation.bundle.THTT5LXE.js.map

@@ -11,7 +11,7 @@ const DonationList = () => {
             description="View and track all donation transactions"
             columns={donationColumns}
             basePath="donations"
-            fields={["name", "donor_name", "temple", "temple.temple_name", "total_amount", "payment_mode"]}
+            fields={["name", "donor_name", "temple", "temple.temple_name", "total_amount", "payment_mode", "cashier"]}
         />
     );
 };

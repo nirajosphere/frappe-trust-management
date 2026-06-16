@@ -37,4 +37,10 @@ export const donationColumns = [
             <Tag color={mode === 'Cash' ? 'green' : 'blue'}>{mode}</Tag>
         ),
     },
+    {
+        title: 'Receiver',
+        dataIndex: 'cashier',
+        key: 'cashier',
+        render: (text) => <Text>{text}</Text>,
+    },
 ];

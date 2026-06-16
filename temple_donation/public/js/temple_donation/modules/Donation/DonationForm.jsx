@@ -5,7 +5,7 @@ import {
 import dayjs from "dayjs";
 import { SaveOutlined } from "@ant-design/icons";
 import {
-    useFrappeGetDoc, useFrappeUpdateDoc
+    useFrappeGetDoc, useFrappeUpdateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_DONATION } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
@@ -21,6 +21,7 @@ const DonationForm = ({ id, onBack }) => {
 
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONATION, id);
+    const { data: donationTypesList } = useFrappeGetDocList("Donation Type", { fields: ["name", "donation_type"], limit: 500 });
 
     useEffect(() => {
         if (isEdit && initialValues) {
@@ -36,6 +37,14 @@ const DonationForm = ({ id, onBack }) => {
             const formattedValues = { ...values };
             if (values.dob && values.dob.format) formattedValues.dob = values.dob.format('YYYY-MM-DD');
             if (values.date_of_anniversary && values.date_of_anniversary.format) formattedValues.date_of_anniversary = values.date_of_anniversary.format('YYYY-MM-DD');
+            
+            // Format amounts in donation_items to float/number
+            if (formattedValues.donation_items && Array.isArray(formattedValues.donation_items)) {
+                formattedValues.donation_items = formattedValues.donation_items.map(item => ({
+                    ...item,
+                    amount: parseFloat(item.amount) || 0
+                }));
+            }
             
             await updateDoc(DOCTYPE_DONATION, id, formattedValues);
             if (onBack) onBack();
@@ -160,16 +169,31 @@ const DonationForm = ({ id, onBack }) => {
                         <Typography.Title level={5} className="text-[#a84422] mt-4 mb-2">Donation Items</Typography.Title>
                     </Col>
                     
-                    <Col xs={24} sm={12}>
-                        <Form.Item name="thakorji_thal" label="Thakorji Thal">
-                            <Input type="number" className="h-10" />
-                        </Form.Item>
-                    </Col>
-                    <Col xs={24} sm={12}>
-                        <Form.Item name="lease_land_receipt" label="Lease Land receipt">
-                            <Input type="number" className="h-10" />
-                        </Form.Item>
-                    </Col>
+                    <Form.List name="donation_items">
+                        {(fields) => (
+                            <>
+                                {fields.map(({ key, name: fieldName, ...restField }) => {
+                                    const itemVal = form.getFieldValue(["donation_items", fieldName]);
+                                    const dTypeRecord = donationTypesList?.find(t => t.name === itemVal?.donation_type);
+                                    const label = dTypeRecord ? dTypeRecord.donation_type : (itemVal?.donation_type || "Donation Item");
+
+                                    return (
+                                        <Col xs={24} sm={12} key={key}>
+                                            <Form.Item
+                                                {...restField}
+                                                name={[fieldName, 'amount']}
+                                                label={label}
+                                            >
+                                                <Input type="number" className="h-10" />
+                                            </Form.Item>
+                                            <Form.Item name={[fieldName, 'name']} hidden><Input /></Form.Item>
+                                            <Form.Item name={[fieldName, 'donation_type']} hidden><Input /></Form.Item>
+                                        </Col>
+                                    );
+                                })}
+                            </>
+                        )}
+                    </Form.List>
 
                     {/* Donation Payments */}
                     <Col xs={24}>

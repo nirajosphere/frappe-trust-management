@@ -8,8 +8,8 @@ export const donorColumns = [
         title: 'Donor ID',
         dataIndex: 'name',
         key: 'name',
-        width: 150,
-        render: (text) => <Text copyable>{text}</Text>
+        width: 180,
+        render: (text) => <Text copyable style={{ whiteSpace: "nowrap" }}>{text}</Text>
     },
     {
         title: 'Name',
