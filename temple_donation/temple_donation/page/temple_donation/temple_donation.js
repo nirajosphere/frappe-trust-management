@@ -5,12 +5,19 @@ frappe.pages["temple-donation"].on_page_load = function (wrapper) {
     single_column: true,
   });
 
+  // Hide the standard Frappe page header to prevent double headers
+  if (page && page.header) page.header.hide();
+  $(wrapper).find('.page-head').hide();
+
   // Load scoped CSS
   const premium_css = "/assets/temple_donation/js/temple_donation/styles.css";
   frappe.require(premium_css);
 };
 
 frappe.pages["temple-donation"].on_page_show = function (wrapper) {
+  // Hide standard header on show as well
+  $(wrapper).find('.page-head').hide();
+
   let $parent = $(wrapper).find(".layout-main-section");
 
   if ($parent.find("#react-root").length === 0) {

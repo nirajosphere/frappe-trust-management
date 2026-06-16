@@ -18,7 +18,16 @@ const { Header, Content } = Layout;
 const App = () => {
     const [currentRoute, setCurrentRoute] = useState("dashboard");
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
     const { user, roles, logout, isAdmin, loading } = useUser();
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const isMobile = windowWidth < 768;
 
     useEffect(() => {
         if (!loading) {
@@ -204,20 +213,42 @@ const App = () => {
                                 <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation" style={logoImgStyle} />
                             </div>
 
-                            {/* CENTER - MENU */}
+                            {/* CENTER & RIGHT - MENU */}
                             <div style={rightContainerStyle}>
-                                <Menu
-                                    mode="horizontal"
-                                    selectedKeys={[currentRoute.split('/')[0]]}
-                                    items={menuItems}
-                                    onClick={handleMenuClick}
-                                    style={menuStyle}
-                                    className="hidden md:flex"
-                                />
+                                {!isMobile && (
+                                    <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                        {menuItems.map(item => {
+                                            const isActive = currentRoute.split('/')[0] === item.key;
+                                            return (
+                                                <button
+                                                    key={item.key}
+                                                    onClick={() => handleMenuClick({ key: item.key })}
+                                                    style={{
+                                                        background: 'none',
+                                                        border: 'none',
+                                                        borderBottom: isActive ? '3px solid #ca8a04' : '3px solid transparent',
+                                                        padding: '8px 4px',
+                                                        cursor: 'pointer',
+                                                        fontSize: '14px',
+                                                        fontWeight: '600',
+                                                        color: isActive ? '#18181b' : '#71717a',
+                                                        transition: 'all 0.2s',
+                                                        outline: 'none',
+                                                        height: '70px',
+                                                        display: 'flex',
+                                                        alignItems: 'center'
+                                                    }}
+                                                >
+                                                    {item.label}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                )}
 
-                                {/* RIGHT - USER */}
+                                {/* RIGHT ACTIONS - USER / MOBILE */}
                                 <div style={rightActionsStyle}>
-                                    {!isAdmin && (
+                                    {!isAdmin && !isMobile && (
                                         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                                             <div style={userProfileStyle}>
                                                 <Avatar
@@ -229,12 +260,24 @@ const App = () => {
                                         </Dropdown>
                                     )}
 
-                                    {/* Mobile button */}
-                                    <Button
-                                        className="md:hidden"
-                                        icon={<MenuOutlined />}
-                                        onClick={() => setMobileOpen(true)}
-                                    />
+                                    {/* Mobile Hamburger Button */}
+                                    {isMobile && (
+                                        <Button
+                                            icon={<MenuOutlined />}
+                                            onClick={() => setMobileOpen(true)}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                border: '1px solid #e4e4e7',
+                                                background: '#ffffff',
+                                                color: '#18181b',
+                                                borderRadius: '6px',
+                                                width: '40px',
+                                                height: '40px'
+                                            }}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -249,29 +292,69 @@ const App = () => {
                         width={280}
                         bodyStyle={{ padding: 0 }}
                     >
-                        <div className="flex flex-col h-full">
-                            <Menu
-                                mode="inline"
-                                selectedKeys={[currentRoute.split('/')[0]]}
-                                items={menuItems}
-                                onClick={handleMenuClick}
-                                className="border-none"
-                            />
+                        <div className="flex flex-col h-full" style={{ padding: '20px 0' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                {menuItems.map(item => {
+                                    const isActive = currentRoute.split('/')[0] === item.key;
+                                    return (
+                                        <button
+                                            key={item.key}
+                                            onClick={() => {
+                                                handleMenuClick({ key: item.key });
+                                                setMobileOpen(false);
+                                            }}
+                                            style={{
+                                                background: isActive ? '#f4f4f5' : 'transparent',
+                                                border: 'none',
+                                                borderLeft: isActive ? '4px solid #ca8a04' : '4px solid transparent',
+                                                padding: '12px 24px',
+                                                cursor: 'pointer',
+                                                fontSize: '16px',
+                                                fontWeight: '600',
+                                                color: isActive ? '#18181b' : '#52525b',
+                                                textAlign: 'left',
+                                                transition: 'all 0.2s',
+                                                outline: 'none',
+                                                width: '100%'
+                                            }}
+                                        >
+                                            {item.label}
+                                        </button>
+                                    );
+                                })}
+                            </div>
 
                             {!isAdmin && (
                                 <div className="mt-auto p-4 border-t border-zinc-100">
-                                    <div className="flex items-center gap-3 px-3 py-2">
+                                    <div className="flex items-center gap-3 px-3 py-2 mb-3">
                                         <Avatar src={user?.image} icon={<UserOutlined />} />
                                         <div className="flex flex-col">
                                             <span className="text-sm font-bold text-zinc-900">{user?.name}</span>
                                             <span className="text-[10px] text-zinc-400 uppercase tracking-widest">{roles?.[0]}</span>
                                         </div>
                                     </div>
-                                    <Menu
-                                        mode="inline"
-                                        items={userMenuItems}
-                                        className="border-none mt-2"
-                                    />
+                                    <button
+                                        onClick={logout}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '8px',
+                                            width: '100%',
+                                            background: 'none',
+                                            border: 'none',
+                                            padding: '10px 12px',
+                                            borderRadius: '6px',
+                                            cursor: 'pointer',
+                                            color: '#ef4444',
+                                            fontWeight: '600',
+                                            fontSize: '14px',
+                                            textAlign: 'left',
+                                            outline: 'none'
+                                        }}
+                                    >
+                                        <LogoutOutlined />
+                                        <span>Logout</span>
+                                    </button>
                                 </div>
                             )}
                         </div>

@@ -132686,7 +132686,14 @@ html body {
   var App = () => {
     const [currentRoute, setCurrentRoute] = (0, import_react257.useState)("dashboard");
     const [mobileOpen, setMobileOpen] = (0, import_react257.useState)(false);
+    const [windowWidth, setWindowWidth] = (0, import_react257.useState)(typeof window !== "undefined" ? window.innerWidth : 1024);
     const { user, roles, logout, isAdmin, loading } = useUser();
+    (0, import_react257.useEffect)(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    const isMobile2 = windowWidth < 768;
     (0, import_react257.useEffect)(() => {
       if (!loading) {
         const initLoader = document.getElementById("temple-initial-loader");
@@ -132822,16 +132829,32 @@ html body {
       style: logoImgStyle
     })), /* @__PURE__ */ import_react257.default.createElement("div", {
       style: rightContainerStyle
-    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
-      mode: "horizontal",
-      selectedKeys: [currentRoute.split("/")[0]],
-      items: menuItems,
-      onClick: handleMenuClick,
-      style: menuStyle,
-      className: "hidden md:flex"
-    }), /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, !isMobile2 && /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: { display: "flex", gap: "24px", alignItems: "center" }
+    }, menuItems.map((item) => {
+      const isActive2 = currentRoute.split("/")[0] === item.key;
+      return /* @__PURE__ */ import_react257.default.createElement("button", {
+        key: item.key,
+        onClick: () => handleMenuClick({ key: item.key }),
+        style: {
+          background: "none",
+          border: "none",
+          borderBottom: isActive2 ? "3px solid #ca8a04" : "3px solid transparent",
+          padding: "8px 4px",
+          cursor: "pointer",
+          fontSize: "14px",
+          fontWeight: "600",
+          color: isActive2 ? "#18181b" : "#71717a",
+          transition: "all 0.2s",
+          outline: "none",
+          height: "70px",
+          display: "flex",
+          alignItems: "center"
+        }
+      }, item.label);
+    })), /* @__PURE__ */ import_react257.default.createElement("div", {
       style: rightActionsStyle
-    }, !isAdmin && /* @__PURE__ */ import_react257.default.createElement(dropdown_default3, {
+    }, !isAdmin && !isMobile2 && /* @__PURE__ */ import_react257.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight"
     }, /* @__PURE__ */ import_react257.default.createElement("div", {
@@ -132839,10 +132862,20 @@ html body {
     }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
       icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react257.default.createElement("span", null, user == null ? void 0 : user.name))), /* @__PURE__ */ import_react257.default.createElement(button_default, {
-      className: "md:hidden",
+    }), /* @__PURE__ */ import_react257.default.createElement("span", null, user == null ? void 0 : user.name))), isMobile2 && /* @__PURE__ */ import_react257.default.createElement(button_default, {
       icon: /* @__PURE__ */ import_react257.default.createElement(MenuOutlined_default2, null),
-      onClick: () => setMobileOpen(true)
+      onClick: () => setMobileOpen(true),
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        border: "1px solid #e4e4e7",
+        background: "#ffffff",
+        color: "#18181b",
+        borderRadius: "6px",
+        width: "40px",
+        height: "40px"
+      }
     }))))), /* @__PURE__ */ import_react257.default.createElement(drawer_default, {
       title: /* @__PURE__ */ import_react257.default.createElement("img", {
         src: "/assets/temple_donation/img/logo.png",
@@ -132855,17 +132888,37 @@ html body {
       width: 280,
       bodyStyle: { padding: 0 }
     }, /* @__PURE__ */ import_react257.default.createElement("div", {
-      className: "flex flex-col h-full"
-    }, /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
-      mode: "inline",
-      selectedKeys: [currentRoute.split("/")[0]],
-      items: menuItems,
-      onClick: handleMenuClick,
-      className: "border-none"
-    }), !isAdmin && /* @__PURE__ */ import_react257.default.createElement("div", {
+      className: "flex flex-col h-full",
+      style: { padding: "20px 0" }
+    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: "8px" }
+    }, menuItems.map((item) => {
+      const isActive2 = currentRoute.split("/")[0] === item.key;
+      return /* @__PURE__ */ import_react257.default.createElement("button", {
+        key: item.key,
+        onClick: () => {
+          handleMenuClick({ key: item.key });
+          setMobileOpen(false);
+        },
+        style: {
+          background: isActive2 ? "#f4f4f5" : "transparent",
+          border: "none",
+          borderLeft: isActive2 ? "4px solid #ca8a04" : "4px solid transparent",
+          padding: "12px 24px",
+          cursor: "pointer",
+          fontSize: "16px",
+          fontWeight: "600",
+          color: isActive2 ? "#18181b" : "#52525b",
+          textAlign: "left",
+          transition: "all 0.2s",
+          outline: "none",
+          width: "100%"
+        }
+      }, item.label);
+    })), !isAdmin && /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "mt-auto p-4 border-t border-zinc-100"
     }, /* @__PURE__ */ import_react257.default.createElement("div", {
-      className: "flex items-center gap-3 px-3 py-2"
+      className: "flex items-center gap-3 px-3 py-2 mb-3"
     }, /* @__PURE__ */ import_react257.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
       icon: /* @__PURE__ */ import_react257.default.createElement(UserOutlined_default2, null)
@@ -132875,11 +132928,25 @@ html body {
       className: "text-sm font-bold text-zinc-900"
     }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react257.default.createElement("span", {
       className: "text-[10px] text-zinc-400 uppercase tracking-widest"
-    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react257.default.createElement(menu_default2, {
-      mode: "inline",
-      items: userMenuItems,
-      className: "border-none mt-2"
-    })))), /* @__PURE__ */ import_react257.default.createElement(Content3, {
+    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react257.default.createElement("button", {
+      onClick: logout,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        width: "100%",
+        background: "none",
+        border: "none",
+        padding: "10px 12px",
+        borderRadius: "6px",
+        cursor: "pointer",
+        color: "#ef4444",
+        fontWeight: "600",
+        fontSize: "14px",
+        textAlign: "left",
+        outline: "none"
+      }
+    }, /* @__PURE__ */ import_react257.default.createElement(LogoutOutlined_default2, null), /* @__PURE__ */ import_react257.default.createElement("span", null, "Logout"))))), /* @__PURE__ */ import_react257.default.createElement(Content3, {
       className: "bg-transparent py-8"
     }, /* @__PURE__ */ import_react257.default.createElement("div", {
       className: "aavatto-content-wrapper"
@@ -132983,4 +133050,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.E2NWTVCV.js.map
+//# sourceMappingURL=temple_donation.bundle.S7COIJQM.js.map
