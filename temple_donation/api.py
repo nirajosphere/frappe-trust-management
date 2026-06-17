@@ -365,3 +365,101 @@ def get_children(doctype, parent_names, parenttype, parentfield):
                 d['temple_name'] = temple_map[d.temple]
 
     return data
+
+@frappe.whitelist()
+def save_filter_view(view_name, reference_doctype, filters_json):
+    """
+    Saves or updates a user-specific filter view.
+    """
+    user = frappe.session.user
+    
+    # Check if view already exists for this user and doctype
+    existing = frappe.db.exists("Saved Filter View", {
+        "view_name": view_name,
+        "reference_doctype": reference_doctype,
+        "user": user
+    })
+    
+    if existing:
+        doc = frappe.get_doc("Saved Filter View", existing)
+        doc.filters_json = filters_json
+        doc.save(ignore_permissions=True)
+    else:
+        doc = frappe.get_doc({
+            "doctype": "Saved Filter View",
+            "view_name": view_name,
+            "reference_doctype": reference_doctype,
+            "user": user,
+            "filters_json": filters_json
+        })
+        doc.insert(ignore_permissions=True)
+        
+    frappe.db.commit()
+    return doc.name
+
+@frappe.whitelist()
+def delete_filter_view(view_name, reference_doctype):
+    """
+    Deletes a specific user filter view.
+    """
+    user = frappe.session.user
+    existing = frappe.db.exists("Saved Filter View", {
+        "view_name": view_name,
+        "reference_doctype": reference_doctype,
+        "user": user
+    })
+    
+    if existing:
+        frappe.delete_doc("Saved Filter View", existing, ignore_permissions=True)
+        frappe.db.commit()
+        return True
+    return False
+
+@frappe.whitelist()
+def get_filter_views(reference_doctype):
+    """
+    Fetches all saved views for the current user and doctype.
+    """
+    user = frappe.session.user
+    return frappe.get_all(
+        "Saved Filter View",
+        filters={
+            "reference_doctype": reference_doctype,
+            "user": user
+        },
+        fields=["view_name", "filters_json"]
+    )
+
+@frappe.whitelist()
+def update_filter_view(old_view_name, new_view_name, reference_doctype, filters_json=None):
+    """
+    Updates a user-specific filter view (renames and/or updates filters).
+    """
+    user = frappe.session.user
+    existing = frappe.db.exists("Saved Filter View", {
+        "view_name": old_view_name,
+        "reference_doctype": reference_doctype,
+        "user": user
+    })
+    
+    if not existing:
+        frappe.throw(_("View not found"))
+        
+    if old_view_name != new_view_name:
+        conflict = frappe.db.exists("Saved Filter View", {
+            "view_name": new_view_name,
+            "reference_doctype": reference_doctype,
+            "user": user
+        })
+        if conflict:
+            frappe.throw(_("A view named '{0}' already exists").format(new_view_name))
+            
+    doc = frappe.get_doc("Saved Filter View", existing)
+    doc.view_name = new_view_name
+    if filters_json:
+        doc.filters_json = filters_json
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
+    return True
+
+

@@ -23,7 +23,11 @@ const PageHeader = ({
     searchPlaceholder = "Search...",
     extra, // Used for custom action buttons (Print, Edit, etc)
     columns, // Passed from ListingPage for dynamic filter field list
-    onApplyFilters // Callback for dynamic filters: (filtersArray) => void
+    doctype, // The database DocType name
+    appliedFilters,
+    onApplyFilters, // Callback for dynamic filters: (filtersArray) => void
+    savedViews,
+    onRefreshViews
 }) => {
     // Filter export dropdown options based on the exportOptions prop
     const defaultItems = [
@@ -78,7 +82,11 @@ const PageHeader = ({
                     {onApplyFilters && (
                         <FilterPopover 
                             columns={columns} 
-                            onApplyFilters={onApplyFilters} 
+                            doctype={doctype}
+                            appliedFilters={appliedFilters}
+                            onApplyFilters={onApplyFilters}
+                            savedViews={savedViews}
+                            onRefreshViews={onRefreshViews}
                         />
                     )}
 

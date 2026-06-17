@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Spin, Alert, Modal, message } from "antd";
+import { Spin, Alert, Modal, message, Input, Select, Button, Space } from "antd";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
 import CommonTable from "./CommonTable";
 import PageHeader from "./PageHeader";
+import SavedViewsBar from "./SavedViewsBar";
 import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils";
 
 /**
@@ -36,7 +38,98 @@ const ListingPage = ({
     addLabel,
     allowFilter = true
 }) => {
-    const [activeFilters, setActiveFilters] = useState([]);
+    const [appliedFilters, setAppliedFilters] = useState([]);
+    const [savedViews, setSavedViews] = useState([]);
+    const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
+    const [renamingView, setRenamingView] = useState(null);
+    const [renameValue, setRenameValue] = useState("");
+    const [editModalFilters, setEditModalFilters] = useState([]);
+
+    const addEditFilterRow = () => {
+        setEditModalFilters([...editModalFilters, { field: undefined, operator: undefined, value: "" }]);
+    };
+
+    const removeEditFilterRow = (index) => {
+        const newRows = [...editModalFilters];
+        newRows.splice(index, 1);
+        setEditModalFilters(newRows);
+    };
+
+    const updateEditFilterRow = (index, key, val) => {
+        const newRows = [...editModalFilters];
+        if (key === "field") {
+            newRows[index] = {
+                field: val,
+                operator: undefined,
+                value: ""
+            };
+        } else {
+            newRows[index] = { ...newRows[index], [key]: val };
+        }
+        setEditModalFilters(newRows);
+    };
+
+    const handleRenameView = () => {
+        if (!renameValue.trim() || !doctype || !renamingView) {
+            message.warning("Please enter a valid view name");
+            return;
+        }
+
+        const validRows = editModalFilters.filter(row => row.field && row.operator && row.value !== "");
+        if (validRows.length === 0) {
+            message.warning("At least one valid filter row is required");
+            return;
+        }
+
+        if (typeof frappe !== "undefined") {
+            frappe.call({
+                method: "temple_donation.api.update_filter_view",
+                args: {
+                    old_view_name: renamingView.name,
+                    new_view_name: renameValue.trim(),
+                    reference_doctype: doctype,
+                    filters_json: JSON.stringify(validRows)
+                },
+                callback: (r) => {
+                    message.success("View updated successfully!");
+                    fetchSavedViews();
+                    setIsRenameModalOpen(false);
+                    setRenamingView(null);
+                    setRenameValue("");
+                    setEditModalFilters([]);
+                }
+            });
+        }
+    };
+
+    const fetchSavedViews = () => {
+        if (!doctype || typeof frappe === "undefined") return;
+        frappe.call({
+            method: "temple_donation.api.get_filter_views",
+            args: { reference_doctype: doctype },
+            callback: (r) => {
+                if (r.message) {
+                    setSavedViews(r.message.map(item => ({
+                        name: item.view_name,
+                        rawRows: JSON.parse(item.filters_json),
+                        filters: JSON.parse(item.filters_json).map(row => {
+                            let val = row.value;
+                            if (row.operator === "like" || row.operator === "not like") {
+                                val = `%${val}%`;
+                            }
+                            return [row.field, row.operator, val];
+                        })
+                    })));
+                } else {
+                    setSavedViews([]);
+                }
+            }
+        });
+    };
+
+    useEffect(() => {
+        fetchSavedViews();
+    }, [doctype]);
 
     // Merge default filters prop with runtime active dynamic filters
     const combinedFilters = React.useMemo(() => {
@@ -52,11 +145,21 @@ const ListingPage = ({
             });
         };
 
+        const activeFiltersMapped = appliedFilters
+            .filter(row => row.field && row.operator && row.value !== undefined && row.value !== "")
+            .map(row => {
+                let val = row.value;
+                if (row.operator === "like" || row.operator === "not like") {
+                    val = `%${val}%`;
+                }
+                return [row.field, row.operator, val];
+            });
+
         return [
             ...normalizeFilters(filters),
-            ...activeFilters
+            ...activeFiltersMapped
         ];
-    }, [filters, activeFilters]);
+    }, [filters, appliedFilters]);
 
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
@@ -196,8 +299,51 @@ const ListingPage = ({
                 allowExport={allowExport}
                 exportOptions={exportOptions}
                 columns={columns}
-                onApplyFilters={allowFilter ? setActiveFilters : undefined}
+                doctype={doctype}
+                appliedFilters={appliedFilters}
+                onApplyFilters={allowFilter ? setAppliedFilters : undefined}
+                savedViews={savedViews}
+                onRefreshViews={fetchSavedViews}
             />
+
+            {allowFilter && savedViews.length > 0 && (
+                <SavedViewsBar
+                    views={savedViews}
+                    appliedFilters={appliedFilters}
+                    onSelectView={setAppliedFilters}
+                    onEditView={(view) => {
+                        setRenamingView(view);
+                        setRenameValue(view.name);
+                        setEditModalFilters(JSON.parse(JSON.stringify(view.rawRows || [])));
+                        setIsRenameModalOpen(true);
+                    }}
+                    onDeleteView={(viewName) => {
+                        Modal.confirm({
+                            title: 'Delete Filter View',
+                            content: `Are you sure you want to delete the saved view "${viewName}"?`,
+                            okText: 'Delete',
+                            okType: 'danger',
+                            cancelText: 'Cancel',
+                            okButtonProps: { style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' } },
+                            onOk() {
+                                if (typeof frappe !== "undefined") {
+                                    frappe.call({
+                                        method: "temple_donation.api.delete_filter_view",
+                                        args: {
+                                            view_name: viewName,
+                                            reference_doctype: doctype
+                                        },
+                                        callback: () => {
+                                            message.success("View deleted!");
+                                            fetchSavedViews();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }}
+                />
+            )}
             <CommonTable
                 columns={columns || []}
                 dataSource={enrichedData}
@@ -212,6 +358,159 @@ const ListingPage = ({
                 showDelete={allowDelete}
                 showPrint={allowPrint}
             />
+
+            <Modal
+                title="Edit Saved View"
+                open={isRenameModalOpen}
+                onOk={handleRenameView}
+                onCancel={() => {
+                    setIsRenameModalOpen(false);
+                    setRenamingView(null);
+                    setRenameValue("");
+                    setEditModalFilters([]);
+                }}
+                okText="Save Changes"
+                cancelText="Cancel"
+                okButtonProps={{ style: { backgroundColor: "#000", borderColor: "#000" } }}
+                width={680}
+                destroyOnClose
+            >
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: "12px" }}>
+                    <div>
+                        <div style={{ fontSize: "12px", fontWeight: "700", color: "#8c8c8c", textTransform: "uppercase", marginBottom: "8px", letterSpacing: "0.5px" }}>
+                            View Name:
+                        </div>
+                        <Input
+                            placeholder="e.g. Active Cashiers..."
+                            value={renameValue}
+                            onChange={(e) => setRenameValue(e.target.value)}
+                            style={{ height: "40px" }}
+                            className="font-medium"
+                            autoFocus
+                        />
+                    </div>
+
+                    <div>
+                        <div style={{ fontSize: "12px", fontWeight: "700", color: "#8c8c8c", textTransform: "uppercase", marginBottom: "8px", letterSpacing: "0.5px" }}>
+                            Filters in this View:
+                        </div>
+                        
+                        <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxHeight: "250px", overflowY: "auto", paddingRight: "4px" }}>
+                            {editModalFilters.map((row, index) => {
+                                const filterableColumns = columns
+                                    ? columns.filter(col => col.filterable !== false && col.dataIndex && col.title && typeof col.title === "string")
+                                    : [];
+                                const selectedCol = filterableColumns.find(c => c.dataIndex === row.field);
+                                let relationOptions = [
+                                    { label: "Equals (=)", value: "=" },
+                                    { label: "Not Equals (!=)", value: "!=" }
+                                ];
+
+                                if (selectedCol) {
+                                    if (selectedCol.filterType !== "select") {
+                                        relationOptions.push(
+                                            { label: "Like", value: "like" },
+                                            { label: "Not Like", value: "not like" }
+                                        );
+                                    }
+
+                                    if (selectedCol.filterType === "number") {
+                                        relationOptions.push(
+                                            { label: "Greater Than (>)", value: ">" },
+                                            { label: "Less Than (<)", value: "<" },
+                                            { label: "Greater or Equal (>=)", value: ">=" },
+                                            { label: "Less or Equal (<=)", value: "<=" }
+                                        );
+                                    }
+
+                                    if (selectedCol.filterOperators) {
+                                        const allRelations = {
+                                            "=": { label: "Equals (=)", value: "=" },
+                                            "!=": { label: "Not Equals (!=)", value: "!=" },
+                                            "like": { label: "Like", value: "like" },
+                                            "not like": { label: "Not Like", value: "not like" },
+                                            ">": { label: "Greater Than (>)", value: ">" },
+                                            "<": { label: "Less Than (<)", value: "<" },
+                                            ">=": { label: "Greater or Equal (>=)", value: ">=" },
+                                            "<=": { label: "Less or Equal (<=)", value: "<=" },
+                                            "in": { label: "In", value: "in" },
+                                            "not in": { label: "Not In", value: "not in" }
+                                        };
+                                        relationOptions = selectedCol.filterOperators.map(op => allRelations[op] || { label: op, value: op });
+                                    }
+                                }
+
+                                return (
+                                    <div key={index} style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%" }}>
+                                        <Select
+                                            placeholder="Filter field"
+                                            value={row.field}
+                                            onChange={(val) => updateEditFilterRow(index, "field", val)}
+                                            style={{ width: "180px" }}
+                                            className="h-9 font-medium"
+                                            options={filterableColumns.map(col => ({
+                                                label: col.title,
+                                                value: col.dataIndex
+                                            }))}
+                                        />
+
+                                        <Select
+                                            placeholder="Filter relation"
+                                            value={row.operator}
+                                            onChange={(val) => updateEditFilterRow(index, "operator", val)}
+                                            style={{ width: "140px" }}
+                                            className="h-9 font-medium"
+                                            disabled={!row.field}
+                                            options={row.field ? relationOptions : []}
+                                        />
+
+                                        {selectedCol?.filterType === "select" ? (
+                                            <Select
+                                                placeholder="Select value"
+                                                value={row.value || undefined}
+                                                onChange={(val) => updateEditFilterRow(index, "value", val)}
+                                                style={{ flex: 1 }}
+                                                className="h-9 font-medium"
+                                                disabled={!row.operator}
+                                                options={selectedCol.filterOptions}
+                                            />
+                                        ) : (
+                                            <Input
+                                                placeholder="Value"
+                                                type={selectedCol?.filterType === "number" ? "number" : "text"}
+                                                value={row.value}
+                                                onChange={(e) => updateEditFilterRow(index, "value", e.target.value)}
+                                                style={{ flex: 1 }}
+                                                className="h-9 font-medium"
+                                                disabled={!row.operator}
+                                            />
+                                        )}
+
+                                        <Button
+                                            type="text"
+                                            danger
+                                            icon={<DeleteOutlined />}
+                                            onClick={() => removeEditFilterRow(index)}
+                                            style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div style={{ marginTop: "12px" }}>
+                            <Button
+                                type="dashed"
+                                icon={<PlusOutlined />}
+                                onClick={addEditFilterRow}
+                                style={{ borderColor: "#d9d9d9", fontWeight: "bold" }}
+                            >
+                                Add a Filter
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 };
