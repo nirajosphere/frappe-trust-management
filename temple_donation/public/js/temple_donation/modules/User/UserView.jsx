@@ -1,11 +1,10 @@
 import React from "react";
-import { Row, Col, Alert, Tag, Table } from "antd";
+import { Row, Col, Alert, Tag } from "antd";
 import { ArrowLeftOutlined, PrinterOutlined, EditOutlined } from "@ant-design/icons";
 import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
-import { DOCTYPE_DONATION } from "../../config/constants";
-import { donationFormFields } from "../../formfield/donationFormFields";
+import { DOCTYPE_USER } from "../../config/constants";
+import { userFormFields } from "../../formfield/userFormFields";
 import PageLoader from "../../components/common/PageLoader";
-import DonationPrint from "../../components/Donation/DonationPrint";
 import { getTagConfig } from "../../utils/tagUtils";
 
 /* ─────────────────────────────────────────
@@ -23,19 +22,16 @@ const C = {
   inkXLight:   "#CBD5E1",        // empty state
   black:       "#0F172A",        // main dark accents
   blackHover:  "#1E293B",
-  green:       "#16A34A",
-  greenBg:     "#F0FDF4",
-  greenBorder: "#BBF7D0",
 };
 
 /* ─────────────────────────────────────────
    FONTS / OVERRIDES
    ───────────────────────────────────────── */
 const fontStyle = `
-  .donation-view-root, 
-  .donation-view-root *, 
-  .donation-view-root .ant-typography, 
-  .donation-view-root .ant-tag {
+  .user-view-root, 
+  .user-view-root *, 
+  .user-view-root .ant-typography, 
+  .user-view-root .ant-tag {
     font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   }
 `;
@@ -105,7 +101,7 @@ function SectionCard({ title, right, children }) {
     }}>
       {/* head */}
       <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
+        display: "flex", alignItems: "center", justifySpace: "between", justifyContent: "space-between",
         padding: "16px 24px",
         background: "#FAFBFD",
         borderBottom: `1px solid ${C.border}`,
@@ -123,13 +119,10 @@ function SectionCard({ title, right, children }) {
   );
 }
 
-const DonationView = ({ id, onBack, onEdit }) => {
-  const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONATION, id);
+const UserView = ({ id, onBack, onEdit }) => {
+  const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
   const { data: temples } = useFrappeGetDocList("Temple", {
     fields: ["name", "temple_name"], limit: 1000,
-  });
-  const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
-    fields: ["name", "donation_type"], limit: 1000,
   });
 
   if (loading) return <PageLoader />;
@@ -138,8 +131,8 @@ const DonationView = ({ id, onBack, onEdit }) => {
     return (
       <div style={{ padding: 32 }}>
         <Alert
-          message="Could not load donation details"
-          description={error?.message || "Donation not found"}
+          message="Could not load user details"
+          description={error?.message || "User not found"}
           type="error"
           showIcon
           action={<HoverButton onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, background: "#fff", border: `1px solid ${C.border}`, cursor: "pointer" }} hoverStyle={{ borderColor: C.black }}><ArrowLeftOutlined /> Back</HoverButton>}
@@ -148,8 +141,13 @@ const DonationView = ({ id, onBack, onEdit }) => {
     );
   }
 
-  // Filter out empty fields to keep view mode clean
-  const visibleFields = (donationFormFields.fields || []).filter(field => {
+  // Filter out password fields and empty fields to keep view mode clean
+  const visibleFields = (userFormFields.fields || []).filter(field => {
+    if (field.name === "new_password" || field.name === "confirm_password" || field.name === "password") return false;
+    
+    // Also skip status fields that go into the sidebar
+    if (field.name === "enabled" || field.name === "custom_status") return false;
+
     const val = doc[field.name];
     const empty = val === null || val === undefined || val === "" ||
       (Array.isArray(val) && val.length === 0);
@@ -173,35 +171,118 @@ const DonationView = ({ id, onBack, onEdit }) => {
         </div>
       );
 
-    if (field.name === "temple") {
-      const t = temples?.find(t => t.name === value);
-      return <span style={{ fontSize: 13, fontWeight: 600, color: C.ink }}>{t ? t.temple_name : String(value)}</span>;
+    if (field.name === "custom_select_temple" && Array.isArray(value)) {
+      return (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          {value.map((item) => {
+            const tid = item.temple || String(item);
+            const t = temples?.find(t => t.name === tid);
+            const name = t ? t.temple_name : tid;
+            const tagInfo = getTagConfig("temple admin");
+            return (
+              <Tag className={`tag-glass ${tagInfo.glassClass}`} key={item.name || tid}>
+                {name}
+              </Tag>
+            );
+          })}
+        </div>
+      );
     }
 
-    if (field.name === "total_amount") {
-      return <span style={{ fontSize: 13, fontWeight: 700, color: C.green }}>₹{Number(value).toLocaleString("en-IN")}</span>;
+    if (field.name === "roles" && Array.isArray(value)) {
+      return (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          {value.map((item) => {
+            const roleName = item.role || String(item);
+            const tagInfo = getTagConfig(roleName);
+            return (
+              <Tag className={`tag-glass ${tagInfo.glassClass}`} key={item.name || roleName}>
+                {roleName}
+              </Tag>
+            );
+          })}
+        </div>
+      );
+    }
+
+    if (field.name === "custom_user_role") {
+      const tagInfo = getTagConfig(String(value));
+      return (
+        <Tag className={`tag-glass ${tagInfo.glassClass}`}>
+          {String(value)}
+        </Tag>
+      );
     }
 
     return <span style={{ fontSize: 13, fontWeight: 600, color: C.ink }}>{String(value)}</span>;
   };
 
+  /* ── Header Avatar Renderer ── */
+  const renderHeaderAvatar = () => {
+    const getInitials = (name) => {
+      if (!name) return "?";
+      const parts = name.trim().split(" ").filter(Boolean);
+      if (parts.length === 1) {
+        return parts[0].slice(0, 2).toUpperCase();
+      }
+      return parts.map(n => n[0]).join("").toUpperCase().slice(0, 2);
+    };
+
+    const fullName = doc.full_name || `${doc.first_name || ""} ${doc.last_name || ""}`.trim() || doc.name;
+
+    if (doc.user_image) {
+      return (
+        <img 
+          src={doc.user_image} 
+          alt={fullName} 
+          style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }} 
+        />
+      );
+    }
+
+    const bgStyle = {
+      width: 56,
+      height: 56,
+      borderRadius: "50%",
+      background: C.black,
+      color: "#FFFFFF",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 18,
+      fontWeight: 700,
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
+      flexShrink: 0
+    };
+
+    return <div style={bgStyle}>{getInitials(fullName)}</div>;
+  };
+
   /* ── Header Text Details Renderer ── */
   const renderHeaderDetails = () => {
-    const title = `Donation ${doc.name}`;
+    const fullName = doc.full_name || `${doc.first_name || ""} ${doc.last_name || ""}`.trim() || doc.name;
     const subtitleElements = [];
 
-    if (doc.creation) {
+    if (doc.email) {
       subtitleElements.push(
-        <span key="date" style={{ color: C.inkMid, fontWeight: 500 }}>
-          {new Date(doc.creation).toLocaleDateString()}
+        <span key="email" style={{ color: C.inkMid, fontWeight: 500 }}>
+          {doc.email}
         </span>
+      );
+    }
+    if (doc.custom_user_role) {
+      const tagInfo = getTagConfig(doc.custom_user_role);
+      subtitleElements.push(
+        <Tag key="role" className={`tag-glass ${tagInfo.glassClass}`} style={{ marginLeft: 4 }}>
+          {doc.custom_user_role}
+        </Tag>
       );
     }
 
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
         <div style={{ fontSize: 20, fontWeight: 800, color: C.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
-          {title}
+          {fullName}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, flexWrap: "wrap" }}>
           {subtitleElements}
@@ -211,7 +292,7 @@ const DonationView = ({ id, onBack, onEdit }) => {
   };
 
   return (
-    <div className="temple-donation-app donation-view-root" style={{ background: C.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }}>
+    <div className="temple-donation-app user-view-root" style={{ background: C.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }}>
       <style>{fontStyle}</style>
       <div style={{ maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
 
@@ -231,6 +312,7 @@ const DonationView = ({ id, onBack, onEdit }) => {
             </HoverButton>
 
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              {renderHeaderAvatar()}
               {renderHeaderDetails()}
             </div>
           </div>
@@ -266,11 +348,11 @@ const DonationView = ({ id, onBack, onEdit }) => {
           <Col xs={24} lg={16}>
             <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               
-              {/* Details Card */}
-              <SectionCard title="Details">
+              {/* Field details */}
+              <SectionCard title="User Details">
                 <Row gutter={[16, 16]}>
                   {visibleFields.map((field) => {
-                    const isFullWidth = field.type === "image" || field.type === "textarea";
+                    const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
                     return (
                       <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
                         <FieldCell label={field.label}>
@@ -280,72 +362,6 @@ const DonationView = ({ id, onBack, onEdit }) => {
                     );
                   })}
                 </Row>
-              </SectionCard>
-
-              {/* Financial Summary */}
-              <SectionCard
-                title="Financial Summary"
-                right={
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 6,
-                    background: C.greenBg, border: `1px solid ${C.greenBorder}`,
-                    borderRadius: 10, padding: "5px 14px" }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: C.green,
-                      letterSpacing: "0.08em", textTransform: "uppercase" }}>Total</span>
-                    <span style={{ fontSize: 18, fontWeight: 800, color: C.green,
-                      fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>
-                      ₹{Number(doc.total_amount || 0).toLocaleString("en-IN")}
-                    </span>
-                  </div>
-                }
-              >
-                <Row gutter={[10, 10]} style={{ marginBottom: 20 }}>
-                  {[
-                    { label: "Payment Mode", value: (() => {
-                      const tagInfo = getTagConfig(doc.payment_mode);
-                      return <Tag className={`tag-glass ${tagInfo.glassClass}`}>{doc.payment_mode}</Tag>;
-                    })() },
-                    { label: "Handled By",   value: <span style={{ fontSize: 13, fontWeight: 600, color: C.ink }}>{doc.cashier || "System"}</span> },
-                    { label: "Reference",    value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid, fontFamily: "ui-monospace,monospace" }}>{doc.transaction_ref_no || doc.reference_no || "N/A"}</span> },
-                  ].map(({ label, value }) => (
-                    <Col xs={24} sm={8} key={label}>
-                      <div style={{ padding: "12px 14px", background: C.bg, border: `1px solid ${C.border}`, borderRadius: 10 }}>
-                        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C.inkLight, marginBottom: 6 }}>
-                          {label}
-                        </div>
-                        {value}
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
-
-                <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, overflow: "hidden" }}>
-                  <Table
-                    dataSource={doc.donation_items || []}
-                    pagination={false}
-                    rowKey="name"
-                    size="middle"
-                    columns={[
-                      {
-                        title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Donation Type</span>,
-                        dataIndex: "donation_type",
-                        render: v => {
-                          const dt = donationTypes?.find(t => t.name === v);
-                          return <span style={{ fontWeight: 600, color: C.ink, fontSize: 13 }}>{dt ? dt.donation_type : v}</span>;
-                        },
-                      },
-                      {
-                        title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Amount</span>,
-                        dataIndex: "amount",
-                        align: "right",
-                        render: v => <span style={{ fontWeight: 700, color: C.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }}>₹{Number(v).toLocaleString("en-IN")}</span>,
-                      },
-                    ]}
-                  />
-                </div>
-
-                <div style={{ marginTop: 20 }}>
-                  <DonationPrint donation={doc} />
-                </div>
               </SectionCard>
 
             </div>
@@ -361,7 +377,7 @@ const DonationView = ({ id, onBack, onEdit }) => {
                   {[
                     { label: "Document ID", value: <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C.inkMid }}>{id}</span> },
                     { label: "Status", value: (() => {
-                      const statusVal = doc.custom_status || doc.status || "Active";
+                      const statusVal = doc.custom_status || doc.status || (Number(doc.enabled) === 1 || doc.enabled === "Active" || doc.enabled === true ? "Active" : "Inactive");
                       const tagInfo = getTagConfig(statusVal);
                       return <Tag className={`tag-glass ${tagInfo.glassClass}`}>{statusVal}</Tag>;
                     })() },
@@ -386,4 +402,4 @@ const DonationView = ({ id, onBack, onEdit }) => {
   );
 };
 
-export default DonationView;
+export default UserView;

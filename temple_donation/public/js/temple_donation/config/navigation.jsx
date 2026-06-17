@@ -32,6 +32,7 @@ import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
 
 import UserList from "../modules/User/UserList";
 import UserForm from "../modules/User/UserForm";
+import UserView from "../modules/User/UserView";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
 
@@ -170,6 +171,7 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             case DOCTYPE_TEMPLE: return <TempleView {...viewProps} />;
             case DOCTYPE_DONATION: return <DonationView {...viewProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeView {...viewProps} />;
+            case DOCTYPE_USER: return <UserView {...viewProps} />;
             default: return <CommonView doctype={targetDoctype} {...viewProps} />;
         }
     }

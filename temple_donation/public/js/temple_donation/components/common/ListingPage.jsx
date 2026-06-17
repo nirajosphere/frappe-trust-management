@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Spin, Alert, Modal, message, Input, Select, Button, Space } from "antd";
+import { Spin, Alert, Modal, message, Input, Select, Button, Space, Tag } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
 import CommonTable from "./CommonTable";
@@ -388,6 +388,48 @@ const ListingPage = ({
                             className="font-medium"
                             autoFocus
                         />
+                    </div>
+
+                    <div>
+                        <div style={{ fontSize: "12px", fontWeight: "700", color: "#8c8c8c", textTransform: "uppercase", marginBottom: "8px", letterSpacing: "0.5px" }}>
+                            Applied Filters Preview:
+                        </div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+                            {editModalFilters.filter(row => row.field && row.operator && row.value !== "").map((row, idx) => {
+                                const col = columns?.find(c => c.dataIndex === row.field);
+                                const fieldLabel = col ? col.title : row.field;
+                                let displayVal = row.value;
+                                if (col && col.filterType === "select" && col.filterOptions) {
+                                    const match = col.filterOptions.find(o => o.value === row.value);
+                                    if (match) {
+                                        displayVal = match.label;
+                                    }
+                                }
+                                return (
+                                    <Tag 
+                                        key={idx}
+                                        style={{
+                                            padding: "4px 12px",
+                                            borderRadius: "16px",
+                                            fontSize: "12px",
+                                            fontWeight: "600",
+                                            backgroundColor: "#f4f4f5",
+                                            color: "#27272a",
+                                            border: "1px solid #e4e4e7",
+                                            display: "inline-flex",
+                                            alignItems: "center"
+                                        }}
+                                    >
+                                        <span style={{ color: "#71717a", marginRight: "4px" }}>{fieldLabel}</span>
+                                        <span style={{ color: "#a1a1aa", marginRight: "4px", fontSize: "11px" }}>{row.operator}</span>
+                                        <strong style={{ color: "#09090b" }}>{displayVal}</strong>
+                                    </Tag>
+                                );
+                            })}
+                            {editModalFilters.filter(row => row.field && row.operator && row.value !== "").length === 0 && (
+                                <span style={{ fontSize: "13px", color: "#a1a1aa", fontStyle: "italic" }}>No filters configured</span>
+                            )}
+                        </div>
                     </div>
 
                     <div>
