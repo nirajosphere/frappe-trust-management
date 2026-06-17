@@ -129807,12 +129807,18 @@ html body {
     {
       title: "Email",
       dataIndex: "email",
-      key: "email"
+      key: "email",
+      render: (text) => text || /* @__PURE__ */ import_react231.default.createElement(Text11, {
+        type: "secondary"
+      }, "-")
     },
     {
       title: "City",
       dataIndex: "city",
-      key: "city"
+      key: "city",
+      render: (text) => text || /* @__PURE__ */ import_react231.default.createElement(Text11, {
+        type: "secondary"
+      }, "-")
     },
     {
       title: "Address",
@@ -131919,6 +131925,21 @@ html body {
   var { Text: Text18 } = typography_default;
   var donationTypeColumns = [
     {
+      title: "Donation Image",
+      dataIndex: "donation_image",
+      key: "donation_image",
+      render: (img) => {
+        if (!img)
+          return "-";
+        const src = img.startsWith("http") ? img : `${window.location.origin}${img.startsWith("/") ? "" : "/"}${img}`;
+        return /* @__PURE__ */ import_react247.default.createElement("img", {
+          src,
+          alt: "Donation",
+          className: "w-10 h-10 object-cover"
+        });
+      }
+    },
+    {
       title: "Donation Type",
       dataIndex: "donation_type",
       key: "donation_type",
@@ -131932,21 +131953,6 @@ html body {
       dataIndex: "default_amount",
       key: "default_amount",
       render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
-    },
-    {
-      title: "Image",
-      dataIndex: "donation_image",
-      key: "donation_image",
-      render: (img) => {
-        if (!img)
-          return "-";
-        const src = img.startsWith("http") ? img : `${window.location.origin}${img.startsWith("/") ? "" : "/"}${img}`;
-        return /* @__PURE__ */ import_react247.default.createElement("img", {
-          src,
-          alt: "Donation",
-          className: "w-10 h-10 object-cover"
-        });
-      }
     }
   ];
 
@@ -132218,7 +132224,7 @@ html body {
       description: "Manage temple admins, cashiers and system users.",
       columns: userColumns,
       basePath: "users",
-      fields: ["name", "full_name", "first_name", "last_name", "email", "custom_test", "custom_user_role", "custom_status", "enabled"],
+      fields: ["name", "full_name", "first_name", "last_name", "email", "custom_test", "custom_user_role", "custom_status", "enabled", "user_image"],
       filters: {
         name: ["not in", ["Administrator", "Guest"]]
       },
@@ -133198,4 +133204,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.CSXAJFU6.js.map
+//# sourceMappingURL=temple_donation.bundle.GVNHXIYH.js.map

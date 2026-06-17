@@ -27,11 +27,13 @@ export const donorColumns = [
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
+        render: (text) => text || <Text type="secondary">-</Text>
     },
     {
         title: 'City',
         dataIndex: 'city',
         key: 'city',
+        render: (text) => text || <Text type="secondary">-</Text>
     },
     {
         title: 'Address',

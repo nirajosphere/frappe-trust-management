@@ -12,6 +12,16 @@ export const donationTypeColumns = [
     //     render: (text) => <Text copyable>{text}</Text>
     // },
     {
+        title: 'Donation Image',
+        dataIndex: 'donation_image',
+        key: 'donation_image',
+        render: (img) => {
+            if (!img) return '-';
+            const src = img.startsWith('http') ? img : `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
+            return <img src={src} alt="Donation" className="w-10 h-10 object-cover" />;
+        }
+    },
+    {
         title: 'Donation Type',
         dataIndex: 'donation_type',
         key: 'donation_type',
@@ -34,15 +44,5 @@ export const donationTypeColumns = [
         dataIndex: 'default_amount',
         key: 'default_amount',
         render: (val) => val ? `₹${Number(val).toLocaleString()}` : '-'
-    },
-    {
-        title: 'Image',
-        dataIndex: 'donation_image',
-        key: 'donation_image',
-        render: (img) => {
-            if (!img) return '-';
-            const src = img.startsWith('http') ? img : `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
-            return <img src={src} alt="Donation" className="w-10 h-10 object-cover" />;
-        }
     },
 ];
