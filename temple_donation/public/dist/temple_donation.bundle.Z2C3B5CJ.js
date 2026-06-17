@@ -127868,10 +127868,18 @@ html body {
     onAdd,
     addLabel = "Add New",
     onExport,
+    allowExport = true,
+    exportOptions = ["csv", "excel", "pdf"],
     onSearch,
     searchPlaceholder = "Search...",
     extra
   }) => {
+    const defaultItems = [
+      { key: "csv", label: "Export to CSV" },
+      { key: "excel", label: "Export to Excel" },
+      { key: "pdf", label: "Export to PDF" }
+    ];
+    const menuItems = exportOptions && Array.isArray(exportOptions) ? defaultItems.filter((item) => exportOptions.includes(item.key)) : defaultItems;
     return /* @__PURE__ */ import_react215.default.createElement("header", {
       className: "mb-8"
     }, /* @__PURE__ */ import_react215.default.createElement("div", {
@@ -127899,13 +127907,9 @@ html body {
       }),
       onChange: (e4) => onSearch(e4.target.value),
       className: "h-10 w-full md:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
-    }), onExport && /* @__PURE__ */ import_react215.default.createElement(dropdown_default3, {
+    }), onExport && allowExport && menuItems.length > 0 && /* @__PURE__ */ import_react215.default.createElement(dropdown_default3, {
       menu: {
-        items: [
-          { key: "csv", label: "Export to CSV" },
-          { key: "excel", label: "Export to Excel" },
-          { key: "pdf", label: "Export to PDF" }
-        ],
+        items: menuItems,
         onClick: ({ key }) => onExport(key)
       },
       trigger: ["click"],
@@ -129642,7 +129646,9 @@ html body {
     allowEdit = true,
     allowDelete = true,
     allowView = true,
-    allowPrint = true
+    allowPrint = true,
+    allowExport = true,
+    exportOptions = ["csv", "excel", "pdf"]
   }) => {
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
       fields,
@@ -129758,7 +129764,9 @@ html body {
       onExport: handleExport,
       onSearch: setSearchText,
       searchPlaceholder: `Search ${doctype}s...`,
-      addLabel: "Add New Record"
+      addLabel: "Add New Record",
+      allowExport,
+      exportOptions
     }), /* @__PURE__ */ import_react230.default.createElement(CommonTable_default, {
       columns: columns || [],
       dataSource: enrichedData,
@@ -131964,7 +131972,8 @@ html body {
       description: "Manage available donation categories",
       columns: donationTypeColumns,
       basePath: "donation-types",
-      fields: ["*"]
+      fields: ["*"],
+      allowExport: false
     });
   };
   var DonationTypeList_default = DonationTypeList;
@@ -133204,4 +133213,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.GVNHXIYH.js.map
+//# sourceMappingURL=temple_donation.bundle.Z2C3B5CJ.js.map

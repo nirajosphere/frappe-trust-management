@@ -16,10 +16,23 @@ const PageHeader = ({
     onAdd,
     addLabel = "Add New",
     onExport,
+    allowExport = true,
+    exportOptions = ["csv", "excel", "pdf"],
     onSearch,
     searchPlaceholder = "Search...",
     extra // Used for custom action buttons (Print, Edit, etc)
 }) => {
+    // Filter export dropdown options based on the exportOptions prop
+    const defaultItems = [
+        { key: "csv", label: "Export to CSV" },
+        { key: "excel", label: "Export to Excel" },
+        { key: "pdf", label: "Export to PDF" }
+    ];
+
+    const menuItems = exportOptions && Array.isArray(exportOptions)
+        ? defaultItems.filter(item => exportOptions.includes(item.key))
+        : defaultItems;
+
     return (
         <header className="mb-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -59,14 +72,10 @@ const PageHeader = ({
                         />
                     )}
 
-                    {onExport && (
+                    {onExport && allowExport && menuItems.length > 0 && (
                         <Dropdown
                             menu={{
-                                items: [
-                                    { key: "csv", label: "Export to CSV" },
-                                    { key: "excel", label: "Export to Excel" },
-                                    { key: "pdf", label: "Export to PDF" }
-                                ],
+                                items: menuItems,
                                 onClick: ({ key }) => onExport(key)
                             }}
                             trigger={["click"]}

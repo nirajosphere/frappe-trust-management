@@ -30,7 +30,9 @@ const ListingPage = ({
     allowEdit = true,
     allowDelete = true,
     allowView = true,
-    allowPrint = true
+    allowPrint = true,
+    allowExport = true,
+    exportOptions = ["csv", "excel", "pdf"]
 }) => {
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
@@ -167,6 +169,8 @@ const ListingPage = ({
                 onSearch={setSearchText}
                 searchPlaceholder={`Search ${doctype}s...`}
                 addLabel="Add New Record" 
+                allowExport={allowExport}
+                exportOptions={exportOptions}
             />
             <CommonTable
                 columns={columns || []}
