@@ -55,7 +55,7 @@ const PageHeader = ({
                             placeholder={searchPlaceholder}
                             prefix={<SearchOutlined className="text-zinc-400" />}
                             onChange={(e) => onSearch(e.target.value)}
-                            className="h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
+                            className="h-10 w-full md:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
                         />
                     )}
 

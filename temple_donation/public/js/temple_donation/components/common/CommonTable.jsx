@@ -4,6 +4,7 @@ import {
     PlusOutlined, EditOutlined, DeleteOutlined,
     EyeOutlined, PrinterOutlined, ExportOutlined
 } from "@ant-design/icons";
+import TableActions from "./TableActions";
 
 const { Title, Text } = Typography;
 
@@ -20,6 +21,10 @@ const CommonTable = ({
     onView,
     onPrint,
     rowKey = "name",
+    showView = true,
+    showEdit = true,
+    showPrint = true,
+    showDelete = true,
 }) => {
 
     const filteredData = dataSource?.filter(item => {
@@ -32,63 +37,18 @@ const CommonTable = ({
         key: "actions",
         fixed: "right",
         width: 120,
-
         render: (_, record) => (
-            <Space>
-
-                {onView && (
-                    <Tooltip title="View">
-                        <Button
-                            type="text"
-                            icon={<EyeOutlined />}
-                            onClick={() => onView(record)}
-                            className="px-2 border border-gray-200 hover:!text-orange-500"
-                        />
-                    </Tooltip>
-                )}
-
-                {onEdit && (
-                    <Tooltip title="Edit">
-                        <Button
-                            type="text"
-                            icon={<EditOutlined />}
-                            onClick={() => onEdit(record)}
-                            className="px-2 border border-gray-200 hover:!text-blue-500"
-                        />
-                    </Tooltip>
-                )}
-
-                {onPrint && (
-                    <Tooltip title="Print">
-                        <Button
-                            type="text"
-                            icon={<PrinterOutlined />}
-                            onClick={() => onPrint(record)}
-                            className="px-2 border border-gray-200 hover:!text-amber-500"
-                        />
-                    </Tooltip>
-                )}
-
-                {onDelete && (
-                    <Popconfirm
-                        title="Delete?"
-                        description="This cannot be undone"
-                        onConfirm={() => onDelete(record)}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <Tooltip title="Delete">
-                            <Button
-                                type="text"
-                                danger
-                                icon={<DeleteOutlined />}
-                                className="px-2 border border-red-200 hover:!text-red-500"
-                            />
-                        </Tooltip>
-                    </Popconfirm>
-                )}
-
-            </Space>
+            <TableActions
+                record={record}
+                onView={onView}
+                onEdit={onEdit}
+                onPrint={onPrint}
+                onDelete={onDelete}
+                showView={showView}
+                showEdit={showEdit}
+                showPrint={showPrint}
+                showDelete={showDelete}
+            />
         )
     };
     // const actionColumn = {
@@ -139,7 +99,8 @@ const CommonTable = ({
     //     )
     // };
 
-    const finalColumns = (onView || onPrint || onEdit || onDelete) ? [...columns, actionColumn] : columns;
+    const hasActions = (onView && showView) || (onPrint && showPrint) || (onEdit && showEdit) || (onDelete && showDelete);
+    const finalColumns = hasActions ? [...columns, actionColumn] : columns;
 
     return (
         // <Card bordered={false} className="aavatto-card !p-0 overflow-hidden shadow-xl shadow-amber-900/5 border-orange-100">

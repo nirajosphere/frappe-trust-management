@@ -16,7 +16,22 @@ import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils
  * @param {string} basePath - Base path for routing (e.g. 'donors')
  * @param {Array} fields - Fields to fetch from Frappe (optional, uses all if not provided)
  */
-const ListingPage = ({ doctype, title, description, columns, basePath, fields = ["*"], filters = {}, childTable, childDocType }) => {
+const ListingPage = ({
+    doctype,
+    title,
+    description,
+    columns,
+    basePath,
+    fields = ["*"],
+    filters = {},
+    childTable,
+    childDocType,
+    allowAdd = true,
+    allowEdit = true,
+    allowDelete = true,
+    allowView = true,
+    allowPrint = true
+}) => {
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
         fields: fields,
@@ -148,7 +163,7 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
             <PageHeader 
                 title={title} 
                 description={description} 
-                onAdd={handleAdd} 
+                onAdd={allowAdd ? handleAdd : undefined} 
                 onExport={handleExport}
                 onSearch={setSearchText}
                 searchPlaceholder={`Search ${doctype}s...`}
@@ -163,6 +178,10 @@ const ListingPage = ({ doctype, title, description, columns, basePath, fields = 
                 onDelete={handleDelete}
                 onView={handleView}
                 onPrint={handlePrint}
+                showView={allowView}
+                showEdit={allowEdit}
+                showDelete={allowDelete}
+                showPrint={allowPrint}
             />
         </div>
     );

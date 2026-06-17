@@ -41,6 +41,7 @@ export const themeConfig = {
             controlHeight: 40,
             fontWeight: 600,
             colorPrimaryHover: "#000000",
+            primaryShadow: "none"
         },
         Input: {
             borderRadius: 8,

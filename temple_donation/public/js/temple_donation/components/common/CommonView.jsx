@@ -69,7 +69,7 @@ function FieldCell({ label, children }) {
       onMouseLeave={() => setHov(false)}
       style={{
         padding: "10px 14px",
-        borderRadius: "0 8px 8px 0",
+        borderRadius: "0 10px 10px 0",
         borderLeft: `3px solid ${hov ? C.black : C.border}`,
         background: hov ? "rgba(15, 23, 42, 0.02)" : "transparent",
         transition: "all 0.2s ease",
@@ -106,15 +106,13 @@ function SectionCard({ title, right, children }) {
       {/* head */}
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "18px 24px",
+        padding: "16px 24px",
+        background: "#FAFBFD",
         borderBottom: `1px solid ${C.border}`,
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.black, flexShrink: 0 }} />
-          <span style={{ fontSize: 14, fontWeight: 700, color: C.ink, letterSpacing: "-0.01em" }}>
-            {title}
-          </span>
-        </div>
+        <span style={{ fontSize: 14, fontWeight: 700, color: C.ink, letterSpacing: "-0.01em" }}>
+          {title}
+        </span>
         {right}
       </div>
       {/* body */}
@@ -170,11 +168,11 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
     if (empty) return <span style={{ color: C.inkXLight, fontSize: 13, fontWeight: 500 }}>—</span>;
 
     if (field.type === "image")
-      return <img src={value} alt={field.label} style={{ width: 56, height: 56, objectFit: "cover", borderRadius: 8, border: `1px solid ${C.border}` }} />;
+      return <img src={value} alt={field.label} style={{ width: 56, height: 56, objectFit: "cover", borderRadius: 10, border: `1px solid ${C.border}` }} />;
 
     if (field.type === "textarea")
       return (
-        <div style={{ background: "#F8FAFC", border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 14px",
+        <div style={{ background: "#F8FAFC", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px",
           fontSize: 12, color: C.inkMid, whiteSpace: "pre-wrap", lineHeight: 1.6, fontWeight: 400 }}>
           {value}
         </div>
@@ -251,7 +249,11 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
   const renderHeaderAvatar = () => {
     const getInitials = (name) => {
       if (!name) return "?";
-      return name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
+      const parts = name.trim().split(" ").filter(Boolean);
+      if (parts.length === 1) {
+        return parts[0].slice(0, 2).toUpperCase();
+      }
+      return parts.map(n => n[0]).join("").toUpperCase().slice(0, 2);
     };
 
     const bgStyle = {
@@ -288,6 +290,19 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
 
     if (doctype === "Temple") {
       return <div style={bgStyle}>{getInitials(doc.temple_name || doc.name)}</div>;
+    }
+
+    if (doctype === "Donation Type") {
+      if (doc.donation_image) {
+        return (
+          <img 
+            src={doc.donation_image} 
+            alt={doc.donation_type} 
+            style={{ width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }} 
+          />
+        );
+      }
+      return <div style={bgStyle}>{getInitials(doc.donation_type || doc.name)}</div>;
     }
 
     // Fallback icon for general records (e.g. Donations)
@@ -337,6 +352,15 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
           {doc.creation ? new Date(doc.creation).toLocaleDateString() : ""}
         </span>
       );
+    } else if (doctype === "Donation Type") {
+      title = doc.donation_type || doc.name;
+      if (doc.donation_type_code) {
+        subtitleElements.push(
+          <span key="code" style={{ color: C.inkMid, fontWeight: 500 }}>
+            {doc.donation_type_code}
+          </span>
+        );
+      }
     }
 
     return (
@@ -362,13 +386,13 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
           
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <HoverButton
-              style={{ width: 34, height: 34, borderRadius: 8, border: `1px solid ${C.border}`,
+              style={{ width: 40, height: 40, borderRadius: 10, border: `1px solid ${C.border}`,
                 background: C.white, display: "flex", alignItems: "center", justifyContent: "center",
                 cursor: "pointer", color: C.inkMid, transition: "all 0.15s" }}
               hoverStyle={{ borderColor: C.black, background: C.black, color: "#fff" }}
               onClick={onBack} title="Go back"
             >
-              <ArrowLeftOutlined style={{ fontSize: 13 }} />
+              <ArrowLeftOutlined style={{ fontSize: 14 }} />
             </HoverButton>
 
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
@@ -380,24 +404,24 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
           {/* Action buttons */}
           <div style={{ display: "flex", gap: 8 }}>
             <HoverButton
-              style={{ height: 36, padding: "0 16px", borderRadius: 8, border: `1px solid ${C.border}`,
+              style={{ height: 40, padding: "0 20px", borderRadius: 10, border: `1px solid ${C.border}`,
                 background: C.white, color: C.inkMid, fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 6, cursor: "pointer", transition: "all 0.15s",
+                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
                 boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}
               hoverStyle={{ borderColor: C.black, color: C.ink }}
               onClick={() => window.print()}
             >
-              <PrinterOutlined style={{ fontSize: 13 }} /> Print
+              <PrinterOutlined style={{ fontSize: 14 }} /> Print
             </HoverButton>
             <HoverButton
-              style={{ height: 36, padding: "0 18px", borderRadius: 8, border: "none",
+              style={{ height: 40, padding: "0 22px", borderRadius: 10, border: "none",
                 background: C.black, color: "#fff", fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 6, cursor: "pointer", transition: "all 0.15s",
+                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
               hoverStyle={{ background: "#1E293B" }}
               onClick={() => onEdit && onEdit(doc)}
             >
-              <EditOutlined style={{ fontSize: 13 }} /> Edit
+              <EditOutlined style={{ fontSize: 14 }} /> Edit
             </HoverButton>
           </div>
         </div>
@@ -411,13 +435,16 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
               {/* Field details */}
               <SectionCard title="Details">
                 <Row gutter={[16, 16]}>
-                  {visibleFields.map((field) => (
-                    <Col xs={24} sm={12} key={field.name}>
-                      <FieldCell label={field.label}>
-                        {renderValue(field, doc[field.name])}
-                      </FieldCell>
-                    </Col>
-                  ))}
+                  {visibleFields.map((field) => {
+                    const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
+                    return (
+                      <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
+                        <FieldCell label={field.label}>
+                          {renderValue(field, doc[field.name])}
+                        </FieldCell>
+                      </Col>
+                    );
+                  })}
                 </Row>
               </SectionCard>
 
@@ -428,7 +455,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                   right={
                     <div style={{ display: "flex", alignItems: "baseline", gap: 6,
                       background: C.greenBg, border: `1px solid ${C.greenBorder}`,
-                      borderRadius: 8, padding: "5px 14px" }}>
+                      borderRadius: 10, padding: "5px 14px" }}>
                       <span style={{ fontSize: 10, fontWeight: 700, color: C.green,
                         letterSpacing: "0.08em", textTransform: "uppercase" }}>Total</span>
                       <span style={{ fontSize: 18, fontWeight: 800, color: C.green,
@@ -448,7 +475,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                       { label: "Reference",    value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid, fontFamily: "ui-monospace,monospace" }}>{doc.reference_no || "N/A"}</span> },
                     ].map(({ label, value }) => (
                       <Col xs={24} sm={8} key={label}>
-                        <div style={{ padding: "12px 14px", background: C.bg, border: `1px solid ${C.border}`, borderRadius: 9 }}>
+                        <div style={{ padding: "12px 14px", background: C.bg, border: `1px solid ${C.border}`, borderRadius: 10 }}>
                           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C.inkLight, marginBottom: 6 }}>
                             {label}
                           </div>
@@ -458,7 +485,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                     ))}
                   </Row>
 
-                  <div style={{ border: `1px solid ${C.border}`, borderRadius: 9, overflow: "hidden" }}>
+                  <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, overflow: "hidden" }}>
                     <Table
                       dataSource={doc.donation_items || []}
                       pagination={false}
@@ -494,12 +521,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               
               {/* Metadata Info Box */}
-              <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 16, padding: "24px",
-                boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)" }}>
-                <div style={{ fontSize: 11, fontWeight: 800, color: C.ink, letterSpacing: "0.05em", textTransform: "uppercase", borderBottom: `1px solid ${C.border}`, paddingBottom: 12, marginBottom: 16 }}>
-                  System Information
-                </div>
-
+              <SectionCard title="System Information">
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   {[
                     { label: "Document ID", value: <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C.inkMid }}>{id}</span> },
@@ -518,7 +540,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </SectionCard>
 
             </div>
           </Col>
