@@ -3,33 +3,62 @@ import { Button, Input, Popover, Select, Space } from "antd";
 import { FilterOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 
 const FilterPopover = ({ columns, onApplyFilters }) => {
-    const [filterRows, setFilterRows] = useState([]);
+    const [appliedFilters, setAppliedFilters] = useState([]);
+    const [draftFilters, setDraftFilters] = useState([]);
     const [popoverOpen, setPopoverOpen] = useState(false);
 
     // Filter available columns to only those that can be queried (must have title and dataIndex)
     const filterableColumns = columns
-        ? columns.filter(col => col.dataIndex && col.title && typeof col.title === "string")
+        ? columns.filter(col => col.filterable !== false && col.dataIndex && col.title && typeof col.title === "string")
         : [];
 
+    const handleOpenChange = (open) => {
+        setPopoverOpen(open);
+        if (open) {
+            // When opening, initialize the draft from the currently applied filters
+            // If there are no applied filters, start with one empty row by default
+            if (appliedFilters.length === 0) {
+                setDraftFilters([{ field: undefined, operator: undefined, value: "" }]);
+            } else {
+                setDraftFilters([...appliedFilters]);
+            }
+        }
+    };
+
     const addFilterRow = () => {
-        setFilterRows([...filterRows, { field: filterableColumns[0]?.dataIndex, operator: "=", value: "" }]);
+        setDraftFilters([...draftFilters, { 
+            field: undefined, 
+            operator: undefined, 
+            value: "" 
+        }]);
     };
 
     const removeFilterRow = (index) => {
-        const newRows = [...filterRows];
+        const newRows = [...draftFilters];
         newRows.splice(index, 1);
-        setFilterRows(newRows);
+        setDraftFilters(newRows);
     };
 
     const updateFilterRow = (index, key, val) => {
-        const newRows = [...filterRows];
-        newRows[index] = { ...newRows[index], [key]: val };
-        setFilterRows(newRows);
+        const newRows = [...draftFilters];
+        if (key === "field") {
+            newRows[index] = {
+                field: val,
+                operator: undefined, // Let user select operator manually
+                value: ""
+            };
+        } else {
+            newRows[index] = { ...newRows[index], [key]: val };
+        }
+        setDraftFilters(newRows);
     };
 
     const handleApply = () => {
-        const activeFilters = filterRows
-            .filter(row => row.field && row.value !== undefined && row.value !== "")
+        // Commit draft filters to applied state
+        setAppliedFilters([...draftFilters]);
+
+        const activeFilters = draftFilters
+            .filter(row => row.field && row.operator && row.value !== undefined && row.value !== "")
             .map(row => {
                 let val = row.value;
                 if (row.operator === "like" || row.operator === "not like") {
@@ -45,7 +74,8 @@ const FilterPopover = ({ columns, onApplyFilters }) => {
     };
 
     const handleClear = () => {
-        setFilterRows([]);
+        setAppliedFilters([]);
+        setDraftFilters([{ field: undefined, operator: undefined, value: "" }]);
         if (onApplyFilters) {
             onApplyFilters([]);
         }
@@ -54,65 +84,114 @@ const FilterPopover = ({ columns, onApplyFilters }) => {
 
     const filterPopoverContent = (
         <div style={{ width: "620px", padding: "12px 8px", display: "flex", flexDirection: "column", gap: "16px" }}>
-            {filterRows.length === 0 ? (
+            {draftFilters.length === 0 ? (
                 <div style={{ color: "#a1a1aa", fontSize: "14px", padding: "16px 0", textAlign: "center" }}>
                     No filters applied. Click below to add a filter.
                 </div>
             ) : (
                 <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxHeight: "300px", overflowY: "auto", paddingRight: "4px" }}>
-                    {filterRows.map((row, index) => (
-                        <div key={index} style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%" }}>
-                            {/* Field Select */}
-                            <Select
-                                placeholder="Filter field"
-                                value={row.field}
-                                onChange={(val) => updateFilterRow(index, "field", val)}
-                                style={{ width: "180px" }}
-                                className="h-9 font-medium"
-                                options={filterableColumns.map(col => ({
-                                    label: col.title,
-                                    value: col.dataIndex
-                                }))}
-                            />
+                    {draftFilters.map((row, index) => {
+                        const selectedCol = filterableColumns.find(c => c.dataIndex === row.field);
+                        let relationOptions = [
+                            { label: "Equals (=)", value: "=" },
+                            { label: "Not Equals (!=)", value: "!=" }
+                        ];
 
-                            {/* Relation Select */}
-                            <Select
-                                placeholder="Filter relation"
-                                value={row.operator}
-                                onChange={(val) => updateFilterRow(index, "operator", val)}
-                                style={{ width: "150px" }}
-                                className="h-9 font-medium"
-                                options={[
-                                    { label: "Equals (=)", value: "=" },
-                                    { label: "Not Equals (!=)", value: "!=" },
+                        if (selectedCol) {
+                            if (selectedCol.filterType !== "select") {
+                                relationOptions.push(
                                     { label: "Like", value: "like" },
-                                    { label: "Not Like", value: "not like" },
+                                    { label: "Not Like", value: "not like" }
+                                );
+                            }
+
+                            if (selectedCol.filterType === "number") {
+                                relationOptions.push(
                                     { label: "Greater Than (>)", value: ">" },
                                     { label: "Less Than (<)", value: "<" },
-                                    { label: "In", value: "in" },
-                                    { label: "Not In", value: "not in" }
-                                ]}
-                            />
+                                    { label: "Greater or Equal (>=)", value: ">=" },
+                                    { label: "Less or Equal (<=)", value: "<=" }
+                                );
+                            }
 
-                            {/* Value Input */}
-                            <Input
-                                placeholder="Value"
-                                value={row.value}
-                                onChange={(e) => updateFilterRow(index, "value", e.target.value)}
-                                style={{ flex: 1 }}
-                                className="h-9 font-medium"
-                            />
+                            // Check if column overrides operators
+                            if (selectedCol.filterOperators) {
+                                const allRelations = {
+                                    "=": { label: "Equals (=)", value: "=" },
+                                    "!=": { label: "Not Equals (!=)", value: "!=" },
+                                    "like": { label: "Like", value: "like" },
+                                    "not like": { label: "Not Like", value: "not like" },
+                                    ">": { label: "Greater Than (>)", value: ">" },
+                                    "<": { label: "Less Than (<)", value: "<" },
+                                    ">=": { label: "Greater or Equal (>=)", value: ">=" },
+                                    "<=": { label: "Less or Equal (<=)", value: "<=" },
+                                    "in": { label: "In", value: "in" },
+                                    "not in": { label: "Not In", value: "not in" }
+                                };
+                                relationOptions = selectedCol.filterOperators.map(op => allRelations[op] || { label: op, value: op });
+                            }
+                        }
 
-                            {/* Delete Button */}
-                            <Button
-                                type="text"
-                                danger
-                                icon={<DeleteOutlined />}
-                                onClick={() => removeFilterRow(index)}
-                                style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }}
-                            />
-                        </div>
-                    ))}
+                        return (
+                            <div key={index} style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%" }}>
+                                {/* Field Select */}
+                                <Select
+                                    placeholder="Filter field"
+                                    value={row.field}
+                                    onChange={(val) => updateFilterRow(index, "field", val)}
+                                    style={{ width: "180px" }}
+                                    className="h-9 font-medium"
+                                    options={filterableColumns.map(col => ({
+                                        label: col.title,
+                                        value: col.dataIndex
+                                    }))}
+                                />
+
+                                {/* Relation Select */}
+                                <Select
+                                    placeholder="Filter relation"
+                                    value={row.operator}
+                                    onChange={(val) => updateFilterRow(index, "operator", val)}
+                                    style={{ width: "150px" }}
+                                    className="h-9 font-medium"
+                                    disabled={!row.field}
+                                    options={row.field ? relationOptions : []}
+                                />
+
+                                {/* Dynamic Value Input */}
+                                {selectedCol?.filterType === "select" ? (
+                                    <Select
+                                        placeholder="Select value"
+                                        value={row.value || undefined}
+                                        onChange={(val) => updateFilterRow(index, "value", val)}
+                                        style={{ flex: 1 }}
+                                        className="h-9 font-medium"
+                                        disabled={!row.operator}
+                                        options={selectedCol.filterOptions}
+                                    />
+                                ) : (
+                                    <Input
+                                        placeholder="Value"
+                                        type={selectedCol?.filterType === "number" ? "number" : "text"}
+                                        value={row.value}
+                                        onChange={(e) => updateFilterRow(index, "value", e.target.value)}
+                                        style={{ flex: 1 }}
+                                        className="h-9 font-medium"
+                                        disabled={!row.operator}
+                                    />
+                                )}
+
+                                {/* Delete Button */}
+                                <Button
+                                    type="text"
+                                    danger
+                                    icon={<DeleteOutlined />}
+                                    onClick={() => removeFilterRow(index)}
+                                    style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             )}
 
@@ -145,14 +224,14 @@ const FilterPopover = ({ columns, onApplyFilters }) => {
         </div>
     );
 
-    const activeCount = filterRows.filter(row => row.field && row.value !== undefined && row.value !== "").length;
+    const activeCount = appliedFilters.filter(row => row.field && row.operator && row.value !== undefined && row.value !== "").length;
 
     return (
         <Popover
             content={filterPopoverContent}
             trigger="click"
             open={popoverOpen}
-            onOpenChange={setPopoverOpen}
+            onOpenChange={handleOpenChange}
             placement="bottomRight"
             arrow={true}
         >

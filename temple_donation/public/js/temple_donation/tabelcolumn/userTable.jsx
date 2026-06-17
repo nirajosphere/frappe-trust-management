@@ -40,7 +40,9 @@ export const userColumns = [
                     </div>
                 </div>
             );
-        }
+        },
+        filterable: true,
+        filterType: "text"
     },
     {
         title: "CONTACT",
@@ -51,7 +53,9 @@ export const userColumns = [
             <span className="text-gray-600 text-sm font-medium">
                 {text || "N/A"}
             </span>
-        )
+        ),
+        filterable: true,
+        filterType: "text"
     },
 
     {
@@ -76,7 +80,8 @@ export const userColumns = [
                     </span>
                 )}
             </div>
-        )
+        ),
+        filterable: false
     },
 
     {
@@ -91,7 +96,15 @@ export const userColumns = [
                     {config.label}
                 </Tag>
             );
-        }
+        },
+        filterable: true,
+        filterType: "select",
+        filterOptions: [
+            { label: "Administrator", value: "Administrator" },
+            { label: "Cashier", value: "Cashier" },
+            { label: "Super Admin", value: "Super Admin" },
+            { label: "Temple Admin", value: "Temple Admin" }
+        ]
     },
 
     {
@@ -106,7 +119,13 @@ export const userColumns = [
                     {config.label}
                 </Tag>
             );
-        }
+        },
+        filterable: true,
+        filterType: "select",
+        filterOptions: [
+            { label: "Active", value: 1 },
+            { label: "Inactive", value: 0 }
+        ]
     },
 
     // className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"

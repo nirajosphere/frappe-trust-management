@@ -15,6 +15,7 @@ export const themeConfig = {
         wireframe: false,
         colorBgContainer: "#ffffff",
         colorBgLayout: "#ffffff",
+        controlOutline: "transparent",
     },
     components: {
         Layout: {

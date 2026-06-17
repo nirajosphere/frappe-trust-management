@@ -19,7 +19,8 @@ export const donationTypeColumns = [
             if (!img) return '-';
             const src = img.startsWith('http') ? img : `${window.location.origin}${img.startsWith('/') ? '' : '/'}${img}`;
             return <img src={src} alt="Donation" className="w-10 h-10 object-cover" />;
-        }
+        },
+        filterable: false
     },
     {
         title: 'Donation Type',
@@ -27,6 +28,8 @@ export const donationTypeColumns = [
         key: 'donation_type',
         render: (text) => <Text strong>{text}</Text>,
         sorter: (a, b) => (a.donation_type || '').localeCompare(b.donation_type || ''),
+        filterable: true,
+        filterType: "text"
     },
     // {
     //     title: 'Donation Type Code',
@@ -43,6 +46,8 @@ export const donationTypeColumns = [
         title: 'Default Amount',
         dataIndex: 'default_amount',
         key: 'default_amount',
-        render: (val) => val ? `₹${Number(val).toLocaleString()}` : '-'
+        render: (val) => val ? `₹${Number(val).toLocaleString()}` : '-',
+        filterable: true,
+        filterType: "number"
     },
 ];

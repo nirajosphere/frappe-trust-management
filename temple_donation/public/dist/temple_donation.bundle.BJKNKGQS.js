@@ -104627,7 +104627,8 @@ html body {
       fontSize: 15,
       wireframe: false,
       colorBgContainer: "#ffffff",
-      colorBgLayout: "#ffffff"
+      colorBgLayout: "#ffffff",
+      controlOutline: "transparent"
     },
     components: {
       Layout: {
@@ -127895,25 +127896,48 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/FilterPopover.jsx
   var import_react215 = __toESM(require_react());
   var FilterPopover = ({ columns, onApplyFilters }) => {
-    const [filterRows, setFilterRows] = (0, import_react215.useState)([]);
+    const [appliedFilters, setAppliedFilters] = (0, import_react215.useState)([]);
+    const [draftFilters, setDraftFilters] = (0, import_react215.useState)([]);
     const [popoverOpen, setPopoverOpen] = (0, import_react215.useState)(false);
-    const filterableColumns = columns ? columns.filter((col) => col.dataIndex && col.title && typeof col.title === "string") : [];
+    const filterableColumns = columns ? columns.filter((col) => col.filterable !== false && col.dataIndex && col.title && typeof col.title === "string") : [];
+    const handleOpenChange = (open2) => {
+      setPopoverOpen(open2);
+      if (open2) {
+        if (appliedFilters.length === 0) {
+          setDraftFilters([{ field: void 0, operator: void 0, value: "" }]);
+        } else {
+          setDraftFilters([...appliedFilters]);
+        }
+      }
+    };
     const addFilterRow = () => {
-      var _a;
-      setFilterRows([...filterRows, { field: (_a = filterableColumns[0]) == null ? void 0 : _a.dataIndex, operator: "=", value: "" }]);
+      setDraftFilters([...draftFilters, {
+        field: void 0,
+        operator: void 0,
+        value: ""
+      }]);
     };
     const removeFilterRow = (index2) => {
-      const newRows = [...filterRows];
+      const newRows = [...draftFilters];
       newRows.splice(index2, 1);
-      setFilterRows(newRows);
+      setDraftFilters(newRows);
     };
     const updateFilterRow = (index2, key, val) => {
-      const newRows = [...filterRows];
-      newRows[index2] = __spreadProps(__spreadValues({}, newRows[index2]), { [key]: val });
-      setFilterRows(newRows);
+      const newRows = [...draftFilters];
+      if (key === "field") {
+        newRows[index2] = {
+          field: val,
+          operator: void 0,
+          value: ""
+        };
+      } else {
+        newRows[index2] = __spreadProps(__spreadValues({}, newRows[index2]), { [key]: val });
+      }
+      setDraftFilters(newRows);
     };
     const handleApply = () => {
-      const activeFilters = filterRows.filter((row) => row.field && row.value !== void 0 && row.value !== "").map((row) => {
+      setAppliedFilters([...draftFilters]);
+      const activeFilters = draftFilters.filter((row) => row.field && row.operator && row.value !== void 0 && row.value !== "").map((row) => {
         let val = row.value;
         if (row.operator === "like" || row.operator === "not like") {
           val = `%${val}%`;
@@ -127926,7 +127950,8 @@ html body {
       setPopoverOpen(false);
     };
     const handleClear = () => {
-      setFilterRows([]);
+      setAppliedFilters([]);
+      setDraftFilters([{ field: void 0, operator: void 0, value: "" }]);
       if (onApplyFilters) {
         onApplyFilters([]);
       }
@@ -127934,52 +127959,92 @@ html body {
     };
     const filterPopoverContent = /* @__PURE__ */ import_react215.default.createElement("div", {
       style: { width: "620px", padding: "12px 8px", display: "flex", flexDirection: "column", gap: "16px" }
-    }, filterRows.length === 0 ? /* @__PURE__ */ import_react215.default.createElement("div", {
+    }, draftFilters.length === 0 ? /* @__PURE__ */ import_react215.default.createElement("div", {
       style: { color: "#a1a1aa", fontSize: "14px", padding: "16px 0", textAlign: "center" }
     }, "No filters applied. Click below to add a filter.") : /* @__PURE__ */ import_react215.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "12px", maxHeight: "300px", overflowY: "auto", paddingRight: "4px" }
-    }, filterRows.map((row, index2) => /* @__PURE__ */ import_react215.default.createElement("div", {
-      key: index2,
-      style: { display: "flex", alignItems: "center", gap: "12px", width: "100%" }
-    }, /* @__PURE__ */ import_react215.default.createElement(select_default, {
-      placeholder: "Filter field",
-      value: row.field,
-      onChange: (val) => updateFilterRow(index2, "field", val),
-      style: { width: "180px" },
-      className: "h-9 font-medium",
-      options: filterableColumns.map((col) => ({
-        label: col.title,
-        value: col.dataIndex
-      }))
-    }), /* @__PURE__ */ import_react215.default.createElement(select_default, {
-      placeholder: "Filter relation",
-      value: row.operator,
-      onChange: (val) => updateFilterRow(index2, "operator", val),
-      style: { width: "150px" },
-      className: "h-9 font-medium",
-      options: [
+    }, draftFilters.map((row, index2) => {
+      const selectedCol = filterableColumns.find((c2) => c2.dataIndex === row.field);
+      let relationOptions = [
         { label: "Equals (=)", value: "=" },
-        { label: "Not Equals (!=)", value: "!=" },
-        { label: "Like", value: "like" },
-        { label: "Not Like", value: "not like" },
-        { label: "Greater Than (>)", value: ">" },
-        { label: "Less Than (<)", value: "<" },
-        { label: "In", value: "in" },
-        { label: "Not In", value: "not in" }
-      ]
-    }), /* @__PURE__ */ import_react215.default.createElement(input_default, {
-      placeholder: "Value",
-      value: row.value,
-      onChange: (e4) => updateFilterRow(index2, "value", e4.target.value),
-      style: { flex: 1 },
-      className: "h-9 font-medium"
-    }), /* @__PURE__ */ import_react215.default.createElement(button_default, {
-      type: "text",
-      danger: true,
-      icon: /* @__PURE__ */ import_react215.default.createElement(DeleteOutlined_default2, null),
-      onClick: () => removeFilterRow(index2),
-      style: { display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }
-    })))), /* @__PURE__ */ import_react215.default.createElement("div", {
+        { label: "Not Equals (!=)", value: "!=" }
+      ];
+      if (selectedCol) {
+        if (selectedCol.filterType !== "select") {
+          relationOptions.push(
+            { label: "Like", value: "like" },
+            { label: "Not Like", value: "not like" }
+          );
+        }
+        if (selectedCol.filterType === "number") {
+          relationOptions.push(
+            { label: "Greater Than (>)", value: ">" },
+            { label: "Less Than (<)", value: "<" },
+            { label: "Greater or Equal (>=)", value: ">=" },
+            { label: "Less or Equal (<=)", value: "<=" }
+          );
+        }
+        if (selectedCol.filterOperators) {
+          const allRelations = {
+            "=": { label: "Equals (=)", value: "=" },
+            "!=": { label: "Not Equals (!=)", value: "!=" },
+            "like": { label: "Like", value: "like" },
+            "not like": { label: "Not Like", value: "not like" },
+            ">": { label: "Greater Than (>)", value: ">" },
+            "<": { label: "Less Than (<)", value: "<" },
+            ">=": { label: "Greater or Equal (>=)", value: ">=" },
+            "<=": { label: "Less or Equal (<=)", value: "<=" },
+            "in": { label: "In", value: "in" },
+            "not in": { label: "Not In", value: "not in" }
+          };
+          relationOptions = selectedCol.filterOperators.map((op) => allRelations[op] || { label: op, value: op });
+        }
+      }
+      return /* @__PURE__ */ import_react215.default.createElement("div", {
+        key: index2,
+        style: { display: "flex", alignItems: "center", gap: "12px", width: "100%" }
+      }, /* @__PURE__ */ import_react215.default.createElement(select_default, {
+        placeholder: "Filter field",
+        value: row.field,
+        onChange: (val) => updateFilterRow(index2, "field", val),
+        style: { width: "180px" },
+        className: "h-9 font-medium",
+        options: filterableColumns.map((col) => ({
+          label: col.title,
+          value: col.dataIndex
+        }))
+      }), /* @__PURE__ */ import_react215.default.createElement(select_default, {
+        placeholder: "Filter relation",
+        value: row.operator,
+        onChange: (val) => updateFilterRow(index2, "operator", val),
+        style: { width: "150px" },
+        className: "h-9 font-medium",
+        disabled: !row.field,
+        options: row.field ? relationOptions : []
+      }), (selectedCol == null ? void 0 : selectedCol.filterType) === "select" ? /* @__PURE__ */ import_react215.default.createElement(select_default, {
+        placeholder: "Select value",
+        value: row.value || void 0,
+        onChange: (val) => updateFilterRow(index2, "value", val),
+        style: { flex: 1 },
+        className: "h-9 font-medium",
+        disabled: !row.operator,
+        options: selectedCol.filterOptions
+      }) : /* @__PURE__ */ import_react215.default.createElement(input_default, {
+        placeholder: "Value",
+        type: (selectedCol == null ? void 0 : selectedCol.filterType) === "number" ? "number" : "text",
+        value: row.value,
+        onChange: (e4) => updateFilterRow(index2, "value", e4.target.value),
+        style: { flex: 1 },
+        className: "h-9 font-medium",
+        disabled: !row.operator
+      }), /* @__PURE__ */ import_react215.default.createElement(button_default, {
+        type: "text",
+        danger: true,
+        icon: /* @__PURE__ */ import_react215.default.createElement(DeleteOutlined_default2, null),
+        onClick: () => removeFilterRow(index2),
+        style: { display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }
+      }));
+    })), /* @__PURE__ */ import_react215.default.createElement("div", {
       style: { display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #f0f0f0", paddingTop: "16px", marginTop: "4px" }
     }, /* @__PURE__ */ import_react215.default.createElement(button_default, {
       type: "dashed",
@@ -127997,12 +128062,12 @@ html body {
       onClick: handleApply,
       style: { height: "36px", padding: "0 16px", backgroundColor: "#000", color: "#fff", fontWeight: "bold", border: "none" }
     }, "Apply Filters"))));
-    const activeCount = filterRows.filter((row) => row.field && row.value !== void 0 && row.value !== "").length;
+    const activeCount = appliedFilters.filter((row) => row.field && row.operator && row.value !== void 0 && row.value !== "").length;
     return /* @__PURE__ */ import_react215.default.createElement(popover_default, {
       content: filterPopoverContent,
       trigger: "click",
       open: popoverOpen,
-      onOpenChange: setPopoverOpen,
+      onOpenChange: handleOpenChange,
       placement: "bottomRight",
       arrow: true
     }, /* @__PURE__ */ import_react215.default.createElement(button_default, {
@@ -129981,7 +130046,9 @@ html body {
       render: (text) => /* @__PURE__ */ import_react232.default.createElement(Text11, {
         copyable: true,
         style: { whiteSpace: "nowrap" }
-      }, text)
+      }, text),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Name",
@@ -129990,12 +130057,16 @@ html body {
       render: (text) => /* @__PURE__ */ import_react232.default.createElement(Text11, {
         strong: true
       }, text),
-      sorter: (a2, b) => (a2.donor_name || "").localeCompare(b.donor_name || "")
+      sorter: (a2, b) => (a2.donor_name || "").localeCompare(b.donor_name || ""),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Mobile Number",
       dataIndex: "mobile_number",
-      key: "mobile_number"
+      key: "mobile_number",
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Email",
@@ -130003,7 +130074,9 @@ html body {
       key: "email",
       render: (text) => text || /* @__PURE__ */ import_react232.default.createElement(Text11, {
         type: "secondary"
-      }, "-")
+      }, "-"),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "City",
@@ -130011,7 +130084,9 @@ html body {
       key: "city",
       render: (text) => text || /* @__PURE__ */ import_react232.default.createElement(Text11, {
         type: "secondary"
-      }, "-")
+      }, "-"),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Address",
@@ -130020,7 +130095,9 @@ html body {
       ellipsis: true,
       render: (text) => text || /* @__PURE__ */ import_react232.default.createElement(Text11, {
         type: "secondary"
-      }, "-")
+      }, "-"),
+      filterable: true,
+      filterType: "text"
     }
   ];
 
@@ -131490,22 +131567,30 @@ html body {
       render: (text) => /* @__PURE__ */ import_react240.default.createElement(Text14, {
         strong: true
       }, text),
-      sorter: (a2, b) => (a2.temple_name || "").localeCompare(b.temple_name || "")
+      sorter: (a2, b) => (a2.temple_name || "").localeCompare(b.temple_name || ""),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "City",
       dataIndex: "city",
-      key: "city"
+      key: "city",
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "State",
       dataIndex: "state",
-      key: "state"
+      key: "state",
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Registration No",
       dataIndex: "trust_registration_no",
-      key: "trust_registration_no"
+      key: "trust_registration_no",
+      filterable: true,
+      filterType: "text"
     }
   ];
 
@@ -131776,12 +131861,17 @@ html body {
       key: "donor_name",
       render: (text) => /* @__PURE__ */ import_react244.default.createElement(Text16, {
         strong: true
-      }, text)
+      }, text),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Temple",
+      dataIndex: "temple",
       key: "temple",
-      render: (_2, record) => /* @__PURE__ */ import_react244.default.createElement(Text16, null, record["temple.temple_name"] || record.temple_name)
+      render: (_2, record) => /* @__PURE__ */ import_react244.default.createElement(Text16, null, record["temple.temple_name"] || record.temple_name),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Amount",
@@ -131791,7 +131881,9 @@ html body {
         type: "success",
         strong: true
       }, "\u20B9", Number(val || 0).toLocaleString()),
-      sorter: (a2, b) => (a2.total_amount || 0) - (b.total_amount || 0)
+      sorter: (a2, b) => (a2.total_amount || 0) - (b.total_amount || 0),
+      filterable: true,
+      filterType: "number"
     },
     {
       title: "Payment Mode",
@@ -131800,13 +131892,24 @@ html body {
       render: (mode) => /* @__PURE__ */ import_react244.default.createElement(tag_default, {
         className: `tag-glass tag-glass-${mode === "Cash" ? "green" : "blue"}`,
         color: mode === "Cash" ? "green" : "blue"
-      }, mode)
+      }, mode),
+      filterable: true,
+      filterType: "select",
+      filterOptions: [
+        { label: "Cash", value: "Cash" },
+        { label: "Online", value: "Online" },
+        { label: "Cheque", value: "Cheque" },
+        { label: "UPI", value: "UPI" },
+        { label: "Card", value: "Card" }
+      ]
     },
     {
       title: "Receiver",
       dataIndex: "cashier",
       key: "cashier",
-      render: (text) => /* @__PURE__ */ import_react244.default.createElement(Text16, null, text)
+      render: (text) => /* @__PURE__ */ import_react244.default.createElement(Text16, null, text),
+      filterable: true,
+      filterType: "text"
     }
   ];
 
@@ -132130,7 +132233,8 @@ html body {
           alt: "Donation",
           className: "w-10 h-10 object-cover"
         });
-      }
+      },
+      filterable: false
     },
     {
       title: "Donation Type",
@@ -132139,13 +132243,17 @@ html body {
       render: (text) => /* @__PURE__ */ import_react248.default.createElement(Text18, {
         strong: true
       }, text),
-      sorter: (a2, b) => (a2.donation_type || "").localeCompare(b.donation_type || "")
+      sorter: (a2, b) => (a2.donation_type || "").localeCompare(b.donation_type || ""),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "Default Amount",
       dataIndex: "default_amount",
       key: "default_amount",
-      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-"
+      render: (val) => val ? `\u20B9${Number(val).toLocaleString()}` : "-",
+      filterable: true,
+      filterType: "number"
     }
   ];
 
@@ -132359,7 +132467,9 @@ html body {
         }, name), /* @__PURE__ */ import_react252.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.email || "no-email")));
-      }
+      },
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "CONTACT",
@@ -132368,7 +132478,9 @@ html body {
       width: 180,
       render: (text) => /* @__PURE__ */ import_react252.default.createElement("span", {
         className: "text-gray-600 text-sm font-medium"
-      }, text || "N/A")
+      }, text || "N/A"),
+      filterable: true,
+      filterType: "text"
     },
     {
       title: "TEMPLES",
@@ -132382,7 +132494,8 @@ html body {
         className: "tag-glass tag-glass-gray !m-0"
       }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react252.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
-      }, "Global"))
+      }, "Global")),
+      filterable: false
     },
     {
       title: "ROLE",
@@ -132394,7 +132507,15 @@ html body {
         return /* @__PURE__ */ import_react252.default.createElement(tag_default, {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
-      }
+      },
+      filterable: true,
+      filterType: "select",
+      filterOptions: [
+        { label: "Administrator", value: "Administrator" },
+        { label: "Cashier", value: "Cashier" },
+        { label: "Super Admin", value: "Super Admin" },
+        { label: "Temple Admin", value: "Temple Admin" }
+      ]
     },
     {
       title: "STATUS",
@@ -132406,7 +132527,13 @@ html body {
         return /* @__PURE__ */ import_react252.default.createElement(tag_default, {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
-      }
+      },
+      filterable: true,
+      filterType: "select",
+      filterOptions: [
+        { label: "Active", value: 1 },
+        { label: "Inactive", value: 0 }
+      ]
     }
   ];
 
@@ -133398,4 +133525,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.OCRMSAQU.js.map
+//# sourceMappingURL=temple_donation.bundle.BJKNKGQS.js.map
