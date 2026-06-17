@@ -44,6 +44,94 @@ const ListingPage = ({
     const [renamingView, setRenamingView] = useState(null);
     const [renameValue, setRenameValue] = useState("");
     const [editModalFilters, setEditModalFilters] = useState([]);
+    const [customizedColumns, setCustomizedColumns] = useState([]);
+
+    useEffect(() => {
+        if (!columns || !doctype) return;
+        
+        // 1. Immediate loading from localStorage for instantaneous UI updates
+        const savedLocal = localStorage.getItem(`columns_order_${doctype}`);
+        let initialCols = columns.map(c => ({ ...c, visible: true }));
+        
+        if (savedLocal) {
+            try {
+                const parsed = JSON.parse(savedLocal);
+                const reordered = [];
+                parsed.forEach(savedCol => {
+                    const match = columns.find(c => (c.dataIndex || c.key) === savedCol.dataIndex);
+                    if (match) {
+                        reordered.push({ ...match, visible: savedCol.visible !== false });
+                    }
+                });
+                columns.forEach(c => {
+                    const key = c.dataIndex || c.key;
+                    if (key && !reordered.find(r => (r.dataIndex || r.key) === key)) {
+                        reordered.push({ ...c, visible: true });
+                    }
+                });
+                initialCols = reordered;
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        setCustomizedColumns(initialCols);
+
+        // 2. Fetch from database user settings (server-side persistence)
+        if (typeof frappe !== "undefined") {
+            frappe.call({
+                method: "temple_donation.api.get_column_order",
+                args: { reference_doctype: doctype },
+                callback: (r) => {
+                    if (r.message && Array.isArray(r.message) && r.message.length > 0) {
+                        const parsed = r.message;
+                        const reordered = [];
+                        parsed.forEach(savedCol => {
+                            const match = columns.find(c => (c.dataIndex || c.key) === savedCol.dataIndex);
+                            if (match) {
+                                reordered.push({ ...match, visible: savedCol.visible !== false });
+                            }
+                        });
+                        columns.forEach(c => {
+                            const key = c.dataIndex || c.key;
+                            if (key && !reordered.find(r => (r.dataIndex || r.key) === key)) {
+                                reordered.push({ ...c, visible: true });
+                            }
+                        });
+                        setCustomizedColumns(reordered);
+                        
+                        // Sync back to local storage
+                        const storageData = reordered.map(c => ({
+                            dataIndex: c.dataIndex || c.key,
+                            visible: c.visible !== false
+                        }));
+                        localStorage.setItem(`columns_order_${doctype}`, JSON.stringify(storageData));
+                    }
+                }
+            });
+        }
+    }, [doctype, columns]);
+
+    const handleSaveColumns = (newCols) => {
+        setCustomizedColumns(newCols);
+        const storageData = newCols.map(c => ({
+            dataIndex: c.dataIndex || c.key,
+            visible: c.visible !== false
+        }));
+        
+        // Save to local storage for fast local experience
+        localStorage.setItem(`columns_order_${doctype}`, JSON.stringify(storageData));
+        
+        // Save to backend database
+        if (typeof frappe !== "undefined") {
+            frappe.call({
+                method: "temple_donation.api.save_column_order",
+                args: {
+                    reference_doctype: doctype,
+                    columns_json: JSON.stringify(storageData)
+                }
+            });
+        }
+    };
 
     const addEditFilterRow = () => {
         setEditModalFilters([...editModalFilters, { field: undefined, operator: undefined, value: "" }]);
@@ -285,6 +373,10 @@ const ListingPage = ({
         );
     }
 
+    const visibleColumns = customizedColumns.length > 0 
+        ? customizedColumns.filter(c => c.visible !== false) 
+        : (columns || []);
+
     return (
         <div className="py-6 space-y-6">
 
@@ -304,6 +396,8 @@ const ListingPage = ({
                 onApplyFilters={allowFilter ? setAppliedFilters : undefined}
                 savedViews={savedViews}
                 onRefreshViews={fetchSavedViews}
+                customizedColumns={customizedColumns}
+                onSaveColumns={handleSaveColumns}
             />
 
             {allowFilter && savedViews.length > 0 && (
@@ -345,7 +439,7 @@ const ListingPage = ({
                 />
             )}
             <CommonTable
-                columns={columns || []}
+                columns={visibleColumns}
                 dataSource={enrichedData}
                 loading={loading || enriching}
                 searchText={searchText}

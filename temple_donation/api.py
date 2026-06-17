@@ -462,4 +462,77 @@ def update_filter_view(old_view_name, new_view_name, reference_doctype, filters_
     frappe.db.commit()
     return True
 
+@frappe.whitelist()
+def save_column_order(reference_doctype, columns_json):
+    """
+    Saves the column order and visibility for a specific user and reference_doctype in __UserSettings.
+    """
+    import json
+    user = frappe.session.user
+    
+    # Fetch current data from database directly with raw SQL to prevent ORM order-by issues
+    res = frappe.db.sql("""
+        select data from `__UserSettings`
+        where `user`=%s and `doctype`=%s
+    """, (user, reference_doctype))
+    
+    existing_data = res[0][0] if res else None
+    
+    if existing_data:
+        try:
+            user_settings = json.loads(existing_data)
+        except Exception:
+            user_settings = {}
+    else:
+        user_settings = {}
+        
+    user_settings["column_order"] = json.loads(columns_json)
+    
+    # Save back to database
+    frappe.db.multisql(
+        {
+            "mariadb": """INSERT INTO `__UserSettings`(`user`, `doctype`, `data`)
+            VALUES (%s, %s, %s)
+            ON DUPLICATE key UPDATE `data`=%s""",
+            "postgres": """INSERT INTO `__UserSettings` (`user`, `doctype`, `data`)
+            VALUES (%s, %s, %s)
+            ON CONFLICT ("user", "doctype") DO UPDATE SET `data`=%s""",
+        },
+        (user, reference_doctype, json.dumps(user_settings), json.dumps(user_settings)),
+        as_dict=1,
+    )
+    frappe.db.commit()
+    
+    # Clear Redis cache
+    try:
+        frappe.cache.hset("_user_settings", f"{reference_doctype}::{user}", None)
+    except Exception:
+        pass
+        
+    return True
+
+@frappe.whitelist()
+def get_column_order(reference_doctype):
+    """
+    Retrieves the column order and visibility for the current user and reference_doctype from __UserSettings.
+    """
+    import json
+    user = frappe.session.user
+    
+    res = frappe.db.sql("""
+        select data from `__UserSettings`
+        where `user`=%s and `doctype`=%s
+    """, (user, reference_doctype))
+    
+    existing_data = res[0][0] if res else None
+    
+    if existing_data:
+        try:
+            settings = json.loads(existing_data)
+            return settings.get("column_order") or []
+        except Exception:
+            return []
+    return []
+
+
 

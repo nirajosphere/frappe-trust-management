@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Space, Button, Input, Dropdown } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
 import FilterPopover from "./FilterPopover";
+import ColumnsPopover from "./ColumnsPopover";
 
 const { Title, Text } = Typography;
 
@@ -27,7 +28,9 @@ const PageHeader = ({
     appliedFilters,
     onApplyFilters, // Callback for dynamic filters: (filtersArray) => void
     savedViews,
-    onRefreshViews
+    onRefreshViews,
+    customizedColumns,
+    onSaveColumns
 }) => {
     // Filter export dropdown options based on the exportOptions prop
     const defaultItems = [
@@ -87,6 +90,15 @@ const PageHeader = ({
                             onApplyFilters={onApplyFilters}
                             savedViews={savedViews}
                             onRefreshViews={onRefreshViews}
+                        />
+                    )}
+
+                    {customizedColumns && onSaveColumns && (
+                        <ColumnsPopover 
+                            customizedColumns={customizedColumns}
+                            onSaveColumns={onSaveColumns}
+                            originalColumns={columns}
+                            doctype={doctype}
                         />
                     )}
 
