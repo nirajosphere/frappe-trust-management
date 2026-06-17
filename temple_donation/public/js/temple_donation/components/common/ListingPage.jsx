@@ -32,7 +32,8 @@ const ListingPage = ({
     allowView = true,
     allowPrint = true,
     allowExport = true,
-    exportOptions = ["csv", "excel", "pdf"]
+    exportOptions = ["csv", "excel", "pdf"],
+    addLabel
 }) => {
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
@@ -168,7 +169,7 @@ const ListingPage = ({
                 onExport={handleExport}
                 onSearch={setSearchText}
                 searchPlaceholder={`Search ${doctype}s...`}
-                addLabel="Add New Record" 
+                addLabel={addLabel || `Add ${doctype}`} 
                 allowExport={allowExport}
                 exportOptions={exportOptions}
             />

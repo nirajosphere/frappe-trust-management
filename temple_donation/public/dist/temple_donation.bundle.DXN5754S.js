@@ -129648,7 +129648,8 @@ html body {
     allowView = true,
     allowPrint = true,
     allowExport = true,
-    exportOptions = ["csv", "excel", "pdf"]
+    exportOptions = ["csv", "excel", "pdf"],
+    addLabel
   }) => {
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
       fields,
@@ -129764,7 +129765,7 @@ html body {
       onExport: handleExport,
       onSearch: setSearchText,
       searchPlaceholder: `Search ${doctype}s...`,
-      addLabel: "Add New Record",
+      addLabel: addLabel || `Add ${doctype}`,
       allowExport,
       exportOptions
     }), /* @__PURE__ */ import_react230.default.createElement(CommonTable_default, {
@@ -133213,4 +133214,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.Z2C3B5CJ.js.map
+//# sourceMappingURL=temple_donation.bundle.DXN5754S.js.map
