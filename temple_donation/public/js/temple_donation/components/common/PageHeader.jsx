@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Space, Button, Input, Dropdown } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
+import FilterPopover from "./FilterPopover";
 
 const { Title, Text } = Typography;
 
@@ -20,7 +21,9 @@ const PageHeader = ({
     exportOptions = ["csv", "excel", "pdf"],
     onSearch,
     searchPlaceholder = "Search...",
-    extra // Used for custom action buttons (Print, Edit, etc)
+    extra, // Used for custom action buttons (Print, Edit, etc)
+    columns, // Passed from ListingPage for dynamic filter field list
+    onApplyFilters // Callback for dynamic filters: (filtersArray) => void
 }) => {
     // Filter export dropdown options based on the exportOptions prop
     const defaultItems = [
@@ -69,6 +72,13 @@ const PageHeader = ({
                             prefix={<SearchOutlined className="text-zinc-400" />}
                             onChange={(e) => onSearch(e.target.value)}
                             className="h-10 w-full md:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
+                        />
+                    )}
+
+                    {onApplyFilters && (
+                        <FilterPopover 
+                            columns={columns} 
+                            onApplyFilters={onApplyFilters} 
                         />
                     )}
 

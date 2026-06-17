@@ -42,7 +42,7 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [doctype, JSON.stringify(options.filters || {}), JSON.stringify(options.fields || [])]);
 
     return { data, loading, error, mutate: fetchData };
 };

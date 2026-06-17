@@ -33,12 +33,35 @@ const ListingPage = ({
     allowPrint = true,
     allowExport = true,
     exportOptions = ["csv", "excel", "pdf"],
-    addLabel
+    addLabel,
+    allowFilter = true
 }) => {
+    const [activeFilters, setActiveFilters] = useState([]);
+
+    // Merge default filters prop with runtime active dynamic filters
+    const combinedFilters = React.useMemo(() => {
+        const normalizeFilters = (flt) => {
+            if (!flt) return [];
+            if (Array.isArray(flt)) return flt;
+            return Object.keys(flt).map(key => {
+                const val = flt[key];
+                if (Array.isArray(val) && val.length === 2) {
+                    return [key, val[0], val[1]];
+                }
+                return [key, "=", val];
+            });
+        };
+
+        return [
+            ...normalizeFilters(filters),
+            ...activeFilters
+        ];
+    }, [filters, activeFilters]);
+
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
         fields: fields,
-        filters: filters,
+        filters: combinedFilters,
         limit: 100,
         orderBy: { field: 'modified', order: 'desc' }
     });
@@ -172,6 +195,8 @@ const ListingPage = ({
                 addLabel={addLabel || `Add ${doctype}`} 
                 allowExport={allowExport}
                 exportOptions={exportOptions}
+                columns={columns}
+                onApplyFilters={allowFilter ? setActiveFilters : undefined}
             />
             <CommonTable
                 columns={columns || []}
