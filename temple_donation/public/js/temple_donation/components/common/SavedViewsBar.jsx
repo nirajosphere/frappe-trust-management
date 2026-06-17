@@ -38,6 +38,24 @@ const SavedViewsBar = ({ views, appliedFilters, onSelectView, onDeleteView, onEd
                 Saved Views:
             </span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                <Tag
+                    onClick={() => onSelectView([])}
+                    style={{
+                        padding: "4px 12px",
+                        borderRadius: "16px",
+                        fontSize: "13px",
+                        fontWeight: "600",
+                        cursor: "pointer",
+                        border: "1px solid",
+                        transition: "all 0.2s",
+                        backgroundColor: (!appliedFilters || appliedFilters.length === 0) ? "#000" : "#ffffff",
+                        color: (!appliedFilters || appliedFilters.length === 0) ? "#fff" : "#18181b",
+                        borderColor: (!appliedFilters || appliedFilters.length === 0) ? "#000" : "#d9d9d9"
+                    }}
+                    className="hover:scale-[1.02]"
+                >
+                    All
+                </Tag>
                 {views.map((view, idx) => {
                     const active = isViewActive(view);
                     return (

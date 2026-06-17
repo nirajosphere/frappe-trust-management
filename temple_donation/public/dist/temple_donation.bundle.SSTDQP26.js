@@ -129843,7 +129843,22 @@ html body {
       }
     }, "Saved Views:"), /* @__PURE__ */ import_react231.default.createElement("div", {
       style: { display: "flex", flexWrap: "wrap", gap: "8px" }
-    }, views.map((view, idx) => {
+    }, /* @__PURE__ */ import_react231.default.createElement(tag_default, {
+      onClick: () => onSelectView([]),
+      style: {
+        padding: "4px 12px",
+        borderRadius: "16px",
+        fontSize: "13px",
+        fontWeight: "600",
+        cursor: "pointer",
+        border: "1px solid",
+        transition: "all 0.2s",
+        backgroundColor: !appliedFilters || appliedFilters.length === 0 ? "#000" : "#ffffff",
+        color: !appliedFilters || appliedFilters.length === 0 ? "#fff" : "#18181b",
+        borderColor: !appliedFilters || appliedFilters.length === 0 ? "#000" : "#d9d9d9"
+      },
+      className: "hover:scale-[1.02]"
+    }, "All"), views.map((view, idx) => {
       const active = isViewActive(view);
       return /* @__PURE__ */ import_react231.default.createElement(tag_default, {
         key: idx,
@@ -133950,4 +133965,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.CJW6SAA7.js.map
+//# sourceMappingURL=temple_donation.bundle.SSTDQP26.js.map
