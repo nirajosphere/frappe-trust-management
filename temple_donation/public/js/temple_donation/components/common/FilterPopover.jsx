@@ -225,7 +225,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                     
                     {draftFilters.some(row => row.field && row.operator && row.value !== "") && (
                         <Button
-                            type="text"
+                            type="dashed"
                             onClick={() => {
                                 setPopoverOpen(false);
                                 setIsSaveModalOpen(true);

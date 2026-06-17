@@ -128078,7 +128078,7 @@ html body {
       style: { height: "36px", borderColor: "#d9d9d9", fontWeight: "bold" },
       className: "hover:text-black hover:border-black"
     }, "Add a Filter"), draftFilters.some((row) => row.field && row.operator && row.value !== "") && /* @__PURE__ */ import_react215.default.createElement(button_default, {
-      type: "text",
+      type: "dashed",
       onClick: () => {
         setPopoverOpen(false);
         setIsSaveModalOpen(true);
@@ -133965,4 +133965,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.SSTDQP26.js.map
+//# sourceMappingURL=temple_donation.bundle.QK7VU3HW.js.map
