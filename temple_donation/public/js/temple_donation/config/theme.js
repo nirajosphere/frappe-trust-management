@@ -50,6 +50,12 @@ export const themeConfig = {
         Select: {
             borderRadius: 8,
             controlHeight: 40,
+            optionSelectedBg: "#18181b",
+            optionSelectedColor: "#ffffff",
+            optionActiveBg: "#f4f4f5",
+            selectorBg: "#ffffff",
+            activeBorderColor: "#18181b",
+            hoverBorderColor: "#18181b",
         },
         Table: {
             borderRadius: 8,

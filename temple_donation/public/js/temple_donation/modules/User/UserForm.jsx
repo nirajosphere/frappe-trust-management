@@ -335,16 +335,14 @@ const UserForm = ({ id, onBack }) => {
 
             if (isEdit) {
                 await updateDoc(DOCTYPE_USER, id, payload);
-                message.success("User updated");
             } else {
                 await createDoc(DOCTYPE_USER, payload);
-                message.success("User created");
             }
 
             onBack && onBack();
 
-        } catch {
-            message.error("Error saving");
+        } catch (err) {
+            console.error("Save Error:", err);
         }
     };
 

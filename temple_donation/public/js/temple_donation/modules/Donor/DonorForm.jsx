@@ -200,15 +200,13 @@ const DonorForm = ({ id, onBack }) => {
 
             if (isEdit) {
                 await updateDoc(DOCTYPE_DONOR, id, payload);
-                message.success("Updated successfully");
             } else {
                 await createDoc(DOCTYPE_DONOR, payload);
-                message.success("Created successfully");
             }
 
             onBack && onBack();
         } catch (err) {
-            message.error("Error saving data");
+            console.error("Save Error:", err);
         }
     };
 

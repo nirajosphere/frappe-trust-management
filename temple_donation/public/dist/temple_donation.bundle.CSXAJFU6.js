@@ -104629,7 +104629,13 @@ html body {
       },
       Select: {
         borderRadius: 8,
-        controlHeight: 40
+        controlHeight: 40,
+        optionSelectedBg: "#18181b",
+        optionSelectedColor: "#ffffff",
+        optionActiveBg: "#f4f4f5",
+        selectorBg: "#ffffff",
+        activeBorderColor: "#18181b",
+        hoverBorderColor: "#18181b"
       },
       Table: {
         borderRadius: 8
@@ -128547,6 +128553,17 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/hooks/useFrappe.js
   var import_react219 = __toESM(require_react());
+  var getErrorMessage = (err) => {
+    if (!err)
+      return "Unknown error";
+    if (typeof err === "string")
+      return err;
+    if (err.message)
+      return err.message;
+    if (err.statusText)
+      return err.statusText;
+    return "Request failed";
+  };
   var useFrappeGetDocList = (doctype, options = {}) => {
     const [data, setData] = (0, import_react219.useState)([]);
     const [loading, setLoading] = (0, import_react219.useState)(true);
@@ -128573,6 +128590,7 @@ html body {
         error: (err) => {
           setLoading(false);
           setError(err);
+          message_default.error(getErrorMessage(err));
         }
       });
     };
@@ -128594,14 +128612,17 @@ html body {
           },
           callback: (r3) => {
             setLoading(false);
-            if (r3.message)
+            if (r3.message) {
+              message_default.success(`${doctype} created successfully`);
               resolve(r3.message);
-            else
+            } else
               reject(r3);
           },
           error: (err) => {
             setLoading(false);
-            setError(err.message || "Failed to create document.");
+            const errMsg = getErrorMessage(err);
+            message_default.error(errMsg);
+            setError(errMsg);
             reject(err);
           }
         });
@@ -128624,14 +128645,17 @@ html body {
           },
           callback: (r3) => {
             setLoading(false);
-            if (r3.message)
+            if (r3.message) {
+              message_default.success(`${doctype} updated successfully`);
               resolve(r3.message);
-            else
+            } else
               reject(r3);
           },
           error: (err) => {
             setLoading(false);
-            setError(err.message || "Failed to update.");
+            const errMsg = getErrorMessage(err);
+            message_default.error(errMsg);
+            setError(errMsg);
             reject(err);
           }
         });
@@ -128660,14 +128684,17 @@ html body {
           setLoading(false);
           if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
+            message_default.success("File uploaded successfully");
             resolve(response.message || response);
           } else {
+            message_default.error("Upload failed");
             setError("Upload failed.");
             reject("Upload failed");
           }
         };
         xhr.onerror = () => {
           setLoading(false);
+          message_default.error("Network Error: Upload failed");
           setError("Network Error");
           reject("Network Error");
         };
@@ -128687,11 +128714,14 @@ html body {
           args: { doctype, name },
           callback: (r3) => {
             setLoading(false);
+            message_default.success(`${doctype} deleted successfully`);
             resolve(r3.message || true);
           },
           error: (err) => {
             setLoading(false);
-            setError(err.message || "Failed to delete.");
+            const errMsg = getErrorMessage(err);
+            message_default.error(errMsg);
+            setError(errMsg);
             reject(err);
           }
         });
@@ -128720,6 +128750,7 @@ html body {
         error: (err) => {
           setLoading(false);
           setError(err);
+          message_default.error(getErrorMessage(err));
         }
       });
     };
@@ -128781,12 +128812,10 @@ html body {
       try {
         const values = await form.validateFields();
         await createDoc("Donor", values);
-        message_default.success("Donor created successfully");
         form.resetFields();
         onSuccess(values);
       } catch (err) {
         console.error(err);
-        message_default.error(err.message || "Failed to create donor");
       }
     };
     return /* @__PURE__ */ import_react220.default.createElement(modal_default, {
@@ -129386,13 +129415,6 @@ html body {
       icon: /* @__PURE__ */ import_react228.default.createElement(EditOutlined_default2, null),
       onClick: () => onEdit(record),
       className: "px-2 border border-gray-200 hover:!text-blue-500"
-    })), onPrint && showPrint && /* @__PURE__ */ import_react228.default.createElement(tooltip_default, {
-      title: "Print"
-    }, /* @__PURE__ */ import_react228.default.createElement(button_default, {
-      type: "text",
-      icon: /* @__PURE__ */ import_react228.default.createElement(PrinterOutlined_default2, null),
-      onClick: () => onPrint(record),
-      className: "px-2 border border-gray-200 hover:!text-amber-500"
     })), onDelete && showDelete && /* @__PURE__ */ import_react228.default.createElement(popconfirm_default, {
       title: "Delete?",
       description: "This cannot be undone",
@@ -129689,10 +129711,9 @@ html body {
         cancelText: "No",
         onOk() {
           return deleteDoc(doctype, record.name).then(() => {
-            message_default.success(`${doctype} deleted successfully!`);
             mutate();
           }).catch((err) => {
-            message_default.error(err.message || "Failed to delete.");
+            console.error("Delete Error:", err);
           });
         }
       });
@@ -130368,6 +130389,10 @@ html body {
       fields: ["name", "temple_name"],
       limit: 1e3
     });
+    const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
+      fields: ["name", "donation_type"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react234.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -130535,18 +130560,7 @@ html body {
           style: bgStyle
         }, getInitials(doc.donation_type || doc.name));
       }
-      return /* @__PURE__ */ import_react234.default.createElement("div", {
-        style: bgStyle
-      }, /* @__PURE__ */ import_react234.default.createElement("svg", {
-        width: "20",
-        height: "20",
-        viewBox: "0 0 24 24",
-        fill: "none",
-        stroke: "currentColor",
-        strokeWidth: "2.5"
-      }, /* @__PURE__ */ import_react234.default.createElement("path", {
-        d: "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-      })));
+      return /* @__PURE__ */ import_react234.default.createElement(import_react234.default.Fragment, null);
     };
     const renderHeaderDetails = () => {
       let title = doc.name;
@@ -130786,9 +130800,12 @@ html body {
             style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C2.inkLight }
           }, "Donation Type"),
           dataIndex: "donation_type",
-          render: (v) => /* @__PURE__ */ import_react234.default.createElement("span", {
-            style: { fontWeight: 600, color: C2.ink, fontSize: 13 }
-          }, v)
+          render: (v) => {
+            const dt2 = donationTypes == null ? void 0 : donationTypes.find((t2) => t2.name === v);
+            return /* @__PURE__ */ import_react234.default.createElement("span", {
+              style: { fontWeight: 600, color: C2.ink, fontSize: 13 }
+            }, dt2 ? dt2.donation_type : v);
+          }
         },
         {
           title: /* @__PURE__ */ import_react234.default.createElement("span", {
@@ -131074,14 +131091,12 @@ html body {
         });
         if (isEdit) {
           await updateDoc(DOCTYPE_DONOR, id, payload);
-          message_default.success("Updated successfully");
         } else {
           await createDoc(DOCTYPE_DONOR, payload);
-          message_default.success("Created successfully");
         }
         onBack && onBack();
       } catch (err) {
-        message_default.error("Error saving data");
+        console.error("Save Error:", err);
       }
     };
     if (loading)
@@ -131361,14 +131376,12 @@ html body {
         });
         if (isEdit) {
           await updateDoc(DOCTYPE_TEMPLE, id, payload);
-          message_default.success("Temple updated");
         } else {
           await createDoc(DOCTYPE_TEMPLE, payload);
-          message_default.success("Temple created");
         }
         onBack && onBack();
       } catch (err) {
-        message_default.error("Error saving");
+        console.error("Save Error:", err);
       }
     };
     const toggleDonationType = (name) => {
@@ -132024,11 +132037,9 @@ html body {
         } else if (isEdit && (!donation_image || donation_image.length === 0)) {
           await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
         }
-        message_default.success("Saved successfully");
         onBack && onBack();
       } catch (err) {
         console.error("Save Error:", err);
-        message_default.error(err.message || "Error saving data");
       }
     };
     if (loading)
@@ -132259,14 +132270,12 @@ html body {
           delete payload.new_password;
         if (isEdit) {
           await updateDoc(DOCTYPE_USER, id, payload);
-          message_default.success("User updated");
         } else {
           await createDoc(DOCTYPE_USER, payload);
-          message_default.success("User created");
         }
         onBack && onBack();
-      } catch (e4) {
-        message_default.error("Error saving");
+      } catch (err) {
+        console.error("Save Error:", err);
       }
     };
     if (isEdit && loading)
@@ -133189,4 +133198,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.PTIPE3VG.js.map
+//# sourceMappingURL=temple_donation.bundle.CSXAJFU6.js.map

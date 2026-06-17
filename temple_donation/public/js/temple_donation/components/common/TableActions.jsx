@@ -40,7 +40,7 @@ const TableActions = ({
                 </Tooltip>
             )}
 
-            {onPrint && showPrint && (
+            {/* {onPrint && showPrint && (
                 <Tooltip title="Print">
                     <Button
                         type="text"
@@ -49,7 +49,7 @@ const TableActions = ({
                         className="px-2 border border-gray-200 hover:!text-amber-500"
                     />
                 </Tooltip>
-            )}
+            )} */}
 
             {onDelete && showDelete && (
                 <Popconfirm

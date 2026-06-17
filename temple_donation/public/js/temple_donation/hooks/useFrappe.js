@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+import { message } from "antd";
+
+const getErrorMessage = (err) => {
+    if (!err) return "Unknown error";
+    if (typeof err === "string") return err;
+    if (err.message) return err.message;
+    if (err.statusText) return err.statusText;
+    return "Request failed";
+};
 
 export const useFrappeGetDocList = (doctype, options = {}) => {
     const [data, setData] = useState([]);
@@ -26,6 +35,7 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
             error: (err) => {
                 setLoading(false);
                 setError(err);
+                message.error(getErrorMessage(err));
             }
         });
     };
@@ -51,12 +61,17 @@ export const useFrappeCreateDoc = () => {
                 },
                 callback: (r) => {
                     setLoading(false);
-                    if (r.message) resolve(r.message);
+                    if (r.message) {
+                        message.success(`${doctype} created successfully`);
+                        resolve(r.message);
+                    }
                     else reject(r);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to create document.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -82,12 +97,17 @@ export const useFrappeUpdateDoc = () => {
                 },
                 callback: (r) => {
                     setLoading(false);
-                    if (r.message) resolve(r.message);
+                    if (r.message) {
+                        message.success(`${doctype} updated successfully`);
+                        resolve(r.message);
+                    }
                     else reject(r);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to update.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -122,8 +142,10 @@ export const useFrappeFileUpload = () => {
                 setLoading(false);
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
+                    message.success("File uploaded successfully");
                     resolve(response.message || response);
                 } else {
+                    message.error("Upload failed");
                     setError("Upload failed.");
                     reject("Upload failed");
                 }
@@ -131,6 +153,7 @@ export const useFrappeFileUpload = () => {
 
             xhr.onerror = () => {
                 setLoading(false);
+                message.error("Network Error: Upload failed");
                 setError("Network Error");
                 reject("Network Error");
             };
@@ -154,11 +177,14 @@ export const useFrappeDeleteDoc = () => {
                 args: { doctype, name },
                 callback: (r) => {
                     setLoading(false);
+                    message.success(`${doctype} deleted successfully`);
                     resolve(r.message || true);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to delete.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -188,6 +214,7 @@ export const useFrappeGetDoc = (doctype, name) => {
             error: (err) => {
                 setLoading(false);
                 setError(err);
+                message.error(getErrorMessage(err));
             }
         });
     };

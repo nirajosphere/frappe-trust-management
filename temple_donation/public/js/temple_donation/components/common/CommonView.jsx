@@ -132,6 +132,9 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
   const { data: temples } = useFrappeGetDocList("Temple", {
     fields: ["name", "temple_name"], limit: 1000,
   });
+  const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
+    fields: ["name", "donation_type"], limit: 1000,
+  });
 
   if (loading) return <PageLoader />;
 
@@ -306,12 +309,13 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
     }
 
     // Fallback icon for general records (e.g. Donations)
-    return (
-      <div style={bgStyle}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-        </svg>
-      </div>
+    return ( <></>
+      // <div style={bgStyle}>
+      //   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      //     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      //     <polyline points="14 2 14 8 20 8" />
+      //   </svg>
+      // </div>
     );
   };
 
@@ -495,7 +499,10 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                         {
                           title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Donation Type</span>,
                           dataIndex: "donation_type",
-                          render: v => <span style={{ fontWeight: 600, color: C.ink, fontSize: 13 }}>{v}</span>,
+                          render: v => {
+                            const dt = donationTypes?.find(t => t.name === v);
+                            return <span style={{ fontWeight: 600, color: C.ink, fontSize: 13 }}>{dt ? dt.donation_type : v}</span>;
+                          },
                         },
                         {
                           title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Amount</span>,

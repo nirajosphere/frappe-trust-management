@@ -110,11 +110,10 @@ const ListingPage = ({
             onOk() {
                 return deleteDoc(doctype, record.name)
                     .then(() => {
-                        message.success(`${doctype} deleted successfully!`);
                         mutate();
                     })
                     .catch((err) => {
-                        message.error(err.message || "Failed to delete.");
+                        console.error("Delete Error:", err);
                     });
             }
         });

@@ -268,12 +268,10 @@ const DonationTypeForm = ({ id, onBack }) => {
                 await updateDoc(DOCTYPE_DONATION_TYPE, id, { donation_image: "" });
             }
 
-            message.success("Saved successfully");
             onBack && onBack();
 
         } catch (err) {
             console.error("Save Error:", err);
-            message.error(err.message || "Error saving data");
         }
     };
 

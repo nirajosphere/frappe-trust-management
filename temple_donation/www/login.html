@@ -25,11 +25,11 @@
                 <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation Logo" class="login-logo">
             </div>
             
-            <div class="login-form-section">
+            <section class="login-form-section for-login">
                 <h2 class="login-title">Welcome Back</h2>
                 <p class="login-subtitle">Please enter your credentials to access the Temple Donation Portal.</p>
                 
-                <form class="form-signin form-login" role="form">
+                <form class="form-signin form-login page-card-body" role="form">
                     <div class="form-group">
                         <label class="form-label sr-only" for="login_email">{{ _("Email") }}</label>
                         <div class="input-field-wrapper">
@@ -57,18 +57,18 @@
                         </p>
                     </div>
 
-                    <button class="btn btn-login-submit" type="submit">
+                    <button class="btn btn-login-submit btn-primary" type="submit">
                         {{ _("Log In") }}
                     </button>
                 </form>
-            </div>
+            </section>
             
             <!-- Forgot Password View -->
-            <div class="forgot-form-section hide">
+            <section class="forgot-form-section for-forgot hide">
                 <h3 class="login-title">{{ _("Forgot Password") }}</h3>
                 <p class="login-subtitle">{{ _("Enter your email address and we'll send you a link to reset your password.") }}</p>
                 
-                <form class="form-signin form-forgot" role="form">
+                <form class="form-signin form-forgot page-card-body" role="form">
                     <div class="form-group">
                         <div class="input-field-wrapper">
                             <input type="email" id="forgot_email" class="form-control" placeholder="Email Address" required autofocus autocomplete="username">
@@ -78,13 +78,13 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-login-submit mb-3" type="submit">{{ _("Reset Password") }}</button>
+                    <button class="btn btn-login-submit btn-primary mb-3" type="submit">{{ _("Reset Password") }}</button>
                     
                     <p class="text-center m-0">
                         <a href="#login" class="back-to-login-link">{{ _("Back to Login") }}</a>
                     </p>
                 </form>
-            </div>
+            </section>
             
             <div class="login-footer-text">
                 &copy; {{ frappe.utils.nowdate()[:4] }} Temple Donation. All rights reserved.
@@ -106,6 +106,133 @@
 {% block script %}
 <script>
 {% include "templates/includes/login/login.js" %}
+
+// Helper to show modern glassmorphic toast notification
+function showToast(message, type) {
+    let container = document.getElementById('custom-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'custom-toast-container';
+        container.style.cssText = `
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 380px;
+            pointer-events: none;
+        `;
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    const isError = type === 'red' || type === 'error';
+    const bg = isError ? 'rgba(254, 242, 242, 0.95)' : 'rgba(240, 253, 244, 0.95)';
+    const border = isError ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid rgba(34, 197, 94, 0.2)';
+    const iconColor = isError ? '#dc2626' : '#16a34a';
+    const textColor = isError ? '#991b1b' : '#166534';
+    const icon = isError ? 
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>' : 
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+
+    toast.style.cssText = `
+        background: ${bg};
+        border: ${border};
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        color: ${textColor};
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 13.5px;
+        font-weight: 500;
+        line-height: 1.5;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: auto;
+    `;
+
+    toast.innerHTML = `
+        <span style="color: ${iconColor}; display: flex; flex-shrink: 0; margin-top: 2px;">${icon}</span>
+        <div style="flex-grow: 1;">${message}</div>
+    `;
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 6000);
+}
+
+// Helper to extract and show frappe server messages as toast alerts
+function showFrappeMessages(data, defaultMsg, indicator) {
+    let msg = defaultMsg;
+    if (data && data._server_messages) {
+        try {
+            const parsed = JSON.parse(data._server_messages);
+            const messages = parsed.map(item => {
+                try {
+                    const inner = JSON.parse(item);
+                    return inner.message || inner;
+                } catch(e) {
+                    return item;
+                }
+            });
+            if (messages.length > 0) {
+                msg = messages.join("<br>");
+            }
+        } catch(e) {}
+    }
+    if (msg) {
+        showToast(msg, indicator);
+    }
+}
+
+// Wrap the standard login handlers to show toast notifications
+if (window.login && login.login_handlers) {
+    const original_200 = login.login_handlers[200];
+    login.login_handlers[200] = function(data) {
+        if (original_200) original_200(data);
+        if (data._server_messages) {
+            showFrappeMessages(data, null, "green");
+        } else if (window.location.hash === '#forgot') {
+            showToast("If this email is registered with us, we have sent password reset instructions to it. Please check your inbox.", "green");
+        }
+    };
+
+    const wrapErrorHandler = (code, defaultMsg) => {
+        const original_handler = login.login_handlers[code];
+        login.login_handlers[code] = function(xhr, data) {
+            if (xhr && xhr.responseJSON) {
+                data = xhr.responseJSON;
+            }
+            showFrappeMessages(data, defaultMsg, "red");
+            if (original_handler) {
+                original_handler(xhr, data);
+            }
+        };
+    };
+
+    wrapErrorHandler(401, "Invalid Login. Try again.");
+    wrapErrorHandler(417, "Oops! Something went wrong.");
+    wrapErrorHandler(429, "Too many requests. Please try again later.");
+    wrapErrorHandler(500, "Something went wrong.");
+}
 
 // Custom toggle between Forgot Password and Login forms to match standard Frappe behavior
 $(document).ready(function() {

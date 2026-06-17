@@ -282,15 +282,13 @@ const TempleForm = ({ id, onBack }) => {
 
             if (isEdit) {
                 await updateDoc(DOCTYPE_TEMPLE, id, payload);
-                message.success("Temple updated");
             } else {
                 await createDoc(DOCTYPE_TEMPLE, payload);
-                message.success("Temple created");
             }
 
             onBack && onBack();
         } catch (err) {
-            message.error("Error saving");
+            console.error("Save Error:", err);
         }
     };
 
