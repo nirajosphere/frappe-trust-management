@@ -1,4 +1,4 @@
-import { theme } from "antd";
+import { DatePicker, theme } from "antd";
 
 export const themeConfig = {
     algorithm: theme.defaultAlgorithm,
@@ -33,24 +33,24 @@ export const themeConfig = {
             horizontalItemHoverColor: "#18181b",
         },
         Card: {
-            borderRadiusLG: 8,
-            borderRadius: 8,
+            borderRadiusLG: 6,
+            borderRadius: 6,
             // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
         },
         Button: {
-            borderRadius: 8,
-            controlHeight: 40,
+            borderRadius: 6,
+            controlHeight: 38,
             fontWeight: 600,
             colorPrimaryHover: "#000000",
             primaryShadow: "none"
         },
         Input: {
-            borderRadius: 8,
-            controlHeight: 40,
+            borderRadius: 6,
+            controlHeight: 38,
         },
         Select: {
-            borderRadius: 8,
-            controlHeight: 40,
+            borderRadius: 6,
+            controlHeight: 38,
             optionSelectedBg: "#18181b",
             optionSelectedColor: "#ffffff",
             optionActiveBg: "#f4f4f5",
@@ -59,9 +59,12 @@ export const themeConfig = {
             hoverBorderColor: "#18181b",
         },
         Table: {
-            borderRadius: 8,
-
+            borderRadius: 6,
         },
+        DatePicker: {
+            controlHeight: 38,
+            borderRadius: 6,
+        }
     },
 };
 

@@ -105318,23 +105318,23 @@ html body {
         horizontalItemHoverColor: "#18181b"
       },
       Card: {
-        borderRadiusLG: 8,
-        borderRadius: 8
+        borderRadiusLG: 6,
+        borderRadius: 6
       },
       Button: {
-        borderRadius: 8,
-        controlHeight: 40,
+        borderRadius: 6,
+        controlHeight: 38,
         fontWeight: 600,
         colorPrimaryHover: "#000000",
         primaryShadow: "none"
       },
       Input: {
-        borderRadius: 8,
-        controlHeight: 40
+        borderRadius: 6,
+        controlHeight: 38
       },
       Select: {
-        borderRadius: 8,
-        controlHeight: 40,
+        borderRadius: 6,
+        controlHeight: 38,
         optionSelectedBg: "#18181b",
         optionSelectedColor: "#ffffff",
         optionActiveBg: "#f4f4f5",
@@ -105343,7 +105343,11 @@ html body {
         hoverBorderColor: "#18181b"
       },
       Table: {
-        borderRadius: 8
+        borderRadius: 6
+      },
+      DatePicker: {
+        controlHeight: 38,
+        borderRadius: 6
       }
     }
   };
@@ -133879,8 +133883,28 @@ html body {
         description: fetchError.message,
         type: "error"
       });
+    const formItemStyle = { marginBottom: "12px" };
+    const commonCardProps = {
+      size: "small",
+      className: "shadow-sm border border-zinc-200/80 overflow-hidden",
+      style: {
+        height: "auto",
+        background: "#fafafa"
+      },
+      headStyle: {
+        background: "#f4f4f5",
+        borderBottom: "1px solid #e4e4e7",
+        paddingTop: "8px",
+        paddingBottom: "8px"
+      },
+      bodyStyle: {
+        background: "#ffffff",
+        padding: "16px"
+      }
+    };
     return /* @__PURE__ */ import_react248.default.createElement("div", {
-      className: "donation-page py-6"
+      className: "donation-page py-6",
+      style: { maxWidth: "1400px", margin: "0 auto", padding: "0 16px" }
     }, /* @__PURE__ */ import_react248.default.createElement(AddPageHeader_default, {
       onBack,
       title: "Edit Donation",
@@ -133889,79 +133913,93 @@ html body {
     }), /* @__PURE__ */ import_react248.default.createElement(form_default, {
       form,
       layout: "vertical",
-      onFinish: handleSave
+      onFinish: handleSave,
+      size: "middle"
+    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+      gutter: [24, 16]
+    }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      xs: 24,
+      lg: 12
     }, /* @__PURE__ */ import_react248.default.createElement("div", {
-      className: "space-y-6"
-    }, /* @__PURE__ */ import_react248.default.createElement(card_default, {
-      size: "small",
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, /* @__PURE__ */ import_react248.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
       title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(UserOutlined_default2, {
         style: { color: "#18181b" }
       }), /* @__PURE__ */ import_react248.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donor Information"))
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+    }), /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "name",
       hidden: true
     }, /* @__PURE__ */ import_react248.default.createElement(input_default, null)), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 12]
+      gutter: [16, 0]
     }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "name_on_receipt",
-      label: "Name on Receipt"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "Name on Receipt",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "Enter receipt name"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "donor_name",
-      label: "Donor Name"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "Donor Name",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "Enter donor name"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "cashier",
-      label: "Donation Receiver Name"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "Donation Receiver Name",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "Enter receiver name"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
-      name: "email",
-      label: "Email"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "contact_number",
-      label: "Contact Number"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))))), /* @__PURE__ */ import_react248.default.createElement(card_default, {
-      size: "small",
+      label: "Contact Number",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "Enter contact number"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      xs: 24
+    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+      name: "email",
+      label: "Email",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      type: "email",
+      placeholder: "Enter email address"
+    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
       title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#18181b" }
       }), /* @__PURE__ */ import_react248.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Address"))
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 12]
+    }), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+      gutter: [16, 0]
     }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
+      xs: 24
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "address_line_1",
-      label: "Address Line 1"
+      label: "Address Line 1",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
       placeholder: "Enter Address Line 1"
     }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
+      xs: 24
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "address_line_2",
-      label: "Address Line 2"
+      label: "Address Line 2",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
       placeholder: "Enter Address Line 2"
     }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
@@ -133969,25 +134007,35 @@ html body {
       sm: 8
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "country",
-      label: "Country"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "Country",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "Country"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
       sm: 8
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "state",
-      label: "State"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "State",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "State"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
       sm: 8
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "city",
-      label: "City"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      label: "City",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "City"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "pincode",
-      label: "Pincode"
+      label: "Pincode",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
       placeholder: "Enter pincode"
     }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
@@ -133995,63 +134043,93 @@ html body {
       sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "native_place",
-      label: "Native Place"
+      label: "Native Place",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
       placeholder: "Enter Native Place"
-    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, {
-      size: "small",
+    }))))))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      xs: 24,
+      lg: 12
+    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: "16px" }
+    }, /* @__PURE__ */ import_react248.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
       title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(HeartOutlined_default2, {
         style: { color: "#18181b" }
       }), /* @__PURE__ */ import_react248.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Personal Details"))
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 12]
+    }), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+      gutter: [16, 0]
     }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "dob",
-      label: "Date of Birth"
+      label: "Date of Birth",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
     }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
       xs: 24,
-      sm: 12,
-      md: 8
+      sm: 12
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "marital_status",
-      label: "Marital Status"
+      label: "Marital Status",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(select_default, {
       style: { width: "100%" },
-      placeholder: "Unmarried"
+      placeholder: "Select Status"
     }, /* @__PURE__ */ import_react248.default.createElement(select_default.Option, {
       value: "Unmarried"
     }, "Unmarried"), /* @__PURE__ */ import_react248.default.createElement(select_default.Option, {
       value: "Married"
     }, "Married")))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12,
-      md: 8
+      xs: 24
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
       name: "date_of_anniversary",
-      label: "Date of Anniversary"
+      label: "Date of Anniversary",
+      style: formItemStyle
     }, /* @__PURE__ */ import_react248.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, {
-      size: "small",
+    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
+      title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(DollarOutlined_default2, {
+        style: { color: "#18181b" }
+      }), /* @__PURE__ */ import_react248.default.createElement("span", {
+        style: { fontWeight: 700, color: "#27272a" }
+      }, "Donation Payments"))
+    }), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+      gutter: [16, 0]
+    }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+      name: "payment_mode",
+      label: "Payment Type",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      placeholder: "e.g. Cash, Online"
+    }))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
+      name: "total_amount",
+      label: "Total Amount",
+      style: formItemStyle
+    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
+      type: "number",
+      placeholder: "0.00"
+    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
       title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(GiftOutlined_default2, {
         style: { color: "#18181b" }
       }), /* @__PURE__ */ import_react248.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donation Items"))
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 12]
+    }), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+      gutter: [16, 0]
     }, /* @__PURE__ */ import_react248.default.createElement(form_default.List, {
       name: "donation_items"
     }, (fields) => /* @__PURE__ */ import_react248.default.createElement(import_react248.default.Fragment, null, fields.map((_a) => {
@@ -134065,9 +134143,11 @@ html body {
         key
       }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
         name: [fieldName, "amount"],
-        label
+        label,
+        style: formItemStyle
       }), /* @__PURE__ */ import_react248.default.createElement(input_default, {
-        type: "number"
+        type: "number",
+        placeholder: "0.00"
       })), /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
         name: [fieldName, "name"],
         hidden: true
@@ -134075,35 +134155,14 @@ html body {
         name: [fieldName, "donation_type"],
         hidden: true
       }, /* @__PURE__ */ import_react248.default.createElement(input_default, null)));
-    }))))), /* @__PURE__ */ import_react248.default.createElement(card_default, {
-      size: "small",
-      title: /* @__PURE__ */ import_react248.default.createElement(space_default, null, /* @__PURE__ */ import_react248.default.createElement(DollarOutlined_default2, {
-        style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react248.default.createElement("span", {
-        style: { fontWeight: 700, color: "#27272a" }
-      }, "Donation Payments"))
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
-      gutter: [16, 12]
-    }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
-      name: "payment_mode",
-      label: "Donation Payment Type"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, null))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
-      xs: 24,
-      sm: 12
-    }, /* @__PURE__ */ import_react248.default.createElement(form_default.Item, {
-      name: "total_amount",
-      label: "Donation Total Amount"
-    }, /* @__PURE__ */ import_react248.default.createElement(input_default, {
-      type: "number"
-    })))))), /* @__PURE__ */ import_react248.default.createElement(FormFooter_default, {
+    })))))))), /* @__PURE__ */ import_react248.default.createElement("div", {
+      style: { marginTop: "24px" }
+    }, /* @__PURE__ */ import_react248.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: updating,
       cancelText: "Back",
       saveText: "Update Donation"
-    })), isEdit && /* @__PURE__ */ import_react248.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react248.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONATION,
       docname: id
     }));
@@ -136983,4 +137042,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.RUCQW562.js.map
+//# sourceMappingURL=temple_donation.bundle.TKNSMXZA.js.map
