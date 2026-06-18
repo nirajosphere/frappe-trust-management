@@ -52,22 +52,15 @@ const TableActions = ({
             )} */}
 
             {onDelete && showDelete && (
-                <Popconfirm
-                    title="Delete?"
-                    description="This cannot be undone"
-                    onConfirm={() => onDelete(record)}
-                    okText="Yes"
-                    cancelText="No"
-                >
-                    <Tooltip title="Delete">
-                        <Button
-                            type="text"
-                            danger
-                            icon={<DeleteOutlined />}
-                            className="px-2 border border-red-200 hover:!text-red-500"
-                        />
-                    </Tooltip>
-                </Popconfirm>
+                <Tooltip title="Delete">
+                    <Button
+                        type="text"
+                        danger
+                        icon={<DeleteOutlined />}
+                        onClick={() => onDelete(record)}
+                        className="px-2 border border-red-200 hover:!text-red-500"
+                    />
+                </Tooltip>
             )}
         </Space>
     );

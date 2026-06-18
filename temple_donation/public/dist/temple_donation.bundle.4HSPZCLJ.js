@@ -130625,20 +130625,15 @@ html body {
       icon: /* @__PURE__ */ import_react230.default.createElement(EditOutlined_default2, null),
       onClick: () => onEdit(record),
       className: "px-2 border border-gray-200 hover:!text-blue-500"
-    })), onDelete && showDelete && /* @__PURE__ */ import_react230.default.createElement(popconfirm_default, {
-      title: "Delete?",
-      description: "This cannot be undone",
-      onConfirm: () => onDelete(record),
-      okText: "Yes",
-      cancelText: "No"
-    }, /* @__PURE__ */ import_react230.default.createElement(tooltip_default, {
+    })), onDelete && showDelete && /* @__PURE__ */ import_react230.default.createElement(tooltip_default, {
       title: "Delete"
     }, /* @__PURE__ */ import_react230.default.createElement(button_default, {
       type: "text",
       danger: true,
       icon: /* @__PURE__ */ import_react230.default.createElement(DeleteOutlined_default2, null),
+      onClick: () => onDelete(record),
       className: "px-2 border border-red-200 hover:!text-red-500"
-    }))));
+    })));
   };
   var TableActions_default = TableActions;
 
@@ -137223,4 +137218,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.FVCKAYWV.js.map
+//# sourceMappingURL=temple_donation.bundle.4HSPZCLJ.js.map
