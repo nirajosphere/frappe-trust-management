@@ -182,14 +182,76 @@ const DonorSection = ({ selectedDonor, onDonorSelect }) => {
             )}
 
             {selectedDonor && (
-                <div style={{ marginTop: 12 }}>
-                    <Text strong>{selectedDonor.donor_name}</Text>
-                    <br />
-                    <Text type="secondary">{selectedDonor.mobile_number}</Text>
-                    <br />
-                    <Button danger onClick={() => onDonorSelect(null)}>
+                <div
+                    style={{
+                        marginTop: 14,
+                        padding: "12px 14px",
+                        backgroundColor: "#f9fafb",
+                        borderRadius: 10,
+                        border: "1px solid #e5e7eb",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                        transition: "all 0.3s ease",
+                        animation: "donorCardFadeIn 0.35s ease",
+                    }}
+                >
+                    {/* Avatar */}
+                    <div
+                        style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: 10,
+                            background: "linear-gradient(135deg, #1e293b, #334155)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexShrink: 0,
+                            color: "#fff",
+                            fontSize: 18,
+                            fontWeight: 700,
+                        }}
+                    >
+                        {(selectedDonor.donor_name || "?").charAt(0).toUpperCase()}
+                    </div>
+
+                    {/* Info */}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <div
+                            style={{
+                                fontWeight: 600,
+                                fontSize: 14,
+                                color: "#1e293b",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                lineHeight: 1.3,
+                            }}
+                        >
+                            {selectedDonor.donor_name || "—"}
+                        </div>
+                        <div style={{ fontSize: 12, color: "#64748b", marginTop: 2 }}>
+                            📱 {selectedDonor.mobile_number}
+                        </div>
+                    </div>
+
+                    {/* Change Button */}
+                    <Button
+                        size="small"
+                        danger
+                        type="link"
+                        onClick={() => onDonorSelect(null)}
+                        style={{ fontWeight: 600, flexShrink: 0 }}
+                    >
                         Change
                     </Button>
+
+                    <style>{`
+                        @keyframes donorCardFadeIn {
+                            from { opacity: 0; transform: translateY(6px); }
+                            to   { opacity: 1; transform: translateY(0); }
+                        }
+                    `}</style>
                 </div>
             )}
 

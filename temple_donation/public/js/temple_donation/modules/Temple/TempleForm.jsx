@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-    Form, Input, Button, Alert, Switch, List, Avatar, Row, Col, Typography
+    Form, Input, Button, Alert, Switch, List, Avatar, Row, Col, Typography, Card, Space
 } from "antd";
 import {
     HomeOutlined, EnvironmentOutlined, GlobalOutlined, PushpinOutlined,
@@ -92,167 +92,136 @@ const TempleForm = ({ id, onBack }) => {
     if (isEdit && error)   return <Alert message="Error loading data" type="error" />;
 
     return (
-        <div className="max-w-6xl mx-auto p-4 pb-28 form-fade-in">
+        <div className="donation-page py-6">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Temple" : "Add Temple"}
                 subtitle="Temple Management"
+                showBack={true}
             />
 
             <Form layout="vertical" form={form} onFinish={handleSave} requiredMark={false}>
-                <div className="flex flex-col md:flex-row items-start gap-6">
+                <Row gutter={[24, 24]}>
 
                     {/* ─── LEFT: Temple Info Panel ─── */}
-                    <div className="w-full md:w-[230px] shrink-0 bg-white border border-zinc-200 rounded-xl p-6 flex flex-col items-center gap-4 shadow-sm">
-                        <Avatar
-                            size={88}
-                            className="text-2xl font-black border-2 border-zinc-100 shadow-sm bg-zinc-900 text-white"
-                        >
-                            {initials}
-                        </Avatar>
-
-                        <div className="text-center w-full">
-                            <div className="text-sm font-bold text-zinc-900 leading-snug break-words">
-                                {templeName || "Temple Name"}
-                            </div>
-                            {templeId && (
-                                <div className="mt-2">
-                                    <span className="inline-block bg-zinc-100 border border-zinc-200 text-zinc-800 rounded px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                                        ID: {templeId}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="w-full border-t border-zinc-100 pt-3 mt-1">
-                            <div className="text-[10px] text-zinc-400 text-center font-bold uppercase tracking-wide">
-                                {selectedDonationTypes.length > 0
-                                    ? `${selectedDonationTypes.length} Active Type${selectedDonationTypes.length > 1 ? "s" : ""}`
-                                    : "No Active Types"}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* ─── RIGHT: Form Inputs ─── */}
-                    <div className="flex-1 w-full flex flex-col gap-6">
-
-                        {/* Temple Details */}
-                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
-                            <SectionTitle icon={<BankOutlined className="text-zinc-400" />}>Temple Details</SectionTitle>
-                            
-                            <Row gutter={[24, 16]}>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="temple_name" label="Temple Name" rules={[{ required: true, message: "Required" }]}>
-                                        <Input prefix={<BankOutlined className="text-zinc-400" />} placeholder="Full Temple Name" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="temple_id" label="Temple ID" rules={[{ required: true, message: "Required" }]}>
-                                        <Input prefix={<InfoCircleOutlined className="text-zinc-400" />} placeholder="Unique Temple ID" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="trust_registration_no" label="Trust Registration No." rules={[{ required: true, message: "Required" }]}>
-                                        <Input prefix={<FileTextOutlined className="text-zinc-400" />} placeholder="Trust Reg. Number" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="note" label="Note">
-                                        <Input prefix={<FileTextOutlined className="text-zinc-400" />} placeholder="Optional note" />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </div>
-
-                        {/* Address */}
-                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
-                            <SectionTitle icon={<EnvironmentOutlined className="text-zinc-400" />}>Address</SectionTitle>
-                            
-                            <Row gutter={[24, 16]}>
-                                <Col xs={24}>
-                                    <Form.Item name="temple_address" label="Temple Address" rules={[{ required: true, message: "Required" }]}>
-                                        <Input prefix={<HomeOutlined className="text-zinc-400" />} placeholder="Full Street Address" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={8}>
-                                    <Form.Item name="country" label="Country" rules={[{ required: true }]}>
-                                        <Input prefix={<GlobalOutlined className="text-zinc-400" />} placeholder="India" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={8}>
-                                    <Form.Item name="state" label="State" rules={[{ required: true }]}>
-                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="State" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={8}>
-                                    <Form.Item name="city" label="City" rules={[{ required: true }]}>
-                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="City" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="pincode" label="Pincode" rules={[{ required: true }]}>
-                                        <Input prefix={<PushpinOutlined className="text-zinc-400" />} placeholder="Postal Code" />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </div>
-
-                        {/* Donation Types */}
-                        <div className="bg-white border border-zinc-200 rounded-xl shadow-sm overflow-hidden">
-                            <div className="px-6 py-4 border-b border-zinc-200 flex justify-between items-center bg-zinc-50/50">
-                                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black">
-                                    <AppstoreOutlined className="text-zinc-400" /> Donation Types
-                                </div>
-                                {donationTypes && donationTypes.length > 0 && (
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Select All</span>
-                                        <Switch
-                                            checked={allSelected}
-                                            onChange={handleSelectAllChange}
-                                            className={allSelected ? "bg-zinc-800" : "bg-zinc-200"}
-                                        />
+                    <Col xs={24} lg={7}>
+                        <div className="space-y-6 sticky top-6">
+                            <Card size="small" title={<Space><BankOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Temple Profile</span></Space>}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, padding: '8px 0' }}>
+                                    <Avatar size={88} style={{ fontSize: 28, fontWeight: 900, border: '2px solid #f4f4f5', backgroundColor: '#18181b', color: '#fff' }}>
+                                        {initials}
+                                    </Avatar>
+                                    <div style={{ textAlign: 'center', width: '100%' }}>
+                                        <div style={{ fontSize: 14, fontWeight: 600, color: '#18181b' }}>{templeName || "Temple Name"}</div>
+                                        {templeId && <div style={{ fontSize: 11, color: '#a1a1aa', marginTop: 4 }}>ID: {templeId}</div>}
                                     </div>
-                                )}
-                            </div>
-                            <div className="max-h-[400px] overflow-y-auto">
-                                <List
-                                    dataSource={donationTypes}
-                                    className="donation-type-list"
-                                    renderItem={item => {
-                                        const active = selectedDonationTypes.includes(item.name);
-                                        return (
-                                            <List.Item
-                                                className="px-6 py-3 hover:bg-zinc-50 transition-colors border-b border-zinc-100 last:border-0 flex items-center justify-between"
-                                                actions={[
-                                                    <Switch
-                                                        checked={active}
-                                                        onChange={() => toggleDonationType(item.name)}
-                                                        className={active ? "bg-zinc-800" : "bg-zinc-200"}
-                                                    />
-                                                ]}
-                                            >
-                                                <List.Item.Meta
-                                                    avatar={
-                                                        <Avatar
-                                                            src={item.donation_image}
-                                                            shape="square"
-                                                            size="large"
-                                                            className="bg-zinc-100 rounded-lg border border-zinc-200 text-zinc-950 font-black"
-                                                        >
-                                                            {item.donation_type?.charAt(0)}
-                                                        </Avatar>
-                                                    }
-                                                    title={<Text strong className="text-zinc-700">{item.donation_type}</Text>}
-                                                />
-                                            </List.Item>
-                                        );
-                                    }}
-                                />
-                            </div>
+                                    <div style={{ width: '100%', borderTop: '1px solid #f4f4f5', paddingTop: 10, textAlign: 'center' }}>
+                                        <span style={{ fontSize: 10, color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            {selectedDonationTypes.length > 0 ? `${selectedDonationTypes.length} Active Type${selectedDonationTypes.length > 1 ? "s" : ""}` : "No Active Types"}
+                                        </span>
+                                    </div>
+                                </div>
+                            </Card>
                         </div>
+                    </Col>
 
-                    </div>
-                </div>
+                    {/* ─── RIGHT: Form Cards ─── */}
+                    <Col xs={24} lg={17}>
+                        <div className="space-y-6">
+
+                            {/* Temple Details */}
+                            <Card size="small" title={<Space><BankOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Temple Details</span></Space>}>
+                                <Row gutter={[16, 12]}>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="temple_name" label="Temple Name" rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<BankOutlined style={{ color: '#a1a1aa' }} />} placeholder="Full Temple Name" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="temple_id" label="Temple ID" rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<InfoCircleOutlined style={{ color: '#a1a1aa' }} />} placeholder="Unique Temple ID" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="trust_registration_no" label="Trust Registration No." rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<FileTextOutlined style={{ color: '#a1a1aa' }} />} placeholder="Trust Reg. Number" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="note" label="Note">
+                                            <Input prefix={<FileTextOutlined style={{ color: '#a1a1aa' }} />} placeholder="Optional note" />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Card>
+
+                            {/* Address */}
+                            <Card size="small" title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address</span></Space>}>
+                                <Row gutter={[16, 12]}>
+                                    <Col xs={24}>
+                                        <Form.Item name="temple_address" label="Temple Address" rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<HomeOutlined style={{ color: '#a1a1aa' }} />} placeholder="Full Street Address" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="country" label="Country" rules={[{ required: true }]}>
+                                            <Input prefix={<GlobalOutlined style={{ color: '#a1a1aa' }} />} placeholder="India" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="state" label="State" rules={[{ required: true }]}>
+                                            <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="State" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="city" label="City" rules={[{ required: true }]}>
+                                            <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="City" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="pincode" label="Pincode" rules={[{ required: true }]}>
+                                            <Input prefix={<PushpinOutlined style={{ color: '#a1a1aa' }} />} placeholder="Postal Code" />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Card>
+
+                            {/* Donation Types */}
+                            <Card size="small" title={<Space><AppstoreOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Types</span></Space>}
+                                extra={donationTypes && donationTypes.length > 0 && (
+                                    <Space size={8}>
+                                        <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase' }}>Select All</span>
+                                        <Switch checked={allSelected} onChange={handleSelectAllChange} className={allSelected ? "bg-zinc-800" : "bg-zinc-200"} />
+                                    </Space>
+                                )}
+                            >
+                                <div style={{ maxHeight: 400, overflowY: 'auto' }}>
+                                    <List
+                                        dataSource={donationTypes}
+                                        renderItem={item => {
+                                            const active = selectedDonationTypes.includes(item.name);
+                                            return (
+                                                <List.Item
+                                                    className="px-2 py-3 hover:bg-zinc-50 transition-colors"
+                                                    actions={[
+                                                        <Switch checked={active} onChange={() => toggleDonationType(item.name)} className={active ? "bg-zinc-800" : "bg-zinc-200"} />
+                                                    ]}
+                                                >
+                                                    <List.Item.Meta
+                                                        avatar={<Avatar src={item.donation_image} shape="square" size="large" style={{ backgroundColor: '#f4f4f5', border: '1px solid #e4e4e7', color: '#18181b', fontWeight: 900 }}>{item.donation_type?.charAt(0)}</Avatar>}
+                                                        title={<Text strong style={{ color: '#3f3f46' }}>{item.donation_type}</Text>}
+                                                    />
+                                                </List.Item>
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            </Card>
+
+                        </div>
+                    </Col>
+
+                </Row>
 
                 <FormFooter
                     onCancel={onBack}

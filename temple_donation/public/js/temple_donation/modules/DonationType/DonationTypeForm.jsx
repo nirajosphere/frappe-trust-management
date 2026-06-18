@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Alert, Upload, Select, Row, Col
+    Form, Input, Button, Alert, Upload, Select, Row, Col, Card, Space
 } from "antd";
 import {
     PictureOutlined, TagOutlined, DollarOutlined
@@ -99,92 +99,91 @@ const DonationTypeForm = ({ id, onBack }) => {
     if (error) return <Alert message="Error loading data" type="error" action={<Button onClick={onBack}>Back</Button>} />;
 
     return (
-        <div className="max-w-6xl mx-auto p-4 pb-28 form-fade-in">
+        <div className="donation-page py-6">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Donation Type" : "Add Donation Type"}
                 subtitle="Donation Setup"
+                showBack={true}
             />
 
             <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false}>
-                <div className="flex flex-col md:flex-row items-start gap-6">
+                <Row gutter={[24, 24]}>
 
                     {/* ─── LEFT: Image Preview Panel ─── */}
-                    <div className="w-full md:w-[230px] shrink-0 bg-white border border-zinc-200 rounded-xl p-6 flex flex-col items-center gap-4 shadow-sm">
-                        <Form.Item
-                            name="donation_image"
-                            valuePropName="fileList"
-                            getValueFromEvent={(e) => Array.isArray(e) ? e : e?.fileList}
-                            className="m-0 w-full"
-                        >
-                            <Upload maxCount={1} beforeUpload={() => false} listType="picture" showUploadList={false}>
-                                <div className="cursor-pointer flex flex-col items-center">
-                                    {previewUrl ? (
-                                        <img
-                                            src={previewUrl} 
-                                            alt="preview"
-                                            className="w-28 height-28 rounded-lg object-cover border border-zinc-900"
-                                        />
-                                    ) : (
-                                        <div className="w-28 h-28 rounded-lg border border-dashed border-zinc-300 bg-zinc-50 flex flex-col items-center justify-center gap-2 transition-colors hover:border-zinc-400">
-                                            <PictureOutlined className="text-xl text-zinc-400" />
-                                            <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Upload</span>
-                                        </div>
-                                    )}
+                    <Col xs={24} lg={7}>
+                        <div className="space-y-6 sticky top-6">
+                            <Card size="small" title={<Space><PictureOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Preview</span></Space>}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, padding: '8px 0' }}>
+                                    <Form.Item
+                                        name="donation_image"
+                                        valuePropName="fileList"
+                                        getValueFromEvent={(e) => Array.isArray(e) ? e : e?.fileList}
+                                        style={{ marginBottom: 0, width: '100%' }}
+                                    >
+                                        <Upload maxCount={1} beforeUpload={() => false} listType="picture" showUploadList={false}>
+                                            <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                {previewUrl ? (
+                                                    <img src={previewUrl} alt="preview" style={{ width: 112, height: 112, borderRadius: 10, objectFit: 'cover', border: '1px solid #18181b' }} />
+                                                ) : (
+                                                    <div style={{ width: 112, height: 112, borderRadius: 10, border: '2px dashed #d4d4d8', backgroundColor: '#fafafa', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                                                        <PictureOutlined style={{ fontSize: 20, color: '#a1a1aa' }} />
+                                                        <span style={{ fontSize: 10, fontWeight: 600, color: '#71717a', textTransform: 'uppercase' }}>Upload</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </Upload>
+                                    </Form.Item>
+
+                                    <div style={{ textAlign: 'center', width: '100%' }}>
+                                        <div style={{ fontSize: 14, fontWeight: 600, color: '#18181b' }}>{donationTypeName || "Donation Type"}</div>
+                                        {defaultAmount && (
+                                            <div style={{ marginTop: 6 }}>
+                                                <span style={{ backgroundColor: '#18181b', color: '#fff', borderRadius: 6, padding: '3px 12px', fontSize: 12, fontWeight: 600 }}>₹ {defaultAmount}</span>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div style={{ width: '100%', borderTop: '1px solid #f4f4f5', paddingTop: 10, textAlign: 'center' }}>
+                                        <span style={{ fontSize: 10, color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            {isEdit ? "Editing Category" : "New Category"}
+                                        </span>
+                                    </div>
                                 </div>
-                            </Upload>
-                        </Form.Item>
-
-                        <div className="text-center w-full">
-                            <div className="text-sm font-bold text-zinc-900 leading-snug break-words">
-                                {donationTypeName || "Donation Type"}
-                            </div>
-                            
-                            {defaultAmount && (
-                                <div className="mt-2">
-                                    <span className="inline-block bg-zinc-900 text-white rounded px-3 py-1 text-xs font-semibold">
-                                        ₹ {defaultAmount}
-                                    </span>
-                                </div>
-                            )}
+                            </Card>
                         </div>
+                    </Col>
 
-                        <div className="w-full border-t border-zinc-100 pt-3 mt-1">
-                            <div className="text-[10px] text-zinc-400 text-center font-bold uppercase tracking-wide">
-                                {isEdit ? "Editing Category" : "New Category"}
-                            </div>
+                    {/* ─── RIGHT: Form Card ─── */}
+                    <Col xs={24} lg={17}>
+                        <div className="space-y-6">
+                            <Card size="small" title={<Space><TagOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Category Details</span></Space>}>
+                                <Row gutter={[16, 12]}>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="donation_type" label="Donation Type" rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<TagOutlined style={{ color: '#a1a1aa' }} />} placeholder="e.g. Anndan, Vastra Daan" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="default_amount" label="Default Amount">
+                                            <Input prefix={<DollarOutlined style={{ color: '#a1a1aa' }} />} placeholder="0.00" type="number" />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24}>
+                                        <Form.Item name="temple" label="Associated Temple">
+                                            <Select
+                                                placeholder="Select Temple"
+                                                allowClear
+                                                options={temples?.map(t => ({ value: t.name, label: t.temple_name || t.name }))}
+                                            />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Card>
                         </div>
-                    </div>
+                    </Col>
 
-                    {/* ─── RIGHT: Form Inputs ─── */}
-                    <div className="flex-1 w-full">
-                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
-                            <SectionTitle icon={<TagOutlined />}>Category Details</SectionTitle>
-                            
-                            <Row gutter={[24, 16]}>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="donation_type" label="Donation Type" rules={[{ required: true, message: "Required" }]}>
-                                        <Input prefix={<TagOutlined className="text-zinc-400" />} placeholder="e.g. Anndan, Vastra Daan" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} sm={12}>
-                                    <Form.Item name="default_amount" label="Default Amount">
-                                        <Input prefix={<DollarOutlined className="text-zinc-400" />} placeholder="0.00" type="number" />
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24}>
-                                    <Form.Item name="temple" label="Associated Temple">
-                                        <Select
-                                            placeholder="Select Temple"
-                                            allowClear
-                                            options={temples?.map(t => ({ value: t.name, label: t.temple_name || t.name }))}
-                                        />
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
-                </div>
+                </Row>
 
                 <FormFooter
                     onCancel={onBack}
