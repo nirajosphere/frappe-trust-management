@@ -1,164 +1,16 @@
-// import React, { useEffect } from "react";
-// import {
-//     Form, Input, Button, Card, Typography, Space, Row, Col,
-//     message, Spin, Alert, Select
-// } from "antd";
-// import { ArrowLeftOutlined, SaveOutlined } from "@ant-design/icons";
-// import {
-//     useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc
-// } from "../../hooks/useFrappe";
-// import { DOCTYPE_DONOR } from "../../config/constants";
-// import { donorFormFields } from "../../formfield/donorFormFields";
-// import PageHeader from "../../components/common/PageHeader";
-
-// const { Title, Text } = Typography;
-
-// const DonorForm = ({ id, onBack }) => {
-//     const isEdit = !!id;
-//     const [form] = Form.useForm();
-
-//     const { createDoc, loading: creating } = useFrappeCreateDoc();
-//     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
-//     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-
-//     useEffect(() => {
-//         if (isEdit && initialValues) {
-//             form.setFieldsValue(initialValues);
-//         } else if (!isEdit) {
-//             const defaultValues = {};
-//             donorFormFields.fields.forEach(f => {
-//                 if (f.defaultValue) defaultValues[f.name] = f.defaultValue;
-//             });
-//             form.setFieldsValue(defaultValues);
-//         }
-//     }, [isEdit, initialValues, form]);
-
-//     const handleSave = async (values) => {
-//         try {
-//             if (isEdit) {
-//                 await updateDoc(DOCTYPE_DONOR, id, values);
-//                 message.success("Donor updated successfully!");
-//             } else {
-//                 await createDoc(DOCTYPE_DONOR, values);
-//                 message.success("Donor created successfully!");
-//             }
-//             if (onBack) onBack();
-//         } catch (err) {
-//             message.error(err.message || "Something went wrong.");
-//         }
-//     };
-
-//     if (isEdit && fetching) {
-//         return (
-//             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-//                 <Spin size="large" />
-//                 <Text className="text-zinc-400 font-bold uppercase tracking-widest text-[10px]">Identitiying donor record...</Text>
-//             </div>
-//         );
-//     }
-
-//     if (isEdit && fetchError) {
-//         return (
-//             <div className="p-8">
-//                 <Alert
-//                     message="Identification Error"
-//                     description={fetchError.message || "Failed to fetch donor details."}
-//                     type="error"
-//                     showIcon
-//                     action={<Button onClick={onBack} icon={<ArrowLeftOutlined />}>Return</Button>}
-//                 />
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div className="max-w-4xl mx-auto py-6">
-//             <PageHeader
-//                 onBack={onBack}
-//                 subtitle="Donor Relationship Management"
-//                 title={isEdit ? "Edit Profile" : "Register Donor"}
-//             />
-
-//             <Card size="small" className="aavatto-card">
-//                 <Form
-//                     form={form}
-//                     layout="vertical"
-//                     onFinish={handleSave}
-//                     scrollToFirstError
-//                     requiredMark={false}
-//                     className="p-6"
-//                 >
-//                     <Row gutter={[24, 0]}>
-//                         {donorFormFields.fields.map((field) => (
-//                             <Col xs={24} md={field.type === 'textarea' ? 24 : 12} key={field.name}>
-//                                 <Form.Item
-//                                     name={field.name}
-//                                     label={<Text strong className="text-zinc-500">{field.label}</Text>}
-//                                     rules={[
-//                                         { required: field.required, message: field.message },
-//                                         field.pattern ? { pattern: field.pattern, message: field.patternMessage } : null
-//                                     ].filter(Boolean)}
-//                                 >
-//                                     {field.type === 'textarea' ? (
-//                                         <Input.TextArea
-//                                             placeholder={field.placeholder}
-//                                             rows={field.rows || 3}
-//                                             className="border-zinc-200 bg-zinc-50/30 focus:bg-white transition-all rounded-lg p-3"
-//                                         />
-//                                     ) : field.type === 'select' ? (
-//                                         <Select placeholder={field.placeholder} className="h-10 w-full">
-//                                             {field.options?.map(opt => (
-//                                                 <Select.Option key={opt} value={opt}>{opt}</Select.Option>
-//                                             ))}
-//                                         </Select>
-//                                     ) : (
-//                                         <Input
-//                                             placeholder={field.placeholder}
-//                                             className="h-10 border-zinc-200 bg-zinc-50/30 focus:bg-white transition-all rounded-lg px-4 font-medium"
-//                                         />
-//                                     )}
-//                                 </Form.Item>
-//                             </Col>
-//                         ))}
-//                     </Row>
-
-//                     <div className="flex items-center justify-end gap-3 mt-10 border-t border-zinc-100 pt-8">
-//                         <Button
-//                             onClick={onBack}
-//                             className="h-10 px-8 font-bold border-zinc-200 text-zinc-400 hover:text-zinc-900 transition-all text-xs uppercase tracking-widest"
-//                         >
-//                             Cancel
-//                         </Button>
-//                         <Button
-//                             type="primary"
-//                             htmlType="submit"
-//                             loading={creating || updating}
-//                             icon={<SaveOutlined />}
-//                             className="h-10 px-10 font-bold bg-black hover:bg-zinc-800 border-none shadow-md flex items-center gap-2 text-xs uppercase tracking-widest"
-//                         >
-//                             {isEdit ? "Update Profile" : "Identify & Register"}
-//                         </Button>
-//                     </div>
-//                 </Form>
-//             </Card>
-//         </div>
-//     );
-// };
-
-// export default DonorForm;
-
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Card, Typography, Row, Col,
-    message, Alert, Select, DatePicker
+    Form, Input, Button, Alert, Select, DatePicker, Avatar, Row, Col, Typography
 } from "antd";
-import { ArrowLeftOutlined, SaveOutlined } from "@ant-design/icons";
+import {
+    UserOutlined, MailOutlined, PhoneOutlined, EnvironmentOutlined,
+    HomeOutlined, GlobalOutlined, PushpinOutlined, IdcardOutlined, HeartOutlined
+} from "@ant-design/icons";
 import dayjs from "dayjs";
 import {
     useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc
 } from "../../hooks/useFrappe";
 import { DOCTYPE_DONOR } from "../../config/constants";
-import PageHeader from "../../components/common/PageHeader";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
@@ -166,14 +18,29 @@ import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
+// --- Clean & Minimalist Section Title with Tailwind ---
+const SectionTitle = ({ icon, children }) => (
+    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black border-b border-zinc-200 pb-2.5 mb-5 mt-1">
+        {icon} {children}
+    </div>
+);
+
 const DonorForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = Form.useForm();
 
+    // --- Frappe API Hooks ---
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
 
+    // --- Form Watchers for Live Preview Panel ---
+    const donorName = Form.useWatch("donor_name", form) || "";
+    const initials = donorName
+        ? donorName.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2)
+        : "D";
+
+    // --- Effect for Form Setup and Binding ---
     useEffect(() => {
         if (isEdit && data) {
             form.setFieldsValue({
@@ -188,14 +55,15 @@ const DonorForm = ({ id, onBack }) => {
                 marital_status: "Unmarried"
             });
         }
-    }, [isEdit, data]);
+    }, [isEdit, data, form]);
 
+    // --- Form Submission Logic ---
     const handleSave = async (values) => {
         try {
             const payload = {
                 ...values,
-                date_of_birth: values.date_of_birth?.format("YYYY-MM-DD"),
-                anniversary_date: values.anniversary_date?.format("YYYY-MM-DD")
+                date_of_birth: values.date_of_birth?.format("YYYY-MM-DD") || null,
+                anniversary_date: values.anniversary_date?.format("YYYY-MM-DD") || null
             };
 
             if (isEdit) {
@@ -204,168 +72,182 @@ const DonorForm = ({ id, onBack }) => {
                 await createDoc(DOCTYPE_DONOR, payload);
             }
 
-            onBack && onBack();
+            if (onBack) onBack();
         } catch (err) {
             console.error("Save Error:", err);
         }
     };
 
     if (loading) return <PageLoader />;
-
-    if (error) {
-        return (
-            <Alert
-                message="Error loading donor"
-                type="error"
-                action={<Button onClick={onBack}>Back</Button>}
-            />
-        );
-    }
+    if (error) return <Alert message="Error loading donor" type="error" action={<Button onClick={onBack}>Back</Button>} />;
 
     return (
-        <div className="max-w-6xl mx-auto p-4 pb-24">
-
+        <div className="max-w-6xl mx-auto p-4 pb-28 form-fade-in">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Donor" : "Add Donor"}
                 subtitle="Donor Management"
             />
 
-            <Card className="border border-zinc-200">
-                <Form form={form} layout="vertical" onFinish={handleSave}>
+            <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false}>
+                <div className="flex flex-col md:flex-row items-start gap-6">
 
-                    <Row gutter={[16, 16]}>
+                    {/* ─── LEFT: Donor Info Panel ─── */}
+                    <div className="w-full md:w-[230px] shrink-0 bg-white border border-zinc-200 rounded-xl p-6 flex flex-col items-center gap-4 shadow-sm">
+                        <Avatar
+                            size={88}
+                            className="text-2xl font-black border-2 border-zinc-100 shadow-sm bg-zinc-900 text-white"
+                        >
+                            {initials}
+                        </Avatar>
 
-                        {/* CONTACT */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item
-                                name="mobile_number"
-                                label={<Text>Contact No</Text>}
-                                rules={[
-                                    { required: true, message: "Enter mobile" },
-                                    { pattern: /^\d{10}$/, message: "Invalid number" }
-                                ]}
-                            >
-                                <Input maxLength={10} className="h-10" />
-                            </Form.Item>
-                        </Col>
+                        <div className="text-center w-full">
+                            <div className="text-sm font-bold text-zinc-900 leading-snug break-words">
+                                {donorName || "Donor Name"}
+                            </div>
+                            <div className="mt-1">
+                                <span className="inline-block bg-zinc-100 border border-zinc-200 text-zinc-800 rounded px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                                    {isEdit ? "Registered" : "New Donor"}
+                                </span>
+                            </div>
+                        </div>
 
-                        {/* NAME */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item
-                                name="donor_name"
-                                label={<Text>Full Name</Text>}
-                                rules={[{ required: true, message: "Enter name" }]}
-                            >
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                        <div className="w-full border-t border-zinc-100 pt-3 mt-1">
+                            <div className="text-[10px] text-zinc-400 text-center font-bold uppercase tracking-wide">
+                                Donor Record
+                            </div>
+                        </div>
+                    </div>
 
-                        {/* EMAIL */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="email" label={<Text>Email</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                    {/* ─── RIGHT: Form Inputs ─── */}
+                    <div className="flex-1 w-full flex flex-col gap-6">
 
-                        {/* ADDRESS 1 */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="address" label={<Text>Address Line 1</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                        {/* Card 1: Profile Information */}
+                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
+                            <SectionTitle icon={<UserOutlined className="text-zinc-400" />}>Profile Information</SectionTitle>
+                            
+                            <Row gutter={[24, 16]}>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item
+                                        name="donor_name"
+                                        label="Full Name"
+                                        rules={[{ required: true, message: "Required" }]}
+                                    >
+                                        <Input prefix={<UserOutlined className="text-zinc-400" />} placeholder="Donor Full Name" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item
+                                        name="mobile_number"
+                                        label="Contact No"
+                                        rules={[
+                                            { required: true, message: "Required" },
+                                            { pattern: /^\d{10}$/, message: "Invalid number" }
+                                        ]}
+                                    >
+                                        <Input maxLength={10} prefix={<PhoneOutlined className="text-zinc-400" />} placeholder="Mobile Number" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item name="email" label="Email">
+                                        <Input prefix={<MailOutlined className="text-zinc-400" />} placeholder="email@example.com" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item
+                                        name="pan_card"
+                                        label="PAN Card"
+                                        rules={[
+                                            { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }
+                                        ]}
+                                    >
+                                        <Input prefix={<IdcardOutlined className="text-zinc-400" />} placeholder="ABCDE1234F" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </div>
 
-                        {/* ADDRESS 2 */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="address_line_2" label={<Text>Address Line 2</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                        {/* Card 2: Personal Details */}
+                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
+                            <SectionTitle icon={<HeartOutlined className="text-zinc-400" />}>Personal Details</SectionTitle>
+                            
+                            <Row gutter={[24, 16]}>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item name="date_of_birth" label="Date of Birth">
+                                        <DatePicker className="w-full h-10" format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item name="marital_status" label="Marital Status">
+                                        <Select
+                                            className="h-10 w-full"
+                                            options={[
+                                                { label: "Unmarried", value: "Unmarried" },
+                                                { label: "Married", value: "Married" }
+                                            ]}
+                                        />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12} md={8}>
+                                    <Form.Item name="anniversary_date" label="Anniversary Date">
+                                        <DatePicker className="w-full h-10" format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </div>
 
-                        {/* PAN */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item
-                                name="pan_card"
-                                label={<Text>PAN</Text>}
-                                rules={[
-                                    { pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }
-                                ]}
-                            >
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                        {/* Card 3: Address & Native Origin */}
+                        <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
+                            <SectionTitle icon={<EnvironmentOutlined className="text-zinc-400" />}>Address & Native Origin</SectionTitle>
+                            
+                            <Row gutter={[24, 16]}>
+                                <Col xs={24} sm={12}>
+                                    <Form.Item name="address" label="Address Line 1">
+                                        <Input prefix={<HomeOutlined className="text-zinc-400" />} placeholder="Flat / House No, Building" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <Form.Item name="address_line_2" label="Address Line 2">
+                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="Street, Locality" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={8}>
+                                    <Form.Item name="country" label="Country">
+                                        <Input prefix={<GlobalOutlined className="text-zinc-400" />} placeholder="Country" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={8}>
+                                    <Form.Item name="state" label="State" rules={[{ required: true, message: "Required" }]}>
+                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="State" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={8}>
+                                    <Form.Item name="city" label="City" rules={[{ required: true, message: "Required" }]}>
+                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="City" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <Form.Item name="pincode" label="Pincode">
+                                        <Input prefix={<PushpinOutlined className="text-zinc-400" />} placeholder="Postal Code" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <Form.Item name="native_place" label="Native Place">
+                                        <Input prefix={<EnvironmentOutlined className="text-zinc-400" />} placeholder="Native Place / Town" className="h-10" />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </div>
 
-                        {/* COUNTRY */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="country" label={<Text>Country</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
+                    </div>
+                </div>
 
-                        {/* STATE */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="state" label={<Text>State</Text>} rules={[{ required: true }]}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
-
-                        {/* CITY */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="city" label={<Text>City</Text>} rules={[{ required: true }]}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
-
-                        {/* PINCODE */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="pincode" label={<Text>Pincode</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
-
-                        {/* NATIVE */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="native_place" label={<Text>Native Place</Text>}>
-                                <Input className="h-10" />
-                            </Form.Item>
-                        </Col>
-
-                        {/* DOB */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="date_of_birth" label={<Text>Date of Birth</Text>}>
-                                <DatePicker className="w-full h-10" format="DD-MM-YYYY" />
-                            </Form.Item>
-                        </Col>
-
-                        {/* MARITAL */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="marital_status" label={<Text>Marital Status</Text>}>
-                                <Select
-                                    options={[
-                                        { label: "Unmarried", value: "Unmarried" },
-                                        { label: "Married", value: "Married" }
-                                    ]}
-                                />
-                            </Form.Item>
-                        </Col>
-
-                        {/* ANNIVERSARY */}
-                        <Col xs={24} sm={12} md={8}>
-                            <Form.Item name="anniversary_date" label={<Text>Anniversary</Text>}>
-                                <DatePicker className="w-full h-10" format="DD-MM-YYYY" />
-                            </Form.Item>
-                        </Col>
-
-                    </Row>
-
-                    <FormFooter
-                        onCancel={onBack}
-                        loading={creating || updating}
-                        isEdit={isEdit}
-                    />
-
-                </Form>
-            </Card>
+                <FormFooter
+                    onCancel={onBack}
+                    loading={creating || updating}
+                    isEdit={isEdit}
+                />
+            </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />}
         </div>

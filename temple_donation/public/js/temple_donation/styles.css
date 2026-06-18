@@ -36,6 +36,10 @@
   }
 }
 
+.temple-donation-app .visible{
+  visibility: visible;
+}
+
 .temple-donation-app .collapse{
   visibility: collapse;
 }
@@ -122,10 +126,6 @@
   margin-bottom: 0.25rem;
 }
 
-.temple-donation-app .mb-10{
-  margin-bottom: 2.5rem;
-}
-
 .temple-donation-app .mb-2{
   margin-bottom: 0.5rem;
 }
@@ -136,6 +136,10 @@
 
 .temple-donation-app .mb-4{
   margin-bottom: 1rem;
+}
+
+.temple-donation-app .mb-5{
+  margin-bottom: 1.25rem;
 }
 
 .temple-donation-app .mb-6{
@@ -160,10 +164,6 @@
 
 .temple-donation-app .mt-1{
   margin-top: 0.25rem;
-}
-
-.temple-donation-app .mt-10{
-  margin-top: 2.5rem;
 }
 
 .temple-donation-app .mt-12{
@@ -200,6 +200,10 @@
 
 .temple-donation-app .block{
   display: block;
+}
+
+.temple-donation-app .inline-block{
+  display: inline-block;
 }
 
 .temple-donation-app .flex{
@@ -242,6 +246,10 @@
   height: 3.5rem;
 }
 
+.temple-donation-app .h-28{
+  height: 7rem;
+}
+
 .temple-donation-app .h-8{
   height: 2rem;
 }
@@ -266,10 +274,6 @@
   min-height: 300px;
 }
 
-.temple-donation-app .min-h-\[400px\]{
-  min-height: 400px;
-}
-
 .temple-donation-app .min-h-screen{
   min-height: 100vh;
 }
@@ -280,6 +284,10 @@
 
 .temple-donation-app .w-10{
   width: 2.5rem;
+}
+
+.temple-donation-app .w-28{
+  width: 7rem;
 }
 
 .temple-donation-app .w-8{
@@ -300,18 +308,6 @@
 
 .temple-donation-app .min-w-0{
   min-width: 0px;
-}
-
-.temple-donation-app .max-w-3xl{
-  max-width: 48rem;
-}
-
-.temple-donation-app .max-w-4xl{
-  max-width: 56rem;
-}
-
-.temple-donation-app .max-w-5xl{
-  max-width: 64rem;
 }
 
 .temple-donation-app .max-w-6xl{
@@ -353,6 +349,10 @@
           user-select: none;
 }
 
+.temple-donation-app .resize-none{
+  resize: none;
+}
+
 .temple-donation-app .resize{
   resize: both;
 }
@@ -391,6 +391,10 @@
 
 .temple-donation-app .gap-1{
   gap: 0.25rem;
+}
+
+.temple-donation-app .gap-1\.5{
+  gap: 0.375rem;
 }
 
 .temple-donation-app .gap-2{
@@ -453,6 +457,10 @@
   white-space: nowrap;
 }
 
+.temple-donation-app .break-words{
+  overflow-wrap: break-word;
+}
+
 .temple-donation-app .break-all{
   word-break: break-all;
 }
@@ -463,10 +471,6 @@
 
 .temple-donation-app .rounded{
   border-radius: 0.25rem;
-}
-
-.temple-donation-app .rounded-2xl{
-  border-radius: 1rem;
 }
 
 .temple-donation-app .rounded-full{
@@ -534,11 +538,6 @@
   border-color: rgb(231 229 228 / var(--tw-border-opacity, 1));
 }
 
-.temple-donation-app .border-white{
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-
 .temple-donation-app .border-zinc-100{
   --tw-border-opacity: 1;
   border-color: rgb(244 244 245 / var(--tw-border-opacity, 1));
@@ -549,9 +548,9 @@
   border-color: rgb(228 228 231 / var(--tw-border-opacity, 1));
 }
 
-.temple-donation-app .border-zinc-700{
+.temple-donation-app .border-zinc-300{
   --tw-border-opacity: 1;
-  border-color: rgb(63 63 70 / var(--tw-border-opacity, 1));
+  border-color: rgb(212 212 216 / var(--tw-border-opacity, 1));
 }
 
 .temple-donation-app .border-zinc-900{
@@ -681,23 +680,19 @@
   padding: 1.5rem;
 }
 
-.temple-donation-app .p-8{
-  padding: 2rem;
-}
-
 .temple-donation-app .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
 
-.temple-donation-app .px-10{
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
 .temple-donation-app .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.temple-donation-app .px-2\.5{
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 
 .temple-donation-app .px-3{
@@ -794,12 +789,16 @@
   padding-bottom: 0.25rem;
 }
 
-.temple-donation-app .pb-20{
-  padding-bottom: 5rem;
+.temple-donation-app .pb-2\.5{
+  padding-bottom: 0.625rem;
 }
 
 .temple-donation-app .pb-24{
   padding-bottom: 6rem;
+}
+
+.temple-donation-app .pb-28{
+  padding-bottom: 7rem;
 }
 
 .temple-donation-app .pb-4{
@@ -814,16 +813,16 @@
   padding-top: 0.5rem;
 }
 
+.temple-donation-app .pt-3{
+  padding-top: 0.75rem;
+}
+
 .temple-donation-app .pt-4{
   padding-top: 1rem;
 }
 
 .temple-donation-app .pt-6{
   padding-top: 1.5rem;
-}
-
-.temple-donation-app .pt-8{
-  padding-top: 2rem;
 }
 
 .temple-donation-app .text-center{
@@ -870,6 +869,11 @@
 .temple-donation-app .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.temple-donation-app .text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .temple-donation-app .text-xs{
@@ -934,6 +938,10 @@
   letter-spacing: -0.025em;
 }
 
+.temple-donation-app .tracking-wide{
+  letter-spacing: 0.025em;
+}
+
 .temple-donation-app .tracking-wider{
   letter-spacing: 0.05em;
 }
@@ -975,6 +983,11 @@
 .temple-donation-app .text-black{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
+.temple-donation-app .text-emerald-600{
+  --tw-text-opacity: 1;
+  color: rgb(5 150 105 / var(--tw-text-opacity, 1));
 }
 
 .temple-donation-app .text-gray-400{
@@ -1087,6 +1100,11 @@
   color: rgb(24 24 27 / var(--tw-text-opacity, 1));
 }
 
+.temple-donation-app .text-zinc-950{
+  --tw-text-opacity: 1;
+  color: rgb(9 9 11 / var(--tw-text-opacity, 1));
+}
+
 .temple-donation-app .line-through{
   text-decoration-line: line-through;
 }
@@ -1133,11 +1151,6 @@
 
 .temple-donation-app .shadow-amber-900\/5{
   --tw-shadow-color: rgb(120 53 15 / 0.05);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.temple-donation-app .shadow-zinc-100\/20{
-  --tw-shadow-color: rgb(244 244 245 / 0.2);
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -2117,14 +2130,20 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   border-width: 0px;
 }
 
+.temple-donation-app .hover\:scale-\[1\.02\]:hover{
+  --tw-scale-x: 1.02;
+  --tw-scale-y: 1.02;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.temple-donation-app .hover\:border-black:hover{
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+}
+
 .temple-donation-app .hover\:border-zinc-200:hover{
   --tw-border-opacity: 1;
   border-color: rgb(228 228 231 / var(--tw-border-opacity, 1));
-}
-
-.temple-donation-app .hover\:border-zinc-300:hover{
-  --tw-border-opacity: 1;
-  border-color: rgb(212 212 216 / var(--tw-border-opacity, 1));
 }
 
 .temple-donation-app .hover\:border-zinc-400:hover{
@@ -2149,11 +2168,6 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 .temple-donation-app .hover\:bg-amber-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(255 251 235 / var(--tw-bg-opacity, 1));
-}
-
-.temple-donation-app .hover\:bg-black:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
 .temple-donation-app .hover\:bg-orange-50:hover{
@@ -2216,14 +2230,19 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
+.temple-donation-app .hover\:text-blue-500:hover{
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity, 1));
+}
+
+.temple-donation-app .hover\:text-red-500:hover{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
 .temple-donation-app .hover\:text-white:hover{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.temple-donation-app .hover\:text-zinc-900:hover{
-  --tw-text-opacity: 1;
-  color: rgb(24 24 27 / var(--tw-text-opacity, 1));
 }
 
 .temple-donation-app .focus\:bg-white:focus{
@@ -2238,6 +2257,10 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 
   .temple-donation-app .md\:hidden{
     display: none;
+  }
+
+  .temple-donation-app .md\:w-\[230px\]{
+    width: 230px;
   }
 
   .temple-donation-app .md\:w-\[280px\]{
