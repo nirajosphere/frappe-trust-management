@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Alert, Select, DatePicker, Avatar, Row, Col, Typography, Card, Space
+    Form, Input, Button, Alert, Select, DatePicker, Row, Col, Typography, Card, Space
 } from "antd";
 import {
     UserOutlined, MailOutlined, PhoneOutlined, EnvironmentOutlined,
@@ -18,13 +18,6 @@ import FormFooter from "../../components/common/FormFooter";
 
 const { Text } = Typography;
 
-// --- Clean & Minimalist Section Title with Tailwind ---
-const SectionTitle = ({ icon, children }) => (
-    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black border-b border-zinc-200 pb-2.5 mb-5 mt-1">
-        {icon} {children}
-    </div>
-);
-
 const DonorForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = Form.useForm();
@@ -33,12 +26,6 @@ const DonorForm = ({ id, onBack }) => {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-
-    // --- Form Watchers for Live Preview Panel ---
-    const donorName = Form.useWatch("donor_name", form) || "";
-    const initials = donorName
-        ? donorName.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2)
-        : "D";
 
     // --- Effect for Form Setup and Binding ---
     useEffect(() => {
@@ -81,8 +68,31 @@ const DonorForm = ({ id, onBack }) => {
     if (loading) return <PageLoader />;
     if (error) return <Alert message="Error loading donor" type="error" action={<Button onClick={onBack}>Back</Button>} />;
 
+    // Custom Form Item Style to reduce/override the massive bottom margin
+    const formItemStyle = { marginBottom: '12px' };
+
+    // Common Premium Card Style Config
+    const commonCardProps = {
+        size: "small",
+        className: "shadow-sm border border-zinc-200/80 overflow-hidden",
+        style: { 
+            height: 'auto',
+            background: '#fafafa', // Soft premium grey background tint
+        },
+        headStyle: {
+            background: '#f4f4f5', // Header distinct dark grey tint
+            borderBottom: '1px solid #e4e4e7',
+            paddingTop: '8px',
+            paddingBottom: '8px'
+        },
+        bodyStyle: {
+            background: '#ffffff', // Content area clean white
+            padding: '16px'
+        }
+    };
+
     return (
-        <div className="donation-page py-6">
+        <div className="donation-page py-6" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 16px' }}>
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Donor" : "Add Donor"}
@@ -90,57 +100,39 @@ const DonorForm = ({ id, onBack }) => {
                 showBack={true}
             />
 
-            <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false}>
-                <Row gutter={[24, 24]}>
+            {/* Added size="middle" globally for uniform height alignment across inputs */}
+            <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false} size="middle">
+                
+                {/* Balanced Two-Column Stack Grid without any empty vertical row gaps */}
+                <Row gutter={[24, 16]}>
 
-                    {/* ─── LEFT: Donor Info Panel ─── */}
-                    <Col xs={24} lg={7}>
-                        <div className="space-y-6 sticky top-6">
-                            <Card size="small" title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donor Profile</span></Space>}>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, padding: '8px 0' }}>
-                                    <Avatar size={88} style={{ fontSize: 28, fontWeight: 900, border: '2px solid #f4f4f5', backgroundColor: '#18181b', color: '#fff' }}>
-                                        {initials}
-                                    </Avatar>
-                                    <div style={{ textAlign: 'center', width: '100%' }}>
-                                        <div style={{ fontSize: 14, fontWeight: 600, color: '#18181b' }}>{donorName || "Donor Name"}</div>
-                                        <div style={{ marginTop: 6 }}>
-                                            <span style={{ backgroundColor: '#f4f4f5', border: '1px solid #e4e4e7', color: '#3f3f46', borderRadius: 6, padding: '2px 10px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                                {isEdit ? "Registered" : "New Donor"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div style={{ width: '100%', borderTop: '1px solid #f4f4f5', paddingTop: 10, textAlign: 'center' }}>
-                                        <span style={{ fontSize: 10, color: '#71717a', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Donor Record</span>
-                                    </div>
-                                </div>
-                            </Card>
-                        </div>
-                    </Col>
-
-                    {/* ─── RIGHT: Form Cards ─── */}
-                    <Col xs={24} lg={17}>
-                        <div className="space-y-6">
-
+                    {/* ================= LEFT COLUMN STACK ================= */}
+                    <Col xs={24} lg={12}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            
                             {/* Card 1: Profile Information */}
-                            <Card size="small" title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Profile Information</span></Space>}>
-                                <Row gutter={[16, 12]}>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="donor_name" label="Full Name" rules={[{ required: true, message: "Required" }]}>
+                            <Card 
+                                {...commonCardProps} 
+                                title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Profile Information</span></Space>}
+                            >
+                                <Row gutter={[16, 0]}>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="donor_name" label="Full Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
                                             <Input prefix={<UserOutlined style={{ color: '#a1a1aa' }} />} placeholder="Donor Full Name" />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="mobile_number" label="Contact No" rules={[{ required: true, message: "Required" }, { pattern: /^\d{10}$/, message: "Invalid number" }]}>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="mobile_number" label="Contact No" style={formItemStyle} rules={[{ required: true, message: "Required" }, { pattern: /^\d{10}$/, message: "Invalid number" }]}>
                                             <Input maxLength={10} prefix={<PhoneOutlined style={{ color: '#a1a1aa' }} />} placeholder="Mobile Number" />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="email" label="Email">
+                                    <Col xs={24}>
+                                        <Form.Item name="email" label="Email" style={formItemStyle}>
                                             <Input prefix={<MailOutlined style={{ color: '#a1a1aa' }} />} placeholder="email@example.com" />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="pan_card" label="PAN Card" rules={[{ pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }]}>
+                                    <Col xs={24}>
+                                        <Form.Item name="pan_card" label="PAN Card" style={formItemStyle} rules={[{ pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }]}>
                                             <Input prefix={<IdcardOutlined style={{ color: '#a1a1aa' }} />} placeholder="ABCDE1234F" />
                                         </Form.Item>
                                     </Col>
@@ -148,61 +140,74 @@ const DonorForm = ({ id, onBack }) => {
                             </Card>
 
                             {/* Card 2: Personal Details */}
-                            <Card size="small" title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}>
-                                <Row gutter={[16, 12]}>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="date_of_birth" label="Date of Birth">
+                            <Card 
+                                {...commonCardProps} 
+                                title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}
+                            >
+                                <Row gutter={[16, 0]}>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="date_of_birth" label="Date of Birth" style={formItemStyle}>
                                             <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="marital_status" label="Marital Status">
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="marital_status" label="Marital Status" style={formItemStyle}>
                                             <Select style={{ width: '100%' }} options={[{ label: "Unmarried", value: "Unmarried" }, { label: "Married", value: "Married" }]} />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12} md={8}>
-                                        <Form.Item name="anniversary_date" label="Anniversary Date">
+                                    <Col xs={24}>
+                                        <Form.Item name="anniversary_date" label="Anniversary Date" style={formItemStyle}>
                                             <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
                                         </Form.Item>
                                     </Col>
                                 </Row>
                             </Card>
 
+                        </div>
+                    </Col>
+
+                    {/* ================= RIGHT COLUMN STACK ================= */}
+                    <Col xs={24} lg={12}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            
                             {/* Card 3: Address & Native Origin */}
-                            <Card size="small" title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address & Native Origin</span></Space>}>
-                                <Row gutter={[16, 12]}>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="address" label="Address Line 1">
+                            <Card 
+                                {...commonCardProps} 
+                                title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address & Native Origin</span></Space>}
+                            >
+                                <Row gutter={[16, 0]}>
+                                    <Col xs={24}>
+                                        <Form.Item name="address" label="Address Line 1" style={formItemStyle}>
                                             <Input prefix={<HomeOutlined style={{ color: '#a1a1aa' }} />} placeholder="Flat / House No, Building" />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="address_line_2" label="Address Line 2">
+                                    <Col xs={24}>
+                                        <Form.Item name="address_line_2" label="Address Line 2" style={formItemStyle}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="Street, Locality" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="country" label="Country">
+                                        <Form.Item name="country" label="Country" style={formItemStyle}>
                                             <Input prefix={<GlobalOutlined style={{ color: '#a1a1aa' }} />} placeholder="Country" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="state" label="State" rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="state" label="State" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="State" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="city" label="City" rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="city" label="City" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="City" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="pincode" label="Pincode">
+                                        <Form.Item name="pincode" label="Pincode" style={formItemStyle}>
                                             <Input prefix={<PushpinOutlined style={{ color: '#a1a1aa' }} />} placeholder="Postal Code" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="native_place" label="Native Place">
+                                        <Form.Item name="native_place" label="Native Place" style={formItemStyle}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="Native Place / Town" />
                                         </Form.Item>
                                     </Col>
@@ -214,11 +219,13 @@ const DonorForm = ({ id, onBack }) => {
 
                 </Row>
 
-                <FormFooter
-                    onCancel={onBack}
-                    loading={creating || updating}
-                    isEdit={isEdit}
-                />
+                <div style={{ marginTop: '24px' }}>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={creating || updating}
+                        isEdit={isEdit}
+                    />
+                </div>
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />}
