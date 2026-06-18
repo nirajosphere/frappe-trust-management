@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Popover } from "antd";
+import { Button, Popover, Checkbox } from "antd";
 import { SettingOutlined, ArrowUpOutlined, ArrowDownOutlined, EyeOutlined, EyeInvisibleOutlined, HolderOutlined } from "@ant-design/icons";
 
 const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doctype }) => {
@@ -99,15 +99,14 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
                         >
                             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                                 <HolderOutlined style={{ color: "#94a3b8", fontSize: "14px", cursor: "grab", marginRight: "2px" }} />
-                                <Button 
-                                    type="text" 
-                                    size="small"
-                                    icon={isVisible ? <EyeOutlined style={{ color: "#0f172a" }} /> : <EyeInvisibleOutlined style={{ color: "#94a3b8" }} />} 
-                                    onClick={(e) => {
+                                <Checkbox
+                                    checked={isVisible}
+                                    onChange={(e) => {
+                                        // Stop propagation to prevent drag-triggering if applicable
                                         e.stopPropagation();
                                         toggleVisibility(index);
                                     }}
-                                    style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "24px", height: "24px", padding: 0 }}
+                                    style={{ marginRight: "6px" }}
                                 />
                                 <span style={{ 
                                     fontSize: "13px", 

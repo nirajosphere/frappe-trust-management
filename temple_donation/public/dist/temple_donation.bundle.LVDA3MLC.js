@@ -128881,19 +128881,13 @@ html body {
         style: { display: "flex", alignItems: "center", gap: "6px" }
       }, /* @__PURE__ */ import_react216.default.createElement(HolderOutlined_default2, {
         style: { color: "#94a3b8", fontSize: "14px", cursor: "grab", marginRight: "2px" }
-      }), /* @__PURE__ */ import_react216.default.createElement(button_default, {
-        type: "text",
-        size: "small",
-        icon: isVisible2 ? /* @__PURE__ */ import_react216.default.createElement(EyeOutlined_default2, {
-          style: { color: "#0f172a" }
-        }) : /* @__PURE__ */ import_react216.default.createElement(EyeInvisibleOutlined_default2, {
-          style: { color: "#94a3b8" }
-        }),
-        onClick: (e4) => {
+      }), /* @__PURE__ */ import_react216.default.createElement(checkbox_default, {
+        checked: isVisible2,
+        onChange: (e4) => {
           e4.stopPropagation();
           toggleVisibility(index2);
         },
-        style: { display: "flex", alignItems: "center", justifyContent: "center", width: "24px", height: "24px", padding: 0 }
+        style: { marginRight: "6px" }
       }), /* @__PURE__ */ import_react216.default.createElement("span", {
         style: {
           fontSize: "13px",
@@ -136853,4 +136847,4 @@ html body {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.P5Y723BE.js.map
+//# sourceMappingURL=temple_donation.bundle.LVDA3MLC.js.map
