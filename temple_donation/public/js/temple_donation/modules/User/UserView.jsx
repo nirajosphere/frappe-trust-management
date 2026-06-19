@@ -10,6 +10,7 @@ import DetailHeader from "../../components/common/DetailHeader";
 import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
 import ViewContainer from "../../components/common/ViewContainer";
+import ActivityLog from "../../components/common/ActivityLog";
 
 const UserView = ({ id, onBack, onEdit }) => {
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
@@ -28,7 +29,7 @@ const UserView = ({ id, onBack, onEdit }) => {
           type="error"
           showIcon
           action={
-            <Button 
+            <Button
               onClick={onBack}
               className="h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
             >
@@ -121,7 +122,7 @@ const UserView = ({ id, onBack, onEdit }) => {
 
       {/* ── TWO COLUMN GRID WORKSURFACE ── */}
       <Row gutter={[24, 24]}>
-        
+
         {/* Left Main View Columns */}
         <Col xs={24} lg={17}>
           <div className="flex flex-col gap-6">
@@ -139,29 +140,35 @@ const UserView = ({ id, onBack, onEdit }) => {
                 })}
               </Row>
             </SectionCard>
+
+
           </div>
         </Col>
 
         {/* Right Meta Parameters Panel */}
         <Col xs={24} lg={7}>
           <div className="sticky top-6 flex flex-col gap-6">
-            
+
             {/* Role Matrix Status Card */}
             <SectionCard title="Role & Access Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
               <div className="flex flex-col gap-3
               
                py-1">
                 {[
-                  { label: "Account Status", value: (() => {
-                    const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
-                    return <Tag className={`tag-glass ${getTagConfig(statusVal).glassClass} !m-0`}>{statusVal}</Tag>;
-                  })() },
-                  { label: "Opening Balance", value: (
-                    <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1">
-                      <Wallet size={12} className="text-zinc-400" />
-                      ₹{doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00"}
-                    </span>
-                  ) }
+                  {
+                    label: "Account Status", value: (() => {
+                      const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
+                      return <Tag className={`tag-glass ${getTagConfig(statusVal).glassClass} !m-0`}>{statusVal}</Tag>;
+                    })()
+                  },
+                  {
+                    label: "Opening Balance", value: (
+                      <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1">
+                        <Wallet size={12} className="text-zinc-400" />
+                        ₹{doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00"}
+                      </span>
+                    )
+                  }
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
                     <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
@@ -185,7 +192,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                     {value}
                   </div>
                 ))}
-                
+
                 <div className="w-full border-t border-zinc-100 pt-3 mt-1 text-center">
                   <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5">
                     <CheckCircle2 size={13} />
@@ -197,7 +204,9 @@ const UserView = ({ id, onBack, onEdit }) => {
 
           </div>
         </Col>
+
       </Row>
+      <ActivityLog doctype={DOCTYPE_USER} docname={id} />
     </ViewContainer>
   );
 };

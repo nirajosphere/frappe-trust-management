@@ -10,6 +10,7 @@ import DetailHeader from "../../components/common/DetailHeader";
 import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
 import ViewContainer from "../../components/common/ViewContainer";
+import ActivityLog from "../../components/common/ActivityLog";
 
 const DonorView = ({ id, onBack, onEdit }) => {
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
@@ -110,6 +111,8 @@ const DonorView = ({ id, onBack, onEdit }) => {
                 })}
               </Row>
             </SectionCard>
+            
+            
           </div>
         </Col>
 
@@ -161,6 +164,7 @@ const DonorView = ({ id, onBack, onEdit }) => {
           </div>
         </Col>
       </Row>
+      <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />
     </ViewContainer>
   );
 };

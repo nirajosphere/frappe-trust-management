@@ -12,7 +12,6 @@ import {
 } from "../../hooks/useFrappe";
 import { DOCTYPE_DONOR } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
-import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
 import ViewContainer from "../../components/common/ViewContainer";
@@ -229,8 +228,6 @@ const DonorForm = ({ id, onBack }) => {
                     />
                 </div>
             </Form>
-
-            {isEdit && <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />}
         </ViewContainer>
     );
 };

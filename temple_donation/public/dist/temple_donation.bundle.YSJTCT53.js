@@ -132138,7 +132138,7 @@ html body {
   var DonorList_default = DonorList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
-  var import_react243 = __toESM(require_react());
+  var import_react244 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/donorFormFields.js
   var donorFormFields = {
@@ -132374,175 +132374,24 @@ html body {
   };
   var ViewContainer_default = ViewContainer;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
-  var DonorView = ({ id, onBack, onEdit }) => {
-    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-    if (loading)
-      return /* @__PURE__ */ import_react243.default.createElement(PageLoader_default, null);
-    if (error || !doc) {
-      return /* @__PURE__ */ import_react243.default.createElement("div", {
-        className: "p-8"
-      }, /* @__PURE__ */ import_react243.default.createElement(alert_default, {
-        message: "Could not load donor details",
-        description: (error == null ? void 0 : error.message) || "Donor not found",
-        type: "error",
-        showIcon: true,
-        action: /* @__PURE__ */ import_react243.default.createElement(button_default, {
-          onClick: onBack,
-          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
-        }, "Back")
-      }));
-    }
-    const visibleFields = (donorFormFields.fields || []).filter((field) => {
-      const val = doc[field.name];
-      return val !== null && val !== void 0 && val !== "" && !(Array.isArray(val) && val.length === 0);
-    });
-    const renderValue = (field, value) => {
-      const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
-      if (empty2)
-        return /* @__PURE__ */ import_react243.default.createElement("span", {
-          className: "text-zinc-300 font-medium"
-        }, "\u2014");
-      if (field.type === "image")
-        return /* @__PURE__ */ import_react243.default.createElement("img", {
-          src: value,
-          alt: field.label,
-          className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
-        });
-      if (field.type === "textarea")
-        return /* @__PURE__ */ import_react243.default.createElement("div", {
-          className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
-        }, value);
-      return /* @__PURE__ */ import_react243.default.createElement("span", {
-        className: "text-zinc-800 font-semibold"
-      }, String(value));
-    };
-    const title = doc.donor_name || doc.name;
-    const initials = title.substring(0, 2).toUpperCase();
-    return /* @__PURE__ */ import_react243.default.createElement(ViewContainer_default, {
-      className: "donor-view-container"
-    }, /* @__PURE__ */ import_react243.default.createElement(DetailHeader_default, {
-      onBack,
-      title,
-      subtitle: doc.email || doc.mobile_number || `Donor ID: ${id}`,
-      initials,
-      tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
-      actions: /* @__PURE__ */ import_react243.default.createElement(import_react243.default.Fragment, null, /* @__PURE__ */ import_react243.default.createElement(button_default, {
-        onClick: () => window.print(),
-        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print"), /* @__PURE__ */ import_react243.default.createElement(button_default, {
-        type: "primary",
-        onClick: () => onEdit && onEdit(doc),
-        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
-      }, "Edit"))
-    }), /* @__PURE__ */ import_react243.default.createElement(row_default2, {
-      gutter: [24, 24]
-    }, /* @__PURE__ */ import_react243.default.createElement(col_default2, {
-      xs: 24,
-      lg: 17
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
-      title: "Basic Information",
-      icon: /* @__PURE__ */ import_react243.default.createElement(User, {
-        size: 15,
-        className: "text-zinc-800"
-      })
-    }, /* @__PURE__ */ import_react243.default.createElement(row_default2, {
-      gutter: [16, 16]
-    }, visibleFields.map((field) => {
-      const isFullWidth = field.type === "image" || field.type === "textarea";
-      return /* @__PURE__ */ import_react243.default.createElement(col_default2, {
-        xs: 24,
-        sm: isFullWidth ? 24 : 12,
-        key: field.name
-      }, /* @__PURE__ */ import_react243.default.createElement(FieldCell_default, {
-        label: field.label
-      }, renderValue(field, doc[field.name])));
-    }))))), /* @__PURE__ */ import_react243.default.createElement(col_default2, {
-      xs: 24,
-      lg: 7
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
-      title: "Status & Meta",
-      icon: /* @__PURE__ */ import_react243.default.createElement(ShieldAlert, {
-        size: 15,
-        className: "text-zinc-800"
-      })
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: "flex flex-col gap-3 py-1"
-    }, [
-      { label: "Account Status", value: (() => {
-        const statusVal = doc.custom_status || doc.status || "Active";
-        return /* @__PURE__ */ import_react243.default.createElement(tag_default, {
-          className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
-        }, statusVal);
-      })() }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react243.default.createElement("div", {
-      key: label,
-      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react243.default.createElement("span", {
-      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
-      title: "System Logs",
-      icon: /* @__PURE__ */ import_react243.default.createElement(FileText, {
-        size: 15,
-        className: "text-zinc-800"
-      })
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: "flex flex-col gap-2 py-1"
-    }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react243.default.createElement("span", {
-        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
-      }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react243.default.createElement("span", {
-        className: "text-xs font-semibold text-zinc-600"
-      }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react243.default.createElement("span", {
-        className: "text-xs font-semibold text-zinc-600"
-      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react243.default.createElement("span", {
-        className: "text-xs font-semibold text-zinc-600"
-      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react243.default.createElement("div", {
-      key: label,
-      className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react243.default.createElement("span", {
-      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react243.default.createElement("span", {
-      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react243.default.createElement(CircleCheck, {
-      size: 13,
-      className: "text-emerald-600"
-    }), "Verified System Record"))))))));
-  };
-  var DonorView_default = DonorView;
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
-  var import_react246 = __toESM(require_react());
-  var import_dayjs4 = __toESM(require_dayjs_min());
-
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ActivityLog.jsx
-  var import_react244 = __toESM(require_react());
+  var import_react243 = __toESM(require_react());
   var { Text: Text12 } = typography_default;
   var { Option: Option4 } = mentions_default;
   var ActivityLog = ({ doctype, docname }) => {
     var _a;
-    const [timelineItems, setTimelineItems] = (0, import_react244.useState)([]);
-    const [loading, setLoading] = (0, import_react244.useState)(false);
-    const [page, setPage] = (0, import_react244.useState)(0);
-    const [commentText, setCommentText] = (0, import_react244.useState)("");
-    const [postingComment, setPostingComment] = (0, import_react244.useState)(false);
-    const [activeReplyId, setActiveReplyId] = (0, import_react244.useState)(null);
-    const [replyText, setReplyText] = (0, import_react244.useState)("");
-    const [postingReply, setPostingReply] = (0, import_react244.useState)(false);
-    const [editingCommentId, setEditingCommentId] = (0, import_react244.useState)(null);
-    const [editingText, setEditingText] = (0, import_react244.useState)("");
-    const [expandedVersions, setExpandedVersions] = (0, import_react244.useState)(/* @__PURE__ */ new Set());
-    const [expandedComments, setExpandedComments] = (0, import_react244.useState)(/* @__PURE__ */ new Set());
+    const [timelineItems, setTimelineItems] = (0, import_react243.useState)([]);
+    const [loading, setLoading] = (0, import_react243.useState)(false);
+    const [page, setPage] = (0, import_react243.useState)(0);
+    const [commentText, setCommentText] = (0, import_react243.useState)("");
+    const [postingComment, setPostingComment] = (0, import_react243.useState)(false);
+    const [activeReplyId, setActiveReplyId] = (0, import_react243.useState)(null);
+    const [replyText, setReplyText] = (0, import_react243.useState)("");
+    const [postingReply, setPostingReply] = (0, import_react243.useState)(false);
+    const [editingCommentId, setEditingCommentId] = (0, import_react243.useState)(null);
+    const [editingText, setEditingText] = (0, import_react243.useState)("");
+    const [expandedVersions, setExpandedVersions] = (0, import_react243.useState)(/* @__PURE__ */ new Set());
+    const [expandedComments, setExpandedComments] = (0, import_react243.useState)(/* @__PURE__ */ new Set());
     const toggleExpandComment = (name) => {
       const next2 = new Set(expandedComments);
       if (next2.has(name)) {
@@ -132552,7 +132401,7 @@ html body {
       }
       setExpandedComments(next2);
     };
-    const [expandedCommentCards, setExpandedCommentCards] = (0, import_react244.useState)(/* @__PURE__ */ new Set());
+    const [expandedCommentCards, setExpandedCommentCards] = (0, import_react243.useState)(/* @__PURE__ */ new Set());
     const toggleExpandCommentCard = (name) => {
       const next2 = new Set(expandedCommentCards);
       if (next2.has(name)) {
@@ -132621,7 +132470,7 @@ html body {
       }
       setLoading(false);
     };
-    (0, import_react244.useEffect)(() => {
+    (0, import_react243.useEffect)(() => {
       fetchTimelineData(true);
     }, [doctype, docname]);
     if (!docname)
@@ -132745,7 +132594,7 @@ html body {
       return words.map((word, idx) => {
         if (word.startsWith("@")) {
           const username = word.substring(1);
-          return /* @__PURE__ */ import_react244.default.createElement("span", {
+          return /* @__PURE__ */ import_react243.default.createElement("span", {
             key: idx,
             onClick: (e4) => {
               e4.stopPropagation();
@@ -132775,7 +132624,7 @@ html body {
       value: u.name,
       label: `${u.first_name || ""} ${u.last_name || ""}`.trim() || u.name
     }));
-    const loadMoreButton = (timelineItems == null ? void 0 : timelineItems.length) >= 5 && /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    const loadMoreButton = (timelineItems == null ? void 0 : timelineItems.length) >= 5 && /* @__PURE__ */ import_react243.default.createElement(button_default, {
       size: "small",
       type: "text",
       onClick: () => fetchTimelineData(false),
@@ -132796,12 +132645,12 @@ html body {
     const renderCommentCard = (c2, isReply = false, parentId = null) => {
       const isCommentOwner = currentUser === c2.owner;
       const isEditing = editingCommentId === c2.name;
-      return /* @__PURE__ */ import_react244.default.createElement("div", {
+      return /* @__PURE__ */ import_react243.default.createElement("div", {
         key: c2.name,
         style: { display: "flex", gap: "12px", position: "relative" }
-      }, isReply && /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, isReply && /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { zIndex: 2, flexShrink: 0 }
-      }, /* @__PURE__ */ import_react244.default.createElement(avatar_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(avatar_default, {
         size: 22,
         style: {
           backgroundColor: "#71717a",
@@ -132809,9 +132658,9 @@ html body {
           fontWeight: 700,
           fontSize: "9px"
         }
-      }, (c2.owner || "U").charAt(0).toUpperCase())), /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, (c2.owner || "U").charAt(0).toUpperCase())), /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { flex: 1, minWidth: 0 }
-      }, /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, /* @__PURE__ */ import_react243.default.createElement("div", {
         onClick: () => !isReply && toggleExpandCommentCard(c2.name),
         style: {
           display: "flex",
@@ -132822,103 +132671,103 @@ html body {
           cursor: !isReply ? "pointer" : "default",
           userSelect: "none"
         }
-      }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      }, /* @__PURE__ */ import_react243.default.createElement("span", {
         style: { fontSize: "12.5px", fontWeight: 600, color: "#18181b" }
-      }, c2.owner), /* @__PURE__ */ import_react244.default.createElement("span", {
+      }, c2.owner), /* @__PURE__ */ import_react243.default.createElement("span", {
         style: { fontSize: "11px", fontWeight: 500, color: "#71717a" }
-      }, isReply ? "replied" : "commented"), !isReply && (expandedCommentCards.has(c2.name) ? /* @__PURE__ */ import_react244.default.createElement(ChevronDown, {
+      }, isReply ? "replied" : "commented"), !isReply && (expandedCommentCards.has(c2.name) ? /* @__PURE__ */ import_react243.default.createElement(ChevronDown, {
         size: 11,
         style: { color: "#71717a", marginLeft: "2px" }
-      }) : /* @__PURE__ */ import_react244.default.createElement(ChevronRight, {
+      }) : /* @__PURE__ */ import_react243.default.createElement(ChevronRight, {
         size: 11,
         style: { color: "#71717a", marginLeft: "2px" }
-      })), /* @__PURE__ */ import_react244.default.createElement("span", {
+      })), /* @__PURE__ */ import_react243.default.createElement("span", {
         style: { fontSize: "11px", color: "#a1a1aa", marginLeft: "auto", fontWeight: 500 }
-      }, new Date(c2.creation).toLocaleString())), (isReply || expandedCommentCards.has(c2.name)) && /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, new Date(c2.creation).toLocaleString())), (isReply || expandedCommentCards.has(c2.name)) && /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { backgroundColor: "#fcfcfd", border: "1px solid #e4e4e7", borderRadius: "8px", padding: "10px" }
-      }, isEditing ? /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, isEditing ? /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { display: "flex", flexDirection: "column", gap: "8px" }
-      }, /* @__PURE__ */ import_react244.default.createElement(mentions_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(mentions_default, {
         value: editingText,
         onChange: setEditingText,
         onKeyDown: (e4) => handleMentionsKeyDown(e4, editingText, setEditingText),
         rows: 2,
         style: { borderRadius: "6px", fontSize: "12px" }
-      }, mentionOptions.map((opt) => /* @__PURE__ */ import_react244.default.createElement(Option4, {
+      }, mentionOptions.map((opt) => /* @__PURE__ */ import_react243.default.createElement(Option4, {
         key: opt.value,
         value: opt.value
-      }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { display: "flex", gap: "6px", justifyContent: "flex-end" }
-      }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
-        icon: /* @__PURE__ */ import_react244.default.createElement(CloseOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react243.default.createElement(CloseOutlined_default2, null),
         onClick: () => setEditingCommentId(null)
-      }, "Cancel"), /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, "Cancel"), /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         type: "primary",
-        icon: /* @__PURE__ */ import_react244.default.createElement(CheckOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react243.default.createElement(CheckOutlined_default2, null),
         style: { backgroundColor: "#18181b", borderColor: "#18181b" },
         onClick: () => handleUpdateComment(c2.name)
-      }, "Update"))) : /* @__PURE__ */ import_react244.default.createElement("div", null, /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, "Update"))) : /* @__PURE__ */ import_react243.default.createElement("div", null, /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px" }
-      }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      }, /* @__PURE__ */ import_react243.default.createElement("span", {
         style: { fontSize: "13px", color: "#27272a", whiteSpace: "pre-wrap", lineHeight: 1.45 }
-      }, formatCommentContent(c2.content)), /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, formatCommentContent(c2.content)), /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { display: "flex", gap: "2px", flexShrink: 0 }
-      }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         type: "text",
-        icon: /* @__PURE__ */ import_react244.default.createElement(UndoOutlined_default2, {
+        icon: /* @__PURE__ */ import_react243.default.createElement(UndoOutlined_default2, {
           style: { fontSize: "11px", color: "#71717a" }
         }),
         onClick: () => {
           setActiveReplyId(c2.name);
           setReplyText(`@${c2.owner} `);
         }
-      }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      }, /* @__PURE__ */ import_react243.default.createElement("span", {
         style: { fontSize: "10px", color: "#71717a" }
-      }, "Reply")), isCommentOwner && /* @__PURE__ */ import_react244.default.createElement(import_react244.default.Fragment, null, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, "Reply")), isCommentOwner && /* @__PURE__ */ import_react243.default.createElement(import_react243.default.Fragment, null, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         type: "text",
-        icon: /* @__PURE__ */ import_react244.default.createElement(EditOutlined_default2, {
+        icon: /* @__PURE__ */ import_react243.default.createElement(EditOutlined_default2, {
           style: { fontSize: "11px", color: "#71717a" }
         }),
         onClick: () => {
           setEditingCommentId(c2.name);
           setEditingText(c2.content);
         }
-      }), /* @__PURE__ */ import_react244.default.createElement(popconfirm_default, {
+      }), /* @__PURE__ */ import_react243.default.createElement(popconfirm_default, {
         title: "Delete Comment",
         description: "Delete this comment?",
         onConfirm: () => handleDeleteComment(c2.name),
         okText: "Yes",
         cancelText: "No",
         okButtonProps: { danger: true }
-      }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         type: "text",
         danger: true,
-        icon: /* @__PURE__ */ import_react244.default.createElement(DeleteOutlined_default2, {
+        icon: /* @__PURE__ */ import_react243.default.createElement(DeleteOutlined_default2, {
           style: { fontSize: "11px" }
         })
-      }))))), activeReplyId === c2.name && /* @__PURE__ */ import_react244.default.createElement("div", {
+      }))))), activeReplyId === c2.name && /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { marginTop: "10px", paddingTop: "10px", borderTop: "1px solid #f4f4f5", display: "flex", flexDirection: "column", gap: "8px" }
-      }, /* @__PURE__ */ import_react244.default.createElement(mentions_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(mentions_default, {
         placeholder: "Write a reply...",
         value: replyText,
         onChange: setReplyText,
         onKeyDown: (e4) => handleMentionsKeyDown(e4, replyText, setReplyText),
         rows: 2,
         style: { borderRadius: "6px", fontSize: "12px", border: "1px solid #e4e4e7", padding: "6px 10px" }
-      }, mentionOptions.map((opt) => /* @__PURE__ */ import_react244.default.createElement(Option4, {
+      }, mentionOptions.map((opt) => /* @__PURE__ */ import_react243.default.createElement(Option4, {
         key: opt.value,
         value: opt.value
-      }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react244.default.createElement("div", {
+      }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react243.default.createElement("div", {
         style: { display: "flex", gap: "6px", justifyContent: "flex-end" }
-      }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         onClick: () => setActiveReplyId(null)
-      }, "Cancel"), /* @__PURE__ */ import_react244.default.createElement(button_default, {
+      }, "Cancel"), /* @__PURE__ */ import_react243.default.createElement(button_default, {
         size: "small",
         type: "primary",
         loading: postingReply,
@@ -132926,17 +132775,17 @@ html body {
         style: { backgroundColor: "#18181b", borderColor: "#18181b" }
       }, "Reply")))))));
     };
-    return /* @__PURE__ */ import_react244.default.createElement("div", {
+    return /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
       title: "Activity & Comments",
-      icon: /* @__PURE__ */ import_react244.default.createElement(HistoryOutlined_default2, {
+      icon: /* @__PURE__ */ import_react243.default.createElement(HistoryOutlined_default2, {
         style: { color: "#18181b" }
       }),
       right: loadMoreButton
-    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { display: "flex", gap: "12px", marginBottom: "24px", borderBottom: "1px solid #f4f4f5", paddingBottom: "16px" }
-    }, /* @__PURE__ */ import_react244.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(avatar_default, {
       size: 32,
       style: {
         backgroundColor: "#18181b",
@@ -132944,9 +132793,9 @@ html body {
         fontWeight: 700,
         fontSize: "12px"
       }
-    }, ((_a = currentUser == null ? void 0 : currentUser.charAt(0)) == null ? void 0 : _a.toUpperCase()) || "U"), /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, ((_a = currentUser == null ? void 0 : currentUser.charAt(0)) == null ? void 0 : _a.toUpperCase()) || "U"), /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { flex: 1, display: "flex", flexDirection: "column", gap: "8px" }
-    }, /* @__PURE__ */ import_react244.default.createElement(mentions_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(mentions_default, {
       placeholder: "Write a comment... use @ to mention users",
       value: commentText,
       onChange: setCommentText,
@@ -132958,17 +132807,17 @@ html body {
         padding: "8px 12px",
         fontSize: "13px"
       }
-    }, mentionOptions.map((opt) => /* @__PURE__ */ import_react244.default.createElement(Option4, {
+    }, mentionOptions.map((opt) => /* @__PURE__ */ import_react243.default.createElement(Option4, {
       key: opt.value,
       value: opt.value
-    }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, opt.label, " (", opt.value, ")"))), /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { display: "flex", justifyContent: "flex-end" }
-    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
       type: "primary",
       size: "small",
       loading: postingComment,
       onClick: handlePostComment,
-      icon: /* @__PURE__ */ import_react244.default.createElement(SendOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react243.default.createElement(SendOutlined_default2, null),
       style: {
         backgroundColor: "#18181b",
         borderColor: "#18181b",
@@ -132978,13 +132827,13 @@ html body {
         height: "32px",
         padding: "0 16px"
       }
-    }, "Comment")))), loading && !timelineItems.length ? /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, "Comment")))), loading && !timelineItems.length ? /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "py-12 flex justify-center"
-    }, /* @__PURE__ */ import_react244.default.createElement(spin_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(spin_default, {
       size: "small"
-    })) : displayItems.length ? /* @__PURE__ */ import_react244.default.createElement("div", {
+    })) : displayItems.length ? /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "relative pl-2 py-2"
-    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       style: {
         position: "absolute",
         left: "19px",
@@ -132993,41 +132842,41 @@ html body {
         width: "1px",
         backgroundColor: "#f4f4f5"
       }
-    }), /* @__PURE__ */ import_react244.default.createElement("div", {
+    }), /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "24px" }
     }, displayItems.map((item) => {
       if (item.isComment) {
         const replies = timelineItems.filter((r3) => r3.isComment && r3.subject === item.name);
         replies.sort((a2, b) => new Date(a2.creation) - new Date(b.creation));
-        return /* @__PURE__ */ import_react244.default.createElement("div", {
+        return /* @__PURE__ */ import_react243.default.createElement("div", {
           key: `c-${item.name}`,
           style: { display: "flex", gap: "14px", position: "relative" }
-        }, /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { zIndex: 2, flexShrink: 0 }
-        }, /* @__PURE__ */ import_react244.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react243.default.createElement(avatar_default, {
           size: 24,
-          icon: /* @__PURE__ */ import_react244.default.createElement(MessageSquare, {
+          icon: /* @__PURE__ */ import_react243.default.createElement(MessageSquare, {
             size: 12
           }),
           style: {
             backgroundColor: "#18181b",
             color: "#ffffff"
           }
-        })), /* @__PURE__ */ import_react244.default.createElement("div", {
+        })), /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: "12px" }
-        }, renderCommentCard(item, false, item.name), replies.length > 0 && expandedCommentCards.has(item.name) && /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, renderCommentCard(item, false, item.name), replies.length > 0 && expandedCommentCards.has(item.name) && /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { marginLeft: "24px", marginTop: "2px" }
-        }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+        }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
           type: "text",
           size: "small",
-          icon: expandedComments.has(item.name) ? /* @__PURE__ */ import_react244.default.createElement(ChevronDown, {
+          icon: expandedComments.has(item.name) ? /* @__PURE__ */ import_react243.default.createElement(ChevronDown, {
             size: 12
-          }) : /* @__PURE__ */ import_react244.default.createElement(ChevronRight, {
+          }) : /* @__PURE__ */ import_react243.default.createElement(ChevronRight, {
             size: 12
           }),
           onClick: () => toggleExpandComment(item.name),
           style: { fontSize: "11px", color: "#71717a", fontWeight: 600, padding: 0, height: "auto" }
-        }, expandedComments.has(item.name) ? "Hide Replies" : `View Replies (${replies.length})`)), replies.length > 0 && expandedCommentCards.has(item.name) && expandedComments.has(item.name) && /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, expandedComments.has(item.name) ? "Hide Replies" : `View Replies (${replies.length})`)), replies.length > 0 && expandedCommentCards.has(item.name) && expandedComments.has(item.name) && /* @__PURE__ */ import_react243.default.createElement("div", {
           style: {
             marginLeft: "24px",
             paddingLeft: "16px",
@@ -133048,12 +132897,12 @@ html body {
         const ownerName = item.owner || "System";
         const initial = ownerName.charAt(0).toUpperCase();
         const isExpanded = expandedVersions.has(item.name);
-        return /* @__PURE__ */ import_react244.default.createElement("div", {
+        return /* @__PURE__ */ import_react243.default.createElement("div", {
           key: `v-${item.name}`,
           style: { display: "flex", gap: "14px", position: "relative" }
-        }, /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { zIndex: 2, flexShrink: 0 }
-        }, /* @__PURE__ */ import_react244.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react243.default.createElement(avatar_default, {
           size: 24,
           style: {
             backgroundColor: "#18181b",
@@ -133061,9 +132910,9 @@ html body {
             fontWeight: 700,
             fontSize: "10px"
           }
-        }, initial)), /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, initial)), /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { flex: 1, minWidth: 0 }
-        }, /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, /* @__PURE__ */ import_react243.default.createElement("div", {
           onClick: () => toggleExpandVersion(item.name),
           style: {
             display: "flex",
@@ -133074,19 +132923,19 @@ html body {
             cursor: "pointer",
             userSelect: "none"
           }
-        }, /* @__PURE__ */ import_react244.default.createElement("span", {
+        }, /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { fontSize: "13px", fontWeight: 600, color: "#18181b" }
-        }, ownerName), /* @__PURE__ */ import_react244.default.createElement("span", {
+        }, ownerName), /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { fontSize: "12px", color: "#71717a" }
-        }, "modified this document"), isExpanded ? /* @__PURE__ */ import_react244.default.createElement(ChevronDown, {
+        }, "modified this document"), isExpanded ? /* @__PURE__ */ import_react243.default.createElement(ChevronDown, {
           size: 12,
           style: { color: "#71717a", marginLeft: "4px" }
-        }) : /* @__PURE__ */ import_react244.default.createElement(ChevronRight, {
+        }) : /* @__PURE__ */ import_react243.default.createElement(ChevronRight, {
           size: 12,
           style: { color: "#71717a", marginLeft: "4px" }
-        }), /* @__PURE__ */ import_react244.default.createElement("span", {
+        }), /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { fontSize: "11px", color: "#a1a1aa", marginLeft: "auto", fontWeight: 500 }
-        }, new Date(item.creation).toLocaleString())), isExpanded && (changedFields.length ? /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, new Date(item.creation).toLocaleString())), isExpanded && (changedFields.length ? /* @__PURE__ */ import_react243.default.createElement("div", {
           style: {
             marginLeft: 0,
             marginTop: "6px",
@@ -133094,7 +132943,7 @@ html body {
             paddingLeft: "12px"
           },
           className: "flex flex-col gap-2"
-        }, changedFields.map(([field, oldVal, newVal]) => /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, changedFields.map(([field, oldVal, newVal]) => /* @__PURE__ */ import_react243.default.createElement("div", {
           key: field,
           style: {
             display: "flex",
@@ -133103,7 +132952,7 @@ html body {
             flexWrap: "wrap",
             fontSize: "12px"
           }
-        }, /* @__PURE__ */ import_react244.default.createElement("span", {
+        }, /* @__PURE__ */ import_react243.default.createElement("span", {
           style: {
             fontSize: "10px",
             fontWeight: 700,
@@ -133115,28 +132964,182 @@ html body {
             textTransform: "capitalize",
             display: "inline-block"
           }
-        }, field.replace(/_/g, " ")), /* @__PURE__ */ import_react244.default.createElement("span", {
+        }, field.replace(/_/g, " ")), /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { color: "#9ca3af", textDecoration: "line-through", maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" },
           title: oldVal || "None"
-        }, oldVal || "None"), /* @__PURE__ */ import_react244.default.createElement(ArrowRightOutlined_default2, {
+        }, oldVal || "None"), /* @__PURE__ */ import_react243.default.createElement(ArrowRightOutlined_default2, {
           style: { fontSize: "10px", color: "#d1d5db" }
-        }), /* @__PURE__ */ import_react244.default.createElement("span", {
+        }), /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { fontWeight: 600, color: "#16a34a", maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" },
           title: newVal || "None"
-        }, newVal || "None")))) : /* @__PURE__ */ import_react244.default.createElement("div", {
+        }, newVal || "None")))) : /* @__PURE__ */ import_react243.default.createElement("div", {
           style: { marginTop: "2px" }
-        }, /* @__PURE__ */ import_react244.default.createElement("span", {
+        }, /* @__PURE__ */ import_react243.default.createElement("span", {
           style: { fontSize: "11px", color: "#a1a1aa", fontStyle: "italic" }
         }, "Metadata or untracked changes updated")))));
       }
-    }))) : /* @__PURE__ */ import_react244.default.createElement("div", {
+    }))) : /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "py-6"
-    }, /* @__PURE__ */ import_react244.default.createElement(empty_default2, {
+    }, /* @__PURE__ */ import_react243.default.createElement(empty_default2, {
       description: "No activity logged yet",
       image: empty_default2.PRESENTED_IMAGE_SIMPLE
     }))));
   };
   var ActivityLog_default = ActivityLog;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
+  var DonorView = ({ id, onBack, onEdit }) => {
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
+    if (loading)
+      return /* @__PURE__ */ import_react244.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react244.default.createElement("div", {
+        className: "p-8"
+      }, /* @__PURE__ */ import_react244.default.createElement(alert_default, {
+        message: "Could not load donor details",
+        description: (error == null ? void 0 : error.message) || "Donor not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react244.default.createElement(button_default, {
+          onClick: onBack,
+          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+        }, "Back")
+      }));
+    }
+    const visibleFields = (donorFormFields.fields || []).filter((field) => {
+      const val = doc[field.name];
+      return val !== null && val !== void 0 && val !== "" && !(Array.isArray(val) && val.length === 0);
+    });
+    const renderValue = (field, value) => {
+      const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
+      if (empty2)
+        return /* @__PURE__ */ import_react244.default.createElement("span", {
+          className: "text-zinc-300 font-medium"
+        }, "\u2014");
+      if (field.type === "image")
+        return /* @__PURE__ */ import_react244.default.createElement("img", {
+          src: value,
+          alt: field.label,
+          className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
+        });
+      if (field.type === "textarea")
+        return /* @__PURE__ */ import_react244.default.createElement("div", {
+          className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
+        }, value);
+      return /* @__PURE__ */ import_react244.default.createElement("span", {
+        className: "text-zinc-800 font-semibold"
+      }, String(value));
+    };
+    const title = doc.donor_name || doc.name;
+    const initials = title.substring(0, 2).toUpperCase();
+    return /* @__PURE__ */ import_react244.default.createElement(ViewContainer_default, {
+      className: "donor-view-container"
+    }, /* @__PURE__ */ import_react244.default.createElement(DetailHeader_default, {
+      onBack,
+      title,
+      subtitle: doc.email || doc.mobile_number || `Donor ID: ${id}`,
+      initials,
+      tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
+      actions: /* @__PURE__ */ import_react244.default.createElement(import_react244.default.Fragment, null, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+        onClick: () => window.print(),
+        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+      }, "Print"), /* @__PURE__ */ import_react244.default.createElement(button_default, {
+        type: "primary",
+        onClick: () => onEdit && onEdit(doc),
+        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+      }, "Edit"))
+    }), /* @__PURE__ */ import_react244.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+      xs: 24,
+      lg: 17
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+      className: "flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
+      title: "Basic Information",
+      icon: /* @__PURE__ */ import_react244.default.createElement(User, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react244.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, visibleFields.map((field) => {
+      const isFullWidth = field.type === "image" || field.type === "textarea";
+      return /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+        xs: 24,
+        sm: isFullWidth ? 24 : 12,
+        key: field.name
+      }, /* @__PURE__ */ import_react244.default.createElement(FieldCell_default, {
+        label: field.label
+      }, renderValue(field, doc[field.name])));
+    }))))), /* @__PURE__ */ import_react244.default.createElement(col_default2, {
+      xs: 24,
+      lg: 7
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+      className: "sticky top-6 flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
+      title: "Status & Meta",
+      icon: /* @__PURE__ */ import_react244.default.createElement(ShieldAlert, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+      className: "flex flex-col gap-3 py-1"
+    }, [
+      { label: "Account Status", value: (() => {
+        const statusVal = doc.custom_status || doc.status || "Active";
+        return /* @__PURE__ */ import_react244.default.createElement(tag_default, {
+          className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
+        }, statusVal);
+      })() }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react244.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
+    }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)))), /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
+      title: "System Logs",
+      icon: /* @__PURE__ */ import_react244.default.createElement(FileText, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+      className: "flex flex-col gap-2 py-1"
+    }, [
+      { label: "Document ID", value: /* @__PURE__ */ import_react244.default.createElement("span", {
+        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
+      }, id) },
+      { label: "Created By", value: /* @__PURE__ */ import_react244.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.owner || "System") },
+      { label: "Created At", value: /* @__PURE__ */ import_react244.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
+      { label: "Last Modified", value: /* @__PURE__ */ import_react244.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react244.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4"
+    }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)), /* @__PURE__ */ import_react244.default.createElement("div", {
+      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
+    }, /* @__PURE__ */ import_react244.default.createElement("span", {
+      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
+    }, /* @__PURE__ */ import_react244.default.createElement(CircleCheck, {
+      size: 13,
+      className: "text-emerald-600"
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react244.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_DONOR,
+      docname: id
+    }));
+  };
+  var DonorView_default = DonorView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
+  var import_react246 = __toESM(require_react());
+  var import_dayjs4 = __toESM(require_dayjs_min());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/FormFooter.jsx
   var import_react245 = __toESM(require_react());
@@ -133480,10 +133483,7 @@ html body {
       onCancel: onBack,
       loading: creating || updating,
       isEdit
-    }))), isEdit && /* @__PURE__ */ import_react246.default.createElement(ActivityLog_default, {
-      doctype: DOCTYPE_DONOR,
-      docname: id
-    }));
+    }))));
   };
   var DonorForm_default = DonorForm;
 
@@ -133761,7 +133761,10 @@ html body {
     }, /* @__PURE__ */ import_react249.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record"))))))));
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react249.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_TEMPLE,
+      docname: id
+    }));
   };
   var TempleView_default = TempleView;
 
@@ -134098,10 +134101,7 @@ html body {
       loading: creating || updating,
       isEdit,
       saveText: isEdit ? "Update Temple" : "Add Temple"
-    }))), isEdit && /* @__PURE__ */ import_react250.default.createElement(ActivityLog_default, {
-      doctype: DOCTYPE_TEMPLE,
-      docname: id
-    }));
+    }))));
   };
   var TempleForm_default = TempleForm;
 
@@ -134509,7 +134509,10 @@ html body {
     }, /* @__PURE__ */ import_react254.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record"))))))));
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react254.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_DONATION,
+      docname: id
+    }));
   };
   var DonationView_default = DonationView;
 
@@ -134815,10 +134818,7 @@ html body {
       loading: updating,
       cancelText: "Back",
       saveText: "Update Donation"
-    }))), isEdit && /* @__PURE__ */ import_react255.default.createElement(ActivityLog_default, {
-      doctype: DOCTYPE_DONATION,
-      docname: id
-    }));
+    }))));
   };
   var DonationForm_default = DonationForm;
 
@@ -135086,7 +135086,10 @@ html body {
     }, /* @__PURE__ */ import_react258.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record"))))))));
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react258.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_DONATION_TYPE,
+      docname: id
+    }));
   };
   var DonationTypeView_default = DonationTypeView;
 
@@ -135283,10 +135286,7 @@ html body {
       loading: creating || updating || uploading,
       isEdit,
       saveText: isEdit ? "Update Type" : "Create Type"
-    }))), isEdit && /* @__PURE__ */ import_react259.default.createElement(ActivityLog_default, {
-      doctype: DOCTYPE_DONATION_TYPE,
-      docname: id
-    }));
+    }))));
   };
   var DonationTypeForm_default = DonationTypeForm;
 
@@ -135725,10 +135725,7 @@ html body {
       loading: creating || updating,
       isEdit,
       saveText: isEdit ? "Update User" : "Create User"
-    }))), isEdit && /* @__PURE__ */ import_react262.default.createElement(ActivityLog_default, {
-      doctype: DOCTYPE_USER,
-      docname: id
-    }));
+    }))));
   };
   var UserForm_default = UserForm;
 
@@ -135951,18 +135948,24 @@ html body {
     }, /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "flex flex-col gap-3\n              \n               py-1"
     }, [
-      { label: "Account Status", value: (() => {
-        const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
-        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
-          className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
-        }, statusVal);
-      })() },
-      { label: "Opening Balance", value: /* @__PURE__ */ import_react263.default.createElement("span", {
-        className: "text-xs font-semibold text-zinc-800 flex items-center gap-1"
-      }, /* @__PURE__ */ import_react263.default.createElement(Wallet, {
-        size: 12,
-        className: "text-zinc-400"
-      }), "\u20B9", doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00") }
+      {
+        label: "Account Status",
+        value: (() => {
+          const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
+          return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+            className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
+          }, statusVal);
+        })()
+      },
+      {
+        label: "Opening Balance",
+        value: /* @__PURE__ */ import_react263.default.createElement("span", {
+          className: "text-xs font-semibold text-zinc-800 flex items-center gap-1"
+        }, /* @__PURE__ */ import_react263.default.createElement(Wallet, {
+          size: 12,
+          className: "text-zinc-400"
+        }), "\u20B9", doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00")
+      }
     ].map(({ label, value }) => /* @__PURE__ */ import_react263.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
@@ -136000,7 +136003,10 @@ html body {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
     }, /* @__PURE__ */ import_react263.default.createElement(CircleCheck, {
       size: 13
-    }), "Verified System Record"))))))));
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react263.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_USER,
+      docname: id
+    }));
   };
   var UserView_default = UserView;
 
@@ -138041,4 +138047,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.TWJHUSX4.js.map
+//# sourceMappingURL=temple_donation.bundle.YSJTCT53.js.map
