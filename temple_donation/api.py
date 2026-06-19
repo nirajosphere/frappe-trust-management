@@ -79,6 +79,22 @@ def reset_user_balance(user_name, amount):
     return {"status": "success", "message": f"Recorded handover of ₹{f_amount} for {user_name}"}
 
 @frappe.whitelist()
+def get_handover_logs():
+    """
+    Fetch all Ledger entries (handover logs) to show history.
+    """
+    logs = frappe.get_all("Ledger", 
+        fields=["name", "user", "user_name", "opening_balance", "reset_date", "owner"],
+        order_by="reset_date desc"
+    )
+    for log in logs:
+        # Get collector's full name
+        log["collector_name"] = frappe.db.get_value("User", log.owner, "full_name") or log.owner
+        # Get cashier's avatar
+        log["user_image"] = frappe.db.get_value("User", log.user, "user_image")
+    return logs
+
+@frappe.whitelist()
 def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns core stats for the dashboard.

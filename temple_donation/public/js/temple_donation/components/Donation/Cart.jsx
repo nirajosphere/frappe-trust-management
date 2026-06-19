@@ -2,7 +2,7 @@
 // import { Card, Table, InputNumber, Button, Space, Typography, Empty, Row, Col } from "antd";
 // import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
-// const { Text, Title } = Typography;
+// const { Text } = Typography;
 
 // const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
 //     const quickAmounts = [101, 201, 501, 1001, 2100, 5100];
@@ -11,38 +11,40 @@
 //         {
 //             title: "Donation Type",
 //             dataIndex: "donation_type_label",
-//             key: "donation_type_label",
-//             render: (text) => (
-//                 <div className="flex flex-col py-1">
-//                     <Text className="!font-bold text-zinc-800">{text}</Text>
-//                     <Text className="text-zinc-400 text-[10px] uppercase font-bold">Temple Fund</Text>
+//             render: (text, record) => (
+//                 <div>
+//                     <Text strong>{text}</Text>
+//                     <div>
+//                         <Text type="secondary" style={{ fontSize: 10 }}>{record.temple}</Text>
+//                     </div>
 //                 </div>
 //             ),
 //         },
 //         {
 //             title: "Amount (₹)",
 //             dataIndex: "amount",
-//             key: "amount",
 //             width: 180,
 //             render: (amount, record, index) => (
-//                 <div className="flex flex-col gap-2 py-2">
+//                 <div>
 //                     <InputNumber
 //                         min={1}
 //                         value={amount}
 //                         formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
 //                         parser={(value) => value.replace(/₹\s?|(,*)/g, "")}
 //                         onChange={(val) => onUpdateAmount(index, val)}
-//                         className="w-full border-zinc-200 h-9 flex items-center font-bold"
+//                         style={{ width: "100%", height: 40 }}
 //                     />
-//                     <div className="flex flex-wrap gap-1">
+
+//                     <div style={{ marginTop: 6 }}>
 //                         {quickAmounts.map(q => (
-//                             <button
+//                             <Button
 //                                 key={q}
+//                                 size="small"
 //                                 onClick={() => onUpdateAmount(index, q)}
-//                                 className="px-2 py-0.5 text-[10px] bg-white border border-zinc-200 text-zinc-500 rounded hover:bg-zinc-900 hover:text-white transition-all font-bold"
+//                                 style={{ marginRight: 4, marginTop: 4 }}
 //                             >
-//                                 +{q}
-//                             </button>
+//                                 {q}
+//                             </Button>
 //                         ))}
 //                     </div>
 //                 </div>
@@ -50,66 +52,33 @@
 //         },
 //         {
 //             title: "",
-//             key: "action",
-//             width: 40,
+//             width: 50,
 //             render: (_, __, index) => (
 //                 <Button
-//                     type="text"
 //                     danger
-//                     shape="circle"
 //                     icon={<DeleteOutlined />}
 //                     onClick={() => onRemoveItem(index)}
-//                     className="flex items-center justify-center"
 //                 />
 //             ),
 //         },
 //     ];
 
 //     return (
-//         <Card
-//             title={
-//                 <Space>
-//                     <ShoppingCartOutlined className="text-zinc-900" />
-//                     <span className="font-bold tracking-tight text-zinc-800">Selection Cart</span>
-//                 </Space>
-//             }
-//             size="small"
-//             className="aavatto-card !p-0 overflow-hidden flex flex-col"
-//             styles={{ body: { padding: 0 } }}
-//         >
-//             <div className="max-h-[400px] overflow-y-auto">
-//                 <Table
-//                     columns={columns}
-//                     dataSource={items}
-//                     pagination={false}
-//                     rowKey={(record, index) => `${record.donation_type}-${index}`}
-//                     className="aavatto-premium-table custom-cart-table"
-//                     locale={{
-//                         emptyText: (
-//                             <div className="py-16 bg-zinc-50/50">
-//                                 <Empty
-//                                     image={Empty.PRESENTED_IMAGE_SIMPLE}
-//                                     description={
-//                                         <Text className="text-zinc-300 font-bold italic">Cart is currently empty</Text>
-//                                     }
-//                                 />
-//                             </div>
-//                         )
-//                     }}
-//                 />
-//             </div>
+//         <Card title={<Space><ShoppingCartOutlined /> Selection Cart</Space>} size="small">
+//             <Table
+//                 columns={columns}
+//                 dataSource={items}
+//                 pagination={false}
+//                 rowKey={(r, i) => i}
+//                 locale={{
+//                     emptyText: <Empty description="Cart is empty" />
+//                 }}
+//             />
 
-//             <div className="p-6 bg-zinc-50 border-t border-zinc-200 mt-auto">
-//                 <Row justify="space-between" align="middle">
-//                     <Col>
-//                         <Text className="text-zinc-500 uppercase text-[10px] font-bold tracking-widest">Total Amount</Text>
-//                     </Col>
-//                     <Col className="text-right">
-//                         <div className="text-3xl font-bold text-black tracking-tight">
-//                             <span className="text-base mr-1">₹</span>
-//                             {totalAmount.toLocaleString()}
-//                         </div>
-//                     </Col>
+//             <div style={{ marginTop: 16, borderTop: "1px solid #eee", paddingTop: 12 }}>
+//                 <Row justify="space-between">
+//                     <Text>Total Amount</Text>
+//                     <Text strong>₹ {totalAmount.toLocaleString()}</Text>
 //                 </Row>
 //             </div>
 //         </Card>
@@ -118,52 +87,46 @@
 
 // export default Cart;
 
+
+
 import React from "react";
-import { Card, Table, InputNumber, Button, Space, Typography, Empty, Row, Col } from "antd";
-import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Card, Table, InputNumber, Button, Row, Typography, Empty } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
 const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
-    const quickAmounts = [101, 201, 501, 1001, 2100, 5100];
+    const quickAmounts = [101, 201, 501, 1001];
 
     const columns = [
         {
             title: "Donation Type",
             dataIndex: "donation_type_label",
             render: (text, record) => (
-                <div>
-                    <Text strong>{text}</Text>
-                    <div>
-                        <Text type="secondary" style={{ fontSize: 10 }}>{record.temple}</Text>
-                    </div>
+                <div style={{ padding: '4px 0' }}>
+                    <Text style={{ fontWeight: 600, color: '#1f2937', fontSize: '13px' }}>{text}</Text>
+                    <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '2px' }}>{record.temple}</div>
                 </div>
             ),
         },
         {
             title: "Amount (₹)",
             dataIndex: "amount",
-            width: 180,
+            width: 160,
             render: (amount, record, index) => (
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     <InputNumber
                         min={1}
                         value={amount}
                         formatter={(value) => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         parser={(value) => value.replace(/₹\s?|(,*)/g, "")}
                         onChange={(val) => onUpdateAmount(index, val)}
-                        style={{ width: "100%", height: 40 }}
+                        style={{ width: "100%", height: '36px', borderRadius: '6px' }}
                     />
-
-                    <div style={{ marginTop: 6 }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                         {quickAmounts.map(q => (
-                            <Button
-                                key={q}
-                                size="small"
-                                onClick={() => onUpdateAmount(index, q)}
-                                style={{ marginRight: 4, marginTop: 4 }}
-                            >
-                                {q}
+                            <Button key={q} size="small" onClick={() => onUpdateAmount(index, q)} style={{ fontSize: '11px', padding: '0 6px', height: '20px', borderRadius: '4px' }}>
+                                +{q}
                             </Button>
                         ))}
                     </div>
@@ -172,35 +135,41 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
         },
         {
             title: "",
-            width: 50,
+            width: 44,
+            align: 'center',
             render: (_, __, index) => (
-                <Button
-                    danger
-                    icon={<DeleteOutlined />}
-                    onClick={() => onRemoveItem(index)}
-                />
+                <Button type="text" danger icon={<DeleteOutlined />} onClick={() => onRemoveItem(index)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
             ),
         },
     ];
 
     return (
-        <Card title={<Space><ShoppingCartOutlined /> Selection Cart</Space>} size="small">
+        <Card 
+            title={<span style={{ fontWeight: 600, color: '#1f2937', fontSize: '14px' }}>Selection Cart</span>}
+            size="small"
+            style={{ borderRadius: '8px', border: '1px solid #f3f4f6', boxShadow: 'none' }}
+            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px' }}
+            bodyStyle={{ padding: '0px' }}
+        >
             <Table
                 columns={columns}
                 dataSource={items}
                 pagination={false}
                 rowKey={(r, i) => i}
+                className="custom-pos-table"
                 locale={{
-                    emptyText: <Empty description="Cart is empty" />
+                    emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<span style={{ color: '#9ca3af', fontSize: '13px' }}>Cart is empty</span>} style={{ padding: '32px 0' }} />
                 }}
             />
 
-            <div style={{ marginTop: 16, borderTop: "1px solid #eee", paddingTop: 12 }}>
-                <Row justify="space-between">
-                    <Text>Total Amount</Text>
-                    <Text strong>₹ {totalAmount.toLocaleString()}</Text>
-                </Row>
-            </div>
+            {items.length > 0 && (
+                <div style={{ padding: "16px", borderTop: "1px solid #f3f4f6", backgroundColor: '#fafafa' }}>
+                    <Row justify="space-between" align="middle">
+                        <Text style={{ fontWeight: 500, color: '#4b5563' }}>Total Amount</Text>
+                        <Text style={{ fontSize: '16px', fontWeight: 700, color: '#111827' }}>₹ {totalAmount.toLocaleString()}</Text>
+                    </Row>
+                </div>
+            )}
         </Card>
     );
 };

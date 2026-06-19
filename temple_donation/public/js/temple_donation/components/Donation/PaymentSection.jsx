@@ -1,89 +1,32 @@
 // import React from "react";
-// import { Card, Button, Space, Typography, Tag } from "antd";
-// import {
-//     CheckCircleOutlined,
-//     WalletOutlined,
-//     CreditCardOutlined,
-//     QrcodeOutlined,
-//     ProfileOutlined,
-//     SafetyCertificateOutlined
-// } from "@ant-design/icons";
+// import { Card, Button } from "antd";
 
-// const { Text } = Typography;
-
-// const PaymentSection = ({
-//     paymentMode,
-//     onPaymentModeChange,
-//     onSubmit,
-//     loading,
-//     disabled
-// }) => {
-//     const paymentModes = [
-//         { label: "Cash", value: "Cash", icon: <WalletOutlined /> },
-//         { label: "UPI", value: "UPI", icon: <QrcodeOutlined /> },
-//         { label: "Card", value: "Card", icon: <CreditCardOutlined /> },
-//         { label: "Cheque", value: "Cheque", icon: <ProfileOutlined /> },
-//     ];
+// const PaymentSection = ({ paymentMode, onPaymentModeChange, onSubmit, loading, disabled }) => {
+//     const modes = ["Cash", "UPI", "Card", "Cheque"];
 
 //     return (
-//         <Card
-//             title={
-//                 <Space>
-//                     <SafetyCertificateOutlined className="text-zinc-900" />
-//                     <span className="font-bold tracking-tight text-zinc-800">Payment Selection</span>
-//                 </Space>
-//             }
-//             size="small"
-//             className="aavatto-card"
-//         >
-//             <div className="mb-6 mt-2 px-1">
-//                 <Text className="text-zinc-400 block mb-4 uppercase text-[10px] font-bold tracking-widest">
-//                     Select Mode
-//                 </Text>
-
-//                 <div className="grid grid-cols-2 gap-3">
-//                     {paymentModes.map(mode => (
-//                         <button
-//                             key={mode.value}
-//                             onClick={() => !loading && onPaymentModeChange(mode.value)}
-//                             className={`
-//                                 flex flex-col items-center justify-center p-4 rounded-lg border-2
-//                                 ${paymentMode === mode.value
-//                                     ? `border-black bg-zinc-50 text-black font-bold`
-//                                     : 'border-zinc-100 bg-white text-zinc-400 hover:border-zinc-200'
-//                                 }
-//                                 ${loading ? 'opacity-50 cursor-not-allowed' : ''}
-//                             `}
-//                         >
-//                             <div className={`text-2xl mb-2 ${paymentMode === mode.value ? 'text-black' : 'text-zinc-300'}`}>
-//                                 {mode.icon}
-//                             </div>
-//                             <span className="text-[11px] uppercase tracking-wider">{mode.label}</span>
-//                         </button>
-//                     ))}
-//                 </div>
-//             </div>
-
-//             <div className="bg-zinc-50 p-4 rounded-xl border border-zinc-200 mb-6 flex items-start gap-3">
-//                 <CheckCircleOutlined className="text-zinc-900 text-lg mt-0.5" />
-//                 <div className="text-[11px] leading-snug text-zinc-600 font-medium italic">
-//                     Verify donor identity and donation items before confirmation.
-//                 </div>
+//         <Card title="Payment Selection" size="small">
+//             <div style={{ marginBottom: 12 }}>
+//                 {modes.map(m => (
+//                     <Button
+//                         key={m}
+//                         type={paymentMode === m ? "primary" : "default"}
+//                         onClick={() => onPaymentModeChange(m)}
+//                         style={{ marginRight: 8 }}
+//                     >
+//                         {m}
+//                     </Button>
+//                 ))}
 //             </div>
 
 //             <Button
 //                 type="primary"
-//                 size="large"
 //                 block
 //                 loading={loading}
 //                 disabled={disabled}
 //                 onClick={onSubmit}
-//                 className={`
-//                     h-14 rounded-lg text-base font-bold
-//                     ${disabled ? 'bg-zinc-100 text-zinc-300' : 'bg-black hover:bg-zinc-800 text-white shadow-sm'}
-//                 `}
 //             >
-//                 {loading ? 'Processing...' : 'Confirm Donation'}
+//                 Confirm Donation
 //             </Button>
 //         </Card>
 //     );
@@ -98,18 +41,36 @@ const PaymentSection = ({ paymentMode, onPaymentModeChange, onSubmit, loading, d
     const modes = ["Cash", "UPI", "Card", "Cheque"];
 
     return (
-        <Card title="Payment Selection" size="small">
-            <div style={{ marginBottom: 12 }}>
-                {modes.map(m => (
-                    <Button
-                        key={m}
-                        type={paymentMode === m ? "primary" : "default"}
-                        onClick={() => onPaymentModeChange(m)}
-                        style={{ marginRight: 8 }}
-                    >
-                        {m}
-                    </Button>
-                ))}
+        <Card 
+            title={<span style={{ fontWeight: 600, color: '#1f2937', fontSize: '14px' }}>Payment Selection</span>}
+            size="small"
+            style={{ borderRadius: '8px', border: '1px solid #f3f4f6', boxShadow: 'none' }}
+            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px' }}
+            bodyStyle={{ padding: '16px' }}
+        >
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                {modes.map(m => {
+                    const isActive = paymentMode === m;
+                    return (
+                        <Button
+                            key={m}
+                            onClick={() => onPaymentModeChange(m)}
+                            style={{
+                                height: '36px',
+                                padding: '0 16px',
+                                borderRadius: '6px',
+                                fontWeight: 500,
+                                transition: 'all 0.2s ease',
+                                background: isActive ? '#111827' : '#ffffff',
+                                color: isActive ? '#ffffff' : '#374151',
+                                borderColor: isActive ? '#111827' : '#e5e7eb',
+                                boxShadow: 'none'
+                            }}
+                        >
+                            {m}
+                        </Button>
+                    );
+                })}
             </div>
 
             <Button
@@ -118,6 +79,15 @@ const PaymentSection = ({ paymentMode, onPaymentModeChange, onSubmit, loading, d
                 loading={loading}
                 disabled={disabled}
                 onClick={onSubmit}
+                style={{
+                    height: '42px',
+                    borderRadius: '6px',
+                    fontWeight: 600,
+                    background: disabled ? '#f3f4f6' : '#111827',
+                    borderColor: disabled ? '#e5e7eb' : '#111827',
+                    color: disabled ? '#9ca3af' : '#ffffff',
+                    boxShadow: 'none'
+                }}
             >
                 Confirm Donation
             </Button>

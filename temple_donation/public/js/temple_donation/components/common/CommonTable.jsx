@@ -114,7 +114,7 @@ const CommonTable = ({
                 pageSize: 10,
                 showSizeChanger: true,
                 showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-amber-600 font-bold">{total}</span> records</span>,
-                className: "!m-8"
+                className: "!my-8"
             }}
             bordered
             className="aavatto-premium-table"

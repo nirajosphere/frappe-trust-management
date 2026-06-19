@@ -1,100 +1,137 @@
+
+
 // import React, { useState, useEffect } from "react";
-// import { Card, Row, Col, Typography, Empty, Spin, Space } from "antd";
-// import { HeartFilled, AppstoreOutlined } from "@ant-design/icons";
+// import { Card, Row, Col, Spin, Empty, Typography, Space, Checkbox } from "antd";
+// import { HeartFilled, CheckCircleFilled } from "@ant-design/icons";
 
 // const { Text } = Typography;
 
-// const DonationTypes = ({ selectedTemple, onAddToCart }) => {
+// const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
 //     const [donationTypes, setDonationTypes] = useState([]);
 //     const [loading, setLoading] = useState(false);
 
 //     useEffect(() => {
-//         if (selectedTemple) {
-//             fetchDonationTypes();
+//         if (selectedTemple && selectedTemple.length > 0) {
+//             fetchData();
 //         } else {
 //             setDonationTypes([]);
 //         }
 //     }, [selectedTemple]);
 
-//     const fetchDonationTypes = () => {
+//     const fetchData = () => {
 //         setLoading(true);
+
 //         frappe.call({
 //             method: "frappe.client.get_list",
-//                 args: {
-//                     doctype: "Donation Type",
-//                     filters: { temple: selectedTemple },
-//                     fields: ["name", "donation_type", "temple", "default_amount"]
+//             args: {
+//                 doctype: "Donation Type",
+//                 filters: {
+//                     temple: ["in", selectedTemple]
 //                 },
-//                 callback: (r) => {
-//                     setLoading(false);
-//                     if (r.message) {
-//                         setDonationTypes(r.message);
-//                     } else {
-//                         setDonationTypes([]);
-//                     }
-//                 }
-//             });
+//                 fields: [
+//                     "name",
+//                     "donation_type",
+//                     "default_amount",
+//                     "donation_image",
+//                     "temple",
+//                     "temple.temple_name"
+//                 ]
+//             },
+//             callback: (r) => {
+//                 setLoading(false);
+//                 setDonationTypes(r.message || []);
+//             }
+//         });
 //     };
 
-//     if (!selectedTemple) {
+//     if (!selectedTemple || selectedTemple.length === 0) {
 //         return (
-//             <Card className="aavatto-card min-h-[300px] flex items-center justify-center border-dashed border-2 border-zinc-200 bg-zinc-50/20">
-//                 <Empty 
-//                     image={Empty.PRESENTED_IMAGE_SIMPLE}
-//                     description={
-//                         <span className="text-zinc-400 font-medium italic">
-//                             Select a temple to view available donation types
-//                         </span>
-//                     } 
-//                 />
+//             <Card size="small">
+//                 <Empty description="Select at least one temple" />
 //             </Card>
 //         );
 //     }
 
 //     return (
-//         <Card 
+//         <Card
 //             title={
-//                 <Space>
-//                     <AppstoreOutlined className="text-zinc-900" />
+//                 <Space size={8}>
+//                     <HeartFilled className="text-zinc-900" />
 //                     <span className="font-bold tracking-tight text-zinc-800">Donation Types</span>
 //                 </Space>
-//             } 
-//             size="small" 
-//             className="aavatto-card"
+//             }
+//             size="small"
+//             className="shadow-sm border-zinc-200"
 //         >
 //             {loading ? (
-//                 <div className="flex flex-col items-center justify-center py-20 gap-4">
-//                     <Spin size="large" />
-//                     <Text className="text-zinc-400 font-bold tracking-widest uppercase text-[10px]">Fetching categories...</Text>
+//                 <div className="flex justify-center py-10">
+//                     <Spin />
 //                 </div>
 //             ) : donationTypes.length > 0 ? (
-//                 <Row gutter={[16, 16]}>
-//                     {donationTypes.map(type => (
-//                         <Col key={type.name} xs={12} sm={8} md={8} lg={6}>
-//                             <Card
-//                                 onClick={() => onAddToCart(type)}
-//                                 className="aavatto-card-minimal rounded-lg border-zinc-200 hover:border-zinc-900 bg-white cursor-pointer"
-//                                 bodyStyle={{ padding: '20px 12px', textAlign: 'center' }}
-//                             >
-//                                     <div className="text-2xl text-zinc-900 mb-2">
-//                                         <HeartFilled />
-//                                     </div>
-//                                     <Text className="block text-zinc-700 text-sm font-bold truncate">
-//                                         {type.donation_type}
-//                                     </Text>
-//                                     {type.default_amount > 0 && (
-//                                         <div className="mt-1">
-//                                             <Text className="text-xs text-zinc-400 font-bold">₹{type.default_amount}</Text>
+//                 <Row gutter={[12, 12]}>
+//                     {donationTypes.map((type) => {
+//                         const isSelected = cartItems.some(item => item.donation_type === type.name);
+
+//                         return (
+//                             <Col xs={12} sm={8} md={6} key={type.name} className="flex">
+//                                 <Card
+//                                     onClick={() => onToggleCart(type)}
+//                                     className={`relative border transition-all duration-300 cursor-pointer w-full h-full overflow-hidden ${
+//                                         isSelected 
+//                                         ? "border-zinc-900 ring-1 ring-zinc-900 bg-zinc-50/50" 
+//                                         : "border-zinc-200 hover:border-zinc-400"
+//                                     }`}
+//                                     bodyStyle={{ padding: 12, height: '100%', display: 'flex', flexDirection: 'column' }}
+//                                 >
+//                                     {/* SELECTION INDICATOR */}
+//                                     {isSelected && (
+//                                         <div className="absolute top-2 right-2 z-10 animate-in fade-in zoom-in duration-300">
+//                                             <CheckCircleFilled className="text-zinc-900 text-lg bg-white rounded-full" />
 //                                         </div>
 //                                     )}
+
+//                                     {/* IMAGE */}
+//                                     <div className={`relative h-[220px] w-full mb-3 rounded-xl overflow-hidden border flex items-center justify-center p-3 transition-colors ${
+//                                         isSelected ? "bg-white border-zinc-900/10" : "bg-white border-zinc-200"
+//                                     }`}>
+//                                         <img
+//                                             src={
+//                                                 type.donation_image ||
+//                                                 "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"
+//                                             }
+//                                             alt={type.donation_type}
+//                                             className="w-full h-full object-contain"
+//                                         />
+//                                     </div>
+
+//                                     {/* DONATION NAME */}
+//                                     <Text strong className={`block text-center transition-colors ${isSelected ? "text-zinc-900" : "text-zinc-800"}`}>
+//                                         {type.donation_type}
+//                                     </Text>
+
+//                                     <Text
+//                                         type="secondary"
+//                                         className="block text-center text-[11px]"
+//                                     >
+//                                         {type["temple.temple_name"] || type.temple}
+//                                     </Text>
+
+//                                     {/* AMOUNT */}
+//                                     {type.default_amount > 0 && (
+//                                         <Text
+//                                             type="secondary"
+//                                             className="block text-center mt-auto pt-2"
+//                                         >
+//                                             ₹ {type.default_amount}
+//                                         </Text>
+//                                     )}
 //                                 </Card>
-//                         </Col>
-//                     ))}
+//                             </Col>
+//                         );
+//                     })}
 //                 </Row>
 //             ) : (
-//                 <div className="py-20 border-2 border-dashed border-zinc-100 rounded-xl bg-zinc-50/30 flex items-center justify-center">
-//                     <Empty description="No categories found" />
-//                 </div>
+//                 <Empty description="No donation types found" />
 //             )}
 //         </Card>
 //     );
@@ -102,9 +139,10 @@
 
 // export default DonationTypes;
 
+
 import React, { useState, useEffect } from "react";
-import { Card, Row, Col, Spin, Empty, Typography, Space, Checkbox } from "antd";
-import { HeartFilled, CheckCircleFilled } from "@ant-design/icons";
+import { Card, Row, Col, Spin, Empty, Typography, Space } from "antd";
+import { CheckCircleFilled } from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -122,22 +160,12 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
 
     const fetchData = () => {
         setLoading(true);
-
         frappe.call({
             method: "frappe.client.get_list",
             args: {
                 doctype: "Donation Type",
-                filters: {
-                    temple: ["in", selectedTemple]
-                },
-                fields: [
-                    "name",
-                    "donation_type",
-                    "default_amount",
-                    "donation_image",
-                    "temple",
-                    "temple.temple_name"
-                ]
+                filters: { temple: ["in", selectedTemple] },
+                fields: ["name", "donation_type", "default_amount", "donation_image", "temple", "temple.temple_name"]
             },
             callback: (r) => {
                 setLoading(false);
@@ -148,84 +176,48 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
 
     if (!selectedTemple || selectedTemple.length === 0) {
         return (
-            <Card size="small">
-                <Empty description="Select at least one temple" />
+            <Card style={{ borderRadius: '8px', border: '1px solid #f3f4f6' }} bodyStyle={{ padding: '24px', textAlign: 'center' }}>
+                <Empty description={<span className="text-zinc-400 font-medium">Select at least one temple</span>} />
             </Card>
         );
     }
 
     return (
         <Card
-            title={
-                <Space size={8}>
-                    <HeartFilled className="text-zinc-900" />
-                    <span className="font-bold tracking-tight text-zinc-800">Donation Types</span>
-                </Space>
-            }
+            title={<span style={{ fontWeight: 600, color: '#1f2937', fontSize: '14px' }}>Donation Types</span>}
             size="small"
-            className="shadow-sm border-zinc-200"
+            style={{ borderRadius: '8px', border: '1px solid #f3f4f6', boxShadow: 'none' }}
+            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px' }}
+            bodyStyle={{ padding: '16px' }}
         >
             {loading ? (
-                <div className="flex justify-center py-10">
-                    <Spin />
-                </div>
+                <div className="flex justify-center py-10"><Spin /></div>
             ) : donationTypes.length > 0 ? (
                 <Row gutter={[12, 12]}>
                     {donationTypes.map((type) => {
                         const isSelected = cartItems.some(item => item.donation_type === type.name);
-
                         return (
                             <Col xs={12} sm={8} md={6} key={type.name} className="flex">
                                 <Card
                                     onClick={() => onToggleCart(type)}
-                                    className={`relative border transition-all duration-300 cursor-pointer w-full h-full overflow-hidden ${
-                                        isSelected 
-                                        ? "border-zinc-900 ring-1 ring-zinc-900 bg-zinc-50/50" 
-                                        : "border-zinc-200 hover:border-zinc-400"
+                                    style={{ borderRadius: '6px', overflow: 'hidden' }}
+                                    className={`relative border transition-all duration-200 cursor-pointer w-full h-full ${
+                                        isSelected ? "border-zinc-900 bg-zinc-50/40" : "border-zinc-200 hover:border-zinc-400"
                                     }`}
-                                    bodyStyle={{ padding: 12, height: '100%', display: 'flex', flexDirection: 'column' }}
+                                    bodyStyle={{ padding: 12, display: 'flex', flexDirection: 'column', height: '100%' }}
                                 >
-                                    {/* SELECTION INDICATOR */}
                                     {isSelected && (
-                                        <div className="absolute top-2 right-2 z-10 animate-in fade-in zoom-in duration-300">
+                                        <div className="absolute top-2 right-2 z-10 animate-fade-in">
                                             <CheckCircleFilled className="text-zinc-900 text-lg bg-white rounded-full" />
                                         </div>
                                     )}
-
-                                    {/* IMAGE */}
-                                    <div className={`relative h-[220px] w-full mb-3 rounded-xl overflow-hidden border flex items-center justify-center p-3 transition-colors ${
-                                        isSelected ? "bg-white border-zinc-900/10" : "bg-white border-zinc-200"
-                                    }`}>
-                                        <img
-                                            src={
-                                                type.donation_image ||
-                                                "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"
-                                            }
-                                            alt={type.donation_type}
-                                            className="w-full h-full object-contain"
-                                        />
+                                    <div className={`relative h-[140px] w-full mb-3 rounded-md overflow-hidden border flex items-center justify-center p-2 bg-white ${isSelected ? "border-zinc-900/10" : "border-zinc-100"}`}>
+                                        <img src={type.donation_image || "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"} alt={type.donation_type} className="w-full h-full object-contain" />
                                     </div>
-
-                                    {/* DONATION NAME */}
-                                    <Text strong className={`block text-center transition-colors ${isSelected ? "text-zinc-900" : "text-zinc-800"}`}>
-                                        {type.donation_type}
-                                    </Text>
-
-                                    <Text
-                                        type="secondary"
-                                        className="block text-center text-[11px]"
-                                    >
-                                        {type["temple.temple_name"] || type.temple}
-                                    </Text>
-
-                                    {/* AMOUNT */}
+                                    <Text strong className="block text-center text-zinc-800 text-sm">{type.donation_type}</Text>
+                                    <Text type="secondary" className="block text-center text-[11px] text-zinc-400 mt-0.5">{type["temple.temple_name"] || type.temple}</Text>
                                     {type.default_amount > 0 && (
-                                        <Text
-                                            type="secondary"
-                                            className="block text-center mt-auto pt-2"
-                                        >
-                                            ₹ {type.default_amount}
-                                        </Text>
+                                        <Text className="block text-center font-semibold text-zinc-900 mt-auto pt-2 text-xs">₹ {type.default_amount}</Text>
                                     )}
                                 </Card>
                             </Col>
