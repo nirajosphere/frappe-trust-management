@@ -48,7 +48,7 @@ const ActiveDonationsModal = ({
                         className: "!my-2"
                     }}
                     bordered
-                    size='small'
+                    // size='small'
                     scroll={{ x: 'max-content' }}
                 />
             </div>
