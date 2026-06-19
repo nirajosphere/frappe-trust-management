@@ -1,123 +1,14 @@
 import React from "react";
-import { Row, Col, Alert, Tag } from "antd";
-import { ArrowLeftOutlined, PrinterOutlined, EditOutlined } from "@ant-design/icons";
+import { Row, Col, Alert, Tag, Button } from "antd";
+import { User, ShieldAlert, FileText, CheckCircle2 } from "lucide-react";
 import { useFrappeGetDoc } from "../../hooks/useFrappe";
 import { DOCTYPE_DONOR } from "../../config/constants";
 import { donorFormFields } from "../../formfield/donorFormFields";
 import PageLoader from "../../components/common/PageLoader";
 import { getTagConfig } from "../../utils/tagUtils";
-
-/* ─────────────────────────────────────────
-   TOKENS — slate-cool, premium SaaS design
-   ───────────────────────────────────────── */
-const C = {
-  white:       "#FFFFFF",
-  bg:          "#F8FAFC",        // cool slate background
-  surface:     "#FFFFFF",        // card surface
-  border:      "#E2E8F0",        // default border
-  borderHover: "#94A3B8",        // hover border
-  ink:         "#0F172A",        // primary text
-  inkMid:      "#475569",        // secondary text
-  inkLight:    "#64748B",        // labels
-  inkXLight:   "#CBD5E1",        // empty state
-  black:       "#0F172A",        // main dark accents
-  blackHover:  "#1E293B",
-};
-
-/* ─────────────────────────────────────────
-   FONTS / OVERRIDES
-   ───────────────────────────────────────── */
-const fontStyle = `
-  .donor-view-root, 
-  .donor-view-root *, 
-  .donor-view-root .ant-typography, 
-  .donor-view-root .ant-tag {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-  }
-`;
-
-/* ─────────────────────────────────────────
-   HOVER BUTTON
-   ───────────────────────────────────────── */
-function HoverButton({ style, hoverStyle, children, onClick, title }) {
-  const [hov, setHov] = React.useState(false);
-  return (
-    <button
-      style={{ ...style, ...(hov ? hoverStyle : {}) }}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      onClick={onClick}
-      title={title}
-    >
-      {children}
-    </button>
-  );
-}
-
-/* ─────────────────────────────────────────
-   FIELD CELL — sidebar accent bar style
-   ───────────────────────────────────────── */
-function FieldCell({ label, children }) {
-  const [hov, setHov] = React.useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        padding: "10px 14px",
-        borderRadius: "0 10px 10px 0",
-        borderLeft: `3px solid ${hov ? C.black : C.border}`,
-        background: hov ? "rgba(15, 23, 42, 0.02)" : "transparent",
-        transition: "all 0.2s ease",
-      }}
-    >
-      <span style={{
-        display: "block",
-        fontSize: 10,
-        fontWeight: 700,
-        letterSpacing: "0.09em",
-        textTransform: "uppercase",
-        color: C.inkLight,
-        marginBottom: 4,
-      }}>
-        {label}
-      </span>
-      <div style={{ minHeight: 20, fontSize: 13, fontWeight: 600, color: C.ink }}>{children}</div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
-   SECTION CARD
-   ───────────────────────────────────────── */
-function SectionCard({ title, right, children }) {
-  return (
-    <div style={{
-      background: C.surface,
-      border: `1px solid ${C.border}`,
-      borderRadius: 16,
-      overflow: "hidden",
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)",
-    }}>
-      {/* head */}
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "16px 24px",
-        background: "#FAFBFD",
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <span style={{ fontSize: 14, fontWeight: 700, color: C.ink, letterSpacing: "-0.01em" }}>
-          {title}
-        </span>
-        {right}
-      </div>
-      {/* body */}
-      <div style={{ padding: "24px" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
+import DetailHeader from "../../components/common/DetailHeader";
+import SectionCard from "../../components/common/SectionCard";
+import FieldCell from "../../components/common/FieldCell";
 
 const DonorView = ({ id, onBack, onEdit }) => {
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
@@ -126,167 +17,87 @@ const DonorView = ({ id, onBack, onEdit }) => {
 
   if (error || !doc) {
     return (
-      <div style={{ padding: 32 }}>
+      <div className="p-8">
         <Alert
           message="Could not load donor details"
           description={error?.message || "Donor not found"}
           type="error"
           showIcon
-          action={<HoverButton onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, background: "#fff", border: `1px solid ${C.border}`, cursor: "pointer" }} hoverStyle={{ borderColor: C.black }}><ArrowLeftOutlined /> Back</HoverButton>}
+          action={
+            <Button 
+              onClick={onBack}
+              className="h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+            >
+              Back
+            </Button>
+          }
         />
       </div>
     );
   }
 
-  // Filter out empty fields to keep view mode clean
   const visibleFields = (donorFormFields.fields || []).filter(field => {
     const val = doc[field.name];
-    const empty = val === null || val === undefined || val === "" ||
-      (Array.isArray(val) && val.length === 0);
-    return !empty;
+    return val !== null && val !== undefined && val !== "" && !(Array.isArray(val) && val.length === 0);
   });
 
-  /* ── value renderer ── */
   const renderValue = (field, value) => {
-    const empty = value === null || value === undefined || value === "" ||
-      (Array.isArray(value) && value.length === 0);
-    if (empty) return <span style={{ color: C.inkXLight, fontSize: 13, fontWeight: 500 }}>—</span>;
+    const empty = value === null || value === undefined || value === "" || (Array.isArray(value) && value.length === 0);
+    if (empty) return <span className="text-zinc-300 font-medium">—</span>;
 
     if (field.type === "image")
-      return <img src={value} alt={field.label} style={{ width: 56, height: 56, objectFit: "cover", borderRadius: 10, border: `1px solid ${C.border}` }} />;
+      return <img src={value} alt={field.label} className="w-14 h-14 object-cover rounded-lg border border-zinc-200" />;
 
     if (field.type === "textarea")
       return (
-        <div style={{ background: "#F8FAFC", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px",
-          fontSize: 12, color: C.inkMid, whiteSpace: "pre-wrap", lineHeight: 1.6, fontWeight: 400 }}>
+        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal">
           {value}
         </div>
       );
 
-    return <span style={{ fontSize: 13, fontWeight: 600, color: C.ink }}>{String(value)}</span>;
+    return <span className="text-zinc-800 font-semibold">{String(value)}</span>;
   };
 
-  /* ── Header Avatar Renderer ── */
-  const renderHeaderAvatar = () => {
-    const getInitials = (name) => {
-      if (!name) return "?";
-      const parts = name.trim().split(" ").filter(Boolean);
-      if (parts.length === 1) {
-        return parts[0].slice(0, 2).toUpperCase();
-      }
-      return parts.map(n => n[0]).join("").toUpperCase().slice(0, 2);
-    };
-
-    const bgStyle = {
-      width: 56,
-      height: 56,
-      borderRadius: "50%",
-      background: C.black,
-      color: "#FFFFFF",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: 18,
-      fontWeight: 700,
-      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
-      flexShrink: 0
-    };
-
-    return <div style={bgStyle}>{getInitials(doc.donor_name || doc.name)}</div>;
-  };
-
-  /* ── Header Text Details Renderer ── */
-  const renderHeaderDetails = () => {
-    const title = doc.donor_name || doc.name;
-    const subtitleElements = [];
-
-    if (doc.email) {
-      subtitleElements.push(
-        <span key="email" style={{ color: C.inkMid, fontWeight: 500 }}>
-          {doc.email}
-        </span>
-      );
-    }
-    const phoneVal = doc.mobile_number || doc.phone;
-    if (phoneVal) {
-      subtitleElements.push(
-        <span key="phone" style={{ color: C.inkLight }}>
-          {doc.email ? `• ${phoneVal}` : phoneVal}
-        </span>
-      );
-    }
-
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-        <div style={{ fontSize: 20, fontWeight: 800, color: C.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
-          {title}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, flexWrap: "wrap" }}>
-          {subtitleElements}
-        </div>
-      </div>
-    );
-  };
+  const title = doc.donor_name || doc.name;
+  const initials = title.substring(0, 2).toUpperCase();
 
   return (
-    <div className="temple-donation-app donor-view-root" style={{ background: C.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }}>
-      <style>{fontStyle}</style>
-      <div style={{ maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-
+    <div className="donor-view-container min-h-screen py-6 bg-[#f8f9fa]" style={{ padding: '24px 40px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        
         {/* ── TOP HERO HEADER ── */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
-          flexWrap: "wrap", gap: 16, paddingBottom: 24, borderBottom: `1px solid ${C.border}` }}>
-          
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <HoverButton
-              style={{ width: 40, height: 40, borderRadius: 10, border: `1px solid ${C.border}`,
-                background: C.white, display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", color: C.inkMid, transition: "all 0.15s" }}
-              hoverStyle={{ borderColor: C.black, background: C.black, color: "#fff" }}
-              onClick={onBack} title="Go back"
-            >
-              <ArrowLeftOutlined style={{ fontSize: 14 }} />
-            </HoverButton>
+        <DetailHeader
+          onBack={onBack}
+          title={title}
+          subtitle={doc.email || doc.mobile_number || `Donor ID: ${id}`}
+          initials={initials}
+          tags={doc.custom_status || doc.status ? [doc.custom_status || doc.status] : []}
+          actions={
+            <>
+              <Button
+                onClick={() => window.print()}
+                className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+              >
+                Print
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => onEdit && onEdit(doc)}
+                className="px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+              >
+                Edit
+              </Button>
+            </>
+          }
+        />
 
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              {renderHeaderAvatar()}
-              {renderHeaderDetails()}
-            </div>
-          </div>
-
-          {/* Action buttons */}
-          <div style={{ display: "flex", gap: 8 }}>
-            <HoverButton
-              style={{ height: 40, padding: "0 20px", borderRadius: 10, border: `1px solid ${C.border}`,
-                background: C.white, color: C.inkMid, fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}
-              hoverStyle={{ borderColor: C.black, color: C.ink }}
-              onClick={() => window.print()}
-            >
-              <PrinterOutlined style={{ fontSize: 14 }} /> Print
-            </HoverButton>
-            <HoverButton
-              style={{ height: 40, padding: "0 22px", borderRadius: 10, border: "none",
-                background: C.black, color: "#fff", fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
-              hoverStyle={{ background: "#1E293B" }}
-              onClick={() => onEdit && onEdit(doc)}
-            >
-              <EditOutlined style={{ fontSize: 14 }} /> Edit
-            </HoverButton>
-          </div>
-        </div>
-
-        {/* ── SPLIT-PANE TWO COLUMN GRID ── */}
+        {/* ── TWO COLUMN GRID WORKSURFACE ── */}
         <Row gutter={[24, 24]}>
-          {/* Main Pane (Left) */}
-          <Col xs={24} lg={16}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-              
-              {/* Field details */}
-              <SectionCard title="Donor Details">
+          
+          {/* Left Main View Columns */}
+          <Col xs={24} lg={17}>
+            <div className="flex flex-col gap-6">
+              <SectionCard title="Basic Information" icon={<User size={15} className="text-zinc-800" />}>
                 <Row gutter={[16, 16]}>
                   {visibleFields.map((field) => {
                     const isFullWidth = field.type === "image" || field.type === "textarea";
@@ -300,40 +111,57 @@ const DonorView = ({ id, onBack, onEdit }) => {
                   })}
                 </Row>
               </SectionCard>
-
             </div>
           </Col>
 
-          {/* Sidebar Pane (Right) */}
-          <Col xs={24} lg={8}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* Right Meta Parameters Panel */}
+          <Col xs={24} lg={7}>
+            <div className="sticky top-6 flex flex-col gap-6">
               
-              {/* Metadata Info Box */}
-              <SectionCard title="System Information">
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {/* Status Meta Card */}
+              <SectionCard title="Status & Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
+                <div className="flex flex-col gap-4 py-1">
                   {[
-                    { label: "Document ID", value: <span style={{ fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C.inkMid }}>{id}</span> },
-                    { label: "Status", value: (() => {
+                    { label: "Account Status", value: (() => {
                       const statusVal = doc.custom_status || doc.status || "Active";
-                      const tagInfo = getTagConfig(statusVal);
-                      return <Tag className={`tag-glass ${tagInfo.glassClass}`}>{statusVal}</Tag>;
-                    })() },
-                    { label: "Created By", value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid }}>{doc.owner || "System"}</span> },
-                    { label: "Created At", value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid }}>{doc.creation ? new Date(doc.creation).toLocaleString() : "—"}</span> },
-                    { label: "Last Modified", value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid }}>{doc.modified ? new Date(doc.modified).toLocaleString() : "—"}</span> }
+                      return <Tag className={`tag-glass ${getTagConfig(statusVal).glassClass} !m-0`}>{statusVal}</Tag>;
+                    })() }
                   ].map(({ label, value }) => (
-                    <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
-                      <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C.inkLight }}>{label}</span>
+                    <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
+                      <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
                       {value}
                     </div>
                   ))}
                 </div>
               </SectionCard>
 
+              {/* System Security Tracking Logs */}
+              <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
+                <div className="flex flex-col gap-3.5 py-1">
+                  {[
+                    { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100">{id}</span> },
+                    { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
+                    { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
+                    { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }
+                  ].map(({ label, value }) => (
+                    <div key={label} className="flex justify-between items-center gap-4">
+                      <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                      {value}
+                    </div>
+                  ))}
+                  
+                  <div className="w-full border-t border-zinc-100 pt-3 mt-1 text-center">
+                    <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5">
+                      <CheckCircle2 size={13} className="text-emerald-600" />
+                      Verified System Record
+                    </span>
+                  </div>
+                </div>
+              </SectionCard>
+
             </div>
           </Col>
         </Row>
-
       </div>
     </div>
   );

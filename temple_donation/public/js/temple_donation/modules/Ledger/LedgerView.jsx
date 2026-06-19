@@ -1,114 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Alert, Table, Avatar, Typography } from "antd";
-import { ArrowLeftOutlined, PrinterOutlined, UserOutlined, FileTextOutlined, HistoryOutlined, WalletOutlined } from "@ant-design/icons";
+import { Row, Col, Alert, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Printer } from "lucide-react";
 import PageLoader from "../../components/common/PageLoader";
-
-const { Text } = Typography;
-
-/* ─────────────────────────────────────────
-   TOKENS — slate-cool, premium SaaS design
-   ───────────────────────────────────────── */
-const C = {
-  white:       "#FFFFFF",
-  bg:          "#F8FAFC",        // cool slate background
-  surface:     "#FFFFFF",        // card surface
-  border:      "#E2E8F0",        // default border
-  ink:         "#0F172A",        // primary text
-  inkMid:      "#475569",        // secondary text
-  inkLight:    "#64748B",        // labels
-  inkXLight:   "#CBD5E1",        // empty state
-  black:       "#0F172A",        // main dark accents
-  blackHover:  "#1E293B",
-  green:       "#16A34A",
-  greenBg:     "#F0FDF4",
-  greenBorder: "#BBF7D0",
-};
-
-const fontStyle = `
-  .ledger-view-root, 
-  .ledger-view-root *, 
-  .ledger-view-root .ant-typography {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-  }
-`;
-
-function HoverButton({ style, hoverStyle, children, onClick, title }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <button
-      style={{ ...style, ...(hov ? hoverStyle : {}) }}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      onClick={onClick}
-      title={title}
-    >
-      {children}
-    </button>
-  );
-}
-
-function FieldCell({ label, children }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        padding: "10px 14px",
-        borderRadius: "0 10px 10px 0",
-        borderLeft: `3px solid ${hov ? C.black : C.border}`,
-        background: hov ? "rgba(15, 23, 42, 0.02)" : "transparent",
-        transition: "all 0.2s ease",
-      }}
-    >
-      <span style={{
-        display: "block",
-        fontSize: 10,
-        fontWeight: 700,
-        letterSpacing: "0.09em",
-        textTransform: "uppercase",
-        color: C.inkLight,
-        marginBottom: 4,
-      }}>
-        {label}
-      </span>
-      <div style={{ minHeight: 20, fontSize: 13, fontWeight: 600, color: C.ink }}>{children}</div>
-    </div>
-  );
-}
-
-function SectionCard({ title, right, children }) {
-  return (
-    <div style={{
-      background: C.surface,
-      border: `1px solid ${C.border}`,
-      borderRadius: 16,
-      overflow: "hidden",
-      boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)",
-    }}>
-      <div style={{
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "16px 24px",
-        background: "#FAFBFD",
-        borderBottom: `1px solid ${C.border}`,
-      }}>
-        <span style={{ fontSize: 14, fontWeight: 700, color: C.ink, letterSpacing: "-0.01em" }}>
-          {title}
-        </span>
-        {right}
-      </div>
-      <div style={{ padding: "24px" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
+import DetailHeader from "../../components/common/DetailHeader";
+import SectionCard from "../../components/common/SectionCard";
+import FieldCell from "../../components/common/FieldCell";
+import LedgerProfileCard from "./components/LedgerProfileCard";
+import LedgerFinancialBox from "./components/LedgerFinancialBox";
+import LedgerTabsSection from "./components/LedgerTabsSection";
 
 const LedgerView = ({ id, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [activeTab, setActiveTab] = useState("donations"); // "donations" or "handovers"
 
   const fetchLedgerDetails = async () => {
     setLoading(true);
@@ -138,20 +43,19 @@ const LedgerView = ({ id, onBack }) => {
 
   if (error || !data) {
     return (
-      <div style={{ padding: 32 }}>
+      <div className="p-8">
         <Alert
           message="Could not load cashier handover details"
           description={error?.message || "User details not found"}
           type="error"
           showIcon
           action={
-            <HoverButton 
+            <button 
               onClick={onBack} 
-              style={{ padding: "8px 16px", borderRadius: 8, background: "#fff", border: `1px solid ${C.border}`, cursor: "pointer" }} 
-              hoverStyle={{ borderColor: C.black }}
+              className="px-4 py-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 font-medium hover:border-zinc-900 transition-all cursor-pointer"
             >
-              <ArrowLeftOutlined /> Back
-            </HoverButton>
+              Back
+            </button>
           }
         />
       </div>
@@ -185,7 +89,7 @@ const LedgerView = ({ id, onBack }) => {
               frappe.set_route("temple-donation", "donations", "view", text);
             }
           }}
-          className="font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline"
+          className="font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline cursor-pointer"
         >
           {text}
         </a>
@@ -266,204 +170,77 @@ const LedgerView = ({ id, onBack }) => {
     }
   ];
 
-  const getInitials = (name) => {
-    if (!name) return "?";
-    const parts = name.trim().split(" ").filter(Boolean);
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-    return parts.map(n => n[0]).join("").toUpperCase().slice(0, 2);
-  };
+  const fullName = user.full_name || user.name || "Cashier";
+  const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase() || "C";
 
   return (
-    <div className="temple-donation-app ledger-view-root" style={{ background: C.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }}>
-      <style>{fontStyle}</style>
-      <div style={{ maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-
-        {/* Hero Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
-          flexWrap: "wrap", gap: 16, paddingBottom: 24, borderBottom: `1px solid ${C.border}` }}>
-          
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <HoverButton
-              style={{ width: 40, height: 40, borderRadius: 10, border: `1px solid ${C.border}`,
-                background: C.white, display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", color: C.inkMid, transition: "all 0.15s" }}
-              hoverStyle={{ borderColor: C.black, background: C.black, color: "#fff" }}
-              onClick={onBack} title="Go back"
-            >
-              <ArrowLeftOutlined style={{ fontSize: 14 }} />
-            </HoverButton>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              {user.user_image ? (
-                <img 
-                  src={user.user_image} 
-                  alt={user.full_name} 
-                  style={{ width: 52, height: 52, borderRadius: "50%", objectFit: "cover", border: `1px solid ${C.border}` }} 
-                />
-              ) : (
-                <div style={{
-                  width: 52, height: 52, borderRadius: "50%", background: C.black, color: "#ffffff",
-                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 700
-                }}>
-                  {getInitials(user.full_name || user.name)}
-                </div>
-              )}
-              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                <div style={{ fontSize: 20, fontWeight: 800, color: C.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }}>
-                  {user.full_name}
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: C.inkMid }}>
-                  <span>{user.email}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: "flex", gap: 8 }}>
-            <HoverButton
-              style={{ height: 40, padding: "0 20px", borderRadius: 10, border: `1px solid ${C.border}`,
-                background: C.white, color: C.inkMid, fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
-                boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}
-              hoverStyle={{ borderColor: C.black, color: C.ink }}
+    <div className="user-view-container min-h-screen py-6 bg-[#f8f9fa]" style={{ padding: '24px 40px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        
+        {/* ── TOP HERO HEADER ── */}
+        <DetailHeader
+          onBack={onBack}
+          title={fullName}
+          subtitle={user.email}
+          imageSrc={user.user_image}
+          initials={initials}
+          actions={
+            <button
               onClick={() => window.print()}
+              className="px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded-lg cursor-pointer"
             >
-              <PrinterOutlined style={{ fontSize: 14 }} /> Print History Report
-            </HoverButton>
-          </div>
-        </div>
+              <Printer size={14} className="text-zinc-600" /> Print History Report
+            </button>
+          }
+        />
 
-        {/* Main Content Layout */}
+        {/* ── TWO COLUMN GRID WORKSURFACE ── */}
         <Row gutter={[24, 24]}>
-          {/* Main Pane (Left) */}
-          <Col xs={24} lg={16}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          
+          {/* Left Meta/Profile Panel (Span 7/24) */}
+          <Col xs={24} lg={7}>
+            <div className="sticky top-6 flex flex-col gap-6">
               
-              {/* Tab Selector Pill control */}
-              <div className="bg-zinc-100 p-1 rounded-lg flex items-center space-x-1 w-fit">
-                <button
-                  onClick={() => setActiveTab("donations")}
-                  style={{
-                    background: activeTab === "donations" ? "#ffffff" : "transparent",
-                    border: "none",
-                    boxShadow: activeTab === "donations" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none",
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${
-                    activeTab === "donations" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"
-                  }`}
-                >
-                  <WalletOutlined className="text-sm" />
-                  Collected Donations ({donations.length})
-                </button>
-                <button
-                  onClick={() => setActiveTab("handovers")}
-                  style={{
-                    background: activeTab === "handovers" ? "#ffffff" : "transparent",
-                    border: "none",
-                    boxShadow: activeTab === "handovers" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none",
-                  }}
-                  className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${
-                    activeTab === "handovers" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"
-                  }`}
-                >
-                  <HistoryOutlined className="text-sm" />
-                  Handover Sessions ({handovers.length})
-                </button>
-              </div>
+              {/* Profile Card */}
+              <LedgerProfileCard user={user} />
 
-              {activeTab === "donations" ? (
-                <SectionCard 
-                  title="Cash Donations Collected & Handed Over" 
-                  right={
-                    <span className="text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md">
-                      {donations.length} Donation{donations.length !== 1 ? 's' : ''} Found
-                    </span>
-                  }
-                >
-                  <Table
-                    dataSource={donations}
-                    columns={donationColumns}
-                    rowKey="name"
-                    pagination={{
-                      pageSize: 10,
-                      showSizeChanger: true,
-                      className: "!my-4"
-                    }}
-                    bordered
-                    className="aavatto-premium-table"
-                    scroll={{ x: 'max-content' }}
-                  />
-                </SectionCard>
-              ) : (
-                <SectionCard 
-                  title="Past Reset & Handover Logs" 
-                  right={
-                    <span className="text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md">
-                      {handovers.length} Session{handovers.length !== 1 ? 's' : ''} Found
-                    </span>
-                  }
-                >
-                  <Table
-                    dataSource={handovers}
-                    columns={handoverColumns}
-                    rowKey="name"
-                    pagination={{
-                      pageSize: 10,
-                      showSizeChanger: true,
-                      className: "!my-4"
-                    }}
-                    bordered
-                    className="aavatto-premium-table"
-                    scroll={{ x: 'max-content' }}
-                  />
-                </SectionCard>
-              )}
-            </div>
-          </Col>
+              {/* Total Collected Financial summary */}
+              <LedgerFinancialBox 
+                title="Total Handed Over Amount" 
+                amount={total_collected}
+                description="Consolidated total from all handover sessions."
+                colorTheme="green"
+              />
 
-          {/* Sidebar (Right) */}
-          <Col xs={24} lg={8}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              
-              {/* Financial Box */}
-              <div style={{
-                background: C.greenBg,
-                border: `1px solid ${C.greenBorder}`,
-                borderRadius: 16,
-                padding: "24px",
-                display: "flex",
-                flexDirection: "column",
-                gap: 8,
-                boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
-              }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: C.green, letterSpacing: "0.09em", textTransform: "uppercase" }}>
-                  Total Handed Over Amount
-                </span>
-                <span style={{ fontSize: 28, fontWeight: 800, color: C.green, letterSpacing: "-0.03em" }}>
-                  ₹{Number(total_collected || 0).toLocaleString("en-IN")}
-                </span>
-                <span style={{ fontSize: 11, color: C.green, opacity: 0.8, fontWeight: 500 }}>
-                  Consolidated total from all handover sessions.
-                </span>
-              </div>
-
-              {/* Cashier Profile Meta */}
-              <SectionCard title="Cashier Information">
+              {/* Cashier Information Card */}
+              <SectionCard title="Cashier Information" icon={<UserOutlined style={{ color: '#1f2937' }} />}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <FieldCell label="User Email">
                     <span style={{ fontSize: 13, fontWeight: 600 }}>{user.email}</span>
                   </FieldCell>
                   
                   <FieldCell label="Full Name">
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{user.full_name}</span>
+                    <span style={{ fontSize: 13, fontWeight: 600 }}>{fullName}</span>
                   </FieldCell>
 
                   <FieldCell label="Total Handovers">
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{handovers.length} Handover Reset{handovers.length !== 1 ? 's' : ''}</span>
+                    <span style={{ fontSize: 13, fontWeight: 600 }}>{handovers.length} Handover Session{handovers.length !== 1 ? 's' : ''}</span>
                   </FieldCell>
                 </div>
               </SectionCard>
 
+            </div>
+          </Col>
+
+          {/* Right Main Table/Tabs Panel (Span 17/24) */}
+          <Col xs={24} lg={17}>
+            <div className="flex flex-col gap-6">
+              <LedgerTabsSection 
+                donations={donations} 
+                handovers={handovers}
+                donationColumns={donationColumns}
+                handoverColumns={handoverColumns}
+              />
             </div>
           </Col>
         </Row>

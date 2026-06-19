@@ -33,9 +33,15 @@ export const themeConfig = {
             horizontalItemHoverColor: "#18181b",
         },
         Card: {
-            borderRadiusLG: 6,
-            borderRadius: 6,
+            borderRadius: 8,
             // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+            headerBg: '#f8f9fa',      // Header ka background grey ho jaayega
+            headerBorderColor: 'transparent', // Header ke niche ki border gayab!
+
+            // Card level structural configurations
+            borderRadiusLG: 8,        // Border radius 8px
+            colorBorderSecondary: '#e5e7eb', // Card ki main border light grey
+            paddingSM: 12,
         },
         Button: {
             borderRadius: 6,

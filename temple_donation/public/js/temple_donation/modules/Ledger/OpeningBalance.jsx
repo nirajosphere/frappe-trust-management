@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, message, Popconfirm, Avatar, Typography, Modal, Table } from 'antd';
+import { Button, message, Popconfirm, Avatar, Typography, Table } from 'antd';
 import { SyncOutlined, WalletOutlined, HistoryOutlined, UserOutlined, EyeOutlined } from '@ant-design/icons';
 import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
 import CommonTable from '../../components/common/CommonTable';
+import ActiveDonationsModal from './components/ActiveDonationsModal';
 
 const { Text } = Typography;
 
@@ -194,7 +195,7 @@ const OpeningBalance = () => {
                             frappe.set_route("temple-donation", "donations", "view", text);
                         }
                     }}
-                    className="font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline"
+                    className="font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline cursor-pointer"
                 >
                     {text}
                 </a>
@@ -404,47 +405,15 @@ const OpeningBalance = () => {
                 />
             )}
 
-            <Modal
-                title={
-                    <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #f1f5f9", paddingBottom: "12px" }}>
-                        <span style={{ fontSize: "16px", fontWeight: 800, color: "#0f172a" }}>
-                            Active Cash Donations for {selectedUserName}
-                        </span>
-                        <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 500, fontFamily: "monospace", marginTop: "2px" }}>
-                            {selectedUser}
-                        </span>
-                    </div>
-                }
-                open={isModalOpen}
-                onCancel={() => setIsModalOpen(false)}
-                footer={[
-                    <Button 
-                        key="close" 
-                        onClick={() => setIsModalOpen(false)}
-                        className="bg-zinc-900 border-zinc-900 hover:!bg-zinc-800 text-white hover:!text-white rounded-md font-semibold"
-                    >
-                        Close
-                    </Button>
-                ]}
-                width={800}
-                className="aavatto-premium-modal"
-            >
-                <div className="py-4">
-                    <Table
-                        dataSource={activeDonations}
-                        columns={activeDonationColumns}
-                        rowKey="name"
-                        loading={loadingActiveDonations}
-                        pagination={{
-                            pageSize: 5,
-                            showSizeChanger: true,
-                            className: "!my-2"
-                        }}
-                        bordered
-                        scroll={{ x: 'max-content' }}
-                    />
-                </div>
-            </Modal>
+            <ActiveDonationsModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                selectedUser={selectedUser}
+                selectedUserName={selectedUserName}
+                activeDonations={activeDonations}
+                loading={loadingActiveDonations}
+                columns={activeDonationColumns}
+            />
         </div>
     );
 };
