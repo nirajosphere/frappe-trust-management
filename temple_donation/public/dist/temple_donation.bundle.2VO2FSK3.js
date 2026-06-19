@@ -132336,8 +132336,10 @@ html body {
       xs: 24,
       md: 12,
       lg: 10
+    }, /* @__PURE__ */ import_react246.default.createElement("div", {
+      className: "sticky top-6"
     }, /* @__PURE__ */ import_react246.default.createElement(SectionCard_default, {
-      title: "Donation Types Matrix",
+      title: "Donation Types",
       icon: /* @__PURE__ */ import_react246.default.createElement(AppstoreOutlined_default2, {
         style: { color: "#18181b" }
       }),
@@ -132406,7 +132408,7 @@ html body {
           }, item.donation_type)
         }));
       }
-    }))))), /* @__PURE__ */ import_react246.default.createElement("div", {
+    })))))), /* @__PURE__ */ import_react246.default.createElement("div", {
       style: { marginTop: "20px" }
     }, /* @__PURE__ */ import_react246.default.createElement(FormFooter_default, {
       onCancel: onBack,
@@ -136356,4 +136358,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.A5LUGW3H.js.map
+//# sourceMappingURL=temple_donation.bundle.2VO2FSK3.js.map

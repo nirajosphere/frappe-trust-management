@@ -567,74 +567,76 @@ const TempleForm = ({ id, onBack }) => {
 
                     {/* ================= RIGHT COLUMN: Self-Healing Adaptive Matrix Panel ================= */}
                     <Col xs={24} md={12} lg={10}>
-                        <SectionCard 
-                            title="Donation Types Matrix"
-                            icon={<AppstoreOutlined style={{ color: '#18181b' }} />}
-                            right={filteredDonationTypes.length > 0 && (
-                                <Space size={6}>
-                                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#52525b', letterSpacing: '0.02em' }}>SELECT ALL</span>
-                                    <Switch size="small" checked={allSelected} onChange={handleSelectAllChange} className={allSelected ? "bg-zinc-800" : "bg-zinc-200"} />
-                                </Space>
-                            )}
-                        >
-                            {/* Filter Bar */}
-                            <div style={{ marginBottom: '12px' }}>
-                                <Input
-                                    placeholder="Filter by category title..."
-                                    prefix={<SearchOutlined style={{ color: '#a1a1aa' }} />}
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    allowClear
-                                    style={{ borderRadius: '6px' }}
-                                />
-                            </div>
+                        <div className="sticky top-6">
+                            <SectionCard 
+                                title="Donation Types"
+                                icon={<AppstoreOutlined style={{ color: '#18181b' }} />}
+                                right={filteredDonationTypes.length > 0 && (
+                                    <Space size={6}>
+                                        <span style={{ fontSize: '11px', fontWeight: 700, color: '#52525b', letterSpacing: '0.02em' }}>SELECT ALL</span>
+                                        <Switch size="small" checked={allSelected} onChange={handleSelectAllChange} className={allSelected ? "bg-zinc-800" : "bg-zinc-200"} />
+                                    </Space>
+                                )}
+                            >
+                                {/* Filter Bar */}
+                                <div style={{ marginBottom: '12px' }}>
+                                    <Input
+                                        placeholder="Filter by category title..."
+                                        prefix={<SearchOutlined style={{ color: '#a1a1aa' }} />}
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        allowClear
+                                        style={{ borderRadius: '6px' }}
+                                    />
+                                </div>
 
-                            {/* Content limits wrapper: Chhote list pe clean wrap karega, bade hone par hi scroll layega */}
-                            <div style={{ 
-                                maxHeight: '580px', 
-                                overflowY: 'auto', 
-                                border: '1px solid #e4e4e7',
-                                borderRadius: '8px',
-                                padding: '6px 10px'
-                            }}>
-                                <List
-                                    dataSource={filteredDonationTypes}
-                                    locale={{ emptyText: "No specific categories matched" }}
-                                    renderItem={item => {
-                                        const active = selectedDonationTypes.includes(item.name);
-                                        return (
-                                            <List.Item
-                                                className="px-2 py-2 rounded-md my-0.5 hover:bg-zinc-50 transition-all"
-                                                style={{ borderBottom: '1px solid #f4f4f5' }}
-                                                actions={[
-                                                    <Switch size="small" checked={active} onChange={() => toggleDonationType(item.name)} className={active ? "bg-zinc-800" : "bg-zinc-200"} />
-                                                ]}
-                                            >
-                                                <List.Item.Meta
-                                                    avatar={
-                                                        <Avatar 
-                                                            src={item.donation_image} 
-                                                            shape="square" 
-                                                            size={36} 
-                                                            style={{ 
-                                                                backgroundColor: '#f4f4f5', 
-                                                                border: '1px solid #e4e4e7', 
-                                                                color: '#18181b', 
-                                                                fontWeight: 700,
-                                                                borderRadius: '4px'
-                                                            }}
-                                                        >
-                                                            {item.donation_type?.charAt(0)}
-                                                        </Avatar>
-                                                    }
-                                                    title={<Text strong style={{ color: '#27272a', fontSize: '13px' }}>{item.donation_type}</Text>}
-                                                />
-                                            </List.Item>
-                                        );
-                                    }}
-                                />
-                            </div>
-                        </SectionCard>
+                                {/* Content limits wrapper: Chhote list pe clean wrap karega, bade hone par hi scroll layega */}
+                                <div style={{ 
+                                    maxHeight: '580px', 
+                                    overflowY: 'auto', 
+                                    border: '1px solid #e4e4e7',
+                                    borderRadius: '8px',
+                                    padding: '6px 10px'
+                                }}>
+                                    <List
+                                        dataSource={filteredDonationTypes}
+                                        locale={{ emptyText: "No specific categories matched" }}
+                                        renderItem={item => {
+                                            const active = selectedDonationTypes.includes(item.name);
+                                            return (
+                                                <List.Item
+                                                    className="px-2 py-2 rounded-md my-0.5 hover:bg-zinc-50 transition-all"
+                                                    style={{ borderBottom: '1px solid #f4f4f5' }}
+                                                    actions={[
+                                                        <Switch size="small" checked={active} onChange={() => toggleDonationType(item.name)} className={active ? "bg-zinc-800" : "bg-zinc-200"} />
+                                                    ]}
+                                                >
+                                                    <List.Item.Meta
+                                                        avatar={
+                                                            <Avatar 
+                                                                src={item.donation_image} 
+                                                                shape="square" 
+                                                                size={36} 
+                                                                style={{ 
+                                                                    backgroundColor: '#f4f4f5', 
+                                                                    border: '1px solid #e4e4e7', 
+                                                                    color: '#18181b', 
+                                                                    fontWeight: 700,
+                                                                    borderRadius: '4px'
+                                                                }}
+                                                            >
+                                                                {item.donation_type?.charAt(0)}
+                                                            </Avatar>
+                                                        }
+                                                        title={<Text strong style={{ color: '#27272a', fontSize: '13px' }}>{item.donation_type}</Text>}
+                                                    />
+                                                </List.Item>
+                                            );
+                                        }}
+                                    />
+                                </div>
+                            </SectionCard>
+                        </div>
                     </Col>
 
                 </Row>
