@@ -81,18 +81,162 @@ def reset_user_balance(user_name, amount):
 @frappe.whitelist()
 def get_handover_logs():
     """
-    Fetch all Ledger entries (handover logs) to show history.
+    Fetch consolidated Handover logs grouped by user.
+    Each user has only one row in the table.
     """
-    logs = frappe.get_all("Ledger", 
-        fields=["name", "user", "user_name", "opening_balance", "reset_date", "owner"],
-        order_by="reset_date desc"
-    )
+    logs = frappe.db.sql("""
+        SELECT 
+            MIN(name) as name,
+            user,
+            user_name,
+            SUM(opening_balance) as opening_balance,
+            MAX(reset_date) as reset_date
+        FROM `tabLedger`
+        GROUP BY user, user_name
+        ORDER BY reset_date DESC
+    """, as_dict=True)
+    
     for log in logs:
-        # Get collector's full name
-        log["collector_name"] = frappe.db.get_value("User", log.owner, "full_name") or log.owner
+        # Get collector's full name (from the last Ledger entry for this user)
+        last_owner = frappe.db.get_value("Ledger", 
+            filters={"user": log.user}, 
+            fieldname="owner", 
+            order_by="reset_date desc"
+        )
+        log["owner"] = last_owner or "Administrator"
+        log["collector_name"] = frappe.db.get_value("User", log["owner"], "full_name") or log["owner"]
         # Get cashier's avatar
         log["user_image"] = frappe.db.get_value("User", log.user, "user_image")
     return logs
+
+@frappe.whitelist()
+def get_user_handover_details(user_id):
+    """
+    Get all handover history and associated cash donations for a specific user.
+    """
+    # Fetch user info
+    user_doc = frappe.db.get_value("User", user_id, 
+        ["name", "full_name", "user_image", "email"], as_dict=True)
+    
+    if not user_doc:
+        frappe.throw(f"User {user_id} not found")
+        
+    # Fetch all past Ledger entries (handovers) for this user
+    handovers = frappe.get_all("Ledger",
+        filters={"user": user_id},
+        fields=["name", "opening_balance", "reset_date", "owner"],
+        order_by="reset_date desc"
+    )
+    for h in handovers:
+        h["collector_name"] = frappe.db.get_value("User", h.owner, "full_name") or h.owner
+        
+    # Total amount collected by this user across all handovers
+    total_collected = sum(flt(h.opening_balance) for h in handovers)
+    
+    # Fetch all Cash donations collected by this user that are handed over
+    donations = []
+    if handovers:
+        latest_reset = max(h.reset_date for h in handovers)
+        donations = frappe.get_all("Donation",
+            filters={
+                "owner": user_id,
+                "payment_mode": "Cash",
+                "creation": ["<=", latest_reset]
+            },
+            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            order_by="creation desc"
+        )
+        for d in donations:
+            d["temple_name"] = frappe.db.get_value("Temple", d.temple, "temple_name") or d.temple
+            
+    return {
+        "user": user_doc,
+        "handovers": handovers,
+        "total_collected": total_collected,
+        "donations": donations
+    }
+
+@frappe.whitelist()
+def get_ledger_donations(ledger_id):
+    """
+    Get all Cash donations collected by a cashier that belong to a specific Ledger handover.
+    """
+    ledger = frappe.get_doc("Ledger", ledger_id)
+    cashier = ledger.user
+    reset_date = ledger.reset_date
+    
+    # Find the latest Ledger reset date for this cashier before this reset_date
+    prev_reset = frappe.db.get_value("Ledger", 
+        filters={
+            "user": cashier,
+            "reset_date": ["<", reset_date]
+        },
+        fieldname="max(reset_date)"
+    )
+    
+    # Query all donations by this cashier (owner) with payment_mode 'Cash'
+    if prev_reset:
+        donations = frappe.get_all("Donation",
+            filters={
+                "owner": cashier,
+                "payment_mode": "Cash",
+                "creation": ["between", [prev_reset, reset_date]]
+            },
+            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            order_by="creation desc"
+        )
+    else:
+        donations = frappe.get_all("Donation",
+            filters={
+                "owner": cashier,
+                "payment_mode": "Cash",
+                "creation": ["<=", reset_date]
+            },
+            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            order_by="creation desc"
+        )
+        
+    for d in donations:
+        d["temple_name"] = frappe.db.get_value("Temple", d.temple, "temple_name") or d.temple
+        
+    return {
+        "ledger": ledger,
+        "donations": donations
+    }
+
+@frappe.whitelist()
+def get_active_user_donations(user):
+    """
+    Get all active (un-reset/pending handover) Cash donations collected by a cashier.
+    """
+    last_reset = frappe.db.get_value("Ledger", 
+                                    filters={"user": user}, 
+                                    fieldname="max(reset_date)")
+    
+    if last_reset:
+        donations = frappe.get_all("Donation",
+            filters={
+                "owner": user,
+                "payment_mode": "Cash",
+                "creation": [">", last_reset]
+            },
+            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            order_by="creation desc"
+        )
+    else:
+        donations = frappe.get_all("Donation",
+            filters={
+                "owner": user,
+                "payment_mode": "Cash"
+            },
+            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            order_by="creation desc"
+        )
+        
+    for d in donations:
+        d["temple_name"] = frappe.db.get_value("Temple", d.temple, "temple_name") or d.temple
+        
+    return donations
 
 @frappe.whitelist()
 def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):

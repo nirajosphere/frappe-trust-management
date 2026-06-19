@@ -1295,7 +1295,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React635 = require_react(), Internals = {
+        var React636 = require_react(), Internals = {
           d: {
             f: noop6,
             r: function() {
@@ -1313,7 +1313,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React635.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React636.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3165,7 +3165,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React635.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React636.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -19003,14 +19003,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React635 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React636 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React635.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React636.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21803,7 +21803,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React635.version;
+          var isomorphicReactPackageVersion = React636.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -23713,7 +23713,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         function useSyncExternalStore$2(subscribe, getSnapshot) {
-          didWarnOld18Alpha || void 0 === React635.startTransition || (didWarnOld18Alpha = true, console.error(
+          didWarnOld18Alpha || void 0 === React636.startTransition || (didWarnOld18Alpha = true, console.error(
             "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
           ));
           var value = getSnapshot();
@@ -23723,7 +23723,7 @@
               "The result of getSnapshot should be cached to avoid an infinite loop"
             ), didWarnUncachedGetSnapshot = true);
           }
-          cachedValue = useState136({
+          cachedValue = useState137({
             inst: { value, getSnapshot }
           });
           var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
@@ -23735,7 +23735,7 @@
             },
             [subscribe, value, getSnapshot]
           );
-          useEffect138(
+          useEffect139(
             function() {
               checkIfSnapshotChanged(inst) && forceUpdate({ inst });
               return subscribe(function() {
@@ -23761,8 +23761,8 @@
           return getSnapshot();
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React635 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState136 = React635.useState, useEffect138 = React635.useEffect, useLayoutEffect13 = React635.useLayoutEffect, useDebugValue3 = React635.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-        exports.useSyncExternalStore = void 0 !== React635.useSyncExternalStore ? React635.useSyncExternalStore : shim;
+        var React636 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState137 = React636.useState, useEffect139 = React636.useEffect, useLayoutEffect13 = React636.useLayoutEffect, useDebugValue3 = React636.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+        exports.useSyncExternalStore = void 0 !== React636.useSyncExternalStore ? React636.useSyncExternalStore : shim;
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -23789,7 +23789,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React635 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React635.useRef, useEffect138 = React635.useEffect, useMemo173 = React635.useMemo, useDebugValue3 = React635.useDebugValue;
+        var React636 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React636.useRef, useEffect139 = React636.useEffect, useMemo173 = React636.useMemo, useDebugValue3 = React636.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -23833,7 +23833,7 @@
             [getSnapshot, getServerSnapshot, selector, isEqual2]
           );
           var value = useSyncExternalStore2(subscribe, instRef[0], instRef[1]);
-          useEffect138(
+          useEffect139(
             function() {
               inst.hasValue = true;
               inst.value = value;
@@ -24244,7 +24244,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React635 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React635.useSyncExternalStore, useRef177 = React635.useRef, useEffect138 = React635.useEffect, useMemo173 = React635.useMemo, useDebugValue3 = React635.useDebugValue;
+        var React636 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React636.useSyncExternalStore, useRef177 = React636.useRef, useEffect139 = React636.useEffect, useMemo173 = React636.useMemo, useDebugValue3 = React636.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -24288,7 +24288,7 @@
             [getSnapshot, getServerSnapshot, selector, isEqual2]
           );
           var value = useSyncExternalStore2(subscribe, instRef[0], instRef[1]);
-          useEffect138(
+          useEffect139(
             function() {
               inst.hasValue = true;
               inst.value = value;
@@ -25725,10 +25725,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react266 = __toESM(require_react());
+  var import_react267 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react265 = __toESM(require_react());
+  var import_react266 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -33459,15 +33459,15 @@ ${mergedStyleStr}
       }
       null != W2 && W2 === document.body && n(W2) && !n(document.documentElement) || null != W2 && n(W2, g) && w.push(W2);
     }
-    const b = null != (s2 = null == (i = window.visualViewport) ? void 0 : i.width) ? s2 : innerWidth, H = null != (h = null == (d = window.visualViewport) ? void 0 : d.height) ? h : innerHeight, { scrollX: y2, scrollY: M2 } = window, { height: v, width: E, top: x2, right: C8, bottom: I2, left: R } = e4.getBoundingClientRect(), { top: T, right: B, bottom: F, left: V } = ((t2) => {
+    const b = null != (s2 = null == (i = window.visualViewport) ? void 0 : i.width) ? s2 : innerWidth, H = null != (h = null == (d = window.visualViewport) ? void 0 : d.height) ? h : innerHeight, { scrollX: y2, scrollY: M2 } = window, { height: v, width: E, top: x2, right: C9, bottom: I2, left: R } = e4.getBoundingClientRect(), { top: T, right: B, bottom: F, left: V } = ((t2) => {
       const e6 = window.getComputedStyle(t2);
       return { top: parseFloat(e6.scrollMarginTop) || 0, right: parseFloat(e6.scrollMarginRight) || 0, bottom: parseFloat(e6.scrollMarginBottom) || 0, left: parseFloat(e6.scrollMarginLeft) || 0 };
     })(e4);
-    let k2 = "start" === f || "nearest" === f ? x2 - T : "end" === f ? I2 + F : x2 + v / 2 - T + F, D2 = "center" === u ? R + E / 2 - V + B : "end" === u ? C8 + B : R - V;
+    let k2 = "start" === f || "nearest" === f ? x2 - T : "end" === f ? I2 + F : x2 + v / 2 - T + F, D2 = "center" === u ? R + E / 2 - V + B : "end" === u ? C9 + B : R - V;
     const L2 = [];
     for (let t2 = 0; t2 < w.length; t2++) {
       const e6 = w[t2], { height: l2, width: r4, top: i2, right: s3, bottom: d2, left: h2 } = e6.getBoundingClientRect();
-      if ("if-needed" === c2 && x2 >= 0 && R >= 0 && I2 <= H && C8 <= b && (e6 === m && !n(e6) || x2 >= i2 && I2 <= d2 && R >= h2 && C8 <= s3))
+      if ("if-needed" === c2 && x2 >= 0 && R >= 0 && I2 <= H && C9 <= b && (e6 === m && !n(e6) || x2 >= i2 && I2 <= d2 && R >= h2 && C9 <= s3))
         return L2;
       const a3 = getComputedStyle(e6), g2 = parseInt(a3.borderLeftWidth, 10), p2 = parseInt(a3.borderTopWidth, 10), W3 = parseInt(a3.borderRightWidth, 10), T2 = parseInt(a3.borderBottomWidth, 10);
       let B2 = 0, F2 = 0;
@@ -105321,7 +105321,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react263 = __toESM(require_react());
+  var import_react264 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
   var import_react220 = __toESM(require_react());
@@ -120567,10 +120567,10 @@ html body {
     var fontSize = style2.fontSize || "";
     var fontFamily = style2.fontFamily || "";
     var fontWeight = style2.fontWeight || "";
-    var fontStyle7 = style2.fontStyle || "";
+    var fontStyle8 = style2.fontStyle || "";
     var letterSpacing = style2.letterSpacing || "";
     var textTransform = style2.textTransform || "";
-    return "".concat(text, "|").concat(fontSize, "|").concat(fontFamily, "|").concat(fontWeight, "|").concat(fontStyle7, "|").concat(letterSpacing, "|").concat(textTransform);
+    return "".concat(text, "|").concat(fontSize, "|").concat(fontFamily, "|").concat(fontWeight, "|").concat(fontStyle8, "|").concat(letterSpacing, "|").concat(textTransform);
   }
   var measureTextWithDOM = (text, style2) => {
     try {
@@ -136037,6 +136037,35 @@ html body {
     const [activeTab, setActiveTab] = (0, import_react261.useState)("balances");
     const [logs, setLogs] = (0, import_react261.useState)([]);
     const [loadingLogs, setLoadingLogs] = (0, import_react261.useState)(false);
+    const [isModalOpen, setIsModalOpen] = (0, import_react261.useState)(false);
+    const [selectedUser, setSelectedUser] = (0, import_react261.useState)(null);
+    const [selectedUserName, setSelectedUserName] = (0, import_react261.useState)("");
+    const [activeDonations, setActiveDonations] = (0, import_react261.useState)([]);
+    const [loadingActiveDonations, setLoadingActiveDonations] = (0, import_react261.useState)(false);
+    const handleViewActiveDonations = async (user, userName) => {
+      setSelectedUser(user);
+      setSelectedUserName(userName);
+      setIsModalOpen(true);
+      setLoadingActiveDonations(true);
+      try {
+        if (typeof frappe !== "undefined") {
+          const response = await frappe.call({
+            method: "temple_donation.api.get_active_user_donations",
+            args: { user }
+          });
+          if (response.message) {
+            setActiveDonations(response.message);
+          } else {
+            setActiveDonations([]);
+          }
+        }
+      } catch (e4) {
+        console.error(e4);
+        message_default.error("Failed to fetch active donations");
+      } finally {
+        setLoadingActiveDonations(false);
+      }
+    };
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -136125,8 +136154,15 @@ html body {
         title: "ACTION",
         key: "action",
         align: "right",
-        width: 160,
-        render: (_2, record) => /* @__PURE__ */ import_react261.default.createElement(popconfirm_default, {
+        width: 220,
+        render: (_2, record) => /* @__PURE__ */ import_react261.default.createElement("div", {
+          className: "flex gap-2 justify-end"
+        }, /* @__PURE__ */ import_react261.default.createElement(button_default, {
+          type: "text",
+          icon: /* @__PURE__ */ import_react261.default.createElement(EyeOutlined_default2, null),
+          onClick: () => handleViewActiveDonations(record.user_name, record.full_name),
+          className: "text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
+        }, "View"), /* @__PURE__ */ import_react261.default.createElement(popconfirm_default, {
           placement: "leftTop",
           title: "Hand Over Cash",
           description: `Reset \u20B9${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`,
@@ -136139,21 +136175,60 @@ html body {
           icon: /* @__PURE__ */ import_react261.default.createElement(SyncOutlined_default2, null),
           disabled: Number(record.opening_balance || 0) === 0,
           className: `rounded-md px-3 py-1.5 font-medium transition-all ${Number(record.opening_balance || 0) === 0 ? "text-zinc-300 cursor-not-allowed" : "text-zinc-600 hover:text-white hover:bg-zinc-900"}`
-        }, "Reset"))
+        }, "Reset")))
+      }
+    ];
+    const activeDonationColumns = [
+      {
+        title: "DONATION ID",
+        dataIndex: "name",
+        key: "name",
+        render: (text) => /* @__PURE__ */ import_react261.default.createElement("a", {
+          onClick: () => {
+            if (typeof frappe !== "undefined") {
+              frappe.set_route("temple-donation", "donations", "view", text);
+            }
+          },
+          className: "font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline"
+        }, text)
+      },
+      {
+        title: "DONOR",
+        dataIndex: "donor_name",
+        key: "donor_name",
+        render: (text) => /* @__PURE__ */ import_react261.default.createElement("span", {
+          className: "font-semibold text-sm text-zinc-800"
+        }, text || "Anonymous")
+      },
+      {
+        title: "TEMPLE",
+        dataIndex: "temple_name",
+        key: "temple_name",
+        render: (text) => /* @__PURE__ */ import_react261.default.createElement("span", {
+          className: "text-xs text-zinc-500 font-medium"
+        }, text)
+      },
+      {
+        title: "DATE & TIME",
+        dataIndex: "creation",
+        key: "creation",
+        render: (val) => /* @__PURE__ */ import_react261.default.createElement("span", {
+          className: "text-xs text-zinc-500"
+        }, formatDateTime(val))
+      },
+      {
+        title: "AMOUNT",
+        dataIndex: "total_amount",
+        key: "total_amount",
+        align: "right",
+        render: (val) => /* @__PURE__ */ import_react261.default.createElement("span", {
+          className: "font-bold text-zinc-900 pr-2"
+        }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
     ];
     const logColumns = [
       {
-        title: "LOG ID",
-        dataIndex: "name",
-        key: "name",
-        width: 140,
-        render: (text) => /* @__PURE__ */ import_react261.default.createElement("span", {
-          className: "font-mono text-xs font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-2 py-1 rounded"
-        }, text)
-      },
-      {
-        title: "CASHIER (HANDED OVER BY)",
+        title: "CASHIER",
         dataIndex: "user_name",
         key: "user_name",
         width: 250,
@@ -136176,20 +136251,20 @@ html body {
         }
       },
       {
-        title: "AMOUNT COLLECTED",
+        title: "TOTAL AMOUNT HANDED OVER",
         dataIndex: "opening_balance",
         key: "opening_balance",
         align: "right",
-        width: 180,
+        width: 240,
         render: (value) => /* @__PURE__ */ import_react261.default.createElement("div", {
           className: "flex items-center justify-end gap-2 pr-4"
         }, /* @__PURE__ */ import_react261.default.createElement(Text19, {
           strong: true,
-          className: "text-zinc-900 text-base"
+          className: "text-green-600 text-base"
         }, "\u20B9", Number(value || 0).toLocaleString()))
       },
       {
-        title: "HANDOVER DATE/TIME",
+        title: "LATEST HANDOVER",
         dataIndex: "reset_date",
         key: "reset_date",
         width: 200,
@@ -136198,7 +136273,7 @@ html body {
         }, formatDateTime(value))
       },
       {
-        title: "COLLECTED BY",
+        title: "LATEST COLLECTOR",
         dataIndex: "collector_name",
         key: "collector_name",
         width: 220,
@@ -136215,6 +136290,22 @@ html body {
         }, text), /* @__PURE__ */ import_react261.default.createElement("span", {
           className: "text-[10px] text-zinc-400"
         }, record.owner)))
+      },
+      {
+        title: "ACTION",
+        key: "action",
+        align: "right",
+        width: 120,
+        render: (_2, record) => /* @__PURE__ */ import_react261.default.createElement(button_default, {
+          type: "text",
+          icon: /* @__PURE__ */ import_react261.default.createElement(EyeOutlined_default2, null),
+          onClick: () => {
+            if (typeof frappe !== "undefined") {
+              frappe.set_route("temple-donation", "ledger", "view", record.user);
+            }
+          },
+          className: "text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
+        }, "View History")
       }
     ];
     return /* @__PURE__ */ import_react261.default.createElement("div", {
@@ -136234,23 +136325,33 @@ html body {
         }, "Refresh")
       ]
     }), /* @__PURE__ */ import_react261.default.createElement("div", {
-      className: "flex border-b border-zinc-200 pb-px"
+      className: "bg-zinc-100 p-1 rounded-lg flex items-center space-x-1 w-fit"
     }, /* @__PURE__ */ import_react261.default.createElement("button", {
       onClick: () => {
         setActiveTab("balances");
         setSearchText("");
       },
-      className: `flex items-center gap-2 pb-3 px-6 text-sm font-semibold border-b-2 transition-all duration-200 outline-none ${activeTab === "balances" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-400 hover:text-zinc-600"}`
+      style: {
+        background: activeTab === "balances" ? "#ffffff" : "transparent",
+        border: "none",
+        boxShadow: activeTab === "balances" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
+      },
+      className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "balances" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
     }, /* @__PURE__ */ import_react261.default.createElement(WalletOutlined_default2, {
-      className: "text-base"
+      className: "text-sm"
     }), "Active Balances"), /* @__PURE__ */ import_react261.default.createElement("button", {
       onClick: () => {
         setActiveTab("logs");
         setSearchText("");
       },
-      className: `flex items-center gap-2 pb-3 px-6 text-sm font-semibold border-b-2 transition-all duration-200 outline-none ${activeTab === "logs" ? "border-zinc-900 text-zinc-900" : "border-transparent text-zinc-400 hover:text-zinc-600"}`
+      style: {
+        background: activeTab === "logs" ? "#ffffff" : "transparent",
+        border: "none",
+        boxShadow: activeTab === "logs" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
+      },
+      className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "logs" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
     }, /* @__PURE__ */ import_react261.default.createElement(HistoryOutlined_default2, {
-      className: "text-base"
+      className: "text-sm"
     }), "Handover History Logs")), activeTab === "balances" ? /* @__PURE__ */ import_react261.default.createElement(CommonTable_default, {
       columns,
       dataSource: data,
@@ -136263,29 +136364,51 @@ html body {
       rowKey: "name",
       loading: loadingLogs,
       searchText
-    }));
+    }), /* @__PURE__ */ import_react261.default.createElement(modal_default, {
+      title: /* @__PURE__ */ import_react261.default.createElement("div", {
+        style: { display: "flex", flexDirection: "column", borderBottom: "1px solid #f1f5f9", paddingBottom: "12px" }
+      }, /* @__PURE__ */ import_react261.default.createElement("span", {
+        style: { fontSize: "16px", fontWeight: 800, color: "#0f172a" }
+      }, "Active Cash Donations for ", selectedUserName), /* @__PURE__ */ import_react261.default.createElement("span", {
+        style: { fontSize: "12px", color: "#64748b", fontWeight: 500, fontFamily: "monospace", marginTop: "2px" }
+      }, selectedUser)),
+      open: isModalOpen,
+      onCancel: () => setIsModalOpen(false),
+      footer: [
+        /* @__PURE__ */ import_react261.default.createElement(button_default, {
+          key: "close",
+          onClick: () => setIsModalOpen(false),
+          className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800 text-white hover:!text-white rounded-md font-semibold"
+        }, "Close")
+      ],
+      width: 800,
+      className: "aavatto-premium-modal"
+    }, /* @__PURE__ */ import_react261.default.createElement("div", {
+      className: "py-4"
+    }, /* @__PURE__ */ import_react261.default.createElement(table_default, {
+      dataSource: activeDonations,
+      columns: activeDonationColumns,
+      rowKey: "name",
+      loading: loadingActiveDonations,
+      pagination: {
+        pageSize: 5,
+        showSizeChanger: true,
+        className: "!my-2"
+      },
+      bordered: true,
+      scroll: { x: "max-content" }
+    }))));
   };
   var OpeningBalance_default = OpeningBalance;
 
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/LedgerView.jsx
   var import_react262 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
-  var formConfigs = {
-    [DOCTYPE_DONOR]: donorFormFields,
-    [DOCTYPE_TEMPLE]: templeFormFields,
-    [DOCTYPE_DONATION]: donationFormFields,
-    [DOCTYPE_DONATION_TYPE]: donationTypeFormFields,
-    [DOCTYPE_USER]: userFormFields
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  var { Text: Text20 } = typography_default;
   var C7 = {
     white: "#FFFFFF",
     bg: "#F8FAFC",
     surface: "#FFFFFF",
     border: "#E2E8F0",
-    borderHover: "#94A3B8",
     ink: "#0F172A",
     inkMid: "#475569",
     inkLight: "#64748B",
@@ -136297,15 +136420,14 @@ html body {
     greenBorder: "#BBF7D0"
   };
   var fontStyle6 = `
-  .common-view-root, 
-  .common-view-root *, 
-  .common-view-root .ant-typography, 
-  .common-view-root .ant-tag {
+  .ledger-view-root, 
+  .ledger-view-root *, 
+  .ledger-view-root .ant-typography {
     font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   }
 `;
   function HoverButton6({ style: style2, hoverStyle, children, onClick, title }) {
-    const [hov, setHov] = import_react262.default.useState(false);
+    const [hov, setHov] = (0, import_react262.useState)(false);
     return /* @__PURE__ */ import_react262.default.createElement("button", {
       style: __spreadValues(__spreadValues({}, style2), hov ? hoverStyle : {}),
       onMouseEnter: () => setHov(true),
@@ -136315,7 +136437,7 @@ html body {
     }, children);
   }
   function FieldCell6({ label, children }) {
-    const [hov, setHov] = import_react262.default.useState(false);
+    const [hov, setHov] = (0, import_react262.useState)(false);
     return /* @__PURE__ */ import_react262.default.createElement("div", {
       onMouseEnter: () => setHov(true),
       onMouseLeave: () => setHov(false),
@@ -136364,258 +136486,167 @@ html body {
       style: { padding: "24px" }
     }, children));
   }
-  var CommonView = ({ doctype, id, onBack, onEdit }) => {
-    const { data: doc, loading, error } = useFrappeGetDoc(doctype, id);
-    const config = formConfigs[doctype];
-    const { data: temples } = useFrappeGetDocList("Temple", {
-      fields: ["name", "temple_name"],
-      limit: 1e3
-    });
-    const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
-      fields: ["name", "donation_type"],
-      limit: 1e3
-    });
+  var LedgerView = ({ id, onBack }) => {
+    const [loading, setLoading] = (0, import_react262.useState)(true);
+    const [error, setError] = (0, import_react262.useState)(null);
+    const [data, setData] = (0, import_react262.useState)(null);
+    const [activeTab, setActiveTab] = (0, import_react262.useState)("donations");
+    const fetchLedgerDetails = async () => {
+      setLoading(true);
+      try {
+        if (typeof frappe !== "undefined") {
+          const response = await frappe.call({
+            method: "temple_donation.api.get_user_handover_details",
+            args: { user_id: id }
+          });
+          if (response.message) {
+            setData(response.message);
+          }
+        }
+      } catch (err) {
+        console.error(err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    (0, import_react262.useEffect)(() => {
+      fetchLedgerDetails();
+    }, [id]);
     if (loading)
       return /* @__PURE__ */ import_react262.default.createElement(PageLoader_default, null);
-    if (error || !doc) {
+    if (error || !data) {
       return /* @__PURE__ */ import_react262.default.createElement("div", {
         style: { padding: 32 }
       }, /* @__PURE__ */ import_react262.default.createElement(alert_default, {
-        message: "Could not load document",
-        description: (error == null ? void 0 : error.message) || "Document not found",
+        message: "Could not load cashier handover details",
+        description: (error == null ? void 0 : error.message) || "User details not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react262.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react262.default.createElement(HoverButton6, {
           onClick: onBack,
-          icon: /* @__PURE__ */ import_react262.default.createElement(ArrowLeftOutlined_default2, null)
-        }, "Back")
+          style: { padding: "8px 16px", borderRadius: 8, background: "#fff", border: `1px solid ${C7.border}`, cursor: "pointer" },
+          hoverStyle: { borderColor: C7.black }
+        }, /* @__PURE__ */ import_react262.default.createElement(ArrowLeftOutlined_default2, null), " Back")
       }));
     }
-    const visibleFields = ((config == null ? void 0 : config.fields) || []).filter((field) => {
-      if (field.name === "new_password" || field.name === "confirm_password" || field.name === "password")
-        return false;
-      if (field.name === "enabled" || field.name === "custom_status")
-        return false;
-      const val = doc[field.name];
-      const empty2 = val === null || val === void 0 || val === "" || Array.isArray(val) && val.length === 0;
-      return !empty2;
-    });
-    const renderValue = (field, value) => {
-      const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
-      if (empty2)
-        return /* @__PURE__ */ import_react262.default.createElement("span", {
-          style: { color: C7.inkXLight, fontSize: 13, fontWeight: 500 }
-        }, "\u2014");
-      if (field.type === "image")
-        return /* @__PURE__ */ import_react262.default.createElement("img", {
-          src: value,
-          alt: field.label,
-          style: { width: 56, height: 56, objectFit: "cover", borderRadius: 10, border: `1px solid ${C7.border}` }
+    const { user, handovers, donations, total_collected } = data;
+    const formatDateTime = (dateStr) => {
+      if (!dateStr)
+        return "\u2014";
+      try {
+        const date5 = new Date(dateStr);
+        return date5.toLocaleString("en-IN", {
+          dateStyle: "medium",
+          timeStyle: "short"
         });
-      if (field.type === "textarea")
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: {
-            background: "#F8FAFC",
-            border: `1px solid ${C7.border}`,
-            borderRadius: 10,
-            padding: "10px 14px",
-            fontSize: 12,
-            color: C7.inkMid,
-            whiteSpace: "pre-wrap",
-            lineHeight: 1.6,
-            fontWeight: 400
-          }
-        }, value);
-      if (field.name === "custom_select_temple" && Array.isArray(value))
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: { display: "flex", flexWrap: "wrap", gap: 6 }
-        }, value.map((item) => {
-          const tid = item.temple || String(item);
-          const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === tid);
-          const name = t2 ? t2.temple_name : tid;
-          const tagInfo = getTagConfig("temple admin");
-          return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-            className: `tag-glass ${tagInfo.glassClass}`,
-            key: item.name || tid
-          }, name);
-        }));
-      if (field.name === "roles" && Array.isArray(value))
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: { display: "flex", flexWrap: "wrap", gap: 6 }
-        }, value.map((item) => {
-          const roleName = item.role || String(item);
-          const tagInfo = getTagConfig(roleName);
-          return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-            className: `tag-glass ${tagInfo.glassClass}`,
-            key: item.name || roleName
-          }, roleName);
-        }));
-      if (field.name === "custom_user_role") {
-        const tagInfo = getTagConfig(String(value));
-        return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-          className: `tag-glass ${tagInfo.glassClass}`
-        }, String(value));
+      } catch (e4) {
+        return dateStr;
       }
-      if (Array.isArray(value))
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: { display: "flex", flexWrap: "wrap", gap: 6 }
-        }, value.map((item, i) => {
-          const s2 = typeof item === "object" ? item.name || JSON.stringify(item) : String(item);
-          const tagInfo = getTagConfig(s2);
-          return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-            className: `tag-glass ${tagInfo.glassClass}`,
-            key: i
-          }, s2);
-        }));
-      if (typeof value === "object")
-        return /* @__PURE__ */ import_react262.default.createElement("pre", {
-          style: {
-            fontSize: 11,
-            background: "#F8FAFC",
-            padding: "8px 10px",
-            borderRadius: 8,
-            border: `1px solid ${C7.border}`,
-            fontFamily: "ui-monospace,monospace",
-            color: C7.inkMid,
-            margin: 0
-          }
-        }, JSON.stringify(value, null, 2));
-      return /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 13, fontWeight: 600, color: C7.ink }
-      }, String(value));
     };
-    const renderHeaderAvatar = () => {
-      const getInitials = (name) => {
-        if (!name)
-          return "?";
-        const parts = name.trim().split(" ").filter(Boolean);
-        if (parts.length === 1) {
-          return parts[0].slice(0, 2).toUpperCase();
-        }
-        return parts.map((n2) => n2[0]).join("").toUpperCase().slice(0, 2);
-      };
-      const bgStyle = {
-        width: 56,
-        height: 56,
-        borderRadius: "50%",
-        background: C7.black,
-        color: "#FFFFFF",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: 18,
-        fontWeight: 700,
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
-        flexShrink: 0
-      };
-      if (doctype === "User") {
-        if (doc.user_image) {
-          return /* @__PURE__ */ import_react262.default.createElement("img", {
-            src: doc.user_image,
-            alt: doc.full_name,
-            style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
-          });
-        }
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: bgStyle
-        }, getInitials(doc.full_name || doc.name));
+    const donationColumns2 = [
+      {
+        title: "DONATION ID",
+        dataIndex: "name",
+        key: "name",
+        render: (text) => /* @__PURE__ */ import_react262.default.createElement("a", {
+          onClick: () => {
+            if (typeof frappe !== "undefined") {
+              frappe.set_route("temple-donation", "donations", "view", text);
+            }
+          },
+          className: "font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline"
+        }, text)
+      },
+      {
+        title: "DONOR",
+        dataIndex: "donor_name",
+        key: "donor_name",
+        render: (text) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "font-semibold text-sm text-zinc-800"
+        }, text || "Anonymous")
+      },
+      {
+        title: "TEMPLE",
+        dataIndex: "temple_name",
+        key: "temple_name",
+        render: (text) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "text-xs text-zinc-500 font-medium"
+        }, text)
+      },
+      {
+        title: "DATE & TIME",
+        dataIndex: "creation",
+        key: "creation",
+        render: (val) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "text-xs text-zinc-500"
+        }, formatDateTime(val))
+      },
+      {
+        title: "AMOUNT",
+        dataIndex: "total_amount",
+        key: "total_amount",
+        align: "right",
+        render: (val) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "font-bold text-zinc-900 pr-2"
+        }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
-      if (doctype === "Donor") {
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: bgStyle
-        }, getInitials(doc.donor_name || doc.name));
+    ];
+    const handoverColumns = [
+      {
+        title: "LOG ID",
+        dataIndex: "name",
+        key: "name",
+        render: (text) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "font-mono text-xs font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-2 py-1 rounded"
+        }, text)
+      },
+      {
+        title: "HANDOVER DATE & TIME",
+        dataIndex: "reset_date",
+        key: "reset_date",
+        render: (val) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "text-sm font-medium text-zinc-600"
+        }, formatDateTime(val))
+      },
+      {
+        title: "COLLECTED BY",
+        dataIndex: "collector_name",
+        key: "collector_name",
+        render: (text, record) => /* @__PURE__ */ import_react262.default.createElement("div", {
+          className: "flex items-center gap-2"
+        }, /* @__PURE__ */ import_react262.default.createElement(avatar_default, {
+          size: "small",
+          icon: /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, null),
+          className: "bg-zinc-800"
+        }), /* @__PURE__ */ import_react262.default.createElement("div", {
+          className: "flex flex-col"
+        }, /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "text-sm font-semibold text-zinc-800"
+        }, text), /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "text-[10px] text-zinc-400"
+        }, record.owner)))
+      },
+      {
+        title: "AMOUNT HANDED OVER",
+        dataIndex: "opening_balance",
+        key: "opening_balance",
+        align: "right",
+        render: (val) => /* @__PURE__ */ import_react262.default.createElement("span", {
+          className: "font-bold text-green-600 pr-2 text-sm"
+        }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
-      if (doctype === "Temple") {
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: bgStyle
-        }, getInitials(doc.temple_name || doc.name));
-      }
-      if (doctype === "Donation Type") {
-        if (doc.donation_image) {
-          return /* @__PURE__ */ import_react262.default.createElement("img", {
-            src: doc.donation_image,
-            alt: doc.donation_type,
-            style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
-          });
-        }
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
-          style: bgStyle
-        }, getInitials(doc.donation_type || doc.name));
-      }
-      return /* @__PURE__ */ import_react262.default.createElement(import_react262.default.Fragment, null);
-    };
-    const renderHeaderDetails = () => {
-      let title = doc.name;
-      let subtitleElements = [];
-      if (doctype === "User") {
-        title = doc.full_name || doc.name;
-        if (doc.email)
-          subtitleElements.push(/* @__PURE__ */ import_react262.default.createElement("span", {
-            key: "email",
-            style: { color: C7.inkMid, fontWeight: 500 }
-          }, doc.email));
-        if (doc.custom_user_role) {
-          const tagInfo = getTagConfig(doc.custom_user_role);
-          subtitleElements.push(
-            /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-              key: "role",
-              className: `tag-glass ${tagInfo.glassClass}`,
-              style: { marginLeft: 4 }
-            }, doc.custom_user_role)
-          );
-        }
-      } else if (doctype === "Donor") {
-        title = doc.donor_name || doc.name;
-        if (doc.email)
-          subtitleElements.push(/* @__PURE__ */ import_react262.default.createElement("span", {
-            key: "email",
-            style: { color: C7.inkMid, fontWeight: 500 }
-          }, doc.email));
-        if (doc.phone)
-          subtitleElements.push(/* @__PURE__ */ import_react262.default.createElement("span", {
-            key: "phone",
-            style: { color: C7.inkLight }
-          }, "\u2022 ", doc.phone));
-      } else if (doctype === "Temple") {
-        title = doc.temple_name || doc.name;
-        if (doc.custom_status) {
-          const tagInfo = getTagConfig(doc.custom_status);
-          subtitleElements.push(
-            /* @__PURE__ */ import_react262.default.createElement(tag_default, {
-              key: "status",
-              className: `tag-glass ${tagInfo.glassClass}`
-            }, doc.custom_status)
-          );
-        }
-      } else if (doctype === "Donation") {
-        title = `Donation ${doc.name}`;
-        subtitleElements.push(
-          /* @__PURE__ */ import_react262.default.createElement("span", {
-            key: "date",
-            style: { color: C7.inkMid, fontWeight: 500 }
-          }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "")
-        );
-      } else if (doctype === "Donation Type") {
-        title = doc.donation_type || doc.name;
-        if (doc.donation_type_code) {
-          subtitleElements.push(
-            /* @__PURE__ */ import_react262.default.createElement("span", {
-              key: "code",
-              style: { color: C7.inkMid, fontWeight: 500 }
-            }, doc.donation_type_code)
-          );
-        }
-      }
-      return /* @__PURE__ */ import_react262.default.createElement("div", {
-        style: { display: "flex", flexDirection: "column", gap: 3 }
-      }, /* @__PURE__ */ import_react262.default.createElement("div", {
-        style: { fontSize: 20, fontWeight: 800, color: C7.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }
-      }, title), /* @__PURE__ */ import_react262.default.createElement("div", {
-        style: { display: "flex", alignItems: "center", gap: 8, fontSize: 13, flexWrap: "wrap" }
-      }, subtitleElements));
+    ];
+    const getInitials = (name) => {
+      if (!name)
+        return "?";
+      const parts = name.trim().split(" ").filter(Boolean);
+      if (parts.length === 1)
+        return parts[0].slice(0, 2).toUpperCase();
+      return parts.map((n2) => n2[0]).join("").toUpperCase().slice(0, 2);
     };
     return /* @__PURE__ */ import_react262.default.createElement("div", {
-      className: "temple-donation-app common-view-root",
+      className: "temple-donation-app ledger-view-root",
       style: { background: C7.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }
     }, /* @__PURE__ */ import_react262.default.createElement("style", null, fontStyle6), /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }
@@ -136652,7 +136683,30 @@ html body {
       style: { fontSize: 14 }
     })), /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { display: "flex", alignItems: "center", gap: 14 }
-    }, renderHeaderAvatar(), renderHeaderDetails())), /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, user.user_image ? /* @__PURE__ */ import_react262.default.createElement("img", {
+      src: user.user_image,
+      alt: user.full_name,
+      style: { width: 52, height: 52, borderRadius: "50%", objectFit: "cover", border: `1px solid ${C7.border}` }
+    }) : /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: {
+        width: 52,
+        height: 52,
+        borderRadius: "50%",
+        background: C7.black,
+        color: "#ffffff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 16,
+        fontWeight: 700
+      }
+    }, getInitials(user.full_name || user.name)), /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 3 }
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { fontSize: 20, fontWeight: 800, color: C7.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }
+    }, user.full_name), /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: C7.inkMid }
+    }, /* @__PURE__ */ import_react262.default.createElement("span", null, user.email))))), /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { display: "flex", gap: 8 }
     }, /* @__PURE__ */ import_react262.default.createElement(HoverButton6, {
       style: {
@@ -136675,13 +136729,526 @@ html body {
       onClick: () => window.print()
     }, /* @__PURE__ */ import_react262.default.createElement(PrinterOutlined_default2, {
       style: { fontSize: 14 }
-    }), " Print"), /* @__PURE__ */ import_react262.default.createElement(HoverButton6, {
+    }), " Print History Report"))), /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+      xs: 24,
+      lg: 16
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 24 }
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      className: "bg-zinc-100 p-1 rounded-lg flex items-center space-x-1 w-fit"
+    }, /* @__PURE__ */ import_react262.default.createElement("button", {
+      onClick: () => setActiveTab("donations"),
+      style: {
+        background: activeTab === "donations" ? "#ffffff" : "transparent",
+        border: "none",
+        boxShadow: activeTab === "donations" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
+      },
+      className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "donations" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
+    }, /* @__PURE__ */ import_react262.default.createElement(WalletOutlined_default2, {
+      className: "text-sm"
+    }), "Collected Donations (", donations.length, ")"), /* @__PURE__ */ import_react262.default.createElement("button", {
+      onClick: () => setActiveTab("handovers"),
+      style: {
+        background: activeTab === "handovers" ? "#ffffff" : "transparent",
+        border: "none",
+        boxShadow: activeTab === "handovers" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
+      },
+      className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "handovers" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
+    }, /* @__PURE__ */ import_react262.default.createElement(HistoryOutlined_default2, {
+      className: "text-sm"
+    }), "Handover Sessions (", handovers.length, ")")), activeTab === "donations" ? /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+      title: "Cash Donations Collected & Handed Over",
+      right: /* @__PURE__ */ import_react262.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md"
+      }, donations.length, " Donation", donations.length !== 1 ? "s" : "", " Found")
+    }, /* @__PURE__ */ import_react262.default.createElement(table_default, {
+      dataSource: donations,
+      columns: donationColumns2,
+      rowKey: "name",
+      pagination: {
+        pageSize: 10,
+        showSizeChanger: true,
+        className: "!my-4"
+      },
+      bordered: true,
+      className: "aavatto-premium-table",
+      scroll: { x: "max-content" }
+    })) : /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+      title: "Past Reset & Handover Logs",
+      right: /* @__PURE__ */ import_react262.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md"
+      }, handovers.length, " Session", handovers.length !== 1 ? "s" : "", " Found")
+    }, /* @__PURE__ */ import_react262.default.createElement(table_default, {
+      dataSource: handovers,
+      columns: handoverColumns,
+      rowKey: "name",
+      pagination: {
+        pageSize: 10,
+        showSizeChanger: true,
+        className: "!my-4"
+      },
+      bordered: true,
+      className: "aavatto-premium-table",
+      scroll: { x: "max-content" }
+    })))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+      xs: 24,
+      lg: 8
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 20 }
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: {
+        background: C7.greenBg,
+        border: `1px solid ${C7.greenBorder}`,
+        borderRadius: 16,
+        padding: "24px",
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+        boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+      }
+    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 10, fontWeight: 700, color: C7.green, letterSpacing: "0.09em", textTransform: "uppercase" }
+    }, "Total Handed Over Amount"), /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 28, fontWeight: 800, color: C7.green, letterSpacing: "-0.03em" }
+    }, "\u20B9", Number(total_collected || 0).toLocaleString("en-IN")), /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 11, color: C7.green, opacity: 0.8, fontWeight: 500 }
+    }, "Consolidated total from all handover sessions.")), /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+      title: "Cashier Information"
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+      style: { display: "flex", flexDirection: "column", gap: 16 }
+    }, /* @__PURE__ */ import_react262.default.createElement(FieldCell6, {
+      label: "User Email"
+    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 13, fontWeight: 600 }
+    }, user.email)), /* @__PURE__ */ import_react262.default.createElement(FieldCell6, {
+      label: "Full Name"
+    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 13, fontWeight: 600 }
+    }, user.full_name)), /* @__PURE__ */ import_react262.default.createElement(FieldCell6, {
+      label: "Total Handovers"
+    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+      style: { fontSize: 13, fontWeight: 600 }
+    }, handovers.length, " Handover Reset", handovers.length !== 1 ? "s" : "")))))))));
+  };
+  var LedgerView_default = LedgerView;
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  var import_react263 = __toESM(require_react());
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
+  var formConfigs = {
+    [DOCTYPE_DONOR]: donorFormFields,
+    [DOCTYPE_TEMPLE]: templeFormFields,
+    [DOCTYPE_DONATION]: donationFormFields,
+    [DOCTYPE_DONATION_TYPE]: donationTypeFormFields,
+    [DOCTYPE_USER]: userFormFields
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
+  var C8 = {
+    white: "#FFFFFF",
+    bg: "#F8FAFC",
+    surface: "#FFFFFF",
+    border: "#E2E8F0",
+    borderHover: "#94A3B8",
+    ink: "#0F172A",
+    inkMid: "#475569",
+    inkLight: "#64748B",
+    inkXLight: "#CBD5E1",
+    black: "#0F172A",
+    blackHover: "#1E293B",
+    green: "#16A34A",
+    greenBg: "#F0FDF4",
+    greenBorder: "#BBF7D0"
+  };
+  var fontStyle7 = `
+  .common-view-root, 
+  .common-view-root *, 
+  .common-view-root .ant-typography, 
+  .common-view-root .ant-tag {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  }
+`;
+  function HoverButton7({ style: style2, hoverStyle, children, onClick, title }) {
+    const [hov, setHov] = import_react263.default.useState(false);
+    return /* @__PURE__ */ import_react263.default.createElement("button", {
+      style: __spreadValues(__spreadValues({}, style2), hov ? hoverStyle : {}),
+      onMouseEnter: () => setHov(true),
+      onMouseLeave: () => setHov(false),
+      onClick,
+      title
+    }, children);
+  }
+  function FieldCell7({ label, children }) {
+    const [hov, setHov] = import_react263.default.useState(false);
+    return /* @__PURE__ */ import_react263.default.createElement("div", {
+      onMouseEnter: () => setHov(true),
+      onMouseLeave: () => setHov(false),
+      style: {
+        padding: "10px 14px",
+        borderRadius: "0 10px 10px 0",
+        borderLeft: `3px solid ${hov ? C8.black : C8.border}`,
+        background: hov ? "rgba(15, 23, 42, 0.02)" : "transparent",
+        transition: "all 0.2s ease"
+      }
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
+      style: {
+        display: "block",
+        fontSize: 10,
+        fontWeight: 700,
+        letterSpacing: "0.09em",
+        textTransform: "uppercase",
+        color: C8.inkLight,
+        marginBottom: 4
+      }
+    }, label), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { minHeight: 20, fontSize: 13, fontWeight: 600, color: C8.ink }
+    }, children));
+  }
+  function SectionCard7({ title, right, children }) {
+    return /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: {
+        background: C8.surface,
+        border: `1px solid ${C8.border}`,
+        borderRadius: 16,
+        overflow: "hidden",
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)"
+      }
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "16px 24px",
+        background: "#FAFBFD",
+        borderBottom: `1px solid ${C8.border}`
+      }
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
+      style: { fontSize: 14, fontWeight: 700, color: C8.ink, letterSpacing: "-0.01em" }
+    }, title), right), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { padding: "24px" }
+    }, children));
+  }
+  var CommonView = ({ doctype, id, onBack, onEdit }) => {
+    const { data: doc, loading, error } = useFrappeGetDoc(doctype, id);
+    const config = formConfigs[doctype];
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
+    const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
+      fields: ["name", "donation_type"],
+      limit: 1e3
+    });
+    if (loading)
+      return /* @__PURE__ */ import_react263.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react263.default.createElement("div", {
+        style: { padding: 32 }
+      }, /* @__PURE__ */ import_react263.default.createElement(alert_default, {
+        message: "Could not load document",
+        description: (error == null ? void 0 : error.message) || "Document not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react263.default.createElement(button_default, {
+          onClick: onBack,
+          icon: /* @__PURE__ */ import_react263.default.createElement(ArrowLeftOutlined_default2, null)
+        }, "Back")
+      }));
+    }
+    const visibleFields = ((config == null ? void 0 : config.fields) || []).filter((field) => {
+      if (field.name === "new_password" || field.name === "confirm_password" || field.name === "password")
+        return false;
+      if (field.name === "enabled" || field.name === "custom_status")
+        return false;
+      const val = doc[field.name];
+      const empty2 = val === null || val === void 0 || val === "" || Array.isArray(val) && val.length === 0;
+      return !empty2;
+    });
+    const renderValue = (field, value) => {
+      const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
+      if (empty2)
+        return /* @__PURE__ */ import_react263.default.createElement("span", {
+          style: { color: C8.inkXLight, fontSize: 13, fontWeight: 500 }
+        }, "\u2014");
+      if (field.type === "image")
+        return /* @__PURE__ */ import_react263.default.createElement("img", {
+          src: value,
+          alt: field.label,
+          style: { width: 56, height: 56, objectFit: "cover", borderRadius: 10, border: `1px solid ${C8.border}` }
+        });
+      if (field.type === "textarea")
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: {
+            background: "#F8FAFC",
+            border: `1px solid ${C8.border}`,
+            borderRadius: 10,
+            padding: "10px 14px",
+            fontSize: 12,
+            color: C8.inkMid,
+            whiteSpace: "pre-wrap",
+            lineHeight: 1.6,
+            fontWeight: 400
+          }
+        }, value);
+      if (field.name === "custom_select_temple" && Array.isArray(value))
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: { display: "flex", flexWrap: "wrap", gap: 6 }
+        }, value.map((item) => {
+          const tid = item.temple || String(item);
+          const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === tid);
+          const name = t2 ? t2.temple_name : tid;
+          const tagInfo = getTagConfig("temple admin");
+          return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+            className: `tag-glass ${tagInfo.glassClass}`,
+            key: item.name || tid
+          }, name);
+        }));
+      if (field.name === "roles" && Array.isArray(value))
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: { display: "flex", flexWrap: "wrap", gap: 6 }
+        }, value.map((item) => {
+          const roleName = item.role || String(item);
+          const tagInfo = getTagConfig(roleName);
+          return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+            className: `tag-glass ${tagInfo.glassClass}`,
+            key: item.name || roleName
+          }, roleName);
+        }));
+      if (field.name === "custom_user_role") {
+        const tagInfo = getTagConfig(String(value));
+        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+          className: `tag-glass ${tagInfo.glassClass}`
+        }, String(value));
+      }
+      if (Array.isArray(value))
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: { display: "flex", flexWrap: "wrap", gap: 6 }
+        }, value.map((item, i) => {
+          const s2 = typeof item === "object" ? item.name || JSON.stringify(item) : String(item);
+          const tagInfo = getTagConfig(s2);
+          return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+            className: `tag-glass ${tagInfo.glassClass}`,
+            key: i
+          }, s2);
+        }));
+      if (typeof value === "object")
+        return /* @__PURE__ */ import_react263.default.createElement("pre", {
+          style: {
+            fontSize: 11,
+            background: "#F8FAFC",
+            padding: "8px 10px",
+            borderRadius: 8,
+            border: `1px solid ${C8.border}`,
+            fontFamily: "ui-monospace,monospace",
+            color: C8.inkMid,
+            margin: 0
+          }
+        }, JSON.stringify(value, null, 2));
+      return /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 13, fontWeight: 600, color: C8.ink }
+      }, String(value));
+    };
+    const renderHeaderAvatar = () => {
+      const getInitials = (name) => {
+        if (!name)
+          return "?";
+        const parts = name.trim().split(" ").filter(Boolean);
+        if (parts.length === 1) {
+          return parts[0].slice(0, 2).toUpperCase();
+        }
+        return parts.map((n2) => n2[0]).join("").toUpperCase().slice(0, 2);
+      };
+      const bgStyle = {
+        width: 56,
+        height: 56,
+        borderRadius: "50%",
+        background: C8.black,
+        color: "#FFFFFF",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: 18,
+        fontWeight: 700,
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
+        flexShrink: 0
+      };
+      if (doctype === "User") {
+        if (doc.user_image) {
+          return /* @__PURE__ */ import_react263.default.createElement("img", {
+            src: doc.user_image,
+            alt: doc.full_name,
+            style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
+          });
+        }
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: bgStyle
+        }, getInitials(doc.full_name || doc.name));
+      }
+      if (doctype === "Donor") {
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: bgStyle
+        }, getInitials(doc.donor_name || doc.name));
+      }
+      if (doctype === "Temple") {
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: bgStyle
+        }, getInitials(doc.temple_name || doc.name));
+      }
+      if (doctype === "Donation Type") {
+        if (doc.donation_image) {
+          return /* @__PURE__ */ import_react263.default.createElement("img", {
+            src: doc.donation_image,
+            alt: doc.donation_type,
+            style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
+          });
+        }
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
+          style: bgStyle
+        }, getInitials(doc.donation_type || doc.name));
+      }
+      return /* @__PURE__ */ import_react263.default.createElement(import_react263.default.Fragment, null);
+    };
+    const renderHeaderDetails = () => {
+      let title = doc.name;
+      let subtitleElements = [];
+      if (doctype === "User") {
+        title = doc.full_name || doc.name;
+        if (doc.email)
+          subtitleElements.push(/* @__PURE__ */ import_react263.default.createElement("span", {
+            key: "email",
+            style: { color: C8.inkMid, fontWeight: 500 }
+          }, doc.email));
+        if (doc.custom_user_role) {
+          const tagInfo = getTagConfig(doc.custom_user_role);
+          subtitleElements.push(
+            /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+              key: "role",
+              className: `tag-glass ${tagInfo.glassClass}`,
+              style: { marginLeft: 4 }
+            }, doc.custom_user_role)
+          );
+        }
+      } else if (doctype === "Donor") {
+        title = doc.donor_name || doc.name;
+        if (doc.email)
+          subtitleElements.push(/* @__PURE__ */ import_react263.default.createElement("span", {
+            key: "email",
+            style: { color: C8.inkMid, fontWeight: 500 }
+          }, doc.email));
+        if (doc.phone)
+          subtitleElements.push(/* @__PURE__ */ import_react263.default.createElement("span", {
+            key: "phone",
+            style: { color: C8.inkLight }
+          }, "\u2022 ", doc.phone));
+      } else if (doctype === "Temple") {
+        title = doc.temple_name || doc.name;
+        if (doc.custom_status) {
+          const tagInfo = getTagConfig(doc.custom_status);
+          subtitleElements.push(
+            /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+              key: "status",
+              className: `tag-glass ${tagInfo.glassClass}`
+            }, doc.custom_status)
+          );
+        }
+      } else if (doctype === "Donation") {
+        title = `Donation ${doc.name}`;
+        subtitleElements.push(
+          /* @__PURE__ */ import_react263.default.createElement("span", {
+            key: "date",
+            style: { color: C8.inkMid, fontWeight: 500 }
+          }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "")
+        );
+      } else if (doctype === "Donation Type") {
+        title = doc.donation_type || doc.name;
+        if (doc.donation_type_code) {
+          subtitleElements.push(
+            /* @__PURE__ */ import_react263.default.createElement("span", {
+              key: "code",
+              style: { color: C8.inkMid, fontWeight: 500 }
+            }, doc.donation_type_code)
+          );
+        }
+      }
+      return /* @__PURE__ */ import_react263.default.createElement("div", {
+        style: { display: "flex", flexDirection: "column", gap: 3 }
+      }, /* @__PURE__ */ import_react263.default.createElement("div", {
+        style: { fontSize: 20, fontWeight: 800, color: C8.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }
+      }, title), /* @__PURE__ */ import_react263.default.createElement("div", {
+        style: { display: "flex", alignItems: "center", gap: 8, fontSize: 13, flexWrap: "wrap" }
+      }, subtitleElements));
+    };
+    return /* @__PURE__ */ import_react263.default.createElement("div", {
+      className: "temple-donation-app common-view-root",
+      style: { background: C8.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }
+    }, /* @__PURE__ */ import_react263.default.createElement("style", null, fontStyle7), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: 16,
+        paddingBottom: 24,
+        borderBottom: `1px solid ${C8.border}`
+      }
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { display: "flex", alignItems: "center", gap: 16 }
+    }, /* @__PURE__ */ import_react263.default.createElement(HoverButton7, {
+      style: {
+        width: 40,
+        height: 40,
+        borderRadius: 10,
+        border: `1px solid ${C8.border}`,
+        background: C8.white,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        color: C8.inkMid,
+        transition: "all 0.15s"
+      },
+      hoverStyle: { borderColor: C8.black, background: C8.black, color: "#fff" },
+      onClick: onBack,
+      title: "Go back"
+    }, /* @__PURE__ */ import_react263.default.createElement(ArrowLeftOutlined_default2, {
+      style: { fontSize: 14 }
+    })), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { display: "flex", alignItems: "center", gap: 14 }
+    }, renderHeaderAvatar(), renderHeaderDetails())), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { display: "flex", gap: 8 }
+    }, /* @__PURE__ */ import_react263.default.createElement(HoverButton7, {
+      style: {
+        height: 40,
+        padding: "0 20px",
+        borderRadius: 10,
+        border: `1px solid ${C8.border}`,
+        background: C8.white,
+        color: C8.inkMid,
+        fontSize: 13,
+        fontWeight: 600,
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        cursor: "pointer",
+        transition: "all 0.15s",
+        boxShadow: "0 1px 2px rgba(0,0,0,0.04)"
+      },
+      hoverStyle: { borderColor: C8.black, color: C8.ink },
+      onClick: () => window.print()
+    }, /* @__PURE__ */ import_react263.default.createElement(PrinterOutlined_default2, {
+      style: { fontSize: 14 }
+    }), " Print"), /* @__PURE__ */ import_react263.default.createElement(HoverButton7, {
       style: {
         height: 40,
         padding: "0 22px",
         borderRadius: 10,
         border: "none",
-        background: C7.black,
+        background: C8.black,
         color: "#fff",
         fontSize: 13,
         fontWeight: 600,
@@ -136694,150 +137261,150 @@ html body {
       },
       hoverStyle: { background: "#1E293B" },
       onClick: () => onEdit && onEdit(doc)
-    }, /* @__PURE__ */ import_react262.default.createElement(EditOutlined_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(EditOutlined_default2, {
       style: { fontSize: 14 }
-    }), " Edit"))), /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+    }), " Edit"))), /* @__PURE__ */ import_react263.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(col_default2, {
       xs: 24,
       lg: 16
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 24 }
-    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+    }, /* @__PURE__ */ import_react263.default.createElement(SectionCard7, {
       title: "Details"
-    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
-      return /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react263.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react262.default.createElement(FieldCell6, {
+      }, /* @__PURE__ */ import_react263.default.createElement(FieldCell7, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))), doctype === "Donation" && /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+    }))), doctype === "Donation" && /* @__PURE__ */ import_react263.default.createElement(SectionCard7, {
       title: "Financial Summary",
-      right: /* @__PURE__ */ import_react262.default.createElement("div", {
+      right: /* @__PURE__ */ import_react263.default.createElement("div", {
         style: {
           display: "flex",
           alignItems: "baseline",
           gap: 6,
-          background: C7.greenBg,
-          border: `1px solid ${C7.greenBorder}`,
+          background: C8.greenBg,
+          border: `1px solid ${C8.greenBorder}`,
           borderRadius: 10,
           padding: "5px 14px"
         }
-      }, /* @__PURE__ */ import_react262.default.createElement("span", {
+      }, /* @__PURE__ */ import_react263.default.createElement("span", {
         style: {
           fontSize: 10,
           fontWeight: 700,
-          color: C7.green,
+          color: C8.green,
           letterSpacing: "0.08em",
           textTransform: "uppercase"
         }
-      }, "Total"), /* @__PURE__ */ import_react262.default.createElement("span", {
+      }, "Total"), /* @__PURE__ */ import_react263.default.createElement("span", {
         style: {
           fontSize: 18,
           fontWeight: 800,
-          color: C7.green,
+          color: C8.green,
           fontVariantNumeric: "tabular-nums",
           letterSpacing: "-0.02em"
         }
       }, "\u20B9", Number(doc.total_amount || 0).toLocaleString("en-IN")))
-    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(row_default2, {
       gutter: [10, 10],
       style: { marginBottom: 20 }
     }, [
       { label: "Payment Mode", value: (() => {
         const tagInfo = getTagConfig(doc.payment_mode);
-        return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass}`
         }, doc.payment_mode);
       })() },
-      { label: "Handled By", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 13, fontWeight: 600, color: C7.ink }
+      { label: "Handled By", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 13, fontWeight: 600, color: C8.ink }
       }, doc.cashier || "System") },
-      { label: "Reference", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 12, fontWeight: 600, color: C7.inkMid, fontFamily: "ui-monospace,monospace" }
+      { label: "Reference", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 12, fontWeight: 600, color: C8.inkMid, fontFamily: "ui-monospace,monospace" }
       }, doc.reference_no || "N/A") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react263.default.createElement(col_default2, {
       xs: 24,
       sm: 8,
       key: label
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
-      style: { padding: "12px 14px", background: C7.bg, border: `1px solid ${C7.border}`, borderRadius: 10 }
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
-      style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C7.inkLight, marginBottom: 6 }
-    }, label), value)))), /* @__PURE__ */ import_react262.default.createElement("div", {
-      style: { border: `1px solid ${C7.border}`, borderRadius: 10, overflow: "hidden" }
-    }, /* @__PURE__ */ import_react262.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { padding: "12px 14px", background: C8.bg, border: `1px solid ${C8.border}`, borderRadius: 10 }
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C8.inkLight, marginBottom: 6 }
+    }, label), value)))), /* @__PURE__ */ import_react263.default.createElement("div", {
+      style: { border: `1px solid ${C8.border}`, borderRadius: 10, overflow: "hidden" }
+    }, /* @__PURE__ */ import_react263.default.createElement(table_default, {
       dataSource: doc.donation_items || [],
       pagination: false,
       rowKey: "name",
       size: "middle",
       columns: [
         {
-          title: /* @__PURE__ */ import_react262.default.createElement("span", {
-            style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C7.inkLight }
+          title: /* @__PURE__ */ import_react263.default.createElement("span", {
+            style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C8.inkLight }
           }, "Donation Type"),
           dataIndex: "donation_type",
           render: (v) => {
             const dt2 = donationTypes == null ? void 0 : donationTypes.find((t2) => t2.name === v);
-            return /* @__PURE__ */ import_react262.default.createElement("span", {
-              style: { fontWeight: 600, color: C7.ink, fontSize: 13 }
+            return /* @__PURE__ */ import_react263.default.createElement("span", {
+              style: { fontWeight: 600, color: C8.ink, fontSize: 13 }
             }, dt2 ? dt2.donation_type : v);
           }
         },
         {
-          title: /* @__PURE__ */ import_react262.default.createElement("span", {
-            style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C7.inkLight }
+          title: /* @__PURE__ */ import_react263.default.createElement("span", {
+            style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C8.inkLight }
           }, "Amount"),
           dataIndex: "amount",
           align: "right",
-          render: (v) => /* @__PURE__ */ import_react262.default.createElement("span", {
-            style: { fontWeight: 700, color: C7.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }
+          render: (v) => /* @__PURE__ */ import_react263.default.createElement("span", {
+            style: { fontWeight: 700, color: C8.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }
           }, "\u20B9", Number(v).toLocaleString("en-IN"))
         }
       ]
-    })), /* @__PURE__ */ import_react262.default.createElement("div", {
+    })), /* @__PURE__ */ import_react263.default.createElement("div", {
       style: { marginTop: 20 }
-    }, /* @__PURE__ */ import_react262.default.createElement(DonationPrint_default, {
+    }, /* @__PURE__ */ import_react263.default.createElement(DonationPrint_default, {
       donation: doc
-    }))))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react263.default.createElement(col_default2, {
       xs: 24,
       lg: 8
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 20 }
-    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard6, {
+    }, /* @__PURE__ */ import_react263.default.createElement(SectionCard7, {
       title: "System Information"
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 16 }
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C7.inkMid }
+      { label: "Document ID", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C8.inkMid }
       }, id) },
       { label: "Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || (Number(doc.enabled) === 1 || doc.enabled === "Active" || doc.enabled === true ? "Active" : "Inactive");
         const tagInfo = getTagConfig(statusVal);
-        return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass}`
         }, statusVal);
       })() },
-      { label: "Created By", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 12, fontWeight: 600, color: C7.inkMid }
+      { label: "Created By", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 12, fontWeight: 600, color: C8.inkMid }
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 12, fontWeight: 600, color: C7.inkMid }
+      { label: "Created At", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 12, fontWeight: 600, color: C8.inkMid }
       }, doc.creation ? new Date(doc.creation).toLocaleString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react262.default.createElement("span", {
-        style: { fontSize: 12, fontWeight: 600, color: C7.inkMid }
+      { label: "Last Modified", value: /* @__PURE__ */ import_react263.default.createElement("span", {
+        style: { fontSize: 12, fontWeight: 600, color: C8.inkMid }
       }, doc.modified ? new Date(doc.modified).toLocaleString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react262.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react263.default.createElement("div", {
       key: label,
       style: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }
-    }, /* @__PURE__ */ import_react262.default.createElement("span", {
-      style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C7.inkLight }
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
+      style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C8.inkLight }
     }, label), value)))))))));
   };
   var CommonView_default = CommonView;
@@ -136847,43 +137414,43 @@ html body {
     {
       key: "dashboard",
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react263.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
       label: "Ledger",
-      component: /* @__PURE__ */ import_react263.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "users",
       label: "Users",
-      component: /* @__PURE__ */ import_react263.default.createElement(UserList_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(UserList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "temples",
       label: "Temples",
-      component: /* @__PURE__ */ import_react263.default.createElement(TempleList_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react263.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donors",
       label: "Donors",
-      component: /* @__PURE__ */ import_react263.default.createElement(DonorList_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donations",
       label: "Donation",
-      component: /* @__PURE__ */ import_react263.default.createElement(DonationList_default, null),
+      component: /* @__PURE__ */ import_react264.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     }
   ];
@@ -136907,19 +137474,19 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react263.default.createElement("div", {
+      return /* @__PURE__ */ import_react264.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react263.default.createElement("div", {
+      }, /* @__PURE__ */ import_react264.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react263.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react264.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react263.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react264.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react263.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react264.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react263.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react264.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react263.default.createElement("button", {
+      }, /* @__PURE__ */ import_react264.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -136935,7 +137502,13 @@ html body {
       }
     };
     if (baseKey === "ledger") {
-      return /* @__PURE__ */ import_react263.default.createElement(OpeningBalance_default, null);
+      if (subRoute === "view") {
+        return /* @__PURE__ */ import_react264.default.createElement(LedgerView_default, {
+          id: dynamicId,
+          onBack: () => navigate(baseKey)
+        });
+      }
+      return /* @__PURE__ */ import_react264.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -136945,24 +137518,24 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react263.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react263.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react264.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react263.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react263.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react263.default.createElement(UserView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react264.default.createElement(UserView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react263.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react264.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react263.default.createElement(Donation_default, {
+        return /* @__PURE__ */ import_react264.default.createElement(Donation_default, {
           onBack: () => navigate(baseKey)
         });
       }
@@ -136972,22 +137545,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react263.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react263.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react264.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react263.default.createElement(DonationForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonationForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react263.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react264.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react263.default.createElement(UserForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react264.default.createElement(UserForm_default, __spreadValues({}, formProps));
         default:
           return null;
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react263.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react264.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -136998,13 +137571,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react264 = __toESM(require_react());
-  var UserContext = (0, import_react264.createContext)();
+  var import_react265 = __toESM(require_react());
+  var UserContext = (0, import_react265.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react264.useState)(null);
-    const [roles, setRoles] = (0, import_react264.useState)([]);
-    const [loading, setLoading] = (0, import_react264.useState)(true);
-    (0, import_react264.useEffect)(() => {
+    const [user, setUser] = (0, import_react265.useState)(null);
+    const [roles, setRoles] = (0, import_react265.useState)([]);
+    const [loading, setLoading] = (0, import_react265.useState)(true);
+    (0, import_react265.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -137066,12 +137639,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator",
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react264.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react265.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react264.useContext)(UserContext);
+    const context = (0, import_react265.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -137079,22 +137652,22 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react265.default.createElement(TempleFlagLoader_default, {
+  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react266.default.createElement(TempleFlagLoader_default, {
     size: "small"
   }));
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react265.useState)("dashboard");
-    const [mobileOpen, setMobileOpen] = (0, import_react265.useState)(false);
-    const [windowWidth, setWindowWidth] = (0, import_react265.useState)(typeof window !== "undefined" ? window.innerWidth : 1024);
+    const [currentRoute, setCurrentRoute] = (0, import_react266.useState)("dashboard");
+    const [mobileOpen, setMobileOpen] = (0, import_react266.useState)(false);
+    const [windowWidth, setWindowWidth] = (0, import_react266.useState)(typeof window !== "undefined" ? window.innerWidth : 1024);
     const { user, roles, logout, isAdmin, loading } = useUser();
-    (0, import_react265.useEffect)(() => {
+    (0, import_react266.useEffect)(() => {
       const handleResize = () => setWindowWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
     const isMobile2 = windowWidth < 768;
-    (0, import_react265.useEffect)(() => {
+    (0, import_react266.useEffect)(() => {
       if (!loading) {
         const initLoader = document.getElementById("temple-initial-loader");
         if (initLoader) {
@@ -137102,7 +137675,7 @@ html body {
         }
       }
     }, [loading]);
-    (0, import_react265.useEffect)(() => {
+    (0, import_react266.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -137130,7 +137703,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react265.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react266.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof window !== "undefined") {
             window.location.href = "/me";
@@ -137143,7 +137716,7 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react265.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react266.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
@@ -137211,29 +137784,29 @@ html body {
     if (loading) {
       return null;
     }
-    return /* @__PURE__ */ import_react265.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react266.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react265.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react266.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react265.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react266.default.createElement(Header3, {
       style: headerStyle
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       style: headerInnerStyle
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       style: logoContainerStyle
-    }, /* @__PURE__ */ import_react265.default.createElement("img", {
+    }, /* @__PURE__ */ import_react266.default.createElement("img", {
       src: "/assets/temple_donation/img/logo.svg",
       alt: "Temple Donation",
       style: logoImgStyle
-    })), /* @__PURE__ */ import_react265.default.createElement("div", {
+    })), /* @__PURE__ */ import_react266.default.createElement("div", {
       style: rightContainerStyle
-    }, !isMobile2 && /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, !isMobile2 && /* @__PURE__ */ import_react266.default.createElement("div", {
       style: { display: "flex", gap: "24px", alignItems: "center" }
     }, menuItems.map((item) => {
       const isActive2 = currentRoute.split("/")[0] === item.key;
-      return /* @__PURE__ */ import_react265.default.createElement("button", {
+      return /* @__PURE__ */ import_react266.default.createElement("button", {
         key: item.key,
         onClick: () => handleMenuClick({ key: item.key }),
         style: {
@@ -137252,18 +137825,18 @@ html body {
           alignItems: "center"
         }
       }, item.label);
-    })), /* @__PURE__ */ import_react265.default.createElement("div", {
+    })), /* @__PURE__ */ import_react266.default.createElement("div", {
       style: rightActionsStyle
-    }, !isAdmin && !isMobile2 && /* @__PURE__ */ import_react265.default.createElement(dropdown_default3, {
+    }, !isAdmin && !isMobile2 && /* @__PURE__ */ import_react266.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight"
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       style: userProfileStyle
-    }, /* @__PURE__ */ import_react265.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react266.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react265.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react265.default.createElement("span", null, user == null ? void 0 : user.name))), isMobile2 && /* @__PURE__ */ import_react265.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react265.default.createElement(MenuOutlined_default2, null),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react266.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react266.default.createElement("span", null, user == null ? void 0 : user.name))), isMobile2 && /* @__PURE__ */ import_react266.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react266.default.createElement(MenuOutlined_default2, null),
       onClick: () => setMobileOpen(true),
       style: {
         display: "flex",
@@ -137276,8 +137849,8 @@ html body {
         width: "40px",
         height: "40px"
       }
-    }))))), /* @__PURE__ */ import_react265.default.createElement(drawer_default, {
-      title: /* @__PURE__ */ import_react265.default.createElement("img", {
+    }))))), /* @__PURE__ */ import_react266.default.createElement(drawer_default, {
+      title: /* @__PURE__ */ import_react266.default.createElement("img", {
         src: "/assets/temple_donation/img/logo.png",
         alt: "Temple Donation",
         style: { height: "40px", objectFit: "contain" }
@@ -137287,14 +137860,14 @@ html body {
       open: mobileOpen,
       width: 280,
       bodyStyle: { padding: 0 }
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "flex flex-col h-full",
       style: { padding: "20px 0" }
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "8px" }
     }, menuItems.map((item) => {
       const isActive2 = currentRoute.split("/")[0] === item.key;
-      return /* @__PURE__ */ import_react265.default.createElement("button", {
+      return /* @__PURE__ */ import_react266.default.createElement("button", {
         key: item.key,
         onClick: () => {
           handleMenuClick({ key: item.key });
@@ -137315,20 +137888,20 @@ html body {
           width: "100%"
         }
       }, item.label);
-    })), !isAdmin && /* @__PURE__ */ import_react265.default.createElement("div", {
+    })), !isAdmin && /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "mt-auto p-4 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "flex items-center gap-3 px-3 py-2 mb-3"
-    }, /* @__PURE__ */ import_react265.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react266.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: /* @__PURE__ */ import_react265.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react265.default.createElement("div", {
+      icon: /* @__PURE__ */ import_react266.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react265.default.createElement("span", {
+    }, /* @__PURE__ */ import_react266.default.createElement("span", {
       className: "text-sm font-bold text-zinc-900"
-    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react265.default.createElement("span", {
+    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react266.default.createElement("span", {
       className: "text-[10px] text-zinc-400 uppercase tracking-widest"
-    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react265.default.createElement("button", {
+    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react266.default.createElement("button", {
       onClick: logout,
       style: {
         display: "flex",
@@ -137346,9 +137919,9 @@ html body {
         textAlign: "left",
         outline: "none"
       }
-    }, /* @__PURE__ */ import_react265.default.createElement(LogoutOutlined_default2, null), /* @__PURE__ */ import_react265.default.createElement("span", null, "Logout"))))), /* @__PURE__ */ import_react265.default.createElement(Content3, {
+    }, /* @__PURE__ */ import_react266.default.createElement(LogoutOutlined_default2, null), /* @__PURE__ */ import_react266.default.createElement("span", null, "Logout"))))), /* @__PURE__ */ import_react266.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react265.default.createElement("div", {
+    }, /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -137368,7 +137941,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react266.default.createElement(UserProvider, null, /* @__PURE__ */ import_react266.default.createElement(App_default, null))
+        /* @__PURE__ */ import_react267.default.createElement(UserProvider, null, /* @__PURE__ */ import_react267.default.createElement(App_default, null))
       );
       this.$temple_donation = root;
     }
@@ -137456,4 +138029,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.7ZFQQ5JQ.js.map
+//# sourceMappingURL=temple_donation.bundle.5XOE7TCV.js.map

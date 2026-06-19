@@ -35,6 +35,7 @@ import UserForm from "../modules/User/UserForm";
 import UserView from "../modules/User/UserView";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
+import LedgerView from "../modules/Ledger/LedgerView";
 
 import CommonView from "../components/common/CommonView";
 
@@ -155,6 +156,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
 
     // Special handling for Ledger and other non-standard modules
     if (baseKey === "ledger") {
+        if (subRoute === "view") {
+            return <LedgerView id={dynamicId} onBack={() => navigate(baseKey)} />;
+        }
         return <OpeningBalance />;
     }
 
