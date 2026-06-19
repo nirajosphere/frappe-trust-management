@@ -140,6 +140,64 @@ const ActivityLog = ({ doctype, docname }) => {
         fetchTimelineData(true);
     }, [doctype, docname]);
 
+    // Handle scroll and highlight for mentions notification redirect
+    useEffect(() => {
+        const target = sessionStorage.getItem("target_comment");
+        if (target && timelineItems.length > 0) {
+            const item = timelineItems.find(i => i.name === target);
+            if (item) {
+                if (item.subject) {
+                    setExpandedCommentCards(prev => {
+                        const next = new Set(prev);
+                        next.add(item.subject);
+                        return next;
+                    });
+                    setExpandedComments(prev => {
+                        const next = new Set(prev);
+                        next.add(item.subject);
+                        return next;
+                    });
+                } else {
+                    setExpandedCommentCards(prev => {
+                        const next = new Set(prev);
+                        next.add(item.name);
+                        return next;
+                    });
+                }
+
+                setTimeout(() => {
+                    const el = document.getElementById(`comment-card-${target}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: "smooth", block: "center" });
+                        const contentBox = el.querySelector(".comment-bubble");
+                        const targetBox = contentBox || el;
+                        
+                        targetBox.style.transition = "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+                        const oldBg = targetBox.style.backgroundColor || "#fcfcfd";
+                        const oldBorderColor = targetBox.style.borderColor || "#e4e4e7";
+                        const oldShadow = targetBox.style.boxShadow || "none";
+                        const oldTransform = targetBox.style.transform || "none";
+                        
+                        targetBox.style.backgroundColor = "#fafafa";
+                        targetBox.style.borderColor = "#18181b";
+                        targetBox.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
+                        targetBox.style.transform = "scale(1.025)";
+                        
+                        setTimeout(() => {
+                            targetBox.style.transition = "all 1.2s ease";
+                            targetBox.style.backgroundColor = oldBg;
+                            targetBox.style.borderColor = oldBorderColor;
+                            targetBox.style.boxShadow = oldShadow;
+                            targetBox.style.transform = oldTransform;
+                        }, 2500);
+                    }
+                }, 600);
+
+                sessionStorage.removeItem("target_comment");
+            }
+        }
+    }, [timelineItems]);
+
     if (!docname) return null;
 
     // Handle token-based backspace deletion for mentions
@@ -279,11 +337,13 @@ const ActivityLog = ({ doctype, docname }) => {
                         key={idx} 
                         onClick={(e) => {
                             e.stopPropagation();
-                            window.location.href = `/app/temple-donation/users/edit/${encodeURIComponent(username)}`;
+                            if (typeof frappe !== "undefined" && frappe.set_route) {
+                                frappe.set_route("temple-donation", "users", "view", username);
+                            }
                         }}
                         style={{ 
-                            color: "#2563eb", 
-                            fontWeight: 600, 
+                            color: "#18181b", 
+                            fontWeight: 700, 
                             cursor: "pointer",
                             textDecoration: "underline"
                         }}
@@ -342,7 +402,7 @@ const ActivityLog = ({ doctype, docname }) => {
         const isEditing = editingCommentId === c.name;
 
         return (
-            <div key={c.name} style={{ display: "flex", gap: "12px", position: "relative" }}>
+            <div key={c.name} id={`comment-card-${c.name}`} style={{ display: "flex", gap: "12px", position: "relative" }}>
                 
                 {/* User avatar for comments/replies inside cards */}
                 {isReply && (
@@ -399,7 +459,7 @@ const ActivityLog = ({ doctype, docname }) => {
 
                     {/* Comment Content Box */}
                     {(isReply || expandedCommentCards.has(c.name)) && (
-                        <div style={{ backgroundColor: "#fcfcfd", border: "1px solid #e4e4e7", borderRadius: "8px", padding: "10px" }}>
+                        <div className="comment-bubble" style={{ backgroundColor: "#fcfcfd", border: "1px solid #e4e4e7", borderRadius: "8px", padding: "10px" }}>
                         {isEditing ? (
                             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                                 <Mentions
@@ -436,7 +496,7 @@ const ActivityLog = ({ doctype, docname }) => {
                                             icon={<UndoOutlined style={{ fontSize: "11px", color: "#71717a" }} />} 
                                             onClick={() => {
                                                 setActiveReplyId(c.name);
-                                                setReplyText(`@${c.owner} `);
+                                                setReplyText(c.owner === currentUser ? "" : `@${c.owner} `);
                                             }}
                                         >
                                             <span style={{ fontSize: "10px", color: "#71717a" }}>Reply</span>

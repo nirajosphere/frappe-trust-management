@@ -7,6 +7,7 @@ import { themeConfig } from "./config/theme";
 import { getFilteredMenuItems, getComponentForRoute } from "./config/navigation";
 import { useUser } from "./context/UserContext";
 import TempleFlagLoader from "./components/common/TempleFlagLoader";
+import NotificationDropdown from "./components/common/NotificationDropdown";
 
 import "./styles.css";
 
@@ -248,6 +249,9 @@ const App = () => {
 
                                 {/* RIGHT ACTIONS - USER / MOBILE */}
                                 <div style={rightActionsStyle}>
+                                    {user && (
+                                        <NotificationDropdown currentUser={user.email || user.name} />
+                                    )}
                                     {!isAdmin && !isMobile && (
                                         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                                             <div style={userProfileStyle}>

@@ -131,7 +131,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                 {visibleFields.map((field) => {
                   const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
                   return (
-                    <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
+                    <Col xs={24} sm={isFullWidth ? 24 : 8} key={field.name}>
                       <FieldCell label={field.label}>
                         {renderValue(field, doc[field.name])}
                       </FieldCell>
