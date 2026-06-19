@@ -27,11 +27,11 @@ const FormFooter = ({
     };
 
     const innerStyle = {
-        maxWidth: "1152px", // equivalent to max-w-6xl
+        maxWidth: "1200px", // Align with the common ViewContainer
         marginLeft: "auto",
         marginRight: "auto",
-        paddingLeft: "24px",
-        paddingRight: "24px",
+        // paddingLeft: "40px",
+        // paddingRight: "40px",
         display: "flex",
         justifyContent: "flex-end",
         gap: "12px"
