@@ -140,7 +140,7 @@ const AddPageHeader = ({
     disableReset = false
 }) => {
     return (
-        <div className="flex items-center justify-between mb-6 border-b border-zinc-100 pb-5">
+        <div className="flex items-center justify-between mb-6 border-b border-zinc-100">
 
             {/* LEFT SECTION */}
             <div className="flex items-center gap-4">

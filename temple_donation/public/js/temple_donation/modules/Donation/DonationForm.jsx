@@ -102,8 +102,8 @@ const DonationForm = ({ id, onBack }) => {
                             
                             {/* Card 1: Donor Information */}
                             <SectionCard 
-                                // {...commonCardProps}
-                                title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donor Information</span></Space>}
+                                title="Donor Information"
+                                icon={<UserOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Form.Item name="name" hidden><Input /></Form.Item>
                                 <Row gutter={[16, 0]}>
@@ -137,8 +137,8 @@ const DonationForm = ({ id, onBack }) => {
 
                             {/* Card 2: Address */}
                             <SectionCard 
-                                // {...commonCardProps}
-                                title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address</span></Space>}
+                                title="Address"
+                                icon={<EnvironmentOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24}>
@@ -188,8 +188,8 @@ const DonationForm = ({ id, onBack }) => {
                             
                             {/* Card 3: Personal Details */}
                             <SectionCard 
-                                // {...commonCardProps}
-                                title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}
+                                title="Personal Details"
+                                icon={<HeartOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
@@ -215,8 +215,8 @@ const DonationForm = ({ id, onBack }) => {
 
                             {/* Card 4: Donation Payments */}
                             <SectionCard 
-                                // {...commonCardProps}
-                                title={<Space><DollarOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Payments</span></Space>}
+                                title="Donation Payments"
+                                icon={<DollarOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
@@ -234,8 +234,8 @@ const DonationForm = ({ id, onBack }) => {
 
                             {/* Card 5: Donation Items */}
                             <SectionCard 
-                                // {...commonCardProps}
-                                title={<Space><GiftOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Items</span></Space>}
+                                title="Donation Items"
+                                icon={<GiftOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Form.List name="donation_items">

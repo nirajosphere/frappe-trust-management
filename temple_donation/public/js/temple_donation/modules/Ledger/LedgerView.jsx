@@ -186,7 +186,7 @@ const LedgerView = ({ id, onBack }) => {
         actions={
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded-lg cursor-pointer"
+            className="px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded cursor-pointer"
           >
             <Printer size={14} className="text-zinc-600" /> Print History Report
           </button>
@@ -213,7 +213,7 @@ const LedgerView = ({ id, onBack }) => {
 
             {/* Cashier Information Card */}
             <SectionCard title="Cashier Information" icon={<UserOutlined style={{ color: '#1f2937' }} />}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div style={{ display: "flex", flexDirection: "column",}}>
                 <FieldCell label="User Email">
                   <span style={{ fontSize: 13, fontWeight: 600 }}>{user.email}</span>
                 </FieldCell>

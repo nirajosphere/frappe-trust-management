@@ -119,7 +119,7 @@ const DonorView = ({ id, onBack, onEdit }) => {
             
             {/* Status Meta Card */}
             <SectionCard title="Status & Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
-              <div className="flex flex-col gap-4 py-1">
+              <div className="flex flex-col gap-3 py-1">
                 {[
                   { label: "Account Status", value: (() => {
                     const statusVal = doc.custom_status || doc.status || "Active";
@@ -136,9 +136,9 @@ const DonorView = ({ id, onBack, onEdit }) => {
 
             {/* System Security Tracking Logs */}
             <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
-              <div className="flex flex-col gap-3.5 py-1">
+              <div className="flex flex-col gap-2 py-1">
                 {[
-                  { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100">{id}</span> },
+                  { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100">{id}</span> },
                   { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
                   { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
                   { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }

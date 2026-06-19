@@ -160,30 +160,29 @@ const DonationView = ({ id, onBack, onEdit }) => {
                 ))}
               </Row>
 
-              <div className="border border-zinc-200 rounded-lg overflow-hidden">
-                <Table
-                  dataSource={doc.donation_items || []}
-                  pagination={false}
-                  rowKey="name"
-                  size="middle"
-                  columns={[
-                    {
-                      title: "DONATION TYPE",
-                      dataIndex: "donation_type",
-                      render: v => {
-                        const dt = donationTypes?.find(t => t.name === v);
-                        return <span className="font-semibold text-zinc-800 text-xs">{dt ? dt.donation_type : v}</span>;
-                      },
+              <Table
+                dataSource={doc.donation_items || []}
+                pagination={false}
+                rowKey="name"
+                size="middle"
+                className="aavatto-premium-table"
+                columns={[
+                  {
+                    title: "DONATION TYPE",
+                    dataIndex: "donation_type",
+                    render: v => {
+                      const dt = donationTypes?.find(t => t.name === v);
+                      return <span className="font-semibold text-zinc-800 text-xs">{dt ? dt.donation_type : v}</span>;
                     },
-                    {
-                      title: "AMOUNT",
-                      dataIndex: "amount",
-                      align: "right",
-                      render: v => <span className="font-bold text-zinc-900 text-xs">₹{Number(v).toLocaleString("en-IN")}</span>,
-                    },
-                  ]}
-                />
-              </div>
+                  },
+                  {
+                    title: "AMOUNT",
+                    dataIndex: "amount",
+                    align: "right",
+                    render: v => <span className="font-bold text-zinc-900 text-xs">₹{Number(v).toLocaleString("en-IN")}</span>,
+                  },
+                ]}
+              />
 
               {/* <div className="mt-4">
                 <DonationPrint donation={doc} />

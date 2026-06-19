@@ -112,8 +112,8 @@ const UserForm = ({ id, onBack }) => {
                     <Col xs={24} md={12} lg={7}>
                         <div className="sticky top-6" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                             <SectionCard 
-                                // {...premiumCardProps}
-                                title={<Space><UserOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b', letterSpacing: '-0.01em' }}>User Profile</span></Space>}
+                                title="User Profile"
+                                icon={<UserOutlined style={{ color: '#09090b' }} />}
                             >
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, padding: '12px 0 4px 0' }}>
                                     <Avatar
@@ -168,8 +168,8 @@ const UserForm = ({ id, onBack }) => {
 
                             {/* Section 1: Basic Info */}
                             <SectionCard 
-                                // {...premiumCardProps}
-                                title={<Space><UserOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Basic Information</span></Space>}
+                                title="Basic Information"
+                                icon={<UserOutlined style={{ color: '#09090b' }} />}
                             >
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
@@ -197,8 +197,8 @@ const UserForm = ({ id, onBack }) => {
 
                             {/* Section 2: Role & Access */}
                             <SectionCard 
-                                // {...premiumCardProps}
-                                title={<Space><SafetyOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Role & Access Matrix</span></Space>}
+                                title="Role & Access Matrix"
+                                icon={<SafetyOutlined style={{ color: '#09090b' }} />}
                             >
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
@@ -246,8 +246,8 @@ const UserForm = ({ id, onBack }) => {
 
                             {/* Section 3: Security */}
                             <SectionCard 
-                                // {...premiumCardProps}
-                                title={<Space><LockOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Security & Balances</span></Space>}
+                                title="Security & Balances"
+                                icon={<LockOutlined style={{ color: '#09090b' }} />}
                             >
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
@@ -265,8 +265,8 @@ const UserForm = ({ id, onBack }) => {
 
                             {/* Section 4: Notes */}
                             <SectionCard 
-                                // {...premiumCardProps}
-                                title={<Space><FileTextOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Internal Notes</span></Space>}
+                                title="Internal Notes"
+                                icon={<FileTextOutlined style={{ color: '#09090b' }} />}
                             >
                                 <Form.Item name="custom_internal_notes" style={{ marginBottom: 0 }}>
                                     <Input.TextArea

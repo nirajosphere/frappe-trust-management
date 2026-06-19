@@ -489,30 +489,29 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                     ))}
                   </Row>
 
-                  <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, overflow: "hidden" }}>
-                    <Table
-                      dataSource={doc.donation_items || []}
-                      pagination={false}
-                      rowKey="name"
-                      size="middle"
-                      columns={[
-                        {
-                          title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Donation Type</span>,
-                          dataIndex: "donation_type",
-                          render: v => {
-                            const dt = donationTypes?.find(t => t.name === v);
-                            return <span style={{ fontWeight: 600, color: C.ink, fontSize: 13 }}>{dt ? dt.donation_type : v}</span>;
-                          },
+                  <Table
+                    dataSource={doc.donation_items || []}
+                    pagination={false}
+                    rowKey="name"
+                    size="middle"
+                    className="aavatto-premium-table"
+                    columns={[
+                      {
+                        title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Donation Type</span>,
+                        dataIndex: "donation_type",
+                        render: v => {
+                          const dt = donationTypes?.find(t => t.name === v);
+                          return <span style={{ fontWeight: 600, color: C.ink, fontSize: 13 }}>{dt ? dt.donation_type : v}</span>;
                         },
-                        {
-                          title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Amount</span>,
-                          dataIndex: "amount",
-                          align: "right",
-                          render: v => <span style={{ fontWeight: 700, color: C.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }}>₹{Number(v).toLocaleString("en-IN")}</span>,
-                        },
-                      ]}
-                    />
-                  </div>
+                      },
+                      {
+                        title: <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C.inkLight }}>Amount</span>,
+                        dataIndex: "amount",
+                        align: "right",
+                        render: v => <span style={{ fontWeight: 700, color: C.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }}>₹{Number(v).toLocaleString("en-IN")}</span>,
+                      },
+                    ]}
+                  />
 
                   <div style={{ marginTop: 20 }}>
                     <DonationPrint donation={doc} />

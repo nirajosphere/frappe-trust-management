@@ -1173,10 +1173,10 @@
   padding: 16px 20px !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:first-child {
-  border-top-left-radius: 10px !important;
+  border-top-left-radius: 6px !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:last-child {
-  border-top-right-radius: 10px !important;
+  border-top-right-radius: 6px !important;
   border-right: none !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
@@ -1191,10 +1191,10 @@
   border-bottom: none !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:last-child > td:first-child {
-  border-bottom-left-radius: 10px !important;
+  border-bottom-left-radius: 6px !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:last-child > td:last-child {
-  border-bottom-right-radius: 10px !important;
+  border-bottom-right-radius: 6px !important;
 }
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td {
   background: rgba(0, 0, 0, 0.01) !important;
@@ -1864,4 +1864,4 @@ body[data-path=login] .footer {
     padding: 1.5rem;
   }
 }
-/*# sourceMappingURL=temple_donation.bundle.SNM323BJ.css.map */
+/*# sourceMappingURL=temple_donation.bundle.CRB5RWCR.css.map */

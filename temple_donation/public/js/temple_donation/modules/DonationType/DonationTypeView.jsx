@@ -50,11 +50,11 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
     if (empty) return <span className="text-zinc-300 font-medium">—</span>;
 
     if (field.type === "image")
-      return <img src={value} alt={field.label} className="w-14 h-14 object-cover rounded-lg border border-zinc-200" />;
+      return <img src={value} alt={field.label} className="w-20 h-14 object-cover rounded-lg border border-zinc-200 shadow-sm mt-1" />;
 
     if (field.type === "textarea")
       return (
-        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal">
+        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal mt-1">
           {value}
         </div>
       );
@@ -82,6 +82,7 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
         title={title}
         subtitle={doc.donation_type_code ? `Code: ${doc.donation_type_code}` : `ID: ${id}`}
         imageSrc={doc.donation_image}
+        imageFlag={false}
         initials={initials}
         tags={doc.custom_status || doc.status ? [doc.custom_status || doc.status] : []}
         actions={
@@ -104,15 +105,16 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
       />
 
       {/* ── TWO COLUMN GRID WORKSURFACE ── */}
-      <Row gutter={[24, 24]}>
+      <Row gutter={[24, 24]} className="mt-2">
         
         {/* Left Main View Columns */}
-        <Col xs={24} lg={17}>
+        <Col xs={24} lg={16}>
           <div className="flex flex-col gap-6">
             <SectionCard title="Basic Information" icon={<User size={15} className="text-zinc-800" />}>
-              <Row gutter={[16, 16]}>
+              <Row gutter={[20, 20]}>
                 {visibleFields.map((field) => {
-                  const isFullWidth = field.type === "image" || field.type === "textarea";
+                  // Textarea looks good full width, but image can sit inside standard columns nicely
+                  const isFullWidth = field.type === "textarea";
                   return (
                     <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
                       <FieldCell label={field.label}>
@@ -127,12 +129,12 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
         </Col>
 
         {/* Right Meta Parameters Panel */}
-        <Col xs={24} lg={7}>
+        <Col xs={24} lg={8}>
           <div className="sticky top-6 flex flex-col gap-6">
             
             {/* Status Meta Card */}
             <SectionCard title="Status & Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
-              <div className="flex flex-col gap-4 py-1">
+              <div className="flex flex-col gap-3 py-1">
                 {[
                   { label: "Account Status", value: (() => {
                     const statusVal = doc.custom_status || doc.status || "Active";
@@ -149,9 +151,9 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
 
             {/* System Security Tracking Logs */}
             <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
-              <div className="flex flex-col gap-3.5 py-1">
+              <div className="flex flex-col gap-3 py-1">
                 {[
-                  { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100">{id}</span> },
+                  { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100">{id}</span> },
                   { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
                   { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
                   { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }

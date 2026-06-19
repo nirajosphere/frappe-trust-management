@@ -1444,11 +1444,11 @@
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:first-child {
-  border-top-left-radius: 10px !important;
+  border-top-left-radius: 6px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:last-child {
-  border-top-right-radius: 10px !important;
+  border-top-right-radius: 6px !important;
   border-right: none !important;
 }
 
@@ -1467,11 +1467,11 @@
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:last-child > td:first-child {
-  border-bottom-left-radius: 10px !important;
+  border-bottom-left-radius: 6px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:last-child > td:last-child {
-  border-bottom-right-radius: 10px !important;
+  border-bottom-right-radius: 6px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td {

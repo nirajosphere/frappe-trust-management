@@ -156,7 +156,7 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
                 dataSource={items}
                 pagination={false}
                 rowKey={(r, i) => i}
-                className="custom-pos-table"
+                className="custom-pos-table aavatto-premium-table"
                 locale={{
                     emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<span style={{ color: '#9ca3af', fontSize: '13px' }}>Cart is empty</span>} style={{ padding: '32px 0' }} />
                 }}

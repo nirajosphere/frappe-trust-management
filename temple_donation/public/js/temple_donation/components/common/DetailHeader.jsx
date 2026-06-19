@@ -11,6 +11,7 @@ const DetailHeader = ({
   title,
   subtitle,
   imageSrc,
+  imageFlag,
   initials = "U",
   tags = [],
   actions
@@ -34,7 +35,7 @@ const DetailHeader = ({
         )}
 
         <div className="flex items-center gap-2 min-w-0">
-          <Avatar 
+         { imageFlag && <Avatar 
             size={48}
             src={hasValidImage ? cleanImageSrc : undefined}
             className={`shrink-0 flex items-center justify-center text-base font-bold select-none ${
@@ -44,7 +45,7 @@ const DetailHeader = ({
             }`}
           >
             {!hasValidImage && initials}
-          </Avatar>
+          </Avatar>}
 
           <div className="flex flex-col justify-center min-w-0 gap-1">
             <div className="flex items-center gap-2 flex-wrap min-w-0">

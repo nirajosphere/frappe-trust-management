@@ -464,8 +464,9 @@ const TempleForm = ({ id, onBack }) => {
                             
                             {/* Temple Meta Profile Header */}
                             <SectionCard 
-                            // {...commonCardProps} 
-                            title={<Space><BankOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Temple Profile</span></Space>}>
+                                title="Temple Profile"
+                                icon={<BankOutlined style={{ color: '#18181b' }} />}
+                            >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '4px 0' }}>
                                     <Avatar 
                                         size={64} 
@@ -501,8 +502,9 @@ const TempleForm = ({ id, onBack }) => {
 
                             {/* Main Details Fields */}
                             <SectionCard 
-                            // {...commonCardProps}
-                             title={<Space><InfoCircleOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Primary Details</span></Space>}>
+                                title="Primary Details"
+                                icon={<InfoCircleOutlined style={{ color: '#18181b' }} />}
+                            >
                                 <Row gutter={[12, 0]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="temple_name" label="Temple Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
@@ -529,8 +531,9 @@ const TempleForm = ({ id, onBack }) => {
 
                             {/* Geographic Information Fields */}
                             <SectionCard 
-                            // {...commonCardProps}
-                             title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Location Details</span></Space>}>
+                                title="Location Details"
+                                icon={<EnvironmentOutlined style={{ color: '#18181b' }} />}
+                            >
                                 <Row gutter={[12, 0]}>
                                     <Col xs={24}>
                                         <Form.Item name="temple_address" label="Street Address" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
@@ -565,10 +568,9 @@ const TempleForm = ({ id, onBack }) => {
                     {/* ================= RIGHT COLUMN: Self-Healing Adaptive Matrix Panel ================= */}
                     <Col xs={24} md={12} lg={10}>
                         <SectionCard 
-                            // {...commonCardProps}
-                            // style={{ ...commonCardProps.style, height: 'auto' }} // Height to auto taaki content size ke hisab se scale kare
-                            title={<Space><AppstoreOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Types Matrix</span></Space>}
-                            extra={filteredDonationTypes.length > 0 && (
+                            title="Donation Types Matrix"
+                            icon={<AppstoreOutlined style={{ color: '#18181b' }} />}
+                            right={filteredDonationTypes.length > 0 && (
                                 <Space size={6}>
                                     <span style={{ fontSize: '11px', fontWeight: 700, color: '#52525b', letterSpacing: '0.02em' }}>SELECT ALL</span>
                                     <Switch size="small" checked={allSelected} onChange={handleSelectAllChange} className={allSelected ? "bg-zinc-800" : "bg-zinc-200"} />

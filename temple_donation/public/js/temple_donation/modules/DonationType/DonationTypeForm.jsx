@@ -332,8 +332,8 @@ const DonationTypeForm = ({ id, onBack }) => {
                     {/* ================= LEFT COLUMN: Modern Image Management ================= */}
                     <Col xs={24} md={9} lg={8}>
                         <SectionCard 
-                            // {...commonCardProps} 
-                            title={<Space><PictureOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Display Image</span></Space>}
+                            title="Display Image"
+                            icon={<PictureOutlined style={{ color: '#18181b' }} />}
                         >
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '210px' }}>
                                 
@@ -389,8 +389,8 @@ const DonationTypeForm = ({ id, onBack }) => {
                     {/* ================= RIGHT COLUMN: Core Details ================= */}
                     <Col xs={24} md={15} lg={16}>
                         <SectionCard 
-                            // {...commonCardProps} 
-                            title={<Space><TagOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Category Details</span></Space>}
+                            title="Category Details"
+                            icon={<TagOutlined style={{ color: '#18181b' }} />}
                         >
                             <Row gutter={[16, 0]}>
                                 <Col xs={24} sm={12}>

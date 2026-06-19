@@ -24,19 +24,20 @@ const ActiveDonationsModal = ({
             }
             open={isOpen}
             onCancel={onClose}
-            footer={[
-                <Button 
-                    key="close" 
-                    onClick={onClose}
-                    className="bg-zinc-900 border-zinc-900 hover:!bg-zinc-800 text-white hover:!text-white rounded-md font-semibold"
-                >
-                    Close
-                </Button>
-            ]}
+            footer={null}
+            // footer={[
+            //     <Button 
+            //         key="close" 
+            //         onClick={onClose}
+            //         className="bg-zinc-900 border-zinc-900 hover:!bg-zinc-800 text-white hover:!text-white rounded-md font-semibold"
+            //     >
+            //         Close
+            //     </Button>
+            // ]}
             width={800}
             className="aavatto-premium-modal"
         >
-            <div className="py-4">
+            <div className="pt-4">
                 <Table
                     dataSource={activeDonations}
                     columns={columns}
@@ -48,6 +49,7 @@ const ActiveDonationsModal = ({
                         className: "!my-2"
                     }}
                     bordered
+                    className="aavatto-premium-table"
                     // size='small'
                     scroll={{ x: 'max-content' }}
                 />

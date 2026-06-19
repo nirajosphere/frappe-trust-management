@@ -114,8 +114,8 @@ const DonorForm = ({ id, onBack }) => {
                             
                             {/* Card 1: Profile Information */}
                             <SectionCard 
-                                // {...commonCardProps} 
-                                title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Profile Information</span></Space>}
+                                title="Profile Information"
+                                icon={<UserOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
@@ -143,8 +143,8 @@ const DonorForm = ({ id, onBack }) => {
 
                             {/* Card 2: Personal Details */}
                             <SectionCard 
-                                // {...commonCardProps} 
-                                title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}
+                                title="Personal Details"
+                                icon={<HeartOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
@@ -174,8 +174,8 @@ const DonorForm = ({ id, onBack }) => {
                             
                             {/* Card 3: Address & Native Origin */}
                             <SectionCard 
-                                // {...commonCardProps} 
-                                title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address & Native Origin</span></Space>}
+                                title="Address & Native Origin"
+                                icon={<EnvironmentOutlined style={{ color: '#18181b' }} />}
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24}>
