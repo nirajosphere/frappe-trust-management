@@ -340,6 +340,8 @@ import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const { Text } = Typography;
 
@@ -425,26 +427,26 @@ const TempleForm = ({ id, onBack }) => {
     const formItemStyle = { marginBottom: '14px' };
 
     // Clean Minimal Card Configuration
-    const commonCardProps = {
-        size: "small",
-        className: "shadow-sm border border-zinc-200 overflow-hidden",
-        style: { 
-            background: '#ffffff',
-            marginBottom: '0px'
-        },
-        headStyle: {
-            background: '#f4f4f5',
-            borderBottom: '1px solid #e4e4e7',
-            paddingTop: '10px',
-            paddingBottom: '10px'
-        },
-        bodyStyle: {
-            padding: '16px'
-        }
-    };
+    // const commonCardProps = {
+    //     size: "small",
+    //     className: "shadow-sm border border-zinc-200 overflow-hidden",
+    //     style: { 
+    //         background: '#ffffff',
+    //         marginBottom: '0px'
+    //     },
+    //     headStyle: {
+    //         background: '#f4f4f5',
+    //         borderBottom: '1px solid #e4e4e7',
+    //         paddingTop: '10px',
+    //         paddingBottom: '10px'
+    //     },
+    //     bodyStyle: {
+    //         padding: '16px'
+    //     }
+    // };
 
     return (
-        <div className="donation-page py-4" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Temple" : "Add Temple"}
@@ -461,7 +463,9 @@ const TempleForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             
                             {/* Temple Meta Profile Header */}
-                            <Card {...commonCardProps} title={<Space><BankOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Temple Profile</span></Space>}>
+                            <SectionCard 
+                            // {...commonCardProps} 
+                            title={<Space><BankOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Temple Profile</span></Space>}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '4px 0' }}>
                                     <Avatar 
                                         size={64} 
@@ -493,10 +497,12 @@ const TempleForm = ({ id, onBack }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </Card>
+                            </SectionCard>
 
                             {/* Main Details Fields */}
-                            <Card {...commonCardProps} title={<Space><InfoCircleOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Primary Details</span></Space>}>
+                            <SectionCard 
+                            // {...commonCardProps}
+                             title={<Space><InfoCircleOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Primary Details</span></Space>}>
                                 <Row gutter={[12, 0]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="temple_name" label="Temple Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
@@ -519,10 +525,12 @@ const TempleForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Geographic Information Fields */}
-                            <Card {...commonCardProps} title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Location Details</span></Space>}>
+                            <SectionCard 
+                            // {...commonCardProps}
+                             title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Location Details</span></Space>}>
                                 <Row gutter={[12, 0]}>
                                     <Col xs={24}>
                                         <Form.Item name="temple_address" label="Street Address" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
@@ -550,15 +558,15 @@ const TempleForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
                         </div>
                     </Col>
 
                     {/* ================= RIGHT COLUMN: Self-Healing Adaptive Matrix Panel ================= */}
                     <Col xs={24} md={12} lg={10}>
-                        <Card 
-                            {...commonCardProps} 
-                            style={{ ...commonCardProps.style, height: 'auto' }} // Height to auto taaki content size ke hisab se scale kare
+                        <SectionCard 
+                            // {...commonCardProps}
+                            // style={{ ...commonCardProps.style, height: 'auto' }} // Height to auto taaki content size ke hisab se scale kare
                             title={<Space><AppstoreOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Types Matrix</span></Space>}
                             extra={filteredDonationTypes.length > 0 && (
                                 <Space size={6}>
@@ -624,7 +632,7 @@ const TempleForm = ({ id, onBack }) => {
                                     }}
                                 />
                             </div>
-                        </Card>
+                        </SectionCard>
                     </Col>
 
                 </Row>
@@ -641,7 +649,7 @@ const TempleForm = ({ id, onBack }) => {
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_TEMPLE} docname={id} />}
-        </div>
+        </ViewContainer>
     );
 };
 

@@ -221,6 +221,8 @@ import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const DonationTypeForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -296,26 +298,26 @@ const DonationTypeForm = ({ id, onBack }) => {
     const formItemStyle = { marginBottom: '16px' };
 
     // Common Premium Card Style Config
-    const commonCardProps = {
-        size: "small",
-        className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-        style: { 
-            height: '100%',
-            background: '#ffffff',
-        },
-        headStyle: {
-            background: '#f4f4f5',
-            borderBottom: '1px solid #e4e4e7',
-            paddingTop: '10px',
-            paddingBottom: '10px'
-        },
-        bodyStyle: {
-            padding: '20px'
-        }
-    };
+    // const commonCardProps = {
+    //     size: "small",
+    //     className: "shadow-sm border border-zinc-200/80 overflow-hidden",
+    //     style: { 
+    //         height: '100%',
+    //         background: '#ffffff',
+    //     },
+    //     headStyle: {
+    //         background: '#f4f4f5',
+    //         borderBottom: '1px solid #e4e4e7',
+    //         paddingTop: '10px',
+    //         paddingBottom: '10px'
+    //     },
+    //     bodyStyle: {
+    //         padding: '20px'
+    //     }
+    // };
 
     return (
-        <div className="donation-page py-6" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
+        <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Donation Type" : "Add Donation Type"}
@@ -329,8 +331,8 @@ const DonationTypeForm = ({ id, onBack }) => {
 
                     {/* ================= LEFT COLUMN: Modern Image Management ================= */}
                     <Col xs={24} md={9} lg={8}>
-                        <Card 
-                            {...commonCardProps} 
+                        <SectionCard 
+                            // {...commonCardProps} 
                             title={<Space><PictureOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Display Image</span></Space>}
                         >
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '210px' }}>
@@ -381,13 +383,13 @@ const DonationTypeForm = ({ id, onBack }) => {
                                 </div>
 
                             </div>
-                        </Card>
+                        </SectionCard>
                     </Col>
 
                     {/* ================= RIGHT COLUMN: Core Details ================= */}
                     <Col xs={24} md={15} lg={16}>
-                        <Card 
-                            {...commonCardProps} 
+                        <SectionCard 
+                            // {...commonCardProps} 
                             title={<Space><TagOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Category Details</span></Space>}
                         >
                             <Row gutter={[16, 0]}>
@@ -414,7 +416,7 @@ const DonationTypeForm = ({ id, onBack }) => {
                                     </Form.Item>
                                 </Col>
                             </Row>
-                        </Card>
+                        </SectionCard>
                     </Col>
 
                 </Row>
@@ -430,7 +432,7 @@ const DonationTypeForm = ({ id, onBack }) => {
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_DONATION_TYPE} docname={id} />}
-        </div>
+        </ViewContainer>
     );
 };
 

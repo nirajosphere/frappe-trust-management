@@ -15,6 +15,8 @@ import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const { Text } = Typography;
 
@@ -72,27 +74,27 @@ const DonorForm = ({ id, onBack }) => {
     const formItemStyle = { marginBottom: '12px' };
 
     // Common Premium Card Style Config
-    const commonCardProps = {
-        size: "small",
-        className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-        style: { 
-            height: 'auto',
-            background: '#fafafa', // Soft premium grey background tint
-        },
-        headStyle: {
-            background: '#f4f4f5', // Header distinct dark grey tint
-            borderBottom: '1px solid #e4e4e7',
-            paddingTop: '8px',
-            paddingBottom: '8px'
-        },
-        bodyStyle: {
-            background: '#ffffff', // Content area clean white
-            padding: '16px'
-        }
-    };
+    // const commonCardProps = {
+    //     size: "small",
+    //     className: "shadow-sm border border-zinc-200/80 overflow-hidden",
+    //     style: { 
+    //         height: 'auto',
+    //         background: '#fafafa', // Soft premium grey background tint
+    //     },
+    //     headStyle: {
+    //         background: '#f4f4f5', // Header distinct dark grey tint
+    //         borderBottom: '1px solid #e4e4e7',
+    //         paddingTop: '8px',
+    //         paddingBottom: '8px'
+    //     },
+    //     bodyStyle: {
+    //         background: '#ffffff', // Content area clean white
+    //         padding: '16px'
+    //     }
+    // };
 
     return (
-        <div className="donation-page py-6" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 16px' }}>
+        <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Donor" : "Add Donor"}
@@ -111,8 +113,8 @@ const DonorForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             
                             {/* Card 1: Profile Information */}
-                            <Card 
-                                {...commonCardProps} 
+                            <SectionCard 
+                                // {...commonCardProps} 
                                 title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Profile Information</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -137,11 +139,11 @@ const DonorForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Card 2: Personal Details */}
-                            <Card 
-                                {...commonCardProps} 
+                            <SectionCard 
+                                // {...commonCardProps} 
                                 title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -161,7 +163,7 @@ const DonorForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                         </div>
                     </Col>
@@ -171,8 +173,8 @@ const DonorForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             
                             {/* Card 3: Address & Native Origin */}
-                            <Card 
-                                {...commonCardProps} 
+                            <SectionCard 
+                                // {...commonCardProps} 
                                 title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address & Native Origin</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -212,7 +214,7 @@ const DonorForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                         </div>
                     </Col>
@@ -229,7 +231,7 @@ const DonorForm = ({ id, onBack }) => {
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_DONOR} docname={id} />}
-        </div>
+        </ViewContainer>
     );
 };
 

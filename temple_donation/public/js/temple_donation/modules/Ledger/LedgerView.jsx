@@ -9,6 +9,7 @@ import FieldCell from "../../components/common/FieldCell";
 import LedgerProfileCard from "./components/LedgerProfileCard";
 import LedgerFinancialBox from "./components/LedgerFinancialBox";
 import LedgerTabsSection from "./components/LedgerTabsSection";
+import ViewContainer from "../../components/common/ViewContainer";
 
 const LedgerView = ({ id, onBack }) => {
   const [loading, setLoading] = useState(true);
@@ -174,78 +175,75 @@ const LedgerView = ({ id, onBack }) => {
   const initials = `${user.first_name?.charAt(0) || ""}${user.last_name?.charAt(0) || ""}`.toUpperCase() || "C";
 
   return (
-    <div className="user-view-container min-h-screen py-6 bg-[#f8f9fa]" style={{ padding: '24px 40px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <ViewContainer className="user-view-container">
+      {/* ── TOP HERO HEADER ── */}
+      <DetailHeader
+        onBack={onBack}
+        title={fullName}
+        subtitle={user.email}
+        imageSrc={user.user_image}
+        initials={initials}
+        actions={
+          <button
+            onClick={() => window.print()}
+            className="px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded-lg cursor-pointer"
+          >
+            <Printer size={14} className="text-zinc-600" /> Print History Report
+          </button>
+        }
+      />
+
+      {/* ── TWO COLUMN GRID WORKSURFACE ── */}
+      <Row gutter={[24, 24]}>
         
-        {/* ── TOP HERO HEADER ── */}
-        <DetailHeader
-          onBack={onBack}
-          title={fullName}
-          subtitle={user.email}
-          imageSrc={user.user_image}
-          initials={initials}
-          actions={
-            <button
-              onClick={() => window.print()}
-              className="px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded-lg cursor-pointer"
-            >
-              <Printer size={14} className="text-zinc-600" /> Print History Report
-            </button>
-          }
-        />
+        {/* Left Meta/Profile Panel (Span 7/24) */}
+        <Col xs={24} lg={7}>
+          <div className="sticky top-6 flex flex-col gap-6">
+            
+            {/* Profile Card */}
+            <LedgerProfileCard user={user} />
 
-        {/* ── TWO COLUMN GRID WORKSURFACE ── */}
-        <Row gutter={[24, 24]}>
-          
-          {/* Left Meta/Profile Panel (Span 7/24) */}
-          <Col xs={24} lg={7}>
-            <div className="sticky top-6 flex flex-col gap-6">
-              
-              {/* Profile Card */}
-              <LedgerProfileCard user={user} />
+            {/* Total Collected Financial summary */}
+            <LedgerFinancialBox 
+              title="Total Handed Over Amount" 
+              amount={total_collected}
+              description="Consolidated total from all handover sessions."
+              colorTheme="green"
+            />
 
-              {/* Total Collected Financial summary */}
-              <LedgerFinancialBox 
-                title="Total Handed Over Amount" 
-                amount={total_collected}
-                description="Consolidated total from all handover sessions."
-                colorTheme="green"
-              />
+            {/* Cashier Information Card */}
+            <SectionCard title="Cashier Information" icon={<UserOutlined style={{ color: '#1f2937' }} />}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <FieldCell label="User Email">
+                  <span style={{ fontSize: 13, fontWeight: 600 }}>{user.email}</span>
+                </FieldCell>
+                
+                <FieldCell label="Full Name">
+                  <span style={{ fontSize: 13, fontWeight: 600 }}>{fullName}</span>
+                </FieldCell>
 
-              {/* Cashier Information Card */}
-              <SectionCard title="Cashier Information" icon={<UserOutlined style={{ color: '#1f2937' }} />}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <FieldCell label="User Email">
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{user.email}</span>
-                  </FieldCell>
-                  
-                  <FieldCell label="Full Name">
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{fullName}</span>
-                  </FieldCell>
+                <FieldCell label="Total Handovers">
+                  <span style={{ fontSize: 13, fontWeight: 600 }}>{handovers.length} Handover Session{handovers.length !== 1 ? 's' : ''}</span>
+                </FieldCell>
+              </div>
+            </SectionCard>
 
-                  <FieldCell label="Total Handovers">
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>{handovers.length} Handover Session{handovers.length !== 1 ? 's' : ''}</span>
-                  </FieldCell>
-                </div>
-              </SectionCard>
+          </div>
+        </Col>
 
-            </div>
-          </Col>
-
-          {/* Right Main Table/Tabs Panel (Span 17/24) */}
-          <Col xs={24} lg={17}>
-            <div className="flex flex-col gap-6">
-              <LedgerTabsSection 
-                donations={donations} 
-                handovers={handovers}
-                donationColumns={donationColumns}
-                handoverColumns={handoverColumns}
-              />
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </div>
+        {/* Right Main Table/Tabs Panel (Span 17/24) */}
+        <Col xs={24} lg={17}>
+          <div className="flex flex-col gap-6">
+            <LedgerTabsSection 
+              donations={donations} 
+              handovers={handovers}
+              donationColumns={donationColumns}
+              handoverColumns={handoverColumns}
+            />
+          </div>
+        </Col>
+      </Row>
+    </ViewContainer>
   );
 };
 

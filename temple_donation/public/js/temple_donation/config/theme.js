@@ -33,15 +33,27 @@ export const themeConfig = {
             horizontalItemHoverColor: "#18181b",
         },
         Card: {
-            borderRadius: 8,
-            // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
-            headerBg: '#f8f9fa',      // Header ka background grey ho jaayega
-            headerBorderColor: 'transparent', // Header ke niche ki border gayab!
+            // borderRadius: 8,
+            // // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+            // headerBg: '#f8f9fa',      // Header ka background grey ho jaayega
+            // headerBorderColor: 'transparent', // Header ke niche ki border gayab!
 
-            // Card level structural configurations
-            borderRadiusLG: 8,        // Border radius 8px
-            colorBorderSecondary: '#e5e7eb', // Card ki main border light grey
-            paddingSM: 12,
+            // // Card level structural configurations
+            // borderRadiusLG: 8,        // Border radius 8px
+            // colorBorderSecondary: '#e5e7eb', // Card ki main border light grey
+            // paddingSM: 12,
+
+
+            borderRadiusLG: 8,
+            headerBg: '#f4f4f5',
+            headerHeight: 48,
+            headerFontSize: 16,
+            headerFontSizeSM: 14,
+
+            colorBorderSecondary: '#e4e4e7',
+
+            bodyPadding: 16,
+            bodyPaddingSM: 12,
         },
         Button: {
             borderRadius: 6,

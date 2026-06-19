@@ -9,6 +9,7 @@ import { getTagConfig } from "../../utils/tagUtils";
 import DetailHeader from "../../components/common/DetailHeader";
 import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
+import ViewContainer from "../../components/common/ViewContainer";
 
 const UserView = ({ id, onBack, onEdit }) => {
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
@@ -90,115 +91,112 @@ const UserView = ({ id, onBack, onEdit }) => {
   const initials = `${doc.first_name?.charAt(0) || ""}${doc.last_name?.charAt(0) || ""}`.toUpperCase() || "U";
 
   return (
-    <div className="user-view-container min-h-screen py-6 bg-[#f8f9fa]" style={{ padding: '24px 40px' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <ViewContainer className="user-view-container">
+      {/* ── TOP HERO HEADER ── */}
+      <DetailHeader
+        onBack={onBack}
+        title={fullName}
+        subtitle={doc.email}
+        imageSrc={doc.user_image}
+        initials={initials}
+        tags={doc.custom_user_role ? [doc.custom_user_role] : []}
+        actions={
+          <>
+            <Button
+              onClick={() => window.print()}
+              className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+            >
+              Print
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => onEdit && onEdit(doc)}
+              className="px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+            >
+              Edit
+            </Button>
+          </>
+        }
+      />
+
+      {/* ── TWO COLUMN GRID WORKSURFACE ── */}
+      <Row gutter={[24, 24]}>
         
-        {/* ── TOP HERO HEADER ── */}
-        <DetailHeader
-          onBack={onBack}
-          title={fullName}
-          subtitle={doc.email}
-          imageSrc={doc.user_image}
-          initials={initials}
-          tags={doc.custom_user_role ? [doc.custom_user_role] : []}
-          actions={
-            <>
-              <Button
-                onClick={() => window.print()}
-                className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-              >
-                Print
-              </Button>
-              <Button
-                type="primary"
-                onClick={() => onEdit && onEdit(doc)}
-                className="px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
-              >
-                Edit
-              </Button>
-            </>
-          }
-        />
+        {/* Left Main View Columns */}
+        <Col xs={24} lg={17}>
+          <div className="flex flex-col gap-6">
+            <SectionCard title="Basic Information" icon={<User size={15} className="text-zinc-800" />}>
+              <Row gutter={[16, 16]}>
+                {visibleFields.map((field) => {
+                  const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
+                  return (
+                    <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
+                      <FieldCell label={field.label}>
+                        {renderValue(field, doc[field.name])}
+                      </FieldCell>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </SectionCard>
+          </div>
+        </Col>
 
-        {/* ── TWO COLUMN GRID WORKSURFACE ── */}
-        <Row gutter={[24, 24]}>
-          
-          {/* Left Main View Columns */}
-          <Col xs={24} lg={17}>
-            <div className="flex flex-col gap-6">
-              <SectionCard title="Basic Information" icon={<User size={15} className="text-zinc-800" />}>
-                <Row gutter={[16, 16]}>
-                  {visibleFields.map((field) => {
-                    const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
-                    return (
-                      <Col xs={24} sm={isFullWidth ? 24 : 12} key={field.name}>
-                        <FieldCell label={field.label}>
-                          {renderValue(field, doc[field.name])}
-                        </FieldCell>
-                      </Col>
-                    );
-                  })}
-                </Row>
-              </SectionCard>
-            </div>
-          </Col>
-
-          {/* Right Meta Parameters Panel */}
-          <Col xs={24} lg={7}>
-            <div className="sticky top-6 flex flex-col gap-6">
-              
-              {/* Role Matrix Status Card */}
-              <SectionCard title="Role & Access Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
-                <div className="flex flex-col gap-4 py-1">
-                  {[
-                    { label: "Account Status", value: (() => {
-                      const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
-                      return <Tag className={`tag-glass ${getTagConfig(statusVal).glassClass} !m-0`}>{statusVal}</Tag>;
-                    })() },
-                    { label: "Opening Balance", value: (
-                      <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1">
-                        <Wallet size={12} className="text-zinc-400" />
-                        ₹{doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00"}
-                      </span>
-                    ) }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
-                      <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
-                      {value}
-                    </div>
-                  ))}
-                </div>
-              </SectionCard>
-
-              {/* System Security Tracking Logs */}
-              <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
-                <div className="flex flex-col gap-3.5 py-1">
-                  {[
-                    { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100">{id}</span> },
-                    { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
-                    { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
-                    { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }
-                  ].map(({ label, value }) => (
-                    <div key={label} className="flex justify-between items-center gap-4">
-                      <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
-                      {value}
-                    </div>
-                  ))}
-                  
-                  <div className="w-full border-t border-zinc-100 pt-3 mt-1 text-center">
-                    <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5">
-                      <CheckCircle2 size={13} />
-                      Verified System Record
+        {/* Right Meta Parameters Panel */}
+        <Col xs={24} lg={7}>
+          <div className="sticky top-6 flex flex-col gap-6">
+            
+            {/* Role Matrix Status Card */}
+            <SectionCard title="Role & Access Meta" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
+              <div className="flex flex-col gap-4 py-1">
+                {[
+                  { label: "Account Status", value: (() => {
+                    const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
+                    return <Tag className={`tag-glass ${getTagConfig(statusVal).glassClass} !m-0`}>{statusVal}</Tag>;
+                  })() },
+                  { label: "Opening Balance", value: (
+                    <span className="text-xs font-semibold text-zinc-800 flex items-center gap-1">
+                      <Wallet size={12} className="text-zinc-400" />
+                      ₹{doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00"}
                     </span>
+                  ) }
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                    {value}
                   </div>
-                </div>
-              </SectionCard>
+                ))}
+              </div>
+            </SectionCard>
 
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </div>
+            {/* System Security Tracking Logs */}
+            <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
+              <div className="flex flex-col gap-3.5 py-1">
+                {[
+                  { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100">{id}</span> },
+                  { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
+                  { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
+                  { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex justify-between items-center gap-4">
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                    {value}
+                  </div>
+                ))}
+                
+                <div className="w-full border-t border-zinc-100 pt-3 mt-1 text-center">
+                  <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5">
+                    <CheckCircle2 size={13} />
+                    Verified System Record
+                  </span>
+                </div>
+              </div>
+            </SectionCard>
+
+          </div>
+        </Col>
+      </Row>
+    </ViewContainer>
   );
 };
 

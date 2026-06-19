@@ -1295,7 +1295,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React643 = require_react(), Internals = {
+        var React644 = require_react(), Internals = {
           d: {
             f: noop6,
             r: function() {
@@ -1313,7 +1313,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React643.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = Symbol.for("react.portal"), ReactSharedInternals = React644.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -3165,7 +3165,7 @@
           "number" === type5 && getActiveElement(node2.ownerDocument) === node2 || node2.defaultValue === "" + value || (node2.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React643.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React644.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -19003,14 +19003,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React643 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React644 = require_react(), ReactDOM = require_react_dom(), assign2 = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE2 = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE2 = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE2 = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = Symbol.for("react.activity");
         Symbol.for("react.legacy_hidden");
         Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel");
         Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React643.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React644.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21803,7 +21803,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React643.version;
+          var isomorphicReactPackageVersion = React644.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -23713,7 +23713,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         function useSyncExternalStore$2(subscribe, getSnapshot) {
-          didWarnOld18Alpha || void 0 === React643.startTransition || (didWarnOld18Alpha = true, console.error(
+          didWarnOld18Alpha || void 0 === React644.startTransition || (didWarnOld18Alpha = true, console.error(
             "You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."
           ));
           var value = getSnapshot();
@@ -23761,8 +23761,8 @@
           return getSnapshot();
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React643 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState138 = React643.useState, useEffect139 = React643.useEffect, useLayoutEffect13 = React643.useLayoutEffect, useDebugValue3 = React643.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-        exports.useSyncExternalStore = void 0 !== React643.useSyncExternalStore ? React643.useSyncExternalStore : shim;
+        var React644 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useState138 = React644.useState, useEffect139 = React644.useEffect, useLayoutEffect13 = React644.useLayoutEffect, useDebugValue3 = React644.useDebugValue, didWarnOld18Alpha = false, didWarnUncachedGetSnapshot = false, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+        exports.useSyncExternalStore = void 0 !== React644.useSyncExternalStore ? React644.useSyncExternalStore : shim;
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
       })();
     }
@@ -23789,7 +23789,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React643 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React643.useRef, useEffect139 = React643.useEffect, useMemo173 = React643.useMemo, useDebugValue3 = React643.useDebugValue;
+        var React644 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = shim.useSyncExternalStore, useRef177 = React644.useRef, useEffect139 = React644.useEffect, useMemo173 = React644.useMemo, useDebugValue3 = React644.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -24244,7 +24244,7 @@
           return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React643 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React643.useSyncExternalStore, useRef177 = React643.useRef, useEffect139 = React643.useEffect, useMemo173 = React643.useMemo, useDebugValue3 = React643.useDebugValue;
+        var React644 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is4, useSyncExternalStore2 = React644.useSyncExternalStore, useRef177 = React644.useRef, useEffect139 = React644.useEffect, useMemo173 = React644.useMemo, useDebugValue3 = React644.useDebugValue;
         exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual2) {
           var instRef = useRef177(null);
           if (null === instRef.current) {
@@ -25725,10 +25725,10 @@
   });
 
   // ../temple_donation/temple_donation/public/js/temple_donation/temple_donation.bundle.jsx
-  var import_react274 = __toESM(require_react());
+  var import_react275 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  var import_react273 = __toESM(require_react());
+  var import_react274 = __toESM(require_react());
 
   // ../temple_donation/node_modules/antd/es/_util/getReactMajorVersionCanDelMe.js
   var import_react = __toESM(require_react());
@@ -105286,12 +105286,14 @@ html body {
         horizontalItemHoverColor: "#18181b"
       },
       Card: {
-        borderRadius: 8,
-        headerBg: "#f8f9fa",
-        headerBorderColor: "transparent",
         borderRadiusLG: 8,
-        colorBorderSecondary: "#e5e7eb",
-        paddingSM: 12
+        headerBg: "#f4f4f5",
+        headerHeight: 48,
+        headerFontSize: 16,
+        headerFontSizeSM: 14,
+        colorBorderSecondary: "#e4e4e7",
+        bodyPadding: 16,
+        bodyPaddingSM: 12
       },
       Button: {
         borderRadius: 6,
@@ -105325,7 +105327,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/navigation.jsx
-  var import_react271 = __toESM(require_react());
+  var import_react272 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Dashboard/Dashboard.jsx
   var import_react220 = __toESM(require_react());
@@ -131722,7 +131724,7 @@ html body {
   var DonorList_default = DonorList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
-  var import_react242 = __toESM(require_react());
+  var import_react243 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/donorFormFields.js
   var donorFormFields = {
@@ -131945,20 +131947,32 @@ html body {
   };
   var FieldCell_default = FieldCell;
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ViewContainer.jsx
+  var import_react242 = __toESM(require_react());
+  var ViewContainer = ({ className, children }) => {
+    return /* @__PURE__ */ import_react242.default.createElement("div", {
+      className: `min-h-screen py-6 bg-[#f8f9fa] ${className || ""}`,
+      style: { padding: "24px 40px" }
+    }, /* @__PURE__ */ import_react242.default.createElement("div", {
+      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
+    }, children));
+  };
+  var ViewContainer_default = ViewContainer;
+
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorView.jsx
   var DonorView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
     if (loading)
-      return /* @__PURE__ */ import_react242.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react243.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react242.default.createElement("div", {
+      return /* @__PURE__ */ import_react243.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react242.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(alert_default, {
         message: "Could not load donor details",
         description: (error == null ? void 0 : error.message) || "Donor not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react242.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react243.default.createElement(button_default, {
           onClick: onBack,
           className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
         }, "Back")
@@ -131971,158 +131985,155 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react242.default.createElement("span", {
+        return /* @__PURE__ */ import_react243.default.createElement("span", {
           className: "text-zinc-300 font-medium"
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react242.default.createElement("img", {
+        return /* @__PURE__ */ import_react243.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react242.default.createElement("div", {
+        return /* @__PURE__ */ import_react243.default.createElement("div", {
           className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
         }, value);
-      return /* @__PURE__ */ import_react242.default.createElement("span", {
+      return /* @__PURE__ */ import_react243.default.createElement("span", {
         className: "text-zinc-800 font-semibold"
       }, String(value));
     };
     const title = doc.donor_name || doc.name;
     const initials = title.substring(0, 2).toUpperCase();
-    return /* @__PURE__ */ import_react242.default.createElement("div", {
-      className: "donor-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react242.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react242.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react243.default.createElement(ViewContainer_default, {
+      className: "donor-view-container"
+    }, /* @__PURE__ */ import_react243.default.createElement(DetailHeader_default, {
       onBack,
       title,
       subtitle: doc.email || doc.mobile_number || `Donor ID: ${id}`,
       initials,
       tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
-      actions: /* @__PURE__ */ import_react242.default.createElement(import_react242.default.Fragment, null, /* @__PURE__ */ import_react242.default.createElement(button_default, {
+      actions: /* @__PURE__ */ import_react243.default.createElement(import_react243.default.Fragment, null, /* @__PURE__ */ import_react243.default.createElement(button_default, {
         onClick: () => window.print(),
         className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print"), /* @__PURE__ */ import_react242.default.createElement(button_default, {
+      }, "Print"), /* @__PURE__ */ import_react243.default.createElement(button_default, {
         type: "primary",
         onClick: () => onEdit && onEdit(doc),
         className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
       }, "Edit"))
-    }), /* @__PURE__ */ import_react242.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react243.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react242.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react243.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react242.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react242.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
       title: "Basic Information",
-      icon: /* @__PURE__ */ import_react242.default.createElement(User, {
+      icon: /* @__PURE__ */ import_react243.default.createElement(User, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react242.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react243.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea";
-      return /* @__PURE__ */ import_react242.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react243.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react242.default.createElement(FieldCell_default, {
+      }, /* @__PURE__ */ import_react243.default.createElement(FieldCell_default, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))))), /* @__PURE__ */ import_react242.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react243.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react242.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react242.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
       title: "Status & Meta",
-      icon: /* @__PURE__ */ import_react242.default.createElement(ShieldAlert, {
+      icon: /* @__PURE__ */ import_react243.default.createElement(ShieldAlert, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react242.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "flex flex-col gap-4 py-1"
     }, [
       { label: "Account Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || "Active";
-        return /* @__PURE__ */ import_react242.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react243.default.createElement(tag_default, {
           className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
         }, statusVal);
       })() }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react242.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react243.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react242.default.createElement("span", {
+    }, /* @__PURE__ */ import_react243.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react242.default.createElement(SectionCard_default, {
+    }, label), value)))), /* @__PURE__ */ import_react243.default.createElement(SectionCard_default, {
       title: "System Logs",
-      icon: /* @__PURE__ */ import_react242.default.createElement(FileText, {
+      icon: /* @__PURE__ */ import_react243.default.createElement(FileText, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react242.default.createElement("div", {
+    }, /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "flex flex-col gap-3.5 py-1"
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react242.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react243.default.createElement("span", {
         className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100"
       }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react242.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react243.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react242.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react243.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react242.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react243.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react242.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react243.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react242.default.createElement("span", {
+    }, /* @__PURE__ */ import_react243.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react242.default.createElement("div", {
+    }, label), value)), /* @__PURE__ */ import_react243.default.createElement("div", {
       className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react242.default.createElement("span", {
+    }, /* @__PURE__ */ import_react243.default.createElement("span", {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react242.default.createElement(CircleCheck, {
+    }, /* @__PURE__ */ import_react243.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record")))))))));
+    }), "Verified System Record"))))))));
   };
   var DonorView_default = DonorView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donor/DonorForm.jsx
-  var import_react245 = __toESM(require_react());
+  var import_react246 = __toESM(require_react());
   var import_dayjs4 = __toESM(require_dayjs_min());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ActivityLog.jsx
-  var import_react243 = __toESM(require_react());
+  var import_react244 = __toESM(require_react());
   var { Text: Text12 } = typography_default;
   var { Panel: Panel4 } = collapse_default2;
   var ActivityLog = ({ doctype, docname }) => {
     const { data: versions, loading: versionLoading, fetchMore } = useFrappeGetVersions(doctype, docname);
     if (!docname)
       return null;
-    return /* @__PURE__ */ import_react243.default.createElement("div", {
+    return /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "bg-white mt-5"
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "flex items-center justify-between px-5 py-4 border-b bg-zinc-50"
-    }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+    }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
       strong: true,
       className: " tracking-widest text-[11px] text-zinc-500 flex items-center gap-2"
-    }, "Activity Timeline")), /* @__PURE__ */ import_react243.default.createElement("div", {
+    }, "Activity Timeline")), /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "px-4 py-4"
-    }, versionLoading ? /* @__PURE__ */ import_react243.default.createElement("div", {
+    }, versionLoading ? /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "py-16 flex justify-center"
-    }, /* @__PURE__ */ import_react243.default.createElement(spin_default, null)) : (versions == null ? void 0 : versions.length) ? /* @__PURE__ */ import_react243.default.createElement("div", {
+    }, /* @__PURE__ */ import_react244.default.createElement(spin_default, null)) : (versions == null ? void 0 : versions.length) ? /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "relative"
-    }, /* @__PURE__ */ import_react243.default.createElement("div", {
+    }, /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "absolute left-5 top-0 bottom-0 w-[1px] bg-zinc-200"
-    }), /* @__PURE__ */ import_react243.default.createElement("div", {
+    }), /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "space-y-6"
     }, versions.map((v) => {
       var _a, _b;
@@ -132132,76 +132143,76 @@ html body {
       } catch (e4) {
       }
       const changedFields = changes.changed || [];
-      return /* @__PURE__ */ import_react243.default.createElement("div", {
+      return /* @__PURE__ */ import_react244.default.createElement("div", {
         key: v.name,
         className: "relative flex gap-4"
-      }, /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "relative z-10"
-      }, /* @__PURE__ */ import_react243.default.createElement(avatar_default, {
+      }, /* @__PURE__ */ import_react244.default.createElement(avatar_default, {
         size: 40,
         className: "!bg-zinc-800 !text-white font-semibold shadow"
-      }, ((_b = (_a = v.owner) == null ? void 0 : _a.charAt(0)) == null ? void 0 : _b.toUpperCase()) || /* @__PURE__ */ import_react243.default.createElement(UserOutlined_default2, null))), /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, ((_b = (_a = v.owner) == null ? void 0 : _a.charAt(0)) == null ? void 0 : _b.toUpperCase()) || /* @__PURE__ */ import_react244.default.createElement(UserOutlined_default2, null))), /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "flex-1 min-w-0"
-      }, /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "flex flex-wrap items-center gap-2 mb-2"
-      }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+      }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
         strong: true,
         className: "text-zinc-800"
-      }, v.owner), /* @__PURE__ */ import_react243.default.createElement("span", {
+      }, v.owner), /* @__PURE__ */ import_react244.default.createElement("span", {
         className: "w-1 h-1 rounded-full bg-zinc-300"
-      }), /* @__PURE__ */ import_react243.default.createElement(Text12, {
+      }), /* @__PURE__ */ import_react244.default.createElement(Text12, {
         className: "text-xs text-zinc-400"
-      }, new Date(v.creation).toLocaleString())), /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, new Date(v.creation).toLocaleString())), /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "bg-zinc-50 border border-zinc-200 rounded-xl overflow-hidden"
-      }, changedFields.length ? /* @__PURE__ */ import_react243.default.createElement(collapse_default2, {
+      }, changedFields.length ? /* @__PURE__ */ import_react244.default.createElement(collapse_default2, {
         ghost: true,
         defaultActiveKey: ["1"],
         expandIconPosition: "end"
-      }, /* @__PURE__ */ import_react243.default.createElement(Panel4, {
-        header: /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement(Panel4, {
+        header: /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "flex items-center gap-2"
-        }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+        }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
           className: "text-sm font-medium"
         }, changedFields.length, " field", changedFields.length > 1 ? "s" : "", " ", "updated")),
         key: "1"
-      }, /* @__PURE__ */ import_react243.default.createElement("div", {
+      }, /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "space-y-3"
       }, changedFields.map(
-        ([field, oldVal, newVal]) => /* @__PURE__ */ import_react243.default.createElement("div", {
+        ([field, oldVal, newVal]) => /* @__PURE__ */ import_react244.default.createElement("div", {
           key: field,
           className: "bg-white border border-zinc-100 rounded-lg p-3"
-        }, /* @__PURE__ */ import_react243.default.createElement("div", {
+        }, /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "mb-2"
-        }, /* @__PURE__ */ import_react243.default.createElement("span", {
+        }, /* @__PURE__ */ import_react244.default.createElement("span", {
           className: "inline-flex px-2 py-1 rounded-md bg-zinc-100 text-zinc-600 text-[11px] capitalize font-medium"
-        }, field.replace(/_/g, " "))), /* @__PURE__ */ import_react243.default.createElement("div", {
+        }, field.replace(/_/g, " "))), /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "flex gap-2"
-        }, /* @__PURE__ */ import_react243.default.createElement("div", {
+        }, /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "break-all"
-        }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+        }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
           delete: true,
           className: "text-red-400 text-xs"
-        }, oldVal || "Empty")), /* @__PURE__ */ import_react243.default.createElement("div", {
+        }, oldVal || "Empty")), /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "text-zinc-300"
-        }, /* @__PURE__ */ import_react243.default.createElement(ArrowRightOutlined_default2, null)), /* @__PURE__ */ import_react243.default.createElement("div", {
+        }, /* @__PURE__ */ import_react244.default.createElement(ArrowRightOutlined_default2, null)), /* @__PURE__ */ import_react244.default.createElement("div", {
           className: "break-all"
-        }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+        }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
           className: "text-green-600 text-xs font-medium"
         }, newVal || "Empty"))))
-      )))) : /* @__PURE__ */ import_react243.default.createElement("div", {
+      )))) : /* @__PURE__ */ import_react244.default.createElement("div", {
         className: "px-4 py-3"
-      }, /* @__PURE__ */ import_react243.default.createElement(Text12, {
+      }, /* @__PURE__ */ import_react244.default.createElement(Text12, {
         type: "secondary",
         className: "italic text-xs"
       }, "Document modified")))));
-    }))) : /* @__PURE__ */ import_react243.default.createElement("div", {
+    }))) : /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "py-14"
-    }, /* @__PURE__ */ import_react243.default.createElement(empty_default2, {
+    }, /* @__PURE__ */ import_react244.default.createElement(empty_default2, {
       description: "No activity found",
       image: empty_default2.PRESENTED_IMAGE_SIMPLE
-    })), (versions == null ? void 0 : versions.length) >= 5 && /* @__PURE__ */ import_react243.default.createElement("div", {
+    })), (versions == null ? void 0 : versions.length) >= 5 && /* @__PURE__ */ import_react244.default.createElement("div", {
       className: "flex justify-center mt-8"
-    }, /* @__PURE__ */ import_react243.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
       onClick: () => fetchMore == null ? void 0 : fetchMore(),
       loading: versionLoading
     }, "Load More"))));
@@ -132209,7 +132220,7 @@ html body {
   var ActivityLog_default = ActivityLog;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/FormFooter.jsx
-  var import_react244 = __toESM(require_react());
+  var import_react245 = __toESM(require_react());
   var FormFooter = ({
     onCancel,
     loading = false,
@@ -132266,19 +132277,19 @@ html body {
       gap: "8px",
       boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
     };
-    return /* @__PURE__ */ import_react244.default.createElement("div", {
+    return /* @__PURE__ */ import_react245.default.createElement("div", {
       style: footerStyle
-    }, /* @__PURE__ */ import_react244.default.createElement("div", {
+    }, /* @__PURE__ */ import_react245.default.createElement("div", {
       style: innerStyle
-    }, /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    }, /* @__PURE__ */ import_react245.default.createElement(button_default, {
       onClick: onCancel,
       style: cancelButtonStyle
-    }, cancelText), /* @__PURE__ */ import_react244.default.createElement(button_default, {
+    }, cancelText), /* @__PURE__ */ import_react245.default.createElement(button_default, {
       type: "primary",
       htmlType: onSubmit ? "button" : "submit",
       onClick: onSubmit,
       loading,
-      icon: /* @__PURE__ */ import_react244.default.createElement(SaveOutlined_default2, null),
+      icon: /* @__PURE__ */ import_react245.default.createElement(SaveOutlined_default2, null),
       style: saveButtonStyle
     }, saveText || (isEdit ? "Update" : "Save"))));
   };
@@ -132292,7 +132303,7 @@ html body {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONOR, id);
-    (0, import_react245.useEffect)(() => {
+    (0, import_react246.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, data), {
           date_of_birth: data.date_of_birth ? (0, import_dayjs4.default)(data.date_of_birth) : null,
@@ -132325,256 +132336,237 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react245.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react246.default.createElement(PageLoader_default, null);
     if (error)
-      return /* @__PURE__ */ import_react245.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react246.default.createElement(alert_default, {
         message: "Error loading donor",
         type: "error",
-        action: /* @__PURE__ */ import_react245.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react246.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     const formItemStyle = { marginBottom: "12px" };
-    const commonCardProps = {
-      size: "small",
-      className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-      style: {
-        height: "auto",
-        background: "#fafafa"
-      },
-      headStyle: {
-        background: "#f4f4f5",
-        borderBottom: "1px solid #e4e4e7",
-        paddingTop: "8px",
-        paddingBottom: "8px"
-      },
-      bodyStyle: {
-        background: "#ffffff",
-        padding: "16px"
-      }
-    };
-    return /* @__PURE__ */ import_react245.default.createElement("div", {
-      className: "donation-page py-6",
-      style: { maxWidth: "1400px", margin: "0 auto", padding: "0 16px" }
-    }, /* @__PURE__ */ import_react245.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react246.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react246.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donor" : "Add Donor",
       subtitle: "Donor Management",
       showBack: true
-    }), /* @__PURE__ */ import_react245.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react246.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
       requiredMark: false,
       size: "middle"
-    }, /* @__PURE__ */ import_react245.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(row_default2, {
       gutter: [24, 16]
-    }, /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       lg: 12
-    }, /* @__PURE__ */ import_react245.default.createElement("div", {
+    }, /* @__PURE__ */ import_react246.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "16px" }
-    }, /* @__PURE__ */ import_react245.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react245.default.createElement(space_default, null, /* @__PURE__ */ import_react245.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react246.default.createElement(space_default, null, /* @__PURE__ */ import_react246.default.createElement(UserOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react245.default.createElement("span", {
+      }), /* @__PURE__ */ import_react246.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Profile Information"))
-    }), /* @__PURE__ */ import_react245.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "donor_name",
       label: "Full Name",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(UserOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Donor Full Name"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "mobile_number",
       label: "Contact No",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }, { pattern: /^\d{10}$/, message: "Invalid number" }]
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
       maxLength: 10,
-      prefix: /* @__PURE__ */ import_react245.default.createElement(PhoneOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(PhoneOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Mobile Number"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "email",
       label: "Email",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(MailOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(MailOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "email@example.com"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "pan_card",
       label: "PAN Card",
       style: formItemStyle,
       rules: [{ pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }]
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(IdcardOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(IdcardOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "ABCDE1234F"
-    }))))), /* @__PURE__ */ import_react245.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react245.default.createElement(space_default, null, /* @__PURE__ */ import_react245.default.createElement(HeartOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react246.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react246.default.createElement(space_default, null, /* @__PURE__ */ import_react246.default.createElement(HeartOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react245.default.createElement("span", {
+      }), /* @__PURE__ */ import_react246.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Personal Details"))
-    }), /* @__PURE__ */ import_react245.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "date_of_birth",
       label: "Date of Birth",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react246.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "marital_status",
       label: "Marital Status",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react246.default.createElement(select_default, {
       style: { width: "100%" },
       options: [{ label: "Unmarried", value: "Unmarried" }, { label: "Married", value: "Married" }]
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "anniversary_date",
       label: "Anniversary Date",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react246.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))))))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))))))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       lg: 12
-    }, /* @__PURE__ */ import_react245.default.createElement("div", {
+    }, /* @__PURE__ */ import_react246.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "16px" }
-    }, /* @__PURE__ */ import_react245.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react245.default.createElement(space_default, null, /* @__PURE__ */ import_react245.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react246.default.createElement(space_default, null, /* @__PURE__ */ import_react246.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react245.default.createElement("span", {
+      }), /* @__PURE__ */ import_react246.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Address & Native Origin"))
-    }), /* @__PURE__ */ import_react245.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "address",
       label: "Address Line 1",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(HomeOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(HomeOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Flat / House No, Building"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "address_line_2",
       label: "Address Line 2",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Street, Locality"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "country",
       label: "Country",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(GlobalOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(GlobalOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Country"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "state",
       label: "State",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "State"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "city",
       label: "City",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "City"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Pincode",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(PushpinOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(PushpinOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Postal Code"
-    }))), /* @__PURE__ */ import_react245.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react246.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react245.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react246.default.createElement(form_default.Item, {
       name: "native_place",
       label: "Native Place",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react245.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react245.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react246.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react246.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Native Place / Town"
-    })))))))), /* @__PURE__ */ import_react245.default.createElement("div", {
+    })))))))), /* @__PURE__ */ import_react246.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react245.default.createElement(FormFooter_default, {
+    }, /* @__PURE__ */ import_react246.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: creating || updating,
       isEdit
-    }))), isEdit && /* @__PURE__ */ import_react245.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react246.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONOR,
       docname: id
     }));
@@ -132582,17 +132574,17 @@ html body {
   var DonorForm_default = DonorForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
-  var import_react247 = __toESM(require_react());
+  var import_react248 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/templeTable.jsx
-  var import_react246 = __toESM(require_react());
+  var import_react247 = __toESM(require_react());
   var { Text: Text14 } = typography_default;
   var templeColumns = [
     {
       title: "Temple Name",
       dataIndex: "temple_name",
       key: "temple_name",
-      render: (text) => /* @__PURE__ */ import_react246.default.createElement(Text14, {
+      render: (text) => /* @__PURE__ */ import_react247.default.createElement(Text14, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.temple_name || "").localeCompare(b.temple_name || ""),
@@ -132624,7 +132616,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleList.jsx
   var TempleList = () => {
-    return /* @__PURE__ */ import_react247.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react248.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_TEMPLE,
       title: "Temple Management",
       description: "View, add, edit or delete temple records",
@@ -132636,7 +132628,7 @@ html body {
   var TempleList_default = TempleList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleView.jsx
-  var import_react248 = __toESM(require_react());
+  var import_react249 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/templeFormFields.js
   var templeFormFields = {
@@ -132716,16 +132708,16 @@ html body {
   var TempleView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_TEMPLE, id);
     if (loading)
-      return /* @__PURE__ */ import_react248.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react249.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react248.default.createElement("div", {
+      return /* @__PURE__ */ import_react249.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react248.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react249.default.createElement(alert_default, {
         message: "Could not load temple details",
         description: (error == null ? void 0 : error.message) || "Temple not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react248.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react249.default.createElement(button_default, {
           onClick: onBack,
           className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
         }, "Back")
@@ -132738,138 +132730,135 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react248.default.createElement("span", {
+        return /* @__PURE__ */ import_react249.default.createElement("span", {
           className: "text-zinc-300 font-medium"
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react248.default.createElement("img", {
+        return /* @__PURE__ */ import_react249.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react248.default.createElement("div", {
+        return /* @__PURE__ */ import_react249.default.createElement("div", {
           className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
         }, value);
-      return /* @__PURE__ */ import_react248.default.createElement("span", {
+      return /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "text-zinc-800 font-semibold"
       }, String(value));
     };
     const title = doc.temple_name || doc.name;
     const initials = title.substring(0, 2).toUpperCase();
-    return /* @__PURE__ */ import_react248.default.createElement("div", {
-      className: "temple-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react248.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react249.default.createElement(ViewContainer_default, {
+      className: "temple-view-container"
+    }, /* @__PURE__ */ import_react249.default.createElement(DetailHeader_default, {
       onBack,
       title,
       subtitle: `Temple ID: ${doc.temple_id || id}`,
       initials,
       tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
-      actions: /* @__PURE__ */ import_react248.default.createElement(import_react248.default.Fragment, null, /* @__PURE__ */ import_react248.default.createElement(button_default, {
+      actions: /* @__PURE__ */ import_react249.default.createElement(import_react249.default.Fragment, null, /* @__PURE__ */ import_react249.default.createElement(button_default, {
         onClick: () => window.print(),
         className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print"), /* @__PURE__ */ import_react248.default.createElement(button_default, {
+      }, "Print"), /* @__PURE__ */ import_react249.default.createElement(button_default, {
         type: "primary",
         onClick: () => onEdit && onEdit(doc),
         className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
       }, "Edit"))
-    }), /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react249.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react248.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(SectionCard_default, {
       title: "Basic Information",
-      icon: /* @__PURE__ */ import_react248.default.createElement(User, {
+      icon: /* @__PURE__ */ import_react249.default.createElement(User, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react248.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react249.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea";
-      return /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react249.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react248.default.createElement(FieldCell_default, {
+      }, /* @__PURE__ */ import_react249.default.createElement(FieldCell_default, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))))), /* @__PURE__ */ import_react248.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react248.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react249.default.createElement(SectionCard_default, {
       title: "Status & Meta",
-      icon: /* @__PURE__ */ import_react248.default.createElement(ShieldAlert, {
+      icon: /* @__PURE__ */ import_react249.default.createElement(ShieldAlert, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col gap-4 py-1"
     }, [
       { label: "Account Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || "Active";
-        return /* @__PURE__ */ import_react248.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react249.default.createElement(tag_default, {
           className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
         }, statusVal);
       })() }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react248.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react249.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react248.default.createElement("span", {
+    }, /* @__PURE__ */ import_react249.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react248.default.createElement(SectionCard_default, {
+    }, label), value)))), /* @__PURE__ */ import_react249.default.createElement(SectionCard_default, {
       title: "System Logs",
-      icon: /* @__PURE__ */ import_react248.default.createElement(FileText, {
+      icon: /* @__PURE__ */ import_react249.default.createElement(FileText, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "flex flex-col gap-3.5 py-1"
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react248.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100"
       }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react248.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react248.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react248.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react249.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react248.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react249.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react248.default.createElement("span", {
+    }, /* @__PURE__ */ import_react249.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react248.default.createElement("div", {
+    }, label), value)), /* @__PURE__ */ import_react249.default.createElement("div", {
       className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react248.default.createElement("span", {
+    }, /* @__PURE__ */ import_react249.default.createElement("span", {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react248.default.createElement(CircleCheck, {
+    }, /* @__PURE__ */ import_react249.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record")))))))));
+    }), "Verified System Record"))))))));
   };
   var TempleView_default = TempleView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Temple/TempleForm.jsx
-  var import_react249 = __toESM(require_react());
+  var import_react250 = __toESM(require_react());
   var { Text: Text15 } = typography_default;
   var TempleForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = form_default.useForm();
-    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react249.useState)([]);
-    const [searchQuery, setSearchQuery] = (0, import_react249.useState)("");
+    const [selectedDonationTypes, setSelectedDonationTypes] = (0, import_react250.useState)([]);
+    const [searchQuery, setSearchQuery] = (0, import_react250.useState)("");
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_TEMPLE, id);
@@ -132879,7 +132868,7 @@ html body {
     const templeName = form_default.useWatch("temple_name", form) || "";
     const templeId = form_default.useWatch("temple_id", form) || "";
     const initials = templeName ? templeName.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2) : "T";
-    (0, import_react249.useEffect)(() => {
+    (0, import_react250.useEffect)(() => {
       if (isEdit && data) {
         form.setFieldsValue(data);
         if (data.donation_types && Array.isArray(data.donation_types) && data.donation_types.length > 0) {
@@ -132931,61 +132920,43 @@ html body {
       }
     };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react249.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react250.default.createElement(PageLoader_default, null);
     if (isEdit && error)
-      return /* @__PURE__ */ import_react249.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react250.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error"
       });
     const formItemStyle = { marginBottom: "14px" };
-    const commonCardProps = {
-      size: "small",
-      className: "shadow-sm border border-zinc-200 overflow-hidden",
-      style: {
-        background: "#ffffff",
-        marginBottom: "0px"
-      },
-      headStyle: {
-        background: "#f4f4f5",
-        borderBottom: "1px solid #e4e4e7",
-        paddingTop: "10px",
-        paddingBottom: "10px"
-      },
-      bodyStyle: {
-        padding: "16px"
-      }
-    };
-    return /* @__PURE__ */ import_react249.default.createElement("div", {
-      className: "donation-page py-4",
-      style: { maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }
-    }, /* @__PURE__ */ import_react249.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react250.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react250.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Temple" : "Add Temple",
       subtitle: "Temple Management Portal",
       showBack: true
-    }), /* @__PURE__ */ import_react249.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react250.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave,
       requiredMark: false,
       size: "middle"
-    }, /* @__PURE__ */ import_react249.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(row_default2, {
       gutter: [20, 20]
-    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       md: 12,
       lg: 14
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "20px" }
-    }, /* @__PURE__ */ import_react249.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react249.default.createElement(space_default, null, /* @__PURE__ */ import_react249.default.createElement(BankOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react250.default.createElement(space_default, null, /* @__PURE__ */ import_react250.default.createElement(BankOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react249.default.createElement("span", {
+      }), /* @__PURE__ */ import_react250.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Temple Profile"))
-    }), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { display: "flex", alignItems: "center", gap: 16, padding: "4px 0" }
-    }, /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react250.default.createElement(avatar_default, {
       size: 64,
       style: {
         fontSize: 22,
@@ -132995,177 +132966,176 @@ html body {
         color: "#fff",
         flexShrink: 0
       }
-    }, initials), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, initials), /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { flexGrow: 1, minWidth: 0 }
-    }, /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { fontSize: "15px", fontWeight: 600, color: "#18181b", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
-    }, templeName || "Temple Identity"), templeId && /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, templeName || "Temple Identity"), templeId && /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { fontSize: "11px", color: "#71717a", marginTop: 2, fontWeight: 500 }
-    }, "System ID: ", templeId), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, "System ID: ", templeId), /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { marginTop: 6 }
-    }, /* @__PURE__ */ import_react249.default.createElement("span", {
+    }, /* @__PURE__ */ import_react250.default.createElement("span", {
       style: { fontSize: "10px", color: "#18181b", backgroundColor: "#f4f4f5", padding: "3px 8px", borderRadius: "4px", fontWeight: 600 }
-    }, selectedDonationTypes.length, " Selected"))))), /* @__PURE__ */ import_react249.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react249.default.createElement(space_default, null, /* @__PURE__ */ import_react249.default.createElement(InfoCircleOutlined_default2, {
+    }, selectedDonationTypes.length, " Selected"))))), /* @__PURE__ */ import_react250.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react250.default.createElement(space_default, null, /* @__PURE__ */ import_react250.default.createElement(InfoCircleOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react249.default.createElement("span", {
+      }), /* @__PURE__ */ import_react250.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Primary Details"))
-    }), /* @__PURE__ */ import_react249.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(row_default2, {
       gutter: [12, 0]
-    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "temple_name",
       label: "Temple Name",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(BankOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(BankOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Full Temple Name"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "temple_id",
       label: "Temple ID",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(InfoCircleOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(InfoCircleOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Unique Identifier"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "trust_registration_no",
       label: "Trust Registration No.",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(FileTextOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(FileTextOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Trust Registration Number"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "note",
       label: "Internal Notes",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(FileTextOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(FileTextOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Optional verification details"
-    }))))), /* @__PURE__ */ import_react249.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react249.default.createElement(space_default, null, /* @__PURE__ */ import_react249.default.createElement(EnvironmentOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react250.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react250.default.createElement(space_default, null, /* @__PURE__ */ import_react250.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react249.default.createElement("span", {
+      }), /* @__PURE__ */ import_react250.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Location Details"))
-    }), /* @__PURE__ */ import_react249.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(row_default2, {
       gutter: [12, 0]
-    }, /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "temple_address",
       label: "Street Address",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(HomeOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(HomeOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Full Physical Location Address"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "country",
       label: "Country",
       style: formItemStyle,
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(GlobalOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(GlobalOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "India"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "state",
       label: "State",
       style: formItemStyle,
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "State"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "city",
       label: "City",
       style: formItemStyle,
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(EnvironmentOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "City"
-    }))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react249.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react250.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Postal Pin Code",
       style: { marginBottom: "4px" },
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react249.default.createElement(PushpinOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(PushpinOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "6-Digit Postal Code"
-    }))))))), /* @__PURE__ */ import_react249.default.createElement(col_default2, {
+    }))))))), /* @__PURE__ */ import_react250.default.createElement(col_default2, {
       xs: 24,
       md: 12,
       lg: 10
-    }, /* @__PURE__ */ import_react249.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      style: __spreadProps(__spreadValues({}, commonCardProps.style), { height: "auto" }),
-      title: /* @__PURE__ */ import_react249.default.createElement(space_default, null, /* @__PURE__ */ import_react249.default.createElement(AppstoreOutlined_default2, {
+    }, /* @__PURE__ */ import_react250.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react250.default.createElement(space_default, null, /* @__PURE__ */ import_react250.default.createElement(AppstoreOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react249.default.createElement("span", {
+      }), /* @__PURE__ */ import_react250.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donation Types Matrix")),
-      extra: filteredDonationTypes.length > 0 && /* @__PURE__ */ import_react249.default.createElement(space_default, {
+      extra: filteredDonationTypes.length > 0 && /* @__PURE__ */ import_react250.default.createElement(space_default, {
         size: 6
-      }, /* @__PURE__ */ import_react249.default.createElement("span", {
+      }, /* @__PURE__ */ import_react250.default.createElement("span", {
         style: { fontSize: "11px", fontWeight: 700, color: "#52525b", letterSpacing: "0.02em" }
-      }, "SELECT ALL"), /* @__PURE__ */ import_react249.default.createElement(switch_default, {
+      }, "SELECT ALL"), /* @__PURE__ */ import_react250.default.createElement(switch_default, {
         size: "small",
         checked: allSelected,
         onChange: handleSelectAllChange,
         className: allSelected ? "bg-zinc-800" : "bg-zinc-200"
       }))
-    }), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }, /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { marginBottom: "12px" }
-    }, /* @__PURE__ */ import_react249.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react250.default.createElement(input_default, {
       placeholder: "Filter by category title...",
-      prefix: /* @__PURE__ */ import_react249.default.createElement(SearchOutlined_default2, {
+      prefix: /* @__PURE__ */ import_react250.default.createElement(SearchOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       value: searchQuery,
       onChange: (e4) => setSearchQuery(e4.target.value),
       allowClear: true,
       style: { borderRadius: "6px" }
-    })), /* @__PURE__ */ import_react249.default.createElement("div", {
+    })), /* @__PURE__ */ import_react250.default.createElement("div", {
       style: {
         maxHeight: "580px",
         overflowY: "auto",
@@ -133173,25 +133143,25 @@ html body {
         borderRadius: "8px",
         padding: "6px 10px"
       }
-    }, /* @__PURE__ */ import_react249.default.createElement(list_default, {
+    }, /* @__PURE__ */ import_react250.default.createElement(list_default, {
       dataSource: filteredDonationTypes,
       locale: { emptyText: "No specific categories matched" },
       renderItem: (item) => {
         var _a;
         const active = selectedDonationTypes.includes(item.name);
-        return /* @__PURE__ */ import_react249.default.createElement(list_default.Item, {
+        return /* @__PURE__ */ import_react250.default.createElement(list_default.Item, {
           className: "px-2 py-2 rounded-md my-0.5 hover:bg-zinc-50 transition-all",
           style: { borderBottom: "1px solid #f4f4f5" },
           actions: [
-            /* @__PURE__ */ import_react249.default.createElement(switch_default, {
+            /* @__PURE__ */ import_react250.default.createElement(switch_default, {
               size: "small",
               checked: active,
               onChange: () => toggleDonationType(item.name),
               className: active ? "bg-zinc-800" : "bg-zinc-200"
             })
           ]
-        }, /* @__PURE__ */ import_react249.default.createElement(list_default.Item.Meta, {
-          avatar: /* @__PURE__ */ import_react249.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react250.default.createElement(list_default.Item.Meta, {
+          avatar: /* @__PURE__ */ import_react250.default.createElement(avatar_default, {
             src: item.donation_image,
             shape: "square",
             size: 36,
@@ -133203,20 +133173,20 @@ html body {
               borderRadius: "4px"
             }
           }, (_a = item.donation_type) == null ? void 0 : _a.charAt(0)),
-          title: /* @__PURE__ */ import_react249.default.createElement(Text15, {
+          title: /* @__PURE__ */ import_react250.default.createElement(Text15, {
             strong: true,
             style: { color: "#27272a", fontSize: "13px" }
           }, item.donation_type)
         }));
       }
-    }))))), /* @__PURE__ */ import_react249.default.createElement("div", {
+    }))))), /* @__PURE__ */ import_react250.default.createElement("div", {
       style: { marginTop: "20px" }
-    }, /* @__PURE__ */ import_react249.default.createElement(FormFooter_default, {
+    }, /* @__PURE__ */ import_react250.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: creating || updating,
       isEdit,
       saveText: isEdit ? "Update Temple" : "Add Temple"
-    }))), isEdit && /* @__PURE__ */ import_react249.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react250.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_TEMPLE,
       docname: id
     }));
@@ -133224,17 +133194,17 @@ html body {
   var TempleForm_default = TempleForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
-  var import_react251 = __toESM(require_react());
+  var import_react252 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTable.jsx
-  var import_react250 = __toESM(require_react());
+  var import_react251 = __toESM(require_react());
   var { Text: Text16 } = typography_default;
   var donationColumns = [
     {
       title: "Donor",
       dataIndex: "donor_name",
       key: "donor_name",
-      render: (text) => /* @__PURE__ */ import_react250.default.createElement(Text16, {
+      render: (text) => /* @__PURE__ */ import_react251.default.createElement(Text16, {
         strong: true
       }, text),
       filterable: true,
@@ -133244,7 +133214,7 @@ html body {
       title: "Temple",
       dataIndex: "temple",
       key: "temple",
-      render: (_2, record) => /* @__PURE__ */ import_react250.default.createElement(Text16, null, record["temple.temple_name"] || record.temple_name),
+      render: (_2, record) => /* @__PURE__ */ import_react251.default.createElement(Text16, null, record["temple.temple_name"] || record.temple_name),
       filterable: true,
       filterType: "text"
     },
@@ -133252,7 +133222,7 @@ html body {
       title: "Amount",
       dataIndex: "total_amount",
       key: "total_amount",
-      render: (val) => /* @__PURE__ */ import_react250.default.createElement(Text16, {
+      render: (val) => /* @__PURE__ */ import_react251.default.createElement(Text16, {
         type: "success",
         strong: true
       }, "\u20B9", Number(val || 0).toLocaleString()),
@@ -133264,7 +133234,7 @@ html body {
       title: "Payment Mode",
       dataIndex: "payment_mode",
       key: "payment_mode",
-      render: (mode) => /* @__PURE__ */ import_react250.default.createElement(tag_default, {
+      render: (mode) => /* @__PURE__ */ import_react251.default.createElement(tag_default, {
         className: `tag-glass tag-glass-${mode === "Cash" ? "green" : "blue"}`,
         color: mode === "Cash" ? "green" : "blue"
       }, mode),
@@ -133282,7 +133252,7 @@ html body {
       title: "Receiver",
       dataIndex: "cashier",
       key: "cashier",
-      render: (text) => /* @__PURE__ */ import_react250.default.createElement(Text16, null, text),
+      render: (text) => /* @__PURE__ */ import_react251.default.createElement(Text16, null, text),
       filterable: true,
       filterType: "text"
     }
@@ -133290,7 +133260,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationList.jsx
   var DonationList = () => {
-    return /* @__PURE__ */ import_react251.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react252.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION,
       title: "Donation Records",
       description: "View and track all donation transactions",
@@ -133302,7 +133272,7 @@ html body {
   var DonationList_default = DonationList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationView.jsx
-  var import_react253 = __toESM(require_react());
+  var import_react254 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/donationFormFields.js
   var donationFormFields = {
@@ -133334,7 +133304,7 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/Donation/DonationPrint.jsx
-  var import_react252 = __toESM(require_react());
+  var import_react253 = __toESM(require_react());
   var DonationPrint = ({ donation }) => {
     if (!donation)
       return null;
@@ -133344,59 +133314,59 @@ html body {
       const date5 = new Date(dateStr);
       return `${date5.getDate().toString().padStart(2, "0")}-${(date5.getMonth() + 1).toString().padStart(2, "0")}-${date5.getFullYear()}`;
     };
-    return /* @__PURE__ */ import_react252.default.createElement("div", {
+    return /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "print-only donation-receipt-container"
-    }, /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "receipt-mantra"
-    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0965 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0ACB \u0AB5\u0ABF\u0A9C\u0AAF\u0AA4\u0AC7\u0AA4\u0AB0\u0ABE\u0AAE\u0ACD \u0965"), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "receipt-no-box"
-    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "Receipt No. ", donation.name), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "temple-header"
-    }, /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "temple-name"
-    }, donation.temple), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, donation.temple), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "trust-no"
-    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0A9F\u0ACD\u0AB0\u0AB8\u0ACD\u0A9F \u0AB0\u0A9C\u0AC0. \u0AA8\u0A82. ", donation.trust_registration_no || "A/1493120"), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "temple-description"
-    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AB8\u0A82\u0AAA\u0ACD\u0AB0\u0AA6\u0ABE\u0AAF\u0AA8\u0ABE \u0AB8\u0A82\u0AB8\u0ACD\u0AA5\u0ABE\u0AA8 \u0A85\u0AAE\u0AA6\u0ABE\u0AB5\u0ABE\u0AA6 \u0AB6\u0ACD\u0AB0\u0AC0 \u0AA8\u0AB0\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3\u0AA6\u0AC7\u0AB5\u0AA8\u0AC0 \u0A97\u0ABE\u0AA6\u0AC0\u0AA8\u0ABE \u0AAA.\u0AAA\u0AC2.\u0AA7\u0AB0\u0ACD\u0AAE\u0AA7\u0AC1\u0AB0\u0A82\u0AA7\u0AB0 \u0AE7\u0AE6\u0AE6\u0AEE \u0AB6\u0ACD\u0AB0\u0AC0 \u0A95\u0ACC\u0AB6\u0AB2\u0AC7\u0AA8\u0ACD\u0AA6\u0ACD\u0AB0\u0AAA\u0ACD\u0AB0\u0AB8\u0ABE\u0AA6\u0A9C\u0AC0 \u0AAE\u0AB9\u0ABE\u0AB0\u0ABE\u0A9C\u0AB6\u0ACD\u0AB0\u0AC0\u0AA8\u0ABE \u0AA4\u0ABE\u0AAC\u0ABE\u0AA8\u0ABE \u0AB6\u0ACD\u0AB0\u0AC0 \u0AB8\u0ACD\u0AB5\u0ABE\u0AAE\u0ABF\u0AA8\u0ABE\u0AB0\u0ABE\u0AAF\u0AA3 \u0AAE\u0A82\u0AA6\u0ABF\u0AB0, ", donation.temple || "Kalupur", " - \u0AE7 \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0 \u0A86 \u0AA6\u0ABE\u0A96\u0AB2\u0ACB \u0A86\u0AAA\u0AB5\u0ABE\u0AAE\u0ABE\u0A82 \u0A86\u0AB5\u0AC7 \u0A9B\u0AC7 \u0A95\u0AC7:")), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "donor-info-bar"
-    }, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0"), /* @__PURE__ */ import_react252.default.createElement("table", {
+    }, "\u0AB6\u0ACD\u0AB0\u0AC0 ", donation.donor_name, ", \u0A97\u0ABE\u0AAE ", donation.city || "-", ", ", donation.state || "-", " \u0AA4\u0AB0\u0AAB\u0AA5\u0AC0"), /* @__PURE__ */ import_react253.default.createElement("table", {
       className: "receipt-table"
-    }, /* @__PURE__ */ import_react252.default.createElement("thead", null, /* @__PURE__ */ import_react252.default.createElement("tr", null, /* @__PURE__ */ import_react252.default.createElement("th", {
+    }, /* @__PURE__ */ import_react253.default.createElement("thead", null, /* @__PURE__ */ import_react253.default.createElement("tr", null, /* @__PURE__ */ import_react253.default.createElement("th", {
       style: { textAlign: "center" }
-    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react252.default.createElement("th", {
+    }, "\u0AAC\u0ABE\u0AAC\u0AA4"), /* @__PURE__ */ import_react253.default.createElement("th", {
       style: { textAlign: "center", width: "200px" }
-    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react252.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react252.default.createElement("tr", {
+    }, "\u0AB0\u0A95\u0AAE"))), /* @__PURE__ */ import_react253.default.createElement("tbody", null, (donation.donation_items || []).map((item, idx) => /* @__PURE__ */ import_react253.default.createElement("tr", {
       key: idx
-    }, /* @__PURE__ */ import_react252.default.createElement("td", null, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react252.default.createElement("td", {
+    }, /* @__PURE__ */ import_react253.default.createElement("td", null, item.donation_type_name || item.donation_type), /* @__PURE__ */ import_react253.default.createElement("td", {
       style: { textAlign: "right", fontWeight: "bold" }
-    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react252.default.createElement("tr", {
+    }, "\u20B9", Number(item.amount).toFixed(2)))), /* @__PURE__ */ import_react253.default.createElement("tr", {
       className: "total-row"
-    }, /* @__PURE__ */ import_react252.default.createElement("td", null, "Total Amount (\u0A95\u0AC1\u0AB2 \u0AB0\u0A95\u0AAE)"), /* @__PURE__ */ import_react252.default.createElement("td", {
+    }, /* @__PURE__ */ import_react253.default.createElement("td", null, "Total Amount (\u0A95\u0AC1\u0AB2 \u0AB0\u0A95\u0AAE)"), /* @__PURE__ */ import_react253.default.createElement("td", {
       style: { textAlign: "right" }
-    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u20B9", Number(donation.total_amount).toFixed(2))))), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "receipt-footer"
-    }, donation.note && /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, donation.note && /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "mb-4"
-    }, /* @__PURE__ */ import_react252.default.createElement("strong", {
+    }, /* @__PURE__ */ import_react253.default.createElement("strong", {
       className: "text-black"
-    }, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0AA8\u0ACB\u0A82\u0AA7:"), " ", donation.note), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "footer-summary"
-    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react252.default.createElement("strong", {
+    }, "\u0A85\u0A82\u0A95\u0AC7 \u0AB0\u0AC2\u0AAA\u0ABF\u0AAF\u0ABE ", /* @__PURE__ */ import_react253.default.createElement("strong", {
       className: "text-black text-lg"
-    }, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react252.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react252.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u20B9", Number(donation.total_amount).toFixed(2), "/-"), " \u0AA4\u0ABE. ", /* @__PURE__ */ import_react253.default.createElement("strong", null, formatDate(donation.creation)), " \u0AA8\u0ABE \u0AB0\u0ACB\u0A9C ", /* @__PURE__ */ import_react253.default.createElement("strong", null, donation.payment_mode || "Cash"), " \u0AAA\u0AC7\u0A9F\u0AC7 \u0AAE\u0AB3\u0ACD\u0AAF\u0ABE \u0A9B\u0AC7."), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "signature-section"
-    }, /* @__PURE__ */ import_react252.default.createElement("div", null, /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, /* @__PURE__ */ import_react253.default.createElement("div", null, /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "text-[10px] uppercase tracking-widest text-zinc-400 font-bold mb-1"
-    }, "\u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 \u0AB9\u0AB8\u0ACD\u0AA4\u0ABE\u0A95\u0ACD\u0AB7\u0AB0"), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0AB2\u0AC7\u0AA8\u0ABE\u0AB0 \u0AB9\u0AB8\u0ACD\u0AA4\u0ABE\u0A95\u0ACD\u0AB7\u0AB0"), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "font-bold text-black border-b border-zinc-900 pb-1"
-    }, donation.cashier || "Cashier"), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, donation.cashier || "Cashier"), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "text-[10px] text-zinc-500 mt-1"
-    }, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC")), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0AAE\u0ACB. \u0AEE\u0AE8\u0AE9\u0AEE\u0AE6\u0AE6\u0AE7\u0AEC\u0AEC\u0AEC")), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "text-right"
-    }, /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "text-[10px] uppercase tracking-widest text-zinc-400 font-bold mb-1"
-    }, "\u0AA4\u0ABE\u0AB0\u0AC0\u0A96"), /* @__PURE__ */ import_react252.default.createElement("div", {
+    }, "\u0AA4\u0ABE\u0AB0\u0AC0\u0A96"), /* @__PURE__ */ import_react253.default.createElement("div", {
       className: "font-bold text-black"
     }, formatDate(donation.creation))))));
   };
@@ -133414,16 +133384,16 @@ html body {
       limit: 1e3
     });
     if (loading)
-      return /* @__PURE__ */ import_react253.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react254.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react253.default.createElement("div", {
+      return /* @__PURE__ */ import_react254.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react253.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react254.default.createElement(alert_default, {
         message: "Could not load donation details",
         description: (error == null ? void 0 : error.message) || "Donation not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react253.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react254.default.createElement(button_default, {
           onClick: onBack,
           className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
         }, "Back")
@@ -133436,119 +133406,116 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react253.default.createElement("span", {
+        return /* @__PURE__ */ import_react254.default.createElement("span", {
           className: "text-zinc-300 font-medium"
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react253.default.createElement("img", {
+        return /* @__PURE__ */ import_react254.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react253.default.createElement("div", {
+        return /* @__PURE__ */ import_react254.default.createElement("div", {
           className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
         }, value);
       if (field.name === "temple") {
         const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === value);
-        return /* @__PURE__ */ import_react253.default.createElement("span", {
+        return /* @__PURE__ */ import_react254.default.createElement("span", {
           className: "text-zinc-800 font-semibold"
         }, t2 ? t2.temple_name : String(value));
       }
       if (field.name === "total_amount") {
-        return /* @__PURE__ */ import_react253.default.createElement("span", {
+        return /* @__PURE__ */ import_react254.default.createElement("span", {
           className: "text-zinc-800 font-semibold"
         }, "\u20B9", Number(value).toLocaleString("en-IN"));
       }
-      return /* @__PURE__ */ import_react253.default.createElement("span", {
+      return /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-zinc-800 font-semibold"
       }, String(value));
     };
     const title = `Donation ${doc.name}`;
     const initials = "DN";
-    return /* @__PURE__ */ import_react253.default.createElement("div", {
-      className: "donation-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react253.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react254.default.createElement(ViewContainer_default, {
+      className: "donation-view-container"
+    }, /* @__PURE__ */ import_react254.default.createElement(DetailHeader_default, {
       onBack,
       title,
       subtitle: doc.creation ? new Date(doc.creation).toLocaleDateString() : "",
       initials,
       tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
-      actions: /* @__PURE__ */ import_react253.default.createElement(import_react253.default.Fragment, null, /* @__PURE__ */ import_react253.default.createElement(button_default, {
+      actions: /* @__PURE__ */ import_react254.default.createElement(import_react254.default.Fragment, null, /* @__PURE__ */ import_react254.default.createElement(button_default, {
         onClick: () => window.print(),
         className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print Receipt"), /* @__PURE__ */ import_react253.default.createElement(button_default, {
+      }, "Print Receipt"), /* @__PURE__ */ import_react254.default.createElement(button_default, {
         type: "primary",
         onClick: () => onEdit && onEdit(doc),
         className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
       }, "Edit"))
-    }), /* @__PURE__ */ import_react253.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react253.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react253.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(SectionCard_default, {
       title: "Receipt Details",
-      icon: /* @__PURE__ */ import_react253.default.createElement(User, {
+      icon: /* @__PURE__ */ import_react254.default.createElement(User, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react253.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react254.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea";
-      return /* @__PURE__ */ import_react253.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react254.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react253.default.createElement(FieldCell_default, {
+      }, /* @__PURE__ */ import_react254.default.createElement(FieldCell_default, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))), /* @__PURE__ */ import_react253.default.createElement(SectionCard_default, {
+    }))), /* @__PURE__ */ import_react254.default.createElement(SectionCard_default, {
       title: "Financial Summary",
-      icon: /* @__PURE__ */ import_react253.default.createElement(Wallet, {
+      icon: /* @__PURE__ */ import_react254.default.createElement(Wallet, {
         size: 15,
         className: "text-zinc-800"
       }),
-      right: /* @__PURE__ */ import_react253.default.createElement("div", {
+      right: /* @__PURE__ */ import_react254.default.createElement("div", {
         className: "flex items-baseline gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1"
-      }, /* @__PURE__ */ import_react253.default.createElement("span", {
+      }, /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-[10px] font-bold text-green-600 tracking-wider uppercase"
-      }, "Total"), /* @__PURE__ */ import_react253.default.createElement("span", {
+      }, "Total"), /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-lg font-extrabold text-green-600 font-mono"
       }, "\u20B9", Number(doc.total_amount || 0).toLocaleString("en-IN")))
-    }, /* @__PURE__ */ import_react253.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react254.default.createElement(row_default2, {
       gutter: [12, 12],
       style: { marginBottom: 20 }
     }, [
       { label: "Payment Mode", value: (() => {
         const tagInfo = getTagConfig(doc.payment_mode);
-        return /* @__PURE__ */ import_react253.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react254.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass} !m-0`
         }, doc.payment_mode);
       })() },
-      { label: "Handled By", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Handled By", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-800"
       }, doc.cashier || "System") },
-      { label: "Reference", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Reference", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-xs font-mono font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-1.5 py-0.5 rounded"
       }, doc.transaction_ref_no || doc.reference_no || "N/A") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react253.default.createElement(col_default2, {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react254.default.createElement(col_default2, {
       xs: 24,
       sm: 8,
       key: label
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "p-3 bg-zinc-50 border border-zinc-200 rounded-lg flex flex-col gap-1"
-    }, /* @__PURE__ */ import_react253.default.createElement("span", {
+    }, /* @__PURE__ */ import_react254.default.createElement("span", {
       className: "text-[9px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, label), value)))), /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "border border-zinc-200 rounded-lg overflow-hidden"
-    }, /* @__PURE__ */ import_react253.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(table_default, {
       dataSource: doc.donation_items || [],
       pagination: false,
       rowKey: "name",
@@ -133559,7 +133526,7 @@ html body {
           dataIndex: "donation_type",
           render: (v) => {
             const dt2 = donationTypes == null ? void 0 : donationTypes.find((t2) => t2.name === v);
-            return /* @__PURE__ */ import_react253.default.createElement("span", {
+            return /* @__PURE__ */ import_react254.default.createElement("span", {
               className: "font-semibold text-zinc-800 text-xs"
             }, dt2 ? dt2.donation_type : v);
           }
@@ -133568,75 +133535,75 @@ html body {
           title: "AMOUNT",
           dataIndex: "amount",
           align: "right",
-          render: (v) => /* @__PURE__ */ import_react253.default.createElement("span", {
+          render: (v) => /* @__PURE__ */ import_react254.default.createElement("span", {
             className: "font-bold text-zinc-900 text-xs"
           }, "\u20B9", Number(v).toLocaleString("en-IN"))
         }
       ]
-    }))))), /* @__PURE__ */ import_react253.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react253.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react254.default.createElement(SectionCard_default, {
       title: "Status & Meta",
-      icon: /* @__PURE__ */ import_react253.default.createElement(ShieldAlert, {
+      icon: /* @__PURE__ */ import_react254.default.createElement(ShieldAlert, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "flex flex-col gap-4 py-1"
     }, [
       { label: "Payment Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || "Active";
-        return /* @__PURE__ */ import_react253.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react254.default.createElement(tag_default, {
           className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
         }, statusVal);
       })() }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react253.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react254.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react253.default.createElement("span", {
+    }, /* @__PURE__ */ import_react254.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react253.default.createElement(SectionCard_default, {
+    }, label), value)))), /* @__PURE__ */ import_react254.default.createElement(SectionCard_default, {
       title: "System Logs",
-      icon: /* @__PURE__ */ import_react253.default.createElement(FileText, {
+      icon: /* @__PURE__ */ import_react254.default.createElement(FileText, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "flex flex-col gap-3.5 py-1"
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100"
       }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react253.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react254.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react253.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react254.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react253.default.createElement("span", {
+    }, /* @__PURE__ */ import_react254.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react253.default.createElement("div", {
+    }, label), value)), /* @__PURE__ */ import_react254.default.createElement("div", {
       className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react253.default.createElement("span", {
+    }, /* @__PURE__ */ import_react254.default.createElement("span", {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react253.default.createElement(CircleCheck, {
+    }, /* @__PURE__ */ import_react254.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record")))))))));
+    }), "Verified System Record"))))))));
   };
   var DonationView_default = DonationView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Donation/DonationForm.jsx
-  var import_react254 = __toESM(require_react());
+  var import_react255 = __toESM(require_react());
   var import_dayjs5 = __toESM(require_dayjs_min());
   var { Text: Text17 } = typography_default;
   var DonationForm = ({ id, onBack }) => {
@@ -133645,7 +133612,7 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_DONATION, id);
     const { data: donationTypesList } = useFrappeGetDocList("Donation Type", { fields: ["name", "donation_type"], limit: 500 });
-    (0, import_react254.useEffect)(() => {
+    (0, import_react255.useEffect)(() => {
       if (isEdit && initialValues) {
         const vals = __spreadValues({}, initialValues);
         if (vals.dob)
@@ -133675,293 +133642,274 @@ html body {
       }
     };
     if (fetching)
-      return /* @__PURE__ */ import_react254.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react255.default.createElement(PageLoader_default, null);
     if (fetchError)
-      return /* @__PURE__ */ import_react254.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react255.default.createElement(alert_default, {
         message: "Error",
         description: fetchError.message,
         type: "error"
       });
     const formItemStyle = { marginBottom: "12px" };
-    const commonCardProps = {
-      size: "small",
-      className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-      style: {
-        height: "auto",
-        background: "#fafafa"
-      },
-      headStyle: {
-        background: "#f4f4f5",
-        borderBottom: "1px solid #e4e4e7",
-        paddingTop: "8px",
-        paddingBottom: "8px"
-      },
-      bodyStyle: {
-        background: "#ffffff",
-        padding: "16px"
-      }
-    };
-    return /* @__PURE__ */ import_react254.default.createElement("div", {
-      className: "donation-page py-6",
-      style: { maxWidth: "1400px", margin: "0 auto", padding: "0 16px" }
-    }, /* @__PURE__ */ import_react254.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react255.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react255.default.createElement(AddPageHeader_default, {
       onBack,
       title: "Edit Donation",
       subtitle: "Donation Entry",
       showBack: true
-    }), /* @__PURE__ */ import_react254.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react255.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
       size: "middle"
-    }, /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [24, 16]
-    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       lg: 12
-    }, /* @__PURE__ */ import_react254.default.createElement("div", {
+    }, /* @__PURE__ */ import_react255.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "16px" }
-    }, /* @__PURE__ */ import_react254.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react254.default.createElement(space_default, null, /* @__PURE__ */ import_react254.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react255.default.createElement(space_default, null, /* @__PURE__ */ import_react255.default.createElement(UserOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react254.default.createElement("span", {
+      }), /* @__PURE__ */ import_react255.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donor Information"))
-    }), /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "name",
       hidden: true
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, null)), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, null)), /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "name_on_receipt",
       label: "Name on Receipt",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter receipt name"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "donor_name",
       label: "Donor Name",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter donor name"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "cashier",
       label: "Donation Receiver Name",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter receiver name"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "contact_number",
       label: "Contact Number",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter contact number"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "email",
       label: "Email",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       type: "email",
       placeholder: "Enter email address"
-    }))))), /* @__PURE__ */ import_react254.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react254.default.createElement(space_default, null, /* @__PURE__ */ import_react254.default.createElement(EnvironmentOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react255.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react255.default.createElement(space_default, null, /* @__PURE__ */ import_react255.default.createElement(EnvironmentOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react254.default.createElement("span", {
+      }), /* @__PURE__ */ import_react255.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Address"))
-    }), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "address_line_1",
       label: "Address Line 1",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter Address Line 1"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "address_line_2",
       label: "Address Line 2",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter Address Line 2"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "country",
       label: "Country",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Country"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "state",
       label: "State",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "State"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 8
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "city",
       label: "City",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "City"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "pincode",
       label: "Pincode",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter pincode"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "native_place",
       label: "Native Place",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "Enter Native Place"
-    }))))))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))))))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       lg: 12
-    }, /* @__PURE__ */ import_react254.default.createElement("div", {
+    }, /* @__PURE__ */ import_react255.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "16px" }
-    }, /* @__PURE__ */ import_react254.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react254.default.createElement(space_default, null, /* @__PURE__ */ import_react254.default.createElement(HeartOutlined_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react255.default.createElement(space_default, null, /* @__PURE__ */ import_react255.default.createElement(HeartOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react254.default.createElement("span", {
+      }), /* @__PURE__ */ import_react255.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Personal Details"))
-    }), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "dob",
       label: "Date of Birth",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "marital_status",
       label: "Marital Status",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(select_default, {
       style: { width: "100%" },
       placeholder: "Select Status"
-    }, /* @__PURE__ */ import_react254.default.createElement(select_default.Option, {
+    }, /* @__PURE__ */ import_react255.default.createElement(select_default.Option, {
       value: "Unmarried"
-    }, "Unmarried"), /* @__PURE__ */ import_react254.default.createElement(select_default.Option, {
+    }, "Unmarried"), /* @__PURE__ */ import_react255.default.createElement(select_default.Option, {
       value: "Married"
-    }, "Married")))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, "Married")))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "date_of_anniversary",
       label: "Date of Anniversary",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(date_picker_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(date_picker_default, {
       style: { width: "100%" },
       format: "DD-MM-YYYY",
       placeholder: "DD-MM-YYYY"
-    }))))), /* @__PURE__ */ import_react254.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react254.default.createElement(space_default, null, /* @__PURE__ */ import_react254.default.createElement(DollarOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react255.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react255.default.createElement(space_default, null, /* @__PURE__ */ import_react255.default.createElement(DollarOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react254.default.createElement("span", {
+      }), /* @__PURE__ */ import_react255.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donation Payments"))
-    }), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "payment_mode",
       label: "Payment Type",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       placeholder: "e.g. Cash, Online"
-    }))), /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react255.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
       name: "total_amount",
       label: "Total Amount",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react254.default.createElement(input_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(input_default, {
       type: "number",
       placeholder: "0.00"
-    }))))), /* @__PURE__ */ import_react254.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react254.default.createElement(space_default, null, /* @__PURE__ */ import_react254.default.createElement(GiftOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react255.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react255.default.createElement(space_default, null, /* @__PURE__ */ import_react255.default.createElement(GiftOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react254.default.createElement("span", {
+      }), /* @__PURE__ */ import_react255.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Donation Items"))
-    }), /* @__PURE__ */ import_react254.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react255.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react254.default.createElement(form_default.List, {
+    }, /* @__PURE__ */ import_react255.default.createElement(form_default.List, {
       name: "donation_items"
-    }, (fields) => /* @__PURE__ */ import_react254.default.createElement(import_react254.default.Fragment, null, fields.map((_a) => {
+    }, (fields) => /* @__PURE__ */ import_react255.default.createElement(import_react255.default.Fragment, null, fields.map((_a) => {
       var _b = _a, { key, name: fieldName } = _b, restField = __objRest(_b, ["key", "name"]);
       const itemVal = form.getFieldValue(["donation_items", fieldName]);
       const dTypeRecord = donationTypesList == null ? void 0 : donationTypesList.find((t2) => t2.name === (itemVal == null ? void 0 : itemVal.donation_type));
       const label = dTypeRecord ? dTypeRecord.donation_type : (itemVal == null ? void 0 : itemVal.donation_type) || "Donation Item";
-      return /* @__PURE__ */ import_react254.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react255.default.createElement(col_default2, {
         xs: 24,
         sm: 12,
         key
-      }, /* @__PURE__ */ import_react254.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
+      }, /* @__PURE__ */ import_react255.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
         name: [fieldName, "amount"],
         label,
         style: formItemStyle
-      }), /* @__PURE__ */ import_react254.default.createElement(input_default, {
+      }), /* @__PURE__ */ import_react255.default.createElement(input_default, {
         type: "number",
         placeholder: "0.00"
-      })), /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+      })), /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
         name: [fieldName, "name"],
         hidden: true
-      }, /* @__PURE__ */ import_react254.default.createElement(input_default, null)), /* @__PURE__ */ import_react254.default.createElement(form_default.Item, {
+      }, /* @__PURE__ */ import_react255.default.createElement(input_default, null)), /* @__PURE__ */ import_react255.default.createElement(form_default.Item, {
         name: [fieldName, "donation_type"],
         hidden: true
-      }, /* @__PURE__ */ import_react254.default.createElement(input_default, null)));
-    })))))))), /* @__PURE__ */ import_react254.default.createElement("div", {
+      }, /* @__PURE__ */ import_react255.default.createElement(input_default, null)));
+    })))))))), /* @__PURE__ */ import_react255.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react254.default.createElement(FormFooter_default, {
+    }, /* @__PURE__ */ import_react255.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: updating,
       cancelText: "Back",
       saveText: "Update Donation"
-    }))), isEdit && /* @__PURE__ */ import_react254.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react255.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONATION,
       docname: id
     }));
@@ -133969,10 +133917,10 @@ html body {
   var DonationForm_default = DonationForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
-  var import_react256 = __toESM(require_react());
+  var import_react257 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/donationTypeTable.jsx
-  var import_react255 = __toESM(require_react());
+  var import_react256 = __toESM(require_react());
   var { Text: Text18 } = typography_default;
   var donationTypeColumns = [
     {
@@ -133983,7 +133931,7 @@ html body {
         if (!img)
           return "-";
         const src = img.startsWith("http") ? img : `${window.location.origin}${img.startsWith("/") ? "" : "/"}${img}`;
-        return /* @__PURE__ */ import_react255.default.createElement("img", {
+        return /* @__PURE__ */ import_react256.default.createElement("img", {
           src,
           alt: "Donation",
           className: "w-10 h-10 object-cover"
@@ -133995,7 +133943,7 @@ html body {
       title: "Donation Type",
       dataIndex: "donation_type",
       key: "donation_type",
-      render: (text) => /* @__PURE__ */ import_react255.default.createElement(Text18, {
+      render: (text) => /* @__PURE__ */ import_react256.default.createElement(Text18, {
         strong: true
       }, text),
       sorter: (a2, b) => (a2.donation_type || "").localeCompare(b.donation_type || ""),
@@ -134014,7 +133962,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeList.jsx
   var DonationTypeList = () => {
-    return /* @__PURE__ */ import_react256.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react257.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       title: "Donation Types",
       description: "Manage available donation categories",
@@ -134027,7 +133975,7 @@ html body {
   var DonationTypeList_default = DonationTypeList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeView.jsx
-  var import_react257 = __toESM(require_react());
+  var import_react258 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/donationTypeFormFields.js
   var donationTypeFormFields = {
@@ -134079,16 +134027,16 @@ html body {
       limit: 1e3
     });
     if (loading)
-      return /* @__PURE__ */ import_react257.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react258.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react257.default.createElement("div", {
+      return /* @__PURE__ */ import_react258.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react257.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react258.default.createElement(alert_default, {
         message: "Could not load donation type details",
         description: (error == null ? void 0 : error.message) || "Donation Type not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react257.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react258.default.createElement(button_default, {
           onClick: onBack,
           className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
         }, "Back")
@@ -134101,144 +134049,141 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react257.default.createElement("span", {
+        return /* @__PURE__ */ import_react258.default.createElement("span", {
           className: "text-zinc-300 font-medium"
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react257.default.createElement("img", {
+        return /* @__PURE__ */ import_react258.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react257.default.createElement("div", {
+        return /* @__PURE__ */ import_react258.default.createElement("div", {
           className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
         }, value);
       if (field.name === "temple") {
         const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === value);
-        return /* @__PURE__ */ import_react257.default.createElement("span", {
+        return /* @__PURE__ */ import_react258.default.createElement("span", {
           className: "text-zinc-800 font-semibold"
         }, t2 ? t2.temple_name : String(value));
       }
       if (field.name === "default_amount") {
-        return /* @__PURE__ */ import_react257.default.createElement("span", {
+        return /* @__PURE__ */ import_react258.default.createElement("span", {
           className: "text-zinc-800 font-semibold"
         }, "\u20B9", Number(value).toLocaleString("en-IN"));
       }
-      return /* @__PURE__ */ import_react257.default.createElement("span", {
+      return /* @__PURE__ */ import_react258.default.createElement("span", {
         className: "text-zinc-800 font-semibold"
       }, String(value));
     };
     const title = doc.donation_type || doc.name;
     const initials = title.substring(0, 2).toUpperCase();
-    return /* @__PURE__ */ import_react257.default.createElement("div", {
-      className: "donation-type-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react257.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react257.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react258.default.createElement(ViewContainer_default, {
+      className: "donation-type-view-container"
+    }, /* @__PURE__ */ import_react258.default.createElement(DetailHeader_default, {
       onBack,
       title,
       subtitle: doc.donation_type_code ? `Code: ${doc.donation_type_code}` : `ID: ${id}`,
       imageSrc: doc.donation_image,
       initials,
       tags: doc.custom_status || doc.status ? [doc.custom_status || doc.status] : [],
-      actions: /* @__PURE__ */ import_react257.default.createElement(import_react257.default.Fragment, null, /* @__PURE__ */ import_react257.default.createElement(button_default, {
+      actions: /* @__PURE__ */ import_react258.default.createElement(import_react258.default.Fragment, null, /* @__PURE__ */ import_react258.default.createElement(button_default, {
         onClick: () => window.print(),
         className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print"), /* @__PURE__ */ import_react257.default.createElement(button_default, {
+      }, "Print"), /* @__PURE__ */ import_react258.default.createElement(button_default, {
         type: "primary",
         onClick: () => onEdit && onEdit(doc),
         className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
       }, "Edit"))
-    }), /* @__PURE__ */ import_react257.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react258.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react257.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react258.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, /* @__PURE__ */ import_react258.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react257.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react258.default.createElement(SectionCard_default, {
       title: "Basic Information",
-      icon: /* @__PURE__ */ import_react257.default.createElement(User, {
+      icon: /* @__PURE__ */ import_react258.default.createElement(User, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react257.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react258.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea";
-      return /* @__PURE__ */ import_react257.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react258.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react257.default.createElement(FieldCell_default, {
+      }, /* @__PURE__ */ import_react258.default.createElement(FieldCell_default, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))))), /* @__PURE__ */ import_react257.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react258.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, /* @__PURE__ */ import_react258.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react257.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react258.default.createElement(SectionCard_default, {
       title: "Status & Meta",
-      icon: /* @__PURE__ */ import_react257.default.createElement(ShieldAlert, {
+      icon: /* @__PURE__ */ import_react258.default.createElement(ShieldAlert, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, /* @__PURE__ */ import_react258.default.createElement("div", {
       className: "flex flex-col gap-4 py-1"
     }, [
       { label: "Account Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || "Active";
-        return /* @__PURE__ */ import_react257.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react258.default.createElement(tag_default, {
           className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
         }, statusVal);
       })() }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react257.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react258.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react257.default.createElement("span", {
+    }, /* @__PURE__ */ import_react258.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react257.default.createElement(SectionCard_default, {
+    }, label), value)))), /* @__PURE__ */ import_react258.default.createElement(SectionCard_default, {
       title: "System Logs",
-      icon: /* @__PURE__ */ import_react257.default.createElement(FileText, {
+      icon: /* @__PURE__ */ import_react258.default.createElement(FileText, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, /* @__PURE__ */ import_react258.default.createElement("div", {
       className: "flex flex-col gap-3.5 py-1"
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react257.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react258.default.createElement("span", {
         className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100"
       }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react257.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react258.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react257.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react258.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react257.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react258.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react257.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react258.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react257.default.createElement("span", {
+    }, /* @__PURE__ */ import_react258.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react257.default.createElement("div", {
+    }, label), value)), /* @__PURE__ */ import_react258.default.createElement("div", {
       className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react257.default.createElement("span", {
+    }, /* @__PURE__ */ import_react258.default.createElement("span", {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react257.default.createElement(CircleCheck, {
+    }, /* @__PURE__ */ import_react258.default.createElement(CircleCheck, {
       size: 13,
       className: "text-emerald-600"
-    }), "Verified System Record")))))))));
+    }), "Verified System Record"))))))));
   };
   var DonationTypeView_default = DonationTypeView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/DonationType/DonationTypeForm.jsx
-  var import_react258 = __toESM(require_react());
+  var import_react259 = __toESM(require_react());
   var DonationTypeForm = ({ id, onBack }) => {
     var _a, _b;
     const isEdit = !!id;
@@ -134250,7 +134195,7 @@ html body {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
     const fileList = form_default.useWatch("donation_image", form) || [];
     const previewUrl = ((_a = fileList == null ? void 0 : fileList[0]) == null ? void 0 : _a.url) || ((_b = fileList == null ? void 0 : fileList[0]) == null ? void 0 : _b.thumbUrl) || "";
-    (0, import_react258.useEffect)(() => {
+    (0, import_react259.useEffect)(() => {
       if (isEdit && data) {
         let initialFileList = [];
         if (data.donation_image) {
@@ -134295,73 +134240,55 @@ html body {
       }
     };
     if (loading)
-      return /* @__PURE__ */ import_react258.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react259.default.createElement(PageLoader_default, null);
     if (error)
-      return /* @__PURE__ */ import_react258.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react259.default.createElement(alert_default, {
         message: "Error loading data",
         type: "error",
-        action: /* @__PURE__ */ import_react258.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react259.default.createElement(button_default, {
           onClick: onBack
         }, "Back")
       });
     const formItemStyle = { marginBottom: "16px" };
-    const commonCardProps = {
-      size: "small",
-      className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-      style: {
-        height: "100%",
-        background: "#ffffff"
-      },
-      headStyle: {
-        background: "#f4f4f5",
-        borderBottom: "1px solid #e4e4e7",
-        paddingTop: "10px",
-        paddingBottom: "10px"
-      },
-      bodyStyle: {
-        padding: "20px"
-      }
-    };
-    return /* @__PURE__ */ import_react258.default.createElement("div", {
-      className: "donation-page py-6",
-      style: { maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }
-    }, /* @__PURE__ */ import_react258.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react259.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react259.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Donation Type" : "Add Donation Type",
       subtitle: "Donation Setup",
       showBack: true
-    }), /* @__PURE__ */ import_react258.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react259.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
       requiredMark: false,
       size: "middle"
-    }, /* @__PURE__ */ import_react258.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(row_default2, {
       gutter: [24, 24],
       align: "stretch"
-    }, /* @__PURE__ */ import_react258.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(col_default2, {
       xs: 24,
       md: 9,
       lg: 8
-    }, /* @__PURE__ */ import_react258.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react258.default.createElement(space_default, null, /* @__PURE__ */ import_react258.default.createElement(PictureOutlined_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react259.default.createElement(space_default, null, /* @__PURE__ */ import_react259.default.createElement(PictureOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react258.default.createElement("span", {
+      }), /* @__PURE__ */ import_react259.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Display Image"))
-    }), /* @__PURE__ */ import_react258.default.createElement("div", {
+    }, /* @__PURE__ */ import_react259.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: "210px" }
-    }, /* @__PURE__ */ import_react258.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react259.default.createElement(form_default.Item, {
       name: "donation_image",
       valuePropName: "fileList",
       getValueFromEvent: (e4) => Array.isArray(e4) ? e4 : e4 == null ? void 0 : e4.fileList,
       style: { marginBottom: 0 }
-    }, /* @__PURE__ */ import_react258.default.createElement(upload_default, {
+    }, /* @__PURE__ */ import_react259.default.createElement(upload_default, {
       maxCount: 1,
       beforeUpload: () => false,
       listType: "picture",
       showUploadList: false
-    }, /* @__PURE__ */ import_react258.default.createElement("div", {
+    }, /* @__PURE__ */ import_react259.default.createElement("div", {
       style: {
         width: "130px",
         height: "130px",
@@ -134378,79 +134305,79 @@ html body {
         transition: "all 0.2s ease",
         boxShadow: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.03)"
       }
-    }, previewUrl ? /* @__PURE__ */ import_react258.default.createElement("img", {
+    }, previewUrl ? /* @__PURE__ */ import_react259.default.createElement("img", {
       src: previewUrl,
       alt: "donation configuration banner",
       style: { width: "100%", height: "100%", objectFit: "cover" }
-    }) : /* @__PURE__ */ import_react258.default.createElement(import_react258.default.Fragment, null, /* @__PURE__ */ import_react258.default.createElement(CloudUploadOutlined_default2, {
+    }) : /* @__PURE__ */ import_react259.default.createElement(import_react259.default.Fragment, null, /* @__PURE__ */ import_react259.default.createElement(CloudUploadOutlined_default2, {
       style: { fontSize: "26px", color: "#64748b" }
-    }), /* @__PURE__ */ import_react258.default.createElement("span", {
+    }), /* @__PURE__ */ import_react259.default.createElement("span", {
       style: { fontSize: "12px", fontWeight: 600, color: "#475569" }
-    }, "Upload Photo"))))), /* @__PURE__ */ import_react258.default.createElement("div", {
+    }, "Upload Photo"))))), /* @__PURE__ */ import_react259.default.createElement("div", {
       style: { marginTop: "16px" }
-    }, /* @__PURE__ */ import_react258.default.createElement("h5", {
+    }, /* @__PURE__ */ import_react259.default.createElement("h5", {
       style: { margin: "0 0 4px 0", fontSize: "13px", fontWeight: 600, color: "#1e293b" }
-    }, "Category Banner"), /* @__PURE__ */ import_react258.default.createElement("p", {
+    }, "Category Banner"), /* @__PURE__ */ import_react259.default.createElement("p", {
       style: { margin: 0, fontSize: "11px", color: "#64748b", lineHeight: "1.5", maxWidth: "210px" }
-    }, "Recommended square aspect (1:1 Ratio). Supports high-quality PNG or JPG formats."))))), /* @__PURE__ */ import_react258.default.createElement(col_default2, {
+    }, "Recommended square aspect (1:1 Ratio). Supports high-quality PNG or JPG formats."))))), /* @__PURE__ */ import_react259.default.createElement(col_default2, {
       xs: 24,
       md: 15,
       lg: 16
-    }, /* @__PURE__ */ import_react258.default.createElement(card_default, __spreadProps(__spreadValues({}, commonCardProps), {
-      title: /* @__PURE__ */ import_react258.default.createElement(space_default, null, /* @__PURE__ */ import_react258.default.createElement(TagOutlined_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react259.default.createElement(space_default, null, /* @__PURE__ */ import_react259.default.createElement(TagOutlined_default2, {
         style: { color: "#18181b" }
-      }), /* @__PURE__ */ import_react258.default.createElement("span", {
+      }), /* @__PURE__ */ import_react259.default.createElement("span", {
         style: { fontWeight: 700, color: "#27272a" }
       }, "Category Details"))
-    }), /* @__PURE__ */ import_react258.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(row_default2, {
       gutter: [16, 0]
-    }, /* @__PURE__ */ import_react258.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react258.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react259.default.createElement(form_default.Item, {
       name: "donation_type",
       label: "Donation Type",
       style: formItemStyle,
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react258.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react258.default.createElement(TagOutlined_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react259.default.createElement(TagOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "e.g. Anndan, Vastra Daan"
-    }))), /* @__PURE__ */ import_react258.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react259.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react258.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react259.default.createElement(form_default.Item, {
       name: "default_amount",
       label: "Default Amount (\u20B9)",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react258.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react258.default.createElement(DollarOutlined_default2, {
+    }, /* @__PURE__ */ import_react259.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react259.default.createElement(DollarOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "0.00",
       type: "number"
-    }))), /* @__PURE__ */ import_react258.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react259.default.createElement(col_default2, {
       xs: 24
-    }, /* @__PURE__ */ import_react258.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react259.default.createElement(form_default.Item, {
       name: "temple",
       label: "Associated Temple",
       style: formItemStyle
-    }, /* @__PURE__ */ import_react258.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react259.default.createElement(select_default, {
       placeholder: "Select Associated Temple",
       allowClear: true,
-      suffixIcon: /* @__PURE__ */ import_react258.default.createElement(BankOutlined_default2, {
+      suffixIcon: /* @__PURE__ */ import_react259.default.createElement(BankOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       options: temples == null ? void 0 : temples.map((t2) => ({ value: t2.name, label: t2.temple_name || t2.name }))
-    }))))))), /* @__PURE__ */ import_react258.default.createElement("div", {
+    }))))))), /* @__PURE__ */ import_react259.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react258.default.createElement(FormFooter_default, {
+    }, /* @__PURE__ */ import_react259.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: creating || updating || uploading,
       isEdit,
       saveText: isEdit ? "Update Type" : "Create Type"
-    }))), isEdit && /* @__PURE__ */ import_react258.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react259.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_DONATION_TYPE,
       docname: id
     }));
@@ -134458,10 +134385,10 @@ html body {
   var DonationTypeForm_default = DonationTypeForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
-  var import_react260 = __toESM(require_react());
+  var import_react261 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userTable.jsx
-  var import_react259 = __toESM(require_react());
+  var import_react260 = __toESM(require_react());
   var userColumns = [
     {
       title: "USER",
@@ -134471,17 +134398,17 @@ html body {
       render: (text, record) => {
         const name = text || `${record.first_name || ""} ${record.last_name || ""}`.trim() || record.name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react259.default.createElement("div", {
+        return /* @__PURE__ */ import_react260.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, /* @__PURE__ */ import_react259.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react260.default.createElement(avatar_default, {
           src: record.user_image,
           size: 26,
           className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-        }, initials), /* @__PURE__ */ import_react259.default.createElement("div", {
+        }, initials), /* @__PURE__ */ import_react260.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react259.default.createElement("span", {
+        }, /* @__PURE__ */ import_react260.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react259.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react260.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.email || "no-email")));
       },
@@ -134493,7 +134420,7 @@ html body {
       dataIndex: "custom_test",
       key: "custom_test",
       width: 180,
-      render: (text) => /* @__PURE__ */ import_react259.default.createElement("span", {
+      render: (text) => /* @__PURE__ */ import_react260.default.createElement("span", {
         className: "text-gray-600 text-sm font-medium"
       }, text || "N/A"),
       filterable: true,
@@ -134504,12 +134431,12 @@ html body {
       dataIndex: "custom_select_temple",
       key: "custom_select_temple",
       width: 180,
-      render: (temples) => /* @__PURE__ */ import_react259.default.createElement("div", {
+      render: (temples) => /* @__PURE__ */ import_react260.default.createElement("div", {
         className: "flex flex-wrap gap-1"
-      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react259.default.createElement(tag_default, {
+      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react260.default.createElement(tag_default, {
         key: index2,
         className: "tag-glass tag-glass-gray !m-0"
-      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react259.default.createElement("span", {
+      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react260.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Global")),
       filterable: false
@@ -134521,7 +134448,7 @@ html body {
       width: 140,
       render: (text) => {
         const config = getTagConfig(text);
-        return /* @__PURE__ */ import_react259.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react260.default.createElement(tag_default, {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       },
@@ -134541,7 +134468,7 @@ html body {
       width: 140,
       render: (enabled) => {
         const config = getTagConfig(enabled ? "Active" : "Inactive");
-        return /* @__PURE__ */ import_react259.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react260.default.createElement(tag_default, {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       },
@@ -134556,7 +134483,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserList.jsx
   var UserList = () => {
-    return /* @__PURE__ */ import_react260.default.createElement(ListingPage_default, {
+    return /* @__PURE__ */ import_react261.default.createElement(ListingPage_default, {
       doctype: DOCTYPE_USER,
       title: "Users Management",
       description: "Manage temple admins, cashiers and system users.",
@@ -134573,7 +134500,7 @@ html body {
   var UserList_default = UserList;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserForm.jsx
-  var import_react261 = __toESM(require_react());
+  var import_react262 = __toESM(require_react());
   var UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = form_default.useForm();
@@ -134590,7 +134517,7 @@ html body {
     const userRole = form_default.useWatch("custom_user_role", form) || "";
     const userImage = (data == null ? void 0 : data.user_image) || "";
     const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase() || "U";
-    (0, import_react261.useEffect)(() => {
+    (0, import_react262.useEffect)(() => {
       if (isEdit && data) {
         const values = __spreadValues({}, data);
         values.enabled = values.enabled ? "Active" : "Inactive";
@@ -134622,64 +134549,46 @@ html body {
       }
     };
     if (isEdit && loading)
-      return /* @__PURE__ */ import_react261.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react262.default.createElement(PageLoader_default, null);
     if (isEdit && error)
-      return /* @__PURE__ */ import_react261.default.createElement(alert_default, {
+      return /* @__PURE__ */ import_react262.default.createElement(alert_default, {
         message: "Error loading user",
         type: "error"
       });
-    const premiumCardProps = {
-      size: "small",
-      className: "transition-all duration-300 hover:shadow-md border border-zinc-200/80 rounded-2xl overflow-hidden",
-      style: {
-        background: "#ffffff",
-        boxShadow: "0 4px 20px -2px rgba(24, 24, 27, 0.03), 0 2px 8px -1px rgba(24, 24, 27, 0.02)"
-      },
-      headStyle: {
-        background: "linear-gradient(to right, #f8f8f9, #f4f4f5)",
-        borderBottom: "1px solid #e4e4e7",
-        paddingTop: "12px",
-        paddingBottom: "12px"
-      },
-      bodyStyle: {
-        padding: "20px"
-      }
-    };
-    return /* @__PURE__ */ import_react261.default.createElement("div", {
-      className: "donation-page py-6",
-      style: { maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }
-    }, /* @__PURE__ */ import_react261.default.createElement(AddPageHeader_default, {
+    return /* @__PURE__ */ import_react262.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react262.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit User" : "Add User",
       subtitle: "User Management Portal",
       showBack: true
-    }), /* @__PURE__ */ import_react261.default.createElement(form_default, {
+    }), /* @__PURE__ */ import_react262.default.createElement(form_default, {
       layout: "vertical",
       form,
       onFinish: handleSave,
       requiredMark: false,
       size: "middle"
-    }, /* @__PURE__ */ import_react261.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       md: 12,
       lg: 7
-    }, /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
       className: "sticky top-6",
       style: { display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react261.default.createElement(card_default, __spreadProps(__spreadValues({}, premiumCardProps), {
-      title: /* @__PURE__ */ import_react261.default.createElement(space_default, null, /* @__PURE__ */ import_react261.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react262.default.createElement(space_default, null, /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, {
         style: { color: "#09090b" }
-      }), /* @__PURE__ */ import_react261.default.createElement("span", {
+      }), /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 700, color: "#09090b", letterSpacing: "-0.01em" }
       }, "User Profile"))
-    }), /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "12px 0 4px 0" }
-    }, /* @__PURE__ */ import_react261.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(avatar_default, {
       size: 96,
       src: userImage || void 0,
-      icon: !userImage && /* @__PURE__ */ import_react261.default.createElement(UserOutlined_default2, null),
+      icon: !userImage && /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, null),
       style: {
         fontSize: 32,
         fontWeight: 800,
@@ -134688,113 +134597,113 @@ html body {
         background: userImage ? void 0 : "linear-gradient(135deg, #18181b 0%, #27272a 100%)",
         color: "#fff"
       }
-    }, !userImage && initials), /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, !userImage && initials), /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { textAlign: "center", width: "100%" }
-    }, /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { fontSize: 16, fontWeight: 700, color: "#09090b", letterSpacing: "-0.02em", lineBreak: "anywhere" }
-    }, firstName || lastName ? `${firstName} ${lastName}`.trim() : isEdit ? data == null ? void 0 : data.full_name : "New User"), isEdit && /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, firstName || lastName ? `${firstName} ${lastName}`.trim() : isEdit ? data == null ? void 0 : data.full_name : "New User"), isEdit && /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { fontSize: 11, color: "#71717a", marginTop: 6, wordBreak: "break-all", fontFamily: "monospace", background: "#f4f4f5", padding: "2px 6px", borderRadius: "4px", display: "inline-block" }
-    }, id)), userRole && /* @__PURE__ */ import_react261.default.createElement(tag_default, {
+    }, id)), userRole && /* @__PURE__ */ import_react262.default.createElement(tag_default, {
       style: { borderRadius: 6, padding: "3px 12px", fontWeight: 700, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", backgroundColor: "#09090b", color: "#fff", border: "none", margin: 0, boxShadow: "0 2px 4px rgba(0,0,0,0.05)" }
-    }, userRole), isEdit && /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, userRole), isEdit && /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { width: "100%", borderTop: "1px solid #e4e4e7", paddingTop: 14, marginTop: 4, textAlign: "center" }
-    }, /* @__PURE__ */ import_react261.default.createElement("span", {
+    }, /* @__PURE__ */ import_react262.default.createElement("span", {
       style: { fontSize: 12, color: "#16a34a", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }
-    }, /* @__PURE__ */ import_react261.default.createElement(CheckCircleOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(CheckCircleOutlined_default2, {
       style: { fontSize: 14 }
-    }), "Verified Identity")))))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }), "Verified Identity")))))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       md: 12,
       lg: 17
-    }, /* @__PURE__ */ import_react261.default.createElement("div", {
+    }, /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react261.default.createElement(card_default, __spreadProps(__spreadValues({}, premiumCardProps), {
-      title: /* @__PURE__ */ import_react261.default.createElement(space_default, null, /* @__PURE__ */ import_react261.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react262.default.createElement(space_default, null, /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, {
         style: { color: "#09090b" }
-      }), /* @__PURE__ */ import_react261.default.createElement("span", {
+      }), /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 700, color: "#09090b" }
       }, "Basic Information"))
-    }), /* @__PURE__ */ import_react261.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
       gutter: [16, 4]
-    }, /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "first_name",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "First Name"),
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "First Name",
       style: { borderRadius: "8px" }
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "last_name",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Last Name")
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(UserOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(UserOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Last Name",
       style: { borderRadius: "8px" }
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "email",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Email Address"),
       rules: [{ required: true, type: "email", message: "Valid email required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(MailOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(MailOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "email@example.com",
       disabled: isEdit,
       style: { borderRadius: "8px" }
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_test",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Contact Number"),
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(PhoneOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(PhoneOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "Mobile Number",
       maxLength: 10,
       style: { borderRadius: "8px" }
-    }))))), /* @__PURE__ */ import_react261.default.createElement(card_default, __spreadProps(__spreadValues({}, premiumCardProps), {
-      title: /* @__PURE__ */ import_react261.default.createElement(space_default, null, /* @__PURE__ */ import_react261.default.createElement(SafetyOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react262.default.createElement(space_default, null, /* @__PURE__ */ import_react262.default.createElement(SafetyOutlined_default2, {
         style: { color: "#09090b" }
-      }), /* @__PURE__ */ import_react261.default.createElement("span", {
+      }), /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 700, color: "#09090b" }
       }, "Role & Access Matrix"))
-    }), /* @__PURE__ */ import_react261.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
       gutter: [16, 4]
-    }, /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_user_role",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "User Role"),
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(select_default, {
       placeholder: "Select Role",
       disabled: disableAdminFields,
       style: { width: "100%" },
@@ -134803,90 +134712,90 @@ html body {
         { label: "Temple Admin", value: "Temple Admin" },
         { label: "Cashier", value: "Cashier" }
       ]
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_select_temple",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Assigned Temples"),
       rules: [{ required: true, message: "Required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(select_default, {
       mode: "multiple",
       placeholder: "Select Temples",
       disabled: disableAdminFields,
       allowClear: true,
       maxTagCount: "responsive",
       style: { width: "100%" }
-    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react261.default.createElement(select_default.Option, {
+    }, temples == null ? void 0 : temples.map((t2) => /* @__PURE__ */ import_react262.default.createElement(select_default.Option, {
       key: t2.name,
       value: t2.name
-    }, t2.temple_name))))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }, t2.temple_name))))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "enabled",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Account Status"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react261.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(select_default, {
       disabled: disableAdminFields,
       style: { width: "100%" },
       options: [
         { label: "Active", value: "Active" },
         { label: "Inactive", value: "Inactive" }
       ]
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_status",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "System Status"),
       rules: [{ required: true }]
-    }, /* @__PURE__ */ import_react261.default.createElement(select_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(select_default, {
       disabled: disableAdminFields,
       style: { width: "100%" },
       options: [
         { label: "Active", value: "Active" },
         { label: "Inactive", value: "Inactive" }
       ]
-    }))))), /* @__PURE__ */ import_react261.default.createElement(card_default, __spreadProps(__spreadValues({}, premiumCardProps), {
-      title: /* @__PURE__ */ import_react261.default.createElement(space_default, null, /* @__PURE__ */ import_react261.default.createElement(LockOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react262.default.createElement(space_default, null, /* @__PURE__ */ import_react262.default.createElement(LockOutlined_default2, {
         style: { color: "#09090b" }
-      }), /* @__PURE__ */ import_react261.default.createElement("span", {
+      }), /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 700, color: "#09090b" }
       }, "Security & Balances"))
-    }), /* @__PURE__ */ import_react261.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
       gutter: [16, 4]
-    }, /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "new_password",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, isEdit ? "New Password (optional)" : "Password"),
       rules: [{ required: !isEdit, message: "Required" }]
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default.Password, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(LockOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default.Password, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(LockOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: isEdit ? "Leave blank to keep current" : "Set password",
       style: { borderRadius: "8px" }
-    }))), /* @__PURE__ */ import_react261.default.createElement(col_default2, {
+    }))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
       xs: 24,
       sm: 12
-    }, /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_opening_balance",
-      label: /* @__PURE__ */ import_react261.default.createElement("span", {
+      label: /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 600, color: "#27272a" }
       }, "Opening Balance")
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default, {
-      prefix: /* @__PURE__ */ import_react261.default.createElement(DollarOutlined_default2, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default, {
+      prefix: /* @__PURE__ */ import_react262.default.createElement(DollarOutlined_default2, {
         style: { color: "#a1a1aa" }
       }),
       placeholder: "0.00",
@@ -134894,28 +134803,28 @@ html body {
       type: "number",
       step: "0.01",
       style: { borderRadius: "8px" }
-    }))))), /* @__PURE__ */ import_react261.default.createElement(card_default, __spreadProps(__spreadValues({}, premiumCardProps), {
-      title: /* @__PURE__ */ import_react261.default.createElement(space_default, null, /* @__PURE__ */ import_react261.default.createElement(FileTextOutlined_default2, {
+    }))))), /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+      title: /* @__PURE__ */ import_react262.default.createElement(space_default, null, /* @__PURE__ */ import_react262.default.createElement(FileTextOutlined_default2, {
         style: { color: "#09090b" }
-      }), /* @__PURE__ */ import_react261.default.createElement("span", {
+      }), /* @__PURE__ */ import_react262.default.createElement("span", {
         style: { fontWeight: 700, color: "#09090b" }
       }, "Internal Notes"))
-    }), /* @__PURE__ */ import_react261.default.createElement(form_default.Item, {
+    }, /* @__PURE__ */ import_react262.default.createElement(form_default.Item, {
       name: "custom_internal_notes",
       style: { marginBottom: 0 }
-    }, /* @__PURE__ */ import_react261.default.createElement(input_default.TextArea, {
+    }, /* @__PURE__ */ import_react262.default.createElement(input_default.TextArea, {
       rows: 3,
       placeholder: "Add sensitive internal logs or operation notes here...",
       disabled: disableAdminFields,
       style: { resize: "none", borderRadius: "8px", padding: "10px" }
-    })))))), /* @__PURE__ */ import_react261.default.createElement("div", {
+    })))))), /* @__PURE__ */ import_react262.default.createElement("div", {
       style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react261.default.createElement(FormFooter_default, {
+    }, /* @__PURE__ */ import_react262.default.createElement(FormFooter_default, {
       onCancel: onBack,
       loading: creating || updating,
       isEdit,
       saveText: isEdit ? "Update User" : "Create User"
-    }))), isEdit && /* @__PURE__ */ import_react261.default.createElement(ActivityLog_default, {
+    }))), isEdit && /* @__PURE__ */ import_react262.default.createElement(ActivityLog_default, {
       doctype: DOCTYPE_USER,
       docname: id
     }));
@@ -134923,7 +134832,7 @@ html body {
   var UserForm_default = UserForm;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/User/UserView.jsx
-  var import_react262 = __toESM(require_react());
+  var import_react263 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/formfield/userFormFields.js
   var userFormFields = {
@@ -135021,16 +134930,16 @@ html body {
       limit: 1e3
     });
     if (loading)
-      return /* @__PURE__ */ import_react262.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react263.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react262.default.createElement("div", {
+      return /* @__PURE__ */ import_react263.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react262.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react263.default.createElement(alert_default, {
         message: "Could not load user details",
         description: (error == null ? void 0 : error.message) || "User not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react262.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react263.default.createElement(button_default, {
           onClick: onBack,
           className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
         }, "Back")
@@ -135047,28 +134956,28 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react262.default.createElement("span", {
+        return /* @__PURE__ */ import_react263.default.createElement("span", {
           className: "text-zinc-300 font-medium"
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react262.default.createElement("img", {
+        return /* @__PURE__ */ import_react263.default.createElement("img", {
           src: value,
           alt: field.label,
           className: "w-14 h-14 object-cover rounded-lg border border-zinc-200"
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
           className: "bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal"
         }, value);
       if ((field.name === "custom_select_temple" || field.name === "roles") && Array.isArray(value)) {
-        return /* @__PURE__ */ import_react262.default.createElement("div", {
+        return /* @__PURE__ */ import_react263.default.createElement("div", {
           className: "flex flex-wrap gap-1.5"
         }, value.map((item) => {
           const tid = item.temple || item.role || String(item);
           const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === tid);
           const name = t2 ? t2.temple_name : tid;
           const tagInfo = getTagConfig(field.name === "roles" ? tid : "temple admin");
-          return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
+          return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
             className: `tag-glass ${tagInfo.glassClass} !m-0`,
             key: item.name || tid
           }, name);
@@ -135076,132 +134985,129 @@ html body {
       }
       if (field.name === "custom_user_role") {
         const tagInfo = getTagConfig(String(value));
-        return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass} !m-0`
         }, String(value));
       }
-      return /* @__PURE__ */ import_react262.default.createElement("span", {
+      return /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "text-zinc-800 font-semibold"
       }, String(value));
     };
     const fullName = doc.full_name || `${doc.first_name || ""} ${doc.last_name || ""}`.trim() || doc.name;
     const initials = `${((_a = doc.first_name) == null ? void 0 : _a.charAt(0)) || ""}${((_b = doc.last_name) == null ? void 0 : _b.charAt(0)) || ""}`.toUpperCase() || "U";
-    return /* @__PURE__ */ import_react262.default.createElement("div", {
-      className: "user-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react262.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react263.default.createElement(ViewContainer_default, {
+      className: "user-view-container"
+    }, /* @__PURE__ */ import_react263.default.createElement(DetailHeader_default, {
       onBack,
       title: fullName,
       subtitle: doc.email,
       imageSrc: doc.user_image,
       initials,
       tags: doc.custom_user_role ? [doc.custom_user_role] : [],
-      actions: /* @__PURE__ */ import_react262.default.createElement(import_react262.default.Fragment, null, /* @__PURE__ */ import_react262.default.createElement(button_default, {
+      actions: /* @__PURE__ */ import_react263.default.createElement(import_react263.default.Fragment, null, /* @__PURE__ */ import_react263.default.createElement(button_default, {
         onClick: () => window.print(),
         className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
-      }, "Print"), /* @__PURE__ */ import_react262.default.createElement(button_default, {
+      }, "Print"), /* @__PURE__ */ import_react263.default.createElement(button_default, {
         type: "primary",
         onClick: () => onEdit && onEdit(doc),
         className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
       }, "Edit"))
-    }), /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react263.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react263.default.createElement(SectionCard_default, {
       title: "Basic Information",
-      icon: /* @__PURE__ */ import_react262.default.createElement(User, {
+      icon: /* @__PURE__ */ import_react263.default.createElement(User, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react262.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react263.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
-      return /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react263.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react262.default.createElement(FieldCell_default, {
+      }, /* @__PURE__ */ import_react263.default.createElement(FieldCell_default, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))))), /* @__PURE__ */ import_react262.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react263.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+    }, /* @__PURE__ */ import_react263.default.createElement(SectionCard_default, {
       title: "Role & Access Meta",
-      icon: /* @__PURE__ */ import_react262.default.createElement(ShieldAlert, {
+      icon: /* @__PURE__ */ import_react263.default.createElement(ShieldAlert, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "flex flex-col gap-4 py-1"
     }, [
       { label: "Account Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || (doc.enabled ? "Active" : "Inactive");
-        return /* @__PURE__ */ import_react262.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
           className: `tag-glass ${getTagConfig(statusVal).glassClass} !m-0`
         }, statusVal);
       })() },
-      { label: "Opening Balance", value: /* @__PURE__ */ import_react262.default.createElement("span", {
+      { label: "Opening Balance", value: /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-800 flex items-center gap-1"
-      }, /* @__PURE__ */ import_react262.default.createElement(Wallet, {
+      }, /* @__PURE__ */ import_react263.default.createElement(Wallet, {
         size: 12,
         className: "text-zinc-400"
       }), "\u20B9", doc.custom_opening_balance ? parseFloat(doc.custom_opening_balance).toFixed(2) : "0.00") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react262.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react263.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
-    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)))), /* @__PURE__ */ import_react262.default.createElement(SectionCard_default, {
+    }, label), value)))), /* @__PURE__ */ import_react263.default.createElement(SectionCard_default, {
       title: "System Logs",
-      icon: /* @__PURE__ */ import_react262.default.createElement(FileText, {
+      icon: /* @__PURE__ */ import_react263.default.createElement(FileText, {
         size: 15,
         className: "text-zinc-800"
       })
-    }, /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "flex flex-col gap-3.5 py-1"
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react262.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-1.5 py-0.5 rounded border border-zinc-100"
       }, id) },
-      { label: "Created By", value: /* @__PURE__ */ import_react262.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react262.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react262.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react263.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-600"
       }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react262.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react263.default.createElement("div", {
       key: label,
       className: "flex justify-between items-center gap-4"
-    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
       className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
-    }, label), value)), /* @__PURE__ */ import_react262.default.createElement("div", {
+    }, label), value)), /* @__PURE__ */ import_react263.default.createElement("div", {
       className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
-    }, /* @__PURE__ */ import_react262.default.createElement("span", {
+    }, /* @__PURE__ */ import_react263.default.createElement("span", {
       className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
-    }, /* @__PURE__ */ import_react262.default.createElement(CircleCheck, {
+    }, /* @__PURE__ */ import_react263.default.createElement(CircleCheck, {
       size: 13
-    }), "Verified System Record")))))))));
+    }), "Verified System Record"))))))));
   };
   var UserView_default = UserView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
-  var import_react265 = __toESM(require_react());
+  var import_react266 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/userBalanceTable.jsx
-  var import_react263 = __toESM(require_react());
+  var import_react264 = __toESM(require_react());
   var { Text: Text19 } = typography_default;
   var userBalanceColumns = [
     {
@@ -135212,17 +135118,17 @@ html body {
       render: (text, record) => {
         const name = text || record.user_name || "Unknown";
         const initials = name.substring(0, 2).toUpperCase();
-        return /* @__PURE__ */ import_react263.default.createElement("div", {
+        return /* @__PURE__ */ import_react264.default.createElement("div", {
           className: "flex items-center gap-3"
-        }, /* @__PURE__ */ import_react263.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react264.default.createElement(avatar_default, {
           src: record.user_image,
           size: 26,
           className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-        }, initials), /* @__PURE__ */ import_react263.default.createElement("div", {
+        }, initials), /* @__PURE__ */ import_react264.default.createElement("div", {
           className: "flex flex-col min-w-0"
-        }, /* @__PURE__ */ import_react263.default.createElement("span", {
+        }, /* @__PURE__ */ import_react264.default.createElement("span", {
           className: "font-semibold text-gray-800 text-sm"
-        }, name), /* @__PURE__ */ import_react263.default.createElement("span", {
+        }, name), /* @__PURE__ */ import_react264.default.createElement("span", {
           className: "text-xs text-gray-400 truncate"
         }, record.user_name)));
       }
@@ -135234,7 +135140,7 @@ html body {
       width: 140,
       render: (text) => {
         const config = getTagConfig(text);
-        return /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react264.default.createElement(tag_default, {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       }
@@ -135244,12 +135150,12 @@ html body {
       dataIndex: "custom_select_temple",
       key: "custom_select_temple",
       width: 180,
-      render: (temples) => /* @__PURE__ */ import_react263.default.createElement("div", {
+      render: (temples) => /* @__PURE__ */ import_react264.default.createElement("div", {
         className: "flex flex-wrap gap-1"
-      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react263.default.createElement(tag_default, {
+      }, temples && temples.length > 0 ? temples.slice(0, 2).map((t2, index2) => /* @__PURE__ */ import_react264.default.createElement(tag_default, {
         key: index2,
         className: "tag-glass tag-glass-gray !m-0"
-      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react263.default.createElement("span", {
+      }, t2.temple_name || t2.temple)) : /* @__PURE__ */ import_react264.default.createElement("span", {
         className: "text-gray-400 text-xs italic"
       }, "Not Assigned"))
     },
@@ -135259,9 +135165,9 @@ html body {
       key: "opening_balance",
       align: "right",
       width: 180,
-      render: (value) => /* @__PURE__ */ import_react263.default.createElement("div", {
+      render: (value) => /* @__PURE__ */ import_react264.default.createElement("div", {
         className: "flex items-center justify-end gap-2 pr-4"
-      }, /* @__PURE__ */ import_react263.default.createElement(Text19, {
+      }, /* @__PURE__ */ import_react264.default.createElement(Text19, {
         strong: true,
         className: "text-zinc-900 text-base"
       }, "\u20B9", Number(value || 0).toLocaleString()))
@@ -135269,7 +135175,7 @@ html body {
   ];
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/components/ActiveDonationsModal.jsx
-  var import_react264 = __toESM(require_react());
+  var import_react265 = __toESM(require_react());
   var ActiveDonationsModal = ({
     isOpen,
     onClose,
@@ -135279,18 +135185,18 @@ html body {
     loading,
     columns
   }) => {
-    return /* @__PURE__ */ import_react264.default.createElement(modal_default, {
-      title: /* @__PURE__ */ import_react264.default.createElement("div", {
+    return /* @__PURE__ */ import_react265.default.createElement(modal_default, {
+      title: /* @__PURE__ */ import_react265.default.createElement("div", {
         style: { display: "flex", flexDirection: "column", borderBottom: "1px solid #f1f5f9", paddingBottom: "12px" }
-      }, /* @__PURE__ */ import_react264.default.createElement("span", {
+      }, /* @__PURE__ */ import_react265.default.createElement("span", {
         style: { fontSize: "16px", fontWeight: 800, color: "#0f172a" }
-      }, "Active Cash Donations for ", selectedUserName), /* @__PURE__ */ import_react264.default.createElement("span", {
+      }, "Active Cash Donations for ", selectedUserName), /* @__PURE__ */ import_react265.default.createElement("span", {
         style: { fontSize: "12px", color: "#64748b", fontWeight: 500, fontFamily: "monospace", marginTop: "2px" }
       }, selectedUser)),
       open: isOpen,
       onCancel: onClose,
       footer: [
-        /* @__PURE__ */ import_react264.default.createElement(button_default, {
+        /* @__PURE__ */ import_react265.default.createElement(button_default, {
           key: "close",
           onClick: onClose,
           className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800 text-white hover:!text-white rounded-md font-semibold"
@@ -135298,9 +135204,9 @@ html body {
       ],
       width: 800,
       className: "aavatto-premium-modal"
-    }, /* @__PURE__ */ import_react264.default.createElement("div", {
+    }, /* @__PURE__ */ import_react265.default.createElement("div", {
       className: "py-4"
-    }, /* @__PURE__ */ import_react264.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react265.default.createElement(table_default, {
       dataSource: activeDonations,
       columns,
       rowKey: "name",
@@ -135319,17 +135225,17 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/OpeningBalance.jsx
   var { Text: Text20 } = typography_default;
   var OpeningBalance = () => {
-    const [loading, setLoading] = (0, import_react265.useState)(false);
-    const [data, setData] = (0, import_react265.useState)([]);
-    const [searchText, setSearchText] = (0, import_react265.useState)("");
-    const [activeTab, setActiveTab] = (0, import_react265.useState)("balances");
-    const [logs, setLogs] = (0, import_react265.useState)([]);
-    const [loadingLogs, setLoadingLogs] = (0, import_react265.useState)(false);
-    const [isModalOpen, setIsModalOpen] = (0, import_react265.useState)(false);
-    const [selectedUser, setSelectedUser] = (0, import_react265.useState)(null);
-    const [selectedUserName, setSelectedUserName] = (0, import_react265.useState)("");
-    const [activeDonations, setActiveDonations] = (0, import_react265.useState)([]);
-    const [loadingActiveDonations, setLoadingActiveDonations] = (0, import_react265.useState)(false);
+    const [loading, setLoading] = (0, import_react266.useState)(false);
+    const [data, setData] = (0, import_react266.useState)([]);
+    const [searchText, setSearchText] = (0, import_react266.useState)("");
+    const [activeTab, setActiveTab] = (0, import_react266.useState)("balances");
+    const [logs, setLogs] = (0, import_react266.useState)([]);
+    const [loadingLogs, setLoadingLogs] = (0, import_react266.useState)(false);
+    const [isModalOpen, setIsModalOpen] = (0, import_react266.useState)(false);
+    const [selectedUser, setSelectedUser] = (0, import_react266.useState)(null);
+    const [selectedUserName, setSelectedUserName] = (0, import_react266.useState)("");
+    const [activeDonations, setActiveDonations] = (0, import_react266.useState)([]);
+    const [loadingActiveDonations, setLoadingActiveDonations] = (0, import_react266.useState)(false);
     const handleViewActiveDonations = async (user, userName) => {
       setSelectedUser(user);
       setSelectedUserName(userName);
@@ -135419,7 +135325,7 @@ html body {
         fetchLogs();
       }
     };
-    (0, import_react265.useEffect)(() => {
+    (0, import_react266.useEffect)(() => {
       fetchData();
       fetchLogs();
     }, []);
@@ -135443,14 +135349,14 @@ html body {
         key: "action",
         align: "right",
         width: 220,
-        render: (_2, record) => /* @__PURE__ */ import_react265.default.createElement("div", {
+        render: (_2, record) => /* @__PURE__ */ import_react266.default.createElement("div", {
           className: "flex gap-2 justify-end"
-        }, /* @__PURE__ */ import_react265.default.createElement(button_default, {
+        }, /* @__PURE__ */ import_react266.default.createElement(button_default, {
           type: "text",
-          icon: /* @__PURE__ */ import_react265.default.createElement(EyeOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react266.default.createElement(EyeOutlined_default2, null),
           onClick: () => handleViewActiveDonations(record.user_name, record.full_name),
           className: "text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
-        }, "View"), /* @__PURE__ */ import_react265.default.createElement(popconfirm_default, {
+        }, "View"), /* @__PURE__ */ import_react266.default.createElement(popconfirm_default, {
           placement: "leftTop",
           title: "Hand Over Cash",
           description: `Reset \u20B9${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`,
@@ -135458,9 +135364,9 @@ html body {
           okText: "Confirm",
           cancelText: "Cancel",
           okButtonProps: { className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" }
-        }, /* @__PURE__ */ import_react265.default.createElement(button_default, {
+        }, /* @__PURE__ */ import_react266.default.createElement(button_default, {
           type: "text",
-          icon: /* @__PURE__ */ import_react265.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react266.default.createElement(SyncOutlined_default2, null),
           disabled: Number(record.opening_balance || 0) === 0,
           className: `rounded-md px-3 py-1.5 font-medium transition-all ${Number(record.opening_balance || 0) === 0 ? "text-zinc-300 cursor-not-allowed" : "text-zinc-600 hover:text-white hover:bg-zinc-900"}`
         }, "Reset")))
@@ -135471,7 +135377,7 @@ html body {
         title: "DONATION ID",
         dataIndex: "name",
         key: "name",
-        render: (text) => /* @__PURE__ */ import_react265.default.createElement("a", {
+        render: (text) => /* @__PURE__ */ import_react266.default.createElement("a", {
           onClick: () => {
             if (typeof frappe !== "undefined") {
               frappe.set_route("temple-donation", "donations", "view", text);
@@ -135484,7 +135390,7 @@ html body {
         title: "DONOR",
         dataIndex: "donor_name",
         key: "donor_name",
-        render: (text) => /* @__PURE__ */ import_react265.default.createElement("span", {
+        render: (text) => /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "font-semibold text-sm text-zinc-800"
         }, text || "Anonymous")
       },
@@ -135492,7 +135398,7 @@ html body {
         title: "TEMPLE",
         dataIndex: "temple_name",
         key: "temple_name",
-        render: (text) => /* @__PURE__ */ import_react265.default.createElement("span", {
+        render: (text) => /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "text-xs text-zinc-500 font-medium"
         }, text)
       },
@@ -135500,7 +135406,7 @@ html body {
         title: "DATE & TIME",
         dataIndex: "creation",
         key: "creation",
-        render: (val) => /* @__PURE__ */ import_react265.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "text-xs text-zinc-500"
         }, formatDateTime(val))
       },
@@ -135509,7 +135415,7 @@ html body {
         dataIndex: "total_amount",
         key: "total_amount",
         align: "right",
-        render: (val) => /* @__PURE__ */ import_react265.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "font-bold text-zinc-900 pr-2"
         }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
@@ -135523,17 +135429,17 @@ html body {
         render: (text, record) => {
           const name = text || record.user || "Unknown";
           const initials = name.substring(0, 2).toUpperCase();
-          return /* @__PURE__ */ import_react265.default.createElement("div", {
+          return /* @__PURE__ */ import_react266.default.createElement("div", {
             className: "flex items-center gap-3"
-          }, /* @__PURE__ */ import_react265.default.createElement(avatar_default, {
+          }, /* @__PURE__ */ import_react266.default.createElement(avatar_default, {
             src: record.user_image,
             size: 26,
             className: "bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-          }, initials), /* @__PURE__ */ import_react265.default.createElement("div", {
+          }, initials), /* @__PURE__ */ import_react266.default.createElement("div", {
             className: "flex flex-col min-w-0"
-          }, /* @__PURE__ */ import_react265.default.createElement("span", {
+          }, /* @__PURE__ */ import_react266.default.createElement("span", {
             className: "font-semibold text-gray-800 text-sm"
-          }, name), /* @__PURE__ */ import_react265.default.createElement("span", {
+          }, name), /* @__PURE__ */ import_react266.default.createElement("span", {
             className: "text-xs text-gray-400 truncate"
           }, record.user)));
         }
@@ -135544,9 +135450,9 @@ html body {
         key: "opening_balance",
         align: "right",
         width: 240,
-        render: (value) => /* @__PURE__ */ import_react265.default.createElement("div", {
+        render: (value) => /* @__PURE__ */ import_react266.default.createElement("div", {
           className: "flex items-center justify-end gap-2 pr-4"
-        }, /* @__PURE__ */ import_react265.default.createElement(Text20, {
+        }, /* @__PURE__ */ import_react266.default.createElement(Text20, {
           strong: true,
           className: "text-green-600 text-base"
         }, "\u20B9", Number(value || 0).toLocaleString()))
@@ -135556,7 +135462,7 @@ html body {
         dataIndex: "reset_date",
         key: "reset_date",
         width: 200,
-        render: (value) => /* @__PURE__ */ import_react265.default.createElement("span", {
+        render: (value) => /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "text-sm font-medium text-gray-600"
         }, formatDateTime(value))
       },
@@ -135565,17 +135471,17 @@ html body {
         dataIndex: "collector_name",
         key: "collector_name",
         width: 220,
-        render: (text, record) => /* @__PURE__ */ import_react265.default.createElement("div", {
+        render: (text, record) => /* @__PURE__ */ import_react266.default.createElement("div", {
           className: "flex items-center gap-2"
-        }, /* @__PURE__ */ import_react265.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react266.default.createElement(avatar_default, {
           size: "small",
-          icon: /* @__PURE__ */ import_react265.default.createElement(UserOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react266.default.createElement(UserOutlined_default2, null),
           className: "bg-zinc-800"
-        }), /* @__PURE__ */ import_react265.default.createElement("div", {
+        }), /* @__PURE__ */ import_react266.default.createElement("div", {
           className: "flex flex-col"
-        }, /* @__PURE__ */ import_react265.default.createElement("span", {
+        }, /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "text-sm font-semibold text-zinc-800"
-        }, text), /* @__PURE__ */ import_react265.default.createElement("span", {
+        }, text), /* @__PURE__ */ import_react266.default.createElement("span", {
           className: "text-[10px] text-zinc-400"
         }, record.owner)))
       },
@@ -135584,9 +135490,9 @@ html body {
         key: "action",
         align: "right",
         width: 120,
-        render: (_2, record) => /* @__PURE__ */ import_react265.default.createElement(button_default, {
+        render: (_2, record) => /* @__PURE__ */ import_react266.default.createElement(button_default, {
           type: "text",
-          icon: /* @__PURE__ */ import_react265.default.createElement(EyeOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react266.default.createElement(EyeOutlined_default2, null),
           onClick: () => {
             if (typeof frappe !== "undefined") {
               frappe.set_route("temple-donation", "ledger", "view", record.user);
@@ -135596,25 +135502,25 @@ html body {
         }, "View History")
       }
     ];
-    return /* @__PURE__ */ import_react265.default.createElement("div", {
+    return /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "animate-fadeIn py-6 space-y-6"
-    }, /* @__PURE__ */ import_react265.default.createElement(PageHeader_default, {
+    }, /* @__PURE__ */ import_react266.default.createElement(PageHeader_default, {
       title: "Ledger & Cash Handovers",
       description: "Manage and track opening balance resets and cash handovers",
       onSearch: setSearchText,
       searchPlaceholder: activeTab === "balances" ? "Search users..." : "Search logs...",
       extra: [
-        /* @__PURE__ */ import_react265.default.createElement(button_default, {
+        /* @__PURE__ */ import_react266.default.createElement(button_default, {
           key: "refresh",
           onClick: handleRefresh,
           loading: activeTab === "balances" ? loading : loadingLogs,
-          icon: /* @__PURE__ */ import_react265.default.createElement(SyncOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react266.default.createElement(SyncOutlined_default2, null),
           className: "flex items-center gap-2 px-4 border border-zinc-200 text-zinc-700 font-medium rounded-md bg-white hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all"
         }, "Refresh")
       ]
-    }), /* @__PURE__ */ import_react265.default.createElement("div", {
+    }), /* @__PURE__ */ import_react266.default.createElement("div", {
       className: "bg-zinc-100 p-1 rounded-lg flex items-center space-x-1 w-fit"
-    }, /* @__PURE__ */ import_react265.default.createElement("button", {
+    }, /* @__PURE__ */ import_react266.default.createElement("button", {
       onClick: () => {
         setActiveTab("balances");
         setSearchText("");
@@ -135625,9 +135531,9 @@ html body {
         boxShadow: activeTab === "balances" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
       },
       className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "balances" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
-    }, /* @__PURE__ */ import_react265.default.createElement(WalletOutlined_default2, {
+    }, /* @__PURE__ */ import_react266.default.createElement(WalletOutlined_default2, {
       className: "text-sm"
-    }), "Active Balances"), /* @__PURE__ */ import_react265.default.createElement("button", {
+    }), "Active Balances"), /* @__PURE__ */ import_react266.default.createElement("button", {
       onClick: () => {
         setActiveTab("logs");
         setSearchText("");
@@ -135638,21 +135544,21 @@ html body {
         boxShadow: activeTab === "logs" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
       },
       className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "logs" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
-    }, /* @__PURE__ */ import_react265.default.createElement(HistoryOutlined_default2, {
+    }, /* @__PURE__ */ import_react266.default.createElement(HistoryOutlined_default2, {
       className: "text-sm"
-    }), "Handover History Logs")), activeTab === "balances" ? /* @__PURE__ */ import_react265.default.createElement(CommonTable_default, {
+    }), "Handover History Logs")), activeTab === "balances" ? /* @__PURE__ */ import_react266.default.createElement(CommonTable_default, {
       columns,
       dataSource: data,
       rowKey: "user_name",
       loading,
       searchText
-    }) : /* @__PURE__ */ import_react265.default.createElement(CommonTable_default, {
+    }) : /* @__PURE__ */ import_react266.default.createElement(CommonTable_default, {
       columns: logColumns,
       dataSource: logs,
       rowKey: "name",
       loading: loadingLogs,
       searchText
-    }), /* @__PURE__ */ import_react265.default.createElement(ActiveDonationsModal_default, {
+    }), /* @__PURE__ */ import_react266.default.createElement(ActiveDonationsModal_default, {
       isOpen: isModalOpen,
       onClose: () => setIsModalOpen(false),
       selectedUser,
@@ -135665,10 +135571,10 @@ html body {
   var OpeningBalance_default = OpeningBalance;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/LedgerView.jsx
-  var import_react269 = __toESM(require_react());
+  var import_react270 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/components/LedgerProfileCard.jsx
-  var import_react266 = __toESM(require_react());
+  var import_react267 = __toESM(require_react());
   var LedgerProfileCard = ({ user }) => {
     const getInitials = (name) => {
       if (!name)
@@ -135680,9 +135586,9 @@ html body {
     };
     const fullName = user.full_name || user.name || "Cashier";
     const initials = getInitials(fullName);
-    return /* @__PURE__ */ import_react266.default.createElement(SectionCard_default, null, /* @__PURE__ */ import_react266.default.createElement("div", {
+    return /* @__PURE__ */ import_react267.default.createElement(SectionCard_default, null, /* @__PURE__ */ import_react267.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "12px 0 4px 0" }
-    }, /* @__PURE__ */ import_react266.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react267.default.createElement(avatar_default, {
       size: 96,
       src: user.user_image || void 0,
       style: {
@@ -135696,18 +135602,18 @@ html body {
         alignItems: "center",
         justifyContent: "center"
       }
-    }, !user.user_image && initials), /* @__PURE__ */ import_react266.default.createElement("div", {
+    }, !user.user_image && initials), /* @__PURE__ */ import_react267.default.createElement("div", {
       style: { textAlign: "center", width: "100%" }
-    }, /* @__PURE__ */ import_react266.default.createElement("div", {
+    }, /* @__PURE__ */ import_react267.default.createElement("div", {
       style: { fontSize: 16, fontWeight: 700, color: "#09090b", letterSpacing: "-0.02em", wordBreak: "break-word" }
-    }, fullName), user.email && /* @__PURE__ */ import_react266.default.createElement("div", {
+    }, fullName), user.email && /* @__PURE__ */ import_react267.default.createElement("div", {
       style: { fontSize: 12, color: "#64748b", marginTop: 4, wordBreak: "break-all" }
     }, user.email))));
   };
   var LedgerProfileCard_default = LedgerProfileCard;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/components/LedgerFinancialBox.jsx
-  var import_react267 = __toESM(require_react());
+  var import_react268 = __toESM(require_react());
   var LedgerFinancialBox = ({ title, amount, description, colorTheme = "green" }) => {
     const styles = colorTheme === "green" ? {
       bg: "#F0FDF4",
@@ -135718,7 +135624,7 @@ html body {
       border: "#E2E8F0",
       text: "#0F172A"
     };
-    return /* @__PURE__ */ import_react267.default.createElement("div", {
+    return /* @__PURE__ */ import_react268.default.createElement("div", {
       style: {
         background: styles.bg,
         border: `1px solid ${styles.border}`,
@@ -135729,25 +135635,25 @@ html body {
         gap: 8,
         boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
       }
-    }, /* @__PURE__ */ import_react267.default.createElement("span", {
+    }, /* @__PURE__ */ import_react268.default.createElement("span", {
       style: { fontSize: 10, fontWeight: 700, color: styles.text, letterSpacing: "0.09em", textTransform: "uppercase" }
-    }, title), /* @__PURE__ */ import_react267.default.createElement("span", {
+    }, title), /* @__PURE__ */ import_react268.default.createElement("span", {
       style: { fontSize: 28, fontWeight: 800, color: styles.text, letterSpacing: "-0.03em" }
-    }, "\u20B9", Number(amount || 0).toLocaleString("en-IN")), description && /* @__PURE__ */ import_react267.default.createElement("span", {
+    }, "\u20B9", Number(amount || 0).toLocaleString("en-IN")), description && /* @__PURE__ */ import_react268.default.createElement("span", {
       style: { fontSize: 11, color: styles.text, opacity: 0.8, fontWeight: 500 }
     }, description));
   };
   var LedgerFinancialBox_default = LedgerFinancialBox;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/components/LedgerTabsSection.jsx
-  var import_react268 = __toESM(require_react());
+  var import_react269 = __toESM(require_react());
   var LedgerTabsSection = ({ donations, handovers, donationColumns: donationColumns2, handoverColumns }) => {
-    const [activeTab, setActiveTab] = (0, import_react268.useState)("donations");
-    return /* @__PURE__ */ import_react268.default.createElement("div", {
+    const [activeTab, setActiveTab] = (0, import_react269.useState)("donations");
+    return /* @__PURE__ */ import_react269.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 24 }
-    }, /* @__PURE__ */ import_react268.default.createElement("div", {
+    }, /* @__PURE__ */ import_react269.default.createElement("div", {
       className: "bg-zinc-100 p-1 rounded-lg flex items-center space-x-1 w-fit"
-    }, /* @__PURE__ */ import_react268.default.createElement("button", {
+    }, /* @__PURE__ */ import_react269.default.createElement("button", {
       onClick: () => setActiveTab("donations"),
       style: {
         background: activeTab === "donations" ? "#ffffff" : "transparent",
@@ -135755,9 +135661,9 @@ html body {
         boxShadow: activeTab === "donations" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
       },
       className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "donations" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
-    }, /* @__PURE__ */ import_react268.default.createElement(WalletOutlined_default2, {
+    }, /* @__PURE__ */ import_react269.default.createElement(WalletOutlined_default2, {
       className: "text-sm"
-    }), "Collected Donations (", donations.length, ")"), /* @__PURE__ */ import_react268.default.createElement("button", {
+    }), "Collected Donations (", donations.length, ")"), /* @__PURE__ */ import_react269.default.createElement("button", {
       onClick: () => setActiveTab("handovers"),
       style: {
         background: activeTab === "handovers" ? "#ffffff" : "transparent",
@@ -135765,14 +135671,14 @@ html body {
         boxShadow: activeTab === "handovers" ? "0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06)" : "none"
       },
       className: `flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 outline-none cursor-pointer ${activeTab === "handovers" ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"}`
-    }, /* @__PURE__ */ import_react268.default.createElement(HistoryOutlined_default2, {
+    }, /* @__PURE__ */ import_react269.default.createElement(HistoryOutlined_default2, {
       className: "text-sm"
-    }), "Handover Sessions (", handovers.length, ")")), activeTab === "donations" ? /* @__PURE__ */ import_react268.default.createElement(SectionCard_default, {
+    }), "Handover Sessions (", handovers.length, ")")), activeTab === "donations" ? /* @__PURE__ */ import_react269.default.createElement(SectionCard_default, {
       title: "Cash Donations Collected & Handed Over",
-      right: /* @__PURE__ */ import_react268.default.createElement("span", {
+      right: /* @__PURE__ */ import_react269.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md"
       }, donations.length, " Donation", donations.length !== 1 ? "s" : "", " Found")
-    }, /* @__PURE__ */ import_react268.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react269.default.createElement(table_default, {
       dataSource: donations,
       columns: donationColumns2,
       rowKey: "name",
@@ -135784,12 +135690,12 @@ html body {
       bordered: true,
       className: "aavatto-premium-table",
       scroll: { x: "max-content" }
-    })) : /* @__PURE__ */ import_react268.default.createElement(SectionCard_default, {
+    })) : /* @__PURE__ */ import_react269.default.createElement(SectionCard_default, {
       title: "Past Reset & Handover Logs",
-      right: /* @__PURE__ */ import_react268.default.createElement("span", {
+      right: /* @__PURE__ */ import_react269.default.createElement("span", {
         className: "text-xs font-semibold text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-md"
       }, handovers.length, " Session", handovers.length !== 1 ? "s" : "", " Found")
-    }, /* @__PURE__ */ import_react268.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react269.default.createElement(table_default, {
       dataSource: handovers,
       columns: handoverColumns,
       rowKey: "name",
@@ -135808,9 +135714,9 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Ledger/LedgerView.jsx
   var LedgerView = ({ id, onBack }) => {
     var _a, _b;
-    const [loading, setLoading] = (0, import_react269.useState)(true);
-    const [error, setError] = (0, import_react269.useState)(null);
-    const [data, setData] = (0, import_react269.useState)(null);
+    const [loading, setLoading] = (0, import_react270.useState)(true);
+    const [error, setError] = (0, import_react270.useState)(null);
+    const [data, setData] = (0, import_react270.useState)(null);
     const fetchLedgerDetails = async () => {
       setLoading(true);
       try {
@@ -135830,20 +135736,20 @@ html body {
         setLoading(false);
       }
     };
-    (0, import_react269.useEffect)(() => {
+    (0, import_react270.useEffect)(() => {
       fetchLedgerDetails();
     }, [id]);
     if (loading)
-      return /* @__PURE__ */ import_react269.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react270.default.createElement(PageLoader_default, null);
     if (error || !data) {
-      return /* @__PURE__ */ import_react269.default.createElement("div", {
+      return /* @__PURE__ */ import_react270.default.createElement("div", {
         className: "p-8"
-      }, /* @__PURE__ */ import_react269.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react270.default.createElement(alert_default, {
         message: "Could not load cashier handover details",
         description: (error == null ? void 0 : error.message) || "User details not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react269.default.createElement("button", {
+        action: /* @__PURE__ */ import_react270.default.createElement("button", {
           onClick: onBack,
           className: "px-4 py-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 font-medium hover:border-zinc-900 transition-all cursor-pointer"
         }, "Back")
@@ -135868,7 +135774,7 @@ html body {
         title: "DONATION ID",
         dataIndex: "name",
         key: "name",
-        render: (text) => /* @__PURE__ */ import_react269.default.createElement("a", {
+        render: (text) => /* @__PURE__ */ import_react270.default.createElement("a", {
           onClick: () => {
             if (typeof frappe !== "undefined") {
               frappe.set_route("temple-donation", "donations", "view", text);
@@ -135881,7 +135787,7 @@ html body {
         title: "DONOR",
         dataIndex: "donor_name",
         key: "donor_name",
-        render: (text) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "font-semibold text-sm text-zinc-800"
         }, text || "Anonymous")
       },
@@ -135889,7 +135795,7 @@ html body {
         title: "TEMPLE",
         dataIndex: "temple_name",
         key: "temple_name",
-        render: (text) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "text-xs text-zinc-500 font-medium"
         }, text)
       },
@@ -135897,7 +135803,7 @@ html body {
         title: "DATE & TIME",
         dataIndex: "creation",
         key: "creation",
-        render: (val) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "text-xs text-zinc-500"
         }, formatDateTime(val))
       },
@@ -135906,7 +135812,7 @@ html body {
         dataIndex: "total_amount",
         key: "total_amount",
         align: "right",
-        render: (val) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "font-bold text-zinc-900 pr-2"
         }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
@@ -135916,7 +135822,7 @@ html body {
         title: "LOG ID",
         dataIndex: "name",
         key: "name",
-        render: (text) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "font-mono text-xs font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-2 py-1 rounded"
         }, text)
       },
@@ -135924,7 +135830,7 @@ html body {
         title: "HANDOVER DATE & TIME",
         dataIndex: "reset_date",
         key: "reset_date",
-        render: (val) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "text-sm font-medium text-zinc-600"
         }, formatDateTime(val))
       },
@@ -135932,17 +135838,17 @@ html body {
         title: "COLLECTED BY",
         dataIndex: "collector_name",
         key: "collector_name",
-        render: (text, record) => /* @__PURE__ */ import_react269.default.createElement("div", {
+        render: (text, record) => /* @__PURE__ */ import_react270.default.createElement("div", {
           className: "flex items-center gap-2"
-        }, /* @__PURE__ */ import_react269.default.createElement(avatar_default, {
+        }, /* @__PURE__ */ import_react270.default.createElement(avatar_default, {
           size: "small",
-          icon: /* @__PURE__ */ import_react269.default.createElement(UserOutlined_default2, null),
+          icon: /* @__PURE__ */ import_react270.default.createElement(UserOutlined_default2, null),
           className: "bg-zinc-800"
-        }), /* @__PURE__ */ import_react269.default.createElement("div", {
+        }), /* @__PURE__ */ import_react270.default.createElement("div", {
           className: "flex flex-col"
-        }, /* @__PURE__ */ import_react269.default.createElement("span", {
+        }, /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "text-sm font-semibold text-zinc-800"
-        }, text), /* @__PURE__ */ import_react269.default.createElement("span", {
+        }, text), /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "text-[10px] text-zinc-400"
         }, record.owner)))
       },
@@ -135951,80 +135857,77 @@ html body {
         dataIndex: "opening_balance",
         key: "opening_balance",
         align: "right",
-        render: (val) => /* @__PURE__ */ import_react269.default.createElement("span", {
+        render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
           className: "font-bold text-green-600 pr-2 text-sm"
         }, "\u20B9", Number(val || 0).toLocaleString("en-IN"))
       }
     ];
     const fullName = user.full_name || user.name || "Cashier";
     const initials = `${((_a = user.first_name) == null ? void 0 : _a.charAt(0)) || ""}${((_b = user.last_name) == null ? void 0 : _b.charAt(0)) || ""}`.toUpperCase() || "C";
-    return /* @__PURE__ */ import_react269.default.createElement("div", {
-      className: "user-view-container min-h-screen py-6 bg-[#f8f9fa]",
-      style: { padding: "24px 40px" }
-    }, /* @__PURE__ */ import_react269.default.createElement("div", {
-      style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
-    }, /* @__PURE__ */ import_react269.default.createElement(DetailHeader_default, {
+    return /* @__PURE__ */ import_react270.default.createElement(ViewContainer_default, {
+      className: "user-view-container"
+    }, /* @__PURE__ */ import_react270.default.createElement(DetailHeader_default, {
       onBack,
       title: fullName,
       subtitle: user.email,
       imageSrc: user.user_image,
       initials,
-      actions: /* @__PURE__ */ import_react269.default.createElement("button", {
+      actions: /* @__PURE__ */ import_react270.default.createElement("button", {
         onClick: () => window.print(),
         className: "px-4 py-2 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white rounded-lg cursor-pointer"
-      }, /* @__PURE__ */ import_react269.default.createElement(Printer, {
+      }, /* @__PURE__ */ import_react270.default.createElement(Printer, {
         size: 14,
         className: "text-zinc-600"
       }), " Print History Report")
-    }), /* @__PURE__ */ import_react269.default.createElement(row_default2, {
+    }), /* @__PURE__ */ import_react270.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react269.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react270.default.createElement(col_default2, {
       xs: 24,
       lg: 7
-    }, /* @__PURE__ */ import_react269.default.createElement("div", {
+    }, /* @__PURE__ */ import_react270.default.createElement("div", {
       className: "sticky top-6 flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react269.default.createElement(LedgerProfileCard_default, {
+    }, /* @__PURE__ */ import_react270.default.createElement(LedgerProfileCard_default, {
       user
-    }), /* @__PURE__ */ import_react269.default.createElement(LedgerFinancialBox_default, {
+    }), /* @__PURE__ */ import_react270.default.createElement(LedgerFinancialBox_default, {
       title: "Total Handed Over Amount",
       amount: total_collected,
       description: "Consolidated total from all handover sessions.",
       colorTheme: "green"
-    }), /* @__PURE__ */ import_react269.default.createElement(SectionCard_default, {
+    }), /* @__PURE__ */ import_react270.default.createElement(SectionCard_default, {
       title: "Cashier Information",
-      icon: /* @__PURE__ */ import_react269.default.createElement(UserOutlined_default2, {
+      icon: /* @__PURE__ */ import_react270.default.createElement(UserOutlined_default2, {
         style: { color: "#1f2937" }
       })
-    }, /* @__PURE__ */ import_react269.default.createElement("div", {
+    }, /* @__PURE__ */ import_react270.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 16 }
-    }, /* @__PURE__ */ import_react269.default.createElement(FieldCell_default, {
+    }, /* @__PURE__ */ import_react270.default.createElement(FieldCell_default, {
       label: "User Email"
-    }, /* @__PURE__ */ import_react269.default.createElement("span", {
+    }, /* @__PURE__ */ import_react270.default.createElement("span", {
       style: { fontSize: 13, fontWeight: 600 }
-    }, user.email)), /* @__PURE__ */ import_react269.default.createElement(FieldCell_default, {
+    }, user.email)), /* @__PURE__ */ import_react270.default.createElement(FieldCell_default, {
       label: "Full Name"
-    }, /* @__PURE__ */ import_react269.default.createElement("span", {
+    }, /* @__PURE__ */ import_react270.default.createElement("span", {
       style: { fontSize: 13, fontWeight: 600 }
-    }, fullName)), /* @__PURE__ */ import_react269.default.createElement(FieldCell_default, {
+    }, fullName)), /* @__PURE__ */ import_react270.default.createElement(FieldCell_default, {
       label: "Total Handovers"
-    }, /* @__PURE__ */ import_react269.default.createElement("span", {
+    }, /* @__PURE__ */ import_react270.default.createElement("span", {
       style: { fontSize: 13, fontWeight: 600 }
-    }, handovers.length, " Handover Session", handovers.length !== 1 ? "s" : "")))))), /* @__PURE__ */ import_react269.default.createElement(col_default2, {
+    }, handovers.length, " Handover Session", handovers.length !== 1 ? "s" : "")))))), /* @__PURE__ */ import_react270.default.createElement(col_default2, {
       xs: 24,
       lg: 17
-    }, /* @__PURE__ */ import_react269.default.createElement("div", {
+    }, /* @__PURE__ */ import_react270.default.createElement("div", {
       className: "flex flex-col gap-6"
-    }, /* @__PURE__ */ import_react269.default.createElement(LedgerTabsSection_default, {
+    }, /* @__PURE__ */ import_react270.default.createElement(LedgerTabsSection_default, {
       donations,
       handovers,
       donationColumns: donationColumns2,
       handoverColumns
-    }))))));
+    })))));
   };
   var LedgerView_default = LedgerView;
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
-  var import_react270 = __toESM(require_react());
+  var import_react271 = __toESM(require_react());
 
   // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
   var formConfigs = {
@@ -136061,8 +135964,8 @@ html body {
   }
 `;
   function HoverButton({ style: style2, hoverStyle, children, onClick, title }) {
-    const [hov, setHov] = import_react270.default.useState(false);
-    return /* @__PURE__ */ import_react270.default.createElement("button", {
+    const [hov, setHov] = import_react271.default.useState(false);
+    return /* @__PURE__ */ import_react271.default.createElement("button", {
       style: __spreadValues(__spreadValues({}, style2), hov ? hoverStyle : {}),
       onMouseEnter: () => setHov(true),
       onMouseLeave: () => setHov(false),
@@ -136071,8 +135974,8 @@ html body {
     }, children);
   }
   function FieldCell2({ label, children }) {
-    const [hov, setHov] = import_react270.default.useState(false);
-    return /* @__PURE__ */ import_react270.default.createElement("div", {
+    const [hov, setHov] = import_react271.default.useState(false);
+    return /* @__PURE__ */ import_react271.default.createElement("div", {
       onMouseEnter: () => setHov(true),
       onMouseLeave: () => setHov(false),
       style: {
@@ -136082,7 +135985,7 @@ html body {
         background: hov ? "rgba(15, 23, 42, 0.02)" : "transparent",
         transition: "all 0.2s ease"
       }
-    }, /* @__PURE__ */ import_react270.default.createElement("span", {
+    }, /* @__PURE__ */ import_react271.default.createElement("span", {
       style: {
         display: "block",
         fontSize: 10,
@@ -136092,12 +135995,12 @@ html body {
         color: C2.inkLight,
         marginBottom: 4
       }
-    }, label), /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, label), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { minHeight: 20, fontSize: 13, fontWeight: 600, color: C2.ink }
     }, children));
   }
   function SectionCard2({ title, right, children }) {
-    return /* @__PURE__ */ import_react270.default.createElement("div", {
+    return /* @__PURE__ */ import_react271.default.createElement("div", {
       style: {
         background: C2.surface,
         border: `1px solid ${C2.border}`,
@@ -136105,7 +136008,7 @@ html body {
         overflow: "hidden",
         boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)"
       }
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: {
         display: "flex",
         alignItems: "center",
@@ -136114,9 +136017,9 @@ html body {
         background: "#FAFBFD",
         borderBottom: `1px solid ${C2.border}`
       }
-    }, /* @__PURE__ */ import_react270.default.createElement("span", {
+    }, /* @__PURE__ */ import_react271.default.createElement("span", {
       style: { fontSize: 14, fontWeight: 700, color: C2.ink, letterSpacing: "-0.01em" }
-    }, title), right), /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, title), right), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { padding: "24px" }
     }, children));
   }
@@ -136132,18 +136035,18 @@ html body {
       limit: 1e3
     });
     if (loading)
-      return /* @__PURE__ */ import_react270.default.createElement(PageLoader_default, null);
+      return /* @__PURE__ */ import_react271.default.createElement(PageLoader_default, null);
     if (error || !doc) {
-      return /* @__PURE__ */ import_react270.default.createElement("div", {
+      return /* @__PURE__ */ import_react271.default.createElement("div", {
         style: { padding: 32 }
-      }, /* @__PURE__ */ import_react270.default.createElement(alert_default, {
+      }, /* @__PURE__ */ import_react271.default.createElement(alert_default, {
         message: "Could not load document",
         description: (error == null ? void 0 : error.message) || "Document not found",
         type: "error",
         showIcon: true,
-        action: /* @__PURE__ */ import_react270.default.createElement(button_default, {
+        action: /* @__PURE__ */ import_react271.default.createElement(button_default, {
           onClick: onBack,
-          icon: /* @__PURE__ */ import_react270.default.createElement(ArrowLeftOutlined_default2, null)
+          icon: /* @__PURE__ */ import_react271.default.createElement(ArrowLeftOutlined_default2, null)
         }, "Back")
       }));
     }
@@ -136159,17 +136062,17 @@ html body {
     const renderValue = (field, value) => {
       const empty2 = value === null || value === void 0 || value === "" || Array.isArray(value) && value.length === 0;
       if (empty2)
-        return /* @__PURE__ */ import_react270.default.createElement("span", {
+        return /* @__PURE__ */ import_react271.default.createElement("span", {
           style: { color: C2.inkXLight, fontSize: 13, fontWeight: 500 }
         }, "\u2014");
       if (field.type === "image")
-        return /* @__PURE__ */ import_react270.default.createElement("img", {
+        return /* @__PURE__ */ import_react271.default.createElement("img", {
           src: value,
           alt: field.label,
           style: { width: 56, height: 56, objectFit: "cover", borderRadius: 10, border: `1px solid ${C2.border}` }
         });
       if (field.type === "textarea")
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: {
             background: "#F8FAFC",
             border: `1px solid ${C2.border}`,
@@ -136183,48 +136086,48 @@ html body {
           }
         }, value);
       if (field.name === "custom_select_temple" && Array.isArray(value))
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: { display: "flex", flexWrap: "wrap", gap: 6 }
         }, value.map((item) => {
           const tid = item.temple || String(item);
           const t2 = temples == null ? void 0 : temples.find((t3) => t3.name === tid);
           const name = t2 ? t2.temple_name : tid;
           const tagInfo = getTagConfig("temple admin");
-          return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+          return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
             className: `tag-glass ${tagInfo.glassClass}`,
             key: item.name || tid
           }, name);
         }));
       if (field.name === "roles" && Array.isArray(value))
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: { display: "flex", flexWrap: "wrap", gap: 6 }
         }, value.map((item) => {
           const roleName = item.role || String(item);
           const tagInfo = getTagConfig(roleName);
-          return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+          return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
             className: `tag-glass ${tagInfo.glassClass}`,
             key: item.name || roleName
           }, roleName);
         }));
       if (field.name === "custom_user_role") {
         const tagInfo = getTagConfig(String(value));
-        return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass}`
         }, String(value));
       }
       if (Array.isArray(value))
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: { display: "flex", flexWrap: "wrap", gap: 6 }
         }, value.map((item, i) => {
           const s2 = typeof item === "object" ? item.name || JSON.stringify(item) : String(item);
           const tagInfo = getTagConfig(s2);
-          return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+          return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
             className: `tag-glass ${tagInfo.glassClass}`,
             key: i
           }, s2);
         }));
       if (typeof value === "object")
-        return /* @__PURE__ */ import_react270.default.createElement("pre", {
+        return /* @__PURE__ */ import_react271.default.createElement("pre", {
           style: {
             fontSize: 11,
             background: "#F8FAFC",
@@ -136236,7 +136139,7 @@ html body {
             margin: 0
           }
         }, JSON.stringify(value, null, 2));
-      return /* @__PURE__ */ import_react270.default.createElement("span", {
+      return /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 13, fontWeight: 600, color: C2.ink }
       }, String(value));
     };
@@ -136266,39 +136169,39 @@ html body {
       };
       if (doctype === "User") {
         if (doc.user_image) {
-          return /* @__PURE__ */ import_react270.default.createElement("img", {
+          return /* @__PURE__ */ import_react271.default.createElement("img", {
             src: doc.user_image,
             alt: doc.full_name,
             style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
           });
         }
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: bgStyle
         }, getInitials(doc.full_name || doc.name));
       }
       if (doctype === "Donor") {
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: bgStyle
         }, getInitials(doc.donor_name || doc.name));
       }
       if (doctype === "Temple") {
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: bgStyle
         }, getInitials(doc.temple_name || doc.name));
       }
       if (doctype === "Donation Type") {
         if (doc.donation_image) {
-          return /* @__PURE__ */ import_react270.default.createElement("img", {
+          return /* @__PURE__ */ import_react271.default.createElement("img", {
             src: doc.donation_image,
             alt: doc.donation_type,
             style: { width: 56, height: 56, borderRadius: "50%", objectFit: "cover", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)", flexShrink: 0 }
           });
         }
-        return /* @__PURE__ */ import_react270.default.createElement("div", {
+        return /* @__PURE__ */ import_react271.default.createElement("div", {
           style: bgStyle
         }, getInitials(doc.donation_type || doc.name));
       }
-      return /* @__PURE__ */ import_react270.default.createElement(import_react270.default.Fragment, null);
+      return /* @__PURE__ */ import_react271.default.createElement(import_react271.default.Fragment, null);
     };
     const renderHeaderDetails = () => {
       let title = doc.name;
@@ -136306,14 +136209,14 @@ html body {
       if (doctype === "User") {
         title = doc.full_name || doc.name;
         if (doc.email)
-          subtitleElements.push(/* @__PURE__ */ import_react270.default.createElement("span", {
+          subtitleElements.push(/* @__PURE__ */ import_react271.default.createElement("span", {
             key: "email",
             style: { color: C2.inkMid, fontWeight: 500 }
           }, doc.email));
         if (doc.custom_user_role) {
           const tagInfo = getTagConfig(doc.custom_user_role);
           subtitleElements.push(
-            /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+            /* @__PURE__ */ import_react271.default.createElement(tag_default, {
               key: "role",
               className: `tag-glass ${tagInfo.glassClass}`,
               style: { marginLeft: 4 }
@@ -136323,12 +136226,12 @@ html body {
       } else if (doctype === "Donor") {
         title = doc.donor_name || doc.name;
         if (doc.email)
-          subtitleElements.push(/* @__PURE__ */ import_react270.default.createElement("span", {
+          subtitleElements.push(/* @__PURE__ */ import_react271.default.createElement("span", {
             key: "email",
             style: { color: C2.inkMid, fontWeight: 500 }
           }, doc.email));
         if (doc.phone)
-          subtitleElements.push(/* @__PURE__ */ import_react270.default.createElement("span", {
+          subtitleElements.push(/* @__PURE__ */ import_react271.default.createElement("span", {
             key: "phone",
             style: { color: C2.inkLight }
           }, "\u2022 ", doc.phone));
@@ -136337,7 +136240,7 @@ html body {
         if (doc.custom_status) {
           const tagInfo = getTagConfig(doc.custom_status);
           subtitleElements.push(
-            /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+            /* @__PURE__ */ import_react271.default.createElement(tag_default, {
               key: "status",
               className: `tag-glass ${tagInfo.glassClass}`
             }, doc.custom_status)
@@ -136346,7 +136249,7 @@ html body {
       } else if (doctype === "Donation") {
         title = `Donation ${doc.name}`;
         subtitleElements.push(
-          /* @__PURE__ */ import_react270.default.createElement("span", {
+          /* @__PURE__ */ import_react271.default.createElement("span", {
             key: "date",
             style: { color: C2.inkMid, fontWeight: 500 }
           }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "")
@@ -136355,27 +136258,27 @@ html body {
         title = doc.donation_type || doc.name;
         if (doc.donation_type_code) {
           subtitleElements.push(
-            /* @__PURE__ */ import_react270.default.createElement("span", {
+            /* @__PURE__ */ import_react271.default.createElement("span", {
               key: "code",
               style: { color: C2.inkMid, fontWeight: 500 }
             }, doc.donation_type_code)
           );
         }
       }
-      return /* @__PURE__ */ import_react270.default.createElement("div", {
+      return /* @__PURE__ */ import_react271.default.createElement("div", {
         style: { display: "flex", flexDirection: "column", gap: 3 }
-      }, /* @__PURE__ */ import_react270.default.createElement("div", {
+      }, /* @__PURE__ */ import_react271.default.createElement("div", {
         style: { fontSize: 20, fontWeight: 800, color: C2.ink, letterSpacing: "-0.02em", lineHeight: 1.2 }
-      }, title), /* @__PURE__ */ import_react270.default.createElement("div", {
+      }, title), /* @__PURE__ */ import_react271.default.createElement("div", {
         style: { display: "flex", alignItems: "center", gap: 8, fontSize: 13, flexWrap: "wrap" }
       }, subtitleElements));
     };
-    return /* @__PURE__ */ import_react270.default.createElement("div", {
+    return /* @__PURE__ */ import_react271.default.createElement("div", {
       className: "temple-donation-app common-view-root",
       style: { background: C2.bg, minHeight: "100vh", padding: "32px 24px 120px 24px" }
-    }, /* @__PURE__ */ import_react270.default.createElement("style", null, fontStyle), /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("style", null, fontStyle), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { maxWidth: 1120, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: {
         display: "flex",
         alignItems: "center",
@@ -136385,9 +136288,9 @@ html body {
         paddingBottom: 24,
         borderBottom: `1px solid ${C2.border}`
       }
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", alignItems: "center", gap: 16 }
-    }, /* @__PURE__ */ import_react270.default.createElement(HoverButton, {
+    }, /* @__PURE__ */ import_react271.default.createElement(HoverButton, {
       style: {
         width: 40,
         height: 40,
@@ -136404,13 +136307,13 @@ html body {
       hoverStyle: { borderColor: C2.black, background: C2.black, color: "#fff" },
       onClick: onBack,
       title: "Go back"
-    }, /* @__PURE__ */ import_react270.default.createElement(ArrowLeftOutlined_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(ArrowLeftOutlined_default2, {
       style: { fontSize: 14 }
-    })), /* @__PURE__ */ import_react270.default.createElement("div", {
+    })), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", alignItems: "center", gap: 14 }
-    }, renderHeaderAvatar(), renderHeaderDetails())), /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, renderHeaderAvatar(), renderHeaderDetails())), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", gap: 8 }
-    }, /* @__PURE__ */ import_react270.default.createElement(HoverButton, {
+    }, /* @__PURE__ */ import_react271.default.createElement(HoverButton, {
       style: {
         height: 40,
         padding: "0 20px",
@@ -136429,9 +136332,9 @@ html body {
       },
       hoverStyle: { borderColor: C2.black, color: C2.ink },
       onClick: () => window.print()
-    }, /* @__PURE__ */ import_react270.default.createElement(PrinterOutlined_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(PrinterOutlined_default2, {
       style: { fontSize: 14 }
-    }), " Print"), /* @__PURE__ */ import_react270.default.createElement(HoverButton, {
+    }), " Print"), /* @__PURE__ */ import_react271.default.createElement(HoverButton, {
       style: {
         height: 40,
         padding: "0 22px",
@@ -136450,31 +136353,31 @@ html body {
       },
       hoverStyle: { background: "#1E293B" },
       onClick: () => onEdit && onEdit(doc)
-    }, /* @__PURE__ */ import_react270.default.createElement(EditOutlined_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(EditOutlined_default2, {
       style: { fontSize: 14 }
-    }), " Edit"))), /* @__PURE__ */ import_react270.default.createElement(row_default2, {
+    }), " Edit"))), /* @__PURE__ */ import_react271.default.createElement(row_default2, {
       gutter: [24, 24]
-    }, /* @__PURE__ */ import_react270.default.createElement(col_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(col_default2, {
       xs: 24,
       lg: 16
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 24 }
-    }, /* @__PURE__ */ import_react270.default.createElement(SectionCard2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(SectionCard2, {
       title: "Details"
-    }, /* @__PURE__ */ import_react270.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(row_default2, {
       gutter: [16, 16]
     }, visibleFields.map((field) => {
       const isFullWidth = field.type === "image" || field.type === "textarea" || field.name === "custom_select_temple" || field.name === "roles";
-      return /* @__PURE__ */ import_react270.default.createElement(col_default2, {
+      return /* @__PURE__ */ import_react271.default.createElement(col_default2, {
         xs: 24,
         sm: isFullWidth ? 24 : 12,
         key: field.name
-      }, /* @__PURE__ */ import_react270.default.createElement(FieldCell2, {
+      }, /* @__PURE__ */ import_react271.default.createElement(FieldCell2, {
         label: field.label
       }, renderValue(field, doc[field.name])));
-    }))), doctype === "Donation" && /* @__PURE__ */ import_react270.default.createElement(SectionCard2, {
+    }))), doctype === "Donation" && /* @__PURE__ */ import_react271.default.createElement(SectionCard2, {
       title: "Financial Summary",
-      right: /* @__PURE__ */ import_react270.default.createElement("div", {
+      right: /* @__PURE__ */ import_react271.default.createElement("div", {
         style: {
           display: "flex",
           alignItems: "baseline",
@@ -136484,7 +136387,7 @@ html body {
           borderRadius: 10,
           padding: "5px 14px"
         }
-      }, /* @__PURE__ */ import_react270.default.createElement("span", {
+      }, /* @__PURE__ */ import_react271.default.createElement("span", {
         style: {
           fontSize: 10,
           fontWeight: 700,
@@ -136492,7 +136395,7 @@ html body {
           letterSpacing: "0.08em",
           textTransform: "uppercase"
         }
-      }, "Total"), /* @__PURE__ */ import_react270.default.createElement("span", {
+      }, "Total"), /* @__PURE__ */ import_react271.default.createElement("span", {
         style: {
           fontSize: 18,
           fontWeight: 800,
@@ -136501,98 +136404,98 @@ html body {
           letterSpacing: "-0.02em"
         }
       }, "\u20B9", Number(doc.total_amount || 0).toLocaleString("en-IN")))
-    }, /* @__PURE__ */ import_react270.default.createElement(row_default2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(row_default2, {
       gutter: [10, 10],
       style: { marginBottom: 20 }
     }, [
       { label: "Payment Mode", value: (() => {
         const tagInfo = getTagConfig(doc.payment_mode);
-        return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass}`
         }, doc.payment_mode);
       })() },
-      { label: "Handled By", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Handled By", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 13, fontWeight: 600, color: C2.ink }
       }, doc.cashier || "System") },
-      { label: "Reference", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Reference", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 12, fontWeight: 600, color: C2.inkMid, fontFamily: "ui-monospace,monospace" }
       }, doc.reference_no || "N/A") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react270.default.createElement(col_default2, {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react271.default.createElement(col_default2, {
       xs: 24,
       sm: 8,
       key: label
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { padding: "12px 14px", background: C2.bg, border: `1px solid ${C2.border}`, borderRadius: 10 }
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C2.inkLight, marginBottom: 6 }
-    }, label), value)))), /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, label), value)))), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { border: `1px solid ${C2.border}`, borderRadius: 10, overflow: "hidden" }
-    }, /* @__PURE__ */ import_react270.default.createElement(table_default, {
+    }, /* @__PURE__ */ import_react271.default.createElement(table_default, {
       dataSource: doc.donation_items || [],
       pagination: false,
       rowKey: "name",
       size: "middle",
       columns: [
         {
-          title: /* @__PURE__ */ import_react270.default.createElement("span", {
+          title: /* @__PURE__ */ import_react271.default.createElement("span", {
             style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C2.inkLight }
           }, "Donation Type"),
           dataIndex: "donation_type",
           render: (v) => {
             const dt2 = donationTypes == null ? void 0 : donationTypes.find((t2) => t2.name === v);
-            return /* @__PURE__ */ import_react270.default.createElement("span", {
+            return /* @__PURE__ */ import_react271.default.createElement("span", {
               style: { fontWeight: 600, color: C2.ink, fontSize: 13 }
             }, dt2 ? dt2.donation_type : v);
           }
         },
         {
-          title: /* @__PURE__ */ import_react270.default.createElement("span", {
+          title: /* @__PURE__ */ import_react271.default.createElement("span", {
             style: { fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.09em", color: C2.inkLight }
           }, "Amount"),
           dataIndex: "amount",
           align: "right",
-          render: (v) => /* @__PURE__ */ import_react270.default.createElement("span", {
+          render: (v) => /* @__PURE__ */ import_react271.default.createElement("span", {
             style: { fontWeight: 700, color: C2.green, fontSize: 13, fontVariantNumeric: "tabular-nums" }
           }, "\u20B9", Number(v).toLocaleString("en-IN"))
         }
       ]
-    })), /* @__PURE__ */ import_react270.default.createElement("div", {
+    })), /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { marginTop: 20 }
-    }, /* @__PURE__ */ import_react270.default.createElement(DonationPrint_default, {
+    }, /* @__PURE__ */ import_react271.default.createElement(DonationPrint_default, {
       donation: doc
-    }))))), /* @__PURE__ */ import_react270.default.createElement(col_default2, {
+    }))))), /* @__PURE__ */ import_react271.default.createElement(col_default2, {
       xs: 24,
       lg: 8
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 20 }
-    }, /* @__PURE__ */ import_react270.default.createElement(SectionCard2, {
+    }, /* @__PURE__ */ import_react271.default.createElement(SectionCard2, {
       title: "System Information"
-    }, /* @__PURE__ */ import_react270.default.createElement("div", {
+    }, /* @__PURE__ */ import_react271.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: 16 }
     }, [
-      { label: "Document ID", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Document ID", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontFamily: "ui-monospace, monospace", fontSize: 11, fontWeight: 600, color: C2.inkMid }
       }, id) },
       { label: "Status", value: (() => {
         const statusVal = doc.custom_status || doc.status || (Number(doc.enabled) === 1 || doc.enabled === "Active" || doc.enabled === true ? "Active" : "Inactive");
         const tagInfo = getTagConfig(statusVal);
-        return /* @__PURE__ */ import_react270.default.createElement(tag_default, {
+        return /* @__PURE__ */ import_react271.default.createElement(tag_default, {
           className: `tag-glass ${tagInfo.glassClass}`
         }, statusVal);
       })() },
-      { label: "Created By", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Created By", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 12, fontWeight: 600, color: C2.inkMid }
       }, doc.owner || "System") },
-      { label: "Created At", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Created At", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 12, fontWeight: 600, color: C2.inkMid }
       }, doc.creation ? new Date(doc.creation).toLocaleString() : "\u2014") },
-      { label: "Last Modified", value: /* @__PURE__ */ import_react270.default.createElement("span", {
+      { label: "Last Modified", value: /* @__PURE__ */ import_react271.default.createElement("span", {
         style: { fontSize: 12, fontWeight: 600, color: C2.inkMid }
       }, doc.modified ? new Date(doc.modified).toLocaleString() : "\u2014") }
-    ].map(({ label, value }) => /* @__PURE__ */ import_react270.default.createElement("div", {
+    ].map(({ label, value }) => /* @__PURE__ */ import_react271.default.createElement("div", {
       key: label,
       style: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }
-    }, /* @__PURE__ */ import_react270.default.createElement("span", {
+    }, /* @__PURE__ */ import_react271.default.createElement("span", {
       style: { fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: C2.inkLight }
     }, label), value)))))))));
   };
@@ -136603,43 +136506,43 @@ html body {
     {
       key: "dashboard",
       label: "Dashboard",
-      component: /* @__PURE__ */ import_react271.default.createElement(Dashboard_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(Dashboard_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "ledger",
       label: "Ledger",
-      component: /* @__PURE__ */ import_react271.default.createElement(OpeningBalance_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(OpeningBalance_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "users",
       label: "Users",
-      component: /* @__PURE__ */ import_react271.default.createElement(UserList_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(UserList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "temples",
       label: "Temples",
-      component: /* @__PURE__ */ import_react271.default.createElement(TempleList_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(TempleList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donation-types",
       label: "Donation Types",
-      component: /* @__PURE__ */ import_react271.default.createElement(DonationTypeList_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(DonationTypeList_default, null),
       roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
       key: "donors",
       label: "Donors",
-      component: /* @__PURE__ */ import_react271.default.createElement(DonorList_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(DonorList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
       key: "donations",
       label: "Donation",
-      component: /* @__PURE__ */ import_react271.default.createElement(DonationList_default, null),
+      component: /* @__PURE__ */ import_react272.default.createElement(DonationList_default, null),
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     }
   ];
@@ -136663,19 +136566,19 @@ html body {
     const navItem = navigationItems.find((nav) => nav.key === baseKey);
     const hasPermission = !navItem || navItem.roles.some((role) => userRoles.includes(role));
     if (!hasPermission) {
-      return /* @__PURE__ */ import_react271.default.createElement("div", {
+      return /* @__PURE__ */ import_react272.default.createElement("div", {
         className: "p-16 text-center bg-stone-50/50  border border-dashed border-stone-200 mt-12 animate-fadeIn"
-      }, /* @__PURE__ */ import_react271.default.createElement("div", {
+      }, /* @__PURE__ */ import_react272.default.createElement("div", {
         className: "text-stone-300 mb-6"
-      }, /* @__PURE__ */ import_react271.default.createElement(UserOutlined_default2, {
+      }, /* @__PURE__ */ import_react272.default.createElement(UserOutlined_default2, {
         className: "text-6xl"
-      })), /* @__PURE__ */ import_react271.default.createElement("h3", {
+      })), /* @__PURE__ */ import_react272.default.createElement("h3", {
         className: "text-2xl font-black text-stone-800 mb-2 tracking-tight"
-      }, "Access Restricted"), /* @__PURE__ */ import_react271.default.createElement("p", {
+      }, "Access Restricted"), /* @__PURE__ */ import_react272.default.createElement("p", {
         className: "text-stone-400 font-medium"
-      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react271.default.createElement("div", {
+      }, "You do not have the required permissions to access this specific module."), /* @__PURE__ */ import_react272.default.createElement("div", {
         className: "flex justify-center gap-4 mt-8"
-      }, /* @__PURE__ */ import_react271.default.createElement("button", {
+      }, /* @__PURE__ */ import_react272.default.createElement("button", {
         onClick: () => navigate("dashboard"),
         className: "px-8 py-3 bg-zinc-900 text-white font-bold  shadow-lg transition-all"
       }, "Return to Dashboard")));
@@ -136692,12 +136595,12 @@ html body {
     };
     if (baseKey === "ledger") {
       if (subRoute === "view") {
-        return /* @__PURE__ */ import_react271.default.createElement(LedgerView_default, {
+        return /* @__PURE__ */ import_react272.default.createElement(LedgerView_default, {
           id: dynamicId,
           onBack: () => navigate(baseKey)
         });
       }
-      return /* @__PURE__ */ import_react271.default.createElement(OpeningBalance_default, null);
+      return /* @__PURE__ */ import_react272.default.createElement(OpeningBalance_default, null);
     }
     if (targetDoctype && subRoute === "view") {
       const viewProps = {
@@ -136707,24 +136610,24 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react271.default.createElement(DonorView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonorView_default, __spreadValues({}, viewProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react271.default.createElement(TempleView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react272.default.createElement(TempleView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react271.default.createElement(DonationView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonationView_default, __spreadValues({}, viewProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react271.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonationTypeView_default, __spreadValues({}, viewProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react271.default.createElement(UserView_default, __spreadValues({}, viewProps));
+          return /* @__PURE__ */ import_react272.default.createElement(UserView_default, __spreadValues({}, viewProps));
         default:
-          return /* @__PURE__ */ import_react271.default.createElement(CommonView_default, __spreadValues({
+          return /* @__PURE__ */ import_react272.default.createElement(CommonView_default, __spreadValues({
             doctype: targetDoctype
           }, viewProps));
       }
     }
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
       if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") {
-        return /* @__PURE__ */ import_react271.default.createElement(Donation_default, {
+        return /* @__PURE__ */ import_react272.default.createElement(Donation_default, {
           onBack: () => navigate(baseKey)
         });
       }
@@ -136734,22 +136637,22 @@ html body {
       };
       switch (targetDoctype) {
         case DOCTYPE_DONOR:
-          return /* @__PURE__ */ import_react271.default.createElement(DonorForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonorForm_default, __spreadValues({}, formProps));
         case DOCTYPE_TEMPLE:
-          return /* @__PURE__ */ import_react271.default.createElement(TempleForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react272.default.createElement(TempleForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION:
-          return /* @__PURE__ */ import_react271.default.createElement(DonationForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonationForm_default, __spreadValues({}, formProps));
         case DOCTYPE_DONATION_TYPE:
-          return /* @__PURE__ */ import_react271.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react272.default.createElement(DonationTypeForm_default, __spreadValues({}, formProps));
         case DOCTYPE_USER:
-          return /* @__PURE__ */ import_react271.default.createElement(UserForm_default, __spreadValues({}, formProps));
+          return /* @__PURE__ */ import_react272.default.createElement(UserForm_default, __spreadValues({}, formProps));
         default:
           return null;
       }
     }
     if (navItem)
       return navItem.component;
-    return /* @__PURE__ */ import_react271.default.createElement(Dashboard_default, null);
+    return /* @__PURE__ */ import_react272.default.createElement(Dashboard_default, null);
   };
   var getFilteredMenuItems = (userRoles = []) => {
     return navigationItems.filter((item) => !item.hidden && item.roles.some((role) => userRoles.includes(role))).map(({ key, icon, label }) => ({
@@ -136760,13 +136663,13 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/context/UserContext.jsx
-  var import_react272 = __toESM(require_react());
-  var UserContext = (0, import_react272.createContext)();
+  var import_react273 = __toESM(require_react());
+  var UserContext = (0, import_react273.createContext)();
   var UserProvider = ({ children }) => {
-    const [user, setUser] = (0, import_react272.useState)(null);
-    const [roles, setRoles] = (0, import_react272.useState)([]);
-    const [loading, setLoading] = (0, import_react272.useState)(true);
-    (0, import_react272.useEffect)(() => {
+    const [user, setUser] = (0, import_react273.useState)(null);
+    const [roles, setRoles] = (0, import_react273.useState)([]);
+    const [loading, setLoading] = (0, import_react273.useState)(true);
+    (0, import_react273.useEffect)(() => {
       const fetchUserData = async () => {
         var _a;
         if (typeof frappe !== "undefined") {
@@ -136828,12 +136731,12 @@ html body {
       isAdmin: (user == null ? void 0 : user.email) === "Administrator",
       hasRole: (roleList) => roleList.some((role) => roles.includes(role))
     };
-    return /* @__PURE__ */ import_react272.default.createElement(UserContext.Provider, {
+    return /* @__PURE__ */ import_react273.default.createElement(UserContext.Provider, {
       value
     }, children);
   };
   var useUser = () => {
-    const context = (0, import_react272.useContext)(UserContext);
+    const context = (0, import_react273.useContext)(UserContext);
     if (!context) {
       throw new Error("useUser must be used within a UserProvider");
     }
@@ -136841,22 +136744,22 @@ html body {
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/App.jsx
-  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react273.default.createElement(TempleFlagLoader_default, {
+  spin_default.setDefaultIndicator(/* @__PURE__ */ import_react274.default.createElement(TempleFlagLoader_default, {
     size: "small"
   }));
   var { Header: Header3, Content: Content3 } = layout_default2;
   var App = () => {
-    const [currentRoute, setCurrentRoute] = (0, import_react273.useState)("dashboard");
-    const [mobileOpen, setMobileOpen] = (0, import_react273.useState)(false);
-    const [windowWidth, setWindowWidth] = (0, import_react273.useState)(typeof window !== "undefined" ? window.innerWidth : 1024);
+    const [currentRoute, setCurrentRoute] = (0, import_react274.useState)("dashboard");
+    const [mobileOpen, setMobileOpen] = (0, import_react274.useState)(false);
+    const [windowWidth, setWindowWidth] = (0, import_react274.useState)(typeof window !== "undefined" ? window.innerWidth : 1024);
     const { user, roles, logout, isAdmin, loading } = useUser();
-    (0, import_react273.useEffect)(() => {
+    (0, import_react274.useEffect)(() => {
       const handleResize = () => setWindowWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
     const isMobile2 = windowWidth < 768;
-    (0, import_react273.useEffect)(() => {
+    (0, import_react274.useEffect)(() => {
       if (!loading) {
         const initLoader = document.getElementById("temple-initial-loader");
         if (initLoader) {
@@ -136864,7 +136767,7 @@ html body {
         }
       }
     }, [loading]);
-    (0, import_react273.useEffect)(() => {
+    (0, import_react274.useEffect)(() => {
       const handleRoute = () => {
         if (typeof frappe !== "undefined" && frappe.get_route) {
           const route = frappe.get_route();
@@ -136892,7 +136795,7 @@ html body {
       {
         key: "profile",
         label: "My Profile",
-        icon: /* @__PURE__ */ import_react273.default.createElement(UserOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react274.default.createElement(UserOutlined_default2, null),
         onClick: () => {
           if (typeof window !== "undefined") {
             window.location.href = "/me";
@@ -136905,7 +136808,7 @@ html body {
       {
         key: "logout",
         label: "Logout",
-        icon: /* @__PURE__ */ import_react273.default.createElement(LogoutOutlined_default2, null),
+        icon: /* @__PURE__ */ import_react274.default.createElement(LogoutOutlined_default2, null),
         danger: true,
         onClick: logout
       }
@@ -136973,29 +136876,29 @@ html body {
     if (loading) {
       return null;
     }
-    return /* @__PURE__ */ import_react273.default.createElement(config_provider_default, {
+    return /* @__PURE__ */ import_react274.default.createElement(config_provider_default, {
       theme: themeConfig
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       className: `temple-donation-app`
-    }, /* @__PURE__ */ import_react273.default.createElement(layout_default2, {
+    }, /* @__PURE__ */ import_react274.default.createElement(layout_default2, {
       className: `min-h-screen`
-    }, /* @__PURE__ */ import_react273.default.createElement(Header3, {
+    }, /* @__PURE__ */ import_react274.default.createElement(Header3, {
       style: headerStyle
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       style: headerInnerStyle
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       style: logoContainerStyle
-    }, /* @__PURE__ */ import_react273.default.createElement("img", {
+    }, /* @__PURE__ */ import_react274.default.createElement("img", {
       src: "/assets/temple_donation/img/logo.svg",
       alt: "Temple Donation",
       style: logoImgStyle
-    })), /* @__PURE__ */ import_react273.default.createElement("div", {
+    })), /* @__PURE__ */ import_react274.default.createElement("div", {
       style: rightContainerStyle
-    }, !isMobile2 && /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, !isMobile2 && /* @__PURE__ */ import_react274.default.createElement("div", {
       style: { display: "flex", gap: "24px", alignItems: "center" }
     }, menuItems.map((item) => {
       const isActive2 = currentRoute.split("/")[0] === item.key;
-      return /* @__PURE__ */ import_react273.default.createElement("button", {
+      return /* @__PURE__ */ import_react274.default.createElement("button", {
         key: item.key,
         onClick: () => handleMenuClick({ key: item.key }),
         style: {
@@ -137014,18 +136917,18 @@ html body {
           alignItems: "center"
         }
       }, item.label);
-    })), /* @__PURE__ */ import_react273.default.createElement("div", {
+    })), /* @__PURE__ */ import_react274.default.createElement("div", {
       style: rightActionsStyle
-    }, !isAdmin && !isMobile2 && /* @__PURE__ */ import_react273.default.createElement(dropdown_default3, {
+    }, !isAdmin && !isMobile2 && /* @__PURE__ */ import_react274.default.createElement(dropdown_default3, {
       menu: { items: userMenuItems },
       placement: "bottomRight"
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       style: userProfileStyle
-    }, /* @__PURE__ */ import_react273.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react274.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react273.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react273.default.createElement("span", null, user == null ? void 0 : user.name))), isMobile2 && /* @__PURE__ */ import_react273.default.createElement(button_default, {
-      icon: /* @__PURE__ */ import_react273.default.createElement(MenuOutlined_default2, null),
+      icon: !(user == null ? void 0 : user.image) && /* @__PURE__ */ import_react274.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react274.default.createElement("span", null, user == null ? void 0 : user.name))), isMobile2 && /* @__PURE__ */ import_react274.default.createElement(button_default, {
+      icon: /* @__PURE__ */ import_react274.default.createElement(MenuOutlined_default2, null),
       onClick: () => setMobileOpen(true),
       style: {
         display: "flex",
@@ -137038,8 +136941,8 @@ html body {
         width: "40px",
         height: "40px"
       }
-    }))))), /* @__PURE__ */ import_react273.default.createElement(drawer_default, {
-      title: /* @__PURE__ */ import_react273.default.createElement("img", {
+    }))))), /* @__PURE__ */ import_react274.default.createElement(drawer_default, {
+      title: /* @__PURE__ */ import_react274.default.createElement("img", {
         src: "/assets/temple_donation/img/logo.png",
         alt: "Temple Donation",
         style: { height: "40px", objectFit: "contain" }
@@ -137049,14 +136952,14 @@ html body {
       open: mobileOpen,
       width: 280,
       bodyStyle: { padding: 0 }
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       className: "flex flex-col h-full",
       style: { padding: "20px 0" }
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       style: { display: "flex", flexDirection: "column", gap: "8px" }
     }, menuItems.map((item) => {
       const isActive2 = currentRoute.split("/")[0] === item.key;
-      return /* @__PURE__ */ import_react273.default.createElement("button", {
+      return /* @__PURE__ */ import_react274.default.createElement("button", {
         key: item.key,
         onClick: () => {
           handleMenuClick({ key: item.key });
@@ -137077,20 +136980,20 @@ html body {
           width: "100%"
         }
       }, item.label);
-    })), !isAdmin && /* @__PURE__ */ import_react273.default.createElement("div", {
+    })), !isAdmin && /* @__PURE__ */ import_react274.default.createElement("div", {
       className: "mt-auto p-4 border-t border-zinc-100"
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       className: "flex items-center gap-3 px-3 py-2 mb-3"
-    }, /* @__PURE__ */ import_react273.default.createElement(avatar_default, {
+    }, /* @__PURE__ */ import_react274.default.createElement(avatar_default, {
       src: user == null ? void 0 : user.image,
-      icon: /* @__PURE__ */ import_react273.default.createElement(UserOutlined_default2, null)
-    }), /* @__PURE__ */ import_react273.default.createElement("div", {
+      icon: /* @__PURE__ */ import_react274.default.createElement(UserOutlined_default2, null)
+    }), /* @__PURE__ */ import_react274.default.createElement("div", {
       className: "flex flex-col"
-    }, /* @__PURE__ */ import_react273.default.createElement("span", {
+    }, /* @__PURE__ */ import_react274.default.createElement("span", {
       className: "text-sm font-bold text-zinc-900"
-    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react273.default.createElement("span", {
+    }, user == null ? void 0 : user.name), /* @__PURE__ */ import_react274.default.createElement("span", {
       className: "text-[10px] text-zinc-400 uppercase tracking-widest"
-    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react273.default.createElement("button", {
+    }, roles == null ? void 0 : roles[0]))), /* @__PURE__ */ import_react274.default.createElement("button", {
       onClick: logout,
       style: {
         display: "flex",
@@ -137108,9 +137011,9 @@ html body {
         textAlign: "left",
         outline: "none"
       }
-    }, /* @__PURE__ */ import_react273.default.createElement(LogoutOutlined_default2, null), /* @__PURE__ */ import_react273.default.createElement("span", null, "Logout"))))), /* @__PURE__ */ import_react273.default.createElement(Content3, {
+    }, /* @__PURE__ */ import_react274.default.createElement(LogoutOutlined_default2, null), /* @__PURE__ */ import_react274.default.createElement("span", null, "Logout"))))), /* @__PURE__ */ import_react274.default.createElement(Content3, {
       className: "bg-transparent py-8"
-    }, /* @__PURE__ */ import_react273.default.createElement("div", {
+    }, /* @__PURE__ */ import_react274.default.createElement("div", {
       className: "aavatto-content-wrapper"
     }, getComponentForRoute(currentRoute, roles))))));
   };
@@ -137130,7 +137033,7 @@ html body {
     setup_app() {
       const root = (0, import_client2.createRoot)(this.$wrapper.get(0));
       root.render(
-        /* @__PURE__ */ import_react274.default.createElement(UserProvider, null, /* @__PURE__ */ import_react274.default.createElement(App_default, null))
+        /* @__PURE__ */ import_react275.default.createElement(UserProvider, null, /* @__PURE__ */ import_react275.default.createElement(App_default, null))
       );
       this.$temple_donation = root;
     }
@@ -137218,4 +137121,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.UCX4WXYY.js.map
+//# sourceMappingURL=temple_donation.bundle.AJ7C3OR3.js.map

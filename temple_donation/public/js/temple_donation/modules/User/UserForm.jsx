@@ -17,6 +17,9 @@ import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
+
 
 const UserForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -75,26 +78,26 @@ const UserForm = ({ id, onBack }) => {
     if (isEdit && error)   return <Alert message="Error loading user" type="error" />;
 
     // --- Premium Glassmorphism & Soft UI Configuration ---
-    const premiumCardProps = {
-        size: "small",
-        className: "transition-all duration-300 hover:shadow-md border border-zinc-200/80 rounded-2xl overflow-hidden",
-        style: { 
-            background: '#ffffff',
-            boxShadow: '0 4px 20px -2px rgba(24, 24, 27, 0.03), 0 2px 8px -1px rgba(24, 24, 27, 0.02)'
-        },
-        headStyle: {
-            background: 'linear-gradient(to right, #f8f8f9, #f4f4f5)',
-            borderBottom: '1px solid #e4e4e7',
-            paddingTop: '12px',
-            paddingBottom: '12px',
-        },
-        bodyStyle: { 
-            padding: '20px' 
-        }
-    };
+    // const premiumCardProps = {
+    //     size: "small",
+    //     className: "transition-all duration-300 hover:shadow-md border border-zinc-200/80 rounded-2xl overflow-hidden",
+    //     style: { 
+    //         background: '#ffffff',
+    //         boxShadow: '0 4px 20px -2px rgba(24, 24, 27, 0.03), 0 2px 8px -1px rgba(24, 24, 27, 0.02)'
+    //     },
+    //     headStyle: {
+    //         background: 'linear-gradient(to right, #f8f8f9, #f4f4f5)',
+    //         borderBottom: '1px solid #e4e4e7',
+    //         paddingTop: '12px',
+    //         paddingBottom: '12px',
+    //     },
+    //     bodyStyle: { 
+    //         padding: '20px' 
+    //     }
+    // };
 
     return (
-        <div className="donation-page py-6" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit User" : "Add User"}
@@ -108,8 +111,8 @@ const UserForm = ({ id, onBack }) => {
                     {/* ─── LEFT COLUMN: Profile Panel (7/24 Span) ─── */}
                     <Col xs={24} md={12} lg={7}>
                         <div className="sticky top-6" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                            <Card 
-                                {...premiumCardProps}
+                            <SectionCard 
+                                // {...premiumCardProps}
                                 title={<Space><UserOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b', letterSpacing: '-0.01em' }}>User Profile</span></Space>}
                             >
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, padding: '12px 0 4px 0' }}>
@@ -155,7 +158,7 @@ const UserForm = ({ id, onBack }) => {
                                         </div>
                                     )}
                                 </div>
-                            </Card>
+                            </SectionCard>
                         </div>
                     </Col>
 
@@ -164,8 +167,8 @@ const UserForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
                             {/* Section 1: Basic Info */}
-                            <Card 
-                                {...premiumCardProps}
+                            <SectionCard 
+                                // {...premiumCardProps}
                                 title={<Space><UserOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Basic Information</span></Space>}
                             >
                                 <Row gutter={[16, 4]}>
@@ -190,11 +193,11 @@ const UserForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Section 2: Role & Access */}
-                            <Card 
-                                {...premiumCardProps}
+                            <SectionCard 
+                                // {...premiumCardProps}
                                 title={<Space><SafetyOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Role & Access Matrix</span></Space>}
                             >
                                 <Row gutter={[16, 4]}>
@@ -239,11 +242,11 @@ const UserForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Section 3: Security */}
-                            <Card 
-                                {...premiumCardProps}
+                            <SectionCard 
+                                // {...premiumCardProps}
                                 title={<Space><LockOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Security & Balances</span></Space>}
                             >
                                 <Row gutter={[16, 4]}>
@@ -258,11 +261,11 @@ const UserForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Section 4: Notes */}
-                            <Card 
-                                {...premiumCardProps}
+                            <SectionCard 
+                                // {...premiumCardProps}
                                 title={<Space><FileTextOutlined style={{ color: '#09090b' }} /><span style={{ fontWeight: 700, color: '#09090b' }}>Internal Notes</span></Space>}
                             >
                                 <Form.Item name="custom_internal_notes" style={{ marginBottom: 0 }}>
@@ -273,7 +276,7 @@ const UserForm = ({ id, onBack }) => {
                                         style={{ resize: 'none', borderRadius: '8px', padding: '10px' }}
                                     />
                                 </Form.Item>
-                            </Card>
+                            </SectionCard>
 
                         </div>
                     </Col>
@@ -292,7 +295,7 @@ const UserForm = ({ id, onBack }) => {
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_USER} docname={id} />}
-        </div>
+        </ViewContainer>
     );
 };
 

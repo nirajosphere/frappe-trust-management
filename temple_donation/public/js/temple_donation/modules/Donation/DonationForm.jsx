@@ -15,6 +15,8 @@ import AddPageHeader from "../../components/common/AddPageHeader";
 import ActivityLog from "../../components/common/ActivityLog";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const { Text } = Typography;
 
@@ -61,27 +63,27 @@ const DonationForm = ({ id, onBack }) => {
     const formItemStyle = { marginBottom: '12px' };
 
     // Common Premium Card Style & Props
-    const commonCardProps = {
-        size: "small",
-        className: "shadow-sm border border-zinc-200/80 overflow-hidden",
-        style: { 
-            height: 'auto',
-            background: '#fafafa', // Halka soft premium grey background
-        },
-        headStyle: {
-            background: '#f4f4f5', // Header ke liye thoda dark background separation ke liye
-            borderBottom: '1px solid #e4e4e7',
-            paddingTop: '8px',
-            paddingBottom: '8px'
-        },
-        bodyStyle: {
-            background: '#ffffff', // Content area clean white taaki inputs acche se highlight hon
-            padding: '16px'
-        }
-    };
+    // const commonCardProps = {
+    //     size: "small",
+    //     className: "shadow-sm border border-zinc-200/80 overflow-hidden",
+    //     style: { 
+    //         height: 'auto',
+    //         background: '#fafafa', // Halka soft premium grey background
+    //     },
+    //     headStyle: {
+    //         background: '#f4f4f5', // Header ke liye thoda dark background separation ke liye
+    //         borderBottom: '1px solid #e4e4e7',
+    //         paddingTop: '8px',
+    //         paddingBottom: '8px'
+    //     },
+    //     bodyStyle: {
+    //         background: '#ffffff', // Content area clean white taaki inputs acche se highlight hon
+    //         padding: '16px'
+    //     }
+    // };
 
     return (
-        <div className="donation-page py-6" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 16px' }}>
+        <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
                 title="Edit Donation"
@@ -99,8 +101,8 @@ const DonationForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             
                             {/* Card 1: Donor Information */}
-                            <Card 
-                                {...commonCardProps}
+                            <SectionCard 
+                                // {...commonCardProps}
                                 title={<Space><UserOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donor Information</span></Space>}
                             >
                                 <Form.Item name="name" hidden><Input /></Form.Item>
@@ -131,11 +133,11 @@ const DonationForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Card 2: Address */}
-                            <Card 
-                                {...commonCardProps}
+                            <SectionCard 
+                                // {...commonCardProps}
                                 title={<Space><EnvironmentOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Address</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -175,7 +177,7 @@ const DonationForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                         </div>
                     </Col>
@@ -185,8 +187,8 @@ const DonationForm = ({ id, onBack }) => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             
                             {/* Card 3: Personal Details */}
-                            <Card 
-                                {...commonCardProps}
+                            <SectionCard 
+                                // {...commonCardProps}
                                 title={<Space><HeartOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Personal Details</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -209,11 +211,11 @@ const DonationForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Card 4: Donation Payments */}
-                            <Card 
-                                {...commonCardProps}
+                            <SectionCard 
+                                // {...commonCardProps}
                                 title={<Space><DollarOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Payments</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -228,11 +230,11 @@ const DonationForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                             {/* Card 5: Donation Items */}
-                            <Card 
-                                {...commonCardProps}
+                            <SectionCard 
+                                // {...commonCardProps}
                                 title={<Space><GiftOutlined style={{ color: '#18181b' }} /><span style={{ fontWeight: 700, color: '#27272a' }}>Donation Items</span></Space>}
                             >
                                 <Row gutter={[16, 0]}>
@@ -257,7 +259,7 @@ const DonationForm = ({ id, onBack }) => {
                                         )}
                                     </Form.List>
                                 </Row>
-                            </Card>
+                            </SectionCard>
 
                         </div>
                     </Col>
@@ -275,7 +277,7 @@ const DonationForm = ({ id, onBack }) => {
             </Form>
 
             {isEdit && <ActivityLog doctype={DOCTYPE_DONATION} docname={id} />}
-        </div>
+        </ViewContainer>
     );
 };
 
