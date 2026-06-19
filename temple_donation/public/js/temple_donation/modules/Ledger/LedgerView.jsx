@@ -80,7 +80,7 @@ const LedgerView = ({ id, onBack }) => {
 
   const donationColumns = [
     {
-      title: "DONATION ID",
+      title: "Donation Id",
       dataIndex: "name",
       key: "name",
       render: (text) => (
@@ -97,25 +97,25 @@ const LedgerView = ({ id, onBack }) => {
       )
     },
     {
-      title: "DONOR",
+      title: "Donor",
       dataIndex: "donor_name",
       key: "donor_name",
       render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
     },
     {
-      title: "TEMPLE",
+      title: "Temple",
       dataIndex: "temple_name",
       key: "temple_name",
       render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>
     },
     {
-      title: "DATE & TIME",
+      title: "Date & Time",
       dataIndex: "creation",
       key: "creation",
       render: (val) => <span className="text-xs text-zinc-500">{formatDateTime(val)}</span>
     },
     {
-      title: "AMOUNT",
+      title: "Amount",
       dataIndex: "total_amount",
       key: "total_amount",
       align: "right",
@@ -129,7 +129,7 @@ const LedgerView = ({ id, onBack }) => {
 
   const handoverColumns = [
     {
-      title: "LOG ID",
+      title: "Log Id",
       dataIndex: "name",
       key: "name",
       render: (text) => (
@@ -139,13 +139,13 @@ const LedgerView = ({ id, onBack }) => {
       )
     },
     {
-      title: "HANDOVER DATE & TIME",
+      title: "Date & Time",
       dataIndex: "reset_date",
       key: "reset_date",
       render: (val) => <span className="text-sm font-medium text-zinc-600">{formatDateTime(val)}</span>
     },
     {
-      title: "COLLECTED BY",
+      title: "Collected By",
       dataIndex: "collector_name",
       key: "collector_name",
       render: (text, record) => (
@@ -159,7 +159,7 @@ const LedgerView = ({ id, onBack }) => {
       )
     },
     {
-      title: "AMOUNT HANDED OVER",
+      title: "Amount Handed Over",
       dataIndex: "opening_balance",
       key: "opening_balance",
       align: "right",

@@ -135217,6 +135217,7 @@ html body {
         className: "!my-2"
       },
       bordered: true,
+      size: "small",
       scroll: { x: "max-content" }
     })));
   };
@@ -135345,7 +135346,7 @@ html body {
     const columns = [
       ...userBalanceColumns,
       {
-        title: "ACTION",
+        title: "Action",
         key: "action",
         align: "right",
         width: 220,
@@ -135374,7 +135375,7 @@ html body {
     ];
     const activeDonationColumns = [
       {
-        title: "DONATION ID",
+        title: "Donation Id",
         dataIndex: "name",
         key: "name",
         render: (text) => /* @__PURE__ */ import_react266.default.createElement("a", {
@@ -135387,7 +135388,7 @@ html body {
         }, text)
       },
       {
-        title: "DONOR",
+        title: "Donor",
         dataIndex: "donor_name",
         key: "donor_name",
         render: (text) => /* @__PURE__ */ import_react266.default.createElement("span", {
@@ -135395,7 +135396,7 @@ html body {
         }, text || "Anonymous")
       },
       {
-        title: "TEMPLE",
+        title: "Temple",
         dataIndex: "temple_name",
         key: "temple_name",
         render: (text) => /* @__PURE__ */ import_react266.default.createElement("span", {
@@ -135403,7 +135404,7 @@ html body {
         }, text)
       },
       {
-        title: "DATE & TIME",
+        title: "Date & Time",
         dataIndex: "creation",
         key: "creation",
         render: (val) => /* @__PURE__ */ import_react266.default.createElement("span", {
@@ -135411,7 +135412,7 @@ html body {
         }, formatDateTime(val))
       },
       {
-        title: "AMOUNT",
+        title: "Amount",
         dataIndex: "total_amount",
         key: "total_amount",
         align: "right",
@@ -135422,7 +135423,7 @@ html body {
     ];
     const logColumns = [
       {
-        title: "CASHIER",
+        title: "Cashier",
         dataIndex: "user_name",
         key: "user_name",
         width: 250,
@@ -135445,7 +135446,7 @@ html body {
         }
       },
       {
-        title: "TOTAL AMOUNT HANDED OVER",
+        title: "Amount Handed Over",
         dataIndex: "opening_balance",
         key: "opening_balance",
         align: "right",
@@ -135458,7 +135459,7 @@ html body {
         }, "\u20B9", Number(value || 0).toLocaleString()))
       },
       {
-        title: "LATEST HANDOVER",
+        title: "Latest Hand Over",
         dataIndex: "reset_date",
         key: "reset_date",
         width: 200,
@@ -135467,7 +135468,7 @@ html body {
         }, formatDateTime(value))
       },
       {
-        title: "LATEST COLLECTOR",
+        title: "Latest Collector",
         dataIndex: "collector_name",
         key: "collector_name",
         width: 220,
@@ -135486,7 +135487,7 @@ html body {
         }, record.owner)))
       },
       {
-        title: "ACTION",
+        title: "Action",
         key: "action",
         align: "right",
         width: 120,
@@ -135771,7 +135772,7 @@ html body {
     };
     const donationColumns2 = [
       {
-        title: "DONATION ID",
+        title: "Donation Id",
         dataIndex: "name",
         key: "name",
         render: (text) => /* @__PURE__ */ import_react270.default.createElement("a", {
@@ -135784,7 +135785,7 @@ html body {
         }, text)
       },
       {
-        title: "DONOR",
+        title: "Donor",
         dataIndex: "donor_name",
         key: "donor_name",
         render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
@@ -135792,7 +135793,7 @@ html body {
         }, text || "Anonymous")
       },
       {
-        title: "TEMPLE",
+        title: "Temple",
         dataIndex: "temple_name",
         key: "temple_name",
         render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
@@ -135800,7 +135801,7 @@ html body {
         }, text)
       },
       {
-        title: "DATE & TIME",
+        title: "Date & Time",
         dataIndex: "creation",
         key: "creation",
         render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
@@ -135808,7 +135809,7 @@ html body {
         }, formatDateTime(val))
       },
       {
-        title: "AMOUNT",
+        title: "Amount",
         dataIndex: "total_amount",
         key: "total_amount",
         align: "right",
@@ -135819,7 +135820,7 @@ html body {
     ];
     const handoverColumns = [
       {
-        title: "LOG ID",
+        title: "Log Id",
         dataIndex: "name",
         key: "name",
         render: (text) => /* @__PURE__ */ import_react270.default.createElement("span", {
@@ -135827,7 +135828,7 @@ html body {
         }, text)
       },
       {
-        title: "HANDOVER DATE & TIME",
+        title: "Date & Time",
         dataIndex: "reset_date",
         key: "reset_date",
         render: (val) => /* @__PURE__ */ import_react270.default.createElement("span", {
@@ -135835,7 +135836,7 @@ html body {
         }, formatDateTime(val))
       },
       {
-        title: "COLLECTED BY",
+        title: "Collected By",
         dataIndex: "collector_name",
         key: "collector_name",
         render: (text, record) => /* @__PURE__ */ import_react270.default.createElement("div", {
@@ -135853,7 +135854,7 @@ html body {
         }, record.owner)))
       },
       {
-        title: "AMOUNT HANDED OVER",
+        title: "Amount Handed Over",
         dataIndex: "opening_balance",
         key: "opening_balance",
         align: "right",
@@ -137121,4 +137122,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.AJ7C3OR3.js.map
+//# sourceMappingURL=temple_donation.bundle.ETJQY2M7.js.map

@@ -142,7 +142,7 @@ const OpeningBalance = () => {
     const columns = [
         ...userBalanceColumns,
         {
-            title: 'ACTION',
+            title: 'Action',
             key: 'action',
             align: 'right',
             width: 220,
@@ -185,7 +185,7 @@ const OpeningBalance = () => {
 
     const activeDonationColumns = [
         {
-            title: "DONATION ID",
+            title: "Donation Id",
             dataIndex: "name",
             key: "name",
             render: (text) => (
@@ -202,25 +202,25 @@ const OpeningBalance = () => {
             )
         },
         {
-            title: "DONOR",
+            title: "Donor",
             dataIndex: "donor_name",
             key: "donor_name",
             render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
         },
         {
-            title: "TEMPLE",
+            title: "Temple",
             dataIndex: "temple_name",
             key: "temple_name",
             render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>
         },
         {
-            title: "DATE & TIME",
+            title: "Date & Time",
             dataIndex: "creation",
             key: "creation",
             render: (val) => <span className="text-xs text-zinc-500">{formatDateTime(val)}</span>
         },
         {
-            title: "AMOUNT",
+            title: "Amount",
             dataIndex: "total_amount",
             key: "total_amount",
             align: "right",
@@ -234,7 +234,7 @@ const OpeningBalance = () => {
 
     const logColumns = [
         {
-            title: 'CASHIER',
+            title: 'Cashier',
             dataIndex: 'user_name',
             key: 'user_name',
             width: 250,
@@ -264,7 +264,7 @@ const OpeningBalance = () => {
             }
         },
         {
-            title: 'TOTAL AMOUNT HANDED OVER',
+            title: 'Amount Handed Over',
             dataIndex: 'opening_balance',
             key: 'opening_balance',
             align: 'right',
@@ -278,7 +278,7 @@ const OpeningBalance = () => {
             )
         },
         {
-            title: 'LATEST HANDOVER',
+            title: 'Latest Hand Over',
             dataIndex: 'reset_date',
             key: 'reset_date',
             width: 200,
@@ -289,7 +289,7 @@ const OpeningBalance = () => {
             )
         },
         {
-            title: 'LATEST COLLECTOR',
+            title: 'Latest Collector',
             dataIndex: 'collector_name',
             key: 'collector_name',
             width: 220,
@@ -304,7 +304,7 @@ const OpeningBalance = () => {
             )
         },
         {
-            title: 'ACTION',
+            title: 'Action',
             key: 'action',
             align: 'right',
             width: 120,
