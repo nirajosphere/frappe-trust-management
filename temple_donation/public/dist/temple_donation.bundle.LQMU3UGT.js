@@ -133658,9 +133658,7 @@ html body {
         style: { backgroundColor: "#18181b", borderColor: "#18181b" }
       }, "Reply")))))));
     };
-    return /* @__PURE__ */ import_react244.default.createElement("div", {
-      style: { marginTop: "24px" }
-    }, /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
+    return /* @__PURE__ */ import_react244.default.createElement("div", null, /* @__PURE__ */ import_react244.default.createElement(SectionCard_default, {
       title: "Activity & Comments",
       icon: /* @__PURE__ */ import_react244.default.createElement(HistoryOutlined_default2, {
         style: { color: "#18181b" }
@@ -139123,4 +139121,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.KVF3QLH5.js.map
+//# sourceMappingURL=temple_donation.bundle.LQMU3UGT.js.map

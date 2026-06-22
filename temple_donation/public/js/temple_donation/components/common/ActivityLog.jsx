@@ -571,7 +571,7 @@ const ActivityLog = ({ doctype, docname }) => {
     };
 
     return (
-        <div style={{ marginTop: "24px" }}>
+        <div>
             <SectionCard
                 title="Activity & Comments"
                 icon={<HistoryOutlined style={{ color: "#18181b" }} />}
