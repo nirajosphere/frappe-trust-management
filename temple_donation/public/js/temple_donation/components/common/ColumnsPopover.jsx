@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Popover, Checkbox } from "antd";
 import { SettingOutlined, ArrowUpOutlined, ArrowDownOutlined, EyeOutlined, EyeInvisibleOutlined, HolderOutlined } from "@ant-design/icons";
+import { Columns3 } from "lucide-react";
 
 const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doctype }) => {
     const [open, setOpen] = useState(false);
@@ -153,10 +154,10 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
             arrow={true}
         >
             <Button
-                icon={<SettingOutlined />}
+                icon={<Columns3 size={16} strokeWidth={2} />}
                 className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
             >
-                Columns
+                {/* Columns */}
             </Button>
         </Popover>
     );

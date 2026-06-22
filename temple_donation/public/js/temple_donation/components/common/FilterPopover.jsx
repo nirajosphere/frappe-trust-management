@@ -272,7 +272,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                     icon={<FilterOutlined />}
                     style={{ height: "40px", padding: "0 16px", borderColor: "#d9d9d9", color: "#595959", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px" }}
                 >
-                    Filter
+                    {/* Filter */}
                     {activeCount > 0 && (
                         <span style={{ backgroundColor: "#000", color: "#fff", fontSize: "10px", height: "20px", minWidth: "20px", padding: "0 6px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "10px", fontWeight: "bold" }}>
                             {activeCount}
