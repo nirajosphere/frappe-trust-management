@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Card, Typography, Row, Col, Spin, Alert, Select, InputNumber
+    Form, Input, Button, Alert, Select, Row, Col, Typography, InputNumber
 } from "antd";
-import { SaveOutlined } from "@ant-design/icons";
 import {
-    useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc
+    useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_ROOM } from "../../config/constants";
 import { roomFormFields } from "../../formfield/roomFormFields";
-import PageHeader from "../../components/common/PageHeader";
+import AddPageHeader from "../../components/common/AddPageHeader";
+import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const { Text } = Typography;
 
@@ -20,9 +23,19 @@ const RoomForm = ({ id, onBack }) => {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_ROOM, id);
 
+    // Fetch Temples list for link field
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
             form.setFieldsValue(initialValues);
+        } else {
+            form.setFieldsValue({
+                status: "Available"
+            });
         }
     }, [isEdit, initialValues, form]);
 
@@ -39,53 +52,60 @@ const RoomForm = ({ id, onBack }) => {
         }
     };
 
-    if (fetching && isEdit) return <div className="p-20 text-center"><Spin /></div>;
-    if (fetchError) return <Alert message="Error" description={fetchError.message} type="error" />;
+    if (fetching && isEdit) return <PageLoader />;
+    if (fetchError) return <Alert message="Error loading room details" type="error" action={<Button onClick={onBack}>Back</Button>} />;
+
+    const formItemStyle = { marginBottom: '14px' };
 
     return (
-        <div className="max-w-5xl mx-auto py-6">
-            <PageHeader
+        <ViewContainer className="donation-page">
+            <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Room Details" : "Register New Room"}
                 subtitle="Accommodation Setup"
+                showBack={true}
             />
 
-            <Card size="small" className="aavatto-card">
-                <Form form={form} layout="vertical" onFinish={handleSave} className="p-6">
+            <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false} size="middle">
+                <SectionCard title="Room Details">
                     <Row gutter={[24, 0]}>
                         {roomFormFields.fields.map((field) => (
                             <Col xs={24} md={12} key={field.name}>
                                 <Form.Item
                                     name={field.name}
-                                    label={<Text strong className="text-zinc-500 uppercase text-[10px] tracking-widest">{field.label}</Text>}
+                                    label={field.label}
+                                    style={formItemStyle}
                                     rules={field.required ? [{ required: true, message: field.message || "Required" }] : []}
                                 >
                                     {field.type === "select" ? (
-                                        <Select placeholder={field.placeholder} options={field.options} className="h-10" />
+                                        <Select placeholder={field.placeholder} options={field.options} />
+                                    ) : field.type === "link" && field.doctype === "Temple" ? (
+                                        <Select 
+                                            showSearch
+                                            placeholder={field.placeholder} 
+                                            optionFilterProp="children"
+                                            loading={loadingTemples}
+                                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                                        />
                                     ) : field.type === "number" ? (
-                                        <InputNumber placeholder={field.placeholder} className="w-full h-10 flex items-center" />
+                                        <InputNumber placeholder={field.placeholder} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />
                                     ) : (
-                                        <Input placeholder={field.placeholder} className="h-10" />
+                                        <Input placeholder={field.placeholder} />
                                     )}
                                 </Form.Item>
                             </Col>
                         ))}
                     </Row>
-                    <div className="flex justify-end gap-3 mt-10 border-t pt-8">
-                        <Button onClick={onBack}>Cancel</Button>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={updating || creating}
-                            icon={<SaveOutlined />}
-                            className="bg-black border-none"
-                        >
-                            {isEdit ? "Update Registry" : "Save Room"}
-                        </Button>
-                    </div>
-                </Form>
-            </Card>
-        </div>
+                </SectionCard>
+                <div style={{ marginTop: '24px' }}>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={updating || creating}
+                        isEdit={isEdit}
+                    />
+                </div>
+            </Form>
+        </ViewContainer>
     );
 };
 

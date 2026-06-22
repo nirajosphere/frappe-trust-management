@@ -1,16 +1,23 @@
 {
  "actions": [],
  "allow_rename": 1,
+<<<<<<< HEAD
 <<<<<<<< HEAD:temple_donation/temple_donation/doctype/donation_material/donation_material.json
  "creation": "2026-04-20 12:35:00.000000",
 ========
  "creation": "2026-05-12 15:02:17.376144",
 >>>>>>>> d85d69df3850bde141b68053e7ca5a753e699974:temple_donation/temple_donation/doctype/temple_donation_type/temple_donation_type.json
+=======
+ "creation": "2026-04-20 12:35:00.000000",
+>>>>>>> 26aa2a49bd0806e0d3e15f4f916554d79c1878ce
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+<<<<<<< HEAD
 <<<<<<<< HEAD:temple_donation/temple_donation/doctype/donation_material/donation_material.json
+=======
+>>>>>>> 26aa2a49bd0806e0d3e15f4f916554d79c1878ce
   "item",
   "qty"
  ],
@@ -27,6 +34,7 @@
    "fieldtype": "Float",
    "label": "Quantity",
    "reqd": 1
+<<<<<<< HEAD
 ========
   "donation_type"
  ],
@@ -37,23 +45,31 @@
    "label": "Donation Type",
    "options": "Donation Type"
 >>>>>>>> d85d69df3850bde141b68053e7ca5a753e699974:temple_donation/temple_donation/doctype/temple_donation_type/temple_donation_type.json
+=======
+>>>>>>> 26aa2a49bd0806e0d3e15f4f916554d79c1878ce
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
+<<<<<<< HEAD
 <<<<<<<< HEAD:temple_donation/temple_donation/doctype/donation_material/donation_material.json
+=======
+>>>>>>> 26aa2a49bd0806e0d3e15f4f916554d79c1878ce
  "modified": "2026-04-20 12:35:00.000000",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Donation Material",
+<<<<<<< HEAD
 ========
  "modified": "2026-05-12 15:03:55.360859",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Temple Donation Type",
 >>>>>>>> d85d69df3850bde141b68053e7ca5a753e699974:temple_donation/temple_donation/doctype/temple_donation_type/temple_donation_type.json
+=======
+>>>>>>> 26aa2a49bd0806e0d3e15f4f916554d79c1878ce
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",
