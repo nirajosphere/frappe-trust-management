@@ -1,218 +1,25 @@
-// import React, { useState, useEffect, useRef } from "react";
-// import { Row, Col, Card, Typography, Space, Tooltip, Empty, Spin } from "antd";
-// import {
-//     WalletOutlined,
-//     AppstoreOutlined,
-//     UserAddOutlined,
-//     ArrowUpOutlined,
-//     TrophyOutlined,
-//     PieChartOutlined
-// } from "@ant-design/icons";
-// import PageHeader from "../../components/common/PageHeader";
-
-// const { Title, Text } = Typography;
-
-// const Dashboard = () => {
-//     const [loading, setLoading] = useState(true);
-//     const [stats, setStats] = useState({ total_donation: 0, top_category: "N/A", new_donors: 0 });
-//     const [topDonors, setTopDonors] = useState([]);
-//     const [typeData, setTypeData] = useState([]);
-//     const chartRef = useRef(null);
-
-//     const fetchData = async () => {
-//         setLoading(true);
-//         try {
-//             if (typeof frappe !== "undefined") {
-//                 const [statsRes, typesRes, donorsRes] = await Promise.all([
-//                     frappe.call({ method: "temple_donation.api.get_dashboard_stats" }),
-//                     frappe.call({ method: "temple_donation.api.get_donations_by_type" }),
-//                     frappe.call({ method: "temple_donation.api.get_top_donors" })
-//                 ]);
-
-//                 if (statsRes.message) setStats(statsRes.message);
-//                 if (typesRes.message) setTypeData(typesRes.message);
-//                 if (donorsRes.message) setTopDonors(donorsRes.message);
-//             }
-//         } catch (error) {
-//             console.error("Dashboard fetch error:", error);
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     useEffect(() => {
-//         fetchData();
-//     }, []);
-
-//     if (loading) {
-//         return (
-//             <div className="flex flex-col items-center justify-center min-h-[600px] gap-4">
-//                 <Spin size="large" />
-//                 <Text className="text-zinc-400 font-bold tracking-widest uppercase text-[10px] animate-pulse">
-//                     Analyzing Temple Statistics...
-//                 </Text>
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div className="dashboard-container animate-fadeIn">
-//             <PageHeader
-//                 title="Consolidated Dashboard"
-//                 subtitle="Real-time performance analytics and donation insights."
-//             />
-
-//             <div className="p-8">
-//                 {/* --- Top Stat Cards --- */}
-//                 <Row gutter={[24, 24]} className="mb-10">
-//                     <Col xs={24} md={8}>
-//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-//                             <div className="flex justify-between items-start">
-//                                 <div>
-//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Total Donation</Text>
-//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
-//                                         ₹{(stats.total_donation || 0).toLocaleString()}
-//                                     </Title>
-//                                     <div className="mt-2 flex items-center gap-1 text-emerald-500 font-bold text-xs">
-//                                         <ArrowUpOutlined />
-//                                         <span>Live Update</span>
-//                                     </div>
-//                                 </div>
-//                                 <div className="h-12 w-12 bg-zinc-900  flex items-center justify-center shadow-lg shadow-zinc-900/10">
-//                                     <WalletOutlined className="text-white text-xl" />
-//                                 </div>
-//                             </div>
-//                         </Card>
-//                     </Col>
-
-//                     <Col xs={24} md={8}>
-//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-//                             <div className="flex justify-between items-start">
-//                                 <div>
-//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">Top Category</Text>
-//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900 max-w-[200px] truncate">
-//                                         {stats.top_category}
-//                                     </Title>
-//                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Based on total collection</div>
-//                                 </div>
-//                                 <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
-//                                     <AppstoreOutlined className="text-zinc-900 text-xl" />
-//                                 </div>
-//                             </div>
-//                         </Card>
-//                     </Col>
-
-//                     <Col xs={24} md={8}>
-//                         <Card className="premium-stat-card border-zinc-100 shadow-sm rounded-[32px] hover:border-zinc-900/10 transition-all duration-300">
-//                             <div className="flex justify-between items-start">
-//                                 <div>
-//                                     <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 block">New Donors (Today)</Text>
-//                                     <Title level={2} className="!m-0 font-black tracking-tighter text-zinc-900">
-//                                         {stats.new_donors}
-//                                     </Title>
-//                                     <div className="mt-2 text-zinc-400 font-medium text-xs">Community growth tracking</div>
-//                                 </div>
-//                                 <div className="h-12 w-12 bg-zinc-100  flex items-center justify-center">
-//                                     <UserAddOutlined className="text-zinc-900 text-xl" />
-//                                 </div>
-//                             </div>
-//                         </Card>
-//                     </Col>
-//                 </Row>
-
-//                 <Row gutter={[24, 24]}>
-//                     {/* --- Donation Types Breakdown --- */}
-//                     <Col xs={24} lg={14}>
-//                         <Card
-//                             title={<span className="font-bold tracking-tight text-zinc-800">Donations By Type</span>}
-//                             className="h-full border-zinc-100 shadow-sm  overflow-hidden"
-//                             extra={<PieChartOutlined className="text-zinc-300" />}
-//                         >
-//                             <div className="py-6 px-4">
-//                                 {typeData.length > 0 ? (
-//                                     <div className="flex flex-col gap-4">
-//                                         {typeData.map((item, idx) => {
-//                                             const percentage = ((item.value / (stats.total_donation || 1)) * 100).toFixed(1);
-//                                             return (
-//                                                 <div key={idx} className="group flex items-center justify-between p-4  border border-zinc-50 hover:bg-zinc-50/50 hover:border-zinc-200 transition-all duration-300">
-//                                                     <div className="flex items-center gap-4">
-//                                                         <div className="h-2 w-2 rounded-full bg-zinc-900 group-hover:scale-125 transition-transform" />
-//                                                         <Text className="font-bold text-zinc-700 truncate max-w-[200px]">{item.type}</Text>
-//                                                     </div>
-//                                                     <div className="text-right">
-//                                                         <div className="font-black text-zinc-900">₹{item.value.toLocaleString()}</div>
-//                                                         <div className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-none mt-1">{percentage}%</div>
-//                                                     </div>
-//                                                 </div>
-//                                             );
-//                                         })}
-//                                     </div>
-//                                 ) : (
-//                                     <Empty description="No breakdown data available" />
-//                                 )}
-//                             </div>
-//                         </Card>
-//                     </Col>
-
-//                     {/* --- Top Donors Leaderboard --- */}
-//                     <Col xs={24} lg={10}>
-//                         <Card
-//                             title={<span className="font-bold tracking-tight text-zinc-800">Top Benefactors</span>}
-//                             className="h-full border-zinc-100 shadow-sm  overflow-hidden"
-//                             extra={<TrophyOutlined className="text-zinc-300" />}
-//                         >
-//                             <div className="p-4">
-//                                 {topDonors.length > 0 ? (
-//                                     <div className="space-y-1">
-//                                         {topDonors.map((donor, idx) => (
-//                                             <div
-//                                                 key={idx}
-//                                                 className="flex items-center justify-between p-4  hover:bg-zinc-50 transition-all border-b border-zinc-50 last:border-0"
-//                                             >
-//                                                 <div className="flex items-center gap-4">
-//                                                     <div className="h-8 w-8 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500">
-//                                                         {idx + 1}
-//                                                     </div>
-//                                                     <Text className="font-semibold text-zinc-800 truncate max-w-[150px]">
-//                                                         {donor.name}
-//                                                     </Text>
-//                                                 </div>
-//                                                 <Text className="font-black text-zinc-900">
-//                                                     ₹{donor.total.toLocaleString()}
-//                                                 </Text>
-//                                             </div>
-//                                         ))}
-//                                     </div>
-//                                 ) : (
-//                                     <Empty description="No donor data" />
-//                                 )}
-//                             </div>
-//                         </Card>
-//                     </Col>
-//                 </Row>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
     Row, Col, Card, Typography, Select, DatePicker, Button,
-    Space, Empty, Spin
+    Space, Empty, Avatar, Tag, Spin
 } from "antd";
 import {
     WalletOutlined, AppstoreOutlined, UserAddOutlined,
-    ArrowUpOutlined, TrophyOutlined, PieChartOutlined
+    HistoryOutlined, TrophyOutlined, PieChartOutlined,
+    AreaChartOutlined
 } from "@ant-design/icons";
 
 import {
-    PieChart, Pie, Cell, Tooltip as ReTooltip, ResponsiveContainer
+    PieChart, Pie, Cell, Tooltip as ReTooltip, ResponsiveContainer,
+    AreaChart, Area, XAxis, YAxis, CartesianGrid
 } from "recharts";
 
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import PageHeader from "../../components/common/PageHeader";
+import PageLoader from "../../components/common/PageLoader";
+
+dayjs.extend(relativeTime);
 
 const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
@@ -237,43 +44,87 @@ const Dashboard = () => {
 
     const [typeData, setTypeData] = useState([]);
     const [topDonors, setTopDonors] = useState([]);
+    const [trendData, setTrendData] = useState([]);
+    const [recentDonations, setRecentDonations] = useState([]);
 
     const [temples, setTemples] = useState([]);
     const [users, setUsers] = useState([]);
+    const [optionsLoading, setOptionsLoading] = useState({ temple: false, user: false });
 
-    // 🔥 FETCH OPTIONS
-    const fetchOptions = async () => {
+    const templeSearchTimer = useRef(null);
+    const userSearchTimer = useRef(null);
+
+    const buildFilterParams = useCallback((filterState = filters) => ({
+        temple: filterState.temple,
+        user: filterState.user,
+        from_date: filterState.dateRange?.[0]?.format("YYYY-MM-DD"),
+        to_date: filterState.dateRange?.[1]?.format("YYYY-MM-DD")
+    }), [filters]);
+
+    const searchTemples = async (searchText = "") => {
+        setOptionsLoading((prev) => ({ ...prev, temple: true }));
         try {
-            const [templeRes, userRes] = await Promise.all([
-                frappe.call({
-                    method: "frappe.client.get_list",
-                    args: {
-                        doctype: "Temple",
-                        fields: ["name", "temple_name"]
-                    }
-                }),
-                frappe.call({
-                    method: "frappe.client.get_list",
-                    args: {
-                        doctype: "User",
-                        filters: { enabled: 1 },
-                        fields: ["name", "full_name"]
-                    }
-                })
-            ]);
-
-            setTemples(templeRes.message || []);
-            setUsers(userRes.message || []);
+            const args = {
+                doctype: "Temple",
+                fields: ["name", "temple_name"],
+                limit_page_length: 50,
+                order_by: "temple_name asc"
+            };
+            if (searchText?.trim()) {
+                args.or_filters = [
+                    ["temple_name", "like", `%${searchText.trim()}%`],
+                    ["name", "like", `%${searchText.trim()}%`]
+                ];
+            }
+            const res = await frappe.call({ method: "frappe.client.get_list", args });
+            setTemples(res.message || []);
         } catch (err) {
             console.error(err);
+        } finally {
+            setOptionsLoading((prev) => ({ ...prev, temple: false }));
         }
+    };
+
+    const searchUsers = async (searchText = "") => {
+        setOptionsLoading((prev) => ({ ...prev, user: true }));
+        try {
+            const args = {
+                doctype: "User",
+                fields: ["name", "full_name"],
+                filters: { enabled: 1, name: ["not in", ["Administrator", "Guest"]] },
+                limit_page_length: 50,
+                order_by: "full_name asc"
+            };
+            if (searchText?.trim()) {
+                args.or_filters = [
+                    ["full_name", "like", `%${searchText.trim()}%`],
+                    ["name", "like", `%${searchText.trim()}%`]
+                ];
+            }
+            const res = await frappe.call({ method: "frappe.client.get_list", args });
+            setUsers(res.message || []);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setOptionsLoading((prev) => ({ ...prev, user: false }));
+        }
+    };
+
+    const handleTempleSearch = (value) => {
+        clearTimeout(templeSearchTimer.current);
+        templeSearchTimer.current = setTimeout(() => searchTemples(value), 300);
+    };
+
+    const handleUserSearch = (value) => {
+        clearTimeout(userSearchTimer.current);
+        userSearchTimer.current = setTimeout(() => searchUsers(value), 300);
     };
 
     // 🔥 FETCH DATA
     const fetchData = async (params = {}) => {
         setLoading(true);
         try {
-            const [statsRes, typesRes, donorsRes] = await Promise.all([
+            const [statsRes, typesRes, donorsRes, trendRes, recentRes] = await Promise.all([
                 frappe.call({
                     method: "temple_donation.api.get_dashboard_stats",
                     args: params
@@ -285,12 +136,22 @@ const Dashboard = () => {
                 frappe.call({
                     method: "temple_donation.api.get_top_donors",
                     args: params
+                }),
+                frappe.call({
+                    method: "temple_donation.api.get_monthly_donations",
+                    args: { temple: params.temple, user: params.user }
+                }),
+                frappe.call({
+                    method: "temple_donation.api.get_recent_donations",
+                    args: { temple: params.temple, user: params.user, limit: 5 }
                 })
             ]);
 
             setStats(statsRes.message || {});
             setTypeData(typesRes.message || []);
             setTopDonors(donorsRes.message || []);
+            setTrendData(trendRes.message || []);
+            setRecentDonations(recentRes.message || []);
 
         } catch (err) {
             console.error(err);
@@ -300,7 +161,8 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        fetchOptions();
+        searchTemples();
+        searchUsers();
         fetchData();
     }, []);
 
@@ -327,16 +189,21 @@ const Dashboard = () => {
         });
     };
 
+    const handleTempleChange = (value) => {
+        const nextFilters = { ...filters, temple: value };
+        setFilters(nextFilters);
+        fetchData(buildFilterParams(nextFilters));
+    };
+
+    const handleUserChange = (value) => {
+        const nextFilters = { ...filters, user: value };
+        setFilters(nextFilters);
+        fetchData(buildFilterParams(nextFilters));
+    };
+
     // 🔥 SUBMIT
     const handleSubmit = () => {
-        const params = {
-            temple: filters.temple,
-            user: filters.user,
-            from_date: filters.dateRange?.[0]?.format("YYYY-MM-DD"),
-            to_date: filters.dateRange?.[1]?.format("YYYY-MM-DD")
-        };
-
-        fetchData(params);
+        fetchData(buildFilterParams());
     };
 
     // 🔥 CLEAR
@@ -350,20 +217,13 @@ const Dashboard = () => {
         fetchData();
     };
 
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center min-h-[400px]">
-                <Spin />
-            </div>
-        );
+    if (loading && !stats.total_donation) {
+        return <PageLoader />;
     }
 
     return (
-        <div>
-            <PageHeader title="Dashboard" subtitle="Analytics Overview" />
-
-            <div className="p-6">
-
+        <div className="py-6">
+            <PageHeader title="Dashboard" description="Analytics Overview" />
                 {/* 🔥 FILTER */}
                 <Card className="border border-zinc-200 mb-6">
 
@@ -373,13 +233,19 @@ const Dashboard = () => {
                         <Col xs={24} md={8}>
                             <Text>Search By Temple</Text>
                             <Select
+                                showSearch
                                 value={filters.temple}
-                                onChange={(v) => setFilters({ ...filters, temple: v })}
-                                placeholder="All"
+                                onChange={handleTempleChange}
+                                onSearch={handleTempleSearch}
+                                onClear={() => searchTemples()}
+                                placeholder="Search temple..."
                                 className="w-full mt-1"
                                 allowClear
+                                loading={optionsLoading.temple}
+                                filterOption={false}
+                                notFoundContent={optionsLoading.temple ? "Loading..." : "No temples found"}
                                 options={temples.map(t => ({
-                                    label: t.temple_name,
+                                    label: t.temple_name || t.name,
                                     value: t.name
                                 }))}
                             />
@@ -389,13 +255,19 @@ const Dashboard = () => {
                         <Col xs={24} md={8}>
                             <Text>Search By User</Text>
                             <Select
+                                showSearch
                                 value={filters.user}
-                                onChange={(v) => setFilters({ ...filters, user: v })}
-                                placeholder="All"
+                                onChange={handleUserChange}
+                                onSearch={handleUserSearch}
+                                onClear={() => searchUsers()}
+                                placeholder="Search user..."
                                 className="w-full mt-1"
                                 allowClear
+                                loading={optionsLoading.user}
+                                filterOption={false}
+                                notFoundContent={optionsLoading.user ? "Loading..." : "No users found"}
                                 options={users.map(u => ({
-                                    label: u.full_name,
+                                    label: u.full_name || u.name,
                                     value: u.name
                                 }))}
                             />
@@ -411,6 +283,7 @@ const Dashboard = () => {
                                     placeholder="Select Range"
                                     value={filters.dateType}
                                     onChange={handleDateTypeChange}
+                                    className="w-full"
                                     options={[
                                         { label: "Today", value: "today" },
                                         { label: "This Week", value: "week" },
@@ -444,36 +317,46 @@ const Dashboard = () => {
                 </Card>
 
                 {/* 🔥 STATS */}
+                <Spin spinning={loading}>
                 <Row gutter={[16, 16]} className="mb-6">
 
                     <Col xs={24} md={8}>
                         <Card className="border">
-                            <Text>Total Donation</Text>
-                            <Title level={3}>₹{stats.total_donation}</Title>
+                            <Space align="center" className="mb-2">
+                                <WalletOutlined className="text-zinc-400" />
+                                <Text>Total Donation</Text>
+                            </Space>
+                            <Title level={3} className="!m-0">₹{(stats.total_donation || 0).toLocaleString()}</Title>
                         </Card>
                     </Col>
 
                     <Col xs={24} md={8}>
                         <Card className="border">
-                            <Text>Top Category</Text>
-                            <Title level={3}>{stats.top_category}</Title>
+                            <Space align="center" className="mb-2">
+                                <AppstoreOutlined className="text-zinc-400" />
+                                <Text>Top Category</Text>
+                            </Space>
+                            <Title level={3} className="!m-0 truncate">{stats.top_category}</Title>
                         </Card>
                     </Col>
 
                     <Col xs={24} md={8}>
                         <Card className="border">
-                            <Text>New Donors</Text>
-                            <Title level={3}>{stats.new_donors}</Title>
+                            <Space align="center" className="mb-2">
+                                <UserAddOutlined className="text-zinc-400" />
+                                <Text>New Donors</Text>
+                            </Space>
+                            <Title level={3} className="!m-0">{stats.new_donors}</Title>
                         </Card>
                     </Col>
 
                 </Row>
 
-                {/* 🔥 CHART */}
-                <Row gutter={[16, 16]}>
+                {/* 🔥 CHARTS */}
+                <Row gutter={[16, 16]} className="mb-6">
 
                     <Col xs={24} md={12}>
-                        <Card title="Donation Distribution" className="border">
+                        <Card title={<Space><PieChartOutlined /> Donation Distribution</Space>} className="border">
 
                             {typeData.length > 0 ? (
                                 <ResponsiveContainer width="100%" height={300}>
@@ -483,6 +366,7 @@ const Dashboard = () => {
                                             dataKey="value"
                                             nameKey="type"
                                             outerRadius={100}
+                                            stroke="none"
                                         >
                                             {typeData.map((_, index) => (
                                                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
@@ -496,15 +380,37 @@ const Dashboard = () => {
                         </Card>
                     </Col>
 
+                    {/* TREND CHART */}
+                    <Col xs={24} md={12}>
+                        <Card title={<Space><AreaChartOutlined /> Collection Trend</Space>} className="border">
+                            {trendData.length > 0 ? (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <AreaChart data={trendData}>
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                        <XAxis dataKey="month" axisLine={false} tickLine={false} />
+                                        <YAxis axisLine={false} tickLine={false} />
+                                        <ReTooltip />
+                                        <Area type="monotone" dataKey="amount" stroke="#111" fill="#f4f4f5" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            ) : <Empty />}
+                        </Card>
+                    </Col>
+
+                </Row>
+
+                {/* 🔥 TABLES */}
+                <Row gutter={[16, 16]}>
+
                     {/* TOP DONORS */}
                     <Col xs={24} md={12}>
-                        <Card title="Top Donors" className="border">
+                        <Card title={<Space><TrophyOutlined /> Top Donors</Space>} className="border">
 
                             {topDonors.length > 0 ? (
                                 topDonors.map((d, i) => (
-                                    <div key={i} className="flex justify-between py-2 border-b">
-                                        <span>{d.name}</span>
-                                        <span>₹{d.total}</span>
+                                    <div key={i} className="flex justify-between py-3 border-b last:border-0">
+                                        <Text font-semibold>{d.name}</Text>
+                                        <Text font-bold>₹{d.total.toLocaleString()}</Text>
                                     </div>
                                 ))
                             ) : <Empty />}
@@ -512,9 +418,31 @@ const Dashboard = () => {
                         </Card>
                     </Col>
 
-                </Row>
+                    {/* RECENT ACTIVITY */}
+                    <Col xs={24} md={12}>
+                        <Card title={<Space><HistoryOutlined /> Recent Activity</Space>} className="border">
+                            {recentDonations.length > 0 ? (
+                                recentDonations.map((d, i) => (
+                                    <div key={i} className="flex items-center justify-between py-3 border-b last:border-0">
+                                        <Space>
+                                            <Avatar size="small" className="bg-zinc-800">{d.initials}</Avatar>
+                                            <div>
+                                                <Text className="block font-medium">{d.donor_name}</Text>
+                                                <Text className="text-zinc-400 text-xs">{dayjs(d.creation).fromNow()}</Text>
+                                            </div>
+                                        </Space>
+                                        <div className="text-right">
+                                            <Text className="block font-bold">₹{d.total_amount.toLocaleString()}</Text>
+                                            <Tag className="m-0 border-none bg-zinc-100 text-zinc-500 text-[10px]">{d.category}</Tag>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : <Empty />}
+                        </Card>
+                    </Col>
 
-            </div>
+                </Row>
+                </Spin>
         </div>
     );
 };

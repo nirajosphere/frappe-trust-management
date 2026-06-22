@@ -36,8 +36,10 @@ import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
 
 import UserList from "../modules/User/UserList";
 import UserForm from "../modules/User/UserForm";
+import UserView from "../modules/User/UserView";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
+import LedgerView from "../modules/Ledger/LedgerView";
 
 import CommonView from "../components/common/CommonView";
 
@@ -66,7 +68,7 @@ import RoomBookingView from "../modules/RoomBooking/RoomBookingView";
 export const navigationItems = [
     {
         key: "dashboard",
-        icon: <DashboardOutlined />,
+        // icon: <DashboardOutlined />,
         label: "Dashboard",
         component: <Dashboard />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
@@ -115,32 +117,46 @@ export const navigationItems = [
     },
     {
         key: "ledger",
-        icon: <BankOutlined />,
+        // icon: <BankOutlined />,
         label: "Ledger",
         component: <OpeningBalance />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "users",
-        icon: <UserOutlined />,
+        // icon: <UserOutlined />,
         label: "Users",
         component: <UserList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "temples",
-        icon: <BankOutlined />,
+        // icon: <BankOutlined />,
         label: "Temples",
         component: <TempleList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
         key: "donation-types",
-        icon: <ShoppingCartOutlined />,
+        // icon: <ShoppingCartOutlined />,
         label: "Donation Types",
         component: <DonationTypeList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
-    }
+    },
+    {
+        key: "donors",
+        // icon: <UserOutlined />,
+        label: "Donors",
+        component: <DonorList />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    },
+    {
+        key: "donations",
+        // icon: <HistoryOutlined />,
+        label: "Donation",
+        component: <DonationList />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    },
 ];
 
 /**
@@ -191,7 +207,13 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         }
     };
 
-    if (baseKey === "ledger") return <OpeningBalance />;
+    // Special handling for Ledger and other non-standard modules
+    if (baseKey === "ledger") {
+        if (subRoute === "view") {
+            return <LedgerView id={dynamicId} onBack={() => navigate(baseKey)} />;
+        }
+        return <OpeningBalance />;
+    }
 
     if (targetDoctype && subRoute === "view") {
         const viewProps = { id: dynamicId, onBack: () => navigate(baseKey), onEdit: (doc) => navigate(baseKey, "edit", doc.name) };
@@ -204,6 +226,7 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             case DOCTYPE_TEMPLE: return <TempleView {...viewProps} />;
             case DOCTYPE_DONATION: return <DonationView {...viewProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeView {...viewProps} />;
+            case DOCTYPE_USER: return <UserView {...viewProps} />;
             default: return <CommonView doctype={targetDoctype} {...viewProps} />;
         }
     }

@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+import { message } from "antd";
+
+const getErrorMessage = (err) => {
+    if (!err) return "Unknown error";
+    if (typeof err === "string") return err;
+    if (err.message) return err.message;
+    if (err.statusText) return err.statusText;
+    return "Request failed";
+};
 
 export const useFrappeGetDocList = (doctype, options = {}) => {
     const [data, setData] = useState([]);
@@ -26,13 +35,14 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
             error: (err) => {
                 setLoading(false);
                 setError(err);
+                message.error(getErrorMessage(err));
             }
         });
     };
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [doctype, JSON.stringify(options.filters || {}), JSON.stringify(options.fields || [])]);
 
     return { data, loading, error, mutate: fetchData };
 };
@@ -46,17 +56,22 @@ export const useFrappeCreateDoc = () => {
         return new Promise((resolve, reject) => {
             frappe.call({
                 method: "frappe.client.insert",
-                args: { 
-                    doc: { doctype, ...data } 
+                args: {
+                    doc: { doctype, ...data }
                 },
                 callback: (r) => {
                     setLoading(false);
-                    if (r.message) resolve(r.message);
+                    if (r.message) {
+                        message.success(`${doctype} created successfully`);
+                        resolve(r.message);
+                    }
                     else reject(r);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to create document.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -75,19 +90,24 @@ export const useFrappeUpdateDoc = () => {
         return new Promise((resolve, reject) => {
             frappe.call({
                 method: "frappe.client.set_value",
-                args: { 
-                    doctype: doctype, 
-                    name: name, 
-                    fieldname: data 
+                args: {
+                    doctype: doctype,
+                    name: name,
+                    fieldname: data
                 },
                 callback: (r) => {
                     setLoading(false);
-                    if (r.message) resolve(r.message);
+                    if (r.message) {
+                        message.success(`${doctype} updated successfully`);
+                        resolve(r.message);
+                    }
                     else reject(r);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to update.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -106,7 +126,7 @@ export const useFrappeFileUpload = () => {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             const formData = new FormData();
-            
+
             formData.append("file", file);
             formData.append("is_private", args.is_private || 0);
             formData.append("doctype", args.doctype);
@@ -117,24 +137,27 @@ export const useFrappeFileUpload = () => {
             if (typeof frappe !== "undefined" && frappe.csrf_token) {
                 xhr.setRequestHeader("X-Frappe-CSRF-Token", frappe.csrf_token);
             }
-            
-            xhr.onload = function() {
+
+            xhr.onload = function () {
                 setLoading(false);
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
+                    message.success("File uploaded successfully");
                     resolve(response.message || response);
                 } else {
+                    message.error("Upload failed");
                     setError("Upload failed.");
                     reject("Upload failed");
                 }
             };
-            
+
             xhr.onerror = () => {
                 setLoading(false);
+                message.error("Network Error: Upload failed");
                 setError("Network Error");
                 reject("Network Error");
             };
-            
+
             xhr.send(formData);
         });
     };
@@ -154,11 +177,14 @@ export const useFrappeDeleteDoc = () => {
                 args: { doctype, name },
                 callback: (r) => {
                     setLoading(false);
+                    message.success(`${doctype} deleted successfully`);
                     resolve(r.message || true);
                 },
                 error: (err) => {
                     setLoading(false);
-                    setError(err.message || "Failed to delete.");
+                    const errMsg = getErrorMessage(err);
+                    message.error(errMsg);
+                    setError(errMsg);
                     reject(err);
                 }
             });
@@ -188,6 +214,7 @@ export const useFrappeGetDoc = (doctype, name) => {
             error: (err) => {
                 setLoading(false);
                 setError(err);
+                message.error(getErrorMessage(err));
             }
         });
     };
@@ -197,4 +224,76 @@ export const useFrappeGetDoc = (doctype, name) => {
     }, [doctype, name]);
 
     return { data, loading, error, mutate: fetchData };
+};
+
+// export const useFrappeGetVersions = (doctype, docname) => {
+//     const [data, setData] = useState([]);
+//     const [loading, setLoading] = useState(false);
+
+//     useEffect(() => {
+//         if (!docname) return;
+
+//         const fetchVersions = async () => {
+//             setLoading(true);
+//             try {
+//                 const res = await fetch(
+//                     `/api/resource/Version?filters=${encodeURIComponent(JSON.stringify([
+//                         ["ref_doctype", "=", doctype],
+//                         ["docname", "=", docname]
+//                     ]))}&fields=${encodeURIComponent(JSON.stringify(["*"]))}&order_by=creation desc`
+//                 );
+//                 const json = await res.json();
+//                 setData(json.data || []);
+//             } catch (err) {
+//                 console.error(err);
+//             }
+//             setLoading(false);
+//         };
+
+//         fetchVersions();
+//     }, [doctype, docname]);
+
+//     return { data, loading };
+// };
+
+export const useFrappeGetVersions = (doctype, docname) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(0);
+
+    const fetchVersions = async (reset = false) => {
+        if (!docname) return;
+
+        setLoading(true);
+
+        try {
+            const res = await fetch(
+                `/api/resource/Version?filters=${encodeURIComponent(JSON.stringify([
+                    ["ref_doctype", "=", doctype],
+                    ["docname", "=", docname]
+                ]))}&fields=${encodeURIComponent(JSON.stringify(["*"]))}&order_by=creation desc&limit_start=${reset ? 0 : page * 5}&limit_page_length=5`
+            );
+
+            const json = await res.json();
+
+            if (reset) {
+                setData(json.data || []);
+                setPage(1);
+            } else {
+                setData(prev => [...prev, ...(json.data || [])]);
+                setPage(prev => prev + 1);
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        fetchVersions(true);
+    }, [doctype, docname]);
+
+    return { data, loading, fetchMore: () => fetchVersions(false) };
 };

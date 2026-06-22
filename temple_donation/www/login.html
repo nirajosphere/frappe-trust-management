@@ -1,0 +1,379 @@
+{% extends "templates/web.html" %}
+
+{% set full_width = True %}
+
+{% block title %}
+{{ _("Login") }}
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block head_include %}
+{{ include_style('login.bundle.css') }}
+<link rel="stylesheet" href="/assets/temple_donation/js/temple_donation/styles.css?v=1.0.9">
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="login-split-container">
+    <!-- Left side: Login Form -->
+    <div class="login-form-side">
+        <div class="login-form-wrapper">
+            <div class="login-brand">
+                <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation Logo" class="login-logo">
+            </div>
+            
+            <section class="login-form-section for-login">
+                <h2 class="login-title">Welcome Back</h2>
+                <p class="login-subtitle">Please enter your credentials to access the Temple Donation Portal.</p>
+                
+                <form class="form-signin form-login page-card-body" role="form">
+                    <div class="form-group">
+                        <label class="form-label sr-only" for="login_email">{{ _("Email") }}</label>
+                        <div class="input-field-wrapper">
+                            <input type="text" id="login_email" class="form-control" placeholder="Email Address" required autofocus autocomplete="username">
+                            <span class="field-icon">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label sr-only" for="login_password">{{ _("Password") }}</label>
+                        <div class="input-field-wrapper">
+                            <input type="password" id="login_password" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                            <span class="field-icon">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <span toggle="#login_password" class="toggle-password text-muted">{{ _('Show') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <p class="forgot-password-message m-0">
+                            <a href="#forgot" class="forgot-link">{{ _("Forgot Password?") }}</a>
+                        </p>
+                    </div>
+
+                    <button class="btn btn-login-submit btn-primary" type="submit">
+                        {{ _("Log In") }}
+                    </button>
+                </form>
+            </section>
+            
+            <!-- Forgot Password View -->
+            <section class="forgot-form-section for-forgot hide">
+                <h3 class="login-title">{{ _("Forgot Password") }}</h3>
+                <p class="login-subtitle">{{ _("Enter your email address and we'll send you a link to reset your password.") }}</p>
+                
+                <form class="form-signin form-forgot page-card-body" role="form">
+                    <div class="form-group">
+                        <div class="input-field-wrapper">
+                            <input type="email" id="forgot_email" class="form-control" placeholder="Email Address" required autofocus autocomplete="username">
+                            <span class="field-icon">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-login-submit btn-primary mb-3" type="submit">{{ _("Reset Password") }}</button>
+                    
+                    <p class="text-center m-0">
+                        <a href="#login" class="back-to-login-link">{{ _("Back to Login") }}</a>
+                    </p>
+                </form>
+            </section>
+            
+            <div class="login-footer-text">
+                &copy; {{ frappe.utils.nowdate()[:4] }} Temple Donation. All rights reserved.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right side: Beautiful Temple Background Image -->
+    <div class="login-image-side" style="background-image: url('/assets/temple_donation/img/temple_login_bg.png');">
+        <div class="login-image-overlay"></div>
+        <div class="login-image-content">
+            <h1 class="image-title">Temple Donation</h1>
+            <p class="image-desc">A modern, secure portal to streamline temple donation management, financial ledgers, and donor relationships.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+{% include "templates/includes/login/login.js" %}
+
+// Helper to show modern top-center toast notification (exactly like Ant Design message)
+function showToast(message, type) {
+    let container = document.getElementById('custom-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'custom-toast-container';
+        container.style.cssText = `
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            pointer-events: none;
+        `;
+        
+        // Inject toast override styles to ensure bullets are removed and items are aligned cleanly
+        const style = document.createElement('style');
+        style.textContent = `
+            #custom-toast-container ul, 
+            #custom-toast-container ol {
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            #custom-toast-container li {
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+            #custom-toast-container p {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        `;
+        container.appendChild(style);
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    
+    // Ant Design Icons & Colors
+    let icon = `<svg viewBox="64 64 896 896" focusable="false" data-icon="check-circle" width="16px" height="16px" fill="#52c41a" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 0 1-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg>`;
+
+    if (type === 'red' || type === 'error') {
+        icon = `<svg viewBox="64 64 896 896" focusable="false" data-icon="close-circle" width="16px" height="16px" fill="#ff4d4f" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.5-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 0 1-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 460.6l99.3-118.5 66.1-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 510l130.1 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg>`;
+    } else if (type === 'orange' || type === 'warning') {
+        icon = `<svg viewBox="64 64 896 896" focusable="false" data-icon="exclamation-circle" width="16px" height="16px" fill="#faad14" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48 48 0 1 1 0-96 48 48 0 0 1 0 96z"></path></svg>`;
+    } else if (type === 'blue' || type === 'info') {
+        icon = `<svg viewBox="64 64 896 896" focusable="false" data-icon="info-circle" width="16px" height="16px" fill="#1677ff" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 624c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V411c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v277zm-32-412a44 44 0 1 1 0-88 44 44 0 0 1 0 88z"></path></svg>`;
+    }
+
+    toast.style.cssText = `
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 10px 16px;
+        box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 12px 48px 16px rgba(0, 0, 0, 0.03);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(0, 0, 0, 0.88);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        pointer-events: auto;
+    `;
+
+    toast.innerHTML = `
+        <span style="display: flex; flex-shrink: 0; align-items: center;">${icon}</span>
+        <div style="flex-grow: 1; font-weight: 400; display: flex; flex-direction: column; justify-content: center;">${message}</div>
+    `;
+
+    container.appendChild(toast);
+
+    // Force reflow
+    toast.offsetHeight;
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 4500);
+}
+
+// Helper to recursively parse and extract clean message text and indicator type from stringified/JSON messages
+function getCleanMessageAndType(msg, defaultIndicator = "green") {
+    let result = {
+        message: "",
+        indicator: defaultIndicator
+    };
+    
+    if (!msg) return result;
+    
+    if (typeof msg === 'object') {
+        if (Array.isArray(msg)) {
+            let messages = msg.map(item => getCleanMessageAndType(item, defaultIndicator));
+            result.message = messages.map(m => m.message).filter(Boolean).join("<br>");
+            // Use the most severe indicator (red > orange > blue > green)
+            let indicators = messages.map(m => m.indicator);
+            if (indicators.includes("red") || indicators.includes("error")) {
+                result.indicator = "red";
+            } else if (indicators.includes("orange") || indicators.includes("warning")) {
+                result.indicator = "orange";
+            } else if (indicators.includes("blue") || indicators.includes("info")) {
+                result.indicator = "blue";
+            } else {
+                result.indicator = "green";
+            }
+            return result;
+        }
+        
+        result.message = msg.message || JSON.stringify(msg);
+        let ind = msg.indicator || msg.type || msg.message_type || defaultIndicator;
+        ind = ind.toLowerCase();
+        if (ind === 'error' || ind === 'red') result.indicator = 'red';
+        else if (ind === 'warning' || ind === 'orange') result.indicator = 'orange';
+        else if (ind === 'info' || ind === 'blue') result.indicator = 'blue';
+        else result.indicator = 'green';
+        
+        result.message = cleanHTMLMessage(result.message);
+        return result;
+    }
+    
+    if (typeof msg === 'string') {
+        let trimmed = msg.trim();
+        if ((trimmed.startsWith('{') && trimmed.endsWith('}')) || (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
+            try {
+                return getCleanMessageAndType(JSON.parse(trimmed), defaultIndicator);
+            } catch (e) {}
+        }
+        
+        // Clean HTML attributes
+        trimmed = cleanHTMLMessage(trimmed);
+        
+        // Check for common warning/error keywords in text
+        let lower = trimmed.toLowerCase();
+        if (lower.includes("error") || lower.includes("fail") || lower.includes("invalid")) {
+            result.indicator = "red";
+        } else if (lower.includes("warning") || lower.includes("common password") || lower.includes("must be") || lower.includes("should contain")) {
+            result.indicator = "orange";
+        } else {
+            result.indicator = defaultIndicator;
+        }
+        result.message = trimmed;
+        return result;
+    }
+    
+    result.message = String(msg);
+    return result;
+}
+
+// Helper to strip style/class attributes from HTML messages to prevent nested styled boxes
+function cleanHTMLMessage(html) {
+    if (!html || typeof html !== 'string') return html;
+    
+    // Create a temporary element to parse HTML safely
+    let temp = document.createElement('div');
+    temp.innerHTML = html;
+    
+    // Remove class and style attributes from all nested elements to avoid background boxes
+    let all = temp.getElementsByTagName('*');
+    for (let i = 0; i < all.length; i++) {
+        all[i].removeAttribute('class');
+        all[i].removeAttribute('style');
+    }
+    
+    // If it has a single container div/p, extract its clean inner contents
+    if (temp.children.length === 1 && (temp.firstElementChild.tagName === 'DIV' || temp.firstElementChild.tagName === 'P')) {
+        return temp.firstElementChild.innerHTML;
+    }
+    
+    return temp.innerHTML;
+}
+
+// Override standard Frappe alert/message functions to use our custom toast notification
+if (window.frappe) {
+    frappe.msgprint = function(msg, title) {
+        if (!msg) return;
+        let clean = getCleanMessageAndType(msg, "green");
+        let indicator = clean.indicator;
+        if (title === "Error" || title === "Validation Error" || (typeof clean.message === 'string' && clean.message.toLowerCase().includes("error"))) {
+            indicator = "red";
+        }
+        showToast(clean.message, indicator);
+    };
+
+    frappe.show_alert = function(msg, seconds) {
+        if (!msg) return;
+        let clean = getCleanMessageAndType(msg, "green");
+        showToast(clean.message, clean.indicator);
+    };
+}
+
+// Helper to extract and show frappe server messages as toast alerts
+function showFrappeMessages(data, defaultMsg, indicator) {
+    if (data && data._server_messages) {
+        // Will be handled automatically by overridden frappe.msgprint to avoid duplicate alerts
+        return;
+    }
+    if (defaultMsg) {
+        showToast(defaultMsg, indicator);
+    }
+}
+
+// Wrap the standard login handlers to show toast notifications
+if (window.login && login.login_handlers) {
+    const original_200 = login.login_handlers[200];
+    login.login_handlers[200] = function(data) {
+        if (original_200) original_200(data);
+        if (data._server_messages) {
+            // Handled automatically by frappe.msgprint override
+        } else if (window.location.hash === '#forgot') {
+            showToast("If this email is registered with us, we have sent password reset instructions to it. Please check your inbox.", "green");
+        }
+    };
+
+    const wrapErrorHandler = (code, defaultMsg) => {
+        const original_handler = login.login_handlers[code];
+        login.login_handlers[code] = function(xhr, data) {
+            if (xhr && xhr.responseJSON) {
+                data = xhr.responseJSON;
+            }
+            showFrappeMessages(data, defaultMsg, "red");
+            if (original_handler) {
+                original_handler(xhr, data);
+            }
+        };
+    };
+
+    wrapErrorHandler(401, "Invalid Login. Try again.");
+    wrapErrorHandler(417, "Oops! Something went wrong.");
+    wrapErrorHandler(429, "Too many requests. Please try again later.");
+    wrapErrorHandler(500, "Something went wrong.");
+}
+
+// Custom toggle between Forgot Password and Login forms to match standard Frappe behavior
+$(document).ready(function() {
+    // Listen for hash changes
+    function toggleForm() {
+        if (window.location.hash === '#forgot') {
+            $('.login-form-section').addClass('hide');
+            $('.forgot-form-section').removeClass('hide');
+        } else {
+            $('.login-form-section').removeClass('hide');
+            $('.forgot-form-section').addClass('hide');
+        }
+    }
+
+    window.addEventListener('hashchange', toggleForm);
+    toggleForm();
+});
+</script>
+{% endblock %}

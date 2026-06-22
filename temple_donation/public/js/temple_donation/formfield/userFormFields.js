@@ -35,24 +35,24 @@ export const userFormFields = {
             pattern: /^\d{10}$/,
             patternMessage: "Please enter a valid 10-digit number!"
         },
-        {
-            name: "new_password",
-            label: "Password",
-            type: "password",
-            placeholder: "Enter Password",
-            required: true,
-            message: "Please enter password!",
-            pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-            patternMessage: "Password must be at least 8 characters long and include at least one number and one special character."
-        },
-        {
-            name: "confirm_password",
-            label: "Confirm Password",
-            type: "password",
-            placeholder: "Enter Confirm Password",
-            required: true,
-            message: "Please confirm password!"
-        },
+        // {
+        //     name: "new_password",
+        //     label: "Password",
+        //     type: "password",
+        //     placeholder: "Enter Password",
+        //     required: true,
+        //     message: "Please enter password!",
+        //     pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
+        //     patternMessage: "Password must be at least 8 characters long and include at least one number and one special character."
+        // },
+        // {
+        //     name: "confirm_password",
+        //     label: "Confirm Password",
+        //     type: "password",
+        //     placeholder: "Enter Confirm Password",
+        //     required: true,
+        //     message: "Please confirm password!"
+        // },
         {
             name: "custom_user_role",
             label: "User Role",

@@ -11,7 +11,14 @@ const UserList = () => {
             description="Manage temple admins, cashiers and system users."
             columns={userColumns}
             basePath="users"
-            fields={["name", "full_name", "first_name", "last_name", "email", "custom_test", "custom_user_role", "custom_status", "enabled"]}
+            // fields={["*"]}
+            fields={["name", "full_name", "first_name", "last_name", "email", "custom_test", "custom_user_role", "custom_status", "enabled","user_image"]}
+            filters={{
+                name: ["not in", ["Administrator", "Guest"]]
+            }}
+            childTable="custom_select_temple"
+            childDocType="Temple Details"
+            // addLabel="Add User"
         />
     );
 };
