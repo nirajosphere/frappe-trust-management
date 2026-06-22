@@ -146,14 +146,11 @@ const DonorModal = ({ open, onCancel, onSuccess, initialMobileNumber }) => {
 
             await createDoc("Donor", values);
 
-            message.success("Donor created successfully");
-
             form.resetFields();
             onSuccess(values);
 
         } catch (err) {
             console.error(err);
-            message.error(err.message || "Failed to create donor");
         }
     };
 

@@ -1,6 +1,8 @@
 import React from "react";
-import { Typography, Space, Button, Input } from "antd";
+import { Typography, Space, Button, Input, Dropdown } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
+import FilterPopover from "./FilterPopover";
+import ColumnsPopover from "./ColumnsPopover";
 
 const { Title, Text } = Typography;
 
@@ -16,10 +18,31 @@ const PageHeader = ({
     onAdd,
     addLabel = "Add New",
     onExport,
+    allowExport = true,
+    exportOptions = ["csv", "excel", "pdf"],
     onSearch,
     searchPlaceholder = "Search...",
-    extra // Used for custom action buttons (Print, Edit, etc)
+    extra, // Used for custom action buttons (Print, Edit, etc)
+    columns, // Passed from ListingPage for dynamic filter field list
+    doctype, // The database DocType name
+    appliedFilters,
+    onApplyFilters, // Callback for dynamic filters: (filtersArray) => void
+    savedViews,
+    onRefreshViews,
+    customizedColumns,
+    onSaveColumns
 }) => {
+    // Filter export dropdown options based on the exportOptions prop
+    const defaultItems = [
+        { key: "csv", label: "Export to CSV" },
+        { key: "excel", label: "Export to Excel" },
+        { key: "pdf", label: "Export to PDF" }
+    ];
+
+    const menuItems = exportOptions && Array.isArray(exportOptions)
+        ? defaultItems.filter(item => exportOptions.includes(item.key))
+        : defaultItems;
+
     return (
         <header className="mb-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -55,18 +78,46 @@ const PageHeader = ({
                             placeholder={searchPlaceholder}
                             prefix={<SearchOutlined className="text-zinc-400" />}
                             onChange={(e) => onSearch(e.target.value)}
-                            className="h-10 w-full md:w-64 border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
+                            className="h-10 w-full md:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
                         />
                     )}
 
-                    {onExport && (
-                        <Button
-                            icon={<DownloadOutlined />}
-                            onClick={onExport}
-                            className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
+                    {onApplyFilters && (
+                        <FilterPopover 
+                            columns={columns} 
+                            doctype={doctype}
+                            appliedFilters={appliedFilters}
+                            onApplyFilters={onApplyFilters}
+                            savedViews={savedViews}
+                            onRefreshViews={onRefreshViews}
+                        />
+                    )}
+
+                    {customizedColumns && onSaveColumns && (
+                        <ColumnsPopover 
+                            customizedColumns={customizedColumns}
+                            onSaveColumns={onSaveColumns}
+                            originalColumns={columns}
+                            doctype={doctype}
+                        />
+                    )}
+
+                    {onExport && allowExport && menuItems.length > 0 && (
+                        <Dropdown
+                            menu={{
+                                items: menuItems,
+                                onClick: ({ key }) => onExport(key)
+                            }}
+                            trigger={["click"]}
+                            placement="bottomRight"
                         >
-                            Export
-                        </Button>
+                            <Button
+                                icon={<DownloadOutlined />}
+                                className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
+                            >
+                                Export
+                            </Button>
+                        </Dropdown>
                     )}
 
                     {onAdd && (

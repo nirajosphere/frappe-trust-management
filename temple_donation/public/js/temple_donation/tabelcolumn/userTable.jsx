@@ -1,6 +1,7 @@
 import React from "react";
-import { Tag, Space } from "antd";
+import { Tag, Space, Avatar } from "antd";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { getTagConfig } from "../utils/tagUtils";
 
 export const userColumns = [
     {
@@ -20,18 +21,13 @@ export const userColumns = [
             return (
                 <div className="flex items-center gap-3">
 
-                    {/* Avatar */}
-                    {record.user_image ? (
-                        <img
-                            src={record.user_image}
-                            alt={name}
-                            className="h-9 w-9 rounded-full object-cover border border-gray-200"
-                        />
-                    ) : (
-                        <div className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-semibold text-gray-500 border border-gray-200">
-                            {initials}
-                        </div>
-                    )}
+                    <Avatar
+                        src={record.user_image}
+                        size={26}
+                        className="bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
+                    >
+                        {initials}
+                    </Avatar>
 
                     {/* Name + Email */}
                     <div className="flex flex-col min-w-0">
@@ -44,7 +40,9 @@ export const userColumns = [
                     </div>
                 </div>
             );
-        }
+        },
+        filterable: true,
+        filterType: "text"
     },
     {
         title: "CONTACT",
@@ -55,13 +53,15 @@ export const userColumns = [
             <span className="text-gray-600 text-sm font-medium">
                 {text || "N/A"}
             </span>
-        )
+        ),
+        filterable: true,
+        filterType: "text"
     },
 
     {
         title: "TEMPLES",
-        dataIndex: "custom_assigned_temples",
-        key: "custom_assigned_temples",
+        dataIndex: "custom_select_temple",
+        key: "custom_select_temple",
         width: 180,
         render: (temples) => (
             <div className="flex flex-wrap gap-1">
@@ -69,9 +69,9 @@ export const userColumns = [
                     temples.slice(0, 2).map((t, index) => (
                         <Tag
                             key={index}
-                            className="bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
+                            className="tag-glass tag-glass-gray !m-0"
                         >
-                            {t.temple}
+                            {t.temple_name || t.temple}
                         </Tag>
                     ))
                 ) : (
@@ -80,7 +80,8 @@ export const userColumns = [
                     </span>
                 )}
             </div>
-        )
+        ),
+        filterable: false
     },
 
     {
@@ -88,11 +89,22 @@ export const userColumns = [
         dataIndex: "custom_user_role",
         key: "custom_user_role",
         width: 140,
-        render: (text) => (
-            <Tag className="bg-gray-100 border border-gray-200 text-gray-700 font-semibold rounded-full px-3 py-0 text-[10px] uppercase">
-                {text || "Standard"}
-            </Tag>
-        )
+        render: (text) => {
+            const config = getTagConfig(text);
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {config.label}
+                </Tag>
+            );
+        },
+        filterable: true,
+        filterType: "select",
+        filterOptions: [
+            { label: "Administrator", value: "Administrator" },
+            { label: "Cashier", value: "Cashier" },
+            { label: "Super Admin", value: "Super Admin" },
+            { label: "Temple Admin", value: "Temple Admin" }
+        ]
     },
 
     {
@@ -100,15 +112,23 @@ export const userColumns = [
         dataIndex: "enabled",
         key: "enabled",
         width: 140,
-        render: (enabled) => (
-            <Tag
-                color={enabled ? "success" : "error"}
-                className="rounded-full px-3 py-[2px] border-0 font-semibold text-[10px]"
-            >
-                {enabled ? "ACTIVE" : "INACTIVE"}
-            </Tag>
-        )
+        render: (enabled) => {
+            const config = getTagConfig(enabled ? "Active" : "Inactive");
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {config.label}
+                </Tag>
+            );
+        },
+        filterable: true,
+        filterType: "select",
+        filterOptions: [
+            { label: "Active", value: 1 },
+            { label: "Inactive", value: 0 }
+        ]
     },
+
+    // className="!m-0 bg-gray-100 border border-gray-200 text-gray-600 font-medium rounded-full px-2 py-[2px] text-[10px]"
 
     // {
     //     title: "ACTIONS",

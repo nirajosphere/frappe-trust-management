@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-06-17 17:09:54.548468",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "view_name_column",
+  "view_name",
+  "reference_doctype",
+  "user",
+  "filters_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "view_name_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "view_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "View Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Data",
+   "label": "Reference DocType ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "filters_json",
+   "fieldtype": "Code",
+   "label": " Filters JSON"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-17 17:13:47.706510",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Saved Filter View",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Super Admin",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Temple Admin",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "Cashier",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

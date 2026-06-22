@@ -11,7 +11,9 @@ const DonationTypeList = () => {
             description="Manage available donation categories"
             columns={donationTypeColumns}
             basePath="donation-types"
-            fields={["name", "donation_type", "donation_type_code", "donation_image"]}
+            // fields={["name", "donation_type", "donation_type_code", "donation_image"]}
+            fields={["*"]}
+            allowExport={false}
         />
     );
 };
