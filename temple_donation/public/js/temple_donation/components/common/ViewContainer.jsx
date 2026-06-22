@@ -2,8 +2,8 @@ import React from "react";
 
 const ViewContainer = ({ className, children }) => {
   return (
-    <div className={`min-h-screen py-6 ${className || ""}`} style={{ padding: '24px 40px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div className={`min-h-screen py-6 ${className || ""}`}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {children}
       </div>
     </div>

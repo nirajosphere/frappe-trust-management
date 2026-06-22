@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin } from "antd";
 import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 
 // Centralized Configs
 import { themeConfig } from "./config/theme";
@@ -117,7 +117,7 @@ const App = () => {
         padding: isMobile ? "0 16px" : "0 24px",
         height: "56px",
         borderRadius: "12px",
-        border: "1px solid #e4e4e7",
+        // border: "1px solid #e4e4e7",
         boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)"
     };
 
@@ -129,7 +129,7 @@ const App = () => {
     };
 
     const logoImgStyle = {
-        height: "30px",
+        height: "60px",
         width: "auto",
         objectFit: "contain",
         display: "block"
@@ -301,7 +301,7 @@ const App = () => {
                                     {user && (
                                         <NotificationDropdown currentUser={user.email || user.name} />
                                     )}
-                                    {!isAdmin && !isMobile && (
+                                    {user && !isMobile && (
                                         <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
                                             <div style={userProfileStyle}>
                                                 <Avatar
@@ -336,81 +336,93 @@ const App = () => {
                         </div>
                     </Header>
 
-                    {/* Mobile Drawer */}
                     <Drawer
-                        title={<img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '40px', objectFit: 'contain' }} />}
                         placement="right"
                         onClose={() => setMobileOpen(false)}
                         open={mobileOpen}
                         width={280}
+                        closable={false}
                         bodyStyle={{ padding: 0 }}
                     >
-                        <div className="flex flex-col h-full" style={{ padding: '20px 0' }}>
-                            <div style={{ padding: '0 8px' }}>
-                                <Menu
-                                    mode="inline"
-                                    selectedKeys={[currentRoute.split('/')[0]]}
-                                    defaultOpenKeys={groupedMenuItems.map(g => g.key)}
-                                    onClick={({ key }) => {
-                                        handleMenuClick({ key });
-                                        setMobileOpen(false);
-                                    }}
-                                    style={{ border: 'none' }}
-                                    items={groupedMenuItems.map(group => {
-                                        const isSingle = group.isSingle || (group.children && group.children.length === 1);
-                                        if (isSingle) {
-                                            const targetKey = group.isSingle ? group.key : group.children[0].key;
-                                            const label = group.isSingle ? group.label : group.children[0].label;
-                                            return {
-                                                key: targetKey,
-                                                label: label
-                                            };
-                                        }
-                                        return {
-                                            key: group.key,
-                                            label: group.label,
-                                            children: group.children.map(child => ({
-                                                key: child.key,
-                                                label: child.label
-                                            }))
-                                        };
-                                    })}
-                                />
-                            </div>
-
-                            {!isAdmin && (
-                                <div className="mt-auto p-4 border-t border-zinc-100">
-                                    <div className="flex items-center gap-3 px-3 py-2 mb-3">
-                                        <Avatar src={user?.image} icon={<UserOutlined />} />
-                                        <div className="flex flex-col">
-                                            <span className="text-sm font-bold text-zinc-900">{user?.name}</span>
-                                            <span className="text-[10px] text-zinc-400 uppercase tracking-widest">{roles?.[0]}</span>
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={logout}
-                                        style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '8px',
-                                            width: '100%',
-                                            background: 'none',
-                                            border: 'none',
-                                            padding: '10px 12px',
-                                            borderRadius: '6px',
-                                            cursor: 'pointer',
-                                            color: '#ef4444',
-                                            fontWeight: '600',
-                                            fontSize: '14px',
-                                            textAlign: 'left',
-                                            outline: 'none'
-                                        }}
+                        <div className="temple-donation-app" style={{ height: '100%' }}>
+                            <div className="flex flex-col h-full" style={{ padding: 0, background: '#ffffff' }}>
+                                {/* Custom Header for Drawer */}
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #f4f4f5' }}>
+                                    <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '36px', objectFit: 'contain' }} />
+                                    <button 
+                                        onClick={() => setMobileOpen(false)}
+                                        style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px', borderRadius: '50%', color: '#71717a' }}
                                     >
-                                        <LogoutOutlined />
-                                        <span>Logout</span>
+                                        <X size={18} />
                                     </button>
                                 </div>
-                            )}
+
+                                <div style={{ flex: 1, overflowY: 'auto', padding: '12px 4px' }}>
+                                    <Menu
+                                        mode="inline"
+                                        selectedKeys={[currentRoute.split('/')[0]]}
+                                        defaultOpenKeys={groupedMenuItems.map(g => g.key)}
+                                        onClick={({ key }) => {
+                                            handleMenuClick({ key });
+                                            setMobileOpen(false);
+                                        }}
+                                        style={{ border: 'none' }}
+                                        items={groupedMenuItems.map(group => {
+                                            const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                                            if (isSingle) {
+                                                const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                                const label = group.isSingle ? group.label : group.children[0].label;
+                                                return {
+                                                    key: targetKey,
+                                                    label: label
+                                                };
+                                            }
+                                            return {
+                                                key: group.key,
+                                                label: group.label,
+                                                children: group.children.map(child => ({
+                                                    key: child.key,
+                                                    label: child.label
+                                                }))
+                                            };
+                                        })}
+                                    />
+                                </div>
+
+                                {user && (
+                                    <div style={{ padding: '16px 20px', borderTop: '1px solid #f4f4f5', background: '#ffffff', flexShrink: 0 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                                            <Avatar size={40} src={user?.image} icon={<UserOutlined />} style={{ border: '2px solid #f4f4f5' }} />
+                                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                <span style={{ fontSize: '14px', fontWeight: '700', color: '#18181b', lineHeight: '1.2' }}>{user?.name}</span>
+                                                <span style={{ fontSize: '10px', color: '#71717a', fontWeight: '600', textTransform: 'uppercase', tracking: '0.05em', marginTop: '2px' }}>{roles?.[0]}</span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={logout}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '8px',
+                                                width: '100%',
+                                                background: '#fef2f2',
+                                                border: '1px solid #fee2e2',
+                                                padding: '8px 16px',
+                                                borderRadius: '8px',
+                                                cursor: 'pointer',
+                                                color: '#ef4444',
+                                                fontWeight: '600',
+                                                fontSize: '14px',
+                                                outline: 'none'
+                                            }}
+                                        >
+                                            <LogoutOutlined />
+                                            <span>Logout</span>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </Drawer>
 

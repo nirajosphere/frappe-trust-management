@@ -906,5 +906,61 @@ body[data-path="login"] {
   }
 }
 
+/* Custom Drawer Menu Styling */
+.temple-donation-app {
+  .ant-menu-inline {
+    background: transparent !important;
+    border: none !important;
+    
+    // Submenu headers
+    .ant-menu-submenu-title {
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      color: #3f3f46 !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      margin: 4px 8px !important;
+      border-radius: 6px !important;
+      
+      &:hover {
+        background-color: #f4f4f5 !important;
+        color: #18181b !important;
+      }
+    }
+    
+    // Submenu containers
+    .ant-menu-sub.ant-menu-inline {
+      background: transparent !important;
+      padding-left: 12px !important;
+    }
+    
+    // Individual menu items (both top-level and sub-items)
+    .ant-menu-item {
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      color: #52525b !important;
+      height: 38px !important;
+      line-height: 38px !important;
+      margin: 4px 8px !important;
+      border-radius: 6px !important;
+      
+      &:hover {
+        background-color: #f4f4f5 !important;
+        color: #18181b !important;
+      }
+      
+      &-selected {
+        background-color: #f4f4f5 !important;
+        color: #18181b !important;
+        font-weight: 600 !important;
+        
+        &::after {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+
 
 

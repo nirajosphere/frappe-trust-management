@@ -135,9 +135,9 @@ const DonationView = ({ id, onBack, onEdit }) => {
               title="Financial Summary"
               icon={<Wallet size={15} className="text-zinc-800" />}
               right={
-                <div className="flex items-baseline gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-1">
-                  <span className="text-[10px] font-bold text-green-600 tracking-wider uppercase">Total</span>
-                  <span className="text-lg font-extrabold text-green-600 font-mono">
+                <div className="flex items-baseline gap-1.5 rounded-lg px-3 py-1">
+                  <span className="text-[10px] font-bold tracking-wider  uppercase text-zinc-900">Total</span>
+                  <span className="text-lg font-extrabold font-mono text-zinc-900">
                     ₹{Number(doc.total_amount || 0).toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -152,10 +152,12 @@ const DonationView = ({ id, onBack, onEdit }) => {
                   { label: "Handled By", value: <span className="text-xs font-semibold text-zinc-800">{doc.cashier || "System"}</span> },
                   { label: "Reference", value: <span className="text-xs font-mono font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-1.5 py-0.5 rounded">{doc.transaction_ref_no || doc.reference_no || "N/A"}</span> },
                 ].map(({ label, value }) => (
-                  <Col xs={24} sm={8} key={label}>
-                    <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-lg flex flex-col gap-1">
-                      <span className="text-[9px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
-                      {value}
+                  <Col xs={24} sm={8} key={label} style={{ display: 'flex' }}>
+                    <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-lg flex flex-col gap-1 w-full h-full justify-between">
+                      <div>
+                        <span className="text-[9px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                        <div style={{ marginTop: '4px' }}>{value}</div>
+                      </div>
                     </div>
                   </Col>
                 ))}

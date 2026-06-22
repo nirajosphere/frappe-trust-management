@@ -143,7 +143,8 @@ const NotificationDropdown = ({ currentUser }) => {
                                         borderBottom: "1px solid #f4f4f5",
                                         display: "flex",
                                         alignItems: "flex-start",
-                                        gap: "10px"
+                                        gap: "10px",
+                                        marginBottom: "4px"
                                     }}
                                     className="hover:bg-zinc-50"
                                 >

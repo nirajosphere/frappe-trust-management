@@ -1,27 +1,19 @@
 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <!-- Outer glowing rings -->
-  <circle cx="100" cy="100" r="80" fill="none" stroke="url(#accentGradient)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4">
-    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite" />
-  </circle>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="url(#accentGradient)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4" />
   
   <!-- Stylized Trust Emblem -->
   <!-- Left curve representing community care/support -->
   <path d="M 60,130 C 45,100 55,60 90,55 C 95,70 90,85 80,95 C 75,100 70,110 80,120 C 85,125 95,130 100,135 C 90,135 70,135 60,130 Z" 
-        fill="url(#primaryGradient)">
-    <animate attributeName="opacity" values="0.8;0.95;0.8" dur="3s" repeatCount="indefinite" />
-  </path>
+        fill="url(#primaryGradient)" opacity="0.9" />
   
   <!-- Right curve representing protection/trust -->
   <path d="M 140,130 C 155,100 145,60 110,55 C 105,70 110,85 120,95 C 125,100 130,110 120,120 C 115,125 105,130 100,135 C 110,135 130,135 140,130 Z" 
-        fill="url(#primaryGradient)">
-    <animate attributeName="opacity" values="0.95;0.8;0.95" dur="3s" repeatCount="indefinite" />
-  </path>
+        fill="url(#primaryGradient)" opacity="0.9" />
   
   <!-- Heart/Leaf shape in center representing life/charity -->
   <path d="M 100,60 C 108,70 115,80 115,90 C 115,102 108,110 100,110 C 92,110 85,102 85,90 C 85,80 92,70 100,60 Z" 
-        fill="url(#accentGradient)">
-    <animateTransform attributeName="transform" type="scale" values="1;1.08;1" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite" transform-origin="100 85" />
-  </path>
+        fill="url(#accentGradient)" />
 
   <defs>
     <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
