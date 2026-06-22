@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Card, Typography, Row, Col, Spin, Alert, Select, DatePicker
+    Form, Input, Button, Alert, Select, DatePicker, Row, Col, Typography
 } from "antd";
-import { SaveOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 import {
-    useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc
+    useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_INVENTORY_ENTRY } from "../../config/constants";
 import { inventoryEntryFormFields } from "../../formfield/inventoryEntryFormFields";
-import PageHeader from "../../components/common/PageHeader";
+import AddPageHeader from "../../components/common/AddPageHeader";
+import PageLoader from "../../components/common/PageLoader";
+import FormFooter from "../../components/common/FormFooter";
+import ViewContainer from "../../components/common/ViewContainer";
+import SectionCard from "../../components/common/SectionCard";
 
 const { Text } = Typography;
 
@@ -20,18 +24,36 @@ const InventoryEntryForm = ({ id, onBack }) => {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
 
+    // Fetch Temples list for link field
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
-            form.setFieldsValue(initialValues);
+            form.setFieldsValue({
+                ...initialValues,
+                posting_date: initialValues.posting_date ? dayjs(initialValues.posting_date) : null
+            });
+        } else {
+            form.setFieldsValue({
+                posting_date: dayjs()
+            });
         }
     }, [isEdit, initialValues, form]);
 
     const handleSave = async (values) => {
         try {
+            const payload = {
+                ...values,
+                posting_date: values.posting_date?.format("YYYY-MM-DD HH:mm:ss") || null
+            };
+
             if (isEdit) {
-                await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, values);
+                await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, payload);
             } else {
-                await createDoc(DOCTYPE_INVENTORY_ENTRY, values);
+                await createDoc(DOCTYPE_INVENTORY_ENTRY, payload);
             }
             if (onBack) onBack();
         } catch (err) {
@@ -39,53 +61,60 @@ const InventoryEntryForm = ({ id, onBack }) => {
         }
     };
 
-    if (fetching && isEdit) return <div className="p-20 text-center"><Spin /></div>;
-    if (fetchError) return <Alert message="Error" description={fetchError.message} type="error" />;
+    if (fetching && isEdit) return <PageLoader />;
+    if (fetchError) return <Alert message="Error loading stock entry" type="error" action={<Button onClick={onBack}>Back</Button>} />;
+
+    const formItemStyle = { marginBottom: '14px' };
 
     return (
-        <div className="max-w-5xl mx-auto py-6">
-            <PageHeader
+        <ViewContainer className="donation-page">
+            <AddPageHeader
                 onBack={onBack}
                 title={isEdit ? "Edit Stock Entry" : "New Stock Entry"}
                 subtitle="Manage Inventory Movements"
+                showBack={true}
             />
 
-            <Card size="small" className="aavatto-card">
-                <Form form={form} layout="vertical" onFinish={handleSave} className="p-6">
+            <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false} size="middle">
+                <SectionCard title="Stock Entry Details">
                     <Row gutter={[24, 0]}>
                         {inventoryEntryFormFields.fields.map((field) => (
                             <Col xs={24} md={12} key={field.name}>
                                 <Form.Item
                                     name={field.name}
-                                    label={<Text strong className="text-zinc-500 uppercase text-[10px] tracking-widest">{field.label}</Text>}
+                                    label={field.label}
+                                    style={formItemStyle}
                                     rules={field.required ? [{ required: true, message: field.message || "Required" }] : []}
                                 >
                                     {field.type === "select" ? (
-                                        <Select placeholder={field.placeholder} options={field.options} className="h-10" />
+                                        <Select placeholder={field.placeholder} options={field.options} />
+                                    ) : field.type === "link" && field.doctype === "Temple" ? (
+                                        <Select 
+                                            showSearch
+                                            placeholder={field.placeholder} 
+                                            optionFilterProp="children"
+                                            loading={loadingTemples}
+                                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                                        />
                                     ) : field.type === "datetime" ? (
-                                        <DatePicker showTime className="w-full h-10" />
+                                        <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" className="w-full" />
                                     ) : (
-                                        <Input placeholder={field.placeholder} className="h-10" />
+                                        <Input placeholder={field.placeholder} />
                                     )}
                                 </Form.Item>
                             </Col>
                         ))}
                     </Row>
-                    <div className="flex justify-end gap-3 mt-10 border-t pt-8">
-                        <Button onClick={onBack}>Cancel</Button>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={updating || creating}
-                            icon={<SaveOutlined />}
-                            className="bg-black border-none"
-                        >
-                            {isEdit ? "Submit Changes" : "Create Entry"}
-                        </Button>
-                    </div>
-                </Form>
-            </Card>
-        </div>
+                </SectionCard>
+                <div style={{ marginTop: '24px' }}>
+                    <FormFooter
+                        onCancel={onBack}
+                        loading={updating || creating}
+                        isEdit={isEdit}
+                    />
+                </div>
+            </Form>
+        </ViewContainer>
     );
 };
 

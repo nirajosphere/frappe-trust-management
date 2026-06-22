@@ -137773,13 +137773,229 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
   var import_react272 = __toESM(require_react());
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/itemFormFields.js
+  var itemFormFields = {
+    title: "Item",
+    fields: [
+      {
+        name: "item_name",
+        label: "Item Name",
+        type: "text",
+        placeholder: "Enter Item Name",
+        required: true,
+        message: "Please enter the item name!"
+      },
+      {
+        name: "item_code",
+        label: "Item Code",
+        type: "text",
+        placeholder: "Enter Item Code"
+      },
+      {
+        name: "unit",
+        label: "Unit",
+        type: "select",
+        placeholder: "Select Unit",
+        required: true,
+        options: [
+          { label: "Nos", value: "Nos" },
+          { label: "Kg", value: "Kg" },
+          { label: "Litre", value: "Litre" }
+        ]
+      },
+      {
+        name: "temple",
+        label: "Temple",
+        type: "link",
+        placeholder: "Select Temple",
+        doctype: "Temple",
+        required: true
+      }
+    ]
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/inventoryEntryFormFields.js
+  var inventoryEntryFormFields = {
+    title: "Inventory Entry",
+    fields: [
+      {
+        name: "entry_type",
+        label: "Entry Type",
+        type: "select",
+        placeholder: "Select Entry Type",
+        required: true,
+        options: [
+          { label: "IN", value: "IN" },
+          { label: "OUT", value: "OUT" }
+        ]
+      },
+      {
+        name: "temple",
+        label: "Temple",
+        type: "link",
+        placeholder: "Select Temple",
+        doctype: "Temple",
+        required: true
+      },
+      {
+        name: "posting_date",
+        label: "Posting Date",
+        type: "datetime",
+        placeholder: "Select date and time"
+      },
+      {
+        name: "reference_type",
+        label: "Reference Type",
+        type: "select",
+        placeholder: "Select Reference Type",
+        options: [
+          { label: "Donation", value: "Donation" },
+          { label: "Manual", value: "Manual" },
+          { label: "Purchase", value: "Purchase" },
+          { label: "Usage", value: "Usage" }
+        ]
+      },
+      {
+        name: "reference_name",
+        label: "Reference Name",
+        type: "text",
+        placeholder: "Enter Reference ID"
+      }
+    ]
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/roomFormFields.js
+  var roomFormFields = {
+    title: "Room",
+    fields: [
+      {
+        name: "room_number",
+        label: "Room Number",
+        type: "text",
+        placeholder: "Enter Room Number",
+        required: true,
+        message: "Please enter the room number!"
+      },
+      {
+        name: "temple",
+        label: "Temple",
+        type: "link",
+        placeholder: "Select Temple",
+        doctype: "Temple",
+        required: true
+      },
+      {
+        name: "room_type",
+        label: "Room Type",
+        type: "select",
+        placeholder: "Select Room Type",
+        required: true,
+        options: [
+          { label: "AC", value: "AC" },
+          { label: "Non-AC", value: "Non-AC" },
+          { label: "Hall", value: "Hall" }
+        ]
+      },
+      {
+        name: "capacity",
+        label: "Capacity",
+        type: "number",
+        placeholder: "Enter Capacity"
+      },
+      {
+        name: "price_per_day",
+        label: "Price Per Day (\u20B9)",
+        type: "number",
+        placeholder: "Enter Price Per Day",
+        required: true
+      },
+      {
+        name: "status",
+        label: "Status",
+        type: "select",
+        placeholder: "Select Status",
+        options: [
+          { label: "Available", value: "Available" },
+          { label: "Occupied", value: "Occupied" },
+          { label: "Maintenance", value: "Maintenance" }
+        ]
+      }
+    ]
+  };
+
+  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/roomBookingFormFields.js
+  var roomBookingFormFields = {
+    title: "Room Booking",
+    fields: [
+      {
+        name: "donor",
+        label: "Donor",
+        type: "link",
+        placeholder: "Select Donor",
+        doctype: "Donor",
+        required: true
+      },
+      {
+        name: "temple",
+        label: "Temple",
+        type: "link",
+        placeholder: "Select Temple",
+        doctype: "Temple",
+        required: true
+      },
+      {
+        name: "room",
+        label: "Room",
+        type: "link",
+        placeholder: "Select Room",
+        doctype: "Room",
+        required: true
+      },
+      {
+        name: "check_in",
+        label: "Check-in Date/Time",
+        type: "datetime",
+        placeholder: "Select check-in time"
+      },
+      {
+        name: "check_out",
+        label: "Check-out Date/Time",
+        type: "datetime",
+        placeholder: "Select check-out time"
+      },
+      {
+        name: "total_amount",
+        label: "Total Amount (\u20B9)",
+        type: "number",
+        placeholder: "Enter total amount",
+        required: true
+      },
+      {
+        name: "status",
+        label: "Status",
+        type: "select",
+        placeholder: "Select Status",
+        options: [
+          { label: "Booked", value: "Booked" },
+          { label: "Checked In", value: "Checked In" },
+          { label: "Checked Out", value: "Checked Out" },
+          { label: "Cancelled", value: "Cancelled" }
+        ]
+      }
+    ]
+  };
+
   // ../temple_donation/temple_donation/public/js/temple_donation/config/formConfig.jsx
   var formConfigs = {
     [DOCTYPE_DONOR]: donorFormFields,
     [DOCTYPE_TEMPLE]: templeFormFields,
     [DOCTYPE_DONATION]: donationFormFields,
     [DOCTYPE_DONATION_TYPE]: donationTypeFormFields,
-    [DOCTYPE_USER]: userFormFields
+    [DOCTYPE_USER]: userFormFields,
+    [DOCTYPE_ITEM]: itemFormFields,
+    [DOCTYPE_INVENTORY_ENTRY]: inventoryEntryFormFields,
+    [DOCTYPE_ROOM]: roomFormFields,
+    [DOCTYPE_ROOM_BOOKING]: roomBookingFormFields
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/CommonView.jsx
@@ -138412,49 +138628,6 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Item/ItemForm.jsx
   var import_react275 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/itemFormFields.js
-  var itemFormFields = {
-    title: "Item",
-    fields: [
-      {
-        name: "item_name",
-        label: "Item Name",
-        type: "text",
-        placeholder: "Enter Item Name",
-        required: true,
-        message: "Please enter the item name!"
-      },
-      {
-        name: "item_code",
-        label: "Item Code",
-        type: "text",
-        placeholder: "Enter Item Code"
-      },
-      {
-        name: "unit",
-        label: "Unit",
-        type: "select",
-        placeholder: "Select Unit",
-        required: true,
-        options: [
-          { label: "Nos", value: "Nos" },
-          { label: "Kg", value: "Kg" },
-          { label: "Litre", value: "Litre" }
-        ]
-      },
-      {
-        name: "temple",
-        label: "Temple",
-        type: "link",
-        placeholder: "Select Temple",
-        doctype: "Temple",
-        required: true
-      }
-    ]
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Item/ItemForm.jsx
   var { Text: Text22 } = typography_default;
   var ItemForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -138462,6 +138635,10 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_ITEM, id);
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     (0, import_react275.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(initialValues);
@@ -138481,29 +138658,31 @@ html body {
       }
     };
     if (fetching && isEdit)
-      return /* @__PURE__ */ import_react275.default.createElement("div", {
-        className: "p-20 text-center"
-      }, /* @__PURE__ */ import_react275.default.createElement(spin_default, null));
+      return /* @__PURE__ */ import_react275.default.createElement(PageLoader_default, null);
     if (fetchError)
       return /* @__PURE__ */ import_react275.default.createElement(alert_default, {
-        message: "Error",
-        description: fetchError.message,
-        type: "error"
+        message: "Error loading item",
+        type: "error",
+        action: /* @__PURE__ */ import_react275.default.createElement(button_default, {
+          onClick: onBack
+        }, "Back")
       });
-    return /* @__PURE__ */ import_react275.default.createElement("div", {
-      className: "max-w-5xl mx-auto py-6"
-    }, /* @__PURE__ */ import_react275.default.createElement(PageHeader_default, {
+    const formItemStyle = { marginBottom: "14px" };
+    return /* @__PURE__ */ import_react275.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react275.default.createElement(AddPageHeader_default, {
       onBack,
-      title: isEdit ? "Edit Item" : "Create New Item",
-      subtitle: "Inventory Item Details"
-    }), /* @__PURE__ */ import_react275.default.createElement(card_default, {
-      size: "small",
-      className: "aavatto-card"
-    }, /* @__PURE__ */ import_react275.default.createElement(form_default, {
+      title: isEdit ? "Edit Item" : "Add Item",
+      subtitle: "Inventory Item Details",
+      showBack: true
+    }), /* @__PURE__ */ import_react275.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
-      className: "p-6"
+      requiredMark: false,
+      size: "middle"
+    }, /* @__PURE__ */ import_react275.default.createElement(SectionCard_default, {
+      title: "Item Details"
     }, /* @__PURE__ */ import_react275.default.createElement(row_default2, {
       gutter: [24, 0]
     }, itemFormFields.fields.map((field) => /* @__PURE__ */ import_react275.default.createElement(col_default2, {
@@ -138512,29 +138691,27 @@ html body {
       key: field.name
     }, /* @__PURE__ */ import_react275.default.createElement(form_default.Item, {
       name: field.name,
-      label: /* @__PURE__ */ import_react275.default.createElement(Text22, {
-        strong: true,
-        className: "text-zinc-500 uppercase text-[10px] tracking-widest"
-      }, field.label),
-      rules: field.required ? [{ required: true, message: field.message }] : []
+      label: field.label,
+      style: formItemStyle,
+      rules: field.required ? [{ required: true, message: field.message || "Required" }] : []
     }, field.type === "select" ? /* @__PURE__ */ import_react275.default.createElement(select_default, {
       placeholder: field.placeholder,
-      options: field.options,
-      className: "h-10"
-    }) : /* @__PURE__ */ import_react275.default.createElement(input_default, {
+      options: field.options
+    }) : field.type === "link" && field.doctype === "Temple" ? /* @__PURE__ */ import_react275.default.createElement(select_default, {
+      showSearch: true,
       placeholder: field.placeholder,
-      className: "h-10"
-    }))))), /* @__PURE__ */ import_react275.default.createElement("div", {
-      className: "flex justify-end gap-3 mt-10 border-t pt-8"
-    }, /* @__PURE__ */ import_react275.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react275.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+      optionFilterProp: "children",
+      loading: loadingTemples,
+      options: (temples == null ? void 0 : temples.map((t2) => ({ label: t2.temple_name, value: t2.name }))) || []
+    }) : /* @__PURE__ */ import_react275.default.createElement(input_default, {
+      placeholder: field.placeholder
+    })))))), /* @__PURE__ */ import_react275.default.createElement("div", {
+      style: { marginTop: "24px" }
+    }, /* @__PURE__ */ import_react275.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: updating || creating,
-      icon: /* @__PURE__ */ import_react275.default.createElement(SaveOutlined_default2, null),
-      className: "bg-black border-none"
-    }, isEdit ? "Save Changes" : "Create Item")))));
+      isEdit
+    }))));
   };
   var ItemForm_default = ItemForm;
 
@@ -138610,58 +138787,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/InventoryEntry/InventoryEntryForm.jsx
   var import_react279 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/inventoryEntryFormFields.js
-  var inventoryEntryFormFields = {
-    title: "Inventory Entry",
-    fields: [
-      {
-        name: "entry_type",
-        label: "Entry Type",
-        type: "select",
-        placeholder: "Select Entry Type",
-        required: true,
-        options: [
-          { label: "IN", value: "IN" },
-          { label: "OUT", value: "OUT" }
-        ]
-      },
-      {
-        name: "temple",
-        label: "Temple",
-        type: "link",
-        placeholder: "Select Temple",
-        doctype: "Temple",
-        required: true
-      },
-      {
-        name: "posting_date",
-        label: "Posting Date",
-        type: "datetime",
-        placeholder: "Select date and time"
-      },
-      {
-        name: "reference_type",
-        label: "Reference Type",
-        type: "select",
-        placeholder: "Select Reference Type",
-        options: [
-          { label: "Donation", value: "Donation" },
-          { label: "Manual", value: "Manual" },
-          { label: "Purchase", value: "Purchase" },
-          { label: "Usage", value: "Usage" }
-        ]
-      },
-      {
-        name: "reference_name",
-        label: "Reference Name",
-        type: "text",
-        placeholder: "Enter Reference ID"
-      }
-    ]
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/InventoryEntry/InventoryEntryForm.jsx
+  var import_dayjs6 = __toESM(require_dayjs_min());
   var { Text: Text24 } = typography_default;
   var InventoryEntryForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -138669,17 +138795,31 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     (0, import_react279.useEffect)(() => {
       if (isEdit && initialValues) {
-        form.setFieldsValue(initialValues);
+        form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
+          posting_date: initialValues.posting_date ? (0, import_dayjs6.default)(initialValues.posting_date) : null
+        }));
+      } else {
+        form.setFieldsValue({
+          posting_date: (0, import_dayjs6.default)()
+        });
       }
     }, [isEdit, initialValues, form]);
     const handleSave = async (values) => {
+      var _a;
       try {
+        const payload = __spreadProps(__spreadValues({}, values), {
+          posting_date: ((_a = values.posting_date) == null ? void 0 : _a.format("YYYY-MM-DD HH:mm:ss")) || null
+        });
         if (isEdit) {
-          await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, values);
+          await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, payload);
         } else {
-          await createDoc(DOCTYPE_INVENTORY_ENTRY, values);
+          await createDoc(DOCTYPE_INVENTORY_ENTRY, payload);
         }
         if (onBack)
           onBack();
@@ -138688,29 +138828,31 @@ html body {
       }
     };
     if (fetching && isEdit)
-      return /* @__PURE__ */ import_react279.default.createElement("div", {
-        className: "p-20 text-center"
-      }, /* @__PURE__ */ import_react279.default.createElement(spin_default, null));
+      return /* @__PURE__ */ import_react279.default.createElement(PageLoader_default, null);
     if (fetchError)
       return /* @__PURE__ */ import_react279.default.createElement(alert_default, {
-        message: "Error",
-        description: fetchError.message,
-        type: "error"
+        message: "Error loading stock entry",
+        type: "error",
+        action: /* @__PURE__ */ import_react279.default.createElement(button_default, {
+          onClick: onBack
+        }, "Back")
       });
-    return /* @__PURE__ */ import_react279.default.createElement("div", {
-      className: "max-w-5xl mx-auto py-6"
-    }, /* @__PURE__ */ import_react279.default.createElement(PageHeader_default, {
+    const formItemStyle = { marginBottom: "14px" };
+    return /* @__PURE__ */ import_react279.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react279.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Stock Entry" : "New Stock Entry",
-      subtitle: "Manage Inventory Movements"
-    }), /* @__PURE__ */ import_react279.default.createElement(card_default, {
-      size: "small",
-      className: "aavatto-card"
-    }, /* @__PURE__ */ import_react279.default.createElement(form_default, {
+      subtitle: "Manage Inventory Movements",
+      showBack: true
+    }), /* @__PURE__ */ import_react279.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
-      className: "p-6"
+      requiredMark: false,
+      size: "middle"
+    }, /* @__PURE__ */ import_react279.default.createElement(SectionCard_default, {
+      title: "Stock Entry Details"
     }, /* @__PURE__ */ import_react279.default.createElement(row_default2, {
       gutter: [24, 0]
     }, inventoryEntryFormFields.fields.map((field) => /* @__PURE__ */ import_react279.default.createElement(col_default2, {
@@ -138719,32 +138861,31 @@ html body {
       key: field.name
     }, /* @__PURE__ */ import_react279.default.createElement(form_default.Item, {
       name: field.name,
-      label: /* @__PURE__ */ import_react279.default.createElement(Text24, {
-        strong: true,
-        className: "text-zinc-500 uppercase text-[10px] tracking-widest"
-      }, field.label),
+      label: field.label,
+      style: formItemStyle,
       rules: field.required ? [{ required: true, message: field.message || "Required" }] : []
     }, field.type === "select" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
       placeholder: field.placeholder,
-      options: field.options,
-      className: "h-10"
+      options: field.options
+    }) : field.type === "link" && field.doctype === "Temple" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
+      showSearch: true,
+      placeholder: field.placeholder,
+      optionFilterProp: "children",
+      loading: loadingTemples,
+      options: (temples == null ? void 0 : temples.map((t2) => ({ label: t2.temple_name, value: t2.name }))) || []
     }) : field.type === "datetime" ? /* @__PURE__ */ import_react279.default.createElement(date_picker_default, {
       showTime: true,
-      className: "w-full h-10"
+      format: "DD-MM-YYYY HH:mm:ss",
+      className: "w-full"
     }) : /* @__PURE__ */ import_react279.default.createElement(input_default, {
-      placeholder: field.placeholder,
-      className: "h-10"
-    }))))), /* @__PURE__ */ import_react279.default.createElement("div", {
-      className: "flex justify-end gap-3 mt-10 border-t pt-8"
-    }, /* @__PURE__ */ import_react279.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react279.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+      placeholder: field.placeholder
+    })))))), /* @__PURE__ */ import_react279.default.createElement("div", {
+      style: { marginTop: "24px" }
+    }, /* @__PURE__ */ import_react279.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: updating || creating,
-      icon: /* @__PURE__ */ import_react279.default.createElement(SaveOutlined_default2, null),
-      className: "bg-black border-none"
-    }, isEdit ? "Submit Changes" : "Create Entry")))));
+      isEdit
+    }))));
   };
   var InventoryEntryForm_default = InventoryEntryForm;
 
@@ -138838,67 +138979,6 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Room/RoomForm.jsx
   var import_react283 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/roomFormFields.js
-  var roomFormFields = {
-    title: "Room",
-    fields: [
-      {
-        name: "room_number",
-        label: "Room Number",
-        type: "text",
-        placeholder: "Enter Room Number",
-        required: true,
-        message: "Please enter the room number!"
-      },
-      {
-        name: "temple",
-        label: "Temple",
-        type: "link",
-        placeholder: "Select Temple",
-        doctype: "Temple",
-        required: true
-      },
-      {
-        name: "room_type",
-        label: "Room Type",
-        type: "select",
-        placeholder: "Select Room Type",
-        required: true,
-        options: [
-          { label: "AC", value: "AC" },
-          { label: "Non-AC", value: "Non-AC" },
-          { label: "Hall", value: "Hall" }
-        ]
-      },
-      {
-        name: "capacity",
-        label: "Capacity",
-        type: "number",
-        placeholder: "Enter Capacity"
-      },
-      {
-        name: "price_per_day",
-        label: "Price Per Day (\u20B9)",
-        type: "number",
-        placeholder: "Enter Price Per Day",
-        required: true
-      },
-      {
-        name: "status",
-        label: "Status",
-        type: "select",
-        placeholder: "Select Status",
-        options: [
-          { label: "Available", value: "Available" },
-          { label: "Occupied", value: "Occupied" },
-          { label: "Maintenance", value: "Maintenance" }
-        ]
-      }
-    ]
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/Room/RoomForm.jsx
   var { Text: Text26 } = typography_default;
   var RoomForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -138906,9 +138986,17 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_ROOM, id);
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     (0, import_react283.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(initialValues);
+      } else {
+        form.setFieldsValue({
+          status: "Available"
+        });
       }
     }, [isEdit, initialValues, form]);
     const handleSave = async (values) => {
@@ -138925,29 +139013,31 @@ html body {
       }
     };
     if (fetching && isEdit)
-      return /* @__PURE__ */ import_react283.default.createElement("div", {
-        className: "p-20 text-center"
-      }, /* @__PURE__ */ import_react283.default.createElement(spin_default, null));
+      return /* @__PURE__ */ import_react283.default.createElement(PageLoader_default, null);
     if (fetchError)
       return /* @__PURE__ */ import_react283.default.createElement(alert_default, {
-        message: "Error",
-        description: fetchError.message,
-        type: "error"
+        message: "Error loading room details",
+        type: "error",
+        action: /* @__PURE__ */ import_react283.default.createElement(button_default, {
+          onClick: onBack
+        }, "Back")
       });
-    return /* @__PURE__ */ import_react283.default.createElement("div", {
-      className: "max-w-5xl mx-auto py-6"
-    }, /* @__PURE__ */ import_react283.default.createElement(PageHeader_default, {
+    const formItemStyle = { marginBottom: "14px" };
+    return /* @__PURE__ */ import_react283.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react283.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Edit Room Details" : "Register New Room",
-      subtitle: "Accommodation Setup"
-    }), /* @__PURE__ */ import_react283.default.createElement(card_default, {
-      size: "small",
-      className: "aavatto-card"
-    }, /* @__PURE__ */ import_react283.default.createElement(form_default, {
+      subtitle: "Accommodation Setup",
+      showBack: true
+    }), /* @__PURE__ */ import_react283.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
-      className: "p-6"
+      requiredMark: false,
+      size: "middle"
+    }, /* @__PURE__ */ import_react283.default.createElement(SectionCard_default, {
+      title: "Room Details"
     }, /* @__PURE__ */ import_react283.default.createElement(row_default2, {
       gutter: [24, 0]
     }, roomFormFields.fields.map((field) => /* @__PURE__ */ import_react283.default.createElement(col_default2, {
@@ -138956,32 +139046,31 @@ html body {
       key: field.name
     }, /* @__PURE__ */ import_react283.default.createElement(form_default.Item, {
       name: field.name,
-      label: /* @__PURE__ */ import_react283.default.createElement(Text26, {
-        strong: true,
-        className: "text-zinc-500 uppercase text-[10px] tracking-widest"
-      }, field.label),
+      label: field.label,
+      style: formItemStyle,
       rules: field.required ? [{ required: true, message: field.message || "Required" }] : []
     }, field.type === "select" ? /* @__PURE__ */ import_react283.default.createElement(select_default, {
       placeholder: field.placeholder,
-      options: field.options,
-      className: "h-10"
+      options: field.options
+    }) : field.type === "link" && field.doctype === "Temple" ? /* @__PURE__ */ import_react283.default.createElement(select_default, {
+      showSearch: true,
+      placeholder: field.placeholder,
+      optionFilterProp: "children",
+      loading: loadingTemples,
+      options: (temples == null ? void 0 : temples.map((t2) => ({ label: t2.temple_name, value: t2.name }))) || []
     }) : field.type === "number" ? /* @__PURE__ */ import_react283.default.createElement(input_number_default, {
       placeholder: field.placeholder,
-      className: "w-full h-10 flex items-center"
+      className: "w-full",
+      style: { height: "32px", display: "flex", alignItems: "center" }
     }) : /* @__PURE__ */ import_react283.default.createElement(input_default, {
-      placeholder: field.placeholder,
-      className: "h-10"
-    }))))), /* @__PURE__ */ import_react283.default.createElement("div", {
-      className: "flex justify-end gap-3 mt-10 border-t pt-8"
-    }, /* @__PURE__ */ import_react283.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react283.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+      placeholder: field.placeholder
+    })))))), /* @__PURE__ */ import_react283.default.createElement("div", {
+      style: { marginTop: "24px" }
+    }, /* @__PURE__ */ import_react283.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: updating || creating,
-      icon: /* @__PURE__ */ import_react283.default.createElement(SaveOutlined_default2, null),
-      className: "bg-black border-none"
-    }, isEdit ? "Update Registry" : "Save Room")))));
+      isEdit
+    }))));
   };
   var RoomForm_default = RoomForm;
 
@@ -139084,70 +139173,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingForm.jsx
   var import_react287 = __toESM(require_react());
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/formfield/roomBookingFormFields.js
-  var roomBookingFormFields = {
-    title: "Room Booking",
-    fields: [
-      {
-        name: "donor",
-        label: "Donor",
-        type: "link",
-        placeholder: "Select Donor",
-        doctype: "Donor",
-        required: true
-      },
-      {
-        name: "temple",
-        label: "Temple",
-        type: "link",
-        placeholder: "Select Temple",
-        doctype: "Temple",
-        required: true
-      },
-      {
-        name: "room",
-        label: "Room",
-        type: "link",
-        placeholder: "Select Room",
-        doctype: "Room",
-        required: true
-      },
-      {
-        name: "check_in",
-        label: "Check-in Date/Time",
-        type: "datetime",
-        placeholder: "Select check-in time"
-      },
-      {
-        name: "check_out",
-        label: "Check-out Date/Time",
-        type: "datetime",
-        placeholder: "Select check-out time"
-      },
-      {
-        name: "total_amount",
-        label: "Total Amount (\u20B9)",
-        type: "number",
-        placeholder: "Enter total amount",
-        required: true
-      },
-      {
-        name: "status",
-        label: "Status",
-        type: "select",
-        placeholder: "Select Status",
-        options: [
-          { label: "Booked", value: "Booked" },
-          { label: "Checked In", value: "Checked In" },
-          { label: "Checked Out", value: "Checked Out" },
-          { label: "Cancelled", value: "Cancelled" }
-        ]
-      }
-    ]
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingForm.jsx
+  var import_dayjs7 = __toESM(require_dayjs_min());
   var { Text: Text28 } = typography_default;
   var RoomBookingForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -139155,17 +139181,43 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_ROOM_BOOKING, id);
+    const { data: donors, loading: loadingDonors } = useFrappeGetDocList("Donor", {
+      fields: ["name", "donor_name"],
+      limit: 1e3
+    });
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
+    const { data: rooms, loading: loadingRooms } = useFrappeGetDocList("Room", {
+      fields: ["name", "room_number"],
+      limit: 1e3
+    });
     (0, import_react287.useEffect)(() => {
       if (isEdit && initialValues) {
-        form.setFieldsValue(initialValues);
+        form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
+          check_in: initialValues.check_in ? (0, import_dayjs7.default)(initialValues.check_in) : null,
+          check_out: initialValues.check_out ? (0, import_dayjs7.default)(initialValues.check_out) : null
+        }));
+      } else {
+        form.setFieldsValue({
+          status: "Booked",
+          check_in: (0, import_dayjs7.default)(),
+          check_out: (0, import_dayjs7.default)().add(1, "day")
+        });
       }
     }, [isEdit, initialValues, form]);
     const handleSave = async (values) => {
+      var _a, _b;
       try {
+        const payload = __spreadProps(__spreadValues({}, values), {
+          check_in: ((_a = values.check_in) == null ? void 0 : _a.format("YYYY-MM-DD HH:mm:ss")) || null,
+          check_out: ((_b = values.check_out) == null ? void 0 : _b.format("YYYY-MM-DD HH:mm:ss")) || null
+        });
         if (isEdit) {
-          await updateDoc(DOCTYPE_ROOM_BOOKING, id, values);
+          await updateDoc(DOCTYPE_ROOM_BOOKING, id, payload);
         } else {
-          await createDoc(DOCTYPE_ROOM_BOOKING, values);
+          await createDoc(DOCTYPE_ROOM_BOOKING, payload);
         }
         if (onBack)
           onBack();
@@ -139174,29 +139226,31 @@ html body {
       }
     };
     if (fetching && isEdit)
-      return /* @__PURE__ */ import_react287.default.createElement("div", {
-        className: "p-20 text-center"
-      }, /* @__PURE__ */ import_react287.default.createElement(spin_default, null));
+      return /* @__PURE__ */ import_react287.default.createElement(PageLoader_default, null);
     if (fetchError)
       return /* @__PURE__ */ import_react287.default.createElement(alert_default, {
-        message: "Error",
-        description: fetchError.message,
-        type: "error"
+        message: "Error loading room booking",
+        type: "error",
+        action: /* @__PURE__ */ import_react287.default.createElement(button_default, {
+          onClick: onBack
+        }, "Back")
       });
-    return /* @__PURE__ */ import_react287.default.createElement("div", {
-      className: "max-w-5xl mx-auto py-6"
-    }, /* @__PURE__ */ import_react287.default.createElement(PageHeader_default, {
+    const formItemStyle = { marginBottom: "14px" };
+    return /* @__PURE__ */ import_react287.default.createElement(ViewContainer_default, {
+      className: "donation-page"
+    }, /* @__PURE__ */ import_react287.default.createElement(AddPageHeader_default, {
       onBack,
       title: isEdit ? "Update Booking" : "New Room Booking",
-      subtitle: "Reservation Details"
-    }), /* @__PURE__ */ import_react287.default.createElement(card_default, {
-      size: "small",
-      className: "aavatto-card"
-    }, /* @__PURE__ */ import_react287.default.createElement(form_default, {
+      subtitle: "Reservation Details",
+      showBack: true
+    }), /* @__PURE__ */ import_react287.default.createElement(form_default, {
       form,
       layout: "vertical",
       onFinish: handleSave,
-      className: "p-6"
+      requiredMark: false,
+      size: "middle"
+    }, /* @__PURE__ */ import_react287.default.createElement(SectionCard_default, {
+      title: "Booking Details"
     }, /* @__PURE__ */ import_react287.default.createElement(row_default2, {
       gutter: [24, 0]
     }, roomBookingFormFields.fields.map((field) => /* @__PURE__ */ import_react287.default.createElement(col_default2, {
@@ -139205,35 +139259,35 @@ html body {
       key: field.name
     }, /* @__PURE__ */ import_react287.default.createElement(form_default.Item, {
       name: field.name,
-      label: /* @__PURE__ */ import_react287.default.createElement(Text28, {
-        strong: true,
-        className: "text-zinc-500 uppercase text-[10px] tracking-widest"
-      }, field.label),
+      label: field.label,
+      style: formItemStyle,
       rules: field.required ? [{ required: true, message: field.message || "Required" }] : []
     }, field.type === "select" ? /* @__PURE__ */ import_react287.default.createElement(select_default, {
       placeholder: field.placeholder,
-      options: field.options,
-      className: "h-10"
+      options: field.options
+    }) : field.type === "link" ? /* @__PURE__ */ import_react287.default.createElement(select_default, {
+      showSearch: true,
+      placeholder: field.placeholder,
+      optionFilterProp: "children",
+      loading: field.doctype === "Donor" ? loadingDonors : field.doctype === "Temple" ? loadingTemples : field.doctype === "Room" ? loadingRooms : false,
+      options: field.doctype === "Donor" ? donors == null ? void 0 : donors.map((d) => ({ label: d.donor_name, value: d.name })) : field.doctype === "Temple" ? temples == null ? void 0 : temples.map((t2) => ({ label: t2.temple_name, value: t2.name })) : field.doctype === "Room" ? rooms == null ? void 0 : rooms.map((r3) => ({ label: `Room ${r3.room_number}`, value: r3.name })) : []
     }) : field.type === "datetime" ? /* @__PURE__ */ import_react287.default.createElement(date_picker_default, {
       showTime: true,
-      className: "w-full h-10"
+      format: "DD-MM-YYYY HH:mm:ss",
+      className: "w-full"
     }) : field.type === "number" ? /* @__PURE__ */ import_react287.default.createElement(input_number_default, {
-      className: "w-full h-10 flex items-center",
-      placeholder: field.placeholder
-    }) : /* @__PURE__ */ import_react287.default.createElement(input_default, {
       placeholder: field.placeholder,
-      className: "h-10"
-    }))))), /* @__PURE__ */ import_react287.default.createElement("div", {
-      className: "flex justify-end gap-3 mt-10 border-t pt-8"
-    }, /* @__PURE__ */ import_react287.default.createElement(button_default, {
-      onClick: onBack
-    }, "Cancel"), /* @__PURE__ */ import_react287.default.createElement(button_default, {
-      type: "primary",
-      htmlType: "submit",
+      className: "w-full",
+      style: { height: "32px", display: "flex", alignItems: "center" }
+    }) : /* @__PURE__ */ import_react287.default.createElement(input_default, {
+      placeholder: field.placeholder
+    })))))), /* @__PURE__ */ import_react287.default.createElement("div", {
+      style: { marginTop: "24px" }
+    }, /* @__PURE__ */ import_react287.default.createElement(FormFooter_default, {
+      onCancel: onBack,
       loading: updating || creating,
-      icon: /* @__PURE__ */ import_react287.default.createElement(SaveOutlined_default2, null),
-      className: "bg-black border-none"
-    }, isEdit ? "Confirm Update" : "Confirm Booking")))));
+      isEdit
+    }))));
   };
   var RoomBookingForm_default = RoomBookingForm;
 
@@ -140104,4 +140158,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.NTJBG4Y5.js.map
+//# sourceMappingURL=temple_donation.bundle.ZJTX4BWF.js.map
