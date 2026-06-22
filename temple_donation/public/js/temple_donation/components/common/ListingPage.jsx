@@ -265,6 +265,13 @@ const ListingPage = ({
         limit: 1000
     });
 
+    // Fetch Donations list for link field mapping in columns
+    const { data: donations } = useFrappeGetDocList("Donation", {
+        fields: ["name", "donor_name", "total_amount"],
+        limit: 1000
+    });
+
+
     const [enrichedData, setEnrichedData] = useState([]);
     const [enriching, setEnriching] = useState(false);
 
@@ -406,9 +413,25 @@ const ListingPage = ({
                     }
                 };
             }
+            if (col.dataIndex === "reference_name") {
+                return {
+                    ...col,
+                    render: (text, record) => {
+                        if (!text) return "—";
+                        if (record.reference_type === "Donation") {
+                            const d = donations?.find(item => item.name === text);
+                            return d 
+                                ? `${d.donor_name || 'Anonymous'} (₹${parseFloat(d.total_amount).toFixed(2)}) - ${text}`
+                                : text;
+                        }
+                        return text;
+                    }
+                };
+            }
             return col;
         });
-    }, [visibleColumns, temples]);
+    }, [visibleColumns, temples, donations]);
+
 
     return (
         <div className="py-6 space-y-6">

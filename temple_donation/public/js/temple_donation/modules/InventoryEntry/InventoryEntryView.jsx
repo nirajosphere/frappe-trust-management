@@ -18,6 +18,16 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+    const { data: donations } = useFrappeGetDocList("Donation", {
+        fields: ["name", "donor_name", "total_amount"],
+        limit: 1000
+    });
+    const { data: items } = useFrappeGetDocList("Item", {
+        fields: ["name", "item_name", "item_code"],
+        limit: 1000
+    });
+
+
 
     if (loading) return <PageLoader />;
 
@@ -48,12 +58,22 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
     const templeObj = temples?.find(t => t.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
+    const donationObj = doc.reference_type === "Donation" ? donations?.find(d => d.name === doc.reference_name) : null;
+    const referenceNameDisplay = donationObj 
+        ? `${donationObj.donor_name || 'Anonymous'} (₹${parseFloat(donationObj.total_amount).toFixed(2)}) - ${doc.reference_name}`
+        : (doc.reference_name || "—");
+
+
     const itemColumns = [
         {
             title: "Item",
             dataIndex: "item",
             key: "item",
-            render: (text) => <span className="font-semibold text-zinc-800">{text}</span>
+            render: (text) => {
+                const itemObj = items?.find(i => i.name === text);
+                const itemName = itemObj ? `${itemObj.item_name} (${itemObj.item_code || 'No Code'})` : text;
+                return <span className="font-semibold text-zinc-800">{itemName}</span>;
+            }
         },
         {
             title: "Quantity",
@@ -63,6 +83,7 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
             render: (qty) => <span className="font-bold text-zinc-900">{qty}</span>
         }
     ];
+
 
     return (
         <ViewContainer className="stock-entry-view-container">
@@ -121,9 +142,10 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Reference Name">
-                                        <span className="text-zinc-800 font-semibold">{doc.reference_name || "—"}</span>
+                                        <span className="text-zinc-800 font-semibold">{referenceNameDisplay}</span>
                                     </FieldCell>
                                 </Col>
+
                             </Row>
                         </SectionCard>
 
@@ -157,11 +179,12 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                     },
                                     {
                                         label: "Source Name", value: (
-                                            <span className="text-xs font-mono font-semibold text-zinc-800">
-                                                {doc.reference_name || "N/A"}
+                                            <span className="text-xs font-semibold text-zinc-800">
+                                                {referenceNameDisplay}
                                             </span>
                                         )
                                     }
+
                                 ].map(({ label, value }) => (
                                     <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
                                         <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>

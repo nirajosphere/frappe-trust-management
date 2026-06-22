@@ -132723,6 +132723,10 @@ html body {
       fields: ["name", "temple_name"],
       limit: 1e3
     });
+    const { data: donations } = useFrappeGetDocList("Donation", {
+      fields: ["name", "donor_name", "total_amount"],
+      limit: 1e3
+    });
     const [enrichedData, setEnrichedData] = (0, import_react237.useState)([]);
     const [enriching, setEnriching] = (0, import_react237.useState)(false);
     (0, import_react237.useEffect)(() => {
@@ -132843,9 +132847,22 @@ html body {
             }
           });
         }
+        if (col.dataIndex === "reference_name") {
+          return __spreadProps(__spreadValues({}, col), {
+            render: (text, record) => {
+              if (!text)
+                return "\u2014";
+              if (record.reference_type === "Donation") {
+                const d = donations == null ? void 0 : donations.find((item) => item.name === text);
+                return d ? `${d.donor_name || "Anonymous"} (\u20B9${parseFloat(d.total_amount).toFixed(2)}) - ${text}` : text;
+              }
+              return text;
+            }
+          });
+        }
         return col;
       });
-    }, [visibleColumns, temples]);
+    }, [visibleColumns, temples, donations]);
     return /* @__PURE__ */ import_react237.default.createElement("div", {
       className: "py-6 space-y-6"
     }, /* @__PURE__ */ import_react237.default.createElement(PageHeader_default, {
@@ -139044,7 +139061,7 @@ html body {
       }
     },
     {
-      title: "Reference",
+      title: "Reference Type",
       dataIndex: "reference_type",
       key: "reference_type",
       width: 120,
@@ -139054,6 +139071,13 @@ html body {
           className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, config.label);
       }
+    },
+    {
+      title: "Reference Name",
+      dataIndex: "reference_name",
+      key: "reference_name",
+      width: 250,
+      render: (text) => text || "\u2014"
     },
     {
       title: "Temple",
@@ -139115,6 +139139,10 @@ html body {
       limit: 1e3,
       orderBy: "creation desc"
     });
+    const { data: itemsList, loading: loadingItems } = useFrappeGetDocList("Item", {
+      fields: ["name", "item_name", "item_code", "unit"],
+      limit: 1e3
+    });
     (0, import_react279.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
@@ -139127,10 +139155,13 @@ html body {
       }
     }, [isEdit, initialValues, form]);
     const handleSave = async (values) => {
-      var _a;
+      var _a, _b;
       try {
         const payload = __spreadProps(__spreadValues({}, values), {
-          posting_date: ((_a = values.posting_date) == null ? void 0 : _a.format("YYYY-MM-DD HH:mm:ss")) || null
+          posting_date: ((_a = values.posting_date) == null ? void 0 : _a.format("YYYY-MM-DD HH:mm:ss")) || null,
+          items: ((_b = values.items) == null ? void 0 : _b.map((item) => __spreadProps(__spreadValues({}, item), {
+            qty: parseFloat(item.qty) || 0
+          }))) || []
         });
         if (isEdit) {
           await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, payload);
@@ -139206,6 +139237,68 @@ html body {
     }) : /* @__PURE__ */ import_react279.default.createElement(input_default, {
       placeholder: field.placeholder
     })))))), /* @__PURE__ */ import_react279.default.createElement("div", {
+      style: { marginTop: "16px" }
+    }, /* @__PURE__ */ import_react279.default.createElement(SectionCard_default, {
+      title: "Stock Items",
+      icon: /* @__PURE__ */ import_react279.default.createElement(PlusOutlined_default2, null)
+    }, /* @__PURE__ */ import_react279.default.createElement(form_default.List, {
+      name: "items"
+    }, (fields, { add, remove }) => /* @__PURE__ */ import_react279.default.createElement("div", {
+      className: "flex flex-col gap-4"
+    }, fields.map((_a) => {
+      var _b = _a, { key, name: fieldName } = _b, restField = __objRest(_b, ["key", "name"]);
+      return /* @__PURE__ */ import_react279.default.createElement(row_default2, {
+        gutter: [16, 16],
+        key,
+        align: "bottom",
+        className: "pb-3 last:border-0 last:pb-0"
+      }, /* @__PURE__ */ import_react279.default.createElement(col_default2, {
+        xs: 24,
+        sm: 14
+      }, /* @__PURE__ */ import_react279.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
+        name: [fieldName, "item"],
+        label: fieldName === 0 ? "Item" : "",
+        rules: [{ required: true, message: "Please select an item" }],
+        style: { marginBottom: 0 }
+      }), /* @__PURE__ */ import_react279.default.createElement(select_default, {
+        showSearch: true,
+        placeholder: "Select Item",
+        optionFilterProp: "children",
+        loading: loadingItems,
+        options: (itemsList == null ? void 0 : itemsList.map((i) => ({
+          label: `${i.item_name} (${i.item_code || "No Code"})`,
+          value: i.name
+        }))) || []
+      }))), /* @__PURE__ */ import_react279.default.createElement(col_default2, {
+        xs: 20,
+        sm: 8
+      }, /* @__PURE__ */ import_react279.default.createElement(form_default.Item, __spreadProps(__spreadValues({}, restField), {
+        name: [fieldName, "qty"],
+        label: fieldName === 0 ? "Quantity" : "",
+        rules: [{ required: true, message: "Required" }],
+        style: { marginBottom: 0 }
+      }), /* @__PURE__ */ import_react279.default.createElement(input_default, {
+        type: "number",
+        placeholder: "Enter quantity",
+        min: 1
+      }))), /* @__PURE__ */ import_react279.default.createElement(col_default2, {
+        xs: 4,
+        sm: 2,
+        className: "text-center"
+      }, /* @__PURE__ */ import_react279.default.createElement(button_default, {
+        type: "text",
+        danger: true,
+        icon: /* @__PURE__ */ import_react279.default.createElement(DeleteOutlined_default2, null),
+        onClick: () => remove(fieldName),
+        style: { display: "inline-flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }
+      })));
+    }), /* @__PURE__ */ import_react279.default.createElement(button_default, {
+      type: "dashed",
+      onClick: () => add(),
+      block: true,
+      icon: /* @__PURE__ */ import_react279.default.createElement(PlusOutlined_default2, null),
+      className: "h-10 border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-zinc-900 font-medium"
+    }, "Add Stock Item"))))), /* @__PURE__ */ import_react279.default.createElement("div", {
       style: { marginTop: "24px" }
     }, /* @__PURE__ */ import_react279.default.createElement(FormFooter_default, {
       onCancel: onBack,
@@ -139222,6 +139315,14 @@ html body {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
     const { data: temples } = useFrappeGetDocList("Temple", {
       fields: ["name", "temple_name"],
+      limit: 1e3
+    });
+    const { data: donations } = useFrappeGetDocList("Donation", {
+      fields: ["name", "donor_name", "total_amount"],
+      limit: 1e3
+    });
+    const { data: items } = useFrappeGetDocList("Item", {
+      fields: ["name", "item_name", "item_code"],
       limit: 1e3
     });
     if (loading)
@@ -139244,14 +139345,20 @@ html body {
     const refTag = getTagConfig(doc.reference_type || "Manual");
     const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
+    const donationObj = doc.reference_type === "Donation" ? donations == null ? void 0 : donations.find((d) => d.name === doc.reference_name) : null;
+    const referenceNameDisplay = donationObj ? `${donationObj.donor_name || "Anonymous"} (\u20B9${parseFloat(donationObj.total_amount).toFixed(2)}) - ${doc.reference_name}` : doc.reference_name || "\u2014";
     const itemColumns2 = [
       {
         title: "Item",
         dataIndex: "item",
         key: "item",
-        render: (text) => /* @__PURE__ */ import_react280.default.createElement("span", {
-          className: "font-semibold text-zinc-800"
-        }, text)
+        render: (text) => {
+          const itemObj = items == null ? void 0 : items.find((i) => i.name === text);
+          const itemName = itemObj ? `${itemObj.item_name} (${itemObj.item_code || "No Code"})` : text;
+          return /* @__PURE__ */ import_react280.default.createElement("span", {
+            className: "font-semibold text-zinc-800"
+          }, itemName);
+        }
       },
       {
         title: "Quantity",
@@ -139322,7 +139429,7 @@ html body {
       label: "Reference Name"
     }, /* @__PURE__ */ import_react280.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.reference_name || "\u2014"))))), /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
+    }, referenceNameDisplay))))), /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
       title: "Items Details",
       icon: /* @__PURE__ */ import_react280.default.createElement(List4, {
         size: 15,
@@ -139358,8 +139465,8 @@ html body {
       {
         label: "Source Name",
         value: /* @__PURE__ */ import_react280.default.createElement("span", {
-          className: "text-xs font-mono font-semibold text-zinc-800"
-        }, doc.reference_name || "N/A")
+          className: "text-xs font-semibold text-zinc-800"
+        }, referenceNameDisplay)
       }
     ].map(({ label, value }) => /* @__PURE__ */ import_react280.default.createElement("div", {
       key: label,
@@ -141000,4 +141107,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.AQRHQPOK.js.map
+//# sourceMappingURL=temple_donation.bundle.R6XHJLZE.js.map

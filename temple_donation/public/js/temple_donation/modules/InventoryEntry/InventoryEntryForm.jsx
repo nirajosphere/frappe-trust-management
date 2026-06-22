@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
     Form, Input, Button, Alert, Select, DatePicker, Row, Col, Typography
 } from "antd";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import {
     useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
@@ -40,6 +41,12 @@ const InventoryEntryForm = ({ id, onBack }) => {
         orderBy: "creation desc"
     });
 
+    // Fetch Items list for link selection
+    const { data: itemsList, loading: loadingItems } = useFrappeGetDocList("Item", {
+        fields: ["name", "item_name", "item_code", "unit"],
+        limit: 1000
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
             form.setFieldsValue({
@@ -57,7 +64,11 @@ const InventoryEntryForm = ({ id, onBack }) => {
         try {
             const payload = {
                 ...values,
-                posting_date: values.posting_date?.format("YYYY-MM-DD HH:mm:ss") || null
+                posting_date: values.posting_date?.format("YYYY-MM-DD HH:mm:ss") || null,
+                items: values.items?.map(item => ({
+                    ...item,
+                    qty: parseFloat(item.qty) || 0
+                })) || []
             };
 
             if (isEdit) {
@@ -131,6 +142,72 @@ const InventoryEntryForm = ({ id, onBack }) => {
                         ))}
                     </Row>
                 </SectionCard>
+
+                <div style={{ marginTop: '16px' }}>
+                    <SectionCard title="Stock Items" icon={<PlusOutlined />}>
+                        <Form.List name="items">
+                            {(fields, { add, remove }) => (
+                                <div className="flex flex-col gap-4">
+                                    {fields.map(({ key, name: fieldName, ...restField }) => (
+                                        <Row gutter={[16, 16]} key={key} align="bottom" className="pb-3 last:border-0 last:pb-0">
+                                            <Col xs={24} sm={14}>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[fieldName, 'item']}
+                                                    label={fieldName === 0 ? "Item" : ""}
+                                                    rules={[{ required: true, message: "Please select an item" }]}
+                                                    style={{ marginBottom: 0 }}
+                                                >
+                                                    <Select
+                                                        showSearch
+                                                        placeholder="Select Item"
+                                                        optionFilterProp="children"
+                                                        loading={loadingItems}
+                                                        options={itemsList?.map(i => ({
+                                                            label: `${i.item_name} (${i.item_code || 'No Code'})`,
+                                                            value: i.name
+                                                        })) || []}
+                                                    />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col xs={20} sm={8}>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[fieldName, 'qty']}
+                                                    label={fieldName === 0 ? "Quantity" : ""}
+                                                    rules={[{ required: true, message: "Required" }]}
+                                                    style={{ marginBottom: 0 }}
+                                                >
+                                                    <Input type="number" placeholder="Enter quantity" min={1} />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col xs={4} sm={2} className="text-center">
+                                                <Button
+                                                    type="text"
+                                                    danger
+                                                    icon={<DeleteOutlined />}
+                                                    onClick={() => remove(fieldName)}
+                                                    style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', height: '36px', width: '36px' }}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    ))}
+                                    
+                                    <Button
+                                        type="dashed"
+                                        onClick={() => add()}
+                                        block
+                                        icon={<PlusOutlined />}
+                                        className="h-10 border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-zinc-900 font-medium"
+                                    >
+                                        Add Stock Item
+                                    </Button>
+                                </div>
+                            )}
+                        </Form.List>
+                    </SectionCard>
+                </div>
+
                 <div style={{ marginTop: '24px' }}>
                     <FormFooter
                         onCancel={onBack}

@@ -32,7 +32,7 @@ export const inventoryEntryColumns = [
         },
     },
     {
-        title: "Reference",
+        title: "Reference Type",
         dataIndex: "reference_type",
         key: "reference_type",
         width: 120,
@@ -44,6 +44,13 @@ export const inventoryEntryColumns = [
                 </Tag>
             );
         },
+    },
+    {
+        title: "Reference Name",
+        dataIndex: "reference_name",
+        key: "reference_name",
+        width: 250,
+        render: (text) => text || "—"
     },
     {
         title: "Temple",
