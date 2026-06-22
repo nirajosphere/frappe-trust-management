@@ -24,10 +24,20 @@ const InventoryEntryForm = ({ id, onBack }) => {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
 
+    // Watch reference_type value
+    const referenceType = Form.useWatch("reference_type", form);
+
     // Fetch Temples list for link field
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
+    });
+
+    // Fetch Donations list for link field when reference_type is "Donation"
+    const { data: donations, loading: loadingDonations } = useFrappeGetDocList("Donation", {
+        fields: ["name", "donor_name", "total_amount", "creation"],
+        limit: 1000,
+        orderBy: "creation desc"
     });
 
     useEffect(() => {
@@ -86,8 +96,23 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                     style={formItemStyle}
                                     rules={field.required ? [{ required: true, message: field.message || "Required" }] : []}
                                 >
-                                    {field.type === "select" ? (
-                                        <Select placeholder={field.placeholder} options={field.options} />
+                                    {field.name === "reference_name" && referenceType === "Donation" ? (
+                                        <Select 
+                                            showSearch
+                                            placeholder="Select Donation" 
+                                            optionFilterProp="children"
+                                            loading={loadingDonations}
+                                            options={donations?.map(d => ({
+                                                label: `${d.donor_name || 'Anonymous'} - ₹${parseFloat(d.total_amount).toFixed(2)} (${d.name})`,
+                                                value: d.name
+                                            })) || []}
+                                        />
+                                    ) : field.type === "select" ? (
+                                        <Select 
+                                            placeholder={field.placeholder} 
+                                            options={field.options} 
+                                            onChange={field.name === "reference_type" ? () => form.setFieldValue("reference_name", undefined) : undefined}
+                                        />
                                     ) : field.type === "link" && field.doctype === "Temple" ? (
                                         <Select 
                                             showSearch

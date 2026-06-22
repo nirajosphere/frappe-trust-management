@@ -138795,9 +138795,15 @@ html body {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    const referenceType = form_default.useWatch("reference_type", form);
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
       fields: ["name", "temple_name"],
       limit: 1e3
+    });
+    const { data: donations, loading: loadingDonations } = useFrappeGetDocList("Donation", {
+      fields: ["name", "donor_name", "total_amount", "creation"],
+      limit: 1e3,
+      orderBy: "creation desc"
     });
     (0, import_react279.useEffect)(() => {
       if (isEdit && initialValues) {
@@ -138864,9 +138870,19 @@ html body {
       label: field.label,
       style: formItemStyle,
       rules: field.required ? [{ required: true, message: field.message || "Required" }] : []
-    }, field.type === "select" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
+    }, field.name === "reference_name" && referenceType === "Donation" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
+      showSearch: true,
+      placeholder: "Select Donation",
+      optionFilterProp: "children",
+      loading: loadingDonations,
+      options: (donations == null ? void 0 : donations.map((d) => ({
+        label: `${d.donor_name || "Anonymous"} - \u20B9${parseFloat(d.total_amount).toFixed(2)} (${d.name})`,
+        value: d.name
+      }))) || []
+    }) : field.type === "select" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
       placeholder: field.placeholder,
-      options: field.options
+      options: field.options,
+      onChange: field.name === "reference_type" ? () => form.setFieldValue("reference_name", void 0) : void 0
     }) : field.type === "link" && field.doctype === "Temple" ? /* @__PURE__ */ import_react279.default.createElement(select_default, {
       showSearch: true,
       placeholder: field.placeholder,
@@ -140158,4 +140174,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.ZJTX4BWF.js.map
+//# sourceMappingURL=temple_donation.bundle.TNIHIYUI.js.map
