@@ -448,8 +448,8 @@ const TempleForm = ({ id, onBack }) => {
         <ViewContainer className="donation-page">
             <AddPageHeader
                 onBack={onBack}
-                title={isEdit ? "Edit Institution" : "Add Institution"}
-                subtitle="Institution Management Portal"
+                title={isEdit ? "Edit Trust" : "Add Trust"}
+                subtitle="Trust Management Portal"
                 showBack={true}
             />
 
@@ -463,7 +463,7 @@ const TempleForm = ({ id, onBack }) => {
                             
                             {/* Temple Meta Profile Header */}
                             <SectionCard 
-                                title="Institution Profile"
+                                title="Trust Profile"
                                 icon={<BankOutlined style={{ color: '#18181b' }} />}
                             >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '4px 0' }}>
@@ -483,7 +483,7 @@ const TempleForm = ({ id, onBack }) => {
                                     
                                     <div style={{ flexGrow: 1, minWidth: 0 }}>
                                         <div style={{ fontSize: '15px', fontWeight: 600, color: '#18181b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                            {templeName || "Institution Identity"}
+                                            {templeName || "Trust Identity"}
                                         </div>
                                         {templeId && (
                                             <div style={{ fontSize: '11px', color: '#71717a', marginTop: 2, fontWeight: 500 }}>
@@ -506,12 +506,12 @@ const TempleForm = ({ id, onBack }) => {
                             >
                                 <Row gutter={[12, 0]}>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="temple_name" label="Institution Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
-                                            <Input prefix={<BankOutlined style={{ color: '#a1a1aa' }} />} placeholder="Full Institution Name" />
+                                        <Form.Item name="temple_name" label="Trust Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
+                                            <Input prefix={<BankOutlined style={{ color: '#a1a1aa' }} />} placeholder="Full Trust Name" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="temple_id" label="Institution ID" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="temple_id" label="Trust ID" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
                                             <Input prefix={<InfoCircleOutlined style={{ color: '#a1a1aa' }} />} placeholder="Unique Identifier" />
                                         </Form.Item>
                                     </Col>
@@ -646,7 +646,7 @@ const TempleForm = ({ id, onBack }) => {
                         onCancel={onBack}
                         loading={creating || updating}
                         isEdit={isEdit}
-                        saveText={isEdit ? "Update Institution" : "Add Institution"}
+                        saveText={isEdit ? "Update Trust" : "Add Trust"}
                     />
                 </div>
             </Form>

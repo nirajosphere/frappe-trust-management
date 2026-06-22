@@ -36,7 +36,7 @@ const Donation = ({ onBack }) => {
 
     const handleToggleCart = useCallback((donationType) => {
         if (!selectedTemple || selectedTemple.length === 0) {
-            message.warning("Please select at least one institution.");
+            message.warning("Please select at least one trust.");
             return;
         }
 
@@ -83,7 +83,7 @@ const Donation = ({ onBack }) => {
             return;
         }
         if (!selectedTemple || selectedTemple.length === 0) {
-            message.error("Please select at least one institution");
+            message.error("Please select at least one trust");
             return;
         }
         if (cartItems.length === 0) {
@@ -139,7 +139,7 @@ const Donation = ({ onBack }) => {
                         resolve();
                     },
                     error: (err) => {
-                        errorMessages.push(`Institution ${tName}: ${err.message || 'Failed'}`);
+                        errorMessages.push(`Trust ${tName}: ${err.message || 'Failed'}`);
                         resolve();
                     }
                 });

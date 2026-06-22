@@ -12,7 +12,7 @@ export const templeColumns = [
     //     render: (text) => <Text copyable>{text}</Text>
     // },
     {
-        title: 'Institution Name',
+        title: 'Trust Name',
         dataIndex: 'temple_name',
         key: 'temple_name',
         render: (text) => <Text strong>{text}</Text>,

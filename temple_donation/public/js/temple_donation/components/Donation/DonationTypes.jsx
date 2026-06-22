@@ -177,7 +177,7 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
     if (!selectedTemple || selectedTemple.length === 0) {
         return (
             <Card style={{ borderRadius: '8px', border: '1px solid #f3f4f6' }} bodyStyle={{ padding: '24px', textAlign: 'center' }}>
-                <Empty description={<span className="text-zinc-400 font-medium">Select at least one institution</span>} />
+                <Empty description={<span className="text-zinc-400 font-medium">Select at least one trust</span>} />
             </Card>
         );
     }
