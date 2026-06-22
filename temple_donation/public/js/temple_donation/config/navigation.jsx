@@ -73,20 +73,20 @@ export const navigationItems = [
         component: <Dashboard />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
-    {
-        key: "donors",
-        icon: <UserOutlined />,
-        label: "Donors",
-        component: <DonorList />,
-        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
-        key: "donations",
-        icon: <HistoryOutlined />,
-        label: "Donation",
-        component: <DonationList />,
-        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
+    // {
+    //     key: "donors",
+    //     icon: <UserOutlined />,
+    //     label: "Donors",
+    //     component: <DonorList />,
+    //     roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    // },
+    // {
+    //     key: "donations",
+    //     icon: <HistoryOutlined />,
+    //     label: "Donation",
+    //     component: <DonationList />,
+    //     roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    // },
     {
         key: "items",
         icon: <AppstoreOutlined />,

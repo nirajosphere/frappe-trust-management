@@ -133230,7 +133230,7 @@ html body {
   var import_react243 = __toESM(require_react());
   var ViewContainer = ({ className, children }) => {
     return /* @__PURE__ */ import_react243.default.createElement("div", {
-      className: `min-h-screen py-6 bg-[#f8f9fa] ${className || ""}`,
+      className: `min-h-screen py-6 ${className || ""}`,
       style: { padding: "24px 40px" }
     }, /* @__PURE__ */ import_react243.default.createElement("div", {
       style: { maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "24px" }
@@ -139328,20 +139328,6 @@ html body {
       roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
     {
-      key: "donors",
-      icon: /* @__PURE__ */ import_react289.default.createElement(UserOutlined_default2, null),
-      label: "Donors",
-      component: /* @__PURE__ */ import_react289.default.createElement(DonorList_default, null),
-      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
-      key: "donations",
-      icon: /* @__PURE__ */ import_react289.default.createElement(HistoryOutlined_default2, null),
-      label: "Donation",
-      component: /* @__PURE__ */ import_react289.default.createElement(DonationList_default, null),
-      roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
-    },
-    {
       key: "items",
       icon: /* @__PURE__ */ import_react289.default.createElement(AppstoreOutlined_default2, null),
       label: "Items",
@@ -140174,4 +140160,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.TNIHIYUI.js.map
+//# sourceMappingURL=temple_donation.bundle.YMVT5LMI.js.map
