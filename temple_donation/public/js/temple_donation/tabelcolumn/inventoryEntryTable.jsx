@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Tag } from "antd";
+import dayjs from "dayjs";
 import { getTagConfig } from "../utils/tagUtils";
 
 const { Text } = Typography;
@@ -9,8 +10,12 @@ export const inventoryEntryColumns = [
         title: "Entry ID",
         dataIndex: "name",
         key: "name",
-        width: 150,
-        render: (text) => <Text copyable>{text}</Text>
+        width: 180,
+        render: (text) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                <Text copyable>{text}</Text>
+            </span>
+        )
     },
     {
         title: "Entry Type",
@@ -44,6 +49,7 @@ export const inventoryEntryColumns = [
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
+        width: 180,
         render: (temple) => {
             if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
             const config = getTagConfig("temple admin");
@@ -58,6 +64,11 @@ export const inventoryEntryColumns = [
         title: "Posting Date",
         dataIndex: "posting_date",
         key: "posting_date",
-        width: 180,
+        width: 220,
+        render: (date) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                {date ? dayjs(date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}
+            </span>
+        )
     },
 ];

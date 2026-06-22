@@ -9,13 +9,18 @@ export const roomColumns = [
         title: "Room No.",
         dataIndex: "room_number",
         key: "room_number",
-        width: 120,
-        render: (text) => <Text strong>{text}</Text>,
+        width: 150,
+        render: (text) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                <Text strong>{text}</Text>
+            </span>
+        )
     },
     {
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
+        width: 180,
         render: (temple) => {
             if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
             const config = getTagConfig("temple admin");

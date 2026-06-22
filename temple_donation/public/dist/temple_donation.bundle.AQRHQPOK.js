@@ -132466,6 +132466,45 @@ html body {
     printWindow.document.close();
   };
 
+  // ../temple_donation/temple_donation/public/js/temple_donation/utils/tagUtils.js
+  var TAG_CONFIG = {
+    "super admin": {
+      color: "magenta",
+      glassClass: "tag-glass-magenta"
+    },
+    "temple admin": {
+      color: "geekblue",
+      glassClass: "tag-glass-geekblue"
+    },
+    manager: {
+      color: "green",
+      glassClass: "tag-glass-green"
+    },
+    cashier: {
+      color: "cyan",
+      glassClass: "tag-glass-cyan"
+    },
+    active: {
+      color: "lime",
+      glassClass: "tag-glass-green"
+    },
+    inactive: {
+      color: "volcano",
+      glassClass: "tag-glass-volcano"
+    },
+    default: {
+      color: "default",
+      glassClass: "tag-glass-gray"
+    }
+  };
+  var getTagConfig = (value = "") => {
+    const key = String(value).toLowerCase();
+    const matchedKey = Object.keys(TAG_CONFIG).sort((a2, b) => b.length - a2.length).find((item) => key.includes(item)) || "default";
+    return __spreadProps(__spreadValues({}, TAG_CONFIG[matchedKey]), {
+      label: value || "Standard"
+    });
+  };
+
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/ListingPage.jsx
   var ListingPage = ({
     doctype,
@@ -132680,6 +132719,10 @@ html body {
       limit: 100,
       orderBy: { field: "modified", order: "desc" }
     });
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     const [enrichedData, setEnrichedData] = (0, import_react237.useState)([]);
     const [enriching, setEnriching] = (0, import_react237.useState)(false);
     (0, import_react237.useEffect)(() => {
@@ -132780,6 +132823,29 @@ html body {
       }));
     }
     const visibleColumns = customizedColumns.length > 0 ? customizedColumns.filter((c2) => c2.visible !== false) : columns || [];
+    const processedColumns = import_react237.default.useMemo(() => {
+      return visibleColumns.map((col) => {
+        if (col.dataIndex === "temple") {
+          return __spreadProps(__spreadValues({}, col), {
+            render: (text) => {
+              if (!text)
+                return /* @__PURE__ */ import_react237.default.createElement("span", {
+                  className: "text-gray-400 text-xs italic"
+                }, "Global");
+              const t2 = temples == null ? void 0 : temples.find((item) => item.name === text);
+              const name = t2 ? t2.temple_name : text;
+              const config = getTagConfig("temple admin");
+              return /* @__PURE__ */ import_react237.default.createElement("span", {
+                style: { whiteSpace: "nowrap" }
+              }, /* @__PURE__ */ import_react237.default.createElement(tag_default, {
+                className: `tag-glass ${config.glassClass} font-bold rounded-full`
+              }, name));
+            }
+          });
+        }
+        return col;
+      });
+    }, [visibleColumns, temples]);
     return /* @__PURE__ */ import_react237.default.createElement("div", {
       className: "py-6 space-y-6"
     }, /* @__PURE__ */ import_react237.default.createElement(PageHeader_default, {
@@ -132836,7 +132902,7 @@ html body {
         });
       }
     }), /* @__PURE__ */ import_react237.default.createElement(CommonTable_default, {
-      columns: visibleColumns,
+      columns: processedColumns,
       dataSource: enrichedData,
       loading: loading || enriching,
       searchText,
@@ -133192,45 +133258,6 @@ html body {
         placeholder: "DD-MM-YYYY"
       }
     ]
-  };
-
-  // ../temple_donation/temple_donation/public/js/temple_donation/utils/tagUtils.js
-  var TAG_CONFIG = {
-    "super admin": {
-      color: "magenta",
-      glassClass: "tag-glass-magenta"
-    },
-    "temple admin": {
-      color: "geekblue",
-      glassClass: "tag-glass-geekblue"
-    },
-    manager: {
-      color: "green",
-      glassClass: "tag-glass-green"
-    },
-    cashier: {
-      color: "cyan",
-      glassClass: "tag-glass-cyan"
-    },
-    active: {
-      color: "lime",
-      glassClass: "tag-glass-green"
-    },
-    inactive: {
-      color: "volcano",
-      glassClass: "tag-glass-volcano"
-    },
-    default: {
-      color: "default",
-      glassClass: "tag-glass-gray"
-    }
-  };
-  var getTagConfig = (value = "") => {
-    const key = String(value).toLowerCase();
-    const matchedKey = Object.keys(TAG_CONFIG).sort((a2, b) => b.length - a2.length).find((item) => key.includes(item)) || "default";
-    return __spreadProps(__spreadValues({}, TAG_CONFIG[matchedKey]), {
-      label: value || "Standard"
-    });
   };
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/DetailHeader.jsx
@@ -138657,10 +138684,12 @@ html body {
       title: "Item Code",
       dataIndex: "item_code",
       key: "item_code",
-      width: 120,
-      render: (text) => /* @__PURE__ */ import_react273.default.createElement(Text21, {
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react273.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, /* @__PURE__ */ import_react273.default.createElement(Text21, {
         copyable: true
-      }, text || "\u2014")
+      }, text || "\u2014"))
     },
     {
       title: "Item Name",
@@ -138686,7 +138715,7 @@ html body {
       title: "Temple",
       dataIndex: "temple",
       key: "temple",
-      width: 160,
+      width: 180,
       render: (temple) => {
         if (!temple)
           return /* @__PURE__ */ import_react273.default.createElement("span", {
@@ -138822,6 +138851,10 @@ html body {
   var ItemView = ({ id, onBack, onEdit }) => {
     var _a;
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ITEM, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react276.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -138841,6 +138874,8 @@ html body {
     const unitTag = getTagConfig(doc.unit || "Nos");
     const stockStatus = (doc.total_stock || 0) <= 0 ? "Inactive" : "Active";
     const stockTag = getTagConfig(stockStatus);
+    const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
     return /* @__PURE__ */ import_react276.default.createElement(ViewContainer_default, {
       className: "item-view-container"
     }, /* @__PURE__ */ import_react276.default.createElement(DetailHeader_default, {
@@ -138900,7 +138935,7 @@ html body {
       label: "Temple"
     }, /* @__PURE__ */ import_react276.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.temple || "Global"))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+    }, templeName))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
@@ -138982,16 +139017,19 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/inventoryEntryTable.jsx
   var import_react277 = __toESM(require_react());
+  var import_dayjs6 = __toESM(require_dayjs_min());
   var { Text: Text23 } = typography_default;
   var inventoryEntryColumns = [
     {
       title: "Entry ID",
       dataIndex: "name",
       key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react277.default.createElement(Text23, {
+      width: 180,
+      render: (text) => /* @__PURE__ */ import_react277.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, /* @__PURE__ */ import_react277.default.createElement(Text23, {
         copyable: true
-      }, text)
+      }, text))
     },
     {
       title: "Entry Type",
@@ -139021,6 +139059,7 @@ html body {
       title: "Temple",
       dataIndex: "temple",
       key: "temple",
+      width: 180,
       render: (temple) => {
         if (!temple)
           return /* @__PURE__ */ import_react277.default.createElement("span", {
@@ -139036,7 +139075,10 @@ html body {
       title: "Posting Date",
       dataIndex: "posting_date",
       key: "posting_date",
-      width: 180
+      width: 220,
+      render: (date5) => /* @__PURE__ */ import_react277.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, date5 ? (0, import_dayjs6.default)(date5).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014")
     }
   ];
 
@@ -139055,7 +139097,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/InventoryEntry/InventoryEntryForm.jsx
   var import_react279 = __toESM(require_react());
-  var import_dayjs6 = __toESM(require_dayjs_min());
+  var import_dayjs7 = __toESM(require_dayjs_min());
   var { Text: Text24 } = typography_default;
   var InventoryEntryForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -139076,11 +139118,11 @@ html body {
     (0, import_react279.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
-          posting_date: initialValues.posting_date ? (0, import_dayjs6.default)(initialValues.posting_date) : null
+          posting_date: initialValues.posting_date ? (0, import_dayjs7.default)(initialValues.posting_date) : null
         }));
       } else {
         form.setFieldsValue({
-          posting_date: (0, import_dayjs6.default)()
+          posting_date: (0, import_dayjs7.default)()
         });
       }
     }, [isEdit, initialValues, form]);
@@ -139175,9 +139217,13 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/InventoryEntry/InventoryEntryView.jsx
   var import_react280 = __toESM(require_react());
-  var import_dayjs7 = __toESM(require_dayjs_min());
+  var import_dayjs8 = __toESM(require_dayjs_min());
   var InventoryEntryView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react280.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -139196,6 +139242,8 @@ html body {
     }
     const typeTag = getTagConfig(doc.entry_type === "IN" ? "active" : "inactive");
     const refTag = getTagConfig(doc.reference_type || "Manual");
+    const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
     const itemColumns2 = [
       {
         title: "Item",
@@ -139220,7 +139268,7 @@ html body {
     }, /* @__PURE__ */ import_react280.default.createElement(DetailHeader_default, {
       onBack,
       title: `Stock Entry: ${doc.name}`,
-      subtitle: `Posting Date: ${doc.posting_date ? (0, import_dayjs7.default)(doc.posting_date).format("DD-MM-YYYY HH:mm:ss") : "\u2014"}`,
+      subtitle: `Posting Date: ${doc.posting_date ? (0, import_dayjs8.default)(doc.posting_date).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014"}`,
       initials: doc.entry_type || "S",
       tags: [doc.entry_type],
       actions: /* @__PURE__ */ import_react280.default.createElement(import_react280.default.Fragment, null, /* @__PURE__ */ import_react280.default.createElement(button_default, {
@@ -139260,7 +139308,7 @@ html body {
       label: "Temple"
     }, /* @__PURE__ */ import_react280.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.temple || "Global"))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+    }, templeName))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react280.default.createElement(FieldCell_default, {
@@ -139368,15 +139416,18 @@ html body {
       title: "Room No.",
       dataIndex: "room_number",
       key: "room_number",
-      width: 120,
-      render: (text) => /* @__PURE__ */ import_react281.default.createElement(Text25, {
+      width: 150,
+      render: (text) => /* @__PURE__ */ import_react281.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, /* @__PURE__ */ import_react281.default.createElement(Text25, {
         strong: true
-      }, text)
+      }, text))
     },
     {
       title: "Temple",
       dataIndex: "temple",
       key: "temple",
+      width: 180,
       render: (temple) => {
         if (!temple)
           return /* @__PURE__ */ import_react281.default.createElement("span", {
@@ -139546,6 +139597,10 @@ html body {
   var import_react284 = __toESM(require_react());
   var RoomView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react284.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -139564,12 +139619,14 @@ html body {
     }
     const typeTag = getTagConfig(doc.room_type === "AC" ? "super admin" : doc.room_type === "Non-AC" ? "default" : "manager");
     const statusTag = getTagConfig(doc.status === "Available" ? "active" : doc.status === "Occupied" ? "inactive" : "default");
+    const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
     return /* @__PURE__ */ import_react284.default.createElement(ViewContainer_default, {
       className: "room-view-container"
     }, /* @__PURE__ */ import_react284.default.createElement(DetailHeader_default, {
       onBack,
       title: `Room ${doc.room_number}`,
-      subtitle: `Temple: ${doc.temple || "N/A"}`,
+      subtitle: `Temple: ${templeName}`,
       initials: "R",
       tags: [doc.room_type],
       actions: /* @__PURE__ */ import_react284.default.createElement(import_react284.default.Fragment, null, /* @__PURE__ */ import_react284.default.createElement(button_default, {
@@ -139609,7 +139666,7 @@ html body {
       label: "Temple"
     }, /* @__PURE__ */ import_react284.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.temple || "Global"))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+    }, templeName))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
@@ -139718,16 +139775,19 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/tabelcolumn/roomBookingTable.jsx
   var import_react285 = __toESM(require_react());
+  var import_dayjs9 = __toESM(require_dayjs_min());
   var { Text: Text27 } = typography_default;
   var roomBookingColumns = [
     {
       title: "Booking ID",
       dataIndex: "name",
       key: "name",
-      width: 150,
-      render: (text) => /* @__PURE__ */ import_react285.default.createElement(Text27, {
+      width: 180,
+      render: (text) => /* @__PURE__ */ import_react285.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, /* @__PURE__ */ import_react285.default.createElement(Text27, {
         copyable: true
-      }, text)
+      }, text))
     },
     {
       title: "Donor",
@@ -139747,13 +139807,19 @@ html body {
       title: "Check In",
       dataIndex: "check_in",
       key: "check_in",
-      width: 170
+      width: 220,
+      render: (date5) => /* @__PURE__ */ import_react285.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, date5 ? (0, import_dayjs9.default)(date5).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014")
     },
     {
       title: "Check Out",
       dataIndex: "check_out",
       key: "check_out",
-      width: 170
+      width: 220,
+      render: (date5) => /* @__PURE__ */ import_react285.default.createElement("span", {
+        style: { whiteSpace: "nowrap" }
+      }, date5 ? (0, import_dayjs9.default)(date5).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014")
     },
     {
       title: "Amount",
@@ -139796,7 +139862,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingForm.jsx
   var import_react287 = __toESM(require_react());
-  var import_dayjs8 = __toESM(require_dayjs_min());
+  var import_dayjs10 = __toESM(require_dayjs_min());
   var { Text: Text28 } = typography_default;
   var RoomBookingForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -139819,14 +139885,14 @@ html body {
     (0, import_react287.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
-          check_in: initialValues.check_in ? (0, import_dayjs8.default)(initialValues.check_in) : null,
-          check_out: initialValues.check_out ? (0, import_dayjs8.default)(initialValues.check_out) : null
+          check_in: initialValues.check_in ? (0, import_dayjs10.default)(initialValues.check_in) : null,
+          check_out: initialValues.check_out ? (0, import_dayjs10.default)(initialValues.check_out) : null
         }));
       } else {
         form.setFieldsValue({
           status: "Booked",
-          check_in: (0, import_dayjs8.default)(),
-          check_out: (0, import_dayjs8.default)().add(1, "day")
+          check_in: (0, import_dayjs10.default)(),
+          check_out: (0, import_dayjs10.default)().add(1, "day")
         });
       }
     }, [isEdit, initialValues, form]);
@@ -139916,9 +139982,13 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingView.jsx
   var import_react288 = __toESM(require_react());
-  var import_dayjs9 = __toESM(require_dayjs_min());
+  var import_dayjs11 = __toESM(require_dayjs_min());
   var RoomBookingView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM_BOOKING, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+      fields: ["name", "temple_name"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react288.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -139937,6 +140007,8 @@ html body {
     }
     const matchedStatus = doc.status === "Booked" || doc.status === "Checked In" ? "active" : doc.status === "Cancelled" ? "inactive" : "default";
     const statusTag = getTagConfig(matchedStatus);
+    const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
     return /* @__PURE__ */ import_react288.default.createElement(ViewContainer_default, {
       className: "room-booking-view-container"
     }, /* @__PURE__ */ import_react288.default.createElement(DetailHeader_default, {
@@ -139982,7 +140054,7 @@ html body {
       label: "Temple"
     }, /* @__PURE__ */ import_react288.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.temple || "Global"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+    }, templeName))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
@@ -140003,14 +140075,14 @@ html body {
       label: "Check-In Time"
     }, /* @__PURE__ */ import_react288.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.check_in ? (0, import_dayjs9.default)(doc.check_in).format("DD-MM-YYYY HH:mm:ss") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+    }, doc.check_in ? (0, import_dayjs11.default)(doc.check_in).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
       label: "Check-Out Time"
     }, /* @__PURE__ */ import_react288.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.check_out ? (0, import_dayjs9.default)(doc.check_out).format("DD-MM-YYYY HH:mm:ss") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+    }, doc.check_out ? (0, import_dayjs11.default)(doc.check_out).format("ddd, DD MMM YYYY, hh:mm A") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
@@ -140928,4 +141000,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.Z32M5QOL.js.map
+//# sourceMappingURL=temple_donation.bundle.AQRHQPOK.js.map

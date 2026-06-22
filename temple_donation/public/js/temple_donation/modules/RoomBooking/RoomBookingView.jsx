@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Alert, Tag, Button } from "antd";
 import { Calendar, ShieldAlert, FileText, CheckCircle2, DollarSign } from "lucide-react";
 import dayjs from "dayjs";
-import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
 import { DOCTYPE_ROOM_BOOKING } from "../../config/constants";
 import PageLoader from "../../components/common/PageLoader";
 import { getTagConfig } from "../../utils/tagUtils";
@@ -14,6 +14,10 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const RoomBookingView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM_BOOKING, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     if (loading) return <PageLoader />;
 
@@ -40,6 +44,9 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
 
     const matchedStatus = (doc.status === "Booked" || doc.status === "Checked In") ? "active" : doc.status === "Cancelled" ? "inactive" : "default";
     const statusTag = getTagConfig(matchedStatus);
+
+    const templeObj = temples?.find(t => t.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
     return (
         <ViewContainer className="room-booking-view-container">
@@ -83,7 +90,7 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Temple">
-                                        <span className="text-zinc-800 font-semibold">{doc.temple || "Global"}</span>
+                                        <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
@@ -101,14 +108,14 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Check-In Time">
                                         <span className="text-zinc-800 font-semibold">
-                                            {doc.check_in ? dayjs(doc.check_in).format("DD-MM-YYYY HH:mm:ss") : "—"}
+                                            {doc.check_in ? dayjs(doc.check_in).format("ddd, DD MMM YYYY, hh:mm A") : "—"}
                                         </span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Check-Out Time">
                                         <span className="text-zinc-800 font-semibold">
-                                            {doc.check_out ? dayjs(doc.check_out).format("DD-MM-YYYY HH:mm:ss") : "—"}
+                                            {doc.check_out ? dayjs(doc.check_out).format("ddd, DD MMM YYYY, hh:mm A") : "—"}
                                         </span>
                                     </FieldCell>
                                 </Col>

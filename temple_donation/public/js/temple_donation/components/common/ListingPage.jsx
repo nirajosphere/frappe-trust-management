@@ -6,6 +6,8 @@ import CommonTable from "./CommonTable";
 import PageHeader from "./PageHeader";
 import SavedViewsBar from "./SavedViewsBar";
 import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils";
+import { getTagConfig } from "../../utils/tagUtils";
+
 
 /**
  * ListingPage Component
@@ -257,8 +259,15 @@ const ListingPage = ({
         orderBy: { field: 'modified', order: 'desc' }
     });
 
+    // Fetch Temples list for link field mapping in columns
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
+
     const [enrichedData, setEnrichedData] = useState([]);
     const [enriching, setEnriching] = useState(false);
+
 
     useEffect(() => {
         if (data && data.length > 0 && childTable) {
@@ -377,6 +386,30 @@ const ListingPage = ({
         ? customizedColumns.filter(c => c.visible !== false) 
         : (columns || []);
 
+    const processedColumns = React.useMemo(() => {
+        return visibleColumns.map(col => {
+            if (col.dataIndex === "temple") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return <span className="text-gray-400 text-xs italic">Global</span>;
+                        const t = temples?.find(item => item.name === text);
+                        const name = t ? t.temple_name : text;
+                        const config = getTagConfig("temple admin");
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {name}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
+            return col;
+        });
+    }, [visibleColumns, temples]);
+
     return (
         <div className="py-6 space-y-6">
 
@@ -439,9 +472,10 @@ const ListingPage = ({
                 />
             )}
             <CommonTable
-                columns={visibleColumns}
+                columns={processedColumns}
                 dataSource={enrichedData}
                 loading={loading || enriching}
+
                 searchText={searchText}
                 onEdit={handleEdit}
                 onDelete={handleDelete}

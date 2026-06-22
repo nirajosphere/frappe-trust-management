@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Alert, Tag, Button, Table } from "antd";
 import { History, ShieldAlert, FileText, CheckCircle2, List } from "lucide-react";
 import dayjs from "dayjs";
-import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
 import { DOCTYPE_INVENTORY_ENTRY } from "../../config/constants";
 import PageLoader from "../../components/common/PageLoader";
 import { getTagConfig } from "../../utils/tagUtils";
@@ -14,6 +14,10 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const InventoryEntryView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     if (loading) return <PageLoader />;
 
@@ -40,6 +44,9 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
 
     const typeTag = getTagConfig(doc.entry_type === "IN" ? "active" : "inactive");
     const refTag = getTagConfig(doc.reference_type || "Manual");
+    
+    const templeObj = temples?.find(t => t.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
     const itemColumns = [
         {
@@ -63,7 +70,7 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
             <DetailHeader
                 onBack={onBack}
                 title={`Stock Entry: ${doc.name}`}
-                subtitle={`Posting Date: ${doc.posting_date ? dayjs(doc.posting_date).format("DD-MM-YYYY HH:mm:ss") : "—"}`}
+                subtitle={`Posting Date: ${doc.posting_date ? dayjs(doc.posting_date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}`}
                 initials={doc.entry_type || "S"}
                 tags={[doc.entry_type]}
                 actions={
@@ -102,7 +109,7 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Temple">
-                                        <span className="text-zinc-800 font-semibold">{doc.temple || "Global"}</span>
+                                        <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>

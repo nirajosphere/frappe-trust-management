@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Alert, Tag, Button } from "antd";
 import { Box, ShieldAlert, FileText, CheckCircle2, Warehouse } from "lucide-react";
-import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
 import { DOCTYPE_ITEM } from "../../config/constants";
 import PageLoader from "../../components/common/PageLoader";
 import { getTagConfig } from "../../utils/tagUtils";
@@ -13,6 +13,10 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const ItemView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ITEM, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     if (loading) return <PageLoader />;
 
@@ -40,6 +44,9 @@ const ItemView = ({ id, onBack, onEdit }) => {
     const unitTag = getTagConfig(doc.unit || "Nos");
     const stockStatus = (doc.total_stock || 0) <= 0 ? "Inactive" : "Active";
     const stockTag = getTagConfig(stockStatus);
+    
+    const templeObj = temples?.find(t => t.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
     return (
         <ViewContainer className="item-view-container">
@@ -95,7 +102,7 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Temple">
-                                        <span className="text-zinc-800 font-semibold">{doc.temple || "Global"}</span>
+                                        <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>

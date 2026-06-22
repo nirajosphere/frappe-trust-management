@@ -9,8 +9,12 @@ export const itemColumns = [
         title: "Item Code",
         dataIndex: "item_code",
         key: "item_code",
-        width: 120,
-        render: (text) => <Text copyable>{text || "—"}</Text>
+        width: 150,
+        render: (text) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                <Text copyable>{text || "—"}</Text>
+            </span>
+        )
     },
     {
         title: "Item Name",
@@ -36,7 +40,7 @@ export const itemColumns = [
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
-        width: 160,
+        width: 180,
         render: (temple) => {
             if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
             const config = getTagConfig("temple admin");
@@ -54,7 +58,6 @@ export const itemColumns = [
         width: 120,
         render: (val) => {
             const stock = Number(val || 0);
-            // Match with tag configurations from tagUtils (active = lime/green, inactive = volcano/red, default/others)
             const status = stock <= 0 ? "inactive" : stock < 10 ? "super admin" : "active";
             const config = getTagConfig(status);
             return (

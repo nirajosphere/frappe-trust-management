@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Alert, Tag, Button } from "antd";
 import { Home, ShieldAlert, FileText, CheckCircle2, Bed } from "lucide-react";
-import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
 import { DOCTYPE_ROOM } from "../../config/constants";
 import PageLoader from "../../components/common/PageLoader";
 import { getTagConfig } from "../../utils/tagUtils";
@@ -13,6 +13,10 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const RoomView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM, id);
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     if (loading) return <PageLoader />;
 
@@ -40,13 +44,16 @@ const RoomView = ({ id, onBack, onEdit }) => {
     const typeTag = getTagConfig(doc.room_type === "AC" ? "super admin" : doc.room_type === "Non-AC" ? "default" : "manager");
     const statusTag = getTagConfig(doc.status === "Available" ? "active" : doc.status === "Occupied" ? "inactive" : "default");
 
+    const templeObj = temples?.find(t => t.name === doc.temple);
+    const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
+
     return (
         <ViewContainer className="room-view-container">
             {/* ── TOP HERO HEADER ── */}
             <DetailHeader
                 onBack={onBack}
                 title={`Room ${doc.room_number}`}
-                subtitle={`Temple: ${doc.temple || "N/A"}`}
+                subtitle={`Temple: ${templeName}`}
                 initials="R"
                 tags={[doc.room_type]}
                 actions={
@@ -82,7 +89,7 @@ const RoomView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Temple">
-                                        <span className="text-zinc-800 font-semibold">{doc.temple || "Global"}</span>
+                                        <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>

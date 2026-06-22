@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Tag } from "antd";
+import dayjs from "dayjs";
 import { getTagConfig } from "../utils/tagUtils";
 
 const { Text } = Typography;
@@ -9,8 +10,12 @@ export const roomBookingColumns = [
         title: "Booking ID",
         dataIndex: "name",
         key: "name",
-        width: 150,
-        render: (text) => <Text copyable>{text}</Text>
+        width: 180,
+        render: (text) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                <Text copyable>{text}</Text>
+            </span>
+        )
     },
     {
         title: "Donor",
@@ -28,13 +33,23 @@ export const roomBookingColumns = [
         title: "Check In",
         dataIndex: "check_in",
         key: "check_in",
-        width: 170,
+        width: 220,
+        render: (date) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                {date ? dayjs(date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}
+            </span>
+        )
     },
     {
         title: "Check Out",
         dataIndex: "check_out",
         key: "check_out",
-        width: 170,
+        width: 220,
+        render: (date) => (
+            <span style={{ whiteSpace: "nowrap" }}>
+                {date ? dayjs(date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}
+            </span>
+        )
     },
     {
         title: "Amount",
