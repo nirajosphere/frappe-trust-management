@@ -257,3 +257,79 @@ export const getFilteredMenuItems = (userRoles = []) => {
         .filter(item => !item.hidden && item.roles.some(role => userRoles.includes(role)))
         .map(({ key, icon, label }) => ({ key, icon, label }));
 };
+
+export const groupedNavigationStructure = [
+    {
+        label: "Dashboard",
+        key: "dashboard",
+        isSingle: true
+    },
+    {
+        label: "Finance",
+        key: "finance-group",
+        children: [
+            { key: "ledger", label: "Ledger" }
+        ]
+    },
+    {
+        label: "Administration",
+        key: "admin-group",
+        children: [
+            { key: "users", label: "Users" }
+        ]
+    },
+    {
+        label: "Trust Management",
+        key: "trust-mgmt",
+        children: [
+            { key: "temples", label: "Trusts" },
+            { key: "rooms", label: "Rooms" },
+            { key: "room-bookings", label: "Bookings" }
+        ]
+    },
+    {
+        label: "Donations",
+        key: "donations-group",
+        children: [
+            { key: "donations", label: "Donation" },
+            { key: "donors", label: "Donors" },
+            { key: "donation-types", label: "Donation Types" }
+        ]
+    },
+    {
+        label: "Inventory",
+        key: "inventory-group",
+        children: [
+            { key: "items", label: "Items" },
+            { key: "inventory-entries", label: "Stock Entries" }
+        ]
+    },
+];
+
+export const getGroupedMenuItems = (userRoles = []) => {
+    return groupedNavigationStructure
+        .map(group => {
+            if (group.isSingle) {
+                const navItem = navigationItems.find(item => item.key === group.key);
+                const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+                if (!hasPermission) return null;
+                return { ...group };
+            }
+            
+            const filteredChildren = group.children.map(child => {
+                const navItem = navigationItems.find(item => item.key === child.key);
+                const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+                if (!hasPermission) return null;
+                return child;
+            }).filter(Boolean);
+
+            if (filteredChildren.length === 0) return null;
+
+            return {
+                ...group,
+                children: filteredChildren
+            };
+        })
+        .filter(Boolean);
+};
+

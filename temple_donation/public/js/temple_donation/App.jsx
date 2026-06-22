@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin } from "antd";
 import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
+import { ChevronDown } from "lucide-react";
 
 // Centralized Configs
 import { themeConfig } from "./config/theme";
-import { getFilteredMenuItems, getComponentForRoute } from "./config/navigation";
+import { getFilteredMenuItems, getGroupedMenuItems, getComponentForRoute } from "./config/navigation";
 import { useUser } from "./context/UserContext";
 import TempleFlagLoader from "./components/common/TempleFlagLoader";
 import NotificationDropdown from "./components/common/NotificationDropdown";
@@ -93,6 +94,7 @@ const App = () => {
 
     // Navigation items filtered by role
     const menuItems = getFilteredMenuItems(roles);
+    const groupedMenuItems = getGroupedMenuItems(roles);
 
     const headerStyle = {
         background: "#ffffff",
@@ -218,30 +220,72 @@ const App = () => {
                             <div style={rightContainerStyle}>
                                 {!isMobile && (
                                     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                                        {menuItems.map(item => {
-                                            const isActive = currentRoute.split('/')[0] === item.key;
+                                        {groupedMenuItems.map(group => {
+                                            const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                                            
+                                            if (isSingle) {
+                                                const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                                const label = group.isSingle ? group.label : group.children[0].label;
+                                                const isActive = currentRoute.split('/')[0] === targetKey;
+                                                
+                                                return (
+                                                    <button
+                                                        key={targetKey}
+                                                        onClick={() => handleMenuClick({ key: targetKey })}
+                                                        style={{
+                                                            background: 'none',
+                                                            border: 'none',
+                                                            borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
+                                                            padding: '8px 4px',
+                                                            cursor: 'pointer',
+                                                            fontSize: '14px',
+                                                            fontWeight: '600',
+                                                            color: isActive ? '#18181b' : '#71717a',
+                                                            transition: 'all 0.2s',
+                                                            outline: 'none',
+                                                            height: '70px',
+                                                            display: 'flex',
+                                                            alignItems: 'center'
+                                                        }}
+                                                    >
+                                                        {label}
+                                                    </button>
+                                                );
+                                            }
+
+                                            const isGroupActive = group.children.some(child => currentRoute.split('/')[0] === child.key);
+                                            const dropdownMenuProps = {
+                                                items: group.children.map(child => ({
+                                                    key: child.key,
+                                                    label: child.label
+                                                })),
+                                                onClick: handleMenuClick
+                                            };
+
                                             return (
-                                                <button
-                                                    key={item.key}
-                                                    onClick={() => handleMenuClick({ key: item.key })}
-                                                    style={{
-                                                        background: 'none',
-                                                        border: 'none',
-                                                        borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
-                                                        padding: '8px 4px',
-                                                        cursor: 'pointer',
-                                                        fontSize: '14px',
-                                                        fontWeight: '600',
-                                                        color: isActive ? '#18181b' : '#71717a',
-                                                        transition: 'all 0.2s',
-                                                        outline: 'none',
-                                                        height: '70px',
-                                                        display: 'flex',
-                                                        alignItems: 'center'
-                                                    }}
-                                                >
-                                                    {item.label}
-                                                </button>
+                                                <Dropdown key={group.key} menu={dropdownMenuProps} placement="bottomLeft">
+                                                    <button
+                                                        style={{
+                                                            background: 'none',
+                                                            border: 'none',
+                                                            borderBottom: isGroupActive ? '3px solid #18181b' : '3px solid transparent',
+                                                            padding: '8px 4px',
+                                                            cursor: 'pointer',
+                                                            fontSize: '14px',
+                                                            fontWeight: '600',
+                                                            color: isGroupActive ? '#18181b' : '#71717a',
+                                                            transition: 'all 0.2s',
+                                                            outline: 'none',
+                                                            height: '70px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '4px'
+                                                        }}
+                                                    >
+                                                        <span>{group.label}</span>
+                                                        <ChevronDown size={14} style={{ color: isGroupActive ? '#18181b' : '#71717a' }} />
+                                                    </button>
+                                                </Dropdown>
                                             );
                                         })}
                                     </div>
@@ -297,35 +341,36 @@ const App = () => {
                         bodyStyle={{ padding: 0 }}
                     >
                         <div className="flex flex-col h-full" style={{ padding: '20px 0' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                {menuItems.map(item => {
-                                    const isActive = currentRoute.split('/')[0] === item.key;
-                                    return (
-                                        <button
-                                            key={item.key}
-                                            onClick={() => {
-                                                handleMenuClick({ key: item.key });
-                                                setMobileOpen(false);
-                                            }}
-                                            style={{
-                                                background: isActive ? '#f4f4f5' : 'transparent',
-                                                border: 'none',
-                                                borderLeft: isActive ? '4px solid #18181b' : '4px solid transparent',
-                                                padding: '12px 24px',
-                                                cursor: 'pointer',
-                                                fontSize: '16px',
-                                                fontWeight: '600',
-                                                color: isActive ? '#18181b' : '#52525b',
-                                                textAlign: 'left',
-                                                transition: 'all 0.2s',
-                                                outline: 'none',
-                                                width: '100%'
-                                            }}
-                                        >
-                                            {item.label}
-                                        </button>
-                                    );
-                                })}
+                            <div style={{ padding: '0 8px' }}>
+                                <Menu
+                                    mode="inline"
+                                    selectedKeys={[currentRoute.split('/')[0]]}
+                                    defaultOpenKeys={groupedMenuItems.map(g => g.key)}
+                                    onClick={({ key }) => {
+                                        handleMenuClick({ key });
+                                        setMobileOpen(false);
+                                    }}
+                                    style={{ border: 'none' }}
+                                    items={groupedMenuItems.map(group => {
+                                        const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                                        if (isSingle) {
+                                            const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                            const label = group.isSingle ? group.label : group.children[0].label;
+                                            return {
+                                                key: targetKey,
+                                                label: label
+                                            };
+                                        }
+                                        return {
+                                            key: group.key,
+                                            label: group.label,
+                                            children: group.children.map(child => ({
+                                                key: child.key,
+                                                label: child.label
+                                            }))
+                                        };
+                                    })}
+                                />
                             </div>
 
                             {!isAdmin && (
