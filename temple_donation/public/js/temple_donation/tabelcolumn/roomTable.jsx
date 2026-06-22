@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Tag } from "antd";
+import { getTagConfig } from "../utils/tagUtils";
 
 const { Text } = Typography;
 
@@ -15,6 +16,15 @@ export const roomColumns = [
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
+        render: (temple) => {
+            if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
+            const config = getTagConfig("temple admin");
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {temple}
+                </Tag>
+            );
+        }
     },
     {
         title: "Room Type",
@@ -22,8 +32,13 @@ export const roomColumns = [
         key: "room_type",
         width: 120,
         render: (type) => {
-            const colors = { AC: "blue", "Non-AC": "default", Hall: "purple" };
-            return <Tag color={colors[type] || "default"}>{type}</Tag>;
+            const matchedRole = type === "AC" ? "super admin" : type === "Non-AC" ? "default" : "manager";
+            const config = getTagConfig(matchedRole);
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {type}
+                </Tag>
+            );
         },
     },
     {
@@ -46,8 +61,13 @@ export const roomColumns = [
         key: "status",
         width: 130,
         render: (status) => {
-            const colors = { Available: "green", Occupied: "red", Maintenance: "orange" };
-            return <Tag color={colors[status] || "default"}>{status}</Tag>;
+            const matchedStatus = status === "Available" ? "active" : status === "Occupied" ? "inactive" : "default";
+            const config = getTagConfig(matchedStatus);
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {status}
+                </Tag>
+            );
         },
     },
 ];

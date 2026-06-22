@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Tag } from "antd";
+import { getTagConfig } from "../utils/tagUtils";
 
 const { Text } = Typography;
 
@@ -22,13 +23,29 @@ export const itemColumns = [
         dataIndex: "unit",
         key: "unit",
         width: 100,
-        render: (unit) => <Tag>{unit}</Tag>,
+        render: (unit) => {
+            const config = getTagConfig(unit || "Default");
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {config.label}
+                </Tag>
+            );
+        },
     },
     {
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
         width: 160,
+        render: (temple) => {
+            if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
+            const config = getTagConfig("temple admin");
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {temple}
+                </Tag>
+            );
+        }
     },
     {
         title: "Stock",
@@ -37,8 +54,14 @@ export const itemColumns = [
         width: 120,
         render: (val) => {
             const stock = Number(val || 0);
-            const color = stock <= 0 ? "red" : stock < 10 ? "orange" : "green";
-            return <Tag color={color}>{stock}</Tag>;
+            // Match with tag configurations from tagUtils (active = lime/green, inactive = volcano/red, default/others)
+            const status = stock <= 0 ? "inactive" : stock < 10 ? "super admin" : "active";
+            const config = getTagConfig(status);
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {stock}
+                </Tag>
+            );
         },
         sorter: (a, b) => (a.total_stock || 0) - (b.total_stock || 0),
     },

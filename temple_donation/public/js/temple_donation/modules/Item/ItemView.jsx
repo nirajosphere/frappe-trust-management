@@ -1,15 +1,171 @@
 import React from "react";
-import CommonView from "../../components/common/CommonView";
+import { Row, Col, Alert, Tag, Button } from "antd";
+import { Box, ShieldAlert, FileText, CheckCircle2, Warehouse } from "lucide-react";
+import { useFrappeGetDoc } from "../../hooks/useFrappe";
 import { DOCTYPE_ITEM } from "../../config/constants";
+import PageLoader from "../../components/common/PageLoader";
+import { getTagConfig } from "../../utils/tagUtils";
+import DetailHeader from "../../components/common/DetailHeader";
+import SectionCard from "../../components/common/SectionCard";
+import FieldCell from "../../components/common/FieldCell";
+import ViewContainer from "../../components/common/ViewContainer";
+import ActivityLog from "../../components/common/ActivityLog";
 
 const ItemView = ({ id, onBack, onEdit }) => {
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ITEM, id);
+
+    if (loading) return <PageLoader />;
+
+    if (error || !doc) {
+        return (
+            <div className="p-8">
+                <Alert
+                    message="Could not load item details"
+                    description={error?.message || "Item not found"}
+                    type="error"
+                    showIcon
+                    action={
+                        <Button
+                            onClick={onBack}
+                            className="h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+                        >
+                            Back
+                        </Button>
+                    }
+                />
+            </div>
+        );
+    }
+
+    const unitTag = getTagConfig(doc.unit || "Nos");
+    const stockStatus = (doc.total_stock || 0) <= 0 ? "Inactive" : "Active";
+    const stockTag = getTagConfig(stockStatus);
+
     return (
-        <CommonView
-            doctype={DOCTYPE_ITEM}
-            id={id}
-            onBack={onBack}
-            onEdit={onEdit}
-        />
+        <ViewContainer className="item-view-container">
+            {/* ── TOP HERO HEADER ── */}
+            <DetailHeader
+                onBack={onBack}
+                title={doc.item_name}
+                subtitle={`Code: ${doc.item_code || "N/A"}`}
+                initials={doc.item_name?.charAt(0).toUpperCase() || "I"}
+                tags={[doc.unit || "Nos"]}
+                actions={
+                    <>
+                        <Button
+                            onClick={() => window.print()}
+                            className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+                        >
+                            Print
+                        </Button>
+                        <Button
+                            type="primary"
+                            onClick={() => onEdit && onEdit(doc)}
+                            className="px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+                        >
+                            Edit
+                        </Button>
+                    </>
+                }
+            />
+
+            {/* ── TWO COLUMN GRID WORKSURFACE ── */}
+            <Row gutter={[24, 24]}>
+                {/* Left Main View Columns */}
+                <Col xs={24} lg={17}>
+                    <div className="flex flex-col gap-6">
+                        <SectionCard title="Item Information" icon={<Box size={15} className="text-zinc-800" />}>
+                            <Row gutter={[16, 16]}>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Item Name">
+                                        <span className="text-zinc-800 font-semibold">{doc.item_name}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Item Code">
+                                        <span className="text-zinc-800 font-semibold">{doc.item_code || "—"}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Unit of Measure">
+                                        <Tag className={`tag-glass ${unitTag.glassClass} font-bold rounded-full !m-0`}>
+                                            {doc.unit || "—"}
+                                        </Tag>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Temple">
+                                        <span className="text-zinc-800 font-semibold">{doc.temple || "Global"}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Total Stock Available">
+                                        <span className="text-xl font-bold text-zinc-900">{doc.total_stock || 0}</span>
+                                    </FieldCell>
+                                </Col>
+                            </Row>
+                        </SectionCard>
+                    </div>
+                </Col>
+
+                {/* Right Meta Parameters Panel */}
+                <Col xs={24} lg={7}>
+                    <div className="sticky top-6 flex flex-col gap-6">
+                        {/* Status Card */}
+                        <SectionCard title="Stock Status" icon={<Warehouse size={15} className="text-zinc-800" />}>
+                            <div className="flex flex-col gap-3 py-1">
+                                {[
+                                    {
+                                        label: "Availability", value: (
+                                            <Tag className={`tag-glass ${stockTag.glassClass} !m-0`}>
+                                                {stockStatus}
+                                            </Tag>
+                                        )
+                                    },
+                                    {
+                                        label: "Current Quantity", value: (
+                                            <span className="text-xs font-semibold text-zinc-800">
+                                                {doc.total_stock || 0} {doc.unit || "units"}
+                                            </span>
+                                        )
+                                    }
+                                ].map(({ label, value }) => (
+                                    <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
+                                        <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                                        {value}
+                                    </div>
+                                ))}
+                            </div>
+                        </SectionCard>
+
+                        {/* System Security Tracking Logs */}
+                        <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
+                            <div className="flex flex-col gap-2 py-1">
+                                {[
+                                    { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100">{id}</span> },
+                                    { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
+                                    { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
+                                    { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }
+                                ].map(({ label, value }) => (
+                                    <div key={label} className="flex justify-between items-center gap-4">
+                                        <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
+                                        {value}
+                                    </div>
+                                ))}
+
+                                <div className="w-full border-t border-zinc-100 pt-3 mt-1 text-center">
+                                    <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5">
+                                        <CheckCircle2 size={13} />
+                                        Verified System Record
+                                    </span>
+                                </div>
+                            </div>
+                        </SectionCard>
+                    </div>
+                </Col>
+            </Row>
+            <ActivityLog doctype={DOCTYPE_ITEM} docname={id} />
+        </ViewContainer>
     );
 };
 

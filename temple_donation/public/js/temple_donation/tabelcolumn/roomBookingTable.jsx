@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Tag } from "antd";
+import { getTagConfig } from "../utils/tagUtils";
 
 const { Text } = Typography;
 
@@ -49,13 +50,13 @@ export const roomBookingColumns = [
         key: "status",
         width: 130,
         render: (status) => {
-            const colors = {
-                "Booked": "blue",
-                "Checked In": "green",
-                "Checked Out": "default",
-                "Cancelled": "red"
-            };
-            return <Tag color={colors[status] || "default"}>{status}</Tag>;
+            const matchedStatus = (status === "Booked" || status === "Checked In") ? "active" : status === "Cancelled" ? "inactive" : "default";
+            const config = getTagConfig(matchedStatus);
+            return (
+                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                    {status}
+                </Tag>
+            );
         },
     },
 ];

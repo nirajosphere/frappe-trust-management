@@ -131678,8 +131678,17 @@ html body {
   ];
   var ArrowLeft = createLucideIcon("arrow-left", __iconNode);
 
-  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/bell.mjs
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/bed.mjs
   var __iconNode2 = [
+    ["path", { d: "M2 4v16", key: "vw9hq8" }],
+    ["path", { d: "M2 8h18a2 2 0 0 1 2 2v10", key: "1dgv2r" }],
+    ["path", { d: "M2 17h20", key: "18nfp3" }],
+    ["path", { d: "M6 8v9", key: "1yriud" }]
+  ];
+  var Bed = createLucideIcon("bed", __iconNode2);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/bell.mjs
+  var __iconNode3 = [
     ["path", { d: "M10.268 21a2 2 0 0 0 3.464 0", key: "vwvbt9" }],
     [
       "path",
@@ -131689,25 +131698,55 @@ html body {
       }
     ]
   ];
-  var Bell = createLucideIcon("bell", __iconNode2);
+  var Bell = createLucideIcon("bell", __iconNode3);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/box.mjs
+  var __iconNode4 = [
+    [
+      "path",
+      {
+        d: "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z",
+        key: "hh9hay"
+      }
+    ],
+    ["path", { d: "m3.3 7 8.7 5 8.7-5", key: "g66t2b" }],
+    ["path", { d: "M12 22V12", key: "d0xqtd" }]
+  ];
+  var Box = createLucideIcon("box", __iconNode4);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/calendar.mjs
+  var __iconNode5 = [
+    ["path", { d: "M8 2v4", key: "1cmpym" }],
+    ["path", { d: "M16 2v4", key: "4m81vk" }],
+    ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
+    ["path", { d: "M3 10h18", key: "8toen8" }]
+  ];
+  var Calendar = createLucideIcon("calendar", __iconNode5);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/chevron-down.mjs
-  var __iconNode3 = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-  var ChevronDown = createLucideIcon("chevron-down", __iconNode3);
+  var __iconNode6 = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+  var ChevronDown = createLucideIcon("chevron-down", __iconNode6);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/chevron-right.mjs
-  var __iconNode4 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-  var ChevronRight = createLucideIcon("chevron-right", __iconNode4);
+  var __iconNode7 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+  var ChevronRight = createLucideIcon("chevron-right", __iconNode7);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/circle-check.mjs
-  var __iconNode5 = [
+  var __iconNode8 = [
     ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
     ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
   ];
-  var CircleCheck = createLucideIcon("circle-check", __iconNode5);
+  var CircleCheck = createLucideIcon("circle-check", __iconNode8);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/dollar-sign.mjs
+  var __iconNode9 = [
+    ["line", { x1: "12", x2: "12", y1: "2", y2: "22", key: "7eqyqh" }],
+    ["path", { d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6", key: "1b0p4s" }]
+  ];
+  var DollarSign = createLucideIcon("dollar-sign", __iconNode9);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/file-text.mjs
-  var __iconNode6 = [
+  var __iconNode10 = [
     [
       "path",
       {
@@ -131720,10 +131759,42 @@ html body {
     ["path", { d: "M16 13H8", key: "t4e002" }],
     ["path", { d: "M16 17H8", key: "z1uh3a" }]
   ];
-  var FileText = createLucideIcon("file-text", __iconNode6);
+  var FileText = createLucideIcon("file-text", __iconNode10);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/history.mjs
+  var __iconNode11 = [
+    ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+    ["path", { d: "M3 3v5h5", key: "1xhq8a" }],
+    ["path", { d: "M12 7v5l4 2", key: "1fdv2h" }]
+  ];
+  var History = createLucideIcon("history", __iconNode11);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/house.mjs
+  var __iconNode12 = [
+    ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
+    [
+      "path",
+      {
+        d: "M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+        key: "r6nss1"
+      }
+    ]
+  ];
+  var House = createLucideIcon("house", __iconNode12);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/list.mjs
+  var __iconNode13 = [
+    ["path", { d: "M3 5h.01", key: "18ugdj" }],
+    ["path", { d: "M3 12h.01", key: "nlz23k" }],
+    ["path", { d: "M3 19h.01", key: "noohij" }],
+    ["path", { d: "M8 5h13", key: "1pao27" }],
+    ["path", { d: "M8 12h13", key: "1za7za" }],
+    ["path", { d: "M8 19h13", key: "m83p4d" }]
+  ];
+  var List4 = createLucideIcon("list", __iconNode13);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/message-square.mjs
-  var __iconNode7 = [
+  var __iconNode14 = [
     [
       "path",
       {
@@ -131732,10 +131803,10 @@ html body {
       }
     ]
   ];
-  var MessageSquare = createLucideIcon("message-square", __iconNode7);
+  var MessageSquare = createLucideIcon("message-square", __iconNode14);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/printer.mjs
-  var __iconNode8 = [
+  var __iconNode15 = [
     [
       "path",
       {
@@ -131746,10 +131817,10 @@ html body {
     ["path", { d: "M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6", key: "1itne7" }],
     ["rect", { x: "6", y: "14", width: "12", height: "8", rx: "1", key: "1ue0tg" }]
   ];
-  var Printer = createLucideIcon("printer", __iconNode8);
+  var Printer = createLucideIcon("printer", __iconNode15);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/shield-alert.mjs
-  var __iconNode9 = [
+  var __iconNode16 = [
     [
       "path",
       {
@@ -131760,17 +131831,17 @@ html body {
     ["path", { d: "M12 8v4", key: "1got3b" }],
     ["path", { d: "M12 16h.01", key: "1drbdi" }]
   ];
-  var ShieldAlert = createLucideIcon("shield-alert", __iconNode9);
+  var ShieldAlert = createLucideIcon("shield-alert", __iconNode16);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/user.mjs
-  var __iconNode10 = [
+  var __iconNode17 = [
     ["path", { d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2", key: "975kel" }],
     ["circle", { cx: "12", cy: "7", r: "4", key: "17ys0d" }]
   ];
-  var User = createLucideIcon("user", __iconNode10);
+  var User = createLucideIcon("user", __iconNode17);
 
   // ../temple_donation/node_modules/lucide-react/dist/esm/icons/wallet.mjs
-  var __iconNode11 = [
+  var __iconNode18 = [
     [
       "path",
       {
@@ -131780,7 +131851,22 @@ html body {
     ],
     ["path", { d: "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4", key: "xoc0q4" }]
   ];
-  var Wallet = createLucideIcon("wallet", __iconNode11);
+  var Wallet = createLucideIcon("wallet", __iconNode18);
+
+  // ../temple_donation/node_modules/lucide-react/dist/esm/icons/warehouse.mjs
+  var __iconNode19 = [
+    ["path", { d: "M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11", key: "pb2vm6" }],
+    [
+      "path",
+      {
+        d: "M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z",
+        key: "doq5xv"
+      }
+    ],
+    ["path", { d: "M6 13h12", key: "yf64js" }],
+    ["path", { d: "M6 17h12", key: "1jwigz" }]
+  ];
+  var Warehouse = createLucideIcon("warehouse", __iconNode19);
 
   // ../temple_donation/temple_donation/public/js/temple_donation/components/common/AddPageHeader.jsx
   var { Text: Text7, Title: Title5 } = typography_default;
@@ -138589,13 +138675,28 @@ html body {
       dataIndex: "unit",
       key: "unit",
       width: 100,
-      render: (unit4) => /* @__PURE__ */ import_react273.default.createElement(tag_default, null, unit4)
+      render: (unit4) => {
+        const config = getTagConfig(unit4 || "Default");
+        return /* @__PURE__ */ import_react273.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, config.label);
+      }
     },
     {
       title: "Temple",
       dataIndex: "temple",
       key: "temple",
-      width: 160
+      width: 160,
+      render: (temple) => {
+        if (!temple)
+          return /* @__PURE__ */ import_react273.default.createElement("span", {
+            className: "text-gray-400 text-xs italic"
+          }, "Global");
+        const config = getTagConfig("temple admin");
+        return /* @__PURE__ */ import_react273.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, temple);
+      }
     },
     {
       title: "Stock",
@@ -138604,9 +138705,10 @@ html body {
       width: 120,
       render: (val) => {
         const stock = Number(val || 0);
-        const color2 = stock <= 0 ? "red" : stock < 10 ? "orange" : "green";
+        const status = stock <= 0 ? "inactive" : stock < 10 ? "super admin" : "active";
+        const config = getTagConfig(status);
         return /* @__PURE__ */ import_react273.default.createElement(tag_default, {
-          color: color2
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, stock);
       },
       sorter: (a2, b) => (a2.total_stock || 0) - (b.total_stock || 0)
@@ -138718,12 +138820,160 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Item/ItemView.jsx
   var import_react276 = __toESM(require_react());
   var ItemView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react276.default.createElement(CommonView_default, {
-      doctype: DOCTYPE_ITEM,
-      id,
+    var _a;
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ITEM, id);
+    if (loading)
+      return /* @__PURE__ */ import_react276.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react276.default.createElement("div", {
+        className: "p-8"
+      }, /* @__PURE__ */ import_react276.default.createElement(alert_default, {
+        message: "Could not load item details",
+        description: (error == null ? void 0 : error.message) || "Item not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react276.default.createElement(button_default, {
+          onClick: onBack,
+          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+        }, "Back")
+      }));
+    }
+    const unitTag = getTagConfig(doc.unit || "Nos");
+    const stockStatus = (doc.total_stock || 0) <= 0 ? "Inactive" : "Active";
+    const stockTag = getTagConfig(stockStatus);
+    return /* @__PURE__ */ import_react276.default.createElement(ViewContainer_default, {
+      className: "item-view-container"
+    }, /* @__PURE__ */ import_react276.default.createElement(DetailHeader_default, {
       onBack,
-      onEdit
-    });
+      title: doc.item_name,
+      subtitle: `Code: ${doc.item_code || "N/A"}`,
+      initials: ((_a = doc.item_name) == null ? void 0 : _a.charAt(0).toUpperCase()) || "I",
+      tags: [doc.unit || "Nos"],
+      actions: /* @__PURE__ */ import_react276.default.createElement(import_react276.default.Fragment, null, /* @__PURE__ */ import_react276.default.createElement(button_default, {
+        onClick: () => window.print(),
+        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+      }, "Print"), /* @__PURE__ */ import_react276.default.createElement(button_default, {
+        type: "primary",
+        onClick: () => onEdit && onEdit(doc),
+        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+      }, "Edit"))
+    }), /* @__PURE__ */ import_react276.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      lg: 17
+    }, /* @__PURE__ */ import_react276.default.createElement("div", {
+      className: "flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react276.default.createElement(SectionCard_default, {
+      title: "Item Information",
+      icon: /* @__PURE__ */ import_react276.default.createElement(Box, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react276.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
+      label: "Item Name"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.item_name))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
+      label: "Item Code"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.item_code || "\u2014"))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
+      label: "Unit of Measure"
+    }, /* @__PURE__ */ import_react276.default.createElement(tag_default, {
+      className: `tag-glass ${unitTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.unit || "\u2014"))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
+      label: "Temple"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.temple || "Global"))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react276.default.createElement(FieldCell_default, {
+      label: "Total Stock Available"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-xl font-bold text-zinc-900"
+    }, doc.total_stock || 0))))))), /* @__PURE__ */ import_react276.default.createElement(col_default2, {
+      xs: 24,
+      lg: 7
+    }, /* @__PURE__ */ import_react276.default.createElement("div", {
+      className: "sticky top-6 flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react276.default.createElement(SectionCard_default, {
+      title: "Stock Status",
+      icon: /* @__PURE__ */ import_react276.default.createElement(Warehouse, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react276.default.createElement("div", {
+      className: "flex flex-col gap-3 py-1"
+    }, [
+      {
+        label: "Availability",
+        value: /* @__PURE__ */ import_react276.default.createElement(tag_default, {
+          className: `tag-glass ${stockTag.glassClass} !m-0`
+        }, stockStatus)
+      },
+      {
+        label: "Current Quantity",
+        value: /* @__PURE__ */ import_react276.default.createElement("span", {
+          className: "text-xs font-semibold text-zinc-800"
+        }, doc.total_stock || 0, " ", doc.unit || "units")
+      }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react276.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)))), /* @__PURE__ */ import_react276.default.createElement(SectionCard_default, {
+      title: "System Logs",
+      icon: /* @__PURE__ */ import_react276.default.createElement(FileText, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react276.default.createElement("div", {
+      className: "flex flex-col gap-2 py-1"
+    }, [
+      { label: "Document ID", value: /* @__PURE__ */ import_react276.default.createElement("span", {
+        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
+      }, id) },
+      { label: "Created By", value: /* @__PURE__ */ import_react276.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.owner || "System") },
+      { label: "Created At", value: /* @__PURE__ */ import_react276.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
+      { label: "Last Modified", value: /* @__PURE__ */ import_react276.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react276.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)), /* @__PURE__ */ import_react276.default.createElement("div", {
+      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
+    }, /* @__PURE__ */ import_react276.default.createElement("span", {
+      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
+    }, /* @__PURE__ */ import_react276.default.createElement(CircleCheck, {
+      size: 13
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react276.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_ITEM,
+      docname: id
+    }));
   };
   var ItemView_default = ItemView;
 
@@ -138748,21 +138998,39 @@ html body {
       dataIndex: "entry_type",
       key: "entry_type",
       width: 100,
-      render: (type5) => /* @__PURE__ */ import_react277.default.createElement(tag_default, {
-        color: type5 === "IN" ? "green" : "volcano"
-      }, type5)
+      render: (type5) => {
+        const config = getTagConfig(type5 === "IN" ? "active" : "inactive");
+        return /* @__PURE__ */ import_react277.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, type5);
+      }
     },
     {
       title: "Reference",
       dataIndex: "reference_type",
       key: "reference_type",
       width: 120,
-      render: (type5) => /* @__PURE__ */ import_react277.default.createElement(tag_default, null, type5 || "Manual")
+      render: (type5) => {
+        const config = getTagConfig(type5 || "Manual");
+        return /* @__PURE__ */ import_react277.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, config.label);
+      }
     },
     {
       title: "Temple",
       dataIndex: "temple",
-      key: "temple"
+      key: "temple",
+      render: (temple) => {
+        if (!temple)
+          return /* @__PURE__ */ import_react277.default.createElement("span", {
+            className: "text-gray-400 text-xs italic"
+          }, "Global");
+        const config = getTagConfig("temple admin");
+        return /* @__PURE__ */ import_react277.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, temple);
+      }
     },
     {
       title: "Posting Date",
@@ -138907,13 +139175,185 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/InventoryEntry/InventoryEntryView.jsx
   var import_react280 = __toESM(require_react());
+  var import_dayjs7 = __toESM(require_dayjs_min());
   var InventoryEntryView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react280.default.createElement(CommonView_default, {
-      doctype: DOCTYPE_INVENTORY_ENTRY,
-      id,
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    if (loading)
+      return /* @__PURE__ */ import_react280.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react280.default.createElement("div", {
+        className: "p-8"
+      }, /* @__PURE__ */ import_react280.default.createElement(alert_default, {
+        message: "Could not load stock entry details",
+        description: (error == null ? void 0 : error.message) || "Stock entry not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react280.default.createElement(button_default, {
+          onClick: onBack,
+          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+        }, "Back")
+      }));
+    }
+    const typeTag = getTagConfig(doc.entry_type === "IN" ? "active" : "inactive");
+    const refTag = getTagConfig(doc.reference_type || "Manual");
+    const itemColumns2 = [
+      {
+        title: "Item",
+        dataIndex: "item",
+        key: "item",
+        render: (text) => /* @__PURE__ */ import_react280.default.createElement("span", {
+          className: "font-semibold text-zinc-800"
+        }, text)
+      },
+      {
+        title: "Quantity",
+        dataIndex: "qty",
+        key: "qty",
+        align: "right",
+        render: (qty) => /* @__PURE__ */ import_react280.default.createElement("span", {
+          className: "font-bold text-zinc-900"
+        }, qty)
+      }
+    ];
+    return /* @__PURE__ */ import_react280.default.createElement(ViewContainer_default, {
+      className: "stock-entry-view-container"
+    }, /* @__PURE__ */ import_react280.default.createElement(DetailHeader_default, {
       onBack,
-      onEdit
-    });
+      title: `Stock Entry: ${doc.name}`,
+      subtitle: `Posting Date: ${doc.posting_date ? (0, import_dayjs7.default)(doc.posting_date).format("DD-MM-YYYY HH:mm:ss") : "\u2014"}`,
+      initials: doc.entry_type || "S",
+      tags: [doc.entry_type],
+      actions: /* @__PURE__ */ import_react280.default.createElement(import_react280.default.Fragment, null, /* @__PURE__ */ import_react280.default.createElement(button_default, {
+        onClick: () => window.print(),
+        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+      }, "Print"), /* @__PURE__ */ import_react280.default.createElement(button_default, {
+        type: "primary",
+        onClick: () => onEdit && onEdit(doc),
+        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+      }, "Edit"))
+    }), /* @__PURE__ */ import_react280.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      lg: 17
+    }, /* @__PURE__ */ import_react280.default.createElement("div", {
+      className: "flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
+      title: "Entry Details",
+      icon: /* @__PURE__ */ import_react280.default.createElement(History, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react280.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react280.default.createElement(FieldCell_default, {
+      label: "Entry Type"
+    }, /* @__PURE__ */ import_react280.default.createElement(tag_default, {
+      className: `tag-glass ${typeTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.entry_type))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react280.default.createElement(FieldCell_default, {
+      label: "Temple"
+    }, /* @__PURE__ */ import_react280.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.temple || "Global"))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react280.default.createElement(FieldCell_default, {
+      label: "Reference Type"
+    }, /* @__PURE__ */ import_react280.default.createElement(tag_default, {
+      className: `tag-glass ${refTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.reference_type || "Manual"))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react280.default.createElement(FieldCell_default, {
+      label: "Reference Name"
+    }, /* @__PURE__ */ import_react280.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.reference_name || "\u2014"))))), /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
+      title: "Items Details",
+      icon: /* @__PURE__ */ import_react280.default.createElement(List4, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react280.default.createElement(table_default, {
+      dataSource: doc.items || [],
+      columns: itemColumns2,
+      rowKey: "name",
+      pagination: false,
+      size: "small",
+      className: "border border-zinc-100 rounded-lg overflow-hidden"
+    })))), /* @__PURE__ */ import_react280.default.createElement(col_default2, {
+      xs: 24,
+      lg: 7
+    }, /* @__PURE__ */ import_react280.default.createElement("div", {
+      className: "sticky top-6 flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
+      title: "Reference Details",
+      icon: /* @__PURE__ */ import_react280.default.createElement(ShieldAlert, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react280.default.createElement("div", {
+      className: "flex flex-col gap-3 py-1"
+    }, [
+      {
+        label: "Source Type",
+        value: /* @__PURE__ */ import_react280.default.createElement(tag_default, {
+          className: `tag-glass ${refTag.glassClass} !m-0`
+        }, doc.reference_type || "Manual")
+      },
+      {
+        label: "Source Name",
+        value: /* @__PURE__ */ import_react280.default.createElement("span", {
+          className: "text-xs font-mono font-semibold text-zinc-800"
+        }, doc.reference_name || "N/A")
+      }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react280.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
+    }, /* @__PURE__ */ import_react280.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)))), /* @__PURE__ */ import_react280.default.createElement(SectionCard_default, {
+      title: "System Logs",
+      icon: /* @__PURE__ */ import_react280.default.createElement(FileText, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react280.default.createElement("div", {
+      className: "flex flex-col gap-2 py-1"
+    }, [
+      { label: "Document ID", value: /* @__PURE__ */ import_react280.default.createElement("span", {
+        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
+      }, id) },
+      { label: "Created By", value: /* @__PURE__ */ import_react280.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.owner || "System") },
+      { label: "Created At", value: /* @__PURE__ */ import_react280.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
+      { label: "Last Modified", value: /* @__PURE__ */ import_react280.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react280.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4"
+    }, /* @__PURE__ */ import_react280.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)), /* @__PURE__ */ import_react280.default.createElement("div", {
+      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
+    }, /* @__PURE__ */ import_react280.default.createElement("span", {
+      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
+    }, /* @__PURE__ */ import_react280.default.createElement(CircleCheck, {
+      size: 13
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react280.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_INVENTORY_ENTRY,
+      docname: id
+    }));
   };
   var InventoryEntryView_default = InventoryEntryView;
 
@@ -138936,7 +139376,17 @@ html body {
     {
       title: "Temple",
       dataIndex: "temple",
-      key: "temple"
+      key: "temple",
+      render: (temple) => {
+        if (!temple)
+          return /* @__PURE__ */ import_react281.default.createElement("span", {
+            className: "text-gray-400 text-xs italic"
+          }, "Global");
+        const config = getTagConfig("temple admin");
+        return /* @__PURE__ */ import_react281.default.createElement(tag_default, {
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
+        }, temple);
+      }
     },
     {
       title: "Room Type",
@@ -138944,9 +139394,10 @@ html body {
       key: "room_type",
       width: 120,
       render: (type5) => {
-        const colors = { AC: "blue", "Non-AC": "default", Hall: "purple" };
+        const matchedRole = type5 === "AC" ? "super admin" : type5 === "Non-AC" ? "default" : "manager";
+        const config = getTagConfig(matchedRole);
         return /* @__PURE__ */ import_react281.default.createElement(tag_default, {
-          color: colors[type5] || "default"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, type5);
       }
     },
@@ -138972,9 +139423,10 @@ html body {
       key: "status",
       width: 130,
       render: (status) => {
-        const colors = { Available: "green", Occupied: "red", Maintenance: "orange" };
+        const matchedStatus = status === "Available" ? "active" : status === "Occupied" ? "inactive" : "default";
+        const config = getTagConfig(matchedStatus);
         return /* @__PURE__ */ import_react281.default.createElement(tag_default, {
-          color: colors[status] || "default"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, status);
       }
     }
@@ -139093,12 +139545,171 @@ html body {
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/Room/RoomView.jsx
   var import_react284 = __toESM(require_react());
   var RoomView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react284.default.createElement(CommonView_default, {
-      doctype: DOCTYPE_ROOM,
-      id,
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM, id);
+    if (loading)
+      return /* @__PURE__ */ import_react284.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react284.default.createElement("div", {
+        className: "p-8"
+      }, /* @__PURE__ */ import_react284.default.createElement(alert_default, {
+        message: "Could not load room details",
+        description: (error == null ? void 0 : error.message) || "Room not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react284.default.createElement(button_default, {
+          onClick: onBack,
+          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+        }, "Back")
+      }));
+    }
+    const typeTag = getTagConfig(doc.room_type === "AC" ? "super admin" : doc.room_type === "Non-AC" ? "default" : "manager");
+    const statusTag = getTagConfig(doc.status === "Available" ? "active" : doc.status === "Occupied" ? "inactive" : "default");
+    return /* @__PURE__ */ import_react284.default.createElement(ViewContainer_default, {
+      className: "room-view-container"
+    }, /* @__PURE__ */ import_react284.default.createElement(DetailHeader_default, {
       onBack,
-      onEdit
-    });
+      title: `Room ${doc.room_number}`,
+      subtitle: `Temple: ${doc.temple || "N/A"}`,
+      initials: "R",
+      tags: [doc.room_type],
+      actions: /* @__PURE__ */ import_react284.default.createElement(import_react284.default.Fragment, null, /* @__PURE__ */ import_react284.default.createElement(button_default, {
+        onClick: () => window.print(),
+        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+      }, "Print"), /* @__PURE__ */ import_react284.default.createElement(button_default, {
+        type: "primary",
+        onClick: () => onEdit && onEdit(doc),
+        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+      }, "Edit"))
+    }), /* @__PURE__ */ import_react284.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      lg: 17
+    }, /* @__PURE__ */ import_react284.default.createElement("div", {
+      className: "flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react284.default.createElement(SectionCard_default, {
+      title: "Room Information",
+      icon: /* @__PURE__ */ import_react284.default.createElement(House, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react284.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Room Number"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.room_number))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Temple"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.temple || "Global"))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Room Type"
+    }, /* @__PURE__ */ import_react284.default.createElement(tag_default, {
+      className: `tag-glass ${typeTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.room_type || "\u2014"))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Capacity (Beds / Persons)"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.capacity || "\u2014"))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Price / Day"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-xl font-bold text-zinc-900"
+    }, "\u20B9", Number(doc.price_per_day || 0).toLocaleString()))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react284.default.createElement(FieldCell_default, {
+      label: "Current Status"
+    }, /* @__PURE__ */ import_react284.default.createElement(tag_default, {
+      className: `tag-glass ${statusTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.status || "\u2014"))))))), /* @__PURE__ */ import_react284.default.createElement(col_default2, {
+      xs: 24,
+      lg: 7
+    }, /* @__PURE__ */ import_react284.default.createElement("div", {
+      className: "sticky top-6 flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react284.default.createElement(SectionCard_default, {
+      title: "Room Summary",
+      icon: /* @__PURE__ */ import_react284.default.createElement(Bed, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react284.default.createElement("div", {
+      className: "flex flex-col gap-3 py-1"
+    }, [
+      {
+        label: "Current Status",
+        value: /* @__PURE__ */ import_react284.default.createElement(tag_default, {
+          className: `tag-glass ${statusTag.glassClass} !m-0`
+        }, doc.status || "N/A")
+      },
+      {
+        label: "Capacity",
+        value: /* @__PURE__ */ import_react284.default.createElement("span", {
+          className: "text-xs font-semibold text-zinc-800"
+        }, doc.capacity || 0, " Persons")
+      },
+      {
+        label: "Rate / Day",
+        value: /* @__PURE__ */ import_react284.default.createElement("span", {
+          className: "text-xs font-bold text-emerald-600"
+        }, "\u20B9", Number(doc.price_per_day || 0).toLocaleString())
+      }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react284.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)))), /* @__PURE__ */ import_react284.default.createElement(SectionCard_default, {
+      title: "System Logs",
+      icon: /* @__PURE__ */ import_react284.default.createElement(FileText, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react284.default.createElement("div", {
+      className: "flex flex-col gap-2 py-1"
+    }, [
+      { label: "Document ID", value: /* @__PURE__ */ import_react284.default.createElement("span", {
+        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
+      }, id) },
+      { label: "Created By", value: /* @__PURE__ */ import_react284.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.owner || "System") },
+      { label: "Created At", value: /* @__PURE__ */ import_react284.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
+      { label: "Last Modified", value: /* @__PURE__ */ import_react284.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react284.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)), /* @__PURE__ */ import_react284.default.createElement("div", {
+      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
+    }, /* @__PURE__ */ import_react284.default.createElement("span", {
+      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
+    }, /* @__PURE__ */ import_react284.default.createElement(CircleCheck, {
+      size: 13
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react284.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_ROOM,
+      docname: id
+    }));
   };
   var RoomView_default = RoomView;
 
@@ -139161,14 +139772,10 @@ html body {
       key: "status",
       width: 130,
       render: (status) => {
-        const colors = {
-          "Booked": "blue",
-          "Checked In": "green",
-          "Checked Out": "default",
-          "Cancelled": "red"
-        };
+        const matchedStatus = status === "Booked" || status === "Checked In" ? "active" : status === "Cancelled" ? "inactive" : "default";
+        const config = getTagConfig(matchedStatus);
         return /* @__PURE__ */ import_react285.default.createElement(tag_default, {
-          color: colors[status] || "default"
+          className: `tag-glass ${config.glassClass} font-bold rounded-full`
         }, status);
       }
     }
@@ -139189,7 +139796,7 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingForm.jsx
   var import_react287 = __toESM(require_react());
-  var import_dayjs7 = __toESM(require_dayjs_min());
+  var import_dayjs8 = __toESM(require_dayjs_min());
   var { Text: Text28 } = typography_default;
   var RoomBookingForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -139212,14 +139819,14 @@ html body {
     (0, import_react287.useEffect)(() => {
       if (isEdit && initialValues) {
         form.setFieldsValue(__spreadProps(__spreadValues({}, initialValues), {
-          check_in: initialValues.check_in ? (0, import_dayjs7.default)(initialValues.check_in) : null,
-          check_out: initialValues.check_out ? (0, import_dayjs7.default)(initialValues.check_out) : null
+          check_in: initialValues.check_in ? (0, import_dayjs8.default)(initialValues.check_in) : null,
+          check_out: initialValues.check_out ? (0, import_dayjs8.default)(initialValues.check_out) : null
         }));
       } else {
         form.setFieldsValue({
           status: "Booked",
-          check_in: (0, import_dayjs7.default)(),
-          check_out: (0, import_dayjs7.default)().add(1, "day")
+          check_in: (0, import_dayjs8.default)(),
+          check_out: (0, import_dayjs8.default)().add(1, "day")
         });
       }
     }, [isEdit, initialValues, form]);
@@ -139309,13 +139916,174 @@ html body {
 
   // ../temple_donation/temple_donation/public/js/temple_donation/modules/RoomBooking/RoomBookingView.jsx
   var import_react288 = __toESM(require_react());
+  var import_dayjs9 = __toESM(require_dayjs_min());
   var RoomBookingView = ({ id, onBack, onEdit }) => {
-    return /* @__PURE__ */ import_react288.default.createElement(CommonView_default, {
-      doctype: DOCTYPE_ROOM_BOOKING,
-      id,
+    const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_ROOM_BOOKING, id);
+    if (loading)
+      return /* @__PURE__ */ import_react288.default.createElement(PageLoader_default, null);
+    if (error || !doc) {
+      return /* @__PURE__ */ import_react288.default.createElement("div", {
+        className: "p-8"
+      }, /* @__PURE__ */ import_react288.default.createElement(alert_default, {
+        message: "Could not load booking details",
+        description: (error == null ? void 0 : error.message) || "Booking not found",
+        type: "error",
+        showIcon: true,
+        action: /* @__PURE__ */ import_react288.default.createElement(button_default, {
+          onClick: onBack,
+          className: "h-9 rounded-lg border-zinc-200 text-zinc-700 hover:!border-zinc-900 hover:!text-zinc-900"
+        }, "Back")
+      }));
+    }
+    const matchedStatus = doc.status === "Booked" || doc.status === "Checked In" ? "active" : doc.status === "Cancelled" ? "inactive" : "default";
+    const statusTag = getTagConfig(matchedStatus);
+    return /* @__PURE__ */ import_react288.default.createElement(ViewContainer_default, {
+      className: "room-booking-view-container"
+    }, /* @__PURE__ */ import_react288.default.createElement(DetailHeader_default, {
       onBack,
-      onEdit
-    });
+      title: `Booking ${doc.name}`,
+      subtitle: `Donor: ${doc.donor || "N/A"}`,
+      initials: "B",
+      tags: [doc.status],
+      actions: /* @__PURE__ */ import_react288.default.createElement(import_react288.default.Fragment, null, /* @__PURE__ */ import_react288.default.createElement(button_default, {
+        onClick: () => window.print(),
+        className: "px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
+      }, "Print"), /* @__PURE__ */ import_react288.default.createElement(button_default, {
+        type: "primary",
+        onClick: () => onEdit && onEdit(doc),
+        className: "px-4 bg-zinc-900 border-zinc-900 text-white font-medium hover:!bg-zinc-800 hover:!border-zinc-800 shadow-none text-sm transition-all flex items-center gap-1.5"
+      }, "Edit"))
+    }), /* @__PURE__ */ import_react288.default.createElement(row_default2, {
+      gutter: [24, 24]
+    }, /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      lg: 17
+    }, /* @__PURE__ */ import_react288.default.createElement("div", {
+      className: "flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react288.default.createElement(SectionCard_default, {
+      title: "Booking Information",
+      icon: /* @__PURE__ */ import_react288.default.createElement(Calendar, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react288.default.createElement(row_default2, {
+      gutter: [16, 16]
+    }, /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Donor"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.donor))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Temple"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.temple || "Global"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Room Number"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.room))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Booking Status"
+    }, /* @__PURE__ */ import_react288.default.createElement(tag_default, {
+      className: `tag-glass ${statusTag.glassClass} font-bold rounded-full !m-0`
+    }, doc.status))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Check-In Time"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.check_in ? (0, import_dayjs9.default)(doc.check_in).format("DD-MM-YYYY HH:mm:ss") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Check-Out Time"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-zinc-800 font-semibold"
+    }, doc.check_out ? (0, import_dayjs9.default)(doc.check_out).format("DD-MM-YYYY HH:mm:ss") : "\u2014"))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      sm: 12
+    }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
+      label: "Total Amount Paid"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-xl font-bold text-zinc-900"
+    }, "\u20B9", Number(doc.total_amount || 0).toLocaleString()))))))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+      xs: 24,
+      lg: 7
+    }, /* @__PURE__ */ import_react288.default.createElement("div", {
+      className: "sticky top-6 flex flex-col gap-6"
+    }, /* @__PURE__ */ import_react288.default.createElement(SectionCard_default, {
+      title: "Booking Finance",
+      icon: /* @__PURE__ */ import_react288.default.createElement(DollarSign, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react288.default.createElement("div", {
+      className: "flex flex-col gap-3 py-1"
+    }, [
+      {
+        label: "Current Status",
+        value: /* @__PURE__ */ import_react288.default.createElement(tag_default, {
+          className: `tag-glass ${statusTag.glassClass} !m-0`
+        }, doc.status || "N/A")
+      },
+      {
+        label: "Total Paid",
+        value: /* @__PURE__ */ import_react288.default.createElement("span", {
+          className: "text-xs font-bold text-emerald-600"
+        }, "\u20B9", Number(doc.total_amount || 0).toLocaleString())
+      }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react288.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)))), /* @__PURE__ */ import_react288.default.createElement(SectionCard_default, {
+      title: "System Logs",
+      icon: /* @__PURE__ */ import_react288.default.createElement(FileText, {
+        size: 15,
+        className: "text-zinc-800"
+      })
+    }, /* @__PURE__ */ import_react288.default.createElement("div", {
+      className: "flex flex-col gap-2 py-1"
+    }, [
+      { label: "Document ID", value: /* @__PURE__ */ import_react288.default.createElement("span", {
+        className: "font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100"
+      }, id) },
+      { label: "Created By", value: /* @__PURE__ */ import_react288.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.owner || "System") },
+      { label: "Created At", value: /* @__PURE__ */ import_react288.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.creation ? new Date(doc.creation).toLocaleDateString() : "\u2014") },
+      { label: "Last Modified", value: /* @__PURE__ */ import_react288.default.createElement("span", {
+        className: "text-xs font-semibold text-zinc-600"
+      }, doc.modified ? new Date(doc.modified).toLocaleDateString() : "\u2014") }
+    ].map(({ label, value }) => /* @__PURE__ */ import_react288.default.createElement("div", {
+      key: label,
+      className: "flex justify-between items-center gap-4"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-[10px] font-bold tracking-wider uppercase text-zinc-400"
+    }, label), value)), /* @__PURE__ */ import_react288.default.createElement("div", {
+      className: "w-full border-t border-zinc-100 pt-3 mt-1 text-center"
+    }, /* @__PURE__ */ import_react288.default.createElement("span", {
+      className: "text-xs text-emerald-600 font-semibold inline-flex items-center gap-1.5"
+    }, /* @__PURE__ */ import_react288.default.createElement(CircleCheck, {
+      size: 13
+    }), "Verified System Record"))))))), /* @__PURE__ */ import_react288.default.createElement(ActivityLog_default, {
+      doctype: DOCTYPE_ROOM_BOOKING,
+      docname: id
+    }));
   };
   var RoomBookingView_default = RoomBookingView;
 
@@ -140160,4 +140928,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.YMVT5LMI.js.map
+//# sourceMappingURL=temple_donation.bundle.Z32M5QOL.js.map
