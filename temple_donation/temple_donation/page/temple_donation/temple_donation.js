@@ -27,7 +27,7 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
     // to hide any Frappe loading elements or logos
     if (!document.getElementById("temple-initial-loader")) {
       const loaderHtml = `
-        <div id="temple-initial-loader" style="position: fixed; inset: 0; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at center, #ffffff 0%, #fffcf8 60%, #fff8f0 100%); width: 100vw; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div id="temple-initial-loader" style="position: fixed; inset: 0; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at center, #ffffff 0%, #f9fafb 60%, #f3f4f6 100%); width: 100vw; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
           <style>
             @keyframes loadingBarInit {
               0% { transform: scaleX(0) translateX(0); }
@@ -40,42 +40,49 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
             }
           </style>
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-            <div style="width: 180px; height: 180px; margin-bottom: 16px; filter: drop-shadow(0 12px 24px rgba(234, 179, 8, 0.18)); position: relative; display: flex; align-items: center; justify-content: center;">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0) 70%); border-radius: 50%; animation: pulseGlowInit 3s ease-in-out infinite alternate; z-index: 1;"></div>
+            <div style="width: 180px; height: 180px; margin-bottom: 16px; filter: drop-shadow(0 12px 24px rgba(16, 185, 129, 0.18)); position: relative; display: flex; align-items: center; justify-content: center;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%); border-radius: 50%; animation: pulseGlowInit 3s ease-in-out infinite alternate; z-index: 1;"></div>
               <svg viewBox="0 0 200 200" style="position: relative; z-index: 2; width: 100%; height: 100%;" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
-                <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
-                <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
-                <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
-                <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
-                <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
-                <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
-                <line x1="93" y1="76" x2="107" y2="76" stroke="#a16207" stroke-width="1.5" opacity="0.5" />
-                <path d="M 96,62 L 104,62 L 104,59 L 96,59 Z" fill="#eab308" />
-                <circle cx="100" cy="55" r="4.5" fill="#eab308" />
-                <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
-                <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" stroke-width="2.5" stroke-linecap="round" />
-                <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                <path fill="#f97316" stroke="#ea580c" stroke-width="0.5" stroke-linejoin="round">
-                  <animate
-                    attributeName="d"
-                    dur="1.8s"
-                    repeatCount="indefinite"
-                    values="
-                      M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z;
-                      M 100,12 Q 115,10 128,4 T 155,24 Q 130,22 115,30 T 100,34 Z;
-                      M 100,12 Q 115,18 128,12 T 155,26 Q 130,18 115,26 T 100,34 Z;
-                      M 100,12 Q 115,10 128,4 T 155,22 Q 130,28 115,20 T 100,34 Z;
-                      M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z
-                    "
-                  />
+                <!-- Outer glowing rings -->
+                <circle cx="100" cy="100" r="80" fill="none" stroke="url(#accentGradientLoader)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4">
+                  <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite" />
+                </circle>
+                
+                <!-- Stylized Trust Emblem -->
+                <!-- Left curve representing community care/support -->
+                <path d="M 60,130 C 45,100 55,60 90,55 C 95,70 90,85 80,95 C 75,100 70,110 80,120 C 85,125 95,130 100,135 C 90,135 70,135 60,130 Z" 
+                      fill="url(#primaryGradientLoader)">
+                  <animate attributeName="opacity" values="0.8;0.95;0.8" dur="3s" repeatCount="indefinite" />
                 </path>
+                
+                <!-- Right curve representing protection/trust -->
+                <path d="M 140,130 C 155,100 145,60 110,55 C 105,70 110,85 120,95 C 125,100 130,110 120,120 C 115,125 105,130 100,135 C 110,135 130,135 140,130 Z" 
+                      fill="url(#primaryGradientLoader)">
+                  <animate attributeName="opacity" values="0.95;0.8;0.95" dur="3s" repeatCount="indefinite" />
+                </path>
+                
+                <!-- Heart/Leaf shape in center representing life/charity -->
+                <path d="M 100,60 C 108,70 115,80 115,90 C 115,102 108,110 100,110 C 92,110 85,102 85,90 C 85,80 92,70 100,60 Z" 
+                      fill="url(#accentGradientLoader)">
+                  <animateTransform attributeName="transform" type="scale" values="1;1.08;1" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite" transform-origin="100 85" />
+                </path>
+
+                <defs>
+                  <linearGradient id="primaryGradientLoader" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#18181b" />
+                    <stop offset="100%" stop-color="#27272a" />
+                  </linearGradient>
+                  <linearGradient id="accentGradientLoader" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981" />
+                    <stop offset="100%" stop-color="#059669" />
+                  </linearGradient>
+                </defs>
               </svg>
             </div>
-            <h2 style="font-size: 1.35rem; font-weight: 700; color: #18181b; margin: 16px 0 0 0; letter-spacing: -0.025em;">Temple Donation Portal</h2>
+            <h2 style="font-size: 1.35rem; font-weight: 700; color: #18181b; margin: 16px 0 0 0; letter-spacing: -0.025em;">Trust Management Portal</h2>
             <p style="font-size: 0.875rem; color: #71717a; margin: 6px 0 0 0;">Initializing services, please wait...</p>
-            <div style="width: 140px; height: 4px; background-color: #f4f4f5; border-radius: 2px; margin-top: 24px; overflow: hidden; position: relative;">
-              <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: linear-gradient(90deg, #fb923c, #ea580c); transform-origin: left; animation: loadingBarInit 2.5s infinite ease-in-out;"></div>
+            <div style="width: 140px; height: 4px; background-color: #e4e4e7; border-radius: 2px; margin-top: 24px; overflow: hidden; position: relative;">
+              <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: linear-gradient(90deg, #10b981, #059669); transform-origin: left; animation: loadingBarInit 2.5s infinite ease-in-out;"></div>
             </div>
           </div>
         </div>

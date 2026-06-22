@@ -36,7 +36,7 @@ const Donation = ({ onBack }) => {
 
     const handleToggleCart = useCallback((donationType) => {
         if (!selectedTemple || selectedTemple.length === 0) {
-            message.warning("Please select at least one temple.");
+            message.warning("Please select at least one institution.");
             return;
         }
 
@@ -83,7 +83,7 @@ const Donation = ({ onBack }) => {
             return;
         }
         if (!selectedTemple || selectedTemple.length === 0) {
-            message.error("Please select at least one temple");
+            message.error("Please select at least one institution");
             return;
         }
         if (cartItems.length === 0) {
@@ -139,7 +139,7 @@ const Donation = ({ onBack }) => {
                         resolve();
                     },
                     error: (err) => {
-                        errorMessages.push(`Temple ${tName}: ${err.message || 'Failed'}`);
+                        errorMessages.push(`Institution ${tName}: ${err.message || 'Failed'}`);
                         resolve();
                     }
                 });
@@ -164,7 +164,7 @@ const Donation = ({ onBack }) => {
     return (
         <div className="donation-page py-6">
             <AddPageHeader
-                title="Temple Donation"
+                title="Donation Portal"
                 subtitle="Operational POS"
                 showBack={true}
                 onBack={onBack || (() => {

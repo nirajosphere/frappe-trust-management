@@ -173,7 +173,7 @@ const App = () => {
                     {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center w-full">
                             <div className="aavatto-topbar-brand">
-                                <span>Temple Donation</span>
+                                <span>Trust Management</span>
                             </div>
                             <Menu
                                 mode="horizontal"
@@ -211,7 +211,7 @@ const App = () => {
                         <div style={headerInnerStyle}>
 
                             <div style={logoContainerStyle}>
-                                <img src="/assets/temple_donation/img/logo.svg" alt="Temple Donation" style={logoImgStyle} />
+                                <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={logoImgStyle} />
                             </div>
 
                             {/* CENTER & RIGHT - MENU */}
@@ -227,7 +227,7 @@ const App = () => {
                                                     style={{
                                                         background: 'none',
                                                         border: 'none',
-                                                        borderBottom: isActive ? '3px solid #ca8a04' : '3px solid transparent',
+                                                        borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
                                                         padding: '8px 4px',
                                                         cursor: 'pointer',
                                                         fontSize: '14px',
@@ -289,7 +289,7 @@ const App = () => {
 
                     {/* Mobile Drawer */}
                     <Drawer
-                        title={<img src="/assets/temple_donation/img/logo.png" alt="Temple Donation" style={{ height: '40px', objectFit: 'contain' }} />}
+                        title={<img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '40px', objectFit: 'contain' }} />}
                         placement="right"
                         onClose={() => setMobileOpen(false)}
                         open={mobileOpen}
@@ -310,7 +310,7 @@ const App = () => {
                                             style={{
                                                 background: isActive ? '#f4f4f5' : 'transparent',
                                                 border: 'none',
-                                                borderLeft: isActive ? '4px solid #ca8a04' : '4px solid transparent',
+                                                borderLeft: isActive ? '4px solid #18181b' : '4px solid transparent',
                                                 padding: '12px 24px',
                                                 cursor: 'pointer',
                                                 fontSize: '16px',

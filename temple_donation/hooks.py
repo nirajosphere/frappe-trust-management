@@ -1,7 +1,7 @@
 app_name = "temple_donation"
-app_title = "Temple Donation"
+app_title = "Trust Management"
 app_publisher = "sk"
-app_description = "Temple Donation Management"
+app_description = "Trust Management System"
 app_email = "shailesh@aavatto.com"
 app_license = "mit"
 

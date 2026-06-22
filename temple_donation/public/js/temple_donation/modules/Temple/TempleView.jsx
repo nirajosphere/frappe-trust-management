@@ -21,8 +21,8 @@ const TempleView = ({ id, onBack, onEdit }) => {
     return (
       <div className="p-8">
         <Alert
-          message="Could not load temple details"
-          description={error?.message || "Temple not found"}
+          message="Could not load institution details"
+          description={error?.message || "Institution not found"}
           type="error"
           showIcon
           action={
@@ -69,7 +69,7 @@ const TempleView = ({ id, onBack, onEdit }) => {
       <DetailHeader
         onBack={onBack}
         title={title}
-        subtitle={`Temple ID: ${doc.temple_id || id}`}
+        subtitle={`Institution ID: ${doc.temple_id || id}`}
         initials={initials}
         tags={doc.custom_status || doc.status ? [doc.custom_status || doc.status] : []}
         actions={

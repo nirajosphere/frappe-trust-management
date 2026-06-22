@@ -3,98 +3,178 @@ import { createPortal } from "react-dom";
 
 const TempleFlagLoader = ({
     fullScreen = false,
-    text = "Temple Donation Portal",
+    text = "Trust Management Portal",
     subtext = "Initializing services, please wait...",
     size = "medium" // "small", "medium", "large"
 }) => {
     // Determine sizes based on prop
-    const svgSize = size === "small" ? 80 : size === "large" ? 220 : 150;
+    const loaderSize = size === "small" ? 80 : size === "large" ? 200 : 140;
+    const logoSize = size === "small" ? 44 : size === "large" ? 110 : 80;
     
+    const loaderContent = (
+        <div className="temple-loading-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="temple-svg-container" style={{ 
+                width: `${loaderSize}px`, 
+                height: `${loaderSize}px`, 
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: size === "small" ? '8px' : '20px'
+            }}>
+                {/* Glowing Background */}
+                <div style={{
+                    position: 'absolute',
+                    width: `${loaderSize * 0.9}px`,
+                    height: `${loaderSize * 0.9}px`,
+                    background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%)',
+                    borderRadius: '50%',
+                    animation: 'pulseGlow 2s ease-in-out infinite alternate',
+                    zIndex: 1
+                }} />
+                
+                {/* Spinning Outer Ring */}
+                <svg viewBox="0 0 100 100" style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    transformOrigin: 'center',
+                    animation: 'spin 1.5s linear infinite',
+                    zIndex: 2
+                }}>
+                    <circle 
+                        cx="50" 
+                        cy="50" 
+                        r="42" 
+                        stroke="#e2e8f0" 
+                        strokeWidth="4" 
+                        fill="none" 
+                    />
+                    <circle 
+                        cx="50" 
+                        cy="50" 
+                        r="42" 
+                        stroke="url(#emeraldGrad)" 
+                        strokeWidth="4" 
+                        strokeDasharray="70 200" 
+                        strokeLinecap="round"
+                        fill="none" 
+                    />
+                    <defs>
+                        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#10b981" />
+                            <stop offset="100%" stopColor="#059669" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                {/* Pulsing Central Logo */}
+                <div style={{
+                    position: 'relative',
+                    zIndex: 3,
+                    width: `${logoSize}px`,
+                    height: `${logoSize}px`,
+                    borderRadius: '50%',
+                    backgroundColor: '#ffffff',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
+                    animation: 'pulseLogo 2s ease-in-out infinite alternate',
+                    padding: '8px'
+                }}>
+                    <img 
+                        src="/assets/temple_donation/img/logo.svg" 
+                        alt="Logo" 
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                        }} 
+                    />
+                </div>
+            </div>
+            {size !== "small" && text && (
+                <h3 style={{
+                    fontSize: size === "large" ? '1.5rem' : '1.25rem',
+                    fontWeight: 700,
+                    color: '#1e293b',
+                    margin: '8px 0 4px 0',
+                    letterSpacing: '-0.025em',
+                    fontFamily: 'system-ui, sans-serif'
+                }}>
+                    {text}
+                </h3>
+            )}
+            {size !== "small" && subtext && (
+                <p style={{
+                    fontSize: '0.875rem',
+                    color: '#64748b',
+                    margin: 0,
+                    fontFamily: 'system-ui, sans-serif'
+                }}>
+                    {subtext}
+                </p>
+            )}
+        </div>
+    );
+
     if (fullScreen) {
         return createPortal(
-            <div className="temple-loading-screen">
-                <div className="temple-loading-wrapper">
-                    <div className="temple-svg-container" style={{ width: `${svgSize}px`, height: `${svgSize}px` }}>
-                        <div className="temple-bg-glow" style={{ width: `${svgSize * 0.83}px`, height: `${svgSize * 0.83}px` }}></div>
-                        <svg viewBox="0 0 200 200" className="temple-svg" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
-                            <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
-                            <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
-                            <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
-                            <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                            <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                            <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                            <line x1="93" y1="76" x2="107" y2="76" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                            <path d="M 96,62 L 104,62 L 104,59 L 96,59 Z" fill="#eab308" />
-                            <circle cx="100" cy="55" r="4.5" fill="#eab308" />
-                            <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
-                            <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" strokeWidth="2.5" strokeLinecap="round" />
-                            <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                            <path fill="#f97316" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
-                                <animate
-                                    attributeName="d"
-                                    dur="1.8s"
-                                    repeatCount="indefinite"
-                                    values="
-                                        M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z;
-                                        M 100,12 Q 115,10 128,4 T 155,24 Q 130,22 115,30 T 100,34 Z;
-                                        M 100,12 Q 115,18 128,12 T 155,26 Q 130,18 115,26 T 100,34 Z;
-                                        M 100,12 Q 115,10 128,4 T 155,22 Q 130,28 115,20 T 100,34 Z;
-                                        M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z
-                                    "
-                                />
-                            </path>
-                        </svg>
-                    </div>
-                    {text && <h2 className="temple-loading-text">{text}</h2>}
-                    {subtext && <p className="temple-loading-subtext">{subtext}</p>}
-                    <div className="temple-loading-bar-container">
-                        <div className="temple-loading-bar-progress"></div>
-                    </div>
-                </div>
+            <div className="temple-loading-screen" style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 999999,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#f8fafc',
+                width: '100vw',
+                height: '100vh'
+            }}>
+                <style>{`
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                    @keyframes pulseGlow {
+                        0% { transform: scale(0.95); opacity: 0.5; }
+                        100% { transform: scale(1.1); opacity: 0.9; }
+                    }
+                    @keyframes pulseLogo {
+                        0% { transform: scale(0.96); }
+                        100% { transform: scale(1.04); }
+                    }
+                `}</style>
+                {loaderContent}
             </div>,
             document.body
         );
     }
 
     return (
-        <div className="temple-loading-screen-inline">
-            <div className="temple-loading-wrapper">
-                <div className="temple-svg-container" style={{ width: `${svgSize}px`, height: `${svgSize}px` }}>
-                    <div className="temple-bg-glow" style={{ width: `${svgSize * 0.83}px`, height: `${svgSize * 0.83}px` }}></div>
-                    <svg viewBox="0 0 200 200" className="temple-svg" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 50,160 L 150,160 L 145,150 L 55,150 Z" fill="#eab308" opacity="0.9" />
-                        <path d="M 60,150 L 140,150 L 136,140 L 64,140 Z" fill="#eab308" />
-                        <path d="M 68,140 L 132,140 L 128,128 L 72,128 Z" fill="#eab308" opacity="0.95" />
-                        <path d="M 76,128 C 76,105 92,85 94,62 L 106,62 C 108,85 124,105 124,128 Z" fill="#eab308" />
-                        <line x1="82" y1="115" x2="118" y2="115" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                        <line x1="87" y1="102" x2="113" y2="102" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                        <line x1="91" y1="89" x2="109" y2="89" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                        <line x1="93" y1="76" x2="107" y2="76" stroke="#a16207" strokeWidth="1.5" opacity="0.5" />
-                        <path d="M 96,62 L 104,62 L 104,59 L 96,59 Z" fill="#eab308" />
-                        <circle cx="100" cy="55" r="4.5" fill="#eab308" />
-                        <path d="M 98,51 L 102,51 L 100,44 Z" fill="#eab308" />
-                        <line x1="100" y1="44" x2="100" y2="10" stroke="#ca8a04" strokeWidth="2.5" strokeLinecap="round" />
-                        <circle cx="100" cy="9" r="1.5" fill="#eab308" />
-                        <path fill="#f97316" stroke="#ea580c" strokeWidth="0.5" strokeLinejoin="round">
-                            <animate
-                                attributeName="d"
-                                dur="1.8s"
-                                repeatCount="indefinite"
-                                values="
-                                    M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z;
-                                    M 100,12 Q 115,10 128,4 T 155,24 Q 130,22 115,30 T 100,34 Z;
-                                    M 100,12 Q 115,18 128,12 T 155,26 Q 130,18 115,26 T 100,34 Z;
-                                    M 100,12 Q 115,10 128,4 T 155,22 Q 130,28 115,20 T 100,34 Z;
-                                    M 100,12 Q 115,2 128,12 T 155,20 Q 130,30 115,22 T 100,34 Z
-                                "
-                            />
-                        </path>
-                    </svg>
-                </div>
-                {size !== "small" && text && <h3 className="temple-loading-text-inline">{text}</h3>}
-                {size !== "small" && subtext && <p className="temple-loading-subtext-inline">{subtext}</p>}
-            </div>
+        <div className="temple-loading-screen-inline" style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px'
+        }}>
+            <style>{`
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                @keyframes pulseGlow {
+                    0% { transform: scale(0.95); opacity: 0.5; }
+                    100% { transform: scale(1.1); opacity: 0.9; }
+                }
+                @keyframes pulseLogo {
+                    0% { transform: scale(0.96); }
+                    100% { transform: scale(1.04); }
+                }
+            `}</style>
+            {loaderContent}
         </div>
     );
 };

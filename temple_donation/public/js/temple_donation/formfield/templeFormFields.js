@@ -1,21 +1,21 @@
 export const templeFormFields = {
-    title: "Temple",
+    title: "Institution",
     fields: [
         {
             name: "temple_name",
-            label: "Temple Name",
+            label: "Institution Name",
             type: "text",
-            placeholder: "Enter Temple Name",
+            placeholder: "Enter Institution Name",
             required: true,
-            message: "Please enter the temple name!"
+            message: "Please enter the institution name!"
         },
         {
             name: "temple_id",
-            label: "Temple Id",
+            label: "Institution ID",
             type: "text",
-            placeholder: "Enter Temple Id",
+            placeholder: "Enter Institution ID",
             required: true,
-            message: "Please enter the temple ID!"
+            message: "Please enter the institution ID!"
         },
         {
             name: "trust_registration_no",
@@ -26,9 +26,9 @@ export const templeFormFields = {
         },
         {
             name: "temple_address",
-            label: "Temple Address",
+            label: "Institution Address",
             type: "textarea",
-            placeholder: "Enter Temple Address",
+            placeholder: "Enter Institution Address",
             required: true,
             rows: 2
         },

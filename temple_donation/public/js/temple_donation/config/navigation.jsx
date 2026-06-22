@@ -132,7 +132,7 @@ export const navigationItems = [
     {
         key: "temples",
         // icon: <BankOutlined />,
-        label: "Temples",
+        label: "Trusts",
         component: <TempleList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },

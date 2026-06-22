@@ -7,8 +7,8 @@ const TempleList = () => {
     return (
         <ListingPage
             doctype={DOCTYPE_TEMPLE}
-            title="Temple Management"
-            description="View, add, edit or delete temple records"
+            title="Institution Management"
+            description="View, add, edit or delete institution records"
             columns={templeColumns}
             basePath="temples"
             fields={["name", "temple_name", "city", "state", "trust_registration_no"]}
