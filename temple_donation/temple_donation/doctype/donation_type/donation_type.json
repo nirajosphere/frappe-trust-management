@@ -45,7 +45,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-16 12:22:59.405341",
+ "modified": "2026-06-22 14:16:26.753948",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Donation Type",
@@ -93,5 +93,7 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }

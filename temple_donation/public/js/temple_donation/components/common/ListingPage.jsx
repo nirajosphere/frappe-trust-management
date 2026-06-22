@@ -271,6 +271,19 @@ const ListingPage = ({
         limit: 1000
     });
 
+    // Fetch Donors list for link field mapping in columns
+    const { data: donors } = useFrappeGetDocList("Donor", {
+        fields: ["name", "donor_name"],
+        limit: 1000
+    });
+
+    // Fetch Rooms list for link field mapping in columns
+    const { data: rooms } = useFrappeGetDocList("Room", {
+        fields: ["name", "room_number"],
+        limit: 1000
+    });
+
+
 
     const [enrichedData, setEnrichedData] = useState([]);
     const [enriching, setEnriching] = useState(false);
@@ -428,9 +441,30 @@ const ListingPage = ({
                     }
                 };
             }
+            if (col.dataIndex === "donor") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const d = donors?.find(item => item.name === text);
+                        return d ? d.donor_name : text;
+                    }
+                };
+            }
+            if (col.dataIndex === "room") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const r = rooms?.find(item => item.name === text);
+                        return r ? `Room ${r.room_number}` : text;
+                    }
+                };
+            }
             return col;
         });
-    }, [visibleColumns, temples, donations]);
+    }, [visibleColumns, temples, donations, donors, rooms]);
+
 
 
     return (

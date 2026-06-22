@@ -18,6 +18,15 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+    const { data: donors } = useFrappeGetDocList("Donor", {
+        fields: ["name", "donor_name"],
+        limit: 1000
+    });
+    const { data: rooms } = useFrappeGetDocList("Room", {
+        fields: ["name", "room_number"],
+        limit: 1000
+    });
+
 
     if (loading) return <PageLoader />;
 
@@ -48,15 +57,23 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
     const templeObj = temples?.find(t => t.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
+    const donorObj = donors?.find(d => d.name === doc.donor);
+    const donorName = donorObj ? donorObj.donor_name : (doc.donor || "—");
+
+    const roomObj = rooms?.find(r => r.name === doc.room);
+    const roomName = roomObj ? `Room ${roomObj.room_number}` : (doc.room || "—");
+
+
     return (
         <ViewContainer className="room-booking-view-container">
             {/* ── TOP HERO HEADER ── */}
             <DetailHeader
                 onBack={onBack}
                 title={`Booking ${doc.name}`}
-                subtitle={`Donor: ${doc.donor || "N/A"}`}
+                subtitle={`Donor: ${donorName}`}
                 initials="B"
                 tags={[doc.status]}
+
                 actions={
                     <>
                         <Button
@@ -85,7 +102,7 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                             <Row gutter={[16, 16]}>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Donor">
-                                        <span className="text-zinc-800 font-semibold">{doc.donor}</span>
+                                        <span className="text-zinc-800 font-semibold">{donorName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
@@ -95,9 +112,10 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Room Number">
-                                        <span className="text-zinc-800 font-semibold">{doc.room}</span>
+                                        <span className="text-zinc-800 font-semibold">{roomName}</span>
                                     </FieldCell>
                                 </Col>
+
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Booking Status">
                                         <Tag className={`tag-glass ${statusTag.glassClass} font-bold rounded-full !m-0`}>

@@ -132727,6 +132727,14 @@ html body {
       fields: ["name", "donor_name", "total_amount"],
       limit: 1e3
     });
+    const { data: donors } = useFrappeGetDocList("Donor", {
+      fields: ["name", "donor_name"],
+      limit: 1e3
+    });
+    const { data: rooms } = useFrappeGetDocList("Room", {
+      fields: ["name", "room_number"],
+      limit: 1e3
+    });
     const [enrichedData, setEnrichedData] = (0, import_react237.useState)([]);
     const [enriching, setEnriching] = (0, import_react237.useState)(false);
     (0, import_react237.useEffect)(() => {
@@ -132860,9 +132868,29 @@ html body {
             }
           });
         }
+        if (col.dataIndex === "donor") {
+          return __spreadProps(__spreadValues({}, col), {
+            render: (text) => {
+              if (!text)
+                return "\u2014";
+              const d = donors == null ? void 0 : donors.find((item) => item.name === text);
+              return d ? d.donor_name : text;
+            }
+          });
+        }
+        if (col.dataIndex === "room") {
+          return __spreadProps(__spreadValues({}, col), {
+            render: (text) => {
+              if (!text)
+                return "\u2014";
+              const r3 = rooms == null ? void 0 : rooms.find((item) => item.name === text);
+              return r3 ? `Room ${r3.room_number}` : text;
+            }
+          });
+        }
         return col;
       });
-    }, [visibleColumns, temples, donations]);
+    }, [visibleColumns, temples, donations, donors, rooms]);
     return /* @__PURE__ */ import_react237.default.createElement("div", {
       className: "py-6 space-y-6"
     }, /* @__PURE__ */ import_react237.default.createElement(PageHeader_default, {
@@ -140096,6 +140124,14 @@ html body {
       fields: ["name", "temple_name"],
       limit: 1e3
     });
+    const { data: donors } = useFrappeGetDocList("Donor", {
+      fields: ["name", "donor_name"],
+      limit: 1e3
+    });
+    const { data: rooms } = useFrappeGetDocList("Room", {
+      fields: ["name", "room_number"],
+      limit: 1e3
+    });
     if (loading)
       return /* @__PURE__ */ import_react288.default.createElement(PageLoader_default, null);
     if (error || !doc) {
@@ -140116,12 +140152,16 @@ html body {
     const statusTag = getTagConfig(matchedStatus);
     const templeObj = temples == null ? void 0 : temples.find((t2) => t2.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : doc.temple || "Global";
+    const donorObj = donors == null ? void 0 : donors.find((d) => d.name === doc.donor);
+    const donorName = donorObj ? donorObj.donor_name : doc.donor || "\u2014";
+    const roomObj = rooms == null ? void 0 : rooms.find((r3) => r3.name === doc.room);
+    const roomName = roomObj ? `Room ${roomObj.room_number}` : doc.room || "\u2014";
     return /* @__PURE__ */ import_react288.default.createElement(ViewContainer_default, {
       className: "room-booking-view-container"
     }, /* @__PURE__ */ import_react288.default.createElement(DetailHeader_default, {
       onBack,
       title: `Booking ${doc.name}`,
-      subtitle: `Donor: ${doc.donor || "N/A"}`,
+      subtitle: `Donor: ${donorName}`,
       initials: "B",
       tags: [doc.status],
       actions: /* @__PURE__ */ import_react288.default.createElement(import_react288.default.Fragment, null, /* @__PURE__ */ import_react288.default.createElement(button_default, {
@@ -140154,7 +140194,7 @@ html body {
       label: "Donor"
     }, /* @__PURE__ */ import_react288.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.donor))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+    }, donorName))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
@@ -140168,7 +140208,7 @@ html body {
       label: "Room Number"
     }, /* @__PURE__ */ import_react288.default.createElement("span", {
       className: "text-zinc-800 font-semibold"
-    }, doc.room))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
+    }, roomName))), /* @__PURE__ */ import_react288.default.createElement(col_default2, {
       xs: 24,
       sm: 12
     }, /* @__PURE__ */ import_react288.default.createElement(FieldCell_default, {
@@ -141107,4 +141147,4 @@ html body {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-//# sourceMappingURL=temple_donation.bundle.R6XHJLZE.js.map
+//# sourceMappingURL=temple_donation.bundle.S5GSPQEF.js.map

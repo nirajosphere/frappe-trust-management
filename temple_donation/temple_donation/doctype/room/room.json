@@ -1,79 +1,95 @@
 {
-    "actions": [],
-    "allow_rename": 1,
-    "creation": "2026-04-20 12:01:45.789272",
-    "doctype": "DocType",
-    "engine": "InnoDB",
-    "field_order": [
-        "room_number",
-        "temple",
-        "room_type",
-        "capacity",
-        "price_per_day",
-        "status"
-    ],
-    "fields": [
-        {
-            "fieldname": "room_number",
-            "label": "Room Number",
-            "fieldtype": "Data",
-            "reqd": 1
-        },
-        {
-            "fieldname": "temple",
-            "label": "Temple",
-            "fieldtype": "Link",
-            "options": "Temple"
-        },
-        {
-            "fieldname": "room_type",
-            "label": "Room Type",
-            "fieldtype": "Select",
-            "options": "AC\nNon-AC\nHall"
-        },
-        {
-            "fieldname": "capacity",
-            "label": "Capacity",
-            "fieldtype": "Int"
-        },
-        {
-            "fieldname": "price_per_day",
-            "label": "Price Per Day",
-            "fieldtype": "Currency"
-        },
-        {
-            "fieldname": "status",
-            "label": "Status",
-            "fieldtype": "Select",
-            "options": "Available\nOccupied\nMaintenance",
-            "default": "Available"
-        }
-    ],
-    "grid_page_length": 50,
-    "index_web_pages_for_search": 1,
-    "links": [],
-    "modified": "2026-04-20 12:01:45.789272",
-    "modified_by": "Administrator",
-    "module": "Temple Donation",
-    "name": "Room",
-    "owner": "Administrator",
-    "permissions": [
-        {
-            "create": 1,
-            "delete": 1,
-            "email": 1,
-            "export": 1,
-            "print": 1,
-            "read": 1,
-            "report": 1,
-            "role": "System Manager",
-            "share": 1,
-            "write": 1
-        }
-    ],
-    "row_format": "Dynamic",
-    "rows_threshold_for_grid_search": 20,
-    "sort_field": "modified",
-    "sort_order": "DESC",
-    "states": []
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-04-20 12:01:45.789272",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "room_number",
+  "temple",
+  "room_type",
+  "capacity",
+  "price_per_day",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "room_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Temple"
+  },
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Select",
+   "label": "Room Type",
+   "options": "AC\nNon-AC\nHall"
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "label": "Capacity"
+  },
+  {
+   "fieldname": "price_per_day",
+   "fieldtype": "Currency",
+   "label": "Price Per Day"
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nOccupied\nMaintenance"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-22 14:21:48.331904",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Room",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Super Admin",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }
