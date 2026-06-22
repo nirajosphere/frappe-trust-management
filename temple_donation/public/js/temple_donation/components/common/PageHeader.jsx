@@ -45,40 +45,40 @@ const PageHeader = ({
 
     return (
         <header className="mb-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <Space size={16} align="start">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div className="flex items-start gap-4 min-w-0">
                     {onBack && (
                         <Button
                             icon={<ArrowLeftOutlined />}
                             onClick={onBack}
-                            className="h-10 w-10 flex items-center justify-center hover:text-black border-zinc-200 transition-all font-bold mt-1"
+                            className="h-10 w-10 flex items-center justify-center hover:text-black border-zinc-200 transition-all font-bold mt-1 flex-shrink-0"
                         />
                     )}
-                    <div>
+                    <div className="min-w-0">
                         {subtitle && (
                             <Text className="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 block mb-1">
                                 {subtitle}
                             </Text>
                         )}
-                        <Title level={2} className="!m-0 font-bold tracking-tight text-zinc-900 leading-none">
+                        <Title level={2} className="!m-0 font-bold tracking-tight text-zinc-900 leading-none break-words">
                             {title}
                         </Title>
                         {description && (
-                            <Text className="text-zinc-400 text-sm mt-1 block">
+                            <Text className="text-zinc-400 text-sm mt-1 block break-words">
                                 {description}
                             </Text>
                         )}
                     </div>
-                </Space>
+                </div>
 
                 {/* Actions Section */}
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto lg:justify-end">
                     {onSearch && (
                         <Input
                             placeholder={searchPlaceholder}
                             prefix={<SearchOutlined className="text-zinc-400" />}
                             onChange={(e) => onSearch(e.target.value)}
-                            className="h-10 w-full md:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
+                            className="h-10 w-full sm:w-[280px] border-zinc-200 bg-zinc-50/50 hover:bg-white focus:bg-white font-medium"
                         />
                     )}
 
@@ -131,7 +131,7 @@ const PageHeader = ({
                         </Button>
                     )}
 
-                    {extra && <div className="flex items-center gap-3">{extra}</div>}
+                    {extra && <div className="flex flex-wrap items-center gap-3">{extra}</div>}
                 </div>
             </div>
         </header>

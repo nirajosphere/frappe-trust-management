@@ -29,7 +29,7 @@ const App = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const isMobile = windowWidth < 768;
+    const isMobile = windowWidth < 1024;
 
     useEffect(() => {
         if (!loading) {
@@ -97,16 +97,14 @@ const App = () => {
     const groupedMenuItems = getGroupedMenuItems(roles);
 
     const headerStyle = {
-        background: "#ffffff",
-        borderBottom: "1px solid #e4e4e7",
-        height: "70px",
-        lineHeight: "70px",
-        padding: "0 24px",
+        background: "transparent",
+        height: "auto",
+        padding: isMobile ? "12px 12px 0" : "16px 24px 0",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         width: "100%",
-        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03)"
+        borderBottom: "none"
     };
 
     const headerInnerStyle = {
@@ -115,19 +113,23 @@ const App = () => {
         alignItems: "center",
         width: "100%",
         maxWidth: "1536px",
-        marginLeft: "auto",
-        marginRight: "auto"
+        background: "#ffffff",
+        padding: isMobile ? "0 16px" : "0 24px",
+        height: "56px",
+        borderRadius: "12px",
+        border: "1px solid #e4e4e7",
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)"
     };
 
     const logoContainerStyle = {
         display: "flex",
         alignItems: "center",
-        height: "70px",
+        height: "100%",
         flexShrink: 0
     };
 
     const logoImgStyle = {
-        height: "38px",
+        height: "30px",
         width: "auto",
         objectFit: "contain",
         display: "block"
@@ -135,21 +137,23 @@ const App = () => {
 
     const rightContainerStyle = {
         display: "flex",
-        alignItems: "center",
-        gap: "24px"
+        alignItems: "stretch",
+        gap: "24px",
+        height: "100%"
     };
 
     const menuStyle = {
         border: "none",
         background: "transparent",
-        lineHeight: "70px",
-        minWidth: "400px"
+        minWidth: "400px",
+        height: "100%"
     };
 
     const rightActionsStyle = {
         display: "flex",
         alignItems: "center",
-        gap: "16px"
+        gap: "16px",
+        height: "100%"
     };
 
     const userProfileStyle = {
@@ -160,7 +164,8 @@ const App = () => {
         fontWeight: 500,
         color: "#18181b",
         padding: "4px 8px",
-        borderRadius: "6px"
+        borderRadius: "6px",
+        height: "36px"
     };
 
     if (loading) {
@@ -219,7 +224,7 @@ const App = () => {
                             {/* CENTER & RIGHT - MENU */}
                             <div style={rightContainerStyle}>
                                 {!isMobile && (
-                                    <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', gap: '24px', alignItems: 'stretch', height: '100%' }}>
                                         {groupedMenuItems.map(group => {
                                             const isSingle = group.isSingle || (group.children && group.children.length === 1);
                                             
@@ -236,14 +241,14 @@ const App = () => {
                                                             background: 'none',
                                                             border: 'none',
                                                             borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
-                                                            padding: '8px 4px',
+                                                            padding: '0 4px',
                                                             cursor: 'pointer',
                                                             fontSize: '14px',
                                                             fontWeight: '600',
                                                             color: isActive ? '#18181b' : '#71717a',
                                                             transition: 'all 0.2s',
                                                             outline: 'none',
-                                                            height: '70px',
+                                                            height: '100%',
                                                             display: 'flex',
                                                             alignItems: 'center'
                                                         }}
@@ -269,14 +274,14 @@ const App = () => {
                                                             background: 'none',
                                                             border: 'none',
                                                             borderBottom: isGroupActive ? '3px solid #18181b' : '3px solid transparent',
-                                                            padding: '8px 4px',
+                                                            padding: '0 4px',
                                                             cursor: 'pointer',
                                                             fontSize: '14px',
                                                             fontWeight: '600',
                                                             color: isGroupActive ? '#18181b' : '#71717a',
                                                             transition: 'all 0.2s',
                                                             outline: 'none',
-                                                            height: '70px',
+                                                            height: '100%',
                                                             display: 'flex',
                                                             alignItems: 'center',
                                                             gap: '4px'
@@ -303,7 +308,7 @@ const App = () => {
                                                     src={user?.image}
                                                     icon={!user?.image && <UserOutlined />}
                                                 />
-                                                <span>{user?.name}</span>
+                                                {/* <span>{user?.name}</span> */}
                                             </div>
                                         </Dropdown>
                                     )}

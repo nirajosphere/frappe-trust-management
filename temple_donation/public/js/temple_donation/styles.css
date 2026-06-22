@@ -148,10 +148,6 @@
   margin-top: 0.25rem;
 }
 
-.temple-donation-app .mt-12{
-  margin-top: 3rem;
-}
-
 .temple-donation-app .mt-2{
   margin-top: 0.5rem;
 }
@@ -164,10 +160,6 @@
   margin-top: 1.5rem;
 }
 
-.temple-donation-app .mt-8{
-  margin-top: 2rem;
-}
-
 .temple-donation-app .mt-auto{
   margin-top: auto;
 }
@@ -178,6 +170,10 @@
 
 .temple-donation-app .inline-block{
   display: inline-block;
+}
+
+.temple-donation-app .inline{
+  display: inline;
 }
 
 .temple-donation-app .flex{
@@ -261,6 +257,10 @@
   min-width: 0px;
 }
 
+.temple-donation-app .flex-shrink-0{
+  flex-shrink: 0;
+}
+
 .temple-donation-app .shrink-0{
   flex-shrink: 0;
 }
@@ -297,6 +297,10 @@
 
 .temple-donation-app .flex-wrap{
   flex-wrap: wrap;
+}
+
+.temple-donation-app .items-start{
+  align-items: flex-start;
 }
 
 .temple-donation-app .items-center{
@@ -369,6 +373,10 @@
   white-space: nowrap;
 }
 
+.temple-donation-app .break-words{
+  overflow-wrap: break-word;
+}
+
 .temple-donation-app .break-all{
   word-break: break-all;
 }
@@ -418,10 +426,6 @@
   border-top-width: 1px;
 }
 
-.temple-donation-app .border-dashed{
-  border-style: dashed;
-}
-
 .temple-donation-app .border-none{
   border-style: none;
 }
@@ -446,11 +450,6 @@
   border-color: rgb(254 202 202 / var(--tw-border-opacity, 1));
 }
 
-.temple-donation-app .border-stone-200{
-  --tw-border-opacity: 1;
-  border-color: rgb(231 229 228 / var(--tw-border-opacity, 1));
-}
-
 .temple-donation-app .border-zinc-100{
   --tw-border-opacity: 1;
   border-color: rgb(244 244 245 / var(--tw-border-opacity, 1));
@@ -469,6 +468,11 @@
   border-color: rgb(228 228 231 / 0.8);
 }
 
+.temple-donation-app .border-zinc-300{
+  --tw-border-opacity: 1;
+  border-color: rgb(212 212 216 / var(--tw-border-opacity, 1));
+}
+
 .temple-donation-app .border-zinc-50{
   --tw-border-opacity: 1;
   border-color: rgb(250 250 250 / var(--tw-border-opacity, 1));
@@ -481,11 +485,6 @@
 
 .temple-donation-app .border-zinc-900\/10{
   border-color: rgb(24 24 27 / 0.1);
-}
-
-.temple-donation-app .bg-\[\#f8f9fa\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 249 250 / var(--tw-bg-opacity, 1));
 }
 
 .temple-donation-app .bg-black{
@@ -506,10 +505,6 @@
 .temple-donation-app .bg-primary{
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity, 1));
-}
-
-.temple-donation-app .bg-stone-50\/50{
-  background-color: rgb(250 250 249 / 0.5);
 }
 
 .temple-donation-app .bg-transparent{
@@ -630,11 +625,6 @@
   padding-right: 1.5rem;
 }
 
-.temple-donation-app .px-8{
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
 .temple-donation-app .py-0\.5{
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -702,6 +692,10 @@
   padding-bottom: 0.625rem;
 }
 
+.temple-donation-app .pb-3{
+  padding-bottom: 0.75rem;
+}
+
 .temple-donation-app .pb-4{
   padding-bottom: 1rem;
 }
@@ -747,11 +741,6 @@
   line-height: 2rem;
 }
 
-.temple-donation-app .text-6xl{
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
 .temple-donation-app .text-\[10px\]{
   font-size: 10px;
 }
@@ -783,6 +772,11 @@
   line-height: 1.25rem;
 }
 
+.temple-donation-app .text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .temple-donation-app .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
@@ -790,10 +784,6 @@
 
 .temple-donation-app .\!font-bold{
   font-weight: 700 !important;
-}
-
-.temple-donation-app .font-black{
-  font-weight: 900;
 }
 
 .temple-donation-app .font-bold{
@@ -925,24 +915,9 @@
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 
-.temple-donation-app .text-stone-300{
-  --tw-text-opacity: 1;
-  color: rgb(214 211 209 / var(--tw-text-opacity, 1));
-}
-
-.temple-donation-app .text-stone-400{
-  --tw-text-opacity: 1;
-  color: rgb(168 162 158 / var(--tw-text-opacity, 1));
-}
-
 .temple-donation-app .text-stone-500{
   --tw-text-opacity: 1;
   color: rgb(120 113 108 / var(--tw-text-opacity, 1));
-}
-
-.temple-donation-app .text-stone-800{
-  --tw-text-opacity: 1;
-  color: rgb(41 37 36 / var(--tw-text-opacity, 1));
 }
 
 .temple-donation-app .text-white{
@@ -996,12 +971,6 @@
 
 .temple-donation-app .line-through{
   text-decoration-line: line-through;
-}
-
-.temple-donation-app .shadow-lg{
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .temple-donation-app .shadow-none{
@@ -2164,6 +2133,11 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   color: rgb(39 39 42 / var(--tw-text-opacity, 1));
 }
 
+.temple-donation-app .hover\:text-zinc-900:hover{
+  --tw-text-opacity: 1;
+  color: rgb(24 24 27 / var(--tw-text-opacity, 1));
+}
+
 .temple-donation-app .hover\:text-zinc-950:hover{
   --tw-text-opacity: 1;
   color: rgb(9 9 11 / var(--tw-text-opacity, 1));
@@ -2195,6 +2169,12 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@media (min-width: 640px){
+  .temple-donation-app .sm\:w-\[280px\]{
+    width: 280px;
+  }
+}
+
 @media (min-width: 768px){
   .temple-donation-app .md\:flex{
     display: flex;
@@ -2204,20 +2184,26 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
     display: none;
   }
 
-  .temple-donation-app .md\:w-\[280px\]{
-    width: 280px;
+  .temple-donation-app .md\:p-6{
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px){
+  .temple-donation-app .lg\:w-auto{
+    width: auto;
   }
 
-  .temple-donation-app .md\:flex-row{
+  .temple-donation-app .lg\:flex-row{
     flex-direction: row;
   }
 
-  .temple-donation-app .md\:items-center{
+  .temple-donation-app .lg\:items-center{
     align-items: center;
   }
 
-  .temple-donation-app .md\:p-6{
-    padding: 1.5rem;
+  .temple-donation-app .lg\:justify-end{
+    justify-content: flex-end;
   }
 }
 

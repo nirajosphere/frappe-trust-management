@@ -5,6 +5,7 @@ import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
 import CommonTable from '../../components/common/CommonTable';
 import ActiveDonationsModal from './components/ActiveDonationsModal';
+import ViewContainer from '../../components/common/ViewContainer';
 
 const { Text } = Typography;
 
@@ -326,7 +327,8 @@ const OpeningBalance = () => {
     ];
 
     return (
-        <div className="animate-fadeIn py-6 space-y-6">
+         <ViewContainer>
+        <div className="animate-fadeIn space-y-6">
             <PageHeader
                 title="Ledger & Cash Handovers"
                 description="Manage and track opening balance resets and cash handovers"
@@ -415,6 +417,7 @@ const OpeningBalance = () => {
                 columns={activeDonationColumns}
             />
         </div>
+        </ViewContainer>
     );
 };
 

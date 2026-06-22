@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PageHeader from "../../components/common/PageHeader";
 import PageLoader from "../../components/common/PageLoader";
+import ViewContainer from "../../components/common/ViewContainer";
 
 dayjs.extend(relativeTime);
 
@@ -222,7 +223,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="py-6">
+        <ViewContainer>
             <PageHeader title="Dashboard" description="Analytics Overview" />
                 {/* 🔥 FILTER */}
                 <Card className="border border-zinc-200 mb-6">
@@ -443,7 +444,7 @@ const Dashboard = () => {
 
                 </Row>
                 </Spin>
-        </div>
+        </ViewContainer>
     );
 };
 
