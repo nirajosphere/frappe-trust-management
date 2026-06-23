@@ -26,7 +26,7 @@ const SavedViewsBar = ({ views, appliedFilters, onSelectView, onDeleteView, onEd
             backgroundColor: "#fafafa", 
             borderRadius: "8px", 
             border: "1px solid #f0f0f0",
-            marginBottom: "16px"
+            // marginBottom: "16px"
         }}>
             <span style={{ 
                 fontSize: "12px", 
