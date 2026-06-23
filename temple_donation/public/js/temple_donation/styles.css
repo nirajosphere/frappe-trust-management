@@ -1329,6 +1329,60 @@
   background: rgba(0, 0, 0, 0.01) !important;
 }
 
+/* Ledger merged container styling */
+.temple-donation-app .ledger-merged-container {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+}
+
+.temple-donation-app .ledger-tab-header {
+  border: 1px solid #e4e4e7 !important;
+  border-bottom: 1px solid #e4e4e7 !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+  background: #fafafa !important;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Table container: borders on left, right, and bottom (and no top border to merge flush with tab header) */
+.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-container {
+  border: 1px solid #e4e4e7 !important;
+  border-top: none !important;
+  border-radius: 0 0 12px 12px !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+}
+
+.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-thead > tr > th {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:first-child {
+  border-bottom-left-radius: 10px !important;
+}
+.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:last-child {
+  border-bottom-right-radius: 10px !important;
+}
+.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td {
+  border-bottom: none !important;
+}
+
+.temple-donation-app .ledger-merged-table .ant-pagination {
+  margin: 16px 0 0 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
 .temple-donation-app {
   /* Modern Scrollbar (Scoped) */
 }

@@ -614,9 +614,7 @@ const ListingPage = ({
                         appliedFilters={appliedFilters}
                         onSelectView={(viewObj) => {
                             setAppliedFilters(viewObj.rawRows || []);
-                            if (viewObj.sorters && viewObj.sorters.length > 0) {
-                                handleApplySorters(viewObj.sorters);
-                            }
+                            handleApplySorters(viewObj.sorters || []);
                         }}
                         onEditView={(view) => {
                             setRenamingView(view);

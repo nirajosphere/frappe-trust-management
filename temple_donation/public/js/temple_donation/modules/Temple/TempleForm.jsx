@@ -375,7 +375,7 @@ const TempleForm = ({ id, onBack }) => {
                 setSelectedDonationTypes([data.dontatio_type]);
             }
         } else {
-            form.setFieldsValue({ country: "India", state: "Gujarat" });
+            form.setFieldsValue({ country: "India", state: "" });
         }
     }, [isEdit, data, form]);
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Input, Popover, Select, Space, message, Modal, Tooltip } from "antd";
+import { Button, Input, Popover, Select, Space, message, Modal, Tooltip, Badge } from "antd";
 import { FilterOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 
-const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, savedViews, onRefreshViews }) => {
+const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, savedViews, onRefreshViews, appliedSorters }) => {
     const [draftFilters, setDraftFilters] = useState([]);
     const [popoverOpen, setPopoverOpen] = useState(false);
     const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
@@ -71,8 +71,12 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
     };
 
     const handleSaveView = () => {
-        if (!saveViewName.trim() || !doctype) {
+        if (!saveViewName.trim()) {
             message.warning("Please enter a view name");
+            return;
+        }
+        if (!doctype) {
+            message.error("System error: doctype reference is missing");
             return;
         }
         const validRows = draftFilters.filter(row => row.field && row.operator && row.value !== "");
@@ -81,13 +85,18 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
             return;
         }
 
+        const saveData = {
+            filters: validRows,
+            sorters: appliedSorters || []
+        };
+
         if (typeof frappe !== "undefined") {
             frappe.call({
                 method: "temple_donation.api.save_filter_view",
                 args: {
                     view_name: saveViewName.trim(),
                     reference_doctype: doctype,
-                    filters_json: JSON.stringify(validRows)
+                    filters_json: JSON.stringify(saveData)
                 },
                 callback: (r) => {
                     message.success("View saved successfully!");
@@ -268,18 +277,18 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                 placement="bottomRight"
                 arrow={true}
             >
-                <Tooltip title="Filter" mouseEnterDelay={0.3}>
-                    <Button
-                        icon={<FilterOutlined />}
-                        style={{ height: "40px", padding: "0 16px", borderColor: "#d9d9d9", color: "#595959", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px" }}
-                    >
-                        {/* Filter */}
-                        {activeCount > 0 && (
-                            <span style={{ backgroundColor: "#000", color: "#fff", fontSize: "10px", height: "20px", minWidth: "20px", padding: "0 6px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "10px", fontWeight: "bold" }}>
-                                {activeCount}
-                            </span>
-                        )}
-                    </Button>
+                <Tooltip title="Filters" mouseEnterDelay={0.3}>
+                    <Badge count={activeCount} color="black" size="small" offset={[-2, 2]}>
+                        <Button
+                            icon={<FilterOutlined />}
+                            className={`h-10 w-10 flex items-center justify-center transition-all ${
+                                activeCount > 0
+                                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
+                                    : "border-zinc-200 text-zinc-600 hover:text-zinc-800"
+                            }`}
+                            style={{ borderRadius: "6px" }}
+                        />
+                    </Badge>
                 </Tooltip>
             </Popover>
 
