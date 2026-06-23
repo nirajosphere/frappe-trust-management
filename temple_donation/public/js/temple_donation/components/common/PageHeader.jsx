@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Space, Button, Input, Dropdown } from "antd";
+import { Typography, Space, Button, Input, Dropdown, Tooltip } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
 import FilterPopover from "./FilterPopover";
 import ColumnsPopover from "./ColumnsPopover";
@@ -123,12 +123,13 @@ const PageHeader = ({
                             trigger={["click"]}
                             placement="bottomRight"
                         >
-                            <Button
-                                icon={<DownloadOutlined />}
-                                className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
-                            >
-                                {/* Export */}
-                            </Button>
+                            <Tooltip title="Export" mouseEnterDelay={0.3}>
+                                <Button
+                                    icon={<DownloadOutlined />}
+                                    className="h-10 w-10 flex items-center justify-center border-zinc-200 text-zinc-600 hover:text-zinc-800 transition-all"
+                                    style={{ borderRadius: "6px" }}
+                                />
+                            </Tooltip>
                         </Dropdown>
                     )}
 

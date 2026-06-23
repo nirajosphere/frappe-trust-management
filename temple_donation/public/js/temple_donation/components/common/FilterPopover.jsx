@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Popover, Select, Space, message, Modal } from "antd";
+import { Button, Input, Popover, Select, Space, message, Modal, Tooltip } from "antd";
 import { FilterOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 
 const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, savedViews, onRefreshViews }) => {
@@ -28,10 +28,10 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
     };
 
     const addFilterRow = () => {
-        setDraftFilters([...draftFilters, { 
-            field: undefined, 
-            operator: undefined, 
-            value: "" 
+        setDraftFilters([...draftFilters, {
+            field: undefined,
+            operator: undefined,
+            value: ""
         }]);
     };
 
@@ -222,7 +222,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                     >
                         Add a Filter
                     </Button>
-                    
+
                     {draftFilters.some(row => row.field && row.operator && row.value !== "") && (
                         <Button
                             type="dashed"
@@ -268,17 +268,19 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                 placement="bottomRight"
                 arrow={true}
             >
-                <Button
-                    icon={<FilterOutlined />}
-                    style={{ height: "40px", padding: "0 16px", borderColor: "#d9d9d9", color: "#595959", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px" }}
-                >
-                    {/* Filter */}
-                    {activeCount > 0 && (
-                        <span style={{ backgroundColor: "#000", color: "#fff", fontSize: "10px", height: "20px", minWidth: "20px", padding: "0 6px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "10px", fontWeight: "bold" }}>
-                            {activeCount}
-                        </span>
-                    )}
-                </Button>
+                <Tooltip title="Filter" mouseEnterDelay={0.3}>
+                    <Button
+                        icon={<FilterOutlined />}
+                        style={{ height: "40px", padding: "0 16px", borderColor: "#d9d9d9", color: "#595959", fontWeight: "bold", display: "flex", alignItems: "center", gap: "8px" }}
+                    >
+                        {/* Filter */}
+                        {activeCount > 0 && (
+                            <span style={{ backgroundColor: "#000", color: "#fff", fontSize: "10px", height: "20px", minWidth: "20px", padding: "0 6px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "10px", fontWeight: "bold" }}>
+                                {activeCount}
+                            </span>
+                        )}
+                    </Button>
+                </Tooltip>
             </Popover>
 
             <Modal

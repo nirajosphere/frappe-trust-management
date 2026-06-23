@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Popover, Checkbox } from "antd";
+import { Button, Popover, Checkbox, Tooltip } from "antd";
 import { SettingOutlined, ArrowUpOutlined, ArrowDownOutlined, EyeOutlined, EyeInvisibleOutlined, HolderOutlined } from "@ant-design/icons";
 import { Columns3 } from "lucide-react";
 
@@ -24,9 +24,18 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
 
     const toggleVisibility = (index) => {
         const nextCols = [...customizedColumns];
+        const isCurrentVisible = nextCols[index].visible !== false;
+        
+        if (isCurrentVisible) {
+            const visibleCount = nextCols.filter(c => c.visible !== false).length;
+            if (visibleCount <= 1) {
+                return; // Prevent deselecting the last visible column
+            }
+        }
+
         nextCols[index] = {
             ...nextCols[index],
-            visible: nextCols[index].visible === false ? true : false
+            visible: !isCurrentVisible
         };
         onSaveColumns(nextCols);
     };
@@ -78,6 +87,9 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
                 {customizedColumns.map((col, index) => {
                     const titleStr = typeof col.title === "string" ? col.title : (col.dataIndex || col.key || "Column");
                     const isVisible = col.visible !== false;
+                    const visibleCount = customizedColumns.filter(c => c.visible !== false).length;
+                    const isDisableCheckbox = isVisible && visibleCount <= 1;
+
                     return (
                         <div 
                             key={index} 
@@ -102,6 +114,7 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
                                 <HolderOutlined style={{ color: "#94a3b8", fontSize: "14px", cursor: "grab", marginRight: "2px" }} />
                                 <Checkbox
                                     checked={isVisible}
+                                    disabled={isDisableCheckbox}
                                     onChange={(e) => {
                                         // Stop propagation to prevent drag-triggering if applicable
                                         e.stopPropagation();
@@ -153,12 +166,13 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
             placement="bottomRight"
             arrow={true}
         >
-            <Button
-                icon={<Columns3 size={16} strokeWidth={2} />}
-                className="h-10 px-4 border-zinc-200 text-zinc-600 font-bold"
-            >
-                {/* Columns */}
-            </Button>
+            <Tooltip title="Columns Settings" mouseEnterDelay={0.3}>
+                <Button
+                    icon={<Columns3 size={16} strokeWidth={2} />}
+                    className="h-10 w-10 flex items-center justify-center border-zinc-200 text-zinc-600 hover:text-zinc-800 transition-all"
+                    style={{ borderRadius: "6px" }}
+                />
+            </Tooltip>
         </Popover>
     );
 };

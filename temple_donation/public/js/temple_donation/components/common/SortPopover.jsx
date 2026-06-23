@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Popover, Input, Badge } from "antd";
+import { Button, Popover, Input, Badge, Tooltip } from "antd";
 import { 
     SwapOutlined, 
     DeleteOutlined, 
@@ -276,17 +276,19 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
             overlayClassName="aavatto-sort-popover"
             onOpenChange={handlePopoverOpenChange}
         >
-            <Badge count={appliedSorters.length} color="black" size="small" offset={[-2, 2]}>
-                <Button
-                    icon={<SwapOutlined style={{ transform: "rotate(90deg)", fontSize: "14px" }} />}
-                    className={`h-10 w-10 flex items-center justify-center transition-all ${
-                        appliedSorters.length > 0
-                            ? "border-zinc-950 bg-zinc-50 text-zinc-950"
-                            : "border-zinc-200 text-zinc-600 hover:text-zinc-800"
-                    }`}
-                    style={{ borderRadius: "6px" }}
-                />
-            </Badge>
+            <Tooltip title="Sort" mouseEnterDelay={0.3}>
+                <Badge count={appliedSorters.length} color="black" size="small" offset={[-2, 2]}>
+                    <Button
+                        icon={<SwapOutlined style={{ transform: "rotate(90deg)", fontSize: "14px" }} />}
+                        className={`h-10 w-10 flex items-center justify-center transition-all ${
+                            appliedSorters.length > 0
+                                ? "border-zinc-950 bg-zinc-50 text-zinc-950"
+                                : "border-zinc-200 text-zinc-600 hover:text-zinc-800"
+                        }`}
+                        style={{ borderRadius: "6px" }}
+                    />
+                </Badge>
+            </Tooltip>
         </Popover>
     );
 };
