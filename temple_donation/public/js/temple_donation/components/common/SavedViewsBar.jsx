@@ -39,7 +39,7 @@ const SavedViewsBar = ({ views, appliedFilters, onSelectView, onDeleteView, onEd
             </span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                 <Tag
-                    onClick={() => onSelectView([])}
+                    onClick={() => onSelectView({ rawRows: [], sorters: [] })}
                     style={{
                         padding: "4px 12px",
                         borderRadius: "16px",
@@ -79,7 +79,7 @@ const SavedViewsBar = ({ views, appliedFilters, onSelectView, onDeleteView, onEd
                             className="hover:scale-[1.02]"
                         >
                             <span 
-                                onClick={() => onSelectView(view.rawRows)} 
+                                onClick={() => onSelectView(view)} 
                                 style={{ marginRight: "4px" }}
                             >
                                 {view.name}

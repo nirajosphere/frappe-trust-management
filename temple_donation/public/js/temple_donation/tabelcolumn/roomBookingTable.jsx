@@ -21,12 +21,14 @@ export const roomBookingColumns = [
         title: "Donor",
         dataIndex: "donor",
         key: "donor",
+        filterField: "donor.donor_name",
         render: (text) => <Text strong>{text}</Text>,
     },
     {
         title: "Room",
         dataIndex: "room",
         key: "room",
+        filterField: "room.room_number",
         width: 120,
     },
     {

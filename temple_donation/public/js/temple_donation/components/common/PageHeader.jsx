@@ -3,6 +3,7 @@ import { Typography, Space, Button, Input, Dropdown } from "antd";
 import { ArrowLeftOutlined, PlusOutlined, DownloadOutlined, SearchOutlined } from "@ant-design/icons";
 import FilterPopover from "./FilterPopover";
 import ColumnsPopover from "./ColumnsPopover";
+import SortPopover from "./SortPopover";
 
 const { Title, Text } = Typography;
 
@@ -27,6 +28,8 @@ const PageHeader = ({
     doctype, // The database DocType name
     appliedFilters,
     onApplyFilters, // Callback for dynamic filters: (filtersArray) => void
+    appliedSorters,
+    onApplySorters, // Callback for dynamic multi-column sorting: (sortersArray) => void
     savedViews,
     onRefreshViews,
     customizedColumns,
@@ -88,8 +91,17 @@ const PageHeader = ({
                             doctype={doctype}
                             appliedFilters={appliedFilters}
                             onApplyFilters={onApplyFilters}
+                            appliedSorters={appliedSorters}
                             savedViews={savedViews}
                             onRefreshViews={onRefreshViews}
+                        />
+                    )}
+
+                    {onApplySorters && (
+                        <SortPopover 
+                            columns={columns}
+                            appliedSorters={appliedSorters}
+                            onApplySorters={onApplySorters}
                         />
                     )}
 

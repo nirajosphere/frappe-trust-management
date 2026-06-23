@@ -42,6 +42,30 @@ const ListingPage = ({
     allowFilter = true
 }) => {
     const [appliedFilters, setAppliedFilters] = useState([]);
+    const [appliedSorters, setAppliedSorters] = useState([]);
+
+    // Restore sorting order from localStorage on mount or doctype change
+    useEffect(() => {
+        if (!doctype) return;
+        const savedSort = localStorage.getItem(`sort_order_${doctype}`);
+        if (savedSort) {
+            try {
+                setAppliedSorters(JSON.parse(savedSort));
+            } catch (e) {
+                console.error("Failed to restore sorting order:", e);
+            }
+        } else {
+            setAppliedSorters([]);
+        }
+    }, [doctype]);
+
+    const handleApplySorters = (newSorters) => {
+        setAppliedSorters(newSorters);
+        if (doctype) {
+            localStorage.setItem(`sort_order_${doctype}`, JSON.stringify(newSorters));
+        }
+    };
+
     const [savedViews, setSavedViews] = useState([]);
     const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
     const [renamingView, setRenamingView] = useState(null);
@@ -172,6 +196,11 @@ const ListingPage = ({
             return;
         }
 
+        const saveData = {
+            filters: validRows,
+            sorters: renamingView.sorters || []
+        };
+
         if (typeof frappe !== "undefined") {
             frappe.call({
                 method: "temple_donation.api.update_filter_view",
@@ -179,7 +208,7 @@ const ListingPage = ({
                     old_view_name: renamingView.name,
                     new_view_name: renameValue.trim(),
                     reference_doctype: doctype,
-                    filters_json: JSON.stringify(validRows)
+                    filters_json: JSON.stringify(saveData)
                 },
                 callback: (r) => {
                     message.success("View updated successfully!");
@@ -200,17 +229,44 @@ const ListingPage = ({
             args: { reference_doctype: doctype },
             callback: (r) => {
                 if (r.message) {
-                    setSavedViews(r.message.map(item => ({
-                        name: item.view_name,
-                        rawRows: JSON.parse(item.filters_json),
-                        filters: JSON.parse(item.filters_json).map(row => {
+                    setSavedViews(r.message.map(item => {
+                        let parsed = null;
+                        try {
+                            parsed = JSON.parse(item.filters_json);
+                        } catch (e) {
+                            console.error(e);
+                        }
+
+                        let rawRows = [];
+                        let sorters = [];
+
+                        if (Array.isArray(parsed)) {
+                            rawRows = parsed;
+                        } else if (parsed && typeof parsed === "object") {
+                            rawRows = parsed.filters || [];
+                            sorters = parsed.sorters || [];
+                        }
+
+                        const mappedFilters = rawRows.map(row => {
                             let val = row.value;
+                            let field = row.field;
+                            const colMatch = columns?.find(c => c.dataIndex === row.field);
+                            if (colMatch && colMatch.filterField) {
+                                field = colMatch.filterField;
+                            }
                             if (row.operator === "like" || row.operator === "not like") {
                                 val = `%${val}%`;
                             }
-                            return [row.field, row.operator, val];
-                        })
-                    })));
+                            return [field, row.operator, val];
+                        });
+
+                        return {
+                            name: item.view_name,
+                            rawRows: rawRows,
+                            sorters: sorters,
+                            filters: mappedFilters
+                        };
+                    }));
                 } else {
                     setSavedViews([]);
                 }
@@ -240,17 +296,22 @@ const ListingPage = ({
             .filter(row => row.field && row.operator && row.value !== undefined && row.value !== "")
             .map(row => {
                 let val = row.value;
+                let field = row.field;
+                const colMatch = columns?.find(c => c.dataIndex === row.field);
+                if (colMatch && colMatch.filterField) {
+                    field = colMatch.filterField;
+                }
                 if (row.operator === "like" || row.operator === "not like") {
                     val = `%${val}%`;
                 }
-                return [row.field, row.operator, val];
+                return [field, row.operator, val];
             });
 
         return [
             ...normalizeFilters(filters),
             ...activeFiltersMapped
         ];
-    }, [filters, appliedFilters]);
+    }, [filters, appliedFilters, columns]);
 
     // Fetch data
     const { data, loading, error, mutate } = useFrappeGetDocList(doctype, {
@@ -334,6 +395,59 @@ const ListingPage = ({
     const { deleteDoc } = useFrappeDeleteDoc();
 
     const [searchText, setSearchText] = useState("");
+
+    const sortedData = React.useMemo(() => {
+        if (!enrichedData) return [];
+        if (!appliedSorters || appliedSorters.length === 0) return enrichedData;
+
+        return [...enrichedData].sort((a, b) => {
+            for (const sorter of appliedSorters) {
+                const { field, order } = sorter;
+                if (!field) continue;
+
+                let valA = a[field];
+                let valB = b[field];
+
+                // Resolve related names to sort alphabetically by display text instead of IDs
+                if (field === "temple") {
+                    const tA = temples?.find(item => item.name === valA);
+                    const tB = temples?.find(item => item.name === valB);
+                    valA = tA ? tA.temple_name : (a["temple.temple_name"] || a.temple_name || valA);
+                    valB = tB ? tB.temple_name : (b["temple.temple_name"] || b.temple_name || valB);
+                } else if (field === "donor") {
+                    const dA = donors?.find(item => item.name === valA);
+                    const dB = donors?.find(item => item.name === valB);
+                    valA = dA ? dA.donor_name : valA;
+                    valB = dB ? dB.donor_name : valB;
+                } else if (field === "room") {
+                    const rA = rooms?.find(item => item.name === valA);
+                    const rB = rooms?.find(item => item.name === valB);
+                    valA = rA ? rA.room_number : valA;
+                    valB = rB ? rB.room_number : valB;
+                }
+
+                if (valA === valB) continue;
+
+                if (valA === undefined || valA === null) return order === 'asc' ? -1 : 1;
+                if (valB === undefined || valB === null) return order === 'asc' ? 1 : -1;
+
+                const numA = Number(valA);
+                const numB = Number(valB);
+                if (!isNaN(numA) && !isNaN(numB) && typeof valA !== "boolean" && typeof valB !== "boolean") {
+                    return order === 'asc' ? numA - numB : numB - numA;
+                }
+
+                const strA = String(valA).toLowerCase();
+                const strB = String(valB).toLowerCase();
+                const compareResult = strA.localeCompare(strB);
+
+                if (compareResult !== 0) {
+                    return order === 'asc' ? compareResult : -compareResult;
+                }
+            }
+            return 0;
+        });
+    }, [enrichedData, appliedSorters, temples, donors, rooms]);
 
     const handleAdd = () => {
         if (typeof frappe !== "undefined" && basePath) {
@@ -486,6 +600,8 @@ const ListingPage = ({
                     doctype={doctype}
                     appliedFilters={appliedFilters}
                     onApplyFilters={allowFilter ? setAppliedFilters : undefined}
+                    appliedSorters={appliedSorters}
+                    onApplySorters={handleApplySorters}
                     savedViews={savedViews}
                     onRefreshViews={fetchSavedViews}
                     customizedColumns={customizedColumns}
@@ -496,7 +612,11 @@ const ListingPage = ({
                     <SavedViewsBar
                         views={savedViews}
                         appliedFilters={appliedFilters}
-                        onSelectView={setAppliedFilters}
+                        onSelectView={(viewObj) => {
+                            setAppliedFilters(viewObj.rawRows || []);
+                            setAppliedSorters(viewObj.sorters || []);
+                            localStorage.setItem(`sort_order_${doctype}`, JSON.stringify(viewObj.sorters || []));
+                        }}
                         onEditView={(view) => {
                             setRenamingView(view);
                             setRenameValue(view.name);
@@ -532,7 +652,7 @@ const ListingPage = ({
                 )}
                 <CommonTable
                     columns={processedColumns}
-                    dataSource={enrichedData}
+                    dataSource={sortedData}
                     loading={loading || enriching}
 
                     searchText={searchText}

@@ -25,6 +25,7 @@ export const donationColumns = [
         key: 'temple',
         render: (_, record) => <Text>{record["temple.temple_name"] || record.temple_name}</Text>,
         filterable: true,
+        filterField: "temple.temple_name",
         filterType: "text"
     },
     {

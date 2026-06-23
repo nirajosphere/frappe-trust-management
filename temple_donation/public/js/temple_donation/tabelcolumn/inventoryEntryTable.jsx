@@ -56,6 +56,7 @@ export const inventoryEntryColumns = [
         title: "Temple",
         dataIndex: "temple",
         key: "temple",
+        filterField: "temple.temple_name",
         width: 180,
         render: (temple) => {
             if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;

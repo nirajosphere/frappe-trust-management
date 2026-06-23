@@ -28,9 +28,13 @@ const CommonTable = ({
 }) => {
 
     const filteredData = dataSource?.filter(item => {
-        return Object.values(item).some(val =>
-            String(val).toLowerCase().includes(searchText.toLowerCase())
-        );
+        if (!searchText) return true;
+        const query = String(searchText).toLowerCase();
+        return Object.values(item).some(val => {
+            if (val === null || val === undefined) return false;
+            if (typeof val === "object") return false; // Skip objects and child arrays
+            return String(val).toLowerCase().includes(query);
+        });
     });
     const actionColumn = {
         title: "Actions",
