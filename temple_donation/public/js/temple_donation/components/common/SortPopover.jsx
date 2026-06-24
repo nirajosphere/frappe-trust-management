@@ -14,6 +14,7 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
     const [isAdding, setIsAdding] = useState(false);
     const [columnSearchText, setColumnSearchText] = useState("");
     const [draggedIndex, setDraggedIndex] = useState(null);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     // Columns that can be sorted (must have title and dataIndex, and not actions)
     const sortableColumns = columns
@@ -83,6 +84,7 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
     };
 
     const handlePopoverOpenChange = (open) => {
+        setPopoverOpen(open);
         if (!open) {
             setIsAdding(false);
             setColumnSearchText("");
@@ -90,7 +92,7 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
     };
 
     const columnSelectorContent = (
-        <div style={{ width: "360px", padding: "4px" }}>
+        <div className="sort-column-selector-content" style={{ padding: "4px" }}>
             {/* Inline Search Box */}
             <Input
                 placeholder="Search"
@@ -138,7 +140,7 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
     );
 
     const popoverContent = (
-        <div style={{ width: "320px", padding: "4px" }}>
+        <div className="sort-popover-content" style={{ padding: "4px" }}>
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #f1f5f9", paddingBottom: "10px", marginBottom: "12px" }}>
                 <span style={{ fontSize: "14px", fontWeight: 700, color: "#0f172a" }}>Sort by</span>
@@ -272,11 +274,12 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
             content={popoverContent}
             title={null}
             trigger="click"
+            open={popoverOpen}
             placement="bottomRight"
-            overlayClassName="aavatto-sort-popover"
+            overlayClassName="aavatto-sort-popover responsive-popover"
             onOpenChange={handlePopoverOpenChange}
         >
-            <Tooltip title="Sort" mouseEnterDelay={0.3}>
+            <Tooltip title={popoverOpen ? null : "Sort"} mouseEnterDelay={0.3}>
                 <Badge count={appliedSorters.length} color="black" size="small" offset={[-2, 2]}>
                     <Button
                         icon={<SwapOutlined style={{ transform: "rotate(90deg)", fontSize: "14px" }} />}

@@ -112,13 +112,13 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
     };
 
     const filterPopoverContent = (
-        <div style={{ width: "620px", padding: "12px 8px", display: "flex", flexDirection: "column", gap: "16px" }}>
+        <div className="filter-popover-content">
             {draftFilters.length === 0 ? (
-                <div style={{ color: "#a1a1aa", fontSize: "14px", padding: "16px 0", textAlign: "center" }}>
+                <div className="filter-popover-empty">
                     No filters applied. Click below to add a filter.
                 </div>
             ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxHeight: "300px", overflowY: "auto", paddingRight: "4px" }}>
+                <div className="filter-popover-list">
                     {draftFilters.map((row, index) => {
                         const selectedCol = filterableColumns.find(c => c.dataIndex === row.field);
                         let relationOptions = [
@@ -162,13 +162,12 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                         }
 
                         return (
-                            <div key={index} style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%" }}>
+                            <div key={index} className="filter-row">
                                 <Select
                                     placeholder="Filter field"
                                     value={row.field}
                                     onChange={(val) => updateFilterRow(index, "field", val)}
-                                    style={{ width: "180px" }}
-                                    className="h-9 font-medium"
+                                    className="filter-select-field h-9 font-medium"
                                     options={filterableColumns.map(col => ({
                                         label: col.title,
                                         value: col.dataIndex
@@ -179,8 +178,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                                     placeholder="Filter relation"
                                     value={row.operator}
                                     onChange={(val) => updateFilterRow(index, "operator", val)}
-                                    style={{ width: "150px" }}
-                                    className="h-9 font-medium"
+                                    className="filter-select-relation h-9 font-medium"
                                     disabled={!row.field}
                                     options={row.field ? relationOptions : []}
                                 />
@@ -190,8 +188,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                                         placeholder="Select value"
                                         value={row.value || undefined}
                                         onChange={(val) => updateFilterRow(index, "value", val)}
-                                        style={{ flex: 1 }}
-                                        className="h-9 font-medium"
+                                        className="filter-value-input h-9 font-medium"
                                         disabled={!row.operator}
                                         options={selectedCol.filterOptions}
                                     />
@@ -201,8 +198,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                                         type={selectedCol?.filterType === "number" ? "number" : "text"}
                                         value={row.value}
                                         onChange={(e) => updateFilterRow(index, "value", e.target.value)}
-                                        style={{ flex: 1 }}
-                                        className="h-9 font-medium"
+                                        className="filter-value-input h-9 font-medium"
                                         disabled={!row.operator}
                                     />
                                 )}
@@ -212,7 +208,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                                     danger
                                     icon={<DeleteOutlined />}
                                     onClick={() => removeFilterRow(index)}
-                                    style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }}
+                                    className="filter-delete-btn"
                                 />
                             </div>
                         );
@@ -220,8 +216,8 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                 </div>
             )}
 
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #f0f0f0", paddingTop: "16px", marginTop: "4px" }}>
-                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <div className="filter-popover-footer">
+                <div className="filter-footer-actions-left">
                     <Button
                         type="dashed"
                         icon={<PlusOutlined />}
@@ -246,7 +242,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                     )}
                 </div>
 
-                <Space size={12}>
+                <div className="filter-footer-actions-right">
                     <Button
                         onClick={handleClear}
                         style={{ height: "36px", padding: "0 16px", borderColor: "#d9d9d9", color: "#595959", fontWeight: "bold" }}
@@ -260,7 +256,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                     >
                         Apply Filters
                     </Button>
-                </Space>
+                </div>
             </div>
         </div>
     );
@@ -276,8 +272,9 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                 onOpenChange={handleOpenChange}
                 placement="bottomRight"
                 arrow={true}
+                overlayClassName="responsive-popover"
             >
-                <Tooltip title="Filters" mouseEnterDelay={0.3}>
+                <Tooltip title={popoverOpen ? null : "Filters"} mouseEnterDelay={0.3}>
                     <Badge count={activeCount} color="black" size="small" offset={[-2, 2]}>
                         <Button
                             icon={<FilterOutlined />}

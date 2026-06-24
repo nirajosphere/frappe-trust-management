@@ -69,7 +69,7 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
     };
 
     const popoverContent = (
-        <div style={{ width: "320px", padding: "8px 4px", display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div className="columns-popover-content" style={{ padding: "8px 4px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #f0f0f0", paddingBottom: "8px" }}>
                 <span style={{ fontSize: "12px", fontWeight: "700", color: "#8c8c8c", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                     Columns Settings
@@ -165,8 +165,9 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
             onOpenChange={setOpen}
             placement="bottomRight"
             arrow={true}
+            overlayClassName="responsive-popover"
         >
-            <Tooltip title="Columns Settings" mouseEnterDelay={0.3}>
+            <Tooltip title={open ? null : "Columns Settings"} mouseEnterDelay={0.3}>
                 <Button
                     icon={<Columns3 size={16} strokeWidth={2} />}
                     className="h-10 w-10 flex items-center justify-center border-zinc-200 text-zinc-600 hover:text-zinc-800 transition-all"

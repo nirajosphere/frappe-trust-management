@@ -1534,7 +1534,7 @@
 .temple-loading-screen .temple-loading-bar-progress {
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #ca8a04, #ea580c);
+  background: linear-gradient(90deg, #18181b, #71717a);
   border-radius: 9999px;
   animation: loadingBar 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   transform-origin: left;
@@ -1760,8 +1760,9 @@ body.non-admin-user .page-container {
 }
 
 .login-split-container .input-field-wrapper .form-control:focus {
-  border-color: #ca8a04 !important;
+  border-color: #18181b !important;
   background-color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
 }
 
 .login-split-container .input-field-wrapper .field-icon {
@@ -1797,7 +1798,7 @@ body.non-admin-user .page-container {
 }
 
 .login-split-container .forgot-link, .login-split-container .back-to-login-link {
-  color: #ca8a04;
+  color: #09090b;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
@@ -1806,16 +1807,16 @@ body.non-admin-user .page-container {
 }
 
 .login-split-container .forgot-link:hover, .login-split-container .back-to-login-link:hover {
-  color: #a16207;
+  color: #000000;
   text-decoration: underline;
 }
 
 .login-split-container .btn-login-submit {
   width: 100%;
   height: 48px;
-  background-color: #18181b;
-  color: #ffffff;
-  border: none;
+  background-color: #18181b !important;
+  color: #ffffff !important;
+  border: none !important;
   border-radius: 0.75rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -1828,9 +1829,10 @@ body.non-admin-user .page-container {
   font-family: "Inter", sans-serif;
 }
 
-.login-split-container .btn-login-submit:hover {
-  background-color: #09090b;
-  color: #ffffff;
+.login-split-container .btn-login-submit:hover, .login-split-container .btn-login-submit:focus, .login-split-container .btn-login-submit:active {
+  background-color: #09090b !important;
+  color: #ffffff !important;
+  border: none !important;
 }
 
 .login-split-container .btn-login-submit:active {
@@ -2034,6 +2036,193 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 
 .temple-donation-app .ant-menu-inline .ant-menu-item-selected::after {
   display: none !important;
+}
+
+/* Responsive Filter, Sort, and Columns Popovers */
+
+.filter-popover-content {
+  width: 620px;
+  max-width: calc(100vw - 32px);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.filter-popover-empty {
+  color: #a1a1aa;
+  font-size: 14px;
+  padding: 16px 0;
+  text-align: center;
+}
+
+.filter-popover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.filter-row .filter-select-field {
+  width: 180px !important;
+  flex-shrink: 0;
+}
+
+.filter-row .filter-select-relation {
+  width: 150px !important;
+  flex-shrink: 0;
+}
+
+.filter-row .filter-value-input {
+  flex: 1;
+  min-width: 100px;
+}
+
+.filter-row .filter-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    background: #fdfdfd;
+    padding: 12px 48px 12px 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .filter-row .filter-select-field,
+  .filter-row .filter-select-relation,
+  .filter-row .filter-value-input {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .filter-row .filter-delete-btn {
+    position: absolute;
+    top: 50% !important;
+    right: 8px !important;
+    transform: translateY(-50%) !important;
+    z-index: 10;
+  }
+}
+
+.filter-popover-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 16px;
+  margin-top: 4px;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .filter-popover-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.filter-footer-actions-left {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .filter-footer-actions-left {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .filter-footer-actions-left button {
+    width: 100% !important;
+  }
+}
+
+.filter-footer-actions-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .filter-footer-actions-right {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .filter-footer-actions-right button {
+    width: 100% !important;
+  }
+}
+
+/* Sort and Columns Popovers */
+
+.sort-popover-content,
+.columns-popover-content {
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+}
+
+.sort-column-selector-content {
+  width: 360px;
+  max-width: calc(100vw - 48px);
+  box-sizing: border-box;
+}
+
+/* Make Popovers fit screen bounds correctly on mobile devices */
+
+@media (max-width: 1023px) {
+  .responsive-popover {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    top: 90px !important;
+    transform: translateX(-50%) !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .responsive-popover .ant-popover-arrow {
+    display: none !important;
+  }
+
+  .responsive-popover .ant-popover-inner {
+    max-width: 100% !important;
+  }
+
+  .responsive-popover .ant-popover-content {
+    max-width: 100% !important;
+  }
+
+  .responsive-popover .filter-popover-content,
+  .responsive-popover .sort-popover-content,
+  .responsive-popover .columns-popover-content {
+    max-width: 100% !important;
+  }
 }
 
 .temple-donation-app .first\:pt-3:first-child{

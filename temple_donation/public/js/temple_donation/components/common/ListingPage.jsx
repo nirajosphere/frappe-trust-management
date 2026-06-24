@@ -800,13 +800,12 @@ const ListingPage = ({
                                     }
 
                                     return (
-                                        <div key={index} style={{ display: "flex", alignItems: "center", gap: "12px", width: "100%" }}>
+                                        <div key={index} className="filter-row">
                                             <Select
                                                 placeholder="Filter field"
                                                 value={row.field}
                                                 onChange={(val) => updateEditFilterRow(index, "field", val)}
-                                                style={{ width: "180px" }}
-                                                className="h-9 font-medium"
+                                                className="filter-select-field h-9 font-medium"
                                                 options={filterableColumns.map(col => ({
                                                     label: col.title,
                                                     value: col.dataIndex
@@ -817,8 +816,7 @@ const ListingPage = ({
                                                 placeholder="Filter relation"
                                                 value={row.operator}
                                                 onChange={(val) => updateEditFilterRow(index, "operator", val)}
-                                                style={{ width: "140px" }}
-                                                className="h-9 font-medium"
+                                                className="filter-select-relation h-9 font-medium"
                                                 disabled={!row.field}
                                                 options={row.field ? relationOptions : []}
                                             />
@@ -828,8 +826,7 @@ const ListingPage = ({
                                                     placeholder="Select value"
                                                     value={row.value || undefined}
                                                     onChange={(val) => updateEditFilterRow(index, "value", val)}
-                                                    style={{ flex: 1 }}
-                                                    className="h-9 font-medium"
+                                                    className="filter-value-input h-9 font-medium"
                                                     disabled={!row.operator}
                                                     options={selectedCol.filterOptions}
                                                 />
@@ -839,8 +836,7 @@ const ListingPage = ({
                                                     type={selectedCol?.filterType === "number" ? "number" : "text"}
                                                     value={row.value}
                                                     onChange={(e) => updateEditFilterRow(index, "value", e.target.value)}
-                                                    style={{ flex: 1 }}
-                                                    className="h-9 font-medium"
+                                                    className="filter-value-input h-9 font-medium"
                                                     disabled={!row.operator}
                                                 />
                                             )}
@@ -850,7 +846,7 @@ const ListingPage = ({
                                                 danger
                                                 icon={<DeleteOutlined />}
                                                 onClick={() => removeEditFilterRow(index)}
-                                                style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "36px", width: "36px" }}
+                                                className="filter-delete-btn"
                                             />
                                         </div>
                                     );
