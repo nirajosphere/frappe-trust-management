@@ -5,6 +5,7 @@ import { useFrappeGetDocList, useFrappeDeleteDoc } from "../../hooks/useFrappe";
 import CommonTable from "./CommonTable";
 import PageHeader from "./PageHeader";
 import SavedViewsBar from "./SavedViewsBar";
+import ActiveFiltersBar from "./ActiveFiltersBar";
 import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils";
 import { getTagConfig } from "../../utils/tagUtils";
 import ViewContainer from "./ViewContainer";
@@ -584,7 +585,7 @@ const ListingPage = ({
 
     return (
         <ViewContainer>
-            {/* <div className="space-y-6"> */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
 
                 <PageHeader
                     title={title}
@@ -649,6 +650,15 @@ const ListingPage = ({
                         }}
                     />
                 )}
+
+                {allowFilter && (
+                    <ActiveFiltersBar
+                        appliedFilters={appliedFilters}
+                        columns={columns}
+                        onApplyFilters={setAppliedFilters}
+                    />
+                )}
+
                 <CommonTable
                     columns={processedColumns}
                     dataSource={sortedData}
@@ -664,6 +674,7 @@ const ListingPage = ({
                     showDelete={allowDelete}
                     showPrint={allowPrint}
                 />
+            </div>
 
                 <Modal
                     title="Edit Saved View"

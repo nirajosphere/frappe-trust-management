@@ -7,6 +7,7 @@ import CommonTable from '../../components/common/CommonTable';
 import ActiveDonationsModal from './components/ActiveDonationsModal';
 import ViewContainer from '../../components/common/ViewContainer';
 import SavedViewsBar from '../../components/common/SavedViewsBar';
+import ActiveFiltersBar from '../../components/common/ActiveFiltersBar';
 
 const { Text } = Typography;
 
@@ -852,6 +853,12 @@ const OpeningBalance = () => {
                         }}
                     />
                 )}
+
+                <ActiveFiltersBar
+                    appliedFilters={currentAppliedFilters}
+                    columns={currentColumns}
+                    onApplyFilters={setCurrentAppliedFilters}
+                />
 
                 {/* Tab + Table merged container */}
                 <div className="ledger-merged-container">
