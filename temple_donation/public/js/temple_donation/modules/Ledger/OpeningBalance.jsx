@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, message, Popconfirm, Avatar, Typography, Modal, Input, Space, Tag } from 'antd';
-import { SyncOutlined, WalletOutlined, HistoryOutlined, UserOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button, message, Popconfirm, Avatar, Typography, Modal, Input, Tag } from 'antd';
+import { SyncOutlined, WalletOutlined, HistoryOutlined, EyeOutlined } from '@ant-design/icons';
 import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
 import CommonTable from '../../components/common/CommonTable';
@@ -8,255 +8,11 @@ import ActiveDonationsModal from './components/ActiveDonationsModal';
 import ViewContainer from '../../components/common/ViewContainer';
 import SavedViewsBar from '../../components/common/SavedViewsBar';
 import ActiveFiltersBar from '../../components/common/ActiveFiltersBar';
+import { formatDateTime, applyClientSideSearch, applyClientSideFilters, applyClientSideSorters } from './utils/ledgerUtils';
+import { originalBalanceColsBase, originalLogColsBase, activeDonationColumns } from './components/openingBalanceColumns';
 
 const { Text } = Typography;
 
-const formatDateTime = (dateStr) => {
-    if (!dateStr) return '—';
-    try {
-        const date = new Date(dateStr);
-        return date.toLocaleString('en-IN', {
-            dateStyle: 'medium',
-            timeStyle: 'short'
-        });
-    } catch (e) {
-        return dateStr;
-    }
-};
-
-// Define baseline columns for Active Balances (enriching them with render functions locally)
-const originalBalanceColsBase = [
-    {
-        title: 'User',
-        dataIndex: 'full_name',
-        key: 'full_name',
-        width: 250,
-        filterType: 'string'
-    },
-    {
-        title: "Role",
-        dataIndex: "custom_user_role",
-        key: "custom_user_role",
-        width: 140,
-        filterType: 'select',
-        filterOptions: [
-            { value: "cashier", label: "Cashier" },
-            { value: "temple admin", label: "Temple Admin" },
-            { value: "trust admin", label: "Trust Admin" }
-        ]
-    },
-    {
-        title: "Temples",
-        dataIndex: "custom_select_temple",
-        key: "custom_select_temple",
-        width: 180,
-        filterType: 'string'
-    },
-    {
-        title: 'Opening Balance',
-        dataIndex: 'opening_balance',
-        key: 'opening_balance',
-        align: 'right',
-        width: 180,
-        filterType: 'number'
-    }
-];
-
-// Define baseline columns for Handover History Logs
-const originalLogColsBase = [
-    {
-        title: 'Cashier',
-        dataIndex: 'user_name',
-        key: 'user_name',
-        width: 250,
-        filterType: 'string',
-        render: (text, record) => {
-            const name = text || record.user || "Unknown";
-            const initials = name.substring(0, 2).toUpperCase();
-
-            return (
-                <div className="flex items-center gap-3">
-                    <Avatar
-                        src={record.user_image}
-                        size={26}
-                        className="bg-zinc-100 text-zinc-500 font-semibold text-[11px] border border-zinc-200 shrink-0"
-                    >
-                        {initials}
-                    </Avatar>
-                    <div className="flex flex-col min-w-0">
-                        <span className="font-semibold text-gray-800 text-sm">
-                            {name}
-                        </span>
-                        <span className="text-xs text-gray-400 truncate">
-                            {record.user}
-                        </span>
-                    </div>
-                </div>
-            );
-        }
-    },
-    {
-        title: 'Amount Handed Over',
-        dataIndex: 'opening_balance',
-        key: 'opening_balance',
-        align: 'right',
-        width: 240,
-        filterType: 'number',
-        render: (value) => (
-            <div className="flex items-center justify-end gap-2 pr-4">
-                <Text strong className="text-green-600 text-base">
-                    ₹{Number(value || 0).toLocaleString()}
-                </Text>
-            </div>
-        )
-    },
-    {
-        title: 'Latest Hand Over',
-        dataIndex: 'reset_date',
-        key: 'reset_date',
-        width: 200,
-        filterType: 'date',
-        render: (value) => (
-            <span className="text-sm font-medium text-gray-600">
-                {formatDateTime(value)}
-            </span>
-        )
-    },
-    {
-        title: 'Latest Collector',
-        dataIndex: 'collector_name',
-        key: 'collector_name',
-        width: 220,
-        filterType: 'string',
-        render: (text, record) => (
-            <div className="flex items-center gap-2">
-                <Avatar size="small" icon={<UserOutlined />} className="bg-zinc-800" />
-                <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-zinc-800">{text}</span>
-                    <span className="text-[10px] text-zinc-400">{record.owner}</span>
-                </div>
-            </div>
-        )
-    }
-];
-
-// Helper to apply client-side text searches
-const applyClientSideSearch = (items, searchText, fieldsToSearch) => {
-    if (!searchText) return items;
-    const query = searchText.toLowerCase();
-    return items.filter(item => {
-        return fieldsToSearch.some(field => {
-            let val = item[field];
-            if (field === "custom_select_temple" && Array.isArray(val)) {
-                val = val.map(t => t.temple_name || t.temple || "").join(", ");
-            }
-            return String(val || "").toLowerCase().includes(query);
-        });
-    });
-};
-
-// Helper to apply client-side filters
-const applyClientSideFilters = (items, filterRules) => {
-    if (!filterRules || filterRules.length === 0) return items;
-    return items.filter(item => {
-        return filterRules.every(rule => {
-            const { field, operator, value } = rule;
-            if (!field || !operator) return true;
-
-            let itemVal = item[field];
-            if (itemVal === undefined || itemVal === null) {
-                itemVal = "";
-            }
-
-            if (field === "custom_select_temple" && Array.isArray(itemVal)) {
-                itemVal = itemVal.map(t => t.temple_name || t.temple || "").join(", ");
-            }
-
-            const itemStr = String(itemVal).toLowerCase();
-            const filterStr = String(value).toLowerCase();
-
-            const itemNum = Number(itemVal);
-            const filterNum = Number(value);
-            const isNumericCompare = !isNaN(itemNum) && !isNaN(filterNum) && typeof itemVal !== 'string';
-
-            switch (operator) {
-                case "=":
-                    if (isNumericCompare) return itemNum === filterNum;
-                    return itemStr === filterStr;
-                case "!=":
-                    if (isNumericCompare) return itemNum !== filterNum;
-                    return itemStr !== filterStr;
-                case "like":
-                    return itemStr.includes(filterStr);
-                case "not like":
-                    return !itemStr.includes(filterStr);
-                case ">":
-                    if (isNumericCompare) return itemNum > filterNum;
-                    return itemStr > filterStr;
-                case "<":
-                    if (isNumericCompare) return itemNum < filterNum;
-                    return itemStr < filterStr;
-                case ">=":
-                    if (isNumericCompare) return itemNum >= filterNum;
-                    return itemStr >= filterStr;
-                case "<=":
-                    if (isNumericCompare) return itemNum <= filterNum;
-                    return itemStr <= filterStr;
-                case "in":
-                    const inList = Array.isArray(value) ? value : String(value).split(",").map(s => s.trim().toLowerCase());
-                    return inList.includes(itemStr);
-                case "not in":
-                    const notInList = Array.isArray(value) ? value : String(value).split(",").map(s => s.trim().toLowerCase());
-                    return !notInList.includes(itemStr);
-                default:
-                    return true;
-            }
-        });
-    });
-};
-
-// Helper to apply client-side multi-column sorting
-const applyClientSideSorters = (items, sortRules) => {
-    if (!sortRules || sortRules.length === 0) return items;
-    const sorted = [...items];
-    sorted.sort((a, b) => {
-        for (const sorter of sortRules) {
-            const { field, order } = sorter;
-            let valA = a[field];
-            let valB = b[field];
-
-            if (field === "custom_select_temple" && Array.isArray(valA)) {
-                valA = valA.map(t => t.temple_name || t.temple || "").join(", ");
-            }
-            if (field === "custom_select_temple" && Array.isArray(valB)) {
-                valB = valB.map(t => t.temple_name || t.temple || "").join(", ");
-            }
-
-            if (valA === undefined || valA === null) valA = "";
-            if (valB === undefined || valB === null) valB = "";
-
-            const numA = Number(valA);
-            const numB = Number(valB);
-            const isNumeric = !isNaN(numA) && !isNaN(numB) && typeof valA !== 'string' && typeof valB !== 'string';
-
-            if (isNumeric) {
-                if (numA !== numB) {
-                    return order === "ascend" ? numA - numB : numB - numA;
-                }
-            } else {
-                const strA = String(valA).toLowerCase();
-                const strB = String(valB).toLowerCase();
-                if (strA !== strB) {
-                    return order === "ascend"
-                        ? strA.localeCompare(strB)
-                        : strB.localeCompare(strA);
-                }
-            }
-        }
-        return 0;
-    });
-    return sorted;
-};
 
 const OpeningBalance = () => {
     const [loading, setLoading] = useState(false);
@@ -608,6 +364,7 @@ const OpeningBalance = () => {
                 key: 'action',
                 align: 'right',
                 width: 220,
+                fixed: 'right',
                 render: (_, record) => (
                     <div className="flex gap-2 justify-end">
                         <Button
@@ -654,6 +411,7 @@ const OpeningBalance = () => {
                 key: 'action',
                 align: 'right',
                 width: 120,
+                fixed: 'right',
                 render: (_, record) => (
                     <Button
                         type="text"
@@ -671,55 +429,6 @@ const OpeningBalance = () => {
             }
         ];
     }, [visibleLogsColumns]);
-
-    const activeDonationColumns = [
-        {
-            title: "Donation Id",
-            dataIndex: "name",
-            key: "name",
-            render: (text) => (
-                <a 
-                    onClick={() => {
-                        if (typeof frappe !== "undefined") {
-                            frappe.set_route("temple-donation", "donations", "view", text);
-                        }
-                    }}
-                    className="font-mono text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline cursor-pointer"
-                >
-                    {text}
-                </a>
-            )
-        },
-        {
-            title: "Donor",
-            dataIndex: "donor_name",
-            key: "donor_name",
-            render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
-        },
-        {
-            title: "Temple",
-            dataIndex: "temple_name",
-            key: "temple_name",
-            render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>
-        },
-        {
-            title: "Date & Time",
-            dataIndex: "creation",
-            key: "creation",
-            render: (val) => <span className="text-xs text-zinc-500">{formatDateTime(val)}</span>
-        },
-        {
-            title: "Amount",
-            dataIndex: "total_amount",
-            key: "total_amount",
-            align: "right",
-            render: (val) => (
-                <span className="font-bold text-zinc-900 pr-2">
-                    ₹{Number(val || 0).toLocaleString("en-IN")}
-                </span>
-            )
-        }
-    ];
 
     // Mapped variables for PageHeader depending on activeTab
     const currentDoctype = activeTab === "balances" ? "LedgerBalances" : "LedgerLogs";

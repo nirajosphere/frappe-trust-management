@@ -136,10 +136,6 @@
   margin-bottom: 1.5rem;
 }
 
-.temple-donation-app .mb-8{
-  margin-bottom: 2rem;
-}
-
 .temple-donation-app .mt-0\.5{
   margin-top: 0.125rem;
 }
@@ -480,6 +476,11 @@
 
 .temple-donation-app .border-zinc-900\/10{
   border-color: rgb(24 24 27 / 0.1);
+}
+
+.temple-donation-app .border-zinc-950{
+  --tw-border-opacity: 1;
+  border-color: rgb(9 9 11 / var(--tw-border-opacity, 1));
 }
 
 .temple-donation-app .bg-black{
@@ -955,6 +956,11 @@
   color: rgb(24 24 27 / var(--tw-text-opacity, 1));
 }
 
+.temple-donation-app .text-zinc-950{
+  --tw-text-opacity: 1;
+  color: rgb(9 9 11 / var(--tw-text-opacity, 1));
+}
+
 .temple-donation-app .underline{
   text-decoration-line: underline;
 }
@@ -1291,11 +1297,12 @@
   letter-spacing: 0.05em !important;
   color: var(--text-muted) !important;
   border-bottom: 1px solid var(--border-color) !important;
-  padding: 16px 20px !important;
+  padding: 10px 12px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:first-child {
   border-top-left-radius: 10px !important;
+  padding-left: 18px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th:last-child {
@@ -1304,9 +1311,13 @@
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td {
-  padding: 18px 20px !important;
+  padding: 10px 12px !important;
   border-bottom: 1px solid var(--border-color) !important;
   transition: background-color 0.2s ease;
+}
+
+.temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td:first-child {
+  padding-left: 18px !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:not(.ant-table-measure-row) > td:last-child {
@@ -1327,60 +1338,6 @@
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td {
   background: rgba(0, 0, 0, 0.01) !important;
-}
-
-/* Ledger merged container styling */
-.temple-donation-app .ledger-merged-container {
-  border: none !important;
-  background: transparent !important;
-  border-radius: 0 !important;
-  overflow: visible !important;
-  display: flex;
-  flex-direction: column;
-  gap: 0 !important;
-}
-
-.temple-donation-app .ledger-tab-header {
-  border: 1px solid #e4e4e7 !important;
-  border-bottom: 1px solid #e4e4e7 !important;
-  border-top-left-radius: 12px !important;
-  border-top-right-radius: 12px !important;
-  background: #fafafa !important;
-  overflow: hidden;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-/* Table container: borders on left, right, and bottom (and no top border to merge flush with tab header) */
-.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-container {
-  border: 1px solid #e4e4e7 !important;
-  border-top: none !important;
-  border-radius: 0 0 12px 12px !important;
-  overflow: hidden !important;
-  background: #ffffff !important;
-}
-
-.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-thead > tr > th {
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-}
-
-.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:first-child {
-  border-bottom-left-radius: 10px !important;
-}
-.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:last-child {
-  border-bottom-right-radius: 10px !important;
-}
-.temple-donation-app .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td {
-  border-bottom: none !important;
-}
-
-.temple-donation-app .ledger-merged-table .ant-pagination {
-  margin: 16px 0 0 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
 }
 
 .temple-donation-app {
@@ -2101,6 +2058,11 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.temple-donation-app .hover\:\!border-zinc-400:hover{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(161 161 170 / var(--tw-border-opacity, 1)) !important;
+}
+
 .temple-donation-app .hover\:\!border-zinc-800:hover{
   --tw-border-opacity: 1 !important;
   border-color: rgb(39 39 42 / var(--tw-border-opacity, 1)) !important;
@@ -2124,6 +2086,11 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 .temple-donation-app .hover\:border-zinc-900:hover{
   --tw-border-opacity: 1;
   border-color: rgb(24 24 27 / var(--tw-border-opacity, 1));
+}
+
+.temple-donation-app .hover\:\!bg-zinc-200:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .temple-donation-app .hover\:\!bg-zinc-800:hover{
@@ -2155,6 +2122,11 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   background-color: rgb(254 242 242 / var(--tw-bg-opacity, 1));
 }
 
+.temple-donation-app .hover\:bg-slate-50:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
+}
+
 .temple-donation-app .hover\:bg-white:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -2177,6 +2149,11 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 .temple-donation-app .hover\:\!text-amber-500:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(245 158 11 / var(--tw-text-opacity, 1)) !important;
+}
+
+.temple-donation-app .hover\:\!text-black:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1)) !important;
 }
 
 .temple-donation-app .hover\:\!text-blue-500:hover{
