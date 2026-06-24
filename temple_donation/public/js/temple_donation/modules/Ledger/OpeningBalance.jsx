@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, message, Popconfirm, Avatar, Typography, Modal, Input, Tag } from 'antd';
-import { SyncOutlined, WalletOutlined, HistoryOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button, message, Popconfirm, Avatar, Typography, Modal, Input, Tag, Dropdown } from 'antd';
+import { SyncOutlined, WalletOutlined, HistoryOutlined, EyeOutlined, MoreOutlined } from '@ant-design/icons';
 import { userBalanceColumns } from '../../tabelcolumn/userBalanceTable';
 import PageHeader from '../../components/common/PageHeader';
 import CommonTable from '../../components/common/CommonTable';
@@ -15,6 +15,16 @@ const { Text } = Typography;
 
 
 const OpeningBalance = () => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 640);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState("");
@@ -363,45 +373,90 @@ const OpeningBalance = () => {
                 title: 'Action',
                 key: 'action',
                 align: 'right',
-                width: 220,
+                width: isMobile ? 80 : 220,
                 fixed: 'right',
-                render: (_, record) => (
-                    <div className="flex gap-2 justify-end">
-                        <Button
-                            type="text"
-                            icon={<EyeOutlined />}
-                            onClick={() => handleViewActiveDonations(record.user_name, record.full_name)}
-                            className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
-                        >
-                            View
-                        </Button>
-                        <Popconfirm
-                            placement="leftTop"
-                            title="Hand Over Cash"
-                            description={`Reset ₹${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`}
-                            onConfirm={() => handleReset(record.user_name, record.opening_balance)}
-                            okText="Confirm"
-                            cancelText="Cancel"
-                            okButtonProps={{ className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" }}
-                        >
-                            <Button
-                                type="text"
-                                icon={<SyncOutlined />}
-                                disabled={Number(record.opening_balance || 0) === 0}
-                                className={`rounded-md px-3 py-1.5 font-medium transition-all ${
-                                    Number(record.opening_balance || 0) === 0 
-                                        ? "text-zinc-300 cursor-not-allowed" 
-                                        : "text-zinc-600 hover:text-white hover:bg-zinc-900"
-                                }`}
-                            >
-                                Reset
-                            </Button>
-                        </Popconfirm>
-                    </div>
-                ),
+                render: (_, record) => {
+                    const menuItems = [
+                        {
+                            key: 'view',
+                            label: 'View',
+                            icon: <EyeOutlined />,
+                            onClick: () => handleViewActiveDonations(record.user_name, record.full_name)
+                        },
+                        {
+                            key: 'reset',
+                            label: 'Reset',
+                            icon: <SyncOutlined />,
+                            disabled: Number(record.opening_balance || 0) === 0,
+                            onClick: () => {
+                                Modal.confirm({
+                                    title: 'Hand Over Cash',
+                                    content: `Reset ₹${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`,
+                                    okText: 'Confirm',
+                                    cancelText: 'Cancel',
+                                    okButtonProps: { className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" },
+                                    onOk() {
+                                        handleReset(record.user_name, record.opening_balance);
+                                    }
+                                });
+                            }
+                        }
+                    ];
+
+                    return (
+                        <div className="flex justify-end items-center">
+                            {!isMobile ? (
+                                /* Desktop View */
+                                <div className="flex gap-2">
+                                    <Button
+                                        type="text"
+                                        icon={<EyeOutlined />}
+                                        onClick={() => handleViewActiveDonations(record.user_name, record.full_name)}
+                                        className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
+                                    >
+                                        View
+                                    </Button>
+                                    <Popconfirm
+                                        placement="leftTop"
+                                        title="Hand Over Cash"
+                                        description={`Reset ₹${Number(record.opening_balance || 0).toLocaleString()} to zero? This will record the cash as handed over.`}
+                                        onConfirm={() => handleReset(record.user_name, record.opening_balance)}
+                                        okText="Confirm"
+                                        cancelText="Cancel"
+                                        okButtonProps={{ className: "bg-zinc-900 border-zinc-900 hover:!bg-zinc-800" }}
+                                    >
+                                        <Button
+                                            type="text"
+                                            icon={<SyncOutlined />}
+                                            disabled={Number(record.opening_balance || 0) === 0}
+                                            className={`rounded-md px-3 py-1.5 font-medium transition-all ${
+                                                Number(record.opening_balance || 0) === 0 
+                                                    ? "text-zinc-300 cursor-not-allowed" 
+                                                    : "text-zinc-600 hover:text-white hover:bg-zinc-900"
+                                            }`}
+                                        >
+                                            Reset
+                                        </Button>
+                                    </Popconfirm>
+                                </div>
+                            ) : (
+                                /* Mobile View */
+                                <div className="flex">
+                                    <Dropdown menu={{ items: menuItems }} trigger={['click']} placement="bottomRight">
+                                        <Button 
+                                            type="text"
+                                            icon={<MoreOutlined style={{ fontSize: '18px' }} />} 
+                                            className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md h-9 w-9 p-0 flex items-center justify-center transition-all"
+                                        />
+                                    </Dropdown>
+                                </div>
+                            )}
+                        </div>
+                    );
+                }
             }
         ];
-    }, [visibleBalancesColumns]);
+    }, [visibleBalancesColumns, isMobile]);
 
     const finalLogsColumns = React.useMemo(() => {
         return [
@@ -410,7 +465,7 @@ const OpeningBalance = () => {
                 title: 'Action',
                 key: 'action',
                 align: 'right',
-                width: 120,
+                width: isMobile ? 80 : 120,
                 fixed: 'right',
                 render: (_, record) => (
                     <Button
@@ -423,12 +478,12 @@ const OpeningBalance = () => {
                         }}
                         className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md px-3 py-1.5 font-medium transition-all"
                     >
-                        View History
+                        {isMobile ? "View" : "View History"}
                     </Button>
                 )
             }
         ];
-    }, [visibleLogsColumns]);
+    }, [visibleLogsColumns, isMobile]);
 
     // Mapped variables for PageHeader depending on activeTab
     const currentDoctype = activeTab === "balances" ? "LedgerBalances" : "LedgerLogs";

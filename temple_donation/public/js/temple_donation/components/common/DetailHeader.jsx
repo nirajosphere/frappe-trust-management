@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Space, Typography, Tag, Avatar } from "antd";
+import { Button, Typography, Avatar } from "antd";
 import { ArrowLeft } from "lucide-react";
-// Yahan apna sahi relative path daal dena file ka
 import { getTagConfig } from "../../utils/tagUtils"; 
 
 const { Title, Text } = Typography;
@@ -22,9 +21,12 @@ const DetailHeader = ({
     !cleanImageSrc.includes("null");
 
   return (
-    <div className="flex items-center justify-between w-full pb-4 border-b border-zinc-200/60 unique-profile-header bg-transparent">
+    <div 
+      className="w-full pb-4 border-b border-zinc-200/60 unique-profile-header bg-transparent"
+      style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}
+    >
       {/* Left side info block */}
-      <div className="flex items-center gap-4 min-w-0">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', minWidth: 0, flex: '1 1 auto' }}>
         {onBack && (
           <Button
             type="default"
@@ -34,7 +36,7 @@ const DetailHeader = ({
           />
         )}
 
-        <div className="flex items-center gap-2 min-w-0">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
          { imageFlag && <Avatar 
             size={48}
             src={hasValidImage ? cleanImageSrc : undefined}
@@ -47,29 +49,14 @@ const DetailHeader = ({
             {!hasValidImage && initials}
           </Avatar>}
 
-          <div className="flex flex-col justify-center min-w-0 gap-1">
-            <div className="flex items-center gap-2 flex-wrap min-w-0">
-              <Title 
-                level={4} 
-                className="!m-0 !font-bold text-zinc-900 tracking-tight truncate" 
-                style={{ fontSize: '18px', lineHeight: '1.2' }}
-              >
-                {title}
-              </Title>
-              
-              {/* {tags.map((tag, i) => {
-                const config = getTagConfig(tag);
-                return (
-                  <Tag 
-                    key={i} 
-                    color={config.color}
-                    className={`!m-0 text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md ${config.glassClass || ""}`}
-                  >
-                    {config.label}
-                  </Tag>
-                );
-              })} */}
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, gap: '4px' }}>
+            <Title 
+              level={4} 
+              className="!m-0 !font-bold text-zinc-900 tracking-tight truncate" 
+              style={{ fontSize: '18px', lineHeight: '1.2' }}
+            >
+              {title}
+            </Title>
             {subtitle && (
               <Text className="text-xs text-zinc-400 font-medium leading-none truncate">
                 {subtitle}
@@ -79,11 +66,11 @@ const DetailHeader = ({
         </div>
       </div>
 
-      {/* Right side actions */}
+      {/* Right side actions — wraps below on small screens */}
       {actions && (
-        <Space size={8} className="shrink-0 flex items-center">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           {actions}
-        </Space>
+        </div>
       )}
     </div>
   );

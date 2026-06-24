@@ -180,15 +180,19 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                         {/* System Logs */}
                         <SectionCard title="System Logs" icon={<FileText size={15} className="text-zinc-800" />}>
                             <div className="flex flex-col gap-2 py-1">
-                                {[
+                                 {[
                                     { label: "Document ID", value: <span className="font-mono text-[11px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded border border-zinc-100">{id}</span> },
                                     { label: "Created By", value: <span className="text-xs font-semibold text-zinc-600">{doc.owner || "System"}</span> },
                                     { label: "Created At", value: <span className="text-xs font-semibold text-zinc-600">{doc.creation ? new Date(doc.creation).toLocaleDateString() : "—"}</span> },
                                     { label: "Last Modified", value: <span className="text-xs font-semibold text-zinc-600">{doc.modified ? new Date(doc.modified).toLocaleDateString() : "—"}</span> }
                                 ].map(({ label, value }) => (
-                                    <div key={label} className="flex justify-between items-center gap-4">
+                                    <div key={label} className={label === "Document ID" ? "flex flex-col gap-1 w-full" : "flex justify-between items-center gap-4 w-full"}>
                                         <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>
-                                        {value}
+                                        {label === "Document ID" ? (
+                                            <div className="w-full flex justify-start">{value}</div>
+                                        ) : (
+                                            value
+                                        )}
                                     </div>
                                 ))}
 

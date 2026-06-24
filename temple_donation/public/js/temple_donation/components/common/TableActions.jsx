@@ -1,6 +1,6 @@
 import React from "react";
-import { Space, Button, Popconfirm, Tooltip } from "antd";
-import { EyeOutlined, EditOutlined, PrinterOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Space, Button, Popconfirm, Tooltip, Dropdown } from "antd";
+import { EyeOutlined, EditOutlined, PrinterOutlined, DeleteOutlined, MoreOutlined } from "@ant-design/icons";
 
 /**
  * Reusable Action Buttons for Tables
@@ -14,8 +14,55 @@ const TableActions = ({
     showView = true,
     showEdit = true,
     showPrint = true,
-    showDelete = true
+    showDelete = true,
+    isMobile = false
 }) => {
+    if (isMobile) {
+        const menuItems = [];
+        if (onView && showView) {
+            menuItems.push({
+                key: "view",
+                label: "View",
+                icon: <EyeOutlined className="text-orange-500" />,
+                onClick: () => onView(record)
+            });
+        }
+        if (onEdit && showEdit) {
+            menuItems.push({
+                key: "edit",
+                label: "Edit",
+                icon: <EditOutlined className="text-blue-500" />,
+                onClick: () => onEdit(record)
+            });
+        }
+        if (onPrint && showPrint) {
+            menuItems.push({
+                key: "print",
+                label: "Print",
+                icon: <PrinterOutlined className="text-amber-500" />,
+                onClick: () => onPrint(record)
+            });
+        }
+        if (onDelete && showDelete) {
+            menuItems.push({
+                key: "delete",
+                label: <span className="text-red-500">Delete</span>,
+                icon: <DeleteOutlined className="text-red-500" />,
+                onClick: () => onDelete(record)
+            });
+        }
+
+        return (
+            <Dropdown menu={{ items: menuItems }} trigger={['click']} placement="bottomRight">
+                <Button 
+                    type="text"
+                    icon={<MoreOutlined style={{ fontSize: '18px' }} />} 
+                    className="text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-md h-8 w-8 p-0 flex items-center justify-center transition-all border border-zinc-200 hover:border-zinc-400 bg-white"
+                />
+            </Dropdown>
+        );
+    }
+
     return (
         <Space size="small">
             {onView && showView && (

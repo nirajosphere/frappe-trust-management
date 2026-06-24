@@ -232,6 +232,18 @@
       overflow: hidden !important;
     }
 
+    .ant-table-cell-fix-left,
+    .ant-table-cell-fix-right {
+      background: #ffffff !important;
+      z-index: 2 !important;
+    }
+
+    .ant-table-thead > tr > th.ant-table-cell-fix-left,
+    .ant-table-thead > tr > th.ant-table-cell-fix-right {
+      background: #fafafa !important;
+      z-index: 3 !important;
+    }
+
     .ant-table-thead>tr>th {
       background: rgba(250, 250, 250, 0.75) !important;
       backdrop-filter: blur(12px) !important;
@@ -1141,6 +1153,62 @@ body[data-path="login"] {
     .columns-popover-content {
       max-width: 100% !important;
     }
+  }
+}
+
+/* Ledger merged container styling */
+.temple-donation-app {
+  .ledger-merged-container {
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0 !important;
+  }
+
+  .ledger-tab-header {
+    border: 1px solid #e4e4e7 !important;
+    border-bottom: 1px solid #e4e4e7 !important;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    background: #fafafa !important;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Table container: borders on left, right, and bottom (and no top border to merge flush with tab header) */
+  .ledger-merged-table .aavatto-premium-table .ant-table-container {
+    border: 1px solid #e4e4e7 !important;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+  }
+
+  .ledger-merged-table .aavatto-premium-table .ant-table-thead > tr > th {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 10px !important;
+  }
+  .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius: 10px !important;
+  }
+  .ledger-merged-table .aavatto-premium-table .ant-table-tbody > tr:last-child > td {
+    border-bottom: none !important;
+  }
+
+  .ledger-merged-table .ant-pagination {
+    margin: 16px 0 0 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
   }
 }
 

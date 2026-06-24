@@ -459,7 +459,7 @@ const ActivityLog = ({ doctype, docname }) => {
 
                     {/* Comment Content Box */}
                     {(isReply || expandedCommentCards.has(c.name)) && (
-                        <div className="comment-bubble" style={{ backgroundColor: "#fcfcfd", border: "1px solid #e4e4e7", borderRadius: "8px", padding: "10px" }}>
+                        <div className="comment-bubble" style={{ backgroundColor: "#fcfcfd", border: "1px solid #e4e4e7", borderRadius: "8px", padding: "10px", overflow: "hidden", maxWidth: "100%" }}>
                         {isEditing ? (
                             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                                 <Mentions
@@ -482,8 +482,8 @@ const ActivityLog = ({ doctype, docname }) => {
                             </div>
                         ) : (
                             <div>
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px" }}>
-                                    <span style={{ fontSize: "13px", color: "#27272a", whiteSpace: "pre-wrap", lineHeight: 1.45 }}>
+                                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", gap: "6px" }}>
+                                    <span style={{ fontSize: "13px", color: "#27272a", whiteSpace: "pre-wrap", lineHeight: 1.45, wordBreak: "break-word", overflowWrap: "break-word", minWidth: 0, flex: "1 1 0%" }}>
                                         {formatCommentContent(c.content)}
                                     </span>
 
@@ -571,7 +571,7 @@ const ActivityLog = ({ doctype, docname }) => {
     };
 
     return (
-        <div>
+        <div style={{ overflow: 'hidden', maxWidth: '100%' }}>
             <SectionCard
                 title="Activity & Comments"
                 icon={<HistoryOutlined style={{ color: "#18181b" }} />}
@@ -684,7 +684,7 @@ const ActivityLog = ({ doctype, docname }) => {
 
                                                 {/* Collapse/Expand Replies Toggle */}
                                                 {replies.length > 0 && expandedCommentCards.has(item.name) && (
-                                                    <div style={{ marginLeft: "24px", marginTop: "2px" }}>
+                                                    <div style={{ marginLeft: "12px", marginTop: "2px" }}>
                                                         <Button
                                                             type="text"
                                                             size="small"
@@ -701,13 +701,14 @@ const ActivityLog = ({ doctype, docname }) => {
                                                 {replies.length > 0 && expandedCommentCards.has(item.name) && expandedComments.has(item.name) && (
                                                     <div 
                                                         style={{ 
-                                                            marginLeft: "24px", 
-                                                            paddingLeft: "16px", 
+                                                            marginLeft: "12px", 
+                                                            paddingLeft: "12px", 
                                                             borderLeft: "2.5px solid #f4f4f5", 
                                                             display: "flex", 
                                                             flexDirection: "column", 
                                                             gap: "12px",
-                                                            marginTop: "2px"
+                                                            marginTop: "2px",
+                                                            overflow: "hidden"
                                                         }}
                                                     >
                                                         {replies.map(reply => renderCommentCard(reply, true, item.name))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Card, Typography, Row, Col, Button, Space, Modal, message, Divider, Popconfirm, Tooltip } from "antd";
 import {
     PlusOutlined, EditOutlined, DeleteOutlined,
@@ -26,6 +26,15 @@ const CommonTable = ({
     showPrint = true,
     showDelete = true,
 }) => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 640);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const filteredData = dataSource?.filter(item => {
         if (!searchText) return true;
@@ -40,7 +49,8 @@ const CommonTable = ({
         title: "Actions",
         key: "actions",
         fixed: "right",
-        width: 120,
+        align: "right",
+        width: isMobile ? 60 : 120,
         render: (_, record) => (
             <TableActions
                 record={record}
@@ -52,6 +62,7 @@ const CommonTable = ({
                 showEdit={showEdit}
                 showPrint={showPrint}
                 showDelete={showDelete}
+                isMobile={isMobile}
             />
         )
     };
@@ -117,7 +128,7 @@ const CommonTable = ({
             pagination={{
                 pageSize: 10,
                 showSizeChanger: true,
-                showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-amber-600 font-bold">{total}</span> records</span>,
+                showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-zinc-900 font-bold">{total}</span> records</span>,
                 className: "!my-8"
             }}
             bordered
