@@ -7,9 +7,9 @@ $(document).ready(() => {
 
         const check_and_redirect = () => {
             const roles = frappe.user_roles || [];
-            const isAdmin = frappe.session.user === "Administrator";
+            const isSystemManager = roles.includes("System Manager") || frappe.session.user === "Administrator";
 
-            if (!isAdmin) {
+            if (!isSystemManager) {
                 const current_route = frappe.get_route();
                 const route_base = current_route ? current_route[0] : "";
 
@@ -31,6 +31,15 @@ $(document).ready(() => {
                     if (navbar) navbar.style.setProperty('display', 'none', 'important');
                     if (sidebar) sidebar.style.setProperty('display', 'none', 'important');
                 }, 100);
+            } else {
+                // Ensure system managers have the class removed
+                document.body.classList.remove("non-admin-user");
+
+                // Show Frappe UI Elements
+                const navbar = document.querySelector(".navbar");
+                const sidebar = document.querySelector(".layout-side-section, .page-side-bar");
+                if (navbar) navbar.style.removeProperty('display');
+                if (sidebar) sidebar.style.removeProperty('display');
             }
         };
 

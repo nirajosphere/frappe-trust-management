@@ -29,14 +29,14 @@ export const UserProvider = ({ children }) => {
 
                 // Logic to hide/show Frappe Header
                 // Check if user has any of the specific roles
-                const hasCustomRole = userRoles.some(role =>
-                    ['Super Admin', 'Temple Admin', 'Cashier'].includes(role)
-                );
+                // const hasCustomRole = userRoles.some(role =>
+                //     ['Super Admin', 'Temple Admin', 'Cashier'].includes(role)
+                // );
 
-                const isAdministrator = currentUser === 'Administrator';
-
-                if (!isAdministrator) {
-                    // Hide Frappe Navbar and Sidebar for non-admin users
+                const isSystemManager = userRoles.includes('System Manager') || currentUser === 'Administrator';
+                // console.log("isSystemManager", isSystemManager);
+                if (!isSystemManager) {
+                    // Hide Frappe Navbar and Sidebar for non-System Manager users
                     const navbar = document.querySelector('.navbar');
                     const sidebar = document.querySelector('.page-side-bar');
                     const container = document.querySelector('.page-container');
@@ -50,7 +50,7 @@ export const UserProvider = ({ children }) => {
                     }
                     if (wsHeader) wsHeader.style.display = 'none';
                 } else {
-                    // Explicitly show Frappe Header for Administrators
+                    // Explicitly show Frappe Header for System Managers and Administrators
                     const navbar = document.querySelector('.navbar');
                     const sidebar = document.querySelector('.page-side-bar');
                     if (navbar) navbar.style.display = 'flex';
@@ -81,6 +81,7 @@ export const UserProvider = ({ children }) => {
         isTempleAdmin: roles.includes('Temple Admin'),
         isCashier: roles.includes('Cashier'),
         isAdmin: user?.email === 'Administrator',
+        isSystemManager: roles.includes('System Manager') || user?.email === 'Administrator',
         hasRole: (roleList) => roleList.some(role => roles.includes(role))
     };
 
