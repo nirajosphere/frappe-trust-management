@@ -108,7 +108,7 @@ const UserForm = ({ id, onBack }) => {
                 <Row gutter={[24, 24]}>
 
                     {/* ─── LEFT COLUMN: Profile Panel (7/24 Span) ─── */}
-                    <Col xs={24} md={12} lg={7}>
+                    <Col xs={24} lg={7}>
                         <div className="sticky top-6" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                             <SectionCard 
                                 title="User Profile"
@@ -162,7 +162,7 @@ const UserForm = ({ id, onBack }) => {
                     </Col>
 
                     {/* ─── RIGHT COLUMN: Form Worksurface (17/24 Span) ─── */}
-                    <Col xs={24} md={12} lg={17}>
+                    <Col xs={24} lg={17}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
                             {/* Section 1: Basic Info */}

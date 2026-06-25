@@ -458,7 +458,7 @@ const TempleForm = ({ id, onBack }) => {
                 <Row gutter={[20, 20]}>
 
                     {/* ================= LEFT COLUMN: Core Profile & Administrative Details ================= */}
-                    <Col xs={24} md={12} lg={14}>
+                    <Col xs={24} lg={14}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             
                             {/* Temple Meta Profile Header */}
@@ -565,7 +565,7 @@ const TempleForm = ({ id, onBack }) => {
                     </Col>
 
                     {/* ================= RIGHT COLUMN: Self-Healing Adaptive Matrix Panel ================= */}
-                    <Col xs={24} md={12} lg={10}>
+                    <Col xs={24} lg={10}>
                         <div className="sticky top-6">
                             <SectionCard 
                                 title="Donation Types"
