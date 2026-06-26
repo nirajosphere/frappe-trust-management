@@ -171,7 +171,7 @@ const AddPageHeader = ({
                     <Button
                         icon={<PlusOutlined className="text-xs" />}
                         onClick={onAdd}
-                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 rounded-lg shadow-none text-sm transition-all"
+                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400  shadow-none text-sm transition-all"
                     >
                         Add
                     </Button>
@@ -181,7 +181,7 @@ const AddPageHeader = ({
                     <Button
                         icon={<EditOutlined className="text-xs" />}
                         onClick={onEdit}
-                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 rounded-lg shadow-none text-sm transition-all"
+                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400  shadow-none text-sm transition-all"
                     >
                         Edit
                     </Button>
@@ -192,7 +192,7 @@ const AddPageHeader = ({
                         icon={<RedoOutlined className="text-xs" />}
                         onClick={onReset}
                         disabled={disableReset}
-                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 rounded-lg shadow-none text-sm transition-all disabled:bg-zinc-50 disabled:text-zinc-300"
+                        className="h-9 px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400  shadow-none text-sm transition-all disabled:bg-zinc-50 disabled:text-zinc-300"
                     >
                         Reset
                     </Button>

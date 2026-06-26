@@ -5,6 +5,7 @@ import { Columns3 } from "lucide-react";
 
 const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doctype }) => {
     const [open, setOpen] = useState(false);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
     const [draggedIndex, setDraggedIndex] = useState(null);
 
     if (!customizedColumns || customizedColumns.length === 0) return null;
@@ -162,16 +163,29 @@ const ColumnsPopover = ({ customizedColumns, onSaveColumns, originalColumns, doc
             content={popoverContent}
             trigger="click"
             open={open}
-            onOpenChange={setOpen}
+            onOpenChange={(v) => {
+                setOpen(v);
+                if (v) setTooltipOpen(false);
+            }}
             placement="bottomRight"
             arrow={true}
             overlayClassName="responsive-popover"
         >
-            <Tooltip title={open ? null : "Columns Settings"} mouseEnterDelay={0.3}>
+            <Tooltip 
+                title="Columns Settings" 
+                open={tooltipOpen}
+                onOpenChange={(v) => {
+                    if (!open) {
+                        setTooltipOpen(v);
+                    }
+                }}
+                mouseEnterDelay={0.3}
+            >
                 <Button
                     icon={<Columns3 size={16} strokeWidth={2} />}
                     className="h-10 w-10 flex items-center justify-center border-zinc-200 text-zinc-600 hover:text-zinc-800 transition-all"
                     style={{ borderRadius: "6px" }}
+                    onClick={() => setTooltipOpen(false)}
                 />
             </Tooltip>
         </Popover>

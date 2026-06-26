@@ -148,19 +148,20 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
             title={<span style={{ fontWeight: 600, color: '#1f2937', fontSize: '14px' }}>Selection Cart</span>}
             size="small"
             style={{ borderRadius: '8px', border: '1px solid #f3f4f6', boxShadow: 'none' }}
-            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px' }}
+            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px', background: '#f9fafb' }}
             bodyStyle={{ padding: '0px' }}
         >
-            <Table
-                columns={columns}
-                dataSource={items}
-                pagination={false}
-                rowKey={(r, i) => i}
-                className="custom-pos-table aavatto-premium-table"
-                locale={{
-                    emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<span style={{ color: '#9ca3af', fontSize: '13px' }}>Cart is empty</span>} style={{ padding: '32px 0' }} />
-                }}
-            />
+            {items.length === 0 ? (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<span style={{ color: '#9ca3af', fontSize: '13px' }}>Cart is empty</span>} style={{ padding: '32px 0', margin: 0 }} />
+            ) : (
+                <Table
+                    columns={columns}
+                    dataSource={items}
+                    pagination={false}
+                    rowKey={(r, i) => i}
+                    className="custom-pos-table aavatto-premium-table"
+                />
+            )}
 
             {items.length > 0 && (
                 <div style={{ padding: "16px", borderTop: "1px solid #f3f4f6", backgroundColor: '#fafafa' }}>

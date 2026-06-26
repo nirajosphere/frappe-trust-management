@@ -15,6 +15,7 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
     const [columnSearchText, setColumnSearchText] = useState("");
     const [draggedIndex, setDraggedIndex] = useState(null);
     const [popoverOpen, setPopoverOpen] = useState(false);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
 
     // Columns that can be sorted (must have title and dataIndex, and not actions)
     const sortableColumns = columns
@@ -88,6 +89,8 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
         if (!open) {
             setIsAdding(false);
             setColumnSearchText("");
+        } else {
+            setTooltipOpen(false);
         }
     };
 
@@ -279,9 +282,19 @@ const SortPopover = ({ columns, appliedSorters = [], onApplySorters }) => {
             overlayClassName="aavatto-sort-popover responsive-popover"
             onOpenChange={handlePopoverOpenChange}
         >
-            <Tooltip title={popoverOpen ? null : "Sort"} mouseEnterDelay={0.3}>
+            <Tooltip 
+                title="Sort" 
+                open={tooltipOpen}
+                onOpenChange={(v) => {
+                    if (!popoverOpen) {
+                        setTooltipOpen(v);
+                    }
+                }}
+                mouseEnterDelay={0.3}
+            >
                 <Badge count={appliedSorters.length} color="black" size="small" offset={[-2, 2]}>
                     <Button
+                        onClick={() => setTooltipOpen(false)}
                         icon={<SwapOutlined style={{ transform: "rotate(90deg)", fontSize: "14px" }} />}
                         className={`h-10 w-10 flex items-center justify-center transition-all ${
                             appliedSorters.length > 0
