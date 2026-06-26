@@ -1212,6 +1212,42 @@ body[data-path="login"] {
   }
 }
 
+/* Premium Ant Design Dropdown/Select Option Spacing & Padding */
+.ant-select-dropdown {
+  padding: 6px !important;
+  
+  .ant-select-item-option {
+    margin-bottom: 4px !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+    
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+/* Prevent long metadata values (like emails) from overflowing card boundaries globally */
+.temple-donation-app {
+  .ant-card {
+    .flex.justify-between.items-center.gap-4.w-full {
+      gap: 12px !important;
+      
+      > span:last-child:not(.ant-tag),
+      > div:last-child:not(.ant-tag) {
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
+        text-align: right !important;
+        min-width: 0 !important;
+        flex: 1 !important;
+      }
+    }
+  }
+}
+
+
+
 
 
 

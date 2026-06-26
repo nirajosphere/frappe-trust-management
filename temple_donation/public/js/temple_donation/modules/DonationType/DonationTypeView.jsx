@@ -55,9 +55,9 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
 
     if (field.type === "textarea")
       return (
-        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal mt-1">
+        <span className="text-zinc-800 font-semibold whitespace-pre-wrap block mt-1">
           {value}
-        </div>
+        </span>
       );
 
     if (field.name === "temple") {

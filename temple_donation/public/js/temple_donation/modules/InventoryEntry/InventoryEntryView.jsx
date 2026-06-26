@@ -129,7 +129,7 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
-                                    <FieldCell label="Temple">
+                                    <FieldCell label="Trust Name">
                                         <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>

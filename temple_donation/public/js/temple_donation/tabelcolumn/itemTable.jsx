@@ -37,7 +37,7 @@ export const itemColumns = [
         },
     },
     {
-        title: "Temple",
+        title: "Trust Name",
         dataIndex: "temple",
         key: "temple",
         width: 180,

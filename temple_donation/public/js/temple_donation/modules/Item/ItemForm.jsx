@@ -6,7 +6,6 @@ import {
     useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_ITEM } from "../../config/constants";
-import { itemFormFields } from "../../formfield/itemFormFields";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
@@ -65,30 +64,61 @@ const ItemForm = ({ id, onBack }) => {
             <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false} size="middle">
                 <SectionCard title="Item Details">
                     <Row gutter={[24, 0]}>
-                        {itemFormFields.fields.map((field) => (
-                            <Col xs={24} md={12} key={field.name}>
-                                <Form.Item
-                                    name={field.name}
-                                    label={field.label}
-                                    style={formItemStyle}
-                                    rules={field.required ? [{ required: true, message: field.message || "Required" }] : []}
-                                >
-                                    {field.type === "select" ? (
-                                        <Select placeholder={field.placeholder} options={field.options} />
-                                    ) : field.type === "link" && field.doctype === "Temple" ? (
-                                        <Select 
-                                            showSearch
-                                            placeholder={field.placeholder} 
-                                            optionFilterProp="children"
-                                            loading={loadingTemples}
-                                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                                        />
-                                    ) : (
-                                        <Input placeholder={field.placeholder} />
-                                    )}
-                                </Form.Item>
-                            </Col>
-                        ))}
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="item_name"
+                                label="Item Name"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Please enter the item name!" }]}
+                            >
+                                <Input placeholder="Enter Item Name" />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="item_code"
+                                label="Item Code"
+                                style={formItemStyle}
+                            >
+                                <Input placeholder="Enter Item Code" />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="unit"
+                                label="Unit"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Required" }]}
+                            >
+                                <Select 
+                                    placeholder="Select Unit" 
+                                    options={[
+                                        { label: "Nos", value: "Nos" },
+                                        { label: "Kg", value: "Kg" },
+                                        { label: "Litre", value: "Litre" }
+                                    ]} 
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="temple"
+                                label="Trust Name"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Required" }]}
+                            >
+                                <Select 
+                                    showSearch
+                                    placeholder="Select Trust Name" 
+                                    optionFilterProp="children"
+                                    loading={loadingTemples}
+                                    options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                                />
+                            </Form.Item>
+                        </Col>
                     </Row>
                 </SectionCard>
                 <div style={{ marginTop: '24px' }}>

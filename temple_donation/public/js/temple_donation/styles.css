@@ -381,6 +381,10 @@
   white-space: nowrap;
 }
 
+.temple-donation-app .whitespace-pre-wrap{
+  white-space: pre-wrap;
+}
+
 .temple-donation-app .break-words{
   overflow-wrap: break-word;
 }
@@ -801,10 +805,6 @@
   font-weight: 500;
 }
 
-.temple-donation-app .font-normal{
-  font-weight: 400;
-}
-
 .temple-donation-app .font-semibold{
   font-weight: 600;
 }
@@ -828,10 +828,6 @@
 
 .temple-donation-app .leading-none{
   line-height: 1;
-}
-
-.temple-donation-app .leading-relaxed{
-  line-height: 1.625;
 }
 
 .temple-donation-app .leading-tight{
@@ -2307,6 +2303,38 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   padding: 0 !important;
   background: transparent !important;
   border: none !important;
+}
+
+/* Premium Ant Design Dropdown/Select Option Spacing & Padding */
+
+.ant-select-dropdown {
+  padding: 6px !important;
+}
+
+.ant-select-dropdown .ant-select-item-option {
+  margin-bottom: 4px !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.ant-select-dropdown .ant-select-item-option:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Prevent long metadata values (like emails) from overflowing card boundaries globally */
+
+.temple-donation-app .ant-card .flex.justify-between.items-center.gap-4.w-full {
+  gap: 12px !important;
+}
+
+.temple-donation-app .ant-card .flex.justify-between.items-center.gap-4.w-full > span:last-child:not(.ant-tag),
+.temple-donation-app .ant-card .flex.justify-between.items-center.gap-4.w-full > div:last-child:not(.ant-tag) {
+  word-break: break-all !important;
+  overflow-wrap: break-word !important;
+  text-align: right !important;
+  min-width: 0 !important;
+  flex: 1 !important;
 }
 
 .temple-donation-app .first\:pt-3:first-child{

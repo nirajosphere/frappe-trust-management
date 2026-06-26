@@ -35,7 +35,7 @@ export const inventoryEntryColumns = [
         title: "Reference Type",
         dataIndex: "reference_type",
         key: "reference_type",
-        width: 120,
+        // width: 120,
         render: (type) => {
             const config = getTagConfig(type || "Manual");
             return (
@@ -49,11 +49,11 @@ export const inventoryEntryColumns = [
         title: "Reference Name",
         dataIndex: "reference_name",
         key: "reference_name",
-        width: 250,
+        // width: 250,
         render: (text) => text || "—"
     },
     {
-        title: "Temple",
+        title: "Trust Name",
         dataIndex: "temple",
         key: "temple",
         filterField: "temple.temple_name",

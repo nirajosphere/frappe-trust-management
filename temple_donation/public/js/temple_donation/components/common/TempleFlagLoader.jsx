@@ -29,7 +29,8 @@ const TempleFlagLoader = ({
                     height: `${loaderSize * 0.9}px`,
                     background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%)',
                     borderRadius: '50%',
-                    zIndex: 1
+                    zIndex: 1,
+                    animation: 'pulseGlow 2s ease-in-out infinite alternate'
                 }} />
                 
                 {/* Spinning Outer Ring */}
@@ -38,7 +39,8 @@ const TempleFlagLoader = ({
                     width: '100%',
                     height: '100%',
                     transformOrigin: 'center',
-                    zIndex: 2
+                    zIndex: 2,
+                    animation: 'spin 1.4s linear infinite'
                 }}>
                     <circle 
                         cx="50" 
@@ -79,7 +81,8 @@ const TempleFlagLoader = ({
                     alignItems: 'center',
                     justifyContent: 'center',
                     overflow: 'hidden',
-                    padding: '8px'
+                    padding: '8px',
+                    animation: 'pulseLogo 2s ease-in-out infinite alternate'
                 }}>
                     <img 
                         src="/assets/temple_donation/img/logo.svg" 

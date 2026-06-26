@@ -48,7 +48,7 @@ const PageHeader = ({
 
     return (
         <header className="">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
                 <div className="flex items-start gap-4 min-w-0">
                     {onBack && (
                         <Button

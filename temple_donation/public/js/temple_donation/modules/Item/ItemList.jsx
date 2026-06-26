@@ -8,7 +8,7 @@ const ItemList = () => {
         <ListingPage
             doctype={DOCTYPE_ITEM}
             title="Inventory Items"
-            description="Manage temple assets and consumable items"
+            description="Manage trust assets and consumable items"
             columns={itemColumns}
             basePath="items"
             fields={["name", "item_name", "item_code", "unit", "temple", "total_stock"]}

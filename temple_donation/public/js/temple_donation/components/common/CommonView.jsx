@@ -175,10 +175,9 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
 
     if (field.type === "textarea")
       return (
-        <div style={{ background: "#F8FAFC", border: `1px solid ${C.border}`, borderRadius: 10, padding: "10px 14px",
-          fontSize: 12, color: C.inkMid, whiteSpace: "pre-wrap", lineHeight: 1.6, fontWeight: 400 }}>
+        <span style={{ fontSize: 13, fontWeight: 600, color: C.ink, whiteSpace: "pre-wrap", display: "block" }}>
           {value}
-        </div>
+        </span>
       );
 
     if (field.name === "custom_select_temple" && Array.isArray(value))
@@ -475,7 +474,7 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
                         const tagInfo = getTagConfig(doc.payment_mode);
                         return <Tag className={`tag-glass ${tagInfo.glassClass}`}>{doc.payment_mode}</Tag>;
                       })() },
-                      { label: "Handled By",   value: <span style={{ fontSize: 13, fontWeight: 600, color: C.ink }}>{doc.cashier || "System"}</span> },
+                      { label: "Handled By",   value: <span style={{ fontSize: 13, fontWeight: 600, color: C.ink, wordBreak: "break-all" }}>{doc.cashier || "System"}</span> },
                       { label: "Reference",    value: <span style={{ fontSize: 12, fontWeight: 600, color: C.inkMid, fontFamily: "ui-monospace,monospace" }}>{doc.reference_no || "N/A"}</span> },
                     ].map(({ label, value }) => (
                       <Col xs={24} sm={8} key={label}>

@@ -57,9 +57,9 @@ const UserView = ({ id, onBack, onEdit }) => {
 
     if (field.type === "textarea")
       return (
-        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal">
+        <span className="text-zinc-800 font-semibold whitespace-pre-wrap block">
           {value}
-        </div>
+        </span>
       );
 
     if ((field.name === "custom_select_temple" || field.name === "roles") && Array.isArray(value)) {

@@ -59,9 +59,9 @@ const DonationView = ({ id, onBack, onEdit }) => {
 
     if (field.type === "textarea")
       return (
-        <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 text-xs text-zinc-600 white-space-pre-wrap leading-relaxed font-normal">
+        <span className="text-zinc-800 font-semibold whitespace-pre-wrap block">
           {value}
-        </div>
+        </span>
       );
 
     if (field.name === "temple") {
@@ -149,7 +149,7 @@ const DonationView = ({ id, onBack, onEdit }) => {
                     const tagInfo = getTagConfig(doc.payment_mode);
                     return <Tag className={`tag-glass ${tagInfo.glassClass} !m-0`}>{doc.payment_mode}</Tag>;
                   })() },
-                  { label: "Handled By", value: <span className="text-xs font-semibold text-zinc-800">{doc.cashier || "System"}</span> },
+                  { label: "Handled By", value: <span className="text-xs font-semibold text-zinc-800" style={{ wordBreak: 'break-all' }}>{doc.cashier || "System"}</span> },
                   { label: "Reference", value: <span className="text-xs font-mono font-semibold text-zinc-500 bg-zinc-50 border border-zinc-200 px-1.5 py-0.5 rounded">{doc.transaction_ref_no || doc.reference_no || "N/A"}</span> },
                 ].map(({ label, value }) => (
                   <Col xs={24} sm={8} key={label} style={{ display: 'flex' }}>
