@@ -97,14 +97,18 @@ const App = () => {
     const groupedMenuItems = getGroupedMenuItems(roles);
 
     const headerStyle = {
-        background: "transparent",
-        height: "auto",
-        padding: isMobile ? "12px 12px 0" : "16px 24px 0",
+        background: "#ffffff",
+        height: "64px",
+        padding: isMobile ? "0 16px" : "0 24px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        borderBottom: "none"
+        borderBottom: "1px solid #e4e4e7",
+        position: "fixed",
+        top: isAdmin ? "48px" : 0,
+        left: 0,
+        zIndex: 50
     };
 
     const headerInnerStyle = {
@@ -113,12 +117,7 @@ const App = () => {
         alignItems: "center",
         width: "100%",
         maxWidth: "1280px",
-        background: "#ffffff",
-        padding: isMobile ? "0 16px" : "0 24px",
-        height: "56px",
-        borderRadius: "12px",
-        // border: "1px solid #e4e4e7",
-        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)"
+        height: "100%"
     };
 
     const logoContainerStyle = {
@@ -175,7 +174,7 @@ const App = () => {
     return (
         <ConfigProvider theme={themeConfig}>
             <div className={`temple-donation-app`}>
-                <Layout className={`min-h-screen`}>
+                <Layout className={`min-h-screen`} style={{ paddingTop: '64px' }}>
                     {/* Custom Top Navigation Bar */}
                     {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center w-full">

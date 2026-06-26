@@ -21,7 +21,7 @@ const FormFooter = ({
         borderTop: "1px solid rgba(228, 228, 231, 0.8)",
         paddingTop: "14px",
         paddingBottom: "14px",
-        zIndex: 9999,
+        zIndex: 999,
         boxShadow: "0 -4px 16px -6px rgba(0, 0, 0, 0.06)"
     };
 

@@ -7,7 +7,7 @@ const RoomList = () => {
     return (
         <ListingPage
             doctype={DOCTYPE_ROOM}
-            title="Temple Accommodations"
+            title="Rooms"
             description="Manage rooms, halls, and guest house facilities"
             columns={roomColumns}
             basePath="rooms"
