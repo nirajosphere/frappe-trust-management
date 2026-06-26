@@ -8,7 +8,6 @@ import {
     useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_INVENTORY_ENTRY } from "../../config/constants";
-import { inventoryEntryFormFields } from "../../formfield/inventoryEntryFormFields";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
@@ -99,47 +98,91 @@ const InventoryEntryForm = ({ id, onBack }) => {
             <Form form={form} layout="vertical" onFinish={handleSave} requiredMark={false} size="middle">
                 <SectionCard title="Stock Entry Details">
                     <Row gutter={[24, 0]}>
-                        {inventoryEntryFormFields.fields.map((field) => (
-                            <Col xs={24} md={12} key={field.name}>
-                                <Form.Item
-                                    name={field.name}
-                                    label={field.label}
-                                    style={formItemStyle}
-                                    rules={field.required ? [{ required: true, message: field.message || "Required" }] : []}
-                                >
-                                    {field.name === "reference_name" && referenceType === "Donation" ? (
-                                        <Select 
-                                            showSearch
-                                            placeholder="Select Donation" 
-                                            optionFilterProp="children"
-                                            loading={loadingDonations}
-                                            options={donations?.map(d => ({
-                                                label: `${d.donor_name || 'Anonymous'} - ₹${parseFloat(d.total_amount).toFixed(2)} (${d.name})`,
-                                                value: d.name
-                                            })) || []}
-                                        />
-                                    ) : field.type === "select" ? (
-                                        <Select 
-                                            placeholder={field.placeholder} 
-                                            options={field.options} 
-                                            onChange={field.name === "reference_type" ? () => form.setFieldValue("reference_name", undefined) : undefined}
-                                        />
-                                    ) : field.type === "link" && field.doctype === "Temple" ? (
-                                        <Select 
-                                            showSearch
-                                            placeholder={field.placeholder} 
-                                            optionFilterProp="children"
-                                            loading={loadingTemples}
-                                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                                        />
-                                    ) : field.type === "datetime" ? (
-                                        <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" className="w-full" />
-                                    ) : (
-                                        <Input placeholder={field.placeholder} />
-                                    )}
-                                </Form.Item>
-                            </Col>
-                        ))}
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="entry_type"
+                                label="Entry Type"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Required" }]}
+                            >
+                                <Select 
+                                    placeholder="Select Entry Type" 
+                                    options={[
+                                        { label: "IN", value: "IN" },
+                                        { label: "OUT", value: "OUT" }
+                                    ]} 
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="temple"
+                                label="Trust Name"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Required" }]}
+                            >
+                                <Select 
+                                    showSearch
+                                    placeholder="Select Trust Name" 
+                                    optionFilterProp="children"
+                                    loading={loadingTemples}
+                                    options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="posting_date"
+                                label="Posting Date"
+                                style={formItemStyle}
+                            >
+                                <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" className="w-full" placeholder="Select date and time" />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="reference_type"
+                                label="Reference Type"
+                                style={formItemStyle}
+                            >
+                                <Select 
+                                    placeholder="Select Reference Type" 
+                                    options={[
+                                        { label: "Donation", value: "Donation" },
+                                        { label: "Manual", value: "Manual" },
+                                        { label: "Purchase", value: "Purchase" },
+                                        { label: "Usage", value: "Usage" }
+                                    ]} 
+                                    onChange={() => form.setFieldValue("reference_name", undefined)}
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="reference_name"
+                                label="Reference Name"
+                                style={formItemStyle}
+                            >
+                                {referenceType === "Donation" ? (
+                                    <Select 
+                                        showSearch
+                                        placeholder="Select Donation" 
+                                        optionFilterProp="children"
+                                        loading={loadingDonations}
+                                        options={donations?.map(d => ({
+                                            label: `${d.donor_name || 'Anonymous'} - ₹${parseFloat(d.total_amount).toFixed(2)} (${d.name})`,
+                                            value: d.name
+                                        })) || []}
+                                    />
+                                ) : (
+                                    <Input placeholder="Enter Reference ID" />
+                                )}
+                            </Form.Item>
+                        </Col>
                     </Row>
                 </SectionCard>
 

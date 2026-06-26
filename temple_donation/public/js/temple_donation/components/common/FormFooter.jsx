@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Button } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 
@@ -10,66 +10,27 @@ const FormFooter = ({
     cancelText = "Cancel",
     onSubmit
 }) => {
-    const footerRef = useRef(null);
-    const [bounds, setBounds] = useState(null);
-
-    useEffect(() => {
-        const updateBounds = () => {
-            const pageContainer = document.querySelector(".donation-page > div") || document.querySelector(".aavatto-content-wrapper");
-            if (pageContainer) {
-                const rect = pageContainer.getBoundingClientRect();
-                setBounds({
-                    left: rect.left,
-                    width: rect.width
-                });
-            }
-        };
-
-        updateBounds();
-
-        // Observe size changes of the page container
-        const pageContainer = document.querySelector(".donation-page > div") || document.querySelector(".aavatto-content-wrapper");
-        let resizeObserver;
-        if (pageContainer && typeof ResizeObserver !== "undefined") {
-            resizeObserver = new ResizeObserver(() => {
-                updateBounds();
-            });
-            resizeObserver.observe(pageContainer);
-        }
-
-        window.addEventListener("resize", updateBounds);
-
-        // A small timeout to capture late layout adjustments
-        const timeout = setTimeout(updateBounds, 100);
-
-        return () => {
-            if (resizeObserver) {
-                resizeObserver.disconnect();
-            }
-            window.removeEventListener("resize", updateBounds);
-            clearTimeout(timeout);
-        };
-    }, []);
-
     const footerStyle = {
         position: "fixed",
         bottom: 0,
-        left: bounds ? bounds.left : 0,
-        width: bounds ? bounds.width : "100%",
-        visibility: bounds ? "visible" : "hidden",
+        left: 0,
+        width: "100%",
         backgroundColor: "rgba(255, 255, 255, 0.8)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        borderTop: "1px solid rgba(228, 228, 231, 0.6)",
+        borderTop: "1px solid rgba(228, 228, 231, 0.8)",
         paddingTop: "14px",
         paddingBottom: "14px",
         zIndex: 9999,
-        boxShadow: "0 -4px 16px -6px rgba(0, 0, 0, 0.08)",
-        transition: "opacity 0.15s ease-in-out"
+        boxShadow: "0 -4px 16px -6px rgba(0, 0, 0, 0.06)"
     };
 
     const innerStyle = {
         width: "100%",
+        maxWidth: "1280px",
+        margin: "0 auto",
+        paddingLeft: "24px",
+        paddingRight: "24px",
         display: "flex",
         justifyContent: "flex-end",
         gap: "12px"
@@ -101,7 +62,7 @@ const FormFooter = ({
     };
 
     return (
-        <div ref={footerRef} style={footerStyle}>
+        <div style={footerStyle}>
             <div style={innerStyle}>
                 <Button 
                     onClick={onCancel} 

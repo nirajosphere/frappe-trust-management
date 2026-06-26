@@ -1261,11 +1261,12 @@
 }
 
 .temple-donation-app .aavatto-content-wrapper {
-  max-width: 1536px;
+  max-width: 1280px;
+  margin: 0 auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 8rem;
 }
 
 .temple-donation-app .aavatto-card {

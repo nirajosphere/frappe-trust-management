@@ -112,7 +112,7 @@ const App = () => {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        maxWidth: "1536px",
+        maxWidth: "1280px",
         background: "#ffffff",
         padding: isMobile ? "0 16px" : "0 24px",
         height: "56px",
