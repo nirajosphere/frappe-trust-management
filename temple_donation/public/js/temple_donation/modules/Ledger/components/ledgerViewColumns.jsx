@@ -35,7 +35,7 @@ export const getDonationColumns = (donations) => [
     render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
   },
   {
-    title: "Temple",
+    title: "Trust",
     dataIndex: "temple_name",
     key: "temple_name",
     sorter: (a, b) => (a.temple_name || "").localeCompare(b.temple_name || ""),

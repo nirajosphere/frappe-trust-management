@@ -208,7 +208,7 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                         <SectionCard title="Booking Information" icon={<Calendar size={15} className="text-zinc-800" />}>
                             <Row gutter={[16, 16]}>
                                 <Col xs={24} sm={12}>
-                                    <FieldCell label="Temple">
+                                    <FieldCell label="Trust">
                                         <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>

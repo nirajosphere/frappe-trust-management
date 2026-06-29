@@ -53,7 +53,7 @@ const RoomView = ({ id, onBack, onEdit }) => {
             <DetailHeader
                 onBack={onBack}
                 title={`Room ${doc.room_number}`}
-                subtitle={`Temple: ${templeName}`}
+                subtitle={`Trust: ${templeName}`}
                 initials="R"
                 tags={[doc.room_type]}
                 actions={
@@ -88,7 +88,7 @@ const RoomView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
-                                    <FieldCell label="Temple">
+                                    <FieldCell label="Trust">
                                         <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>

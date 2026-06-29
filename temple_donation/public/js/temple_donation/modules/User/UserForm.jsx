@@ -205,7 +205,7 @@ const UserForm = ({ id, onBack }) => {
                                             <Select placeholder="Select Role" disabled={disableAdminFields} style={{ width: '100%' }}
                                                 options={[
                                                     { label: "Super Admin",  value: "Super Admin"  },
-                                                    { label: "Temple Admin", value: "Temple Admin" },
+                                                    { label: "Trust Admin", value: "Temple Admin" },
                                                     { label: "Cashier",      value: "Cashier"      },
                                                 ]}
                                             />

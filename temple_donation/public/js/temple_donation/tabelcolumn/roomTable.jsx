@@ -17,7 +17,7 @@ export const roomColumns = [
         )
     },
     {
-        title: "Temple",
+        title: "Trust",
         dataIndex: "temple",
         key: "temple",
         width: 180,

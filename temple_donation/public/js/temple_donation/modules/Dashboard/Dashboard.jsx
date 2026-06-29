@@ -232,7 +232,7 @@ const Dashboard = () => {
 
                         {/* TEMPLE */}
                         <Col xs={24} md={8}>
-                            <Text>Search By Temple</Text>
+                            <Text>Search By Trust</Text>
                             <Select
                                 showSearch
                                 value={filters.temple}

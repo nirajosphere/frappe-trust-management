@@ -405,9 +405,9 @@ const DonationTypeForm = ({ id, onBack }) => {
                                 </Col>
 
                                 <Col xs={24}>
-                                    <Form.Item name="temple" label="Associated Temple" style={formItemStyle}>
+                                    <Form.Item name="temple" label="Associated Trust" style={formItemStyle}>
                                         <Select
-                                            placeholder="Select Associated Temple"
+                                            placeholder="Select Associated Trust"
                                             allowClear
                                             suffixIcon={<BankOutlined style={{ color: '#a1a1aa' }} />}
                                             options={temples?.map(t => ({ value: t.name, label: t.temple_name || t.name }))}

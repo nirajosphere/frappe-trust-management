@@ -69,7 +69,7 @@ const UserView = ({ id, onBack, onEdit }) => {
             const tid = item.temple || item.role || String(item);
             const t = temples?.find(t => t.name === tid);
             const name = t ? t.temple_name : tid;
-            const tagInfo = getTagConfig(field.name === "roles" ? tid : "temple admin");
+            const tagInfo = getTagConfig(field.name === "roles" ? tid : "trust admin");
             return (
               <Tag className={`tag-glass ${tagInfo.glassClass} !m-0`} key={item.name || tid}>
                 {name}

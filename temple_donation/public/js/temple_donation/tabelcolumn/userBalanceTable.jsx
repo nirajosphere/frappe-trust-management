@@ -54,7 +54,7 @@ export const userBalanceColumns = [
     },
 
     {
-        title: "TEMPLES",
+        title: "TRUSTS",
         dataIndex: "custom_select_temple",
         key: "custom_select_temple",
         width: 180,

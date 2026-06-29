@@ -208,11 +208,11 @@ const RoomBookingForm = ({ id, onBack }) => {
                             <SectionCard title="Booking Details" icon={<CalendarOutlined style={{ color: '#18181b' }} />}>
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="temple" label="Temple" style={formItemStyle}
-                                            rules={[{ required: true, message: "Temple is required" }]}>
+                                        <Form.Item name="temple" label="Trust" style={formItemStyle}
+                                            rules={[{ required: true, message: "Trust is required" }]}>
                                             <Select
                                                 showSearch
-                                                placeholder="Select Temple"
+                                                placeholder="Select Trust"
                                                 optionFilterProp="children"
                                                 loading={loadingTemples}
                                                 onChange={handleTempleChange}

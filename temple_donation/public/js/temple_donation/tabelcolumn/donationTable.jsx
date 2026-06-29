@@ -20,7 +20,7 @@ export const donationColumns = [
         filterType: "text"
     },
     {
-        title: 'Temple',
+        title: 'Trust',
         dataIndex: 'temple',
         key: 'temple',
         render: (_, record) => <Text>{record["temple.temple_name"] || record.temple_name}</Text>,

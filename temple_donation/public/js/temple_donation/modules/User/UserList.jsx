@@ -8,7 +8,7 @@ const UserList = () => {
         <ListingPage
             doctype={DOCTYPE_USER}
             title="Users Management"
-            description="Manage temple admins, cashiers and system users."
+            description="Manage trust admins, cashiers and system users."
             columns={userColumns}
             basePath="users"
             // fields={["*"]}

@@ -21,12 +21,11 @@ export const originalBalanceColsBase = [
         filterType: 'select',
         filterOptions: [
             { value: "cashier", label: "Cashier" },
-            { value: "temple admin", label: "Temple Admin" },
-            { value: "trust admin", label: "Trust Admin" }
+            { value: "temple admin", label: "Trust Admin" }
         ]
     },
     {
-        title: "Temples",
+        title: "Trusts",
         dataIndex: "custom_select_temple",
         key: "custom_select_temple",
         width: 180,
@@ -144,7 +143,7 @@ export const activeDonationColumns = [
         render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
     },
     {
-        title: "Temple",
+        title: "Trust",
         dataIndex: "temple_name",
         key: "temple_name",
         render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>

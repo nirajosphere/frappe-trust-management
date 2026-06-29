@@ -59,7 +59,7 @@ export const userColumns = [
     },
 
     {
-        title: "TEMPLES",
+        title: "TRUSTS",
         dataIndex: "custom_select_temple",
         key: "custom_select_temple",
         width: 180,
@@ -103,7 +103,7 @@ export const userColumns = [
             { label: "Administrator", value: "Administrator" },
             { label: "Cashier", value: "Cashier" },
             { label: "Super Admin", value: "Super Admin" },
-            { label: "Temple Admin", value: "Temple Admin" }
+            { label: "Trust Admin", value: "Temple Admin" }
         ]
     },
 
