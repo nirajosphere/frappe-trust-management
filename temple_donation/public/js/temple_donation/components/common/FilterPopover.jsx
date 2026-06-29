@@ -300,7 +300,7 @@ const FilterPopover = ({ columns, doctype, appliedFilters, onApplyFilters, saved
                 okText="Save View"
                 cancelText="Cancel"
                 okButtonProps={{ style: { backgroundColor: "#000", borderColor: "#000" } }}
-                destroyOnClose
+                destroyOnHidden
             >
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: "12px" }}>
                     <div>

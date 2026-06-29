@@ -668,6 +668,3 @@ def get_column_order(reference_doctype):
         except Exception:
             return []
     return []
-
-
-

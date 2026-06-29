@@ -505,19 +505,6 @@ const ListingPage = ({
         }
     };
 
-    if (error) {
-        return (
-            <div className="p-6">
-                <Alert
-                    message="Connection Error"
-                    description={error.message || `Failed to fetch ${doctype} list.`}
-                    type="error"
-                    showIcon
-                />
-            </div>
-        );
-    }
-
     const visibleColumns = customizedColumns.length > 0
         ? customizedColumns.filter(c => c.visible !== false)
         : (columns || []);
@@ -580,6 +567,19 @@ const ListingPage = ({
             return col;
         });
     }, [visibleColumns, temples, donations, donors, rooms]);
+
+    if (error) {
+        return (
+            <div className="p-6">
+                <Alert
+                    message="Connection Error"
+                    description={error.message || `Failed to fetch ${doctype} list.`}
+                    type="error"
+                    showIcon
+                />
+            </div>
+        );
+    }
 
 
 
@@ -690,7 +690,7 @@ const ListingPage = ({
                     cancelText="Cancel"
                     okButtonProps={{ style: { backgroundColor: "#000", borderColor: "#000" } }}
                     width={680}
-                    destroyOnClose
+                    destroyOnHidden
                 >
                     <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: "12px" }}>
                         <div>

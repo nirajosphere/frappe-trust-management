@@ -13,6 +13,7 @@
   "total_amount",
   "status",
   "donation",
+  "guest_name",
   "guest_id",
   "number_of_guests",
   "remarks"
@@ -67,6 +68,13 @@
    "fieldtype": "Link",
    "label": "Donation",
    "options": "Donation"
+  },
+  {
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Guest Name",
+   "reqd": 1
   },
   {
    "fieldname": "guest_id",

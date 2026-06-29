@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin } from "antd";
+import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin, App as AntApp } from "antd";
 import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
 import { ChevronDown, X } from "lucide-react";
 
@@ -173,8 +173,9 @@ const App = () => {
 
     return (
         <ConfigProvider theme={themeConfig}>
-            <div className={`temple-donation-app`}>
-                <Layout className={`min-h-screen`} style={{ paddingTop: '64px' }}>
+            <AntApp>
+                <div className={`temple-donation-app`}>
+                    <Layout className={`min-h-screen`} style={{ paddingTop: '64px' }}>
                     {/* Custom Top Navigation Bar */}
                     {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center w-full">
@@ -339,9 +340,9 @@ const App = () => {
                         placement="right"
                         onClose={() => setMobileOpen(false)}
                         open={mobileOpen}
-                        width={280}
+                        size={280}
                         closable={false}
-                        bodyStyle={{ padding: 0 }}
+                        styles={{ body: { padding: 0 } }}
                     >
                         <div className="temple-donation-app" style={{ height: '100%' }}>
                             <div className="flex flex-col h-full" style={{ padding: 0, background: '#ffffff' }}>
@@ -431,8 +432,9 @@ const App = () => {
                             {getComponentForRoute(currentRoute, roles)}
                         </div>
                     </Content>
-                </Layout>
-            </div>
+                    </Layout>
+                </div>
+            </AntApp>
         </ConfigProvider>
     );
 };
