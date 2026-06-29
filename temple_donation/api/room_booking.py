@@ -308,7 +308,7 @@ def download_room_import_template():
     
     frappe.local.response.filename = "room_import_template.csv"
     frappe.local.response.filecontent = output.getvalue()
-    frappe.local.response.type = "csv"
+    frappe.local.response.type = "download"
 
 
 @frappe.whitelist()
@@ -364,13 +364,32 @@ def import_rooms_from_csv(csv_content, temple):
             # Resolve building
             building = frappe.db.get_value("Building", {"building_code": building_code}, "name")
             if not building:
-                # If building doesn't exist, create it automatically or raise error
-                raise ValueError(f"Building Code '{building_code}' not found. Please create the Building first.")
+                # Auto-create Building
+                b_doc = frappe.get_doc({
+                    "doctype": "Building",
+                    "building_code": building_code,
+                    "building_name": f"Building {building_code}",
+                    "temple": temple,
+                    "status": "Active"
+                })
+                b_doc.insert(ignore_permissions=True)
+                building = b_doc.name
+                logs.append(f"Row {row_idx}: Info - Auto-created Building '{building_code}' under this Temple.")
 
             # Resolve Room Type
             room_type = frappe.db.get_value("Room Type", {"room_type_name": room_type_name}, "name")
             if not room_type:
-                raise ValueError(f"Room Type '{room_type_name}' not found. Please create the Room Type first.")
+                # Auto-create Room Type
+                rt_doc = frappe.get_doc({
+                    "doctype": "Room Type",
+                    "room_type_name": room_type_name,
+                    "default_capacity": capacity or 2,
+                    "default_price_per_day": price_per_day or 0.0,
+                    "active": 1
+                })
+                rt_doc.insert(ignore_permissions=True)
+                room_type = rt_doc.name
+                logs.append(f"Row {row_idx}: Info - Auto-created Room Type '{room_type_name}'.")
 
             if frappe.db.exists("Room", {"room_number": room_number}):
                 raise ValueError(f"Room Number '{room_number}' already exists")

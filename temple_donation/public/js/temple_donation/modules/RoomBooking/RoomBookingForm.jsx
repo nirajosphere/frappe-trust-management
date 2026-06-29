@@ -37,11 +37,7 @@ const RoomBookingForm = ({ id, onBack }) => {
         limit: 1000
     });
 
-    // Fallback: fetch all rooms for edit mode
-    const { data: allRooms } = useFrappeGetDocList("Room", {
-        fields: ["name", "room_number", "room_type", "capacity", "price_per_day", "status"],
-        limit: 1000
-    });
+
 
     useEffect(() => {
         if (isEdit && initialValues) {
@@ -50,6 +46,9 @@ const RoomBookingForm = ({ id, onBack }) => {
                 check_in: initialValues.check_in ? dayjs(initialValues.check_in) : null,
                 check_out: initialValues.check_out ? dayjs(initialValues.check_out) : null
             });
+            if (initialValues.check_in && initialValues.check_out && initialValues.temple) {
+                fetchAvailableRooms(dayjs(initialValues.check_in), dayjs(initialValues.check_out), initialValues.temple);
+            }
         } else {
             const prefilledRoom = localStorage.getItem("prefilled_booking_room");
             const prefilledCheckIn = localStorage.getItem("prefilled_booking_check_in");
@@ -63,13 +62,12 @@ const RoomBookingForm = ({ id, onBack }) => {
                     check_in: cIn,
                     check_out: cOut,
                     room: prefilledRoom,
-                    number_of_guests: 1
+                    number_of_guests: 1,
+                    adults: 1,
+                    children: 0
                 });
                 
-                // Fetch available rooms so the dropdown has options
-                fetchAvailableRooms(cIn, cOut);
-
-                // Fetch room temple to prefill temple
+                // Fetch room temple to prefill temple and load options
                 if (typeof frappe !== "undefined") {
                     frappe.db.get_value("Room", prefilledRoom, "temple", (r) => {
                         if (r && r.temple) {
@@ -87,23 +85,42 @@ const RoomBookingForm = ({ id, onBack }) => {
                     status: "Booked",
                     check_in: dayjs(),
                     check_out: dayjs().add(1, 'day'),
-                    number_of_guests: 1
+                    number_of_guests: 1,
+                    adults: 1,
+                    children: 0
                 });
-                // Fetch available rooms for default dates
-                fetchAvailableRooms(dayjs(), dayjs().add(1, 'day'));
             }
         }
     }, [isEdit, initialValues, form]);
 
+    // Handle initial temple loading selection to fetch defaults
+    useEffect(() => {
+        if (!isEdit && !localStorage.getItem("prefilled_booking_room") && temples && temples.length > 0) {
+            const currentTemple = form.getFieldValue("temple");
+            if (!currentTemple) {
+                const defaultTemple = temples[0].name;
+                form.setFieldsValue({ temple: defaultTemple });
+                const checkIn = form.getFieldValue("check_in") || dayjs();
+                const checkOut = form.getFieldValue("check_out") || dayjs().add(1, 'day');
+                fetchAvailableRooms(checkIn, checkOut, defaultTemple);
+            }
+        }
+    }, [temples, isEdit, form]);
+
     const fetchAvailableRooms = (checkIn, checkOut, temple = null) => {
         if (!checkIn || !checkOut) return;
+        if (!temple) {
+            setAvailableRooms([]);
+            setLoadingRooms(false);
+            return;
+        }
         setLoadingRooms(true);
 
         const args = {
             check_in: checkIn.format("YYYY-MM-DD HH:mm:ss"),
-            check_out: checkOut.format("YYYY-MM-DD HH:mm:ss")
+            check_out: checkOut.format("YYYY-MM-DD HH:mm:ss"),
+            temple: temple
         };
-        if (temple) args.temple = temple;
 
         frappe.call({
             method: "temple_donation.api.room_booking.get_available_rooms",
@@ -162,7 +179,7 @@ const RoomBookingForm = ({ id, onBack }) => {
     const formItemStyle = { marginBottom: '14px' };
 
     // Build room options with availability badges
-    const roomOptions = (availableRooms.length > 0 ? availableRooms : (allRooms || [])).map(r => ({
+    const roomOptions = (availableRooms || []).map(r => ({
         label: (
             <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                 <span>Room {r.room_number} — {r.room_type} ({r.capacity} pax)</span>
@@ -307,7 +324,7 @@ const RoomBookingForm = ({ id, onBack }) => {
                                                 options={roomOptions}
                                                 optionLabelProp="label"
                                                 filterOption={(input, option) => {
-                                                    const room = (availableRooms.length > 0 ? availableRooms : (allRooms || [])).find(r => r.name === option.value);
+                                                    const room = (availableRooms || []).find(r => r.name === option.value);
                                                     if (!room) return false;
                                                     return `Room ${room.room_number}`.toLowerCase().includes(input.toLowerCase());
                                                 }}
