@@ -10,7 +10,10 @@
   "room",
   "check_in",
   "check_out",
+  "adults",
+  "children",
   "total_amount",
+  "payment_status",
   "status",
   "donation",
   "guest_name",
@@ -31,7 +34,8 @@
    "fieldname": "temple",
    "fieldtype": "Link",
    "label": "Temple",
-   "options": "Temple"
+   "options": "Temple",
+   "reqd": 1
   },
   {
    "fieldname": "room",
@@ -44,30 +48,57 @@
   {
    "fieldname": "check_in",
    "fieldtype": "Datetime",
-   "label": "Check In"
+   "label": "Check In",
+   "reqd": 1
   },
   {
    "fieldname": "check_out",
    "fieldtype": "Datetime",
-   "label": "Check Out"
+   "label": "Check Out",
+   "reqd": 1
+  },
+  {
+   "fieldname": "adults",
+   "fieldtype": "Int",
+   "label": "Adults",
+   "default": "1"
+  },
+  {
+   "fieldname": "children",
+   "fieldtype": "Int",
+   "label": "Children",
+   "default": "0"
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount"
+   "label": "Total Amount",
+   "default": "0"
   },
   {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "Pending\nPaid\nPartial",
+   "default": "Pending",
+   "in_list_view": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "default": "Booked",
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status",
-   "options": "Reserved\nChecked In\nChecked Out\nCancelled",
-   "default": "Reserved"
+   "label": "Booking Status",
+   "options": "Booked\nChecked In\nChecked Out\nCancelled",
+   "in_list_view": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "donation",
    "fieldtype": "Link",
    "label": "Donation",
-   "options": "Donation"
+   "options": "Donation",
+   "allow_on_submit": 1
   },
   {
    "fieldname": "guest_name",
@@ -96,7 +127,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-22 14:19:55.681062",
+ "modified": "2026-06-29 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Room Booking",
@@ -128,11 +159,7 @@
   }
  ],
  "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1,
- "track_seen": 1,
- "track_views": 1
+ "track_changes": 1
 }

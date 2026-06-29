@@ -18,6 +18,8 @@ export const DOCTYPE_INVENTORY_ITEM = "Inventory Item";
 // Room Management
 export const DOCTYPE_ROOM = "Room";
 export const DOCTYPE_ROOM_BOOKING = "Room Booking";
+export const DOCTYPE_BUILDING = "Building";
+export const DOCTYPE_ROOM_TYPE = "Room Type";
 
 // Ledger
 export const DOCTYPE_TEMPLE_LEDGER = "Temple Ledger";

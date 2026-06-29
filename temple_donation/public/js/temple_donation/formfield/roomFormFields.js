@@ -18,20 +18,29 @@ export const roomFormFields = {
             required: true
         },
         {
+            name: "building",
+            label: "Building",
+            type: "link",
+            placeholder: "Select Building",
+            doctype: "Building"
+        },
+        {
+            name: "floor_number",
+            label: "Floor Number",
+            type: "number",
+            placeholder: "Enter Floor Number"
+        },
+        {
             name: "room_type",
-            label: "Room Type",
-            type: "select",
-            placeholder: "Select Room Type",
-            required: true,
-            options: [
-                { label: "AC", value: "AC" },
-                { label: "Non-AC", value: "Non-AC" },
-                { label: "Hall", value: "Hall" }
-            ]
+            label: "Room Category",
+            type: "link",
+            placeholder: "Select Room Category",
+            doctype: "Room Type",
+            required: true
         },
         {
             name: "capacity",
-            label: "Capacity",
+            label: "Capacity (Pax)",
             type: "number",
             placeholder: "Enter Capacity"
         },
@@ -49,9 +58,23 @@ export const roomFormFields = {
             placeholder: "Select Status",
             options: [
                 { label: "Available", value: "Available" },
+                { label: "Reserved", value: "Reserved" },
                 { label: "Occupied", value: "Occupied" },
+                { label: "Cleaning", value: "Cleaning" },
                 { label: "Maintenance", value: "Maintenance" }
             ]
+        },
+        {
+            name: "description",
+            label: "Description",
+            type: "text",
+            placeholder: "Enter Description"
+        },
+        {
+            name: "notes",
+            label: "Notes",
+            type: "text",
+            placeholder: "Enter Notes"
         }
     ]
 };

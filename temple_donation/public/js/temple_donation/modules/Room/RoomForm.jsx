@@ -29,6 +29,18 @@ const RoomForm = ({ id, onBack }) => {
         limit: 1000
     });
 
+    // Fetch Buildings list for link field
+    const { data: buildings, loading: loadingBuildings } = useFrappeGetDocList("Building", {
+        fields: ["name", "building_name"],
+        limit: 1000
+    });
+
+    // Fetch Room Types list for link field
+    const { data: roomTypes, loading: loadingRoomTypes } = useFrappeGetDocList("Room Type", {
+        fields: ["name", "room_type_name"],
+        limit: 1000
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
             form.setFieldsValue(initialValues);
@@ -86,6 +98,22 @@ const RoomForm = ({ id, onBack }) => {
                                             optionFilterProp="children"
                                             loading={loadingTemples}
                                             options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                                        />
+                                    ) : field.type === "link" && field.doctype === "Building" ? (
+                                        <Select 
+                                            showSearch
+                                            placeholder={field.placeholder} 
+                                            optionFilterProp="children"
+                                            loading={loadingBuildings}
+                                            options={buildings?.map(b => ({ label: b.building_name, value: b.name })) || []}
+                                        />
+                                    ) : field.type === "link" && field.doctype === "Room Type" ? (
+                                        <Select 
+                                            showSearch
+                                            placeholder={field.placeholder} 
+                                            optionFilterProp="children"
+                                            loading={loadingRoomTypes}
+                                            options={roomTypes?.map(rt => ({ label: rt.room_type_name, value: rt.name })) || []}
                                         />
                                     ) : field.type === "number" ? (
                                         <InputNumber placeholder={field.placeholder} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />

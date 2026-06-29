@@ -14,7 +14,8 @@ import Dashboard from "../modules/Dashboard/Dashboard";
 import DonationPOS from "../modules/Donation/Donation";
 import {
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER,
-    DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING
+    DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING,
+    DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE
 } from "./constants";
 
 // Module Imports
@@ -61,6 +62,9 @@ import RoomBookingList from "../modules/RoomBooking/RoomBookingList";
 import RoomBookingForm from "../modules/RoomBooking/RoomBookingForm";
 import RoomBookingView from "../modules/RoomBooking/RoomBookingView";
 
+import BuildingList from "../modules/Building/BuildingList";
+import RoomTypeList from "../modules/RoomType/RoomTypeList";
+
 
 /**
  * Centralized navigation configuration.
@@ -106,6 +110,20 @@ export const navigationItems = [
         icon: <HomeOutlined />,
         label: "Rooms",
         component: <RoomList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "buildings",
+        icon: <BankOutlined />,
+        label: "Buildings",
+        component: <BuildingList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "room-types",
+        icon: <AppstoreOutlined />,
+        label: "Room Categories",
+        component: <RoomTypeList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
@@ -180,7 +198,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         "items": DOCTYPE_ITEM,
         "inventory-entries": DOCTYPE_INVENTORY_ENTRY,
         "rooms": DOCTYPE_ROOM,
-        "room-bookings": DOCTYPE_ROOM_BOOKING
+        "room-bookings": DOCTYPE_ROOM_BOOKING,
+        "buildings": DOCTYPE_BUILDING,
+        "room-types": DOCTYPE_ROOM_TYPE
     };
 
     const targetDoctype = doctypeMap[baseKey];
@@ -283,6 +303,8 @@ export const groupedNavigationStructure = [
         key: "trust-mgmt",
         children: [
             { key: "temples", label: "Trusts" },
+            { key: "buildings", label: "Buildings" },
+            { key: "room-types", label: "Room Categories" },
             { key: "rooms", label: "Rooms" },
             { key: "room-bookings", label: "Bookings" }
         ]

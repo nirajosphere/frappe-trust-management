@@ -5,5 +5,23 @@
 from frappe.model.document import Document
 
 
+import frappe
+from frappe import _
+
 class Room(Document):
-	pass
+	def validate(self):
+		self.validate_temple_change()
+
+	def validate_temple_change(self):
+		if not self.is_new():
+			db_temple = frappe.db.get_value("Room", self.name, "temple")
+			if db_temple and db_temple != self.temple:
+				# Check for active bookings
+				active_bookings = frappe.db.exists("Room Booking", {
+					"room": self.name,
+					"status": ["in", ["Reserved", "Checked In"]],
+				})
+				if active_bookings:
+					frappe.throw(
+						_("Cannot change the Temple of Room '{0}' because it has active or reserved bookings under the current Temple.").format(self.name)
+					)

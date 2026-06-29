@@ -51,14 +51,47 @@ const RoomBookingForm = ({ id, onBack }) => {
                 check_out: initialValues.check_out ? dayjs(initialValues.check_out) : null
             });
         } else {
-            form.setFieldsValue({
-                status: "Reserved",
-                check_in: dayjs(),
-                check_out: dayjs().add(1, 'day'),
-                number_of_guests: 1
-            });
-            // Fetch available rooms for default dates
-            fetchAvailableRooms(dayjs(), dayjs().add(1, 'day'));
+            const prefilledRoom = localStorage.getItem("prefilled_booking_room");
+            const prefilledCheckIn = localStorage.getItem("prefilled_booking_check_in");
+            const prefilledCheckOut = localStorage.getItem("prefilled_booking_check_out");
+
+            if (prefilledRoom && prefilledCheckIn && prefilledCheckOut) {
+                const cIn = dayjs(prefilledCheckIn);
+                const cOut = dayjs(prefilledCheckOut);
+                form.setFieldsValue({
+                    status: "Booked",
+                    check_in: cIn,
+                    check_out: cOut,
+                    room: prefilledRoom,
+                    number_of_guests: 1
+                });
+                
+                // Fetch available rooms so the dropdown has options
+                fetchAvailableRooms(cIn, cOut);
+
+                // Fetch room temple to prefill temple
+                if (typeof frappe !== "undefined") {
+                    frappe.db.get_value("Room", prefilledRoom, "temple", (r) => {
+                        if (r && r.temple) {
+                            form.setFieldsValue({ temple: r.temple });
+                            fetchAvailableRooms(cIn, cOut, r.temple);
+                        }
+                    });
+                }
+
+                localStorage.removeItem("prefilled_booking_room");
+                localStorage.removeItem("prefilled_booking_check_in");
+                localStorage.removeItem("prefilled_booking_check_out");
+            } else {
+                form.setFieldsValue({
+                    status: "Booked",
+                    check_in: dayjs(),
+                    check_out: dayjs().add(1, 'day'),
+                    number_of_guests: 1
+                });
+                // Fetch available rooms for default dates
+                fetchAvailableRooms(dayjs(), dayjs().add(1, 'day'));
+            }
         }
     }, [isEdit, initialValues, form]);
 
@@ -184,9 +217,19 @@ const RoomBookingForm = ({ id, onBack }) => {
                                             />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="number_of_guests" label="Number of Guests" style={formItemStyle}>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="number_of_guests" label="Guests Count" style={formItemStyle}>
                                             <InputNumber placeholder="1" min={1} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="adults" label="Adults" style={formItemStyle}>
+                                            <InputNumber placeholder="1" min={1} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={8}>
+                                        <Form.Item name="children" label="Children" style={formItemStyle}>
+                                            <InputNumber placeholder="0" min={0} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />
                                         </Form.Item>
                                     </Col>
                                 </Row>
@@ -225,7 +268,7 @@ const RoomBookingForm = ({ id, onBack }) => {
                                             <Select
                                                 placeholder="Select Status"
                                                 options={[
-                                                    { label: "Reserved", value: "Reserved" },
+                                                    { label: "Booked", value: "Booked" },
                                                     { label: "Checked In", value: "Checked In" },
                                                     { label: "Checked Out", value: "Checked Out" },
                                                     { label: "Cancelled", value: "Cancelled" }
@@ -274,6 +317,18 @@ const RoomBookingForm = ({ id, onBack }) => {
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="total_amount" label="Total Amount (₹)" style={formItemStyle}>
                                             <InputNumber placeholder="0.00" min={0} className="w-full" style={{ height: '32px', display: 'flex', alignItems: 'center' }} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col xs={24} sm={12}>
+                                        <Form.Item name="payment_status" label="Payment Status" style={formItemStyle}>
+                                            <Select
+                                                placeholder="Select Payment Status"
+                                                options={[
+                                                    { label: "Pending", value: "Pending" },
+                                                    { label: "Paid", value: "Paid" },
+                                                    { label: "Partial", value: "Partial" }
+                                                ]}
+                                            />
                                         </Form.Item>
                                     </Col>
                                 </Row>

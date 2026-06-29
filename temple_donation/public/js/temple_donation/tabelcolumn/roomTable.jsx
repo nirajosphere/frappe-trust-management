@@ -32,6 +32,20 @@ export const roomColumns = [
         }
     },
     {
+        title: "Building",
+        dataIndex: "building",
+        key: "building",
+        width: 140,
+        render: (b) => b || "-"
+    },
+    {
+        title: "Floor No.",
+        dataIndex: "floor_number",
+        key: "floor_number",
+        width: 100,
+        render: (f) => f ?? 0
+    },
+    {
         title: "Room Type",
         dataIndex: "room_type",
         key: "room_type",
