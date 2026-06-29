@@ -47,7 +47,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Available\nOccupied\nMaintenance"
+   "options": "Available\nReserved\nOccupied\nCleaning\nMaintenance"
   }
  ],
  "grid_page_length": 50,

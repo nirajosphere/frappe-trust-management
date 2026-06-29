@@ -11,7 +11,7 @@ const RoomBookingList = () => {
             description="Manage guest check-ins and accommodation history"
             columns={roomBookingColumns}
             basePath="room-bookings"
-            fields={["name", "donor", "temple", "room", "check_in", "check_out", "total_amount", "status"]}
+            fields={["name", "guest_name", "donor", "temple", "room", "check_in", "check_out", "total_amount", "status", "number_of_guests"]}
         />
     );
 };

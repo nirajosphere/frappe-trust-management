@@ -158,23 +158,13 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"temple_donation.tasks.all"
-# 	],
-# 	"daily": [
-# 		"temple_donation.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"temple_donation.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"temple_donation.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"temple_donation.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"cron": {
+		"* * * * *": [
+			"temple_donation.api.room_booking.update_room_statuses"
+		]
+	}
+}
 
 # Testing
 # -------

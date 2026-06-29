@@ -12,7 +12,10 @@
   "check_out",
   "total_amount",
   "status",
-  "donation"
+  "donation",
+  "guest_id",
+  "number_of_guests",
+  "remarks"
  ],
  "fields": [
   {
@@ -56,13 +59,30 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Booked\nChecked In\nChecked Out\nCancelled"
+   "options": "Reserved\nChecked In\nChecked Out\nCancelled",
+   "default": "Reserved"
   },
   {
    "fieldname": "donation",
    "fieldtype": "Link",
    "label": "Donation",
    "options": "Donation"
+  },
+  {
+   "fieldname": "guest_id",
+   "fieldtype": "Data",
+   "label": "Guest ID"
+  },
+  {
+   "fieldname": "number_of_guests",
+   "fieldtype": "Int",
+   "label": "Number of Guests",
+   "default": "1"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
   }
  ],
  "grid_page_length": 50,
