@@ -63,7 +63,10 @@ import RoomBookingForm from "../modules/RoomBooking/RoomBookingForm";
 import RoomBookingView from "../modules/RoomBooking/RoomBookingView";
 
 import BuildingList from "../modules/Building/BuildingList";
+import BuildingForm from "../modules/Building/BuildingForm";
+
 import RoomTypeList from "../modules/RoomType/RoomTypeList";
+import RoomTypeForm from "../modules/RoomType/RoomTypeForm";
 
 
 /**
@@ -236,7 +239,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     }
 
     if (targetDoctype && subRoute === "view") {
-        const viewProps = { id: dynamicId, onBack: () => navigate(baseKey), onEdit: (doc) => navigate(baseKey, "edit", doc.name) };
+        const isRoomRelated = [DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING, DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE].includes(targetDoctype);
+        const backKey = isRoomRelated ? "rooms" : baseKey;
+        const viewProps = { id: dynamicId, onBack: () => navigate(backKey), onEdit: (doc) => navigate(baseKey, "edit", doc.name) };
         switch (targetDoctype) {
             case DOCTYPE_ITEM: return <ItemView {...viewProps} />;
             case DOCTYPE_INVENTORY_ENTRY: return <InventoryEntryView {...viewProps} />;
@@ -253,12 +258,16 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
 
     if (targetDoctype && (subRoute === "new" || subRoute === "edit")) {
         if (targetDoctype === DOCTYPE_DONATION && subRoute === "new") return <DonationPOS onBack={() => navigate(baseKey)} />;
-        const formProps = { id: dynamicId, onBack: () => navigate(baseKey) };
+        const isRoomRelated = [DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING, DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE].includes(targetDoctype);
+        const backKey = isRoomRelated ? "rooms" : baseKey;
+        const formProps = { id: dynamicId, onBack: () => navigate(backKey) };
         switch (targetDoctype) {
             case DOCTYPE_ITEM: return <ItemForm {...formProps} />;
             case DOCTYPE_INVENTORY_ENTRY: return <InventoryEntryForm {...formProps} />;
             case DOCTYPE_ROOM: return <RoomForm {...formProps} />;
             case DOCTYPE_ROOM_BOOKING: return <RoomBookingForm {...formProps} />;
+            case DOCTYPE_BUILDING: return <BuildingForm {...formProps} />;
+            case DOCTYPE_ROOM_TYPE: return <RoomTypeForm {...formProps} />;
             case DOCTYPE_DONOR: return <DonorForm {...formProps} />;
             case DOCTYPE_TEMPLE: return <TempleForm {...formProps} />;
             case DOCTYPE_DONATION: return <DonationForm {...formProps} />;
@@ -303,10 +312,7 @@ export const groupedNavigationStructure = [
         key: "trust-mgmt",
         children: [
             { key: "temples", label: "Trusts" },
-            { key: "buildings", label: "Buildings" },
-            { key: "room-types", label: "Room Categories" },
-            { key: "rooms", label: "Rooms" },
-            { key: "room-bookings", label: "Bookings" }
+            { key: "rooms", label: "Rooms" }
         ]
     },
     {

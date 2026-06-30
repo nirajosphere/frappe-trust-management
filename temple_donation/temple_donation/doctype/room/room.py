@@ -11,6 +11,20 @@ from frappe import _
 class Room(Document):
 	def validate(self):
 		self.validate_temple_change()
+		self.validate_unique_room_number()
+
+	def validate_unique_room_number(self):
+		if not self.room_number or not self.temple:
+			return
+		duplicate = frappe.db.exists("Room", {
+			"temple": self.temple,
+			"room_number": self.room_number,
+			"name": ["!=", self.name]
+		})
+		if duplicate:
+			frappe.throw(
+				_("Room number '{0}' already exists in the selected Temple.").format(self.room_number)
+			)
 
 	def validate_temple_change(self):
 		if not self.is_new():

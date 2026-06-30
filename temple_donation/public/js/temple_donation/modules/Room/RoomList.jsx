@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tabs } from "antd";
 import { 
     UnorderedListOutlined, DashboardOutlined, CalendarOutlined, 
-    BuildOutlined, ImportOutlined 
+    BuildOutlined, ImportOutlined, ScheduleOutlined, AppstoreOutlined, BankOutlined
 } from "@ant-design/icons";
 import ListingPage from "../../components/common/ListingPage";
 import { DOCTYPE_ROOM } from "../../config/constants";
@@ -13,15 +13,50 @@ import BulkRoomGenerator from "./components/BulkRoomGenerator";
 import RoomImport from "./components/RoomImport";
 import ViewContainer from "../../components/common/ViewContainer";
 
+// Import other lists to render as tabs
+import RoomBookingList from "../RoomBooking/RoomBookingList";
+import RoomTypeList from "../RoomType/RoomTypeList";
+import BuildingList from "../Building/BuildingList";
+
 const RoomList = () => {
-    const [activeTab, setActiveTab] = useState("list");
+    const [activeTab, setActiveTab] = useState("dashboard");
 
     const tabItems = [
+        {
+            key: "dashboard",
+            label: (
+                <span>
+                    <DashboardOutlined style={{ marginRight: 8 }} />
+                    Room Dashboard
+                </span>
+            ),
+            children: <RoomDashboard />
+        },
+        {
+            key: "calendar",
+            label: (
+                <span>
+                    <CalendarOutlined style={{ marginRight: 8 }} />
+                    Booking Calendar
+                </span>
+            ),
+            children: <RoomCalendar />
+        },
+        {
+            key: "bookings",
+            label: (
+                <span>
+                    <ScheduleOutlined style={{ marginRight: 8 }} />
+                    Bookings
+                </span>
+            ),
+            children: <RoomBookingList />
+        },
         {
             key: "list",
             label: (
                 <span>
-                    <UnorderedListOutlined />
+                    <UnorderedListOutlined style={{ marginRight: 8 }} />
                     Room Directory
                 </span>
             ),
@@ -37,30 +72,30 @@ const RoomList = () => {
             )
         },
         {
-            key: "dashboard",
+            key: "buildings",
             label: (
                 <span>
-                    <DashboardOutlined />
-                    Room Dashboard
+                    <BankOutlined style={{ marginRight: 8 }} />
+                    Buildings
                 </span>
             ),
-            children: <RoomDashboard />
+            children: <BuildingList />
         },
         {
-            key: "calendar",
+            key: "room-types",
             label: (
                 <span>
-                    <CalendarOutlined />
-                    Booking Calendar
+                    <AppstoreOutlined style={{ marginRight: 8 }} />
+                    Room Categories
                 </span>
             ),
-            children: <RoomCalendar />
+            children: <RoomTypeList />
         },
         {
             key: "generator",
             label: (
                 <span>
-                    <BuildOutlined />
+                    <BuildOutlined style={{ marginRight: 8 }} />
                     Bulk Generator
                 </span>
             ),
@@ -70,7 +105,7 @@ const RoomList = () => {
             key: "import",
             label: (
                 <span>
-                    <ImportOutlined />
+                    <ImportOutlined style={{ marginRight: 8 }} />
                     CSV Import
                 </span>
             ),

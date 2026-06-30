@@ -7,7 +7,18 @@ const { Title, Text } = Typography;
 
 const RoomCalendar = () => {
     const [selectedTemple, setSelectedTemple] = useState(null);
-    const [startDate, setStartDate] = useState(new Date());
+    
+    // Helper to get the Monday of any date
+    const getMonday = (d) => {
+        const date = new Date(d);
+        const day = date.getDay();
+        const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when Day is Sunday
+        const monday = new Date(date.setDate(diff));
+        monday.setHours(0, 0, 0, 0);
+        return monday;
+    };
+
+    const [startDate, setStartDate] = useState(() => getMonday(new Date()));
     const [rooms, setRooms] = useState([]);
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -18,7 +29,7 @@ const RoomCalendar = () => {
         limit: 1000
     });
 
-    // 7-day range starting from startDate
+    // 7-day range starting from Monday startDate
     const getDatesRange = () => {
         const range = [];
         for (let i = 0; i < 7; i++) {
@@ -100,24 +111,49 @@ const RoomCalendar = () => {
     };
 
     const handleToday = () => {
-        setStartDate(new Date());
+        setStartDate(getMonday(new Date()));
     };
 
     const handleNewBooking = (roomName, date) => {
         if (typeof frappe !== "undefined") {
             const checkIn = new Date(date);
-            checkIn.setHours(12, 0, 0, 0); // standard checkin
             const checkOut = new Date(date);
             checkOut.setDate(checkOut.getDate() + 1);
-            checkOut.setHours(11, 0, 0, 0); // standard checkout
 
-            // Set route with parameters if needed or go to new booking
-            // Using Frappe route setting
+            const formatLocalDate = (d, hours) => {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const hh = String(hours).padStart(2, '0');
+                return `${year}-${month}-${day}T${hh}:00:00`;
+            };
+
+            const checkInStr = formatLocalDate(checkIn, 12);
+            const checkOutStr = formatLocalDate(checkOut, 11);
+
             frappe.set_route("temple-donation", "room-bookings", "new");
-            // We can pass state in localStorage to auto-populate the form
             localStorage.setItem("prefilled_booking_room", roomName);
-            localStorage.setItem("prefilled_booking_check_in", checkIn.toISOString().substring(0, 16));
-            localStorage.setItem("prefilled_booking_check_out", checkOut.toISOString().substring(0, 16));
+            localStorage.setItem("prefilled_booking_check_in", checkInStr);
+            localStorage.setItem("prefilled_booking_check_out", checkOutStr);
+        }
+    };
+
+    const getCalendarHeaderTitle = () => {
+        const start = dates[0];
+        const end = dates[dates.length - 1];
+        if (!start || !end) return "";
+        
+        const startMonth = start.toLocaleDateString("en-IN", { month: "long" });
+        const startYear = start.getFullYear();
+        const endMonth = end.toLocaleDateString("en-IN", { month: "long" });
+        const endYear = end.getFullYear();
+
+        if (startYear !== endYear) {
+            return `${startMonth} ${startYear} - ${endMonth} ${endYear}`;
+        } else if (startMonth !== endMonth) {
+            return `${startMonth} - ${endMonth} ${startYear}`;
+        } else {
+            return `${startMonth} ${startYear}`;
         }
     };
 
@@ -152,27 +188,80 @@ const RoomCalendar = () => {
                 width: 140,
                 align: "center",
                 render: (_, record) => {
-                    // Check if there is a booking overlapping this day
-                    const cellDateStart = new Date(date);
-                    cellDateStart.setHours(0, 0, 0, 0);
-                    const cellDateEnd = new Date(date);
-                    cellDateEnd.setHours(23, 59, 59, 999);
+                    // Pre-calculate bookings for all 7 days of the week for this room row
+                    const dayBookings = dates.map(d => {
+                        const cellDateStart = new Date(d);
+                        cellDateStart.setHours(0, 0, 0, 0);
+                        const cellDateEnd = new Date(d);
+                        cellDateEnd.setHours(23, 59, 59, 999);
 
-                    const booking = bookings.find(b => {
-                        if (b.room !== record.name) return false;
-                        const bStart = new Date(b.check_in);
-                        const bEnd = new Date(b.check_out);
-                        return bStart <= cellDateEnd && bEnd >= cellDateStart;
+                        return bookings.find(b => {
+                            if (b.room !== record.name) return false;
+                            const bStart = new Date(b.check_in);
+                            const bEnd = new Date(b.check_out);
+                            return bStart <= cellDateEnd && bEnd >= cellDateStart;
+                        });
                     });
 
-                    if (booking) {
-                        const isCheckedIn = booking.status === "Checked In";
-                        return (
+                    const currentBooking = dayBookings[idx];
+
+                    // Empty cell
+                    if (!currentBooking) {
+                        return {
+                            children: (
+                                <div 
+                                    style={{
+                                        height: "36px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        cursor: "pointer",
+                                        borderRadius: "6px",
+                                        border: "1px dashed transparent"
+                                    }}
+                                    className="hover:border-blue-300 hover:bg-blue-50"
+                                    onClick={() => handleNewBooking(record.name, date)}
+                                >
+                                    <PlusOutlined style={{ color: "#d1d5db" }} />
+                                </div>
+                            ),
+                            props: {
+                                colSpan: 1
+                            }
+                        };
+                    }
+
+                    // Check if this booking began on a previous day in this week's visible range
+                    const isFirstDayOfBookingInView = idx === 0 || dayBookings[idx - 1]?.name !== currentBooking.name;
+
+                    if (!isFirstDayOfBookingInView) {
+                        // This day is covered by a merge, hide this cell
+                        return {
+                            children: null,
+                            props: {
+                                colSpan: 0
+                            }
+                        };
+                    }
+
+                    // Calculate how many consecutive days the booking spans in this view from this point
+                    let colSpan = 1;
+                    for (let k = idx + 1; k < 7; k++) {
+                        if (dayBookings[k]?.name === currentBooking.name) {
+                            colSpan++;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    const isCheckedIn = currentBooking.status === "Checked In";
+                    return {
+                        children: (
                             <Tooltip title={
                                 <div>
-                                    <p>Guest: {booking.guest_name}</p>
-                                    <p>Check-in: {new Date(booking.check_in).toLocaleDateString()}</p>
-                                    <p>Check-out: {new Date(booking.check_out).toLocaleDateString()}</p>
+                                    <p>Guest: {currentBooking.guest_name}</p>
+                                    <p>Check-in: {new Date(currentBooking.check_in).toLocaleDateString()}</p>
+                                    <p>Check-out: {new Date(currentBooking.check_out).toLocaleDateString()}</p>
                                 </div>
                             }>
                                 <div 
@@ -188,36 +277,21 @@ const RoomCalendar = () => {
                                         cursor: "pointer",
                                         overflow: "hidden",
                                         textOverflow: "ellipsis",
-                                        whiteSpace: "nowrap"
+                                        whiteSpace: "nowrap",
+                                        width: "100%"
                                     }}
                                     onClick={() => {
-                                        frappe.set_route("temple-donation", "room-bookings", "view", booking.name);
+                                        frappe.set_route("temple-donation", "room-bookings", "view", currentBooking.name);
                                     }}
                                 >
-                                    {booking.guest_name}
+                                    {currentBooking.guest_name}
                                 </div>
                             </Tooltip>
-                        );
-                    }
-
-                    // Empty cell
-                    return (
-                        <div 
-                            style={{
-                                height: "36px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                cursor: "pointer",
-                                borderRadius: "6px",
-                                border: "1px dashed transparent"
-                            }}
-                            className="hover:border-blue-300 hover:bg-blue-50"
-                            onClick={() => handleNewBooking(record.name, date)}
-                        >
-                            <PlusOutlined style={{ color: "#d1d5db" }} />
-                        </div>
-                    );
+                        ),
+                        props: {
+                            colSpan: colSpan
+                        }
+                    };
                 }
             };
         })
@@ -237,12 +311,16 @@ const RoomCalendar = () => {
                     <Title level={2} style={{ margin: 0 }}>Room Calendar</Title>
                     <Text type="secondary">Interactive weekly booking calendar and quick reservation matrix</Text>
                 </div>
-                <Space size="middle">
+                <Space size="middle" style={{ display: "flex", alignItems: "center" }}>
                     <Button.Group>
                         <Button icon={<LeftOutlined />} onClick={handlePrevWeek} />
                         <Button onClick={handleToday}>Today</Button>
                         <Button icon={<RightOutlined />} onClick={handleNextWeek} />
                     </Button.Group>
+
+                    <Text strong style={{ fontSize: "16px", marginLeft: "8px", marginRight: "8px" }}>
+                        {getCalendarHeaderTitle()}
+                    </Text>
 
                     <Select 
                         showSearch 

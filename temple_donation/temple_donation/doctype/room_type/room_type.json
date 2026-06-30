@@ -1,7 +1,8 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-06-29 12:00:00.000000",
+ "autoname": "ROOM-.####",
+ "creation": "2026-06-29 12:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -21,16 +22,16 @@
    "unique": 1
   },
   {
+   "default": "2",
    "fieldname": "default_capacity",
    "fieldtype": "Int",
-   "label": "Default Capacity",
-   "default": "2"
+   "label": "Default Capacity"
   },
   {
+   "default": "0",
    "fieldname": "default_price_per_day",
    "fieldtype": "Currency",
-   "label": "Default Price Per Day",
-   "default": "0"
+   "label": "Default Price Per Day"
   },
   {
    "default": "1",
@@ -47,10 +48,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-29 12:00:00.000000",
+ "modified": "2026-06-29 14:29:21.848018",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Room Type",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -81,5 +83,6 @@
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

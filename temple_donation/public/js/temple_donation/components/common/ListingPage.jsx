@@ -346,6 +346,18 @@ const ListingPage = ({
         limit: 1000
     });
 
+    // Fetch Buildings list for link field mapping in columns
+    const { data: buildings } = useFrappeGetDocList("Building", {
+        fields: ["name", "building_name"],
+        limit: 1000
+    });
+
+    // Fetch Room Types list for link field mapping in columns
+    const { data: roomTypes } = useFrappeGetDocList("Room Type", {
+        fields: ["name", "room_type_name"],
+        limit: 1000
+    });
+
 
 
     const [enrichedData, setEnrichedData] = useState([]);
@@ -425,6 +437,16 @@ const ListingPage = ({
                     const rB = rooms?.find(item => item.name === valB);
                     valA = rA ? rA.room_number : valA;
                     valB = rB ? rB.room_number : valB;
+                } else if (field === "building") {
+                    const bA = buildings?.find(item => item.name === valA);
+                    const bB = buildings?.find(item => item.name === valB);
+                    valA = bA ? bA.building_name : valA;
+                    valB = bB ? bB.building_name : valB;
+                } else if (field === "room_type") {
+                    const rtA = roomTypes?.find(item => item.name === valA);
+                    const rtB = roomTypes?.find(item => item.name === valB);
+                    valA = rtA ? rtA.room_type_name : valA;
+                    valB = rtB ? rtB.room_type_name : valB;
                 }
 
                 if (valA === valB) continue;
@@ -448,7 +470,7 @@ const ListingPage = ({
             }
             return 0;
         });
-    }, [enrichedData, appliedSorters, temples, donors, rooms]);
+    }, [enrichedData, appliedSorters, temples, donors, rooms, buildings, roomTypes]);
 
     const handleAdd = () => {
         if (typeof frappe !== "undefined" && basePath) {
@@ -564,9 +586,38 @@ const ListingPage = ({
                     }
                 };
             }
+            if (col.dataIndex === "building") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const b = buildings?.find(item => item.name === text);
+                        return b ? b.building_name : text;
+                    }
+                };
+            }
+            if (col.dataIndex === "room_type") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const rt = roomTypes?.find(item => item.name === text);
+                        const name = rt ? rt.room_type_name : text;
+                        const matchedRole = name === "AC" ? "super admin" : name === "Non-AC" ? "default" : "manager";
+                        const config = getTagConfig(matchedRole);
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {name}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
             return col;
         });
-    }, [visibleColumns, temples, donations, donors, rooms]);
+    }, [visibleColumns, temples, donations, donors, rooms, buildings, roomTypes]);
 
     if (error) {
         return (
