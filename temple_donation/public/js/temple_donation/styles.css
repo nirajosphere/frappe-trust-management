@@ -1401,6 +1401,7 @@
 .temple-donation-app .aavatto-premium-table .ant-table-cell-fix-right {
   background: #ffffff !important;
   z-index: 2 !important;
+  transition: background-color 0.2s ease !important;
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-thead > tr > th.ant-table-cell-fix-left,
@@ -1459,7 +1460,12 @@
 }
 
 .temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td {
-  background: rgba(0, 0, 0, 0.01) !important;
+  background: #f8fafc !important;
+}
+
+.temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td.ant-table-cell-fix-left,
+.temple-donation-app .aavatto-premium-table .ant-table-tbody > tr:hover > td.ant-table-cell-fix-right {
+  background: #f8fafc !important;
 }
 
 .temple-donation-app {

@@ -237,6 +237,7 @@
     .ant-table-cell-fix-right {
       background: #ffffff !important;
       z-index: 2 !important;
+      transition: background-color 0.2s ease !important;
     }
 
     .ant-table-thead > tr > th.ant-table-cell-fix-left,
@@ -292,7 +293,12 @@
     }
 
     .ant-table-tbody>tr:hover>td {
-      background: rgba(0, 0, 0, 0.01) !important;
+      background: #f8fafc !important;
+    }
+
+    .ant-table-tbody>tr:hover>td.ant-table-cell-fix-left,
+    .ant-table-tbody>tr:hover>td.ant-table-cell-fix-right {
+      background: #f8fafc !important;
     }
   }
 
