@@ -40,7 +40,8 @@ const ListingPage = ({
     allowExport = true,
     exportOptions = ["csv", "excel", "pdf"],
     addLabel,
-    allowFilter = true
+    allowFilter = true,
+    extra
 }) => {
     const [appliedFilters, setAppliedFilters] = useState([]);
     const [appliedSorters, setAppliedSorters] = useState([]);
@@ -658,6 +659,7 @@ const ListingPage = ({
                     onRefreshViews={fetchSavedViews}
                     customizedColumns={customizedColumns}
                     onSaveColumns={handleSaveColumns}
+                    extra={extra}
                 />
 
                 {allowFilter && savedViews.length > 0 && (
@@ -681,7 +683,7 @@ const ListingPage = ({
                                 okText: 'Delete',
                                 okType: 'danger',
                                 cancelText: 'Cancel',
-                                okButtonProps: { style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' } },
+                                okButtonProps: { style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f', color: '#fff' } },
                                 onOk() {
                                     if (typeof frappe !== "undefined") {
                                         frappe.call({

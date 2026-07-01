@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Alert, Tag, Button } from "antd";
 import { Box, ShieldAlert, FileText, CheckCircle2, Warehouse } from "lucide-react";
 import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
@@ -17,6 +17,27 @@ const ItemView = ({ id, onBack, onEdit }) => {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+    const [valuationRate, setValuationRate] = useState(0.0);
+
+    useEffect(() => {
+        if (doc && doc.name && typeof frappe !== "undefined") {
+            frappe.call({
+                method: "frappe.client.get_list",
+                args: {
+                    doctype: "Inventory Item",
+                    filters: { item: doc.name },
+                    fields: ["rate"],
+                    order_by: "creation desc",
+                    limit: 1
+                },
+                callback: (r) => {
+                    if (r.message && r.message.length > 0) {
+                        setValuationRate(Number(r.message[0].rate || 0));
+                    }
+                }
+            });
+        }
+    }, [doc]);
 
     if (loading) return <PageLoader />;
 
@@ -42,11 +63,16 @@ const ItemView = ({ id, onBack, onEdit }) => {
     }
 
     const unitTag = getTagConfig(doc.unit || "Nos");
-    const stockStatus = (doc.total_stock || 0) <= 0 ? "Inactive" : "Active";
-    const stockTag = getTagConfig(stockStatus);
+    const stockVal = Number(doc.total_stock || 0);
+    const thresholdVal = Number(doc.minimum_stock || 0);
+    const isLowStock = stockVal <= 0 ? "inactive" : stockVal < thresholdVal ? "super admin" : "active";
+    const stockStatus = stockVal <= 0 ? "Out of Stock" : stockVal < thresholdVal ? "Low Stock" : "In Stock";
+    const stockTag = getTagConfig(isLowStock);
     
     const templeObj = temples?.find(t => t.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
+
+    const activeConfig = getTagConfig(doc.status === "Active" ? "active" : "inactive");
 
     return (
         <ViewContainer className="item-view-container">
@@ -94,6 +120,16 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
+                                    <FieldCell label="Category">
+                                        <span className="text-zinc-800 font-semibold">{doc.item_category || "—"}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Store Location">
+                                        <span className="text-zinc-800 font-semibold">{doc.store_location || "—"}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
                                     <FieldCell label="Unit of Measure">
                                         <Tag className={`tag-glass ${unitTag.glassClass} font-bold rounded-full !m-0`}>
                                             {doc.unit || "—"}
@@ -106,10 +142,34 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
+                                    <FieldCell label="Valuation Rate">
+                                        <span className="text-zinc-800 font-semibold">₹{Number(valuationRate || 0).toFixed(2)}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Low Stock Threshold">
+                                        <span className="text-zinc-800 font-semibold">{doc.minimum_stock || 0}</span>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
+                                    <FieldCell label="Active Status">
+                                        <Tag className={`tag-glass ${activeConfig.glassClass} font-bold rounded-full !m-0`}>
+                                            {doc.status === "Active" ? "Active" : "Inactive"}
+                                        </Tag>
+                                    </FieldCell>
+                                </Col>
+                                <Col xs={24} sm={12}>
                                     <FieldCell label="Total Stock Available">
                                         <span className="text-xl font-bold text-zinc-900">{doc.total_stock || 0}</span>
                                     </FieldCell>
                                 </Col>
+                                {doc.description && (
+                                    <Col xs={24}>
+                                        <FieldCell label="Description">
+                                            <span className="text-zinc-700">{doc.description}</span>
+                                        </FieldCell>
+                                    </Col>
+                                )}
                             </Row>
                         </SectionCard>
                     </div>
@@ -133,6 +193,13 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                         label: "Current Quantity", value: (
                                             <span className="text-xs font-semibold text-zinc-800">
                                                 {doc.total_stock || 0} {doc.unit || "units"}
+                                            </span>
+                                        )
+                                    },
+                                    {
+                                        label: "Stock Value", value: (
+                                            <span className="text-xs font-bold text-zinc-900">
+                                                ₹{(Number(doc.total_stock || 0) * Number(doc.valuation_rate || 0)).toFixed(2)}
                                             </span>
                                         )
                                     }

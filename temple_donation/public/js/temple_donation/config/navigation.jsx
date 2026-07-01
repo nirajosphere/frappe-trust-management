@@ -15,7 +15,7 @@ import DonationPOS from "../modules/Donation/Donation";
 import {
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER,
     DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING,
-    DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE
+    DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE, DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION
 } from "./constants";
 
 // Module Imports
@@ -45,9 +45,18 @@ import LedgerView from "../modules/Ledger/LedgerView";
 import CommonView from "../components/common/CommonView";
 
 // Inventory Management
+import InventoryDashboard from "../modules/InventoryDashboard/InventoryDashboard";
+
 import ItemList from "../modules/Item/ItemList";
 import ItemForm from "../modules/Item/ItemForm";
 import ItemView from "../modules/Item/ItemView";
+import ItemBulkImporter from "../modules/Item/ItemBulkImporter";
+
+import ItemCategoryList from "../modules/ItemCategory/ItemCategoryList";
+import ItemCategoryForm from "../modules/ItemCategory/ItemCategoryForm";
+
+import StoreLocationList from "../modules/StoreLocation/StoreLocationList";
+import StoreLocationForm from "../modules/StoreLocation/StoreLocationForm";
 
 import InventoryEntryList from "../modules/InventoryEntry/InventoryEntryList";
 import InventoryEntryForm from "../modules/InventoryEntry/InventoryEntryForm";
@@ -95,10 +104,31 @@ export const navigationItems = [
     //     roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     // },
     {
+        key: "inventory-dashboard",
+        icon: <DashboardOutlined />,
+        label: "Inventory Dashboard",
+        component: <InventoryDashboard />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
         key: "items",
         icon: <AppstoreOutlined />,
         label: "Items",
         component: <ItemList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "item-categories",
+        icon: <AppstoreOutlined />,
+        label: "Item Categories",
+        component: <ItemCategoryList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "store-locations",
+        icon: <BankOutlined />,
+        label: "Store Locations",
+        component: <StoreLocationList />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
@@ -199,6 +229,8 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         "donation-types": DOCTYPE_DONATION_TYPE,
         "users": DOCTYPE_USER,
         "items": DOCTYPE_ITEM,
+        "item-categories": DOCTYPE_ITEM_CATEGORY,
+        "store-locations": DOCTYPE_STORE_LOCATION,
         "inventory-entries": DOCTYPE_INVENTORY_ENTRY,
         "rooms": DOCTYPE_ROOM,
         "room-bookings": DOCTYPE_ROOM_BOOKING,
@@ -229,6 +261,10 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             frappe.set_route(...route);
         }
     };
+
+    if (baseKey === "items" && subRoute === "import") {
+        return <ItemBulkImporter onBack={() => navigate("items")} />;
+    }
 
     // Special handling for Ledger and other non-standard modules
     if (baseKey === "ledger") {
@@ -263,6 +299,8 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         const formProps = { id: dynamicId, onBack: () => navigate(backKey) };
         switch (targetDoctype) {
             case DOCTYPE_ITEM: return <ItemForm {...formProps} />;
+            case DOCTYPE_ITEM_CATEGORY: return <ItemCategoryForm {...formProps} />;
+            case DOCTYPE_STORE_LOCATION: return <StoreLocationForm {...formProps} />;
             case DOCTYPE_INVENTORY_ENTRY: return <InventoryEntryForm {...formProps} />;
             case DOCTYPE_ROOM: return <RoomForm {...formProps} />;
             case DOCTYPE_ROOM_BOOKING: return <RoomBookingForm {...formProps} />;
@@ -328,7 +366,10 @@ export const groupedNavigationStructure = [
         label: "Inventory",
         key: "inventory-group",
         children: [
+            { key: "inventory-dashboard", label: "Inventory Dashboard" },
             { key: "items", label: "Items" },
+            { key: "item-categories", label: "Item Categories" },
+            { key: "store-locations", label: "Store Locations" },
             { key: "inventory-entries", label: "Stock Entries" }
         ]
     },

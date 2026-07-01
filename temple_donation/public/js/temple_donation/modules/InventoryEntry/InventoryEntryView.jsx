@@ -14,20 +14,21 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const InventoryEntryView = ({ id, onBack, onEdit }) => {
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+    
     const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+    
     const { data: donations } = useFrappeGetDocList("Donation", {
         fields: ["name", "donor_name", "total_amount"],
         limit: 1000
     });
+    
     const { data: items } = useFrappeGetDocList("Item", {
         fields: ["name", "item_name", "item_code"],
         limit: 1000
     });
-
-
 
     if (loading) return <PageLoader />;
 
@@ -52,7 +53,21 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
         );
     }
 
-    const typeTag = getTagConfig(doc.entry_type === "IN" ? "active" : "inactive");
+    const entryTypeMap = {
+        "Stock In": "Receipt",
+        "Stock Out": "Issue",
+        "Stock Adjustment": "Adjustment",
+        "IN": "Receipt",
+        "OUT": "Issue"
+    };
+    const purpose = entryTypeMap[doc.entry_type] || doc.entry_type || "Receipt";
+
+    let purposeStatus = "default";
+    if (purpose === "Receipt") purposeStatus = "active";
+    else if (purpose === "Issue") purposeStatus = "inactive";
+    else if (purpose === "Transfer" || purpose === "Adjustment") purposeStatus = "manager";
+    const purposeTag = getTagConfig(purposeStatus);
+
     const refTag = getTagConfig(doc.reference_type || "Manual");
     
     const templeObj = temples?.find(t => t.name === doc.temple);
@@ -62,7 +77,6 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
     const referenceNameDisplay = donationObj 
         ? `${donationObj.donor_name || 'Anonymous'} (₹${parseFloat(donationObj.total_amount).toFixed(2)}) - ${doc.reference_name}`
         : (doc.reference_name || "—");
-
 
     const itemColumns = [
         {
@@ -80,10 +94,26 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
             dataIndex: "qty",
             key: "qty",
             align: "right",
-            render: (qty) => <span className="font-bold text-zinc-900">{qty}</span>
+            render: (qty) => <span className="font-bold text-zinc-950">{qty}</span>
+        },
+        {
+            title: "Valuation Rate",
+            dataIndex: "rate",
+            key: "rate",
+            align: "right",
+            render: (rate) => <span className="text-zinc-700">₹{Number(rate || 0).toFixed(2)}</span>
+        },
+        {
+            title: "Total Amount",
+            dataIndex: "total_amount",
+            key: "total_amount",
+            align: "right",
+            render: (amt) => <span className="font-semibold text-zinc-900">₹{Number(amt || 0).toFixed(2)}</span>
         }
     ];
 
+    // Calculate total entry value
+    const totalEntryValue = doc.items?.reduce((sum, item) => sum + Number(item.total_amount || 0), 0) || 0;
 
     return (
         <ViewContainer className="stock-entry-view-container">
@@ -92,8 +122,8 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                 onBack={onBack}
                 title={`Stock Entry: ${doc.name}`}
                 subtitle={`Posting Date: ${doc.posting_date ? dayjs(doc.posting_date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}`}
-                initials={doc.entry_type || "S"}
-                tags={[doc.entry_type]}
+                initials={purpose?.charAt(0) || "S"}
+                tags={[purpose || "Receipt"]}
                 actions={
                     <>
                         <Button
@@ -122,9 +152,9 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                         <SectionCard title="Entry Details" icon={<History size={15} className="text-zinc-800" />}>
                             <Row gutter={[16, 16]}>
                                 <Col xs={24} sm={12}>
-                                    <FieldCell label="Entry Type">
-                                        <Tag className={`tag-glass ${typeTag.glassClass} font-bold rounded-full !m-0`}>
-                                            {doc.entry_type}
+                                    <FieldCell label="Purpose">
+                                        <Tag className={`tag-glass ${purposeTag.glassClass} font-bold rounded-full !m-0`}>
+                                            {purpose || "Receipt"}
                                         </Tag>
                                     </FieldCell>
                                 </Col>
@@ -133,6 +163,23 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                         <span className="text-zinc-800 font-semibold">{templeName}</span>
                                     </FieldCell>
                                 </Col>
+
+                                {(purpose === "Issue" || purpose === "Transfer") && (
+                                    <Col xs={24} sm={12}>
+                                        <FieldCell label="Source Location">
+                                            <span className="text-zinc-800 font-semibold">{doc.source_location || "—"}</span>
+                                        </FieldCell>
+                                    </Col>
+                                )}
+
+                                {(purpose === "Receipt" || purpose === "Transfer") && (
+                                    <Col xs={24} sm={12}>
+                                        <FieldCell label="Target Location">
+                                            <span className="text-zinc-800 font-semibold">{doc.target_location || "—"}</span>
+                                        </FieldCell>
+                                    </Col>
+                                )}
+
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Reference Type">
                                         <Tag className={`tag-glass ${refTag.glassClass} font-bold rounded-full !m-0`}>
@@ -146,6 +193,13 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
 
+                                {doc.remarks && (
+                                    <Col xs={24}>
+                                        <FieldCell label="Remarks">
+                                            <span className="text-zinc-700">{doc.remarks}</span>
+                                        </FieldCell>
+                                    </Col>
+                                )}
                             </Row>
                         </SectionCard>
 
@@ -167,24 +221,23 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                 <Col xs={24} lg={7}>
                     <div className="sticky top-6 flex flex-col gap-6">
                         {/* Reference Summary Card */}
-                        <SectionCard title="Reference Details" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
+                        <SectionCard title="Transaction Summary" icon={<ShieldAlert size={15} className="text-zinc-800" />}>
                             <div className="flex flex-col gap-3 py-1">
                                 {[
                                     {
-                                        label: "Source Type", value: (
-                                            <Tag className={`tag-glass ${refTag.glassClass} !m-0`}>
-                                                {doc.reference_type || "Manual"}
-                                            </Tag>
+                                        label: "Total Items", value: (
+                                            <span className="text-xs font-semibold text-zinc-800">
+                                                {doc.items?.length || 0} line items
+                                            </span>
                                         )
                                     },
                                     {
-                                        label: "Source Name", value: (
-                                            <span className="text-xs font-semibold text-zinc-800">
-                                                {referenceNameDisplay}
+                                        label: "Total Value", value: (
+                                            <span className="text-sm font-bold text-zinc-950">
+                                                ₹{totalEntryValue.toFixed(2)}
                                             </span>
                                         )
                                     }
-
                                 ].map(({ label, value }) => (
                                     <div key={label} className="flex justify-between items-center gap-4 border-b border-zinc-50 pb-2 last:border-0 last:pb-0">
                                         <span className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{label}</span>

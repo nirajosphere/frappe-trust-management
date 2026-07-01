@@ -9,7 +9,15 @@
   "item_code",
   "unit",
   "temple",
-  "total_stock"
+  "item_category",
+  "store_location",
+  "minimum_stock",
+  "maximum_stock",
+  "total_stock",
+  "current_stock",
+  "item_image",
+  "status",
+  "description"
  ],
  "fields": [
   {
@@ -37,16 +45,66 @@
    "options": "Temple"
   },
   {
+   "fieldname": "item_category",
+   "fieldtype": "Link",
+   "label": "Item Category",
+   "options": "Item Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "store_location",
+   "fieldtype": "Link",
+   "label": "Store Location",
+   "options": "Store Location"
+  },
+  {
+   "fieldname": "minimum_stock",
+   "fieldtype": "Float",
+   "label": "Minimum Stock",
+   "default": "0"
+  },
+  {
+   "fieldname": "maximum_stock",
+   "fieldtype": "Float",
+   "label": "Maximum Stock",
+   "default": "0"
+  },
+  {
    "fieldname": "total_stock",
    "fieldtype": "Float",
    "label": "Total Stock",
-   "read_only": 1
+   "read_only": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "current_stock",
+   "fieldtype": "Float",
+   "label": "Current Stock",
+   "read_only": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "item_image",
+   "fieldtype": "Attach Image",
+   "label": "Item Image"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-22 14:21:13.580528",
+ "modified": "2026-07-01 12:00:00.580528",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Item",

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Alert, Select, Row, Col, Typography
+    Form, Input, Button, Alert, Select, Row, Col, Typography, InputNumber, Checkbox
 } from "antd";
 import {
     useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
-import { DOCTYPE_ITEM } from "../../config/constants";
+import { DOCTYPE_ITEM, DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
@@ -28,18 +28,41 @@ const ItemForm = ({ id, onBack }) => {
         limit: 1000
     });
 
+    // Fetch Item Categories list
+    const { data: categories, loading: loadingCategories } = useFrappeGetDocList(DOCTYPE_ITEM_CATEGORY, {
+        fields: ["name", "category_name"],
+        limit: 1000
+    });
+
+    // Fetch Store Locations list
+    const { data: locations, loading: loadingLocations } = useFrappeGetDocList(DOCTYPE_STORE_LOCATION, {
+        fields: ["name", "location_name"],
+        limit: 1000
+    });
+
     useEffect(() => {
         if (isEdit && initialValues) {
-            form.setFieldsValue(initialValues);
+            form.setFieldsValue({
+                ...initialValues,
+                active: initialValues.status === "Active"
+            });
+        } else if (!isEdit) {
+            form.setFieldsValue({ active: true });
         }
     }, [isEdit, initialValues, form]);
 
     const handleSave = async (values) => {
         try {
+            const mappedValues = {
+                ...values,
+                status: values.active ? "Active" : "Inactive"
+            };
+            delete mappedValues.active;
+            delete mappedValues.valuation_rate;
             if (isEdit) {
-                await updateDoc(DOCTYPE_ITEM, id, values);
+                await updateDoc(DOCTYPE_ITEM, id, mappedValues);
             } else {
-                await createDoc(DOCTYPE_ITEM, values);
+                await createDoc(DOCTYPE_ITEM, mappedValues);
             }
             if (onBack) onBack();
         } catch (err) {
@@ -87,6 +110,40 @@ const ItemForm = ({ id, onBack }) => {
 
                         <Col xs={24} md={12}>
                             <Form.Item
+                                name="item_category"
+                                label="Category"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Please select category!" }]}
+                            >
+                                <Select 
+                                    showSearch
+                                    placeholder="Select Category" 
+                                    optionFilterProp="children"
+                                    loading={loadingCategories}
+                                    options={categories?.map(c => ({ label: c.category_name, value: c.name })) || []}
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="store_location"
+                                label="Store Location"
+                                style={formItemStyle}
+                                rules={[{ required: true, message: "Please select store location!" }]}
+                            >
+                                <Select 
+                                    showSearch
+                                    placeholder="Select Location" 
+                                    optionFilterProp="children"
+                                    loading={loadingLocations}
+                                    options={locations?.map(l => ({ label: l.location_name, value: l.name })) || []}
+                                />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
                                 name="unit"
                                 label="Unit"
                                 style={formItemStyle}
@@ -117,6 +174,36 @@ const ItemForm = ({ id, onBack }) => {
                                     loading={loadingTemples}
                                     options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
                                 />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="minimum_stock"
+                                label="Low Stock Threshold (Minimum Stock)"
+                                style={formItemStyle}
+                            >
+                                <InputNumber placeholder="10" style={{ width: '100%' }} min={0} precision={0} />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={24}>
+                            <Form.Item
+                                name="active"
+                                valuePropName="checked"
+                                style={formItemStyle}
+                            >
+                                <Checkbox>Active Item (available for transactions)</Checkbox>
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={24}>
+                            <Form.Item
+                                name="description"
+                                label="Description"
+                                style={formItemStyle}
+                            >
+                                <Input.TextArea placeholder="Enter Item Description" rows={2} />
                             </Form.Item>
                         </Col>
                     </Row>

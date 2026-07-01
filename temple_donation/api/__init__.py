@@ -668,3 +668,653 @@ def get_column_order(reference_doctype):
         except Exception:
             return []
     return []
+
+@frappe.whitelist()
+def get_inventory_dashboard(temple=None):
+    """
+    Returns inventory stats, chart data, and recent activities.
+    """
+    # Filters
+    item_filters = {"status": "Active"}
+    entry_filters = {"docstatus": 1}
+    if temple:
+        item_filters["temple"] = temple
+        entry_filters["temple"] = temple
+
+    # Total Items
+    total_items = frappe.db.count("Item", item_filters)
+
+    # Total Stock Qty
+    items = frappe.get_all("Item", filters=item_filters, fields=["name", "current_stock", "minimum_stock"])
+    total_stock_qty = sum(float(i.current_stock or 0) for i in items)
+
+    # Low Stock / Out of Stock
+    low_stock_count = 0
+    out_of_stock_count = 0
+    for i in items:
+        curr = float(i.current_stock or 0)
+        min_s = float(i.minimum_stock or 0)
+        if curr <= 0:
+            out_of_stock_count += 1
+        elif curr < min_s:
+            low_stock_count += 1
+
+    # Current Stock Value
+    current_stock_value = 0
+    for i in items:
+        curr = float(i.current_stock or 0)
+        if curr > 0:
+            latest_rate = frappe.db.sql("""
+                SELECT child.rate FROM `tabInventory Item` child
+                JOIN `tabInventory Entry` parent ON child.parent = parent.name
+                WHERE child.item = %s AND parent.docstatus = 1
+                ORDER BY parent.posting_date DESC, parent.creation DESC LIMIT 1
+            """, (i.name,))
+            rate = float(latest_rate[0][0] or 0) if latest_rate else 0
+            current_stock_value += curr * rate
+
+    # Today's Stock In / Out
+    today = frappe.utils.today()
+    today_start = today + " 00:00:00"
+    today_end = today + " 23:59:59"
+    
+    today_entries = frappe.db.sql("""
+        SELECT parent.entry_type, SUM(child.qty) as total_qty
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE parent.docstatus = 1
+            AND parent.posting_date BETWEEN %s AND %s
+            {temple_cond}
+        GROUP BY parent.entry_type
+    """.format(temple_cond="AND parent.temple = '{}'".format(temple) if temple else ""), (today_start, today_end), as_dict=True)
+
+    today_stock_in = 0
+    today_stock_out = 0
+    for entry in today_entries:
+        if entry.entry_type in ["IN", "Stock In"]:
+            today_stock_in += float(entry.total_qty or 0)
+        elif entry.entry_type in ["OUT", "Stock Out"]:
+            today_stock_out += float(entry.total_qty or 0)
+
+    # Charts Data:
+    # 1. Monthly Stock In/Out (last 6 months)
+    monthly_data = frappe.db.sql("""
+        SELECT 
+            DATE_FORMAT(parent.posting_date, '%%Y-%%m') as month,
+            parent.entry_type,
+            SUM(child.qty) as total_qty
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE parent.docstatus = 1
+            AND parent.posting_date >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+            {temple_cond}
+        GROUP BY DATE_FORMAT(parent.posting_date, '%%Y-%%m'), parent.entry_type
+        ORDER BY month ASC
+    """.format(temple_cond="AND parent.temple = '{}'".format(temple) if temple else ""), as_dict=True)
+
+    monthly_map = {}
+    from frappe.utils import add_months, formatdate
+    for offset in range(5, -1, -1):
+        m_start = add_months(today, -offset)
+        m_key = formatdate(m_start, "yyyy-MM")
+        m_label = formatdate(m_start, "MMM YYYY")
+        monthly_map[m_key] = {"month": m_label, "stock_in": 0, "stock_out": 0}
+
+    for d in monthly_data:
+        m = d.month
+        if m in monthly_map:
+            qty = float(d.total_qty or 0)
+            if d.entry_type in ["IN", "Stock In"]:
+                monthly_map[m]["stock_in"] += qty
+            elif d.entry_type in ["OUT", "Stock Out"]:
+                monthly_map[m]["stock_out"] += qty
+
+    monthly_stock_in_out = sorted(list(monthly_map.values()), key=lambda x: x["month"])
+
+    # 2. Category Wise Stock Distribution
+    category_dist = frappe.db.sql("""
+        SELECT cat.category_name as category, SUM(i.current_stock) as value
+        FROM `tabItem` i
+        JOIN `tabItem Category` cat ON i.item_category = cat.name
+        WHERE i.status = 'Active' {temple_cond}
+        GROUP BY cat.category_name
+        HAVING value > 0
+    """.format(temple_cond="AND i.temple = '{}'".format(temple) if temple else ""), as_dict=True)
+
+    # 3. Top Consumed Items
+    top_consumed = frappe.db.sql("""
+        SELECT i.item_name as name, SUM(child.qty) as value
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        JOIN `tabItem` i ON child.item = i.name
+        WHERE parent.docstatus = 1 AND parent.entry_type in ('OUT', 'Stock Out')
+            {temple_cond}
+        GROUP BY child.item
+        ORDER BY value DESC
+        LIMIT 5
+    """.format(temple_cond="AND parent.temple = '{}'".format(temple) if temple else ""), as_dict=True)
+
+    # Recent Activities
+    latest_entries = frappe.get_all("Inventory Entry",
+        filters=entry_filters,
+        fields=["name", "entry_type", "posting_date", "temple", "remarks"],
+        order_by="posting_date desc, creation desc",
+        limit=5
+    )
+    for l in latest_entries:
+        l["temple_name"] = frappe.db.get_value("Temple", l.temple, "temple_name") or l.temple
+    
+    issue_filters = entry_filters.copy()
+    issue_filters["entry_type"] = ["in", ["OUT", "Stock Out"]]
+    latest_issues = frappe.get_all("Inventory Entry",
+        filters=issue_filters,
+        fields=["name", "posting_date", "temple", "remarks"],
+        order_by="posting_date desc, creation desc",
+        limit=5
+    )
+    for l in latest_issues:
+        l["temple_name"] = frappe.db.get_value("Temple", l.temple, "temple_name") or l.temple
+
+    donation_filters = entry_filters.copy()
+    donation_filters["reference_type"] = "Donation"
+    latest_donations = frappe.get_all("Inventory Entry",
+        filters=donation_filters,
+        fields=["name", "reference_name", "posting_date", "remarks"],
+        order_by="posting_date desc, creation desc",
+        limit=5
+    )
+
+    return {
+        "stats": {
+            "total_items": total_items,
+            "total_stock_qty": total_stock_qty,
+            "current_stock_value": current_stock_value,
+            "low_stock_items": low_stock_count,
+            "out_of_stock_items": out_of_stock_count,
+            "today_stock_in": today_stock_in,
+            "today_stock_out": today_stock_out
+        },
+        "charts": {
+            "monthly_stock_in_out": monthly_stock_in_out,
+            "category_distribution": category_dist,
+            "top_consumed": top_consumed
+        },
+        "recent_activities": {
+            "latest_entries": latest_entries,
+            "latest_issues": latest_issues,
+            "latest_donations": latest_donations
+        }
+    }
+
+@frappe.whitelist()
+def get_item_history(item):
+    """
+    Returns running stock history for a specific item.
+    """
+    if not item:
+        return []
+
+    # Get item info
+    item_doc = frappe.db.get_value("Item", item, ["item_name", "unit"], as_dict=True)
+    if not item_doc:
+        return []
+
+    # Get all submitted stock transactions for this item
+    entries = frappe.db.sql("""
+        SELECT 
+            parent.name as reference,
+            parent.entry_type,
+            parent.posting_date,
+            parent.owner as user,
+            child.qty,
+            parent.reference_type,
+            parent.reference_name
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE child.item = %s AND parent.docstatus = 1
+        ORDER BY parent.posting_date ASC, parent.creation ASC
+    """, (item,), as_dict=True)
+
+    remaining = 0
+    history = []
+    for e in entries:
+        qty = float(e.qty or 0)
+        is_out = e.entry_type in ["OUT", "Stock Out"]
+        is_in = e.entry_type in ["IN", "Stock In"]
+        
+        if is_out:
+            change = -qty
+        elif is_in:
+            change = qty
+        else:
+            change = qty
+
+        remaining += change
+        
+        history.append({
+            "date": e.posting_date,
+            "transaction_type": e.entry_type,
+            "quantity": qty,
+            "reference": e.reference,
+            "reference_type": e.reference_type,
+            "reference_name": e.reference_name,
+            "user": frappe.db.get_value("User", e.user, "full_name") or e.user,
+            "remaining_stock": remaining
+        })
+
+    history.reverse()
+    return history
+
+@frappe.whitelist()
+def get_inventory_report(report_type, temple=None, category=None):
+    """
+    Generates structured reports for inventory module.
+    """
+    from frappe.utils import flt
+    # Base item filter
+    item_filters = {"status": "Active"}
+    if temple:
+        item_filters["temple"] = temple
+    if category:
+        item_filters["item_category"] = category
+
+    if report_type == "Current Stock Report":
+        items = frappe.get_all("Item", 
+            filters=item_filters,
+            fields=["name", "item_name", "item_code", "item_category", "store_location", "minimum_stock", "maximum_stock", "current_stock", "unit", "temple"]
+        )
+        for i in items:
+            i["category_name"] = frappe.db.get_value("Item Category", i.item_category, "category_name") if i.item_category else "—"
+            i["location_name"] = frappe.db.get_value("Store Location", i.store_location, "location_name") if i.store_location else "—"
+            i["temple_name"] = frappe.db.get_value("Temple", i.temple, "temple_name") if i.temple else "Global"
+            # Get latest rate
+            latest_rate = frappe.db.sql("""
+                SELECT child.rate FROM `tabInventory Item` child
+                JOIN `tabInventory Entry` parent ON child.parent = parent.name
+                WHERE child.item = %s AND parent.docstatus = 1
+                ORDER BY parent.posting_date DESC, parent.creation DESC LIMIT 1
+            """, (i.name,))
+            rate = float(latest_rate[0][0] or 0) if latest_rate else 0
+            i["rate"] = rate
+            i["stock_value"] = float(i.current_stock or 0) * rate
+        return items
+
+    elif report_type == "Low Stock Report":
+        items = frappe.get_all("Item",
+            filters=item_filters,
+            fields=["name", "item_name", "item_code", "item_category", "minimum_stock", "current_stock", "unit", "temple"]
+        )
+        low_stock = []
+        for i in items:
+            curr = float(i.current_stock or 0)
+            min_s = float(i.minimum_stock or 0)
+            if curr < min_s:
+                i["category_name"] = frappe.db.get_value("Item Category", i.item_category, "category_name") if i.item_category else "—"
+                i["temple_name"] = frappe.db.get_value("Temple", i.temple, "temple_name") if i.temple else "Global"
+                low_stock.append(i)
+        return low_stock
+
+    elif report_type == "Stock Ledger":
+        query = """
+            SELECT 
+                parent.posting_date as date,
+                parent.name as reference,
+                parent.entry_type,
+                parent.reference_type,
+                parent.reference_name,
+                child.item as item_code,
+                i.item_name,
+                child.qty as quantity,
+                child.unit,
+                child.rate,
+                child.total_amount,
+                parent.owner as user
+            FROM `tabInventory Item` child
+            JOIN `tabInventory Entry` parent ON child.parent = parent.name
+            JOIN `tabItem` i ON child.item = i.name
+            WHERE parent.docstatus = 1
+        """
+        params = []
+        if temple:
+            query += " AND parent.temple = %s"
+            params.append(temple)
+        if category:
+            query += " AND i.item_category = %s"
+            params.append(category)
+        
+        query += " ORDER BY parent.posting_date DESC, parent.creation DESC"
+        
+        ledger = frappe.db.sql(query, tuple(params), as_dict=True)
+        for l in ledger:
+            l["user"] = frappe.db.get_value("User", l.user, "full_name") or l.user
+        return ledger
+
+    elif report_type == "Category Wise Stock":
+        query = """
+            SELECT 
+                cat.category_name as category,
+                COUNT(i.name) as total_items,
+                SUM(i.current_stock) as total_stock
+            FROM `tabItem` i
+            JOIN `tabItem Category` cat ON i.item_category = cat.name
+            WHERE i.status = 'Active'
+        """
+        params = []
+        if temple:
+            query += " AND i.temple = %s"
+            params.append(temple)
+        if category:
+            query += " AND i.item_category = %s"
+            params.append(category)
+
+        query += " GROUP BY cat.name"
+        return frappe.db.sql(query, tuple(params), as_dict=True)
+
+    elif report_type == "Temple Wise Stock":
+        query = """
+            SELECT 
+                t.temple_name as temple,
+                COUNT(i.name) as total_items,
+                SUM(i.current_stock) as total_stock
+            FROM `tabItem` i
+            JOIN `tabTemple` t ON i.temple = t.name
+            WHERE i.status = 'Active'
+        """
+        params = []
+        if category:
+            query += " AND i.item_category = %s"
+            params.append(category)
+        if temple:
+            query += " AND i.temple = %s"
+            params.append(temple)
+
+        query += " GROUP BY t.name"
+        return frappe.db.sql(query, tuple(params), as_dict=True)
+
+    elif report_type == "Monthly Consumption":
+        query = """
+            SELECT 
+                DATE_FORMAT(parent.posting_date, '%%Y-%%m') as month,
+                i.item_name,
+                SUM(child.qty) as quantity,
+                child.unit
+            FROM `tabInventory Item` child
+            JOIN `tabInventory Entry` parent ON child.parent = parent.name
+            JOIN `tabItem` i ON child.item = i.name
+            WHERE parent.docstatus = 1 AND parent.entry_type in ('OUT', 'Stock Out')
+        """
+        params = []
+        if temple:
+            query += " AND parent.temple = %s"
+            params.append(temple)
+        if category:
+            query += " AND i.item_category = %s"
+            params.append(category)
+
+        query += " GROUP BY DATE_FORMAT(parent.posting_date, '%%Y-%%m'), child.item ORDER BY month DESC"
+        return frappe.db.sql(query, tuple(params), as_dict=True)
+
+    elif report_type == "Monthly Stock In/Out":
+        query = """
+            SELECT 
+                DATE_FORMAT(parent.posting_date, '%%Y-%%m') as month,
+                parent.entry_type,
+                SUM(child.qty) as quantity
+            FROM `tabInventory Item` child
+            JOIN `tabInventory Entry` parent ON child.parent = parent.name
+            WHERE parent.docstatus = 1
+        """
+        params = []
+        if temple:
+            query += " AND parent.temple = %s"
+            params.append(temple)
+
+        query += " GROUP BY DATE_FORMAT(parent.posting_date, '%%Y-%%m'), parent.entry_type ORDER BY month DESC"
+        return frappe.db.sql(query, tuple(params), as_dict=True)
+
+    return []
+
+@frappe.whitelist()
+def import_inventory_items(items_list):
+    """
+    Parses, validates, and imports items from frontend bulk upload.
+    """
+    import json
+    from frappe.utils import flt
+    if isinstance(items_list, str):
+        items_list = json.loads(items_list)
+
+    summary = {
+        "created": 0,
+        "skipped": 0,
+        "failed": 0,
+        "logs": []
+    }
+
+    for idx, row in enumerate(items_list):
+        row_num = idx + 1
+        item_name = row.get("item_name")
+        item_code = row.get("item_code")
+        category = row.get("category")
+        location = row.get("store_location")
+        unit = row.get("unit")
+        temple = row.get("temple")
+        min_stock = flt(row.get("minimum_stock", 0))
+        max_stock = flt(row.get("maximum_stock", 0))
+        description = row.get("description")
+
+        if not item_name:
+            summary["failed"] += 1
+            summary["logs"].append(f"Row {row_num}: Item Name is required.")
+            continue
+
+        exists_filters = {"item_name": item_name}
+        if item_code:
+            exists_filters = {"or": [["item_name", "=", item_name], ["item_code", "=", item_code]]}
+        
+        if frappe.db.exists("Item", exists_filters):
+            summary["skipped"] += 1
+            summary["logs"].append(f"Row {row_num}: Item '{item_name}' already exists. Skipped.")
+            continue
+
+        category_id = None
+        if category:
+            category_id = frappe.db.exists("Item Category", {"category_name": category})
+            if not category_id:
+                summary["failed"] += 1
+                summary["logs"].append(f"Row {row_num}: Category '{category}' does not exist.")
+                continue
+
+        location_id = None
+        if location:
+            location_id = frappe.db.exists("Store Location", {"location_name": location})
+            if not location_id:
+                summary["failed"] += 1
+                summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist.")
+                continue
+
+        if unit not in ["Nos", "Kg", "Litre"]:
+            summary["failed"] += 1
+            summary["logs"].append(f"Row {row_num}: Unit '{unit}' is invalid. Allowed: Nos, Kg, Litre.")
+            continue
+
+        if temple:
+            if not frappe.db.exists("Temple", temple):
+                summary["failed"] += 1
+                summary["logs"].append(f"Row {row_num}: Trust '{temple}' does not exist.")
+                continue
+
+        try:
+            item_doc = frappe.get_doc({
+                "doctype": "Item",
+                "item_name": item_name,
+                "item_code": item_code,
+                "unit": unit,
+                "temple": temple,
+                "item_category": category_id,
+                "store_location": location_id,
+                "minimum_stock": min_stock,
+                "maximum_stock": max_stock,
+                "description": description,
+				"status": "Active"
+            })
+            item_doc.insert(ignore_permissions=True)
+            summary["created"] += 1
+        except Exception as e:
+            summary["failed"] += 1
+            summary["logs"].append(f"Row {row_num}: Error creating item. {str(e)}")
+
+    frappe.db.commit()
+    return summary
+
+
+@frappe.whitelist()
+def get_inventory_dashboard_data():
+    """
+    Computes all dashboard statistics, charts data, and activity feeds for the Inventory dashboard.
+    """
+    items = frappe.get_all("Item", fields=["name", "total_stock", "minimum_stock", "item_category"])
+    
+    total_items = len(items)
+    total_stock_qty = sum(flt(i.total_stock) for i in items)
+    
+    current_stock_value = 0.0
+    low_stock_items = 0
+    out_of_stock_items = 0
+    
+    for i in items:
+        # Get latest rate
+        latest_rate = frappe.db.sql("""
+            SELECT child.rate FROM `tabInventory Item` child
+            JOIN `tabInventory Entry` parent ON child.parent = parent.name
+            WHERE child.item = %s AND parent.docstatus = 1
+            ORDER BY parent.posting_date DESC, parent.creation DESC LIMIT 1
+        """, (i.name,))
+        rate = float(latest_rate[0][0] or 0) if latest_rate else 0.0
+        
+        stock = flt(i.total_stock)
+        current_stock_value += stock * rate
+        
+        threshold = flt(i.minimum_stock) if i.minimum_stock is not None else 0.0
+        if stock <= 0:
+            out_of_stock_items += 1
+        elif stock < threshold:
+            low_stock_items += 1
+
+    # Today's date range
+    today_start = nowdate() + " 00:00:00"
+    today_end = nowdate() + " 23:59:59"
+
+    # Today's stock in
+    today_in_qty = frappe.db.sql("""
+        SELECT SUM(child.qty)
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE parent.posting_date BETWEEN %s AND %s
+          AND parent.entry_type IN ('Stock In', 'IN')
+          AND parent.docstatus = 1
+    """, (today_start, today_end))[0][0] or 0.0
+
+    # Today's stock out
+    today_out_qty = frappe.db.sql("""
+        SELECT SUM(child.qty)
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE parent.posting_date BETWEEN %s AND %s
+          AND parent.entry_type IN ('Stock Out', 'OUT')
+          AND parent.docstatus = 1
+    """, (today_start, today_end))[0][0] or 0.0
+
+    # Monthly Stock In/Out (last 6 months)
+    months_query = frappe.db.sql("""
+        SELECT 
+            DATE_FORMAT(parent.posting_date, '%%b %%y') as month_name,
+            DATE_FORMAT(parent.posting_date, '%%Y-%%m') as month_val,
+            SUM(CASE WHEN parent.entry_type IN ('Stock In', 'IN') THEN child.qty ELSE 0 END) as stock_in,
+            SUM(CASE WHEN parent.entry_type IN ('Stock Out', 'OUT') THEN child.qty ELSE 0 END) as stock_out
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        WHERE parent.posting_date >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
+          AND parent.docstatus = 1
+        GROUP BY month_val, month_name
+        ORDER BY month_val ASC
+    """, as_dict=True)
+    
+    # Category wise distribution
+    category_data = frappe.db.sql("""
+        SELECT 
+            IFNULL(item_category, 'Uncategorized') as name,
+            SUM(total_stock) as value
+        FROM `tabItem`
+        GROUP BY item_category
+        ORDER BY value DESC
+    """, as_dict=True)
+
+    # Top consumed items
+    top_consumed = frappe.db.sql("""
+        SELECT 
+            item.item_name as name,
+            SUM(child.qty) as value
+        FROM `tabInventory Item` child
+        JOIN `tabInventory Entry` parent ON child.parent = parent.name
+        JOIN `tabItem` item ON child.item = item.name
+        WHERE parent.entry_type IN ('Stock Out', 'OUT')
+          AND parent.docstatus = 1
+        GROUP BY child.item, item.item_name
+        ORDER BY value DESC
+        LIMIT 5
+    """, as_dict=True)
+
+    # Recent Activities
+    latest_entries = frappe.get_all("Inventory Entry",
+        fields=["name", "entry_type", "posting_date", "temple", "owner"],
+        order_by="posting_date desc",
+        limit=5
+    )
+    for entry in latest_entries:
+        entry["purpose"] = "Receipt" if entry.entry_type in ["Stock In", "IN"] else ("Issue" if entry.entry_type in ["Stock Out", "OUT"] else "Adjustment")
+        entry["owner_name"] = frappe.db.get_value("User", entry.owner, "full_name") or entry.owner
+        
+    latest_issues = frappe.get_all("Inventory Entry",
+        filters={"entry_type": ["in", ["Stock Out", "OUT"]]},
+        fields=["name", "entry_type", "posting_date", "temple", "owner"],
+        order_by="posting_date desc",
+        limit=5
+    )
+    for issue in latest_issues:
+        issue["purpose"] = "Issue"
+        issue["owner_name"] = frappe.db.get_value("User", issue.owner, "full_name") or issue.owner
+
+    latest_donations = frappe.get_all("Inventory Entry",
+        filters={"reference_type": "Donation"},
+        fields=["name", "reference_name", "posting_date", "temple"],
+        order_by="posting_date desc",
+        limit=5
+    )
+    for d in latest_donations:
+        donor_name, amount = frappe.db.get_value("Donation", d.reference_name, ["donor_name", "total_amount"]) or ("Anonymous", 0)
+        d["donor_name"] = donor_name
+        d["amount"] = amount
+
+    return {
+        "summary": {
+            "total_items": total_items,
+            "total_stock_qty": total_stock_qty,
+            "current_stock_value": current_stock_value,
+            "low_stock_items": low_stock_items,
+            "out_of_stock_items": out_of_stock_items,
+            "today_stock_in": today_in_qty,
+            "today_stock_out": today_out_qty
+        },
+        "charts": {
+            "monthly_stock_in_out": months_query,
+            "category_wise_stock": category_data,
+            "top_consumed_items": top_consumed
+        },
+        "activities": {
+            "latest_stock_entries": latest_entries,
+            "latest_stock_issues": latest_issues,
+            "latest_donations": latest_donations
+        }
+    }
+

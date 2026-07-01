@@ -10,7 +10,7 @@ export const inventoryEntryColumns = [
         title: "Entry ID",
         dataIndex: "name",
         key: "name",
-        width: 180,
+        width: 160,
         render: (text) => (
             <span style={{ whiteSpace: "nowrap" }}>
                 <Text copyable>{text}</Text>
@@ -18,26 +18,54 @@ export const inventoryEntryColumns = [
         )
     },
     {
-        title: "Entry Type",
+        title: "Purpose",
         dataIndex: "entry_type",
         key: "entry_type",
-        width: 100,
-        render: (type) => {
-            const config = getTagConfig(type === "IN" ? "active" : "inactive");
+        width: 130,
+        render: (entry_type) => {
+            let status = "default";
+            let label = entry_type;
+            if (entry_type === "Stock In" || entry_type === "IN") {
+                status = "active";
+                label = "Receipt";
+            } else if (entry_type === "Stock Out" || entry_type === "OUT") {
+                status = "inactive";
+                label = "Issue";
+            } else if (entry_type === "Stock Adjustment") {
+                status = "manager";
+                label = "Adjustment";
+            }
+            
+            const config = getTagConfig(status);
             return (
                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
-                    {type}
+                    {label || "Receipt"}
                 </Tag>
             );
         },
     },
     {
+        title: "Source Location",
+        dataIndex: "source_location",
+        key: "source_location",
+        width: 150,
+        render: (text) => text || <span className="text-zinc-400">—</span>
+    },
+    {
+        title: "Target Location",
+        dataIndex: "target_location",
+        key: "target_location",
+        width: 150,
+        render: (text) => text || <span className="text-zinc-400">—</span>
+    },
+    {
         title: "Reference Type",
         dataIndex: "reference_type",
         key: "reference_type",
-        // width: 120,
+        width: 130,
         render: (type) => {
-            const config = getTagConfig(type || "Manual");
+            if (!type) return <span className="text-zinc-400">—</span>;
+            const config = getTagConfig(type);
             return (
                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                     {config.label}
@@ -49,30 +77,19 @@ export const inventoryEntryColumns = [
         title: "Reference Name",
         dataIndex: "reference_name",
         key: "reference_name",
-        // width: 250,
-        render: (text) => text || "—"
+        render: (text) => text || <span className="text-zinc-400">—</span>
     },
     {
         title: "Trust Name",
         dataIndex: "temple",
         key: "temple",
-        filterField: "temple.temple_name",
-        width: 180,
-        render: (temple) => {
-            if (!temple) return <span className="text-gray-400 text-xs italic">Global</span>;
-            const config = getTagConfig("temple admin");
-            return (
-                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
-                    {temple}
-                </Tag>
-            );
-        }
+        width: 160,
     },
     {
         title: "Posting Date",
         dataIndex: "posting_date",
         key: "posting_date",
-        width: 220,
+        width: 200,
         render: (date) => (
             <span style={{ whiteSpace: "nowrap" }}>
                 {date ? dayjs(date).format("ddd, DD MMM YYYY, hh:mm A") : "—"}

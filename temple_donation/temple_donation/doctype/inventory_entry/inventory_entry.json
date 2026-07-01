@@ -10,6 +10,7 @@
   "reference_name",
   "temple",
   "posting_date",
+  "remarks",
   "items"
  ],
  "fields": [
@@ -18,14 +19,14 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Entry Type",
-   "options": "IN\nOUT",
+   "options": "Stock In\nStock Out\nStock Adjustment",
    "reqd": 1
   },
   {
    "fieldname": "reference_type",
    "fieldtype": "Select",
    "label": "Reference Type",
-   "options": "Donation\nManual\nPurchase\nUsage"
+   "options": "Donation\nPurchase\nKitchen Usage\nPooja Usage\nManual Adjustment"
   },
   {
    "fieldname": "reference_name",
@@ -47,6 +48,11 @@
    "label": "Posting Date"
   },
   {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
    "fieldname": "items",
    "fieldtype": "Table",
    "label": "Items",
@@ -56,7 +62,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-22 14:20:59.545260",
+ "modified": "2026-07-01 12:00:00.545260",
  "modified_by": "Administrator",
  "module": "Temple Donation",
  "name": "Inventory Entry",
@@ -81,7 +87,6 @@
    "export": 1,
    "print": 1,
    "read": 1,
-   "report": 1,
    "role": "Super Admin",
    "share": 1,
    "write": 1

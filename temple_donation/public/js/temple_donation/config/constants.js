@@ -14,6 +14,8 @@ export const DOCTYPE_USER = "User";
 export const DOCTYPE_ITEM = "Item";
 export const DOCTYPE_INVENTORY_ENTRY = "Inventory Entry";
 export const DOCTYPE_INVENTORY_ITEM = "Inventory Item";
+export const DOCTYPE_ITEM_CATEGORY = "Item Category";
+export const DOCTYPE_STORE_LOCATION = "Store Location";
 
 // Room Management
 export const DOCTYPE_ROOM = "Room";

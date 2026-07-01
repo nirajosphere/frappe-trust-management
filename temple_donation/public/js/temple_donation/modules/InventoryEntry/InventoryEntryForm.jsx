@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import {
-    Form, Input, Button, Alert, Select, DatePicker, Row, Col, Typography
+    Form, Input, Button, Alert, Select, DatePicker, Row, Col, Typography, InputNumber, message
 } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import {
     useFrappeGetDoc, useFrappeUpdateDoc, useFrappeCreateDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
-import { DOCTYPE_INVENTORY_ENTRY } from "../../config/constants";
+import { DOCTYPE_INVENTORY_ENTRY, DOCTYPE_STORE_LOCATION } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
@@ -24,23 +24,30 @@ const InventoryEntryForm = ({ id, onBack }) => {
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { data: initialValues, loading: fetching, error: fetchError } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
 
-    // Watch reference_type value
+    // Watch purpose and reference_type
+    const purpose = Form.useWatch("purpose", form);
     const referenceType = Form.useWatch("reference_type", form);
 
-    // Fetch Temples list for link field
+    // Fetch Temples list
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
     });
 
-    // Fetch Donations list for link field when reference_type is "Donation"
+    // Fetch Store Locations list
+    const { data: locations, loading: loadingLocations } = useFrappeGetDocList(DOCTYPE_STORE_LOCATION, {
+        fields: ["name", "location_name"],
+        limit: 1000
+    });
+
+    // Fetch Donations list
     const { data: donations, loading: loadingDonations } = useFrappeGetDocList("Donation", {
         fields: ["name", "donor_name", "total_amount", "creation"],
         limit: 1000,
         orderBy: "creation desc"
     });
 
-    // Fetch Items list for link selection
+    // Fetch Items list
     const { data: itemsList, loading: loadingItems } = useFrappeGetDocList("Item", {
         fields: ["name", "item_name", "item_code", "unit"],
         limit: 1000
@@ -50,25 +57,37 @@ const InventoryEntryForm = ({ id, onBack }) => {
         if (isEdit && initialValues) {
             form.setFieldsValue({
                 ...initialValues,
+                purpose: initialValues.entry_type === "Stock In" ? "Receipt" : (initialValues.entry_type === "Stock Out" ? "Issue" : "Transfer"),
                 posting_date: initialValues.posting_date ? dayjs(initialValues.posting_date) : null
             });
         } else {
             form.setFieldsValue({
-                posting_date: dayjs()
+                posting_date: dayjs(),
+                purpose: "Receipt"
             });
         }
     }, [isEdit, initialValues, form]);
 
     const handleSave = async (values) => {
         try {
+            // Validations
+            if (values.purpose === "Transfer" && values.source_location === values.target_location) {
+                message.error("Source and Target locations cannot be the same!");
+                return;
+            }
+
             const payload = {
                 ...values,
+                entry_type: values.purpose === "Receipt" ? "Stock In" : (values.purpose === "Issue" ? "Stock Out" : "Stock Adjustment"),
                 posting_date: values.posting_date?.format("YYYY-MM-DD HH:mm:ss") || null,
                 items: values.items?.map(item => ({
                     ...item,
-                    qty: parseFloat(item.qty) || 0
+                    qty: parseFloat(item.qty) || 0,
+                    rate: parseFloat(item.rate) || 0,
+                    total_amount: parseFloat(item.total_amount) || 0
                 })) || []
             };
+            delete payload.purpose;
 
             if (isEdit) {
                 await updateDoc(DOCTYPE_INVENTORY_ENTRY, id, payload);
@@ -79,6 +98,44 @@ const InventoryEntryForm = ({ id, onBack }) => {
         } catch (err) {
             console.error(err);
         }
+    };
+
+    const handleItemChange = (itemId, fieldName) => {
+        const itemObj = itemsList?.find(i => i.name === itemId);
+        if (itemObj) {
+            form.setFieldValue(['items', fieldName, 'unit'], itemObj.unit || "Nos");
+            if (typeof frappe !== "undefined") {
+                frappe.call({
+                    method: "frappe.client.get_list",
+                    args: {
+                        doctype: "Inventory Item",
+                        filters: { item: itemId },
+                        fields: ["rate"],
+                        order_by: "creation desc",
+                        limit: 1
+                    },
+                    callback: (r) => {
+                        const latestRate = r.message?.[0]?.rate || 0;
+                        form.setFieldValue(['items', fieldName, 'rate'], latestRate);
+                        const qty = form.getFieldValue(['items', fieldName, 'qty']) || 0;
+                        form.setFieldValue(['items', fieldName, 'total_amount'], qty * latestRate);
+                    }
+                });
+            } else {
+                form.setFieldValue(['items', fieldName, 'rate'], 0);
+                form.setFieldValue(['items', fieldName, 'total_amount'], 0);
+            }
+        }
+    };
+
+    const handleQtyChange = (qty, fieldName) => {
+        const rate = form.getFieldValue(['items', fieldName, 'rate']) || 0;
+        form.setFieldValue(['items', fieldName, 'total_amount'], (qty || 0) * rate);
+    };
+
+    const handleRateChange = (rate, fieldName) => {
+        const qty = form.getFieldValue(['items', fieldName, 'qty']) || 0;
+        form.setFieldValue(['items', fieldName, 'total_amount'], qty * (rate || 0));
     };
 
     if (fetching && isEdit) return <PageLoader />;
@@ -100,16 +157,17 @@ const InventoryEntryForm = ({ id, onBack }) => {
                     <Row gutter={[24, 0]}>
                         <Col xs={24} md={12}>
                             <Form.Item
-                                name="entry_type"
-                                label="Entry Type"
+                                name="purpose"
+                                label="Purpose"
                                 style={formItemStyle}
                                 rules={[{ required: true, message: "Required" }]}
                             >
                                 <Select 
-                                    placeholder="Select Entry Type" 
+                                    placeholder="Select Purpose" 
                                     options={[
-                                        { label: "IN", value: "IN" },
-                                        { label: "OUT", value: "OUT" }
+                                        { label: "Receipt (Stock In)", value: "Receipt" },
+                                        { label: "Issue (Stock Out)", value: "Issue" },
+                                        { label: "Transfer (Between Locations)", value: "Transfer" }
                                     ]} 
                                 />
                             </Form.Item>
@@ -141,6 +199,45 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                 <DatePicker showTime format="DD-MM-YYYY HH:mm:ss" className="w-full" placeholder="Select date and time" />
                             </Form.Item>
                         </Col>
+
+                        {/* Conditional warehouse selection based on purpose */}
+                        {(purpose === "Issue" || purpose === "Transfer") && (
+                            <Col xs={24} md={12}>
+                                <Form.Item
+                                    name="source_location"
+                                    label="Source Location"
+                                    style={formItemStyle}
+                                    rules={[{ required: true, message: "Please select source location!" }]}
+                                >
+                                    <Select 
+                                        showSearch
+                                        placeholder="Select Source Location" 
+                                        optionFilterProp="children"
+                                        loading={loadingLocations}
+                                        options={locations?.map(l => ({ label: l.location_name, value: l.name })) || []}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        )}
+
+                        {(purpose === "Receipt" || purpose === "Transfer") && (
+                            <Col xs={24} md={12}>
+                                <Form.Item
+                                    name="target_location"
+                                    label="Target Location"
+                                    style={formItemStyle}
+                                    rules={[{ required: true, message: "Please select target location!" }]}
+                                >
+                                    <Select 
+                                        showSearch
+                                        placeholder="Select Target Location" 
+                                        optionFilterProp="children"
+                                        loading={loadingLocations}
+                                        options={locations?.map(l => ({ label: l.location_name, value: l.name })) || []}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        )}
 
                         <Col xs={24} md={12}>
                             <Form.Item
@@ -183,6 +280,16 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                 )}
                             </Form.Item>
                         </Col>
+
+                        <Col xs={24} md={24}>
+                            <Form.Item
+                                name="remarks"
+                                label="Remarks"
+                                style={formItemStyle}
+                            >
+                                <Input.TextArea placeholder="Enter internal remarks" rows={2} />
+                            </Form.Item>
+                        </Col>
                     </Row>
                 </SectionCard>
 
@@ -192,8 +299,8 @@ const InventoryEntryForm = ({ id, onBack }) => {
                             {(fields, { add, remove }) => (
                                 <div className="flex flex-col gap-4">
                                     {fields.map(({ key, name: fieldName, ...restField }) => (
-                                        <Row gutter={[16, 16]} key={key} align="bottom" className="pb-3 last:border-0 last:pb-0">
-                                            <Col xs={24} sm={14}>
+                                        <Row gutter={[16, 16]} key={key} align="bottom" className="pb-3 border-b border-zinc-100 last:border-0 last:pb-0">
+                                            <Col xs={24} sm={8}>
                                                 <Form.Item
                                                     {...restField}
                                                     name={[fieldName, 'item']}
@@ -206,6 +313,7 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                                         placeholder="Select Item"
                                                         optionFilterProp="children"
                                                         loading={loadingItems}
+                                                        onChange={(val) => handleItemChange(val, fieldName)}
                                                         options={itemsList?.map(i => ({
                                                             label: `${i.item_name} (${i.item_code || 'No Code'})`,
                                                             value: i.name
@@ -213,7 +321,7 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                                     />
                                                 </Form.Item>
                                             </Col>
-                                            <Col xs={20} sm={8}>
+                                            <Col xs={24} sm={4}>
                                                 <Form.Item
                                                     {...restField}
                                                     name={[fieldName, 'qty']}
@@ -221,10 +329,45 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                                     rules={[{ required: true, message: "Required" }]}
                                                     style={{ marginBottom: 0 }}
                                                 >
-                                                    <Input type="number" placeholder="Enter quantity" min={1} />
+                                                    <InputNumber 
+                                                        placeholder="Qty" 
+                                                        min={0.01} 
+                                                        style={{ width: '100%' }} 
+                                                        onChange={(val) => handleQtyChange(val, fieldName)} 
+                                                    />
                                                 </Form.Item>
                                             </Col>
-                                            <Col xs={4} sm={2} className="text-center">
+                                            <Col xs={24} sm={5}>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[fieldName, 'rate']}
+                                                    label={fieldName === 0 ? "Rate (₹)" : ""}
+                                                    style={{ marginBottom: 0 }}
+                                                >
+                                                    <InputNumber 
+                                                        placeholder="Rate" 
+                                                        style={{ width: '100%' }} 
+                                                        onChange={(val) => handleRateChange(val, fieldName)}
+                                                        precision={2} 
+                                                    />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col xs={24} sm={5}>
+                                                <Form.Item
+                                                    {...restField}
+                                                    name={[fieldName, 'total_amount']}
+                                                    label={fieldName === 0 ? "Amount (₹)" : ""}
+                                                    style={{ marginBottom: 0 }}
+                                                >
+                                                    <InputNumber 
+                                                        placeholder="Amount" 
+                                                        disabled 
+                                                        style={{ width: '100%' }} 
+                                                        precision={2} 
+                                                    />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col xs={24} sm={2} className="text-center">
                                                 <Button
                                                     type="text"
                                                     danger

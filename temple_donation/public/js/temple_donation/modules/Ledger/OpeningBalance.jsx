@@ -597,7 +597,7 @@ const OpeningBalance = () => {
                                 okText: 'Delete',
                                 okType: 'danger',
                                 cancelText: 'Cancel',
-                                okButtonProps: { style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' } },
+                                okButtonProps: { style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f', color: '#fff' } },
                                 onOk() {
                                     if (typeof frappe !== "undefined") {
                                         frappe.call({
