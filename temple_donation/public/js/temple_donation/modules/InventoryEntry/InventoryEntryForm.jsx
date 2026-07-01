@@ -106,16 +106,12 @@ const InventoryEntryForm = ({ id, onBack }) => {
             form.setFieldValue(['items', fieldName, 'unit'], itemObj.unit || "Nos");
             if (typeof frappe !== "undefined") {
                 frappe.call({
-                    method: "frappe.client.get_list",
+                    method: "temple_donation.api.get_latest_item_rate",
                     args: {
-                        doctype: "Inventory Item",
-                        filters: { item: itemId },
-                        fields: ["rate"],
-                        order_by: "creation desc",
-                        limit: 1
+                        item: itemId
                     },
                     callback: (r) => {
-                        const latestRate = r.message?.[0]?.rate || 0;
+                        const latestRate = Number(r.message || 0);
                         form.setFieldValue(['items', fieldName, 'rate'], latestRate);
                         const qty = form.getFieldValue(['items', fieldName, 'qty']) || 0;
                         form.setFieldValue(['items', fieldName, 'total_amount'], qty * latestRate);

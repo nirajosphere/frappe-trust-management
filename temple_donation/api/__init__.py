@@ -1318,3 +1318,213 @@ def get_inventory_dashboard_data():
         }
     }
 
+
+@frappe.whitelist()
+def seed_inventory_demo_data():
+    # 1. Create Temple if none exists
+    temple = None
+    temples = frappe.get_all("Temple", limit=1)
+    if temples:
+        temple = temples[0].name
+    else:
+        t_doc = frappe.get_doc({
+            "doctype": "Temple",
+            "temple_name": "Main Temple Trust",
+            "city": "Mumbai",
+            "state": "Maharashtra"
+        })
+        t_doc.insert(ignore_permissions=True)
+        temple = t_doc.name
+
+    # 2. Create Item Categories
+    categories = ["Pooja Items", "Prasad Ingredients", "Cleaning & Maintenance", "Assets"]
+    cat_map = {}
+    for cat in categories:
+        exists = frappe.db.exists("Item Category", {"category_name": cat})
+        if not exists:
+            c_doc = frappe.get_doc({
+                "doctype": "Item Category",
+                "category_name": cat,
+                "description": f"Category for {cat}"
+            })
+            c_doc.insert(ignore_permissions=True)
+            cat_map[cat] = c_doc.name
+        else:
+            cat_map[cat] = exists
+
+    # 3. Create Store Locations
+    locations = ["Main Store", "Kitchen Warehouse", "Temple Office"]
+    loc_map = {}
+    for loc in locations:
+        exists = frappe.db.exists("Store Location", {"location_name": loc})
+        if not exists:
+            l_doc = frappe.get_doc({
+                "doctype": "Store Location",
+                "location_name": loc,
+                "description": f"Storage area: {loc}",
+                "temple": temple
+            })
+            l_doc.insert(ignore_permissions=True)
+            loc_map[loc] = l_doc.name
+        else:
+            loc_map[loc] = exists
+
+    # 4. Create Items
+    items_to_create = [
+        {"item_name": "Rice", "unit": "Kg", "category": "Prasad Ingredients", "location": "Kitchen Warehouse", "min": 50, "max": 500, "code": "ITM-RIC-001"},
+        {"item_name": "Ghee", "unit": "Litre", "category": "Prasad Ingredients", "location": "Kitchen Warehouse", "min": 10, "max": 100, "code": "ITM-GHE-002"},
+        {"item_name": "Incense Sticks", "unit": "Nos", "category": "Pooja Items", "location": "Main Store", "min": 20, "max": 200, "code": "ITM-INC-003"},
+        {"item_name": "Camphor", "unit": "Kg", "category": "Pooja Items", "location": "Main Store", "min": 5, "max": 50, "code": "ITM-CAM-004"},
+        {"item_name": "Coconut", "unit": "Nos", "category": "Pooja Items", "location": "Kitchen Warehouse", "min": 100, "max": 1000, "code": "ITM-COC-005"},
+        {"item_name": "Cleaning Liquid", "unit": "Litre", "category": "Cleaning & Maintenance", "location": "Main Store", "min": 15, "max": 80, "code": "ITM-CLN-006"}
+    ]
+    item_map = {}
+    for itm in items_to_create:
+        exists = frappe.db.exists("Item", {"item_name": itm["item_name"]})
+        if not exists:
+            i_doc = frappe.get_doc({
+                "doctype": "Item",
+                "item_name": itm["item_name"],
+                "item_code": itm["code"],
+                "item_category": cat_map[itm["category"]],
+                "store_location": loc_map[itm["location"]],
+                "unit": itm["unit"],
+                "minimum_stock": itm["min"],
+                "maximum_stock": itm["max"],
+                "status": "Active",
+                "temple": temple
+            })
+            i_doc.insert(ignore_permissions=True)
+            item_map[itm["item_name"]] = i_doc.name
+        else:
+            item_map[itm["item_name"]] = exists
+
+    # 5. Create past stock entries to build beautiful stats
+    existing_entries = frappe.get_all("Inventory Entry", limit=1)
+    if not existing_entries:
+        import datetime
+        base_date = datetime.datetime.now()
+
+        # Entry 1: Stock In (5 months ago)
+        e1 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock In",
+            "posting_date": (base_date - datetime.timedelta(days=150)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Initial stock receipt",
+            "items": [
+                {"item": item_map["Rice"], "qty": 300.0, "unit": "Kg", "rate": 60.0, "total_amount": 18000.0},
+                {"item": item_map["Ghee"], "qty": 60.0, "unit": "Litre", "rate": 650.0, "total_amount": 39000.0},
+                {"item": item_map["Incense Sticks"], "qty": 150.0, "unit": "Nos", "rate": 45.0, "total_amount": 6750.0}
+            ]
+        })
+        e1.insert(ignore_permissions=True)
+        e1.submit()
+
+        # Entry 2: Stock Out (4 months ago)
+        e2 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock Out",
+            "posting_date": (base_date - datetime.timedelta(days=120)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Prasad distribution and daily Pooja consumption",
+            "items": [
+                {"item": item_map["Rice"], "qty": 120.0, "unit": "Kg", "rate": 60.0, "total_amount": 7200.0},
+                {"item": item_map["Ghee"], "qty": 25.0, "unit": "Litre", "rate": 650.0, "total_amount": 16250.0},
+                {"item": item_map["Incense Sticks"], "qty": 50.0, "unit": "Nos", "rate": 45.0, "total_amount": 2250.0}
+            ]
+        })
+        e2.insert(ignore_permissions=True)
+        e2.submit()
+
+        # Entry 3: Stock In (3 months ago)
+        e3 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock In",
+            "posting_date": (base_date - datetime.timedelta(days=90)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Festival supply receipt",
+            "items": [
+                {"item": item_map["Rice"], "qty": 400.0, "unit": "Kg", "rate": 62.0, "total_amount": 24800.0},
+                {"item": item_map["Coconut"], "qty": 800.0, "unit": "Nos", "rate": 20.0, "total_amount": 16000.0},
+                {"item": item_map["Camphor"], "qty": 40.0, "unit": "Kg", "rate": 400.0, "total_amount": 16000.0}
+            ]
+        })
+        e3.insert(ignore_permissions=True)
+        e3.submit()
+
+        # Entry 4: Stock Out (2 months ago)
+        e4 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock Out",
+            "posting_date": (base_date - datetime.timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Maha Pooja consumption",
+            "items": [
+                {"item": item_map["Rice"], "qty": 200.0, "unit": "Kg", "rate": 62.0, "total_amount": 12400.0},
+                {"item": item_map["Ghee"], "qty": 20.0, "unit": "Litre", "rate": 650.0, "total_amount": 13000.0},
+                {"item": item_map["Coconut"], "qty": 500.0, "unit": "Nos", "rate": 20.0, "total_amount": 10000.0},
+                {"item": item_map["Camphor"], "qty": 15.0, "unit": "Kg", "rate": 400.0, "total_amount": 6000.0}
+            ]
+        })
+        e4.insert(ignore_permissions=True)
+        e4.submit()
+
+        # Entry 5: Stock In (15 days ago)
+        e5 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock In",
+            "posting_date": (base_date - datetime.timedelta(days=15)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Monthly refill",
+            "items": [
+                {"item": item_map["Rice"], "qty": 150.0, "unit": "Kg", "rate": 62.0, "total_amount": 9300.0},
+                {"item": item_map["Ghee"], "qty": 30.0, "unit": "Litre", "rate": 680.0, "total_amount": 20400.0},
+                {"item": item_map["Cleaning Liquid"], "qty": 50.0, "unit": "Litre", "rate": 90.0, "total_amount": 4500.0}
+            ]
+        })
+        e5.insert(ignore_permissions=True)
+        e5.submit()
+
+        # Entry 6: Stock Out (2 days ago)
+        e6 = frappe.get_doc({
+            "doctype": "Inventory Entry",
+            "entry_type": "Stock Out",
+            "posting_date": (base_date - datetime.timedelta(days=2)).strftime("%Y-%m-%d %H:%M:%S"),
+            "temple": temple,
+            "remarks": "Weekly consumption",
+            "items": [
+                {"item": item_map["Rice"], "qty": 490.0, "unit": "Kg", "rate": 62.0, "total_amount": 30380.0},
+                {"item": item_map["Ghee"], "qty": 40.0, "unit": "Litre", "rate": 680.0, "total_amount": 27200.0},
+                {"item": item_map["Coconut"], "qty": 300.0, "unit": "Nos", "rate": 20.0, "total_amount": 6000.0}
+            ]
+        })
+        e6.insert(ignore_permissions=True)
+        e6.submit()
+
+    return {"status": "success", "message": "Demo data populated successfully!"}
+
+
+@frappe.whitelist()
+def get_latest_item_rate(item):
+    """
+    Get the latest transaction rate for a given item bypassing direct child table restrictions.
+    """
+    if not item:
+        return 0.0
+    try:
+        rates = frappe.get_all(
+            "Inventory Item",
+            filters={"item": item},
+            fields=["rate"],
+            order_by="creation desc",
+            limit=1,
+            ignore_permissions=True
+        )
+        if rates:
+            return float(rates[0].get("rate") or 0.0)
+    except Exception as e:
+        frappe.log_error(f"Error fetching latest item rate: {str(e)}")
+    return 0.0
+
+

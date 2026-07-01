@@ -22,17 +22,13 @@ const ItemView = ({ id, onBack, onEdit }) => {
     useEffect(() => {
         if (doc && doc.name && typeof frappe !== "undefined") {
             frappe.call({
-                method: "frappe.client.get_list",
+                method: "temple_donation.api.get_latest_item_rate",
                 args: {
-                    doctype: "Inventory Item",
-                    filters: { item: doc.name },
-                    fields: ["rate"],
-                    order_by: "creation desc",
-                    limit: 1
+                    item: doc.name
                 },
                 callback: (r) => {
-                    if (r.message && r.message.length > 0) {
-                        setValuationRate(Number(r.message[0].rate || 0));
+                    if (r.message !== undefined) {
+                        setValuationRate(Number(r.message || 0));
                     }
                 }
             });

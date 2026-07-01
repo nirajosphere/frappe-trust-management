@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button
+    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button, message
 } from "antd";
 import {
     AppstoreOutlined, HistoryOutlined, PieChartOutlined,
@@ -37,6 +37,7 @@ const InventoryDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [seeding, setSeeding] = useState(false);
 
     const call = (method, args = {}) => {
         return new Promise((resolve, reject) => {
@@ -66,6 +67,24 @@ const InventoryDashboard = () => {
             setError("Failed to load inventory dashboard data.");
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSeedData = async () => {
+        setSeeding(true);
+        try {
+            const res = await call("temple_donation.api.seed_inventory_demo_data");
+            if (res && res.status === "success") {
+                message.success(res.message || "Demo data seeded successfully!");
+                fetchStats();
+            } else {
+                message.error(res?.message || "Failed to seed demo data.");
+            }
+        } catch (err) {
+            console.error(err);
+            message.error("Error seeding data.");
+        } finally {
+            setSeeding(false);
         }
     };
 
@@ -104,14 +123,24 @@ const InventoryDashboard = () => {
                 title="Inventory Dashboard"
                 subtitle="Overview of store items, stock levels, and movements"
                 actions={
-                    <Button 
-                        type="default" 
-                        icon={<ReloadOutlined />} 
-                        onClick={fetchStats}
-                        loading={loading}
-                    >
-                        Refresh Data
-                    </Button>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                        <Button 
+                            type="primary" 
+                            style={{ backgroundColor: '#18181b', borderColor: '#18181b' }}
+                            onClick={handleSeedData}
+                            loading={seeding}
+                        >
+                            Generate Demo Data
+                        </Button>
+                        <Button 
+                            type="default" 
+                            icon={<ReloadOutlined />} 
+                            onClick={fetchStats}
+                            loading={loading}
+                        >
+                            Refresh Data
+                        </Button>
+                    </div>
                 }
             />
 

@@ -54,9 +54,11 @@ import ItemBulkImporter from "../modules/Item/ItemBulkImporter";
 
 import ItemCategoryList from "../modules/ItemCategory/ItemCategoryList";
 import ItemCategoryForm from "../modules/ItemCategory/ItemCategoryForm";
+import ItemCategoryView from "../modules/ItemCategory/ItemCategoryView";
 
 import StoreLocationList from "../modules/StoreLocation/StoreLocationList";
 import StoreLocationForm from "../modules/StoreLocation/StoreLocationForm";
+import StoreLocationView from "../modules/StoreLocation/StoreLocationView";
 
 import InventoryEntryList from "../modules/InventoryEntry/InventoryEntryList";
 import InventoryEntryForm from "../modules/InventoryEntry/InventoryEntryForm";
@@ -281,6 +283,8 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         switch (targetDoctype) {
             case DOCTYPE_ITEM: return <ItemView {...viewProps} />;
             case DOCTYPE_INVENTORY_ENTRY: return <InventoryEntryView {...viewProps} />;
+            case DOCTYPE_ITEM_CATEGORY: return <ItemCategoryView {...viewProps} />;
+            case DOCTYPE_STORE_LOCATION: return <StoreLocationView {...viewProps} />;
             case DOCTYPE_ROOM: return <RoomView {...viewProps} />;
             case DOCTYPE_ROOM_BOOKING: return <RoomBookingView {...viewProps} />;
             case DOCTYPE_DONOR: return <DonorView {...viewProps} />;

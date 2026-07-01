@@ -1,6 +1,7 @@
 import { 
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER,
-    DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING
+    DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING,
+    DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION
 } from "./constants";
 import { donorFormFields } from "../formfield/donorFormFields";
 import { templeFormFields } from "../formfield/templeFormFields";
@@ -11,6 +12,8 @@ import { itemFormFields } from "../formfield/itemFormFields";
 import { inventoryEntryFormFields } from "../formfield/inventoryEntryFormFields";
 import { roomFormFields } from "../formfield/roomFormFields";
 import { roomBookingFormFields } from "../formfield/roomBookingFormFields";
+import { itemCategoryFormFields } from "../formfield/itemCategoryFormFields";
+import { storeLocationFormFields } from "../formfield/storeLocationFormFields";
 
 /**
  * Centralized form configuration for different Doctypes.
@@ -27,6 +30,8 @@ export const formConfigs = {
     [DOCTYPE_INVENTORY_ENTRY]: inventoryEntryFormFields,
     [DOCTYPE_ROOM]: roomFormFields,
     [DOCTYPE_ROOM_BOOKING]: roomBookingFormFields,
+    [DOCTYPE_ITEM_CATEGORY]: itemCategoryFormFields,
+    [DOCTYPE_STORE_LOCATION]: storeLocationFormFields,
 };
 
 
