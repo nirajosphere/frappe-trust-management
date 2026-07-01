@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-    Button, Table, Alert, Card, Row, Col, Typography, Upload, Tag, Progress, message
+    Button, Table, Alert, Card, Row, Col, Typography, Upload, Tag, Progress, message, Empty, Select
 } from "antd";
-import { DownloadOutlined, UploadOutlined, PlayCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { DownloadOutlined, UploadOutlined, PlayCircleOutlined, InfoCircleOutlined, InboxOutlined } from "@ant-design/icons";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ViewContainer from "../../components/common/ViewContainer";
 import SectionCard from "../../components/common/SectionCard";
@@ -15,6 +15,30 @@ const ItemBulkImporter = ({ onBack }) => {
     const [parsedData, setParsedData] = useState([]);
     const [importResult, setImportResult] = useState(null);
     const [fileName, setFileName] = useState("");
+    const [temples, setTemples] = useState([]);
+    const [selectedTemple, setSelectedTemple] = useState(null);
+
+    useEffect(() => {
+        const fetchTemples = async () => {
+            try {
+                const res = await call("frappe.client.get_list", {
+                    doctype: "Temple",
+                    fields: ["name", "temple_name"],
+                    limit_page_length: 100,
+                    order_by: "temple_name asc"
+                });
+                if (res) {
+                    setTemples(res);
+                    if (res.length > 0) {
+                        setSelectedTemple(res[0].name);
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchTemples();
+    }, []);
 
     const call = (method, args = {}) => {
         return new Promise((resolve, reject) => {
@@ -36,7 +60,7 @@ const ItemBulkImporter = ({ onBack }) => {
         const lines = text.split(/\r?\n/);
         if (lines.length === 0) return [];
         
-        // Headers: Item Name,Item Code,Category,Store Location,Unit,Minimum Stock,Maximum Stock,Description
+        // Headers: Item Name,Item Code,Category,Store Location,Temple/Trust,Unit,Minimum Stock,Maximum Stock,Description
         const items = [];
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
@@ -65,10 +89,11 @@ const ItemBulkImporter = ({ onBack }) => {
                     item_code: cells[1] || "",
                     category: cells[2] || "",
                     store_location: cells[3] || "",
-                    unit: cells[4] || "Nos",
-                    minimum_stock: parseFloat(cells[5]) || 0,
-                    maximum_stock: parseFloat(cells[6]) || 0,
-                    description: cells[7] || ""
+                    temple: cells[4] || "",
+                    unit: cells[5] || "Nos",
+                    minimum_stock: parseFloat(cells[6]) || 0,
+                    maximum_stock: parseFloat(cells[7]) || 0,
+                    description: cells[8] || ""
                 });
             }
         }
@@ -76,8 +101,8 @@ const ItemBulkImporter = ({ onBack }) => {
     };
 
     const handleDownloadTemplate = () => {
-        const headers = ["Item Name", "Item Code", "Category", "Store Location", "Unit", "Minimum Stock", "Maximum Stock", "Description"];
-        const exampleRow = ["Fresh Banana", "BAN-01", "Fruits", "Main Kitchen", "Nos", "50", "200", "Bananas for pooja prasadam"];
+        const headers = ["Item Name", "Item Code", "Category", "Store Location", "Temple / Trust", "Unit", "Minimum Stock", "Maximum Stock", "Description"];
+        const exampleRow = ["Fresh Banana", "BAN-01", "Fruits", "Main Kitchen", selectedTemple || "MALATAJ MELDI MAA", "Nos", "50", "200", "Bananas for pooja prasadam"];
         const csvContent = "data:text/csv;charset=utf-8," 
             + [headers.join(","), exampleRow.join(",")].join("\n");
         
@@ -99,7 +124,12 @@ const ItemBulkImporter = ({ onBack }) => {
                 message.error("The uploaded CSV file is empty or formatted incorrectly.");
                 return;
             }
-            setParsedData(data);
+            // Fallback/override temple field with selected temple
+            const mappedData = data.map(item => ({
+                ...item,
+                temple: item.temple || selectedTemple
+            }));
+            setParsedData(mappedData);
             setFileName(file.name);
             setImportResult(null);
             message.success(`Parsed ${data.length} items from CSV.`);
@@ -112,8 +142,12 @@ const ItemBulkImporter = ({ onBack }) => {
         if (parsedData.length === 0) return;
         setImporting(true);
         try {
+            const preparedData = parsedData.map(item => ({
+                ...item,
+                temple: item.temple || selectedTemple
+            }));
             const res = await call("temple_donation.api.import_inventory_items", {
-                items_list: JSON.stringify(parsedData)
+                items_list: JSON.stringify(preparedData)
             });
             if (res) {
                 setImportResult(res);
@@ -133,6 +167,7 @@ const ItemBulkImporter = ({ onBack }) => {
         { title: "Item Code", dataIndex: "item_code", key: "item_code" },
         { title: "Category", dataIndex: "category", key: "category" },
         { title: "Location", dataIndex: "store_location", key: "store_location" },
+        { title: "Temple/Trust", dataIndex: "temple", key: "temple" },
         { title: "Unit", dataIndex: "unit", key: "unit" },
         { title: "Min Stock", dataIndex: "minimum_stock", key: "minimum_stock", align: "right" }
     ];
@@ -149,8 +184,32 @@ const ItemBulkImporter = ({ onBack }) => {
             <Row gutter={[24, 24]}>
                 <Col xs={24} lg={8}>
                     <div className="flex flex-col gap-6">
+                        {/* Select Trust/Temple Card */}
+                        <SectionCard title="1. Select Target Trust">
+                            <Paragraph className="text-zinc-500 text-xs">
+                                Choose the Temple or Trust you are importing items for. This will pre-fill the downloaded template and serve as the default for all rows.
+                            </Paragraph>
+                            <Select
+                                placeholder="Select Trust / Temple"
+                                value={selectedTemple}
+                                onChange={(val) => {
+                                    setSelectedTemple(val);
+                                    // If we already parsed data, update its temple values
+                                    if (parsedData.length > 0) {
+                                        const updated = parsedData.map(item => ({
+                                            ...item,
+                                            temple: val
+                                        }));
+                                        setParsedData(updated);
+                                    }
+                                }}
+                                className="w-full h-10 border-zinc-200 text-zinc-700 font-semibold"
+                                options={temples.map(t => ({ label: t.temple_name || t.name, value: t.name }))}
+                            />
+                        </SectionCard>
+
                         {/* Download Template Card */}
-                        <SectionCard title="1. Download Template">
+                        <SectionCard title="2. Download Template">
                             <Paragraph className="text-zinc-500 text-xs">
                                 Download our standard CSV template containing all required column headers to ensure valid database records.
                             </Paragraph>
@@ -158,6 +217,7 @@ const ItemBulkImporter = ({ onBack }) => {
                                 type="dashed"
                                 icon={<DownloadOutlined />}
                                 onClick={handleDownloadTemplate}
+                                disabled={!selectedTemple}
                                 block
                                 className="h-10 border-zinc-300 text-zinc-700 font-semibold"
                             >
@@ -166,23 +226,27 @@ const ItemBulkImporter = ({ onBack }) => {
                         </SectionCard>
 
                         {/* Upload CSV Card */}
-                        <SectionCard title="2. Upload CSV File">
+                        <SectionCard title="3. Upload CSV File">
                             <Paragraph className="text-zinc-500 text-xs">
                                 Select or drag and drop your completed CSV template here.
                             </Paragraph>
-                            <Upload
+                            <Upload.Dragger
                                 beforeUpload={handleBeforeUpload}
                                 accept=".csv"
                                 fileList={[]}
+                                disabled={!selectedTemple}
+                                className="bg-zinc-50/50 border-2 border-dashed border-zinc-200 rounded-xl hover:border-zinc-900 transition-colors p-4 block"
                             >
-                                <Button
-                                    icon={<UploadOutlined />}
-                                    block
-                                    className="h-10 border-zinc-900 bg-zinc-900 text-white font-semibold hover:!bg-zinc-800 hover:!border-zinc-800"
-                                >
-                                    Select CSV File
-                                </Button>
-                            </Upload>
+                                <p className="ant-upload-drag-icon text-zinc-400 text-3xl mb-1">
+                                    <InboxOutlined className="!text-zinc-600" />
+                                </p>
+                                <p className="ant-upload-text font-bold text-zinc-700 text-xs">
+                                    Click to select or drag CSV file here
+                                </p>
+                                <p className="ant-upload-hint text-zinc-400 text-[10px] mt-1">
+                                    Only standard .csv file format is supported
+                                </p>
+                            </Upload.Dragger>
                             {fileName && (
                                 <div className="mt-3 p-2 bg-zinc-50 border border-zinc-100 rounded text-center">
                                     <Text className="text-xs font-semibold text-zinc-700">Selected: {fileName}</Text>
@@ -245,7 +309,7 @@ const ItemBulkImporter = ({ onBack }) => {
                     {parsedData.length > 0 ? (
                         <SectionCard 
                             title={`Preview Parsed Data (${parsedData.length} records)`}
-                            extra={
+                            right={
                                 <Button
                                     type="primary"
                                     icon={<PlayCircleOutlined />}

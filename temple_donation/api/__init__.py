@@ -1108,13 +1108,13 @@ def import_inventory_items(items_list):
             summary["logs"].append(f"Row {row_num}: Item Name is required.")
             continue
 
-        exists_filters = {"item_name": item_name}
-        if item_code:
-            exists_filters = {"or": [["item_name", "=", item_name], ["item_code", "=", item_code]]}
+        item_exists = frappe.db.exists("Item", {"item_name": item_name})
+        if not item_exists and item_code:
+            item_exists = frappe.db.exists("Item", {"item_code": item_code})
         
-        if frappe.db.exists("Item", exists_filters):
+        if item_exists:
             summary["skipped"] += 1
-            summary["logs"].append(f"Row {row_num}: Item '{item_name}' already exists. Skipped.")
+            summary["logs"].append(f"Row {row_num}: Item '{item_name}' (or Code '{item_code}') already exists. Skipped.")
             continue
 
         category_id = None
@@ -1125,24 +1125,30 @@ def import_inventory_items(items_list):
                 summary["logs"].append(f"Row {row_num}: Category '{category}' does not exist.")
                 continue
 
+        if temple:
+            if not frappe.db.exists("Temple", temple):
+                summary["failed"] += 1
+                summary["logs"].append(f"Row {row_num}: Trust '{temple}' does not exist.")
+                continue
+
         location_id = None
         if location:
-            location_id = frappe.db.exists("Store Location", {"location_name": location})
+            loc_filters = {"location_name": location}
+            if temple:
+                loc_filters["temple"] = temple
+            location_id = frappe.db.exists("Store Location", loc_filters)
             if not location_id:
+                if temple:
+                    summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist for Trust '{temple}'.")
+                else:
+                    summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist.")
                 summary["failed"] += 1
-                summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist.")
                 continue
 
         if unit not in ["Nos", "Kg", "Litre"]:
             summary["failed"] += 1
             summary["logs"].append(f"Row {row_num}: Unit '{unit}' is invalid. Allowed: Nos, Kg, Litre.")
             continue
-
-        if temple:
-            if not frappe.db.exists("Temple", temple):
-                summary["failed"] += 1
-                summary["logs"].append(f"Row {row_num}: Trust '{temple}' does not exist.")
-                continue
 
         try:
             item_doc = frappe.get_doc({
