@@ -47,7 +47,7 @@ const ItemForm = ({ id, onBack }) => {
                 active: initialValues.status === "Active"
             });
         } else if (!isEdit) {
-            form.setFieldsValue({ active: true });
+            form.setFieldsValue({ active: true, total_stock: 0 });
         }
     }, [isEdit, initialValues, form]);
 
@@ -58,7 +58,7 @@ const ItemForm = ({ id, onBack }) => {
                 status: values.active ? "Active" : "Inactive"
             };
             delete mappedValues.active;
-            delete mappedValues.valuation_rate;
+            delete mappedValues.total_stock;
             if (isEdit) {
                 await updateDoc(DOCTYPE_ITEM, id, mappedValues);
             } else {
@@ -154,7 +154,16 @@ const ItemForm = ({ id, onBack }) => {
                                     options={[
                                         { label: "Nos", value: "Nos" },
                                         { label: "Kg", value: "Kg" },
-                                        { label: "Litre", value: "Litre" }
+                                        { label: "Litre", value: "Litre" },
+                                        { label: "Bag", value: "Bag" },
+                                        { label: "Bottle", value: "Bottle" },
+                                        { label: "Box", value: "Box" },
+                                        { label: "Pack", value: "Pack" },
+                                        { label: "Piece", value: "Piece" },
+                                        { label: "Can", value: "Can" },
+                                        { label: "Book", value: "Book" },
+                                        { label: "Gram", value: "Gram" },
+                                        { label: "Meter", value: "Meter" }
                                     ]} 
                                 />
                             </Form.Item>
@@ -184,6 +193,36 @@ const ItemForm = ({ id, onBack }) => {
                                 style={formItemStyle}
                             >
                                 <InputNumber placeholder="10" style={{ width: '100%' }} min={0} precision={0} />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="maximum_stock"
+                                label="Maximum Stock"
+                                style={formItemStyle}
+                            >
+                                <InputNumber placeholder="100" style={{ width: '100%' }} min={0} precision={0} />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="valuation_rate"
+                                label="Valuation Rate (₹)"
+                                style={formItemStyle}
+                            >
+                                <InputNumber placeholder="0.00" style={{ width: '100%' }} min={0} precision={2} />
+                            </Form.Item>
+                        </Col>
+
+                        <Col xs={24} md={12}>
+                            <Form.Item
+                                name="total_stock"
+                                label="Total Stock"
+                                style={formItemStyle}
+                            >
+                                <InputNumber disabled style={{ width: '100%' }} placeholder="0" />
                             </Form.Item>
                         </Col>
 

@@ -1121,12 +1121,27 @@ def import_inventory_items(items_list):
         if category:
             category_id = frappe.db.exists("Item Category", {"category_name": category})
             if not category_id:
-                summary["failed"] += 1
-                summary["logs"].append(f"Row {row_num}: Category '{category}' does not exist.")
-                continue
+                try:
+                    new_cat = frappe.get_doc({
+                        "doctype": "Item Category",
+                        "category_name": category
+                    })
+                    new_cat.insert(ignore_permissions=True)
+                    category_id = new_cat.name
+                    summary["logs"].append(f"Row {row_num}: Created Category '{category}' as it did not exist.")
+                except Exception as e:
+                    summary["failed"] += 1
+                    summary["logs"].append(f"Row {row_num}: Failed to create Category '{category}': {str(e)}")
+                    continue
 
+        resolved_temple = None
         if temple:
-            if not frappe.db.exists("Temple", temple):
+            if frappe.db.exists("Temple", temple):
+                resolved_temple = temple
+            else:
+                resolved_temple = frappe.db.get_value("Temple", {"temple_name": temple})
+            
+            if not resolved_temple:
                 summary["failed"] += 1
                 summary["logs"].append(f"Row {row_num}: Trust '{temple}' does not exist.")
                 continue
@@ -1134,20 +1149,28 @@ def import_inventory_items(items_list):
         location_id = None
         if location:
             loc_filters = {"location_name": location}
-            if temple:
-                loc_filters["temple"] = temple
+            if resolved_temple:
+                loc_filters["temple"] = resolved_temple
             location_id = frappe.db.exists("Store Location", loc_filters)
             if not location_id:
-                if temple:
-                    summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist for Trust '{temple}'.")
-                else:
-                    summary["logs"].append(f"Row {row_num}: Store Location '{location}' does not exist.")
-                summary["failed"] += 1
-                continue
+                try:
+                    new_loc = frappe.get_doc({
+                        "doctype": "Store Location",
+                        "location_name": location,
+                        "temple": resolved_temple
+                    })
+                    new_loc.insert(ignore_permissions=True)
+                    location_id = new_loc.name
+                    summary["logs"].append(f"Row {row_num}: Created Store Location '{location}' under Trust '{resolved_temple}' as it did not exist.")
+                except Exception as e:
+                    summary["failed"] += 1
+                    summary["logs"].append(f"Row {row_num}: Failed to create Store Location '{location}': {str(e)}")
+                    continue
 
-        if unit not in ["Nos", "Kg", "Litre"]:
+        allowed_units = ["Nos", "Kg", "Litre", "Bag", "Bottle", "Box", "Pack", "Piece", "Can", "Book", "Gram", "Meter"]
+        if unit not in allowed_units:
             summary["failed"] += 1
-            summary["logs"].append(f"Row {row_num}: Unit '{unit}' is invalid. Allowed: Nos, Kg, Litre.")
+            summary["logs"].append(f"Row {row_num}: Unit '{unit}' is invalid. Allowed: {', '.join(allowed_units)}")
             continue
 
         try:
@@ -1156,7 +1179,7 @@ def import_inventory_items(items_list):
                 "item_name": item_name,
                 "item_code": item_code,
                 "unit": unit,
-                "temple": temple,
+                "temple": resolved_temple,
                 "item_category": category_id,
                 "store_location": location_id,
                 "minimum_stock": min_stock,

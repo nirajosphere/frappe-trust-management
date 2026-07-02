@@ -13,7 +13,7 @@ const ItemList = () => {
             description="Manage trust assets and consumable items"
             columns={itemColumns}
             basePath="items"
-            fields={["name", "item_name", "item_code", "unit", "temple", "total_stock", "item_category", "store_location", "minimum_stock", "status"]}
+            fields={["name", "item_name", "item_code", "unit", "temple", "total_stock", "item_category", "store_location", "minimum_stock", "status", "valuation_rate"]}
             extra={
                 <Button
                     type="default"

@@ -98,7 +98,7 @@ export const itemColumns = [
 
             if (stock <= 0) {
                 status = "inactive";
-                label = "Out of Stock";
+                label = `${stock} ${record.unit || "Nos"}`;
             } else if (stock < threshold) {
                 status = "super admin";
                 label = `Low (${stock})`;

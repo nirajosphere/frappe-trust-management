@@ -9,6 +9,8 @@
   "reference_type",
   "reference_name",
   "temple",
+  "source_location",
+  "target_location",
   "posting_date",
   "remarks",
   "items"
@@ -41,6 +43,18 @@
    "label": "Temple",
    "options": "Temple",
    "reqd": 1
+  },
+  {
+   "fieldname": "source_location",
+   "fieldtype": "Link",
+   "label": "Source Location",
+   "options": "Store Location"
+  },
+  {
+   "fieldname": "target_location",
+   "fieldtype": "Link",
+   "label": "Target Location",
+   "options": "Store Location"
   },
   {
    "fieldname": "posting_date",

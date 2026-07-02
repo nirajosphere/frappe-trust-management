@@ -359,6 +359,18 @@ const ListingPage = ({
         limit: 1000
     });
 
+    // Fetch Item Categories list for link field mapping in columns
+    const { data: categories } = useFrappeGetDocList("Item Category", {
+        fields: ["name", "category_name"],
+        limit: 1000
+    });
+
+    // Fetch Store Locations list for link field mapping in columns
+    const { data: storeLocations } = useFrappeGetDocList("Store Location", {
+        fields: ["name", "location_name"],
+        limit: 1000
+    });
+
 
 
     const [enrichedData, setEnrichedData] = useState([]);
@@ -448,6 +460,16 @@ const ListingPage = ({
                     const rtB = roomTypes?.find(item => item.name === valB);
                     valA = rtA ? rtA.room_type_name : valA;
                     valB = rtB ? rtB.room_type_name : valB;
+                } else if (field === "item_category" || field === "item_category.category_name") {
+                    const cA = categories?.find(item => item.name === valA);
+                    const cB = categories?.find(item => item.name === valB);
+                    valA = cA ? cA.category_name : valA;
+                    valB = cB ? cB.category_name : valB;
+                } else if (field === "store_location" || field === "store_location.location_name") {
+                    const slA = storeLocations?.find(item => item.name === valA);
+                    const slB = storeLocations?.find(item => item.name === valB);
+                    valA = slA ? slA.location_name : valA;
+                    valB = slB ? slB.location_name : valB;
                 }
 
                 if (valA === valB) continue;
@@ -471,7 +493,7 @@ const ListingPage = ({
             }
             return 0;
         });
-    }, [enrichedData, appliedSorters, temples, donors, rooms, buildings, roomTypes]);
+    }, [enrichedData, appliedSorters, temples, donors, rooms, buildings, roomTypes, categories, storeLocations]);
 
     const handleAdd = () => {
         if (typeof frappe !== "undefined" && basePath) {
@@ -616,9 +638,45 @@ const ListingPage = ({
                     }
                 };
             }
+            if (col.dataIndex === "item_category") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const c = categories?.find(item => item.name === text);
+                        const name = c ? c.category_name : text;
+                        const config = getTagConfig("default");
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {name}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
+            if (col.dataIndex === "store_location") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return "—";
+                        const sl = storeLocations?.find(item => item.name === text);
+                        const name = sl ? sl.location_name : text;
+                        const config = getTagConfig("manager");
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {name}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
             return col;
         });
-    }, [visibleColumns, temples, donations, donors, rooms, buildings, roomTypes]);
+    }, [visibleColumns, temples, donations, donors, rooms, buildings, roomTypes, categories, storeLocations]);
 
     if (error) {
         return (

@@ -17,6 +17,14 @@ const ItemView = ({ id, onBack, onEdit }) => {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+    const { data: categories } = useFrappeGetDocList("Item Category", {
+        fields: ["name", "category_name"],
+        limit: 1000
+    });
+    const { data: storeLocations } = useFrappeGetDocList("Store Location", {
+        fields: ["name", "location_name"],
+        limit: 1000
+    });
     const [valuationRate, setValuationRate] = useState(0.0);
 
     useEffect(() => {
@@ -68,6 +76,12 @@ const ItemView = ({ id, onBack, onEdit }) => {
     const templeObj = temples?.find(t => t.name === doc.temple);
     const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
 
+    const categoryObj = categories?.find(c => c.name === doc.item_category);
+    const categoryName = categoryObj ? categoryObj.category_name : (doc.item_category || "—");
+
+    const storeLocationObj = storeLocations?.find(sl => sl.name === doc.store_location);
+    const storeLocationName = storeLocationObj ? storeLocationObj.location_name : (doc.store_location || "—");
+
     const activeConfig = getTagConfig(doc.status === "Active" ? "active" : "inactive");
 
     return (
@@ -117,12 +131,12 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Category">
-                                        <span className="text-zinc-800 font-semibold">{doc.item_category || "—"}</span>
+                                        <span className="text-zinc-800 font-semibold">{categoryName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Store Location">
-                                        <span className="text-zinc-800 font-semibold">{doc.store_location || "—"}</span>
+                                        <span className="text-zinc-800 font-semibold">{storeLocationName}</span>
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
@@ -189,6 +203,13 @@ const ItemView = ({ id, onBack, onEdit }) => {
                                         label: "Current Quantity", value: (
                                             <span className="text-xs font-semibold text-zinc-800">
                                                 {doc.total_stock || 0} {doc.unit || "units"}
+                                            </span>
+                                        )
+                                    },
+                                    {
+                                        label: "Valuation Rate", value: (
+                                            <span className="text-xs font-semibold text-zinc-800">
+                                                ₹{Number(doc.valuation_rate || 0).toFixed(2)}
                                             </span>
                                         )
                                     },

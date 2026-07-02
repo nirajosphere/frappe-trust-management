@@ -245,9 +245,10 @@ const InventoryEntryForm = ({ id, onBack }) => {
                                     placeholder="Select Reference Type" 
                                     options={[
                                         { label: "Donation", value: "Donation" },
-                                        { label: "Manual", value: "Manual" },
                                         { label: "Purchase", value: "Purchase" },
-                                        { label: "Usage", value: "Usage" }
+                                        { label: "Kitchen Usage", value: "Kitchen Usage" },
+                                        { label: "Pooja Usage", value: "Pooja Usage" },
+                                        { label: "Manual Adjustment", value: "Manual Adjustment" }
                                     ]} 
                                     onChange={() => form.setFieldValue("reference_name", undefined)}
                                 />

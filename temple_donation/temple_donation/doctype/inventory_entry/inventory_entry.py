@@ -12,10 +12,16 @@ class InventoryEntry(Document):
 				item.unit = frappe.db.get_value("Item", item.item, "unit")
 			item.total_amount = (item.qty or 0) * (item.rate or 0)
 
-	def on_submit(self):
+	def after_insert(self):
 		self.update_stock()
 
-	def on_cancel(self):
+	def on_update(self):
+		old_doc = self.get_doc_before_save()
+		if old_doc:
+			old_doc.update_stock(reverse=True)
+		self.update_stock()
+
+	def on_trash(self):
 		self.update_stock(reverse=True)
 
 	def update_stock(self, reverse=False):

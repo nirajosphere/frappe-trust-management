@@ -36,7 +36,7 @@
    "fieldname": "unit",
    "fieldtype": "Select",
    "label": "Unit",
-   "options": "Nos\nKg\nLitre"
+   "options": "Nos\nKg\nLitre\nBag\nBottle\nBox\nPack\nPiece\nCan\nBook\nGram\nMeter"
   },
   {
    "fieldname": "temple",
@@ -81,6 +81,12 @@
    "fieldtype": "Float",
    "label": "Current Stock",
    "read_only": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "valuation_rate",
+   "fieldtype": "Float",
+   "label": "Valuation Rate",
    "default": "0"
   },
   {
