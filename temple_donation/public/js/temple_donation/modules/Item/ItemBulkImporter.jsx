@@ -3,6 +3,7 @@ import {
     Button, Table, Alert, Card, Row, Col, Typography, Upload, Tag, Progress, message, Empty, Select
 } from "antd";
 import { DownloadOutlined, UploadOutlined, PlayCircleOutlined, InfoCircleOutlined, InboxOutlined } from "@ant-design/icons";
+import { parseSpreadsheetFile } from "../../utils/importUtils";
 import AddPageHeader from "../../components/common/AddPageHeader";
 import ViewContainer from "../../components/common/ViewContainer";
 import SectionCard from "../../components/common/SectionCard";
@@ -55,49 +56,46 @@ const ItemBulkImporter = ({ onBack }) => {
         });
     };
 
-    // CSV parser helper
-    const parseCSV = (text) => {
-        const lines = text.split(/\r?\n/);
-        if (lines.length === 0) return [];
+    // Map parsed headers and rows to Item structure
+    const parseItemData = (headers, rows) => {
+        const headersLower = headers.map(h => h.trim().toLowerCase());
+        const getHeaderKey = (possibleNames) => {
+            const idx = headersLower.findIndex(h => possibleNames.some(p => h.includes(p)));
+            return idx >= 0 ? headers[idx] : null;
+        };
         
-        // Headers: Item Name,Item Code,Category,Store Location,Temple/Trust,Unit,Minimum Stock,Maximum Stock,Description
-        const items = [];
-        for (let i = 1; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (!line) continue;
-            
-            // Simple split by comma while respecting potential quotes
-            const cells = [];
-            let inQuotes = false;
-            let currentCell = '';
-            for (let c = 0; c < line.length; c++) {
-                const char = line[c];
-                if (char === '"' || char === "'") {
-                    inQuotes = !inQuotes;
-                } else if (char === ',' && !inQuotes) {
-                    cells.push(currentCell.trim());
-                    currentCell = '';
-                } else {
-                    currentCell += char;
+        const keyName = getHeaderKey(["item name", "name"]);
+        const keyCode = getHeaderKey(["item code", "code"]);
+        const keyCategory = getHeaderKey(["category"]);
+        const keyLocation = getHeaderKey(["store location", "location", "store"]);
+        const keyTemple = getHeaderKey(["temple", "trust"]);
+        const keyUnit = getHeaderKey(["unit"]);
+        const keyMinStock = getHeaderKey(["minimum stock", "min stock", "minimum"]);
+        const keyMaxStock = getHeaderKey(["maximum stock", "max stock", "maximum"]);
+        const keyDesc = getHeaderKey(["description", "desc"]);
+        
+        return rows.map((row, index) => {
+            const val = (key, fallbackIdx) => {
+                if (key && row[key] !== undefined && row[key] !== null) {
+                    return String(row[key]).trim();
                 }
-            }
-            cells.push(currentCell.trim());
+                const keys = Object.keys(row);
+                const fallbackKey = keys[fallbackIdx];
+                return fallbackKey ? String(row[fallbackKey]).trim() : "";
+            };
             
-            if (cells.length > 0 && cells[0]) {
-                items.push({
-                    item_name: cells[0] || "",
-                    item_code: cells[1] || "",
-                    category: cells[2] || "",
-                    store_location: cells[3] || "",
-                    temple: cells[4] || "",
-                    unit: cells[5] || "Nos",
-                    minimum_stock: parseFloat(cells[6]) || 0,
-                    maximum_stock: parseFloat(cells[7]) || 0,
-                    description: cells[8] || ""
-                });
-            }
-        }
-        return items;
+            return {
+                item_name: val(keyName, 0),
+                item_code: val(keyCode, 1),
+                category: val(keyCategory, 2),
+                store_location: val(keyLocation, 3),
+                temple: val(keyTemple, 4),
+                unit: val(keyUnit, 5) || "Nos",
+                minimum_stock: parseFloat(val(keyMinStock, 6)) || 0,
+                maximum_stock: parseFloat(val(keyMaxStock, 7)) || 0,
+                description: val(keyDesc, 8)
+            };
+        }).filter(item => item.item_name);
     };
 
     const handleDownloadTemplate = () => {
@@ -116,25 +114,26 @@ const ItemBulkImporter = ({ onBack }) => {
     };
 
     const handleBeforeUpload = (file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target.result;
-            const data = parseCSV(text);
-            if (data.length === 0) {
-                message.error("The uploaded CSV file is empty or formatted incorrectly.");
-                return;
-            }
-            // Fallback/override temple field with selected temple
-            const mappedData = data.map(item => ({
-                ...item,
-                temple: item.temple || selectedTemple
-            }));
-            setParsedData(mappedData);
-            setFileName(file.name);
-            setImportResult(null);
-            message.success(`Parsed ${data.length} items from CSV.`);
-        };
-        reader.readAsText(file);
+        parseSpreadsheetFile(file)
+            .then(({ headers, rows }) => {
+                const parsed = parseItemData(headers, rows);
+                if (parsed.length === 0) {
+                    message.error("No valid items could be parsed from the file.");
+                    return;
+                }
+                const mappedData = parsed.map(item => ({
+                    ...item,
+                    temple: item.temple || selectedTemple
+                }));
+                setParsedData(mappedData);
+                setFileName(file.name);
+                setImportResult(null);
+                message.success(`Parsed ${parsed.length} items from template.`);
+            })
+            .catch(err => {
+                console.error(err);
+                message.error("Failed to parse file. Make sure it is a valid CSV or Excel file.");
+            });
         return false; // Prevent auto upload
     };
 
@@ -226,13 +225,13 @@ const ItemBulkImporter = ({ onBack }) => {
                         </SectionCard>
 
                         {/* Upload CSV Card */}
-                        <SectionCard title="3. Upload CSV File">
+                        <SectionCard title="3. Upload Template File">
                             <Paragraph className="text-zinc-500 text-xs">
-                                Select or drag and drop your completed CSV template here.
+                                Select or drag and drop your completed CSV or Excel template here.
                             </Paragraph>
                             <Upload.Dragger
                                 beforeUpload={handleBeforeUpload}
-                                accept=".csv"
+                                accept=".csv,.xlsx,.xls"
                                 fileList={[]}
                                 disabled={!selectedTemple}
                                 className="bg-zinc-50/50 border-2 border-dashed border-zinc-200 rounded-xl hover:border-zinc-900 transition-colors p-4 block"
@@ -241,10 +240,10 @@ const ItemBulkImporter = ({ onBack }) => {
                                     <InboxOutlined className="!text-zinc-600" />
                                 </p>
                                 <p className="ant-upload-text font-bold text-zinc-700 text-xs">
-                                    Click to select or drag CSV file here
+                                    Click to select or drag CSV or Excel file here
                                 </p>
                                 <p className="ant-upload-hint text-zinc-400 text-[10px] mt-1">
-                                    Only standard .csv file format is supported
+                                    Supports CSV, Excel (.xlsx, .xls) and Google Sheets (exported)
                                 </p>
                             </Upload.Dragger>
                             {fileName && (

@@ -1,51 +1,11 @@
 import React, { useState } from "react";
-import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification } from "antd";
+import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification, Dropdown } from "antd";
 import { DownloadOutlined, InboxOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
+import { parseSpreadsheetFile, convertToCSVString } from "../../../utils/importUtils";
 
 const { Title, Paragraph, Text } = Typography;
 const { Dragger } = Upload;
-
-const parseCSV = (text) => {
-    const lines = text.split(/\r\n|\n/);
-    if (lines.length === 0) return { headers: [], rows: [] };
-    
-    // Parse helper that handles quotes
-    const parseLine = (line) => {
-        const result = [];
-        let current = "";
-        let inQuotes = false;
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                result.push(current.trim());
-                current = "";
-            } else {
-                current += char;
-            }
-        }
-        result.push(current.trim());
-        return result;
-    };
-
-    const headers = parseLine(lines[0]);
-    const rows = [];
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i];
-        if (!line.trim()) continue;
-        const values = parseLine(line);
-        if (values.length === 0 || values.every(v => !v)) continue;
-        
-        const row = {};
-        headers.forEach((header, index) => {
-            row[header] = values[index] || "";
-        });
-        rows.push(row);
-    }
-    return { headers, rows };
-};
 
 const RoomImport = () => {
     const [selectedTemple, setSelectedTemple] = useState(null);
@@ -62,11 +22,40 @@ const RoomImport = () => {
         limit: 1000
     });
 
-    const handleDownloadTemplate = () => {
+    const handleDownloadCSV = () => {
         if (typeof window !== "undefined") {
             window.open("/api/method/temple_donation.api.room_booking.download_room_import_template");
         }
     };
+
+    const handleDownloadExcel = async () => {
+        try {
+            const XLSX = await import("xlsx");
+            const headers = ["Room Number", "Building Code", "Floor Number", "Room Type Name", "Capacity", "Price Per Day", "Status", "Description", "Notes"];
+            const exampleRow1 = ["A-101", "BLD001", "1", "AC", "2", "1500", "Available", "Main Building AC Room", "Near elevator"];
+            const exampleRow2 = ["A-102", "BLD001", "1", "Non AC", "4", "800", "Available", "Main Building Quad Room", "Family sized"];
+            
+            const worksheet = XLSX.utils.aoa_to_sheet([headers, exampleRow1, exampleRow2]);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Rooms Template");
+            XLSX.writeFile(workbook, "room_import_template.xlsx");
+        } catch (err) {
+            notification.error({ message: "Failed to generate Excel template", description: err.message });
+        }
+    };
+
+    const templateMenuItems = [
+        {
+            key: "csv",
+            label: "CSV Template",
+            onClick: handleDownloadCSV
+        },
+        {
+            key: "excel",
+            label: "Excel Template (.xlsx)",
+            onClick: handleDownloadExcel
+        }
+    ];
 
     const handleUpload = (file) => {
         if (!selectedTemple) {
@@ -74,33 +63,30 @@ const RoomImport = () => {
             return false;
         }
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const content = e.target.result;
-            try {
-                const parsed = parseCSV(content);
+        parseSpreadsheetFile(file)
+            .then(({ headers, rows }) => {
                 // Validate headers
                 const required = ["Room Number", "Building Code", "Floor Number", "Room Type Name"];
-                const missing = required.filter(req => !parsed.headers.includes(req));
+                const missing = required.filter(req => !headers.includes(req));
                 if (missing.length > 0) {
                     notification.error({
-                        message: "Invalid CSV Format",
+                        message: "Invalid Template Format",
                         description: `Missing required columns: ${missing.join(", ")}`
                     });
                     return;
                 }
-                setCsvContent(content);
-                setPreviewData(parsed.rows);
+                const csvStr = convertToCSVString(headers, rows);
+                setCsvContent(csvStr);
+                setPreviewData(rows);
                 setStats(null);
                 setImportLogs([]);
-            } catch (err) {
+            })
+            .catch(err => {
                 notification.error({
-                    message: "Failed to parse CSV",
+                    message: "Failed to parse file",
                     description: err.message || "Unknown parsing error"
                 });
-            }
-        };
-        reader.readAsText(file);
+            });
         return false; // Prevent auto-upload by AntD
     };
 
@@ -183,13 +169,14 @@ const RoomImport = () => {
                             Upload a CSV file to import rooms in bulk. Ensure Building Codes and Room Categories exist in the system first.
                         </Paragraph>
                     </div>
-                    <Button 
-                        type="dashed" 
-                        icon={<DownloadOutlined />} 
-                        onClick={handleDownloadTemplate}
-                    >
-                        Download Sample Template
-                    </Button>
+                    <Dropdown menu={{ items: templateMenuItems }} trigger={["click"]}>
+                        <Button 
+                            type="dashed" 
+                            icon={<DownloadOutlined />}
+                        >
+                            Download Sample Template
+                        </Button>
+                    </Dropdown>
                 </div>
 
                 <div style={{ marginBottom: "24px" }}>
@@ -208,7 +195,7 @@ const RoomImport = () => {
 
                 {!previewData ? (
                     <Dragger 
-                        accept=".csv"
+                        accept=".csv,.xlsx,.xls"
                         beforeUpload={handleUpload}
                         showUploadList={false}
                         disabled={!selectedTemple || loading}
@@ -216,17 +203,17 @@ const RoomImport = () => {
                         <p className="ant-upload-drag-icon">
                             <InboxOutlined />
                         </p>
-                        <p className="ant-upload-text">Click or drag CSV file to this area to import</p>
+                        <p className="ant-upload-text">Click or drag CSV or Excel file to this area to import</p>
                         <p className="ant-upload-hint">
                             {!selectedTemple 
                                 ? "Please select a destination temple above first." 
-                                : "Support for single CSV file containing room records."}
+                                : "Supports CSV, Excel (.xlsx, .xls) and Google Sheets (exported)"}
                         </p>
                     </Dragger>
                 ) : (
                     <div style={{ marginTop: "16px" }}>
                         <Alert 
-                            message="CSV File Loaded Successfully" 
+                            message="Template File Loaded Successfully" 
                             description={`Found ${previewData.length} room records. Please review the preview below before confirming the import.`} 
                             type="info" 
                             showIcon 
