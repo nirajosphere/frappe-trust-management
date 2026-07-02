@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button, message
+    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button, message, Select, Space
 } from "antd";
 import {
     AppstoreOutlined, HistoryOutlined, PieChartOutlined,
@@ -19,6 +19,7 @@ import PageLoader from "../../components/common/PageLoader";
 import ViewContainer from "../../components/common/ViewContainer";
 import SectionCard from "../../components/common/SectionCard";
 import { getTagConfig } from "../../utils/tagUtils";
+import { useFrappeGetDocList } from "../../hooks/useFrappe";
 
 dayjs.extend(relativeTime);
 const { Title, Text } = Typography;
@@ -38,6 +39,12 @@ const InventoryDashboard = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [seeding, setSeeding] = useState(false);
+    const [selectedTemple, setSelectedTemple] = useState(undefined);
+
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     const call = (method, args = {}) => {
         return new Promise((resolve, reject) => {
@@ -58,7 +65,7 @@ const InventoryDashboard = () => {
         setLoading(true);
         try {
             setError(null);
-            const res = await call("temple_donation.api.get_inventory_dashboard_data");
+            const res = await call("temple_donation.api.get_inventory_dashboard_data", { temple: selectedTemple });
             if (res) {
                 setData(res);
             }
@@ -90,7 +97,7 @@ const InventoryDashboard = () => {
 
     useEffect(() => {
         fetchStats();
-    }, []);
+    }, [selectedTemple]);
 
     if (loading && !data) return <PageLoader />;
 
@@ -119,30 +126,41 @@ const InventoryDashboard = () => {
 
     return (
         <ViewContainer className="inventory-dashboard-page">
-            <PageHeader
-                title="Inventory Dashboard"
-                subtitle="Overview of store items, stock levels, and movements"
-                actions={
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                        <Button 
-                            type="primary" 
-                            style={{ backgroundColor: '#18181b', borderColor: '#18181b' }}
-                            onClick={handleSeedData}
-                            loading={seeding}
-                        >
-                            Generate Demo Data
-                        </Button>
-                        <Button 
-                            type="default" 
-                            icon={<ReloadOutlined />} 
-                            onClick={fetchStats}
-                            loading={loading}
-                        >
-                            Refresh Data
-                        </Button>
-                    </div>
-                }
-            />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+                <div>
+                    <Title level={2} style={{ margin: 0 }}>Inventory Dashboard</Title>
+                    <Text type="secondary">Overview of store items, stock levels, and movements</Text>
+                </div>
+                <Space>
+                    {/* <Text strong>Filter by Trust:</Text> */}
+                    <Select 
+                        showSearch 
+                        placeholder="All Trusts"
+                        style={{ width: "220px" }}
+                        optionFilterProp="children"
+                        allowClear
+                        value={selectedTemple}
+                        onChange={(val) => setSelectedTemple(val)}
+                        options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                    />
+                    {/* <Button 
+                        type="primary" 
+                        style={{ backgroundColor: '#18181b', borderColor: '#18181b' }}
+                        onClick={handleSeedData}
+                        loading={seeding}
+                    >
+                        Generate Demo Data
+                    </Button> */}
+                    <Button 
+                        type="default" 
+                        icon={<ReloadOutlined />} 
+                        onClick={fetchStats}
+                        loading={loading}
+                    >
+                        Refresh Data
+                    </Button>
+                </Space>
+            </div>
 
             {error && (
                 <div style={{ marginBottom: 24 }}>

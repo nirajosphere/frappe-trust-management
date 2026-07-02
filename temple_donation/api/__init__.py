@@ -1198,11 +1198,16 @@ def import_inventory_items(items_list):
 
 
 @frappe.whitelist()
-def get_inventory_dashboard_data():
+def get_inventory_dashboard_data(temple=None):
     """
     Computes all dashboard statistics, charts data, and activity feeds for the Inventory dashboard.
+    Supports filtering by Temple (Trust).
     """
-    items = frappe.get_all("Item", fields=["name", "total_stock", "minimum_stock", "item_category"])
+    item_filters = {}
+    if temple:
+        item_filters["temple"] = temple
+        
+    items = frappe.get_all("Item", filters=item_filters, fields=["name", "total_stock", "minimum_stock", "item_category"])
     
     total_items = len(items)
     total_stock_qty = sum(flt(i.total_stock) for i in items)
@@ -1216,7 +1221,7 @@ def get_inventory_dashboard_data():
         latest_rate = frappe.db.sql("""
             SELECT child.rate FROM `tabInventory Item` child
             JOIN `tabInventory Entry` parent ON child.parent = parent.name
-            WHERE child.item = %s AND parent.docstatus = 1
+            WHERE child.item = %s
             ORDER BY parent.posting_date DESC, parent.creation DESC LIMIT 1
         """, (i.name,))
         rate = float(latest_rate[0][0] or 0) if latest_rate else 0.0
@@ -1235,27 +1240,45 @@ def get_inventory_dashboard_data():
     today_end = nowdate() + " 23:59:59"
 
     # Today's stock in
-    today_in_qty = frappe.db.sql("""
+    query_args_in = {"today_start": today_start, "today_end": today_end}
+    temple_cond_in = ""
+    if temple:
+        temple_cond_in = "AND parent.temple = %(temple)s"
+        query_args_in["temple"] = temple
+
+    today_in_qty = frappe.db.sql(f"""
         SELECT SUM(child.qty)
         FROM `tabInventory Item` child
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
-        WHERE parent.posting_date BETWEEN %s AND %s
+        WHERE parent.posting_date BETWEEN %(today_start)s AND %(today_end)s
           AND parent.entry_type IN ('Stock In', 'IN')
-          AND parent.docstatus = 1
-    """, (today_start, today_end))[0][0] or 0.0
+          {temple_cond_in}
+    """, query_args_in)[0][0] or 0.0
 
     # Today's stock out
-    today_out_qty = frappe.db.sql("""
+    query_args_out = {"today_start": today_start, "today_end": today_end}
+    temple_cond_out = ""
+    if temple:
+        temple_cond_out = "AND parent.temple = %(temple)s"
+        query_args_out["temple"] = temple
+
+    today_out_qty = frappe.db.sql(f"""
         SELECT SUM(child.qty)
         FROM `tabInventory Item` child
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
-        WHERE parent.posting_date BETWEEN %s AND %s
+        WHERE parent.posting_date BETWEEN %(today_start)s AND %(today_end)s
           AND parent.entry_type IN ('Stock Out', 'OUT')
-          AND parent.docstatus = 1
-    """, (today_start, today_end))[0][0] or 0.0
+          {temple_cond_out}
+    """, query_args_out)[0][0] or 0.0
 
     # Monthly Stock In/Out (last 6 months)
-    months_query = frappe.db.sql("""
+    query_args_months = {}
+    temple_cond_months = ""
+    if temple:
+        temple_cond_months = "AND parent.temple = %(temple)s"
+        query_args_months["temple"] = temple
+
+    months_query = frappe.db.sql(f"""
         SELECT 
             DATE_FORMAT(parent.posting_date, '%%b %%y') as month_name,
             DATE_FORMAT(parent.posting_date, '%%Y-%%m') as month_val,
@@ -1264,23 +1287,37 @@ def get_inventory_dashboard_data():
         FROM `tabInventory Item` child
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
         WHERE parent.posting_date >= DATE_SUB(NOW(), INTERVAL 6 MONTH)
-          AND parent.docstatus = 1
+          {temple_cond_months}
         GROUP BY month_val, month_name
         ORDER BY month_val ASC
-    """, as_dict=True)
+    """, query_args_months, as_dict=True)
     
-    # Category wise distribution
-    category_data = frappe.db.sql("""
+    # Category wise distribution (using name/category_name)
+    query_args_cat = {}
+    temple_cond_cat = ""
+    if temple:
+        temple_cond_cat = "WHERE i.temple = %(temple)s"
+        query_args_cat["temple"] = temple
+
+    category_data = frappe.db.sql(f"""
         SELECT 
-            IFNULL(item_category, 'Uncategorized') as name,
-            SUM(total_stock) as value
-        FROM `tabItem`
-        GROUP BY item_category
+            IFNULL(cat.category_name, 'Uncategorized') as name,
+            SUM(i.total_stock) as value
+        FROM `tabItem` i
+        LEFT JOIN `tabItem Category` cat ON i.item_category = cat.name
+        {temple_cond_cat}
+        GROUP BY cat.category_name
         ORDER BY value DESC
-    """, as_dict=True)
+    """, query_args_cat, as_dict=True)
 
     # Top consumed items
-    top_consumed = frappe.db.sql("""
+    query_args_top = {}
+    temple_cond_top = ""
+    if temple:
+        temple_cond_top = "AND parent.temple = %(temple)s"
+        query_args_top["temple"] = temple
+
+    top_consumed = frappe.db.sql(f"""
         SELECT 
             item.item_name as name,
             SUM(child.qty) as value
@@ -1288,14 +1325,19 @@ def get_inventory_dashboard_data():
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
         JOIN `tabItem` item ON child.item = item.name
         WHERE parent.entry_type IN ('Stock Out', 'OUT')
-          AND parent.docstatus = 1
+          {temple_cond_top}
         GROUP BY child.item, item.item_name
         ORDER BY value DESC
         LIMIT 5
-    """, as_dict=True)
+    """, query_args_top, as_dict=True)
 
     # Recent Activities
+    activities_filters = {}
+    if temple:
+        activities_filters["temple"] = temple
+
     latest_entries = frappe.get_all("Inventory Entry",
+        filters=activities_filters,
         fields=["name", "entry_type", "posting_date", "temple", "owner"],
         order_by="posting_date desc",
         limit=5
@@ -1305,7 +1347,7 @@ def get_inventory_dashboard_data():
         entry["owner_name"] = frappe.db.get_value("User", entry.owner, "full_name") or entry.owner
         
     latest_issues = frappe.get_all("Inventory Entry",
-        filters={"entry_type": ["in", ["Stock Out", "OUT"]]},
+        filters={**activities_filters, "entry_type": ["in", ["Stock Out", "OUT"]]},
         fields=["name", "entry_type", "posting_date", "temple", "owner"],
         order_by="posting_date desc",
         limit=5
@@ -1315,7 +1357,7 @@ def get_inventory_dashboard_data():
         issue["owner_name"] = frappe.db.get_value("User", issue.owner, "full_name") or issue.owner
 
     latest_donations = frappe.get_all("Inventory Entry",
-        filters={"reference_type": "Donation"},
+        filters={**activities_filters, "reference_type": "Donation"},
         fields=["name", "reference_name", "posting_date", "temple"],
         order_by="posting_date desc",
         limit=5
