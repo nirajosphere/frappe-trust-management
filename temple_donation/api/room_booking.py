@@ -173,9 +173,9 @@ def get_room_stats(temple=None):
 
 
 @frappe.whitelist()
-def get_room_dashboard_data(temple=None):
+def get_room_dashboard_data(temple=None, from_date=None, to_date=None):
     """
-    Provides comprehensive room management dashboard APIs.
+    Provides comprehensive room management dashboard APIs with date-range filters.
     """
     filters = {}
     if temple:
@@ -197,49 +197,71 @@ def get_room_dashboard_data(temple=None):
         if status in stats:
             stats[status] += 1
 
-    # Today's check-ins / check-outs / upcoming
-    today_start = now_datetime().replace(hour=0, minute=0, second=0, microsecond=0)
-    today_end = now_datetime().replace(hour=23, minute=59, second=59, microsecond=999999)
+    # Date range for selected period
+    if from_date and to_date:
+        period_start = get_datetime(from_date + " 00:00:00")
+        period_end = get_datetime(to_date + " 23:59:59")
+    else:
+        # Default to today
+        period_start = now_datetime().replace(hour=0, minute=0, second=0, microsecond=0)
+        period_end = now_datetime().replace(hour=23, minute=59, second=59, microsecond=999999)
 
     booking_filters = {}
     if temple:
         booking_filters["temple"] = temple
 
-    # Today's Check Ins
+    # Check Ins in selected period
     check_in_filters = booking_filters.copy()
     check_in_filters.update({
-        "check_in": ["between", [today_start, today_end]],
+        "check_in": ["between", [period_start, period_end]],
         "status": "Booked"
     })
     todays_check_ins = frappe.get_all("Room Booking", filters=check_in_filters, fields=["*"])
 
-    # Today's Check Outs
+    # Check Outs in selected period
     check_out_filters = booking_filters.copy()
     check_out_filters.update({
-        "check_out": ["between", [today_start, today_end]],
+        "check_out": ["between", [period_start, period_end]],
         "status": "Checked In"
     })
     todays_check_outs = frappe.get_all("Room Booking", filters=check_out_filters, fields=["*"])
 
-    # Upcoming Bookings (Next 7 days)
-    seven_days_later = today_end + datetime.timedelta(days=7) if 'datetime' in globals() else today_end
-    # Simple import fallback if datetime is not global
+    # Upcoming Bookings (after period_end)
     import datetime as dt
-    seven_days_later = today_end + dt.timedelta(days=7)
+    seven_days_later = period_end + dt.timedelta(days=7)
 
     upcoming_filters = booking_filters.copy()
     upcoming_filters.update({
-        "check_in": [">", today_end],
+        "check_in": [">", period_end],
         "check_in": ["<=", seven_days_later],
         "status": "Booked"
     })
     upcoming_bookings = frappe.get_all("Room Booking", filters=upcoming_filters, fields=["*"], order_by="check_in asc")
 
+    # Extra Period Metrics for live site dashboard:
+    # 1. Total bookings created or active in the period
+    period_booking_filters = booking_filters.copy()
+    period_booking_filters.update({
+        "creation": ["between", [period_start, period_end]]
+    })
+    total_period_bookings = frappe.db.count("Room Booking", period_booking_filters)
+
+    # 2. Total revenue (sum of total_amount from room bookings created in the period)
+    period_revenue = frappe.db.get_value("Room Booking", {
+        **booking_filters,
+        "creation": ["between", [period_start, period_end]],
+        "status": ["not in", ["Cancelled"]]
+    }, "sum(total_amount)") or 0.0
+
     return {
         "stats": stats,
         "todays_check_ins": todays_check_ins,
         "todays_check_outs": todays_check_outs,
-        "upcoming_bookings": upcoming_bookings
+        "upcoming_bookings": upcoming_bookings,
+        "period_metrics": {
+            "total_bookings": total_period_bookings,
+            "total_revenue": float(period_revenue)
+        }
     }
 
 

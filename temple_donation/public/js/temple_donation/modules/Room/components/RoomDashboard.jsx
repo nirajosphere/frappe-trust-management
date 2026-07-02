@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Statistic, Table, Button, Select, Space, Typography, Tag, notification, Progress } from "antd";
+import { Row, Col, Card, Statistic, Table, Button, Select, Space, Typography, Tag, notification, Progress, DatePicker, Radio, Popover } from "antd";
 import { 
     HomeOutlined, CheckCircleOutlined, InfoCircleOutlined, ClockCircleOutlined,
-    CalendarOutlined, UserOutlined, LoginOutlined, LogoutOutlined 
+    CalendarOutlined, UserOutlined, LoginOutlined, LogoutOutlined, ReloadOutlined
 } from "@ant-design/icons";
+import dayjs from "dayjs";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
+import PageHeader from "../../../components/common/PageHeader";
 
 const { Title, Text } = Typography;
 
 const RoomDashboard = () => {
     const [selectedTemple, setSelectedTemple] = useState(null);
+    const [periodType, setPeriodType] = useState("today"); // 'today', 'week', 'month', 'custom'
+    const [customRange, setCustomRange] = useState([]); // [dayjs, dayjs]
+    const [popoverVisible, setPopoverVisible] = useState(false);
     const [data, setData] = useState({
         stats: { total: 0, available: 0, reserved: 0, occupied: 0, cleaning: 0, maintenance: 0 },
         todays_check_ins: [],
         todays_check_outs: [],
-        upcoming_bookings: []
+        upcoming_bookings: [],
+        period_metrics: { total_bookings: 0, total_revenue: 0 }
     });
     const [loading, setLoading] = useState(false);
 
@@ -24,13 +30,40 @@ const RoomDashboard = () => {
         limit: 1000
     });
 
+    const getPeriodDates = () => {
+        let fromDate = null;
+        let toDate = null;
+        const now = dayjs();
+        
+        if (periodType === "today") {
+            fromDate = now.format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "week") {
+            fromDate = now.subtract(7, "day").format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "month") {
+            fromDate = now.subtract(30, "day").format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "custom" && customRange && customRange.length === 2) {
+            fromDate = customRange[0].format("YYYY-MM-DD");
+            toDate = customRange[1].format("YYYY-MM-DD");
+        }
+        
+        return { fromDate, toDate };
+    };
+
     const fetchDashboardData = () => {
         if (typeof frappe === "undefined") return;
 
         setLoading(true);
+        const { fromDate, toDate } = getPeriodDates();
         frappe.call({
             method: "temple_donation.api.room_booking.get_room_dashboard_data",
-            args: { temple: selectedTemple },
+            args: { 
+                temple: selectedTemple,
+                from_date: fromDate,
+                to_date: toDate
+            },
             callback: (r) => {
                 setLoading(false);
                 if (r.message) {
@@ -42,8 +75,11 @@ const RoomDashboard = () => {
     };
 
     useEffect(() => {
+        if (periodType === "custom" && (!customRange || customRange.length < 2)) {
+            return;
+        }
         fetchDashboardData();
-    }, [selectedTemple]);
+    }, [selectedTemple, periodType, customRange]);
 
     const handleCheckIn = (bookingName) => {
         if (typeof frappe === "undefined") return;
@@ -153,27 +189,87 @@ const RoomDashboard = () => {
         boxShadow: "0 2px 10px rgba(0,0,0,0.04)"
     };
 
+    const getPeriodSuffix = () => {
+        if (periodType === "today") return "Today's";
+        if (periodType === "week") return "Weekly";
+        if (periodType === "month") return "Monthly";
+        return "Period";
+    };
+
     return (
         <div style={{ padding: "24px 0" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-                <div>
-                    <Title level={2} style={{ margin: 0 }}>Room Dashboard</Title>
-                    <Text type="secondary">Real-time room occupancy, operations, and booking timeline analytics</Text>
-                </div>
-                <Space>
-                    <Text strong>Filter by Temple:</Text>
-                    <Select 
-                        showSearch 
-                        placeholder="All Temples"
-                        style={{ width: "220px" }}
-                        optionFilterProp="children"
-                        allowClear
-                        loading={loadingTemples}
-                        onChange={(val) => setSelectedTemple(val)}
-                        options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                    />
-                </Space>
-            </div>
+            <PageHeader 
+                title="Room Dashboard"
+                description="Real-time room occupancy, operations, and booking timeline analytics"
+                extra={(
+                    <Space wrap size="middle">
+                        <Select 
+                            showSearch 
+                            placeholder="All Trusts"
+                            style={{ width: "200px" }}
+                            optionFilterProp="children"
+                            allowClear
+                            loading={loadingTemples}
+                            value={selectedTemple}
+                            onChange={(val) => setSelectedTemple(val)}
+                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                        />
+                        <Radio.Group 
+                            value={periodType} 
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val !== "custom") {
+                                    setPeriodType(val);
+                                }
+                            }}
+                            optionType="button"
+                            buttonStyle="solid"
+                        >
+                            <Radio.Button value="today">Today</Radio.Button>
+                            <Radio.Button value="week">Week</Radio.Button>
+                            <Radio.Button value="month">Month</Radio.Button>
+                            <Popover
+                                content={(
+                                    <div style={{ padding: "4px" }} onClick={(e) => e.stopPropagation()}>
+                                        <DatePicker.RangePicker 
+                                            value={customRange}
+                                            onChange={(dates) => {
+                                                setCustomRange(dates);
+                                                if (dates && dates.length === 2) {
+                                                    setPopoverVisible(false);
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                                title="Select Custom Range"
+                                trigger="click"
+                                open={popoverVisible}
+                                onOpenChange={(visible) => {
+                                    setPopoverVisible(visible);
+                                    if (visible) {
+                                        setPeriodType("custom");
+                                    }
+                                }}
+                            >
+                                <Radio.Button value="custom" style={{ borderLeftWidth: "1px", borderRadius: "0 6px 6px 0" }}>
+                                    {periodType === "custom" && customRange && customRange.length === 2 
+                                        ? `${customRange[0].format("DD MMM")} - ${customRange[1].format("DD MMM")}`
+                                        : "Custom"}
+                                </Radio.Button>
+                            </Popover>
+                        </Radio.Group>
+                        <Button 
+                            type="default" 
+                            icon={<ReloadOutlined />}
+                            onClick={fetchDashboardData}
+                            loading={loading}
+                        >
+                            Refresh Data
+                        </Button>
+                    </Space>
+                )}
+            />
 
             {/* KPI Cards */}
             <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
@@ -244,29 +340,53 @@ const RoomDashboard = () => {
                 </Col>
             </Row>
 
+            {/* Period Statistics Row */}
+            <Row gutter={[16, 16]} style={{ marginBottom: "24px" }}>
+                <Col xs={24} sm={12}>
+                    <Card style={cardStyles} bordered={false}>
+                        <Statistic 
+                            title={`${getPeriodSuffix()} Total Bookings`}
+                            value={data.period_metrics?.total_bookings || 0}
+                            valueStyle={{ color: "#1f2937" }}
+                            prefix={<CalendarOutlined />} 
+                        />
+                    </Card>
+                </Col>
+                <Col xs={24} sm={12}>
+                    <Card style={cardStyles} bordered={false}>
+                        <Statistic 
+                            title={`${getPeriodSuffix()} Room Donation Revenue`}
+                            value={Number(data.period_metrics?.total_revenue || 0).toLocaleString("en-IN", { style: "currency", currency: "INR" })}
+                            valueStyle={{ color: "#10b981" }}
+                            prefix={<span style={{ marginRight: 8 }}>₹</span>} 
+                        />
+                    </Card>
+                </Col>
+            </Row>
+
             {/* Operational Action Lists */}
             <Row gutter={[24, 24]}>
                 <Col xs={24} lg={12}>
-                    <Card title="Today's Check Ins" style={cardStyles} bordered={false}>
+                    <Card title={`${getPeriodSuffix()} Check Ins`} style={cardStyles} bordered={false}>
                         <Table 
                             columns={columnsCheckIn} 
                             dataSource={data.todays_check_ins} 
                             rowKey="name"
                             loading={loading}
                             pagination={{ pageSize: 5 }}
-                            locale={{ emptyText: "No check-ins scheduled for today" }}
+                            locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
                 </Col>
                 <Col xs={24} lg={12}>
-                    <Card title="Today's Check Outs" style={cardStyles} bordered={false}>
+                    <Card title={`${getPeriodSuffix()} Check Outs`} style={cardStyles} bordered={false}>
                         <Table 
                             columns={columnsCheckOut} 
                             dataSource={data.todays_check_outs} 
                             rowKey="name"
                             loading={loading}
                             pagination={{ pageSize: 5 }}
-                            locale={{ emptyText: "No check-outs scheduled for today" }}
+                            locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
                 </Col>

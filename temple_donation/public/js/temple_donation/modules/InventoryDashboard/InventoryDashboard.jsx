@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button, message, Select, Space
+    Row, Col, Card, Typography, Empty, Tag, Spin, List, Timeline, Button, message, Select, Space, DatePicker, Radio, Table, Popover
 } from "antd";
 import {
     AppstoreOutlined, HistoryOutlined, PieChartOutlined,
@@ -40,11 +40,36 @@ const InventoryDashboard = () => {
     const [error, setError] = useState(null);
     const [seeding, setSeeding] = useState(false);
     const [selectedTemple, setSelectedTemple] = useState(undefined);
+    const [periodType, setPeriodType] = useState("month"); // 'today', 'week', 'month', 'custom'
+    const [customRange, setCustomRange] = useState([]); // [dayjs, dayjs]
+    const [popoverVisible, setPopoverVisible] = useState(false);
 
     const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
     });
+
+    const getPeriodDates = () => {
+        let fromDate = null;
+        let toDate = null;
+        const now = dayjs();
+        
+        if (periodType === "today") {
+            fromDate = now.format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "week") {
+            fromDate = now.subtract(7, "day").format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "month") {
+            fromDate = now.subtract(30, "day").format("YYYY-MM-DD");
+            toDate = now.format("YYYY-MM-DD");
+        } else if (periodType === "custom" && customRange && customRange.length === 2) {
+            fromDate = customRange[0].format("YYYY-MM-DD");
+            toDate = customRange[1].format("YYYY-MM-DD");
+        }
+        
+        return { fromDate, toDate };
+    };
 
     const call = (method, args = {}) => {
         return new Promise((resolve, reject) => {
@@ -65,7 +90,12 @@ const InventoryDashboard = () => {
         setLoading(true);
         try {
             setError(null);
-            const res = await call("temple_donation.api.get_inventory_dashboard_data", { temple: selectedTemple });
+            const { fromDate, toDate } = getPeriodDates();
+            const res = await call("temple_donation.api.get_inventory_dashboard_data", { 
+                temple: selectedTemple,
+                from_date: fromDate,
+                to_date: toDate
+            });
             if (res) {
                 setData(res);
             }
@@ -96,8 +126,11 @@ const InventoryDashboard = () => {
     };
 
     useEffect(() => {
+        if (periodType === "custom" && (!customRange || customRange.length < 2)) {
+            return;
+        }
         fetchStats();
-    }, [selectedTemple]);
+    }, [selectedTemple, periodType, customRange]);
 
     if (loading && !data) return <PageLoader />;
 
@@ -124,43 +157,88 @@ const InventoryDashboard = () => {
         qty: parseFloat(item.value) || 0
     })) || [];
 
+    // Dynamic card title suffix
+    const getPeriodSuffix = () => {
+        if (periodType === "today") return "Today's";
+        if (periodType === "week") return "Weekly";
+        if (periodType === "month") return "Monthly";
+        return "Period";
+    };
+
     return (
         <ViewContainer className="inventory-dashboard-page">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
-                <div>
-                    <Title level={2} style={{ margin: 0 }}>Inventory Dashboard</Title>
-                    <Text type="secondary">Overview of store items, stock levels, and movements</Text>
-                </div>
-                <Space>
-                    {/* <Text strong>Filter by Trust:</Text> */}
-                    <Select 
-                        showSearch 
-                        placeholder="All Trusts"
-                        style={{ width: "220px" }}
-                        optionFilterProp="children"
-                        allowClear
-                        value={selectedTemple}
-                        onChange={(val) => setSelectedTemple(val)}
-                        options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                    />
-                    {/* <Button 
-                        type="primary" 
-                        style={{ backgroundColor: '#18181b', borderColor: '#18181b' }}
-                        onClick={handleSeedData}
-                        loading={seeding}
-                    >
-                        Generate Demo Data
-                    </Button> */}
-                    <Button 
-                        type="default" 
-                        icon={<ReloadOutlined />} 
-                        onClick={fetchStats}
-                        loading={loading}
-                    >
-                        Refresh Data
-                    </Button>
-                </Space>
-            </div>
+            <PageHeader 
+                title="Inventory Dashboard"
+                description="Overview of store items, stock levels, and movements"
+                extra={(
+                    <Space wrap size="middle">
+                        <Select 
+                            showSearch 
+                            placeholder="All Trusts"
+                            style={{ width: "200px" }}
+                            optionFilterProp="children"
+                            allowClear
+                            value={selectedTemple}
+                            onChange={(val) => setSelectedTemple(val)}
+                            options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                        />
+                        <Radio.Group 
+                            value={periodType} 
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val !== "custom") {
+                                    setPeriodType(val);
+                                }
+                            }}
+                            optionType="button"
+                            buttonStyle="solid"
+                            
+                        >
+                            <Radio.Button value="today">Today</Radio.Button>
+                            <Radio.Button value="week">Week</Radio.Button>
+                            <Radio.Button value="month">Month</Radio.Button>
+                            <Popover
+                                content={(
+                                    <div style={{ padding: "4px" }} onClick={(e) => e.stopPropagation()}>
+                                        <DatePicker.RangePicker 
+                                            value={customRange}
+                                            onChange={(dates) => {
+                                                setCustomRange(dates);
+                                                if (dates && dates.length === 2) {
+                                                    setPopoverVisible(false);
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                                title="Select Custom Range"
+                                trigger="click"
+                                open={popoverVisible}
+                                onOpenChange={(visible) => {
+                                    setPopoverVisible(visible);
+                                    if (visible) {
+                                        setPeriodType("custom");
+                                    }
+                                }}
+                            >
+                                <Radio.Button value="custom" style={{ borderLeftWidth: "1px", borderRadius: "0 6px 6px 0" }}>
+                                    {periodType === "custom" && customRange && customRange.length === 2 
+                                        ? `${customRange[0].format("DD MMM")} - ${customRange[1].format("DD MMM")}`
+                                        : "Custom"}
+                                </Radio.Button>
+                            </Popover>
+                        </Radio.Group>
+                        <Button 
+                            type="default" 
+                            icon={<ReloadOutlined />} 
+                            onClick={fetchStats}
+                            loading={loading}
+                        >
+                            Refresh Data
+                        </Button>
+                    </Space>
+                )}
+            />
 
             {error && (
                 <div style={{ marginBottom: 24 }}>
@@ -242,7 +320,7 @@ const InventoryDashboard = () => {
                     <Card className="card-glass" bordered={false}>
                         <div className="flex justify-between items-center">
                             <div>
-                                <Text className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">Today's Stock In</Text>
+                                <Text className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{getPeriodSuffix()} Stock In</Text>
                                 <Title level={3} style={{ margin: "4px 0 0 0", color: "#16a34a" }}>
                                     +{summary.today_stock_in || 0} Units
                                 </Title>
@@ -255,7 +333,7 @@ const InventoryDashboard = () => {
                     <Card className="card-glass" bordered={false}>
                         <div className="flex justify-between items-center">
                             <div>
-                                <Text className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">Today's Stock Out</Text>
+                                <Text className="text-[10px] font-bold tracking-wider uppercase text-zinc-400">{getPeriodSuffix()} Stock Out</Text>
                                 <Title level={3} style={{ margin: "4px 0 0 0", color: "#dc2626" }}>
                                     -{summary.today_stock_out || 0} Units
                                 </Title>
@@ -418,6 +496,26 @@ const InventoryDashboard = () => {
                         ) : (
                             <Empty description="No recent item donations registered" />
                         )}
+                    </SectionCard>
+                </Col>
+            </Row>
+
+            <Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
+                <Col xs={24}>
+                    <SectionCard title="Highest Stocked Items" icon={<AppstoreOutlined size={15} />}>
+                        <Table
+                            dataSource={data?.top_most_stock || []}
+                            columns={[
+                                { title: "Item Name", dataIndex: "name", key: "name", render: (text) => <Text strong className="text-zinc-800">{text}</Text> },
+                                { title: "Category", dataIndex: "category", key: "category", render: (cat) => <Tag color="blue">{cat || "Uncategorized"}</Tag> },
+                                { title: "Current Stock", dataIndex: "qty", key: "qty", align: "right", render: (val, record) => <Text strong className={val <= 0 ? "text-red-600" : "text-zinc-900"}>{val} {record.unit || 'Nos'}</Text> }
+                            ]}
+                            pagination={{ pageSize: 5 }}
+                            size="middle"
+                            bordered={false}
+                            className="clean-table"
+                            rowKey="name"
+                        />
                     </SectionCard>
                 </Col>
             </Row>

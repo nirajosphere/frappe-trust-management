@@ -82,7 +82,10 @@ export const themeConfig = {
         DatePicker: {
             controlHeight: 38,
             borderRadius: 6,
-        }
+        },
+        Radio: {
+            controlHeight: 38,
+        },
     },
 };
 

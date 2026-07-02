@@ -1198,10 +1198,10 @@ def import_inventory_items(items_list):
 
 
 @frappe.whitelist()
-def get_inventory_dashboard_data(temple=None):
+def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
     """
     Computes all dashboard statistics, charts data, and activity feeds for the Inventory dashboard.
-    Supports filtering by Temple (Trust).
+    Supports filtering by Temple (Trust) and Date Range.
     """
     item_filters = {}
     if temple:
@@ -1235,43 +1235,43 @@ def get_inventory_dashboard_data(temple=None):
         elif stock < threshold:
             low_stock_items += 1
 
-    # Today's date range
-    today_start = nowdate() + " 00:00:00"
-    today_end = nowdate() + " 23:59:59"
+    # Date range for selected period
+    period_start = (from_date + " 00:00:00") if from_date else (nowdate() + " 00:00:00")
+    period_end = (to_date + " 23:59:59") if to_date else (nowdate() + " 23:59:59")
 
-    # Today's stock in
-    query_args_in = {"today_start": today_start, "today_end": today_end}
+    # Selected period's stock in
+    query_args_in = {"period_start": period_start, "period_end": period_end}
     temple_cond_in = ""
     if temple:
         temple_cond_in = "AND parent.temple = %(temple)s"
         query_args_in["temple"] = temple
 
-    today_in_qty = frappe.db.sql(f"""
+    period_in_qty = frappe.db.sql(f"""
         SELECT SUM(child.qty)
         FROM `tabInventory Item` child
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
-        WHERE parent.posting_date BETWEEN %(today_start)s AND %(today_end)s
+        WHERE parent.posting_date BETWEEN %(period_start)s AND %(period_end)s
           AND parent.entry_type IN ('Stock In', 'IN')
           {temple_cond_in}
     """, query_args_in)[0][0] or 0.0
 
-    # Today's stock out
-    query_args_out = {"today_start": today_start, "today_end": today_end}
+    # Selected period's stock out
+    query_args_out = {"period_start": period_start, "period_end": period_end}
     temple_cond_out = ""
     if temple:
         temple_cond_out = "AND parent.temple = %(temple)s"
         query_args_out["temple"] = temple
 
-    today_out_qty = frappe.db.sql(f"""
+    period_out_qty = frappe.db.sql(f"""
         SELECT SUM(child.qty)
         FROM `tabInventory Item` child
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
-        WHERE parent.posting_date BETWEEN %(today_start)s AND %(today_end)s
+        WHERE parent.posting_date BETWEEN %(period_start)s AND %(period_end)s
           AND parent.entry_type IN ('Stock Out', 'OUT')
           {temple_cond_out}
     """, query_args_out)[0][0] or 0.0
 
-    # Monthly Stock In/Out (last 6 months)
+    # Monthly Stock In/Out (last 6 months) - remains historical trend
     query_args_months = {}
     temple_cond_months = ""
     if temple:
@@ -1292,7 +1292,7 @@ def get_inventory_dashboard_data(temple=None):
         ORDER BY month_val ASC
     """, query_args_months, as_dict=True)
     
-    # Category wise distribution (using name/category_name)
+    # Category wise distribution
     query_args_cat = {}
     temple_cond_cat = ""
     if temple:
@@ -1310,8 +1310,8 @@ def get_inventory_dashboard_data(temple=None):
         ORDER BY value DESC
     """, query_args_cat, as_dict=True)
 
-    # Top consumed items
-    query_args_top = {}
+    # Top consumed items in selected period
+    query_args_top = {"period_start": period_start, "period_end": period_end}
     temple_cond_top = ""
     if temple:
         temple_cond_top = "AND parent.temple = %(temple)s"
@@ -1325,16 +1325,19 @@ def get_inventory_dashboard_data(temple=None):
         JOIN `tabInventory Entry` parent ON child.parent = parent.name
         JOIN `tabItem` item ON child.item = item.name
         WHERE parent.entry_type IN ('Stock Out', 'OUT')
+          AND parent.posting_date BETWEEN %(period_start)s AND %(period_end)s
           {temple_cond_top}
         GROUP BY child.item, item.item_name
         ORDER BY value DESC
         LIMIT 5
     """, query_args_top, as_dict=True)
 
-    # Recent Activities
+    # Recent Activities within selected period
     activities_filters = {}
     if temple:
         activities_filters["temple"] = temple
+    if from_date and to_date:
+        activities_filters["posting_date"] = ["between", [from_date, to_date]]
 
     latest_entries = frappe.get_all("Inventory Entry",
         filters=activities_filters,
@@ -1367,6 +1370,25 @@ def get_inventory_dashboard_data(temple=None):
         d["donor_name"] = donor_name
         d["amount"] = amount
 
+    # Top most stocked items (highest current stock)
+    temple_cond_stock = ""
+    query_args_stock = {}
+    if temple:
+        temple_cond_stock = "AND temple = %(temple)s"
+        query_args_stock["temple"] = temple
+
+    top_most_stock = frappe.db.sql(f"""
+        SELECT 
+            item_name as name,
+            total_stock as qty,
+            unit,
+            item_category as category
+        FROM `tabItem`
+        WHERE status = 'Active' {temple_cond_stock}
+        ORDER BY total_stock DESC
+        LIMIT 10
+    """, query_args_stock, as_dict=True)
+
     return {
         "summary": {
             "total_items": total_items,
@@ -1374,8 +1396,8 @@ def get_inventory_dashboard_data(temple=None):
             "current_stock_value": current_stock_value,
             "low_stock_items": low_stock_items,
             "out_of_stock_items": out_of_stock_items,
-            "today_stock_in": today_in_qty,
-            "today_stock_out": today_out_qty
+            "today_stock_in": period_in_qty,
+            "today_stock_out": period_out_qty
         },
         "charts": {
             "monthly_stock_in_out": months_query,
@@ -1386,7 +1408,8 @@ def get_inventory_dashboard_data(temple=None):
             "latest_stock_entries": latest_entries,
             "latest_stock_issues": latest_issues,
             "latest_donations": latest_donations
-        }
+        },
+        "top_most_stock": top_most_stock
     }
 
 
