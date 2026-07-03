@@ -13,6 +13,7 @@ const TempleList = () => {
             basePath="temples"
             fields={["name", "temple_name", "city", "state", "trust_registration_no"]}
             addLabel="Add Trust"
+            dependentDocTypes={[]}
         />
     );
 };

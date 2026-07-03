@@ -12,6 +12,7 @@ const BuildingList = () => {
             columns={buildingColumns}
             basePath="buildings"
             fields={["name", "building_name", "building_code", "temple", "total_floors", "status", "description"]}
+            dependentDocTypes={["Temple"]}
         />
     );
 };

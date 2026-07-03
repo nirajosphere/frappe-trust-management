@@ -12,6 +12,7 @@ const DonorList = () => {
             columns={donorColumns}
             basePath="donors"
             fields={["name", "donor_name", "mobile_number", "address", "city", "email"]}
+            dependentDocTypes={[]}
         />
     );
 };

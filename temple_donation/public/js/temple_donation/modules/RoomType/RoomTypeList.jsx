@@ -12,6 +12,7 @@ const RoomTypeList = () => {
             columns={roomTypeColumns}
             basePath="room-types"
             fields={["name", "room_type_name", "default_capacity", "default_price_per_day", "active", "description"]}
+            dependentDocTypes={[]}
         />
     );
 };

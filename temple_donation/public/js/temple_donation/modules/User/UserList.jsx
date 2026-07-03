@@ -19,6 +19,7 @@ const UserList = () => {
             childTable="custom_select_temple"
             childDocType="Temple Details"
             // addLabel="Add User"
+            dependentDocTypes={[]}
         />
     );
 };

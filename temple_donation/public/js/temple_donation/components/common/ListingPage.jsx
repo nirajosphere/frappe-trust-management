@@ -41,7 +41,8 @@ const ListingPage = ({
     exportOptions = ["csv", "excel", "pdf"],
     addLabel,
     allowFilter = true,
-    extra
+    extra,
+    dependentDocTypes = []
 }) => {
     const [appliedFilters, setAppliedFilters] = useState([]);
     const [appliedSorters, setAppliedSorters] = useState([]);
@@ -323,54 +324,48 @@ const ListingPage = ({
         orderBy: { field: 'modified', order: 'desc' }
     });
 
+    const isDepEnabled = (dtName) => Array.isArray(dependentDocTypes) && dependentDocTypes.includes(dtName);
+
     // Fetch Temples list for link field mapping in columns
-    const { data: temples } = useFrappeGetDocList("Temple", {
+    const { data: temples } = useFrappeGetDocList(isDepEnabled("Temple") ? "Temple" : null, {
         fields: ["name", "temple_name"],
         limit: 1000
     });
 
-    // Fetch Donations list for link field mapping in columns
-    const { data: donations } = useFrappeGetDocList("Donation", {
+    const { data: donations } = useFrappeGetDocList(isDepEnabled("Donation") ? "Donation" : null, {
         fields: ["name", "donor_name", "total_amount"],
         limit: 1000
     });
 
-    // Fetch Donors list for link field mapping in columns
-    const { data: donors } = useFrappeGetDocList("Donor", {
+    const { data: donors } = useFrappeGetDocList(isDepEnabled("Donor") ? "Donor" : null, {
         fields: ["name", "donor_name"],
         limit: 1000
     });
 
-    // Fetch Rooms list for link field mapping in columns
-    const { data: rooms } = useFrappeGetDocList("Room", {
+    const { data: rooms } = useFrappeGetDocList(isDepEnabled("Room") ? "Room" : null, {
         fields: ["name", "room_number"],
         limit: 1000
     });
 
-    // Fetch Buildings list for link field mapping in columns
-    const { data: buildings } = useFrappeGetDocList("Building", {
+    const { data: buildings } = useFrappeGetDocList(isDepEnabled("Building") ? "Building" : null, {
         fields: ["name", "building_name"],
         limit: 1000
     });
 
-    // Fetch Room Types list for link field mapping in columns
-    const { data: roomTypes } = useFrappeGetDocList("Room Type", {
+    const { data: roomTypes } = useFrappeGetDocList(isDepEnabled("Room Type") ? "Room Type" : null, {
         fields: ["name", "room_type_name"],
         limit: 1000
     });
 
-    // Fetch Item Categories list for link field mapping in columns
-    const { data: categories } = useFrappeGetDocList("Item Category", {
+    const { data: categories } = useFrappeGetDocList(isDepEnabled("Item Category") ? "Item Category" : null, {
         fields: ["name", "category_name"],
         limit: 1000
     });
 
-    // Fetch Store Locations list for link field mapping in columns
-    const { data: storeLocations } = useFrappeGetDocList("Store Location", {
+    const { data: storeLocations } = useFrappeGetDocList(isDepEnabled("Store Location") ? "Store Location" : null, {
         fields: ["name", "location_name"],
         limit: 1000
     });
-
 
 
     const [enrichedData, setEnrichedData] = useState([]);

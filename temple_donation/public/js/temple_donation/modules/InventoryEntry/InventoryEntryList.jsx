@@ -12,6 +12,7 @@ const InventoryEntryList = () => {
             columns={inventoryEntryColumns}
             basePath="inventory-entries"
             fields={["name", "entry_type", "reference_type", "reference_name", "temple", "posting_date", "source_location", "target_location"]}
+            dependentDocTypes={["Temple", "Donation"]}
         />
     );
 };

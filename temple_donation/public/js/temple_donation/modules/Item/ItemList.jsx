@@ -14,6 +14,7 @@ const ItemList = () => {
             columns={itemColumns}
             basePath="items"
             fields={["name", "item_name", "item_code", "unit", "temple", "total_stock", "item_category", "store_location", "minimum_stock", "status", "valuation_rate"]}
+            dependentDocTypes={["Temple", "Item Category", "Store Location"]}
             extra={
                 <Button
                     type="default"

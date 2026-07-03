@@ -31,6 +31,7 @@ const StoreLocationList = () => {
             columns={storeLocationColumns}
             basePath="store-locations"
             fields={["name", "location_name", "temple", "description"]}
+            dependentDocTypes={["Temple"]}
         />
     );
 };

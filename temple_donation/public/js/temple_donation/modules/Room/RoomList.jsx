@@ -68,6 +68,7 @@ const RoomList = () => {
                     columns={roomColumns}
                     basePath="rooms"
                     fields={["name", "room_number", "temple", "building", "floor_number", "room_type", "capacity", "price_per_day", "status"]}
+                    dependentDocTypes={["Temple", "Building", "Room Type"]}
                 />
             )
         },

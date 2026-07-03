@@ -14,6 +14,7 @@ const DonationTypeList = () => {
             // fields={["name", "donation_type", "donation_type_code", "donation_image"]}
             fields={["*"]}
             allowExport={false}
+            dependentDocTypes={[]}
         />
     );
 };

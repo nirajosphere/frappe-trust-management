@@ -11,11 +11,11 @@ const getErrorMessage = (err) => {
 
 export const useFrappeGetDocList = (doctype, options = {}) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!!doctype);
     const [error, setError] = useState(null);
 
     const fetchData = () => {
-        if (typeof frappe === "undefined") {
+        if (!doctype || typeof frappe === "undefined") {
             setLoading(false);
             return;
         }

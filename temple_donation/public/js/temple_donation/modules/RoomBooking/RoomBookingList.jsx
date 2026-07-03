@@ -12,6 +12,7 @@ const RoomBookingList = () => {
             columns={roomBookingColumns}
             basePath="room-bookings"
             fields={["name", "guest_name", "donor", "temple", "room", "check_in", "check_out", "total_amount", "status", "number_of_guests"]}
+            dependentDocTypes={["Donor", "Temple", "Room"]}
         />
     );
 };

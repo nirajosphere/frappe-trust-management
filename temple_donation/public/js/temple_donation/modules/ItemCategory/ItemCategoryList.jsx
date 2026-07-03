@@ -26,6 +26,7 @@ const ItemCategoryList = () => {
             columns={itemCategoryColumns}
             basePath="item-categories"
             fields={["name", "category_name", "description"]}
+            dependentDocTypes={[]}
         />
     );
 };

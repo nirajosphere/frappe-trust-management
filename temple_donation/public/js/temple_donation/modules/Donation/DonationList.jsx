@@ -12,6 +12,7 @@ const DonationList = () => {
             columns={donationColumns}
             basePath="donations"
             fields={["name", "donor_name", "temple", "temple.temple_name", "total_amount", "payment_mode", "cashier"]}
+            dependentDocTypes={["Temple"]}
         />
     );
 };
