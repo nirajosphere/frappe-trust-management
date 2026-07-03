@@ -404,8 +404,8 @@ export const groupedNavigationStructure = [
         ]
     },
     {
-        label: "Print & Documents",
-        key: "print-documents-group",
+        label: "Settings",
+        key: "settings-group",
         children: [
             { key: "document-templates", label: "Document Templates" },
             { key: "receipt-settings", label: "Receipt Settings" }

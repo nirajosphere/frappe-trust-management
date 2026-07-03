@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tabs } from "antd";
 import { 
     UnorderedListOutlined, DashboardOutlined, CalendarOutlined, 
-    BuildOutlined, ImportOutlined, ScheduleOutlined, AppstoreOutlined, BankOutlined
+    BuildOutlined, CloudUploadOutlined, ScheduleOutlined, AppstoreOutlined, BankOutlined
 } from "@ant-design/icons";
 import ListingPage from "../../components/common/ListingPage";
 import { DOCTYPE_ROOM } from "../../config/constants";
@@ -105,8 +105,8 @@ const RoomList = () => {
             key: "import",
             label: (
                 <span>
-                    <ImportOutlined style={{ marginRight: 8 }} />
-                    CSV Import
+                    <CloudUploadOutlined style={{ marginRight: 8 }} />
+                    Bulk Room Import
                 </span>
             ),
             children: <RoomImport />

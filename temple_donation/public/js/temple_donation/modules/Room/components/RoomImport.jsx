@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification, Dropdown } from "antd";
-import { DownloadOutlined, InboxOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
+import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification, Dropdown, Divider } from "antd";
+import { DownloadOutlined, InboxOutlined, CloseOutlined, CheckOutlined, EyeOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
 import { parseSpreadsheetFile, convertToCSVString } from "../../../utils/importUtils";
 
@@ -164,9 +164,9 @@ const RoomImport = () => {
             >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
                     <div>
-                        <Title level={3} style={{ margin: 0 }}>Import Rooms</Title>
+                        <Title level={3} style={{ margin: 0 }}>Bulk Room Import</Title>
                         <Paragraph type="secondary" style={{ margin: 0 }}>
-                            Upload a CSV file to import rooms in bulk. Ensure Building Codes and Room Categories exist in the system first.
+                            Upload a CSV or Excel file to preview and import rooms in bulk. Ensure Building Codes and Room Categories exist in the system first.
                         </Paragraph>
                     </div>
                     <Dropdown menu={{ items: templateMenuItems }} trigger={["click"]}>
@@ -213,12 +213,20 @@ const RoomImport = () => {
                 ) : (
                     <div style={{ marginTop: "16px" }}>
                         <Alert 
-                            message="Template File Loaded Successfully" 
-                            description={`Found ${previewData.length} room records. Please review the preview below before confirming the import.`} 
+                            message="File Loaded — Review Before Importing" 
+                            description={`Found ${previewData.length} room records. Please review the preview below and confirm only when ready.`} 
                             type="info" 
                             showIcon 
                             style={{ marginBottom: "16px" }}
                         />
+
+                        <Divider orientation="left" style={{ margin: "16px 0 12px" }}>
+                            <Space>
+                                <EyeOutlined />
+                                <span style={{ fontWeight: 600 }}>Room Preview</span>
+                            </Space>
+                        </Divider>
+
                         <div style={{ marginBottom: "16px", overflowX: "auto" }}>
                             <Table 
                                 dataSource={previewData.map((row, idx) => ({ ...row, key: idx }))} 
