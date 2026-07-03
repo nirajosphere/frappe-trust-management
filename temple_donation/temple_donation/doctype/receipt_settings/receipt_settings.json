@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-02 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "temple",
+  "default_donation_template",
+  "default_room_template",
+  "default_inventory_template",
+  "default_expense_template",
+  "receipt_prefix",
+  "donation_prefix",
+  "room_prefix",
+  "inventory_prefix",
+  "expense_prefix",
+  "enable_qr_code",
+  "enable_digital_signature",
+  "terms_and_conditions"
+ ],
+ "fields": [
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Temple",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "default_donation_template",
+   "fieldtype": "Link",
+   "label": "Default Donation Template",
+   "options": "Document Template"
+  },
+  {
+   "fieldname": "default_room_template",
+   "fieldtype": "Link",
+   "label": "Default Room Template",
+   "options": "Document Template"
+  },
+  {
+   "fieldname": "default_inventory_template",
+   "fieldtype": "Link",
+   "label": "Default Inventory Template",
+   "options": "Document Template"
+  },
+  {
+   "fieldname": "default_expense_template",
+   "fieldtype": "Link",
+   "label": "Default Expense Template",
+   "options": "Document Template"
+  },
+  {
+   "fieldname": "receipt_prefix",
+   "fieldtype": "Data",
+   "label": "General Receipt Prefix",
+   "default": "REC"
+  },
+  {
+   "fieldname": "donation_prefix",
+   "fieldtype": "Data",
+   "label": "Donation Prefix",
+   "default": "DON"
+  },
+  {
+   "fieldname": "room_prefix",
+   "fieldtype": "Data",
+   "label": "Room Prefix",
+   "default": "ROM"
+  },
+  {
+   "fieldname": "inventory_prefix",
+   "fieldtype": "Data",
+   "label": "Inventory Prefix",
+   "default": "INV"
+  },
+  {
+   "fieldname": "expense_prefix",
+   "fieldtype": "Data",
+   "label": "Expense Prefix",
+   "default": "EXP"
+  },
+  {
+   "fieldname": "enable_qr_code",
+   "fieldtype": "Check",
+   "label": "Enable QR Code Verification",
+   "default": 1
+  },
+  {
+   "fieldname": "enable_digital_signature",
+   "fieldtype": "Check",
+   "label": "Enable Digital Signature",
+   "default": 0
+  },
+  {
+   "fieldname": "terms_and_conditions",
+   "fieldtype": "Text Editor",
+   "label": "Terms & Conditions"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Receipt Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Temple Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cashier",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

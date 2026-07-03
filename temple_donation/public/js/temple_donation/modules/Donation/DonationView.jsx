@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Alert, Tag, Table, Button } from "antd";
 import { User, ShieldAlert, FileText, CheckCircle2,Wallet } from "lucide-react";
 import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
@@ -12,8 +12,10 @@ import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
 import ViewContainer from "../../components/common/ViewContainer";
 import ActivityLog from "../../components/common/ActivityLog";
+import PrintReceiptModal from "../../components/common/PrintReceiptModal";
 
 const DonationView = ({ id, onBack, onEdit }) => {
+  const [printModalVisible, setPrintModalVisible] = useState(false);
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_DONATION, id);
   const { data: temples } = useFrappeGetDocList("Temple", {
     fields: ["name", "temple_name"], limit: 1000,
@@ -91,7 +93,7 @@ const DonationView = ({ id, onBack, onEdit }) => {
         actions={
           <>
             <Button
-              onClick={() => window.print()}
+              onClick={() => setPrintModalVisible(true)}
               className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
             >
               Print Receipt
@@ -249,6 +251,13 @@ const DonationView = ({ id, onBack, onEdit }) => {
         </Col>
       </Row>
       <ActivityLog doctype={DOCTYPE_DONATION} docname={id} />
+      <PrintReceiptModal
+        visible={printModalVisible}
+        onCancel={() => setPrintModalVisible(false)}
+        doctype={DOCTYPE_DONATION}
+        docname={id}
+        temple={doc.temple}
+      />
     </ViewContainer>
   );
 };

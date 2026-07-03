@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Alert, Tag, Button, Table } from "antd";
 import { History, ShieldAlert, FileText, CheckCircle2, List } from "lucide-react";
 import dayjs from "dayjs";
@@ -11,9 +11,12 @@ import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
 import ViewContainer from "../../components/common/ViewContainer";
 import ActivityLog from "../../components/common/ActivityLog";
+import PrintReceiptModal from "../../components/common/PrintReceiptModal";
 
 const InventoryEntryView = ({ id, onBack, onEdit }) => {
+    const [printModalVisible, setPrintModalVisible] = useState(false);
     const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_INVENTORY_ENTRY, id);
+
     
     const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
@@ -127,7 +130,7 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                 actions={
                     <>
                         <Button
-                            onClick={() => window.print()}
+                            onClick={() => setPrintModalVisible(true)}
                             className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
                         >
                             Print
@@ -278,6 +281,13 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                 </Col>
             </Row>
             <ActivityLog doctype={DOCTYPE_INVENTORY_ENTRY} docname={id} />
+            <PrintReceiptModal
+                visible={printModalVisible}
+                onCancel={() => setPrintModalVisible(false)}
+                doctype={DOCTYPE_INVENTORY_ENTRY}
+                docname={id}
+                temple={doc.temple}
+            />
         </ViewContainer>
     );
 };

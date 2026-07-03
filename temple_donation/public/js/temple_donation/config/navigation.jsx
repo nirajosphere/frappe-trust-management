@@ -7,7 +7,9 @@ import {
     ShoppingCartOutlined,
     AppstoreOutlined,
     HomeOutlined,
-    ScheduleOutlined
+    ScheduleOutlined,
+    LayoutOutlined,
+    SettingOutlined
 } from "@ant-design/icons";
 
 import Dashboard from "../modules/Dashboard/Dashboard";
@@ -15,7 +17,8 @@ import DonationPOS from "../modules/Donation/Donation";
 import {
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER,
     DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING,
-    DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE, DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION
+    DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE, DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION,
+    DOCTYPE_DOCUMENT_TEMPLATE, DOCTYPE_RECEIPT_SETTINGS
 } from "./constants";
 
 // Module Imports
@@ -78,6 +81,11 @@ import BuildingForm from "../modules/Building/BuildingForm";
 
 import RoomTypeList from "../modules/RoomType/RoomTypeList";
 import RoomTypeForm from "../modules/RoomType/RoomTypeForm";
+
+// Document & Receipt Management
+import DocumentTemplateList from "../modules/DocumentReceipt/DocumentTemplateList";
+import DocumentTemplateForm from "../modules/DocumentReceipt/DocumentTemplateForm";
+import ReceiptSettingsForm from "../modules/DocumentReceipt/ReceiptSettingsForm";
 
 
 /**
@@ -210,6 +218,20 @@ export const navigationItems = [
         component: <DonationList />,
         roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
     },
+    {
+        key: "document-templates",
+        icon: <LayoutOutlined />,
+        label: "Document Templates",
+        component: <DocumentTemplateList />,
+        roles: ["Super Admin", "Temple Admin", "Cashier", "Administrator", "System Manager"]
+    },
+    {
+        key: "receipt-settings",
+        icon: <SettingOutlined />,
+        label: "Receipt Settings",
+        component: <ReceiptSettingsForm />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    }
 ];
 
 /**
@@ -237,7 +259,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         "rooms": DOCTYPE_ROOM,
         "room-bookings": DOCTYPE_ROOM_BOOKING,
         "buildings": DOCTYPE_BUILDING,
-        "room-types": DOCTYPE_ROOM_TYPE
+        "room-types": DOCTYPE_ROOM_TYPE,
+        "document-templates": DOCTYPE_DOCUMENT_TEMPLATE,
+        "receipt-settings": DOCTYPE_RECEIPT_SETTINGS
     };
 
     const targetDoctype = doctypeMap[baseKey];
@@ -315,6 +339,8 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
             case DOCTYPE_DONATION: return <DonationForm {...formProps} />;
             case DOCTYPE_DONATION_TYPE: return <DonationTypeForm {...formProps} />;
             case DOCTYPE_USER: return <UserForm {...formProps} />;
+            case DOCTYPE_DOCUMENT_TEMPLATE: return <DocumentTemplateForm {...formProps} />;
+            case DOCTYPE_RECEIPT_SETTINGS: return <ReceiptSettingsForm {...formProps} />;
             default: return null;
         }
     }
@@ -377,6 +403,14 @@ export const groupedNavigationStructure = [
             { key: "inventory-entries", label: "Stock Entries" }
         ]
     },
+    {
+        label: "Print & Documents",
+        key: "print-documents-group",
+        children: [
+            { key: "document-templates", label: "Document Templates" },
+            { key: "receipt-settings", label: "Receipt Settings" }
+        ]
+    }
 ];
 
 export const getGroupedMenuItems = (userRoles = []) => {
@@ -405,4 +439,5 @@ export const getGroupedMenuItems = (userRoles = []) => {
         })
         .filter(Boolean);
 };
+
 

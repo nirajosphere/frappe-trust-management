@@ -11,13 +11,16 @@ import SectionCard from "../../components/common/SectionCard";
 import FieldCell from "../../components/common/FieldCell";
 import ViewContainer from "../../components/common/ViewContainer";
 import ActivityLog from "../../components/common/ActivityLog";
+import PrintReceiptModal from "../../components/common/PrintReceiptModal";
 
 const RoomBookingView = ({ id, onBack, onEdit }) => {
+    const [printModalVisible, setPrintModalVisible] = useState(false);
     const { data: doc, loading, error, mutate } = useFrappeGetDoc(DOCTYPE_ROOM_BOOKING, id);
     const [checkoutLoading, setCheckoutLoading] = useState(false);
     const [extendModal, setExtendModal] = useState(false);
     const [newCheckout, setNewCheckout] = useState(null);
     const [extendLoading, setExtendLoading] = useState(false);
+
 
     const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
@@ -157,7 +160,7 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                             </>
                         )}
                         <Button
-                            onClick={() => window.print()}
+                            onClick={() => setPrintModalVisible(true)}
                             className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
                         >
                             Print
@@ -354,6 +357,14 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                     />
                 </div>
             </Modal>
+
+            <PrintReceiptModal
+                visible={printModalVisible}
+                onCancel={() => setPrintModalVisible(false)}
+                doctype={DOCTYPE_ROOM_BOOKING}
+                docname={id}
+                temple={doc.temple}
+            />
         </ViewContainer>
     );
 };

@@ -1,0 +1,191 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-02 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "template_name",
+  "temple",
+  "template_type",
+  "status",
+  "default_template",
+  "paper_size",
+  "print_orientation",
+  "font_family",
+  "margins",
+  "primary_color",
+  "secondary_color",
+  "logo",
+  "watermark",
+  "header_html",
+  "body_html",
+  "footer_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "label": "Template Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Temple",
+   "reqd": 1
+  },
+  {
+   "fieldname": "template_type",
+   "fieldtype": "Select",
+   "label": "Template Type",
+   "options": "Donation Receipt\nRoom Receipt\nInventory Receipt\nExpense Voucher\nPurchase Receipt\nVisitor Pass\nDonation Certificate\nCustom",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive",
+   "default": "Active",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_template",
+   "fieldtype": "Check",
+   "label": "Default Template",
+   "default": 0
+  },
+  {
+   "fieldname": "paper_size",
+   "fieldtype": "Select",
+   "label": "Paper Size",
+   "options": "A4\nA5\nThermal 80mm\nThermal 58mm",
+   "default": "A4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "print_orientation",
+   "fieldtype": "Select",
+   "label": "Print Orientation",
+   "options": "Portrait\nLandscape",
+   "default": "Portrait"
+  },
+  {
+   "fieldname": "font_family",
+   "fieldtype": "Select",
+   "label": "Font Family",
+   "options": "Inter\nRoboto\nOutfit\nOpen Sans\nMonospace",
+   "default": "Inter"
+  },
+  {
+   "fieldname": "margins",
+   "fieldtype": "Data",
+   "label": "Margins (CSS style, e.g. 10px 10px 10px 10px)",
+   "default": "10px"
+  },
+  {
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Primary Color",
+   "default": "#18181b"
+  },
+  {
+   "fieldname": "secondary_color",
+   "fieldtype": "Color",
+   "label": "Secondary Color",
+   "default": "#71717a"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
+  },
+  {
+   "fieldname": "watermark",
+   "fieldtype": "Attach Image",
+   "label": "Watermark"
+  },
+  {
+   "fieldname": "header_html",
+   "fieldtype": "Code",
+   "label": "Header HTML",
+   "options": "HTML"
+  },
+  {
+   "fieldname": "body_html",
+   "fieldtype": "Code",
+   "label": "Body HTML",
+   "options": "HTML"
+  },
+  {
+   "fieldname": "footer_html",
+   "fieldtype": "Code",
+   "label": "Footer HTML",
+   "options": "HTML"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Document Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Temple Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cashier",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

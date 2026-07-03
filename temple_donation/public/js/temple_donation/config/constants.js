@@ -25,3 +25,7 @@ export const DOCTYPE_ROOM_TYPE = "Room Type";
 
 // Ledger
 export const DOCTYPE_TEMPLE_LEDGER = "Temple Ledger";
+
+// Document & Receipt Management
+export const DOCTYPE_DOCUMENT_TEMPLATE = "Document Template";
+export const DOCTYPE_RECEIPT_SETTINGS = "Receipt Settings";
