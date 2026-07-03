@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
     Form, Input, Button, Card, Row, Col, Select, Switch, TimePicker,
-    Typography, Divider, message, InputNumber, Checkbox
+    Typography, Divider, message, InputNumber, Checkbox, Spin
 } from "antd";
 import {
     SettingOutlined, SaveOutlined, CalendarOutlined,
@@ -30,12 +30,15 @@ const BookingSettingsForm = ({ onBack }) => {
         limit: 1000
     });
 
+    // Auto-select first temple when temples list loads
     useEffect(() => {
-        if (!selectedTemple || typeof frappe === "undefined") {
-            setSettingsDocName(null);
-            form.resetFields();
-            return;
+        if (temples && temples.length > 0 && !selectedTemple) {
+            setSelectedTemple(temples[0].name);
         }
+    }, [temples]);
+
+    useEffect(() => {
+        if (!selectedTemple || typeof frappe === "undefined") return;
 
         setLoadingSettings(true);
         frappe.call({
@@ -100,6 +103,22 @@ const BookingSettingsForm = ({ onBack }) => {
         }
     };
 
+    if (loadingTemples || loadingSettings) {
+        return (
+            <ViewContainer>
+                <AddPageHeader
+                    onBack={onBack}
+                    title="Booking Settings"
+                    subtitle="Configure check-in/out times, booking rules, and cancellation policies."
+                    showBack={true}
+                />
+                <div style={{ padding: "60px 0", textAlign: "center" }}>
+                    <Spin size="large" />
+                </div>
+            </ViewContainer>
+        );
+    }
+
     const formItemStyle = { marginBottom: "16px" };
 
     return (
@@ -111,40 +130,36 @@ const BookingSettingsForm = ({ onBack }) => {
                 showBack={true}
             />
 
-            <Card bordered={false} style={{ marginBottom: "20px", borderRadius: "8px" }} className="shadow-sm">
-                <Row gutter={[16, 0]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item label="Select Temple / Trust to Configure" required>
-                            <Select
-                                showSearch
-                                placeholder="Choose Temple"
-                                loading={loadingTemples}
-                                optionFilterProp="children"
-                                value={selectedTemple}
-                                onChange={(val) => setSelectedTemple(val)}
-                                options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                                style={{ width: "100%" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-            </Card>
+            {temples && temples.length > 1 && (
+                <Card bordered={false} style={{ marginBottom: "20px", borderRadius: "8px" }} className="shadow-sm">
+                    <Row gutter={[16, 0]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item label="Organization / Trust" style={{ marginBottom: 0 }}>
+                                <Select
+                                    showSearch
+                                    placeholder="Choose Temple"
+                                    optionFilterProp="children"
+                                    value={selectedTemple}
+                                    onChange={(val) => setSelectedTemple(val)}
+                                    options={temples.map(t => ({ label: t.temple_name, value: t.name }))}
+                                    style={{ width: "100%" }}
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Card>
+            )}
 
             {!selectedTemple ? (
                 <Card bordered={false} className="shadow-sm">
                     <div style={{ textAlign: "center", padding: "40px 20px" }}>
                         <CalendarOutlined style={{ fontSize: "48px", color: "#d4d4d8", marginBottom: "16px" }} />
-                        <Title level={5} type="secondary" style={{ margin: 0 }}>Select a Temple / Trust</Title>
+                        <Title level={5} type="secondary" style={{ margin: 0 }}>No organization found</Title>
                         <Text type="secondary" style={{ fontSize: "13px" }}>
-                            Choose from the dropdown above to manage its booking configuration.
+                            Please add a Temple / Trust first from the Trust Management section.
                         </Text>
                     </div>
                 </Card>
-            ) : loadingSettings ? (
-                <div style={{ padding: "40px 0", textAlign: "center" }}>
-                    <LoadingOutlined style={{ fontSize: 24, color: "#18181b" }} spin />
-                    <div style={{ marginTop: "12px", color: "#71717a" }}>Loading configurations...</div>
-                </div>
             ) : (
                 <Form
                     form={form}

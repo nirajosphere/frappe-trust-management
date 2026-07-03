@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
     Form, Input, Button, Card, Row, Col, Select, Switch,
-    Typography, Divider, message, Upload, ColorPicker, InputNumber
+    Typography, Divider, message, Spin
 } from "antd";
 import {
     SettingOutlined, SaveOutlined, BankOutlined, GlobalOutlined,
-    LoadingOutlined, UploadOutlined, PictureOutlined
+    LoadingOutlined, PictureOutlined
 } from "@ant-design/icons";
 import {
     useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDocList
@@ -30,13 +30,16 @@ const GeneralSettingsForm = ({ onBack }) => {
         limit: 1000
     });
 
-    // Fetch existing settings when a temple is selected
+    // Auto-select first temple when temples list loads
     useEffect(() => {
-        if (!selectedTemple || typeof frappe === "undefined") {
-            setSettingsDocName(null);
-            form.resetFields();
-            return;
+        if (temples && temples.length > 0 && !selectedTemple) {
+            setSelectedTemple(temples[0].name);
         }
+    }, [temples]);
+
+    // Fetch settings when a temple is selected
+    useEffect(() => {
+        if (!selectedTemple || typeof frappe === "undefined") return;
 
         setLoadingSettings(true);
         frappe.call({
@@ -54,6 +57,7 @@ const GeneralSettingsForm = ({ onBack }) => {
                     form.setFieldsValue(doc);
                 } else {
                     setSettingsDocName(null);
+                    form.resetFields();
                     form.setFieldsValue({
                         organization_name: "",
                         organization_type: "Temple",
@@ -76,9 +80,7 @@ const GeneralSettingsForm = ({ onBack }) => {
                     });
                 }
             },
-            error: () => {
-                setLoadingSettings(false);
-            }
+            error: () => { setLoadingSettings(false); }
         });
     }, [selectedTemple, form]);
 
@@ -116,6 +118,22 @@ const GeneralSettingsForm = ({ onBack }) => {
         { label: "Foundation", value: "Foundation" }
     ];
 
+    if (loadingTemples || loadingSettings) {
+        return (
+            <ViewContainer>
+                <AddPageHeader
+                    onBack={onBack}
+                    title="General Settings"
+                    subtitle="Configure organization profile, branding, and financial defaults."
+                    showBack={true}
+                />
+                <div style={{ padding: "60px 0", textAlign: "center" }}>
+                    <Spin size="large" />
+                </div>
+            </ViewContainer>
+        );
+    }
+
     return (
         <ViewContainer>
             <AddPageHeader
@@ -125,40 +143,37 @@ const GeneralSettingsForm = ({ onBack }) => {
                 showBack={true}
             />
 
-            <Card bordered={false} style={{ marginBottom: "20px", borderRadius: "8px" }} className="shadow-sm">
-                <Row gutter={[16, 0]}>
-                    <Col xs={24} md={12}>
-                        <Form.Item label="Select Temple / Trust to Configure" required>
-                            <Select
-                                showSearch
-                                placeholder="Choose Temple"
-                                loading={loadingTemples}
-                                optionFilterProp="children"
-                                value={selectedTemple}
-                                onChange={(val) => setSelectedTemple(val)}
-                                options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                                style={{ width: "100%" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-            </Card>
+            {/* Organization switcher — shown only if more than 1 temple exists */}
+            {temples && temples.length > 1 && (
+                <Card bordered={false} style={{ marginBottom: "20px", borderRadius: "8px" }} className="shadow-sm">
+                    <Row gutter={[16, 0]}>
+                        <Col xs={24} md={12}>
+                            <Form.Item label="Organization / Trust" style={{ marginBottom: 0 }}>
+                                <Select
+                                    showSearch
+                                    placeholder="Choose Temple"
+                                    optionFilterProp="children"
+                                    value={selectedTemple}
+                                    onChange={(val) => setSelectedTemple(val)}
+                                    options={temples.map(t => ({ label: t.temple_name, value: t.name }))}
+                                    style={{ width: "100%" }}
+                                />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Card>
+            )}
 
             {!selectedTemple ? (
                 <Card bordered={false} className="shadow-sm">
                     <div style={{ textAlign: "center", padding: "40px 20px" }}>
                         <BankOutlined style={{ fontSize: "48px", color: "#d4d4d8", marginBottom: "16px" }} />
-                        <Title level={5} type="secondary" style={{ margin: 0 }}>Select a Temple / Trust</Title>
+                        <Title level={5} type="secondary" style={{ margin: 0 }}>No organization found</Title>
                         <Text type="secondary" style={{ fontSize: "13px" }}>
-                            Choose from the dropdown above to manage its general settings.
+                            Please add a Temple / Trust first from the Trust Management section.
                         </Text>
                     </div>
                 </Card>
-            ) : loadingSettings ? (
-                <div style={{ padding: "40px 0", textAlign: "center" }}>
-                    <LoadingOutlined style={{ fontSize: 24, color: "#18181b" }} spin />
-                    <div style={{ marginTop: "12px", color: "#71717a" }}>Loading configurations...</div>
-                </div>
             ) : (
                 <Form
                     form={form}
