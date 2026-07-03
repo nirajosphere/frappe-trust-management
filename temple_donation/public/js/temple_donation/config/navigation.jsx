@@ -18,7 +18,8 @@ import {
     DOCTYPE_DONOR, DOCTYPE_TEMPLE, DOCTYPE_DONATION, DOCTYPE_DONATION_TYPE, DOCTYPE_USER,
     DOCTYPE_ITEM, DOCTYPE_INVENTORY_ENTRY, DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING,
     DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE, DOCTYPE_ITEM_CATEGORY, DOCTYPE_STORE_LOCATION,
-    DOCTYPE_DOCUMENT_TEMPLATE, DOCTYPE_RECEIPT_SETTINGS
+    DOCTYPE_DOCUMENT_TEMPLATE, DOCTYPE_RECEIPT_SETTINGS, DOCTYPE_GENERAL_SETTINGS,
+    DOCTYPE_BOOKING_SETTINGS, DOCTYPE_NOTIFICATION_SETTINGS
 } from "./constants";
 
 // Module Imports
@@ -86,6 +87,11 @@ import RoomTypeForm from "../modules/RoomType/RoomTypeForm";
 import DocumentTemplateList from "../modules/DocumentReceipt/DocumentTemplateList";
 import DocumentTemplateForm from "../modules/DocumentReceipt/DocumentTemplateForm";
 import ReceiptSettingsForm from "../modules/DocumentReceipt/ReceiptSettingsForm";
+
+// Settings Management
+import GeneralSettingsForm from "../modules/Settings/GeneralSettingsForm";
+import BookingSettingsForm from "../modules/Settings/BookingSettingsForm";
+import NotificationSettingsForm from "../modules/Settings/NotificationSettingsForm";
 
 
 /**
@@ -231,6 +237,27 @@ export const navigationItems = [
         label: "Receipt Settings",
         component: <ReceiptSettingsForm />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "general-settings",
+        icon: <SettingOutlined />,
+        label: "General Settings",
+        component: <GeneralSettingsForm />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "booking-settings",
+        icon: <SettingOutlined />,
+        label: "Booking Settings",
+        component: <BookingSettingsForm />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "notification-settings",
+        icon: <SettingOutlined />,
+        label: "Notification Settings",
+        component: <NotificationSettingsForm />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     }
 ];
 
@@ -261,7 +288,10 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
         "buildings": DOCTYPE_BUILDING,
         "room-types": DOCTYPE_ROOM_TYPE,
         "document-templates": DOCTYPE_DOCUMENT_TEMPLATE,
-        "receipt-settings": DOCTYPE_RECEIPT_SETTINGS
+        "receipt-settings": DOCTYPE_RECEIPT_SETTINGS,
+        "general-settings": DOCTYPE_GENERAL_SETTINGS,
+        "booking-settings": DOCTYPE_BOOKING_SETTINGS,
+        "notification-settings": DOCTYPE_NOTIFICATION_SETTINGS
     };
 
     const targetDoctype = doctypeMap[baseKey];
@@ -407,6 +437,9 @@ export const groupedNavigationStructure = [
         label: "Settings",
         key: "settings-group",
         children: [
+            { key: "general-settings", label: "General Settings" },
+            { key: "booking-settings", label: "Booking Settings" },
+            { key: "notification-settings", label: "Notification Settings" },
             { key: "document-templates", label: "Document Templates" },
             { key: "receipt-settings", label: "Receipt Settings" }
         ]

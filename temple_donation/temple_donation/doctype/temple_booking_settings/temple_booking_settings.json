@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-03 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "temple",
+  "default_checkin_time",
+  "default_checkout_time",
+  "maintenance_gap_hours",
+  "max_advance_booking_days",
+  "min_advance_booking_hours",
+  "max_stay_days",
+  "max_guests_per_booking",
+  "overbooking_buffer_percent",
+  "allow_same_day_booking",
+  "auto_confirm_booking",
+  "allow_group_booking",
+  "allow_extension",
+  "auto_checkout_enabled",
+  "cancellation_allowed",
+  "free_cancellation_hours",
+  "cancellation_charge_percent",
+  "require_id_proof",
+  "require_phone_number",
+  "booking_terms"
+ ],
+ "fields": [
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Temple",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "default_checkin_time",
+   "fieldtype": "Data",
+   "label": "Default Check-In Time"
+  },
+  {
+   "fieldname": "default_checkout_time",
+   "fieldtype": "Data",
+   "label": "Default Check-Out Time"
+  },
+  {
+   "fieldname": "maintenance_gap_hours",
+   "fieldtype": "Int",
+   "label": "Maintenance Gap (Hours)"
+  },
+  {
+   "fieldname": "max_advance_booking_days",
+   "fieldtype": "Int",
+   "label": "Max Advance Booking Days"
+  },
+  {
+   "fieldname": "min_advance_booking_hours",
+   "fieldtype": "Int",
+   "label": "Min Advance Booking Hours"
+  },
+  {
+   "fieldname": "max_stay_days",
+   "fieldtype": "Int",
+   "label": "Max Stay Days"
+  },
+  {
+   "fieldname": "max_guests_per_booking",
+   "fieldtype": "Int",
+   "label": "Max Guests Per Booking"
+  },
+  {
+   "fieldname": "overbooking_buffer_percent",
+   "fieldtype": "Int",
+   "label": "Overbooking Buffer Percent"
+  },
+  {
+   "fieldname": "allow_same_day_booking",
+   "fieldtype": "Check",
+   "label": "Allow Same Day Booking"
+  },
+  {
+   "fieldname": "auto_confirm_booking",
+   "fieldtype": "Check",
+   "label": "Auto Confirm Booking"
+  },
+  {
+   "fieldname": "allow_group_booking",
+   "fieldtype": "Check",
+   "label": "Allow Group Booking"
+  },
+  {
+   "fieldname": "allow_extension",
+   "fieldtype": "Check",
+   "label": "Allow Stay Extension"
+  },
+  {
+   "fieldname": "auto_checkout_enabled",
+   "fieldtype": "Check",
+   "label": "Auto Checkout Enabled"
+  },
+  {
+   "fieldname": "cancellation_allowed",
+   "fieldtype": "Check",
+   "label": "Cancellation Allowed"
+  },
+  {
+   "fieldname": "free_cancellation_hours",
+   "fieldtype": "Int",
+   "label": "Free Cancellation Hours"
+  },
+  {
+   "fieldname": "cancellation_charge_percent",
+   "fieldtype": "Percent",
+   "label": "Cancellation Charge Percent"
+  },
+  {
+   "fieldname": "require_id_proof",
+   "fieldtype": "Check",
+   "label": "Require ID Proof"
+  },
+  {
+   "fieldname": "require_phone_number",
+   "fieldtype": "Check",
+   "label": "Require Phone Number"
+  },
+  {
+   "fieldname": "booking_terms",
+   "fieldtype": "Text Editor",
+   "label": "Booking Terms & Conditions"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-03 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Temple Booking Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Temple Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cashier",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

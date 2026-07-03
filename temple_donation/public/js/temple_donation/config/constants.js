@@ -29,3 +29,6 @@ export const DOCTYPE_TEMPLE_LEDGER = "Temple Ledger";
 // Document & Receipt Management
 export const DOCTYPE_DOCUMENT_TEMPLATE = "Document Template";
 export const DOCTYPE_RECEIPT_SETTINGS = "Receipt Settings";
+export const DOCTYPE_GENERAL_SETTINGS = "Temple General Settings";
+export const DOCTYPE_BOOKING_SETTINGS = "Temple Booking Settings";
+export const DOCTYPE_NOTIFICATION_SETTINGS = "Temple Notification Settings";

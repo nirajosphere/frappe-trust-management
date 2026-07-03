@@ -264,7 +264,9 @@ const App = () => {
                                                     key: child.key,
                                                     label: child.label
                                                 })),
-                                                onClick: handleMenuClick
+                                                onClick: handleMenuClick,
+                                                selectable: true,
+                                                selectedKeys: [currentRoute.split('/')[0]]
                                             };
 
                                             return (

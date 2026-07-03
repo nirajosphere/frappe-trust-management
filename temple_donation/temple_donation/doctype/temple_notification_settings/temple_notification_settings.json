@@ -1,0 +1,221 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-03 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "temple",
+  "enable_email_notifications",
+  "email_on_new_donation",
+  "email_on_booking_confirmation",
+  "email_on_booking_cancellation",
+  "email_on_checkout",
+  "email_daily_summary",
+  "admin_email_recipients",
+  "enable_sms_notifications",
+  "sms_on_donation",
+  "sms_on_booking",
+  "sms_provider",
+  "sms_api_key",
+  "sms_sender_id",
+  "enable_whatsapp",
+  "whatsapp_on_donation_receipt",
+  "whatsapp_on_booking_confirmation",
+  "whatsapp_api_key",
+  "enable_low_stock_alerts",
+  "low_stock_threshold",
+  "alert_recipients",
+  "enable_system_alerts",
+  "alert_on_failed_import",
+  "alert_on_payment_failure"
+ ],
+ "fields": [
+  {
+   "fieldname": "temple",
+   "fieldtype": "Link",
+   "label": "Temple",
+   "options": "Temple",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "enable_email_notifications",
+   "fieldtype": "Check",
+   "label": "Enable Email Notifications"
+  },
+  {
+   "fieldname": "email_on_new_donation",
+   "fieldtype": "Check",
+   "label": "Email On New Donation"
+  },
+  {
+   "fieldname": "email_on_booking_confirmation",
+   "fieldtype": "Check",
+   "label": "Email On Booking Confirmation"
+  },
+  {
+   "fieldname": "email_on_booking_cancellation",
+   "fieldtype": "Check",
+   "label": "Email On Booking Cancellation"
+  },
+  {
+   "fieldname": "email_on_checkout",
+   "fieldtype": "Check",
+   "label": "Email On Checkout"
+  },
+  {
+   "fieldname": "email_daily_summary",
+   "fieldtype": "Check",
+   "label": "Email Daily Summary"
+  },
+  {
+   "fieldname": "admin_email_recipients",
+   "fieldtype": "Small Text",
+   "label": "Admin Email Recipients"
+  },
+  {
+   "fieldname": "enable_sms_notifications",
+   "fieldtype": "Check",
+   "label": "Enable SMS Notifications"
+  },
+  {
+   "fieldname": "sms_on_donation",
+   "fieldtype": "Check",
+   "label": "SMS On Donation"
+  },
+  {
+   "fieldname": "sms_on_booking",
+   "fieldtype": "Check",
+   "label": "SMS On Booking"
+  },
+  {
+   "fieldname": "sms_provider",
+   "fieldtype": "Select",
+   "label": "SMS Provider",
+   "options": "MSG91\nTwilio\nTextLocal\nFast2SMS\nCustom"
+  },
+  {
+   "fieldname": "sms_api_key",
+   "fieldtype": "Password",
+   "label": "SMS API Key"
+  },
+  {
+   "fieldname": "sms_sender_id",
+   "fieldtype": "Data",
+   "label": "SMS Sender ID"
+  },
+  {
+   "fieldname": "enable_whatsapp",
+   "fieldtype": "Check",
+   "label": "Enable WhatsApp"
+  },
+  {
+   "fieldname": "whatsapp_on_donation_receipt",
+   "fieldtype": "Check",
+   "label": "WhatsApp On Donation Receipt"
+  },
+  {
+   "fieldname": "whatsapp_on_booking_confirmation",
+   "fieldtype": "Check",
+   "label": "WhatsApp On Booking Confirmation"
+  },
+  {
+   "fieldname": "whatsapp_api_key",
+   "fieldtype": "Password",
+   "label": "WhatsApp API Key"
+  },
+  {
+   "fieldname": "enable_low_stock_alerts",
+   "fieldtype": "Check",
+   "label": "Enable Low Stock Alerts"
+  },
+  {
+   "fieldname": "low_stock_threshold",
+   "fieldtype": "Int",
+   "label": "Low Stock Threshold"
+  },
+  {
+   "fieldname": "alert_recipients",
+   "fieldtype": "Small Text",
+   "label": "Alert Recipients"
+  },
+  {
+   "fieldname": "enable_system_alerts",
+   "fieldtype": "Check",
+   "label": "Enable System Alerts"
+  },
+  {
+   "fieldname": "alert_on_failed_import",
+   "fieldtype": "Check",
+   "label": "Alert On Failed Import"
+  },
+  {
+   "fieldname": "alert_on_payment_failure",
+   "fieldtype": "Check",
+   "label": "Alert On Payment Failure"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-03 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Temple Donation",
+ "name": "Temple Notification Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Temple Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cashier",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
