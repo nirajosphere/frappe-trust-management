@@ -369,11 +369,13 @@ const RoomDashboard = () => {
                 <Col xs={24} lg={12}>
                     <Card title={`${getPeriodSuffix()} Check Ins`} style={cardStyles} bordered={false}>
                         <Table 
+                            className="aavatto-premium-table"
                             columns={columnsCheckIn} 
                             dataSource={data.todays_check_ins} 
                             rowKey="name"
                             loading={loading}
                             pagination={{ pageSize: 5 }}
+                            scroll={{ x: "max-content" }}
                             locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
@@ -381,11 +383,13 @@ const RoomDashboard = () => {
                 <Col xs={24} lg={12}>
                     <Card title={`${getPeriodSuffix()} Check Outs`} style={cardStyles} bordered={false}>
                         <Table 
+                            className="aavatto-premium-table"
                             columns={columnsCheckOut} 
                             dataSource={data.todays_check_outs} 
                             rowKey="name"
                             loading={loading}
                             pagination={{ pageSize: 5 }}
+                            scroll={{ x: "max-content" }}
                             locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
@@ -393,11 +397,13 @@ const RoomDashboard = () => {
                 <Col xs={24}>
                     <Card title="Upcoming Bookings (Next 7 Days)" style={cardStyles} bordered={false}>
                         <Table 
+                            className="aavatto-premium-table"
                             columns={columnsUpcoming} 
                             dataSource={data.upcoming_bookings} 
                             rowKey="name"
                             loading={loading}
                             pagination={{ pageSize: 10 }}
+                            scroll={{ x: "max-content" }}
                             locale={{ emptyText: "No upcoming bookings found" }}
                         />
                     </Card>
