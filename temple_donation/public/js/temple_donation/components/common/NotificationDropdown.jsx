@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Popover, Badge, Button, Avatar, List, Empty, Tooltip } from "antd";
 import { Bell, MessageSquare, CheckCircle2 } from "lucide-react";
 import { SyncOutlined } from "@ant-design/icons";
@@ -14,15 +14,33 @@ const NotificationDropdown = ({ currentUser }) => {
         }
     });
 
-    const { data: comments, mutate: refresh, loading } = useFrappeGetDocList("Comment", {
-        fields: ["name", "content", "reference_doctype", "reference_name", "owner", "creation"],
-        filters: [
-            ["comment_type", "=", "Comment"],
-            ["content", "like", `%@${currentUser}%`],
-            ["owner", "!=", currentUser]
-        ],
-        limit: 15
-    });
+    const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const refresh = useCallback(() => {
+        if (typeof frappe === "undefined" || !currentUser) return;
+        setLoading(true);
+        frappe.call({
+            method: "temple_donation.temple_donation.api.get_user_mentions",
+            args: {
+                currentUser: currentUser,
+                limit: 15
+            },
+            callback: (r) => {
+                setLoading(false);
+                if (r.message) {
+                    setComments(r.message);
+                }
+            },
+            error: () => {
+                setLoading(false);
+            }
+        });
+    }, [currentUser]);
+
+    useEffect(() => {
+        refresh();
+    }, [refresh]);
 
     useEffect(() => {
         localStorage.setItem("read_notifications", JSON.stringify(readNotifications));

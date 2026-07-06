@@ -35,7 +35,9 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
             error: (err) => {
                 setLoading(false);
                 setError(err);
-                message.error(getErrorMessage(err));
+                if (options.showError !== false) {
+                    message.error(getErrorMessage(err));
+                }
             }
         });
     };

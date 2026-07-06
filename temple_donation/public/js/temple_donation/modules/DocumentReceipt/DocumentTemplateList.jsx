@@ -363,7 +363,7 @@ const DocumentTemplateList = () => {
                 loading={loadingTemplates}
                 pagination={{ pageSize: 10 }}
                 bordered
-                className="aavatto-premium-table shadow-sm"
+                className="aavatto-premium-table"
                 style={{ background: "#fff", borderRadius: "8px" }}
             />
 

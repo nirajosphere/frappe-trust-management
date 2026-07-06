@@ -132,3 +132,24 @@ def inventory_stock(temple=None, item=None):
 		filters["name"] = item
 		
 	return frappe.get_all("Item", filters=filters, fields=["name", "item_name", "total_stock", "unit"])
+
+@frappe.whitelist()
+def get_user_mentions(currentUser, limit=15):
+	"""
+	Fetch user mentions from Comment DocType ignoring strict RPM permissions.
+	"""
+	if not currentUser:
+		currentUser = frappe.session.user
+		
+	return frappe.get_all(
+		"Comment",
+		filters=[
+			["comment_type", "=", "Comment"],
+			["content", "like", f"%@{currentUser}%"],
+			["owner", "!=", currentUser]
+		],
+		fields=["name", "content", "reference_doctype", "reference_name", "owner", "creation"],
+		limit=limit,
+		order_by="creation desc",
+		ignore_permissions=True
+	)
