@@ -104,6 +104,23 @@ def get_available_rooms(check_in, check_out, temple=None):
 
 
 @frappe.whitelist()
+def check_in_booking(booking_name):
+    """
+    Check in guest: sets booking status to Checked In, room to Occupied.
+    """
+    booking = frappe.get_doc("Room Booking", booking_name)
+
+    if booking.status != "Booked":
+        frappe.throw(_("Only Booked rooms can be checked in."))
+
+    frappe.db.set_value("Room Booking", booking_name, "status", "Checked In")
+    frappe.db.set_value("Room", booking.room, "status", "Occupied")
+    frappe.db.commit()
+
+    return {"success": True}
+
+
+@frappe.whitelist()
 def early_checkout(booking_name):
     """
     Early checkout: sets booking status to Checked Out, room to Available.

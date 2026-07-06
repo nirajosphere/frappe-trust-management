@@ -218,7 +218,8 @@ const RoomBookingForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="guest_id" label="Guest ID (Aadhaar/PAN)" style={formItemStyle}>
+                                        <Form.Item name="guest_id" label="Guest ID (Aadhaar/PAN)" style={formItemStyle}
+                                            rules={[{ required: true, message: "Guest ID is required" }]}>
                                             <Input placeholder="Enter guest ID" />
                                         </Form.Item>
                                     </Col>

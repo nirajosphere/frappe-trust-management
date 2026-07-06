@@ -86,15 +86,9 @@ const RoomDashboard = () => {
 
         setLoading(true);
         frappe.call({
-            method: "frappe.client.set_value",
-            args: {
-                doctype: "Room Booking",
-                name: bookingName,
-                fieldname: {
-                    status: "Checked In"
-                }
-            },
-            callback: () => {
+            method: "temple_donation.api.room_booking.check_in_booking",
+            args: { booking_name: bookingName },
+              callback: () => {
                 notification.success({ message: "Check-in Successful", description: `Booking ${bookingName} checked in.` });
                 fetchDashboardData();
             },
@@ -358,7 +352,7 @@ const RoomDashboard = () => {
                             title={`${getPeriodSuffix()} Room Donation Revenue`}
                             value={Number(data.period_metrics?.total_revenue || 0).toLocaleString("en-IN", { style: "currency", currency: "INR" })}
                             valueStyle={{ color: "#10b981" }}
-                            prefix={<span style={{ marginRight: 8 }}>₹</span>} 
+                            // prefix={<span style={{ marginRight: 8 }}>₹</span>} 
                         />
                     </Card>
                 </Col>
