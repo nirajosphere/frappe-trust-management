@@ -54,10 +54,18 @@ const App = () => {
 
         window.update_temple_donation_route = handleRoute;
         window.addEventListener("hashchange", handleRoute);
+
+        if (typeof frappe !== "undefined" && frappe.router) {
+            frappe.router.on("change", handleRoute);
+        }
+
         handleRoute();
 
         return () => {
             window.removeEventListener("hashchange", handleRoute);
+            if (typeof frappe !== "undefined" && frappe.router && typeof frappe.router.off === "function") {
+                frappe.router.off("change", handleRoute);
+            }
             delete window.update_temple_donation_route;
         };
     }, []);

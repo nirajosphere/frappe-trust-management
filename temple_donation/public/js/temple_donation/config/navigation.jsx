@@ -297,6 +297,16 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     const targetDoctype = doctypeMap[baseKey];
     const navItem = navigationItems.find(nav => nav.key === baseKey);
     
+    // Redirect if it's an unrecognized sub-route
+    if (baseKey && baseKey !== "dashboard" && !navItem) {
+        if (typeof frappe !== "undefined" && frappe.set_route) {
+            setTimeout(() => {
+                frappe.set_route("temple-donation");
+            }, 0);
+        }
+        return <Dashboard />;
+    }
+
     // Permission check
     const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
 
