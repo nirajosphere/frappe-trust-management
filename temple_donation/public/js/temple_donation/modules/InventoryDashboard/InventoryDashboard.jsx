@@ -452,13 +452,13 @@ const InventoryDashboard = () => {
                                         children: (
                                             <div className="flex flex-col gap-0.5">
                                                 <div className="flex justify-between items-center">
-                                                    <Text strong className="text-xs">{entry.name}</Text>
+                                                    <Text strong className="text-xs">{entry.temple_name || entry.name}</Text>
                                                     <Tag className={`tag-glass ${typeTag.glassClass} font-bold rounded-full !m-0 !py-0 !px-1.5`}>
                                                         {entry.purpose}
                                                     </Tag>
                                                 </div>
                                                 <div className="flex justify-between items-center text-[10px] text-zinc-400">
-                                                    <span>By: {entry.owner_name}</span>
+                                                    <span>By: {entry.owner_name} | Entry: {entry.name}</span>
                                                     <span>{dayjs(entry.posting_date).fromNow()}</span>
                                                 </div>
                                             </div>

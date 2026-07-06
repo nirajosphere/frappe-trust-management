@@ -221,7 +221,6 @@ const App = () => {
                                 <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={logoImgStyle} />
                             </div>
 
-                            {/* CENTER & RIGHT - MENU */}
                             <div style={rightContainerStyle}>
                                 {!isMobile && (
                                     <div style={{ display: 'flex', gap: '24px', alignItems: 'stretch', height: '100%' }}>
@@ -290,7 +289,7 @@ const App = () => {
                                                         }}
                                                     >
                                                         <span>{group.label}</span>
-                                                        <ChevronDown size={14} style={{ color: isGroupActive ? '#18181b' : '#71717a' }} />
+                                                        <ChevronDown size={14} style={{ color: isGroupActive ? '#18181bd' : '#71717a' }} />
                                                     </button>
                                                 </Dropdown>
                                             );
@@ -298,7 +297,6 @@ const App = () => {
                                     </div>
                                 )}
 
-                                {/* RIGHT ACTIONS - USER / MOBILE */}
                                 <div style={rightActionsStyle}>
                                     {user && (
                                         <NotificationDropdown currentUser={user.email || user.name} />
@@ -310,12 +308,11 @@ const App = () => {
                                                     src={user?.image}
                                                     icon={!user?.image && <UserOutlined />}
                                                 />
-                                                {/* <span>{user?.name}</span> */}
+                 
                                             </div>
                                         </Dropdown>
                                     )}
 
-                                    {/* Mobile Hamburger Button */}
                                     {isMobile && (
                                         <Button
                                             icon={<MenuOutlined />}

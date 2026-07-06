@@ -253,6 +253,19 @@ def get_room_dashboard_data(temple=None, from_date=None, to_date=None):
         "status": ["not in", ["Cancelled"]]
     }, "sum(total_amount)") or 0.0
 
+    # Map room ID/name to human-readable room number
+    rooms = frappe.get_all("Room", fields=["name", "room_number"])
+    room_map = {r.name: r.room_number for r in rooms}
+
+    for b in todays_check_ins:
+        b["room"] = room_map.get(b.room) or b.room
+
+    for b in todays_check_outs:
+        b["room"] = room_map.get(b.room) or b.room
+
+    for b in upcoming_bookings:
+        b["room"] = room_map.get(b.room) or b.room
+
     return {
         "stats": stats,
         "todays_check_ins": todays_check_ins,

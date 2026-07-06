@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { 
-    Form, Input, Button, Alert, Select, Row, Col, Card, 
-    Checkbox, Space, Tabs, List, Tooltip, Typography, Divider, Badge 
+import {
+    Form, Input, Button, Alert, Select, Row, Col, Card,
+    Checkbox, Space, Tabs, List, Tooltip, Typography, Divider, Badge, message, Modal
 } from "antd";
-import { 
+import {
     SaveOutlined, ArrowLeftOutlined, CopyOutlined, InfoCircleOutlined,
     EditOutlined, EyeOutlined, LayoutOutlined
 } from "@ant-design/icons";
-import { 
-    useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc, useFrappeGetDocList 
+import {
+    useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc, useFrappeGetDocList
 } from "../../hooks/useFrappe";
 import { DOCTYPE_DOCUMENT_TEMPLATE } from "../../config/constants";
 import AddPageHeader from "../../components/common/AddPageHeader";
@@ -58,51 +58,55 @@ const sampleData = {
 };
 
 const variablesList = [
-	{ name: "{{temple_name}}", desc: "Name of the Temple", cat: "Temple" },
-	{ name: "{{trust_name}}", desc: "Name of the Trust", cat: "Temple" },
-	{ name: "{{address}}", desc: "Temple Address", cat: "Temple" },
-	{ name: "{{city}}", desc: "Temple City", cat: "Temple" },
-	{ name: "{{state}}", desc: "Temple State", cat: "Temple" },
-	{ name: "{{phone}}", desc: "Contact Number", cat: "Temple" },
-	{ name: "{{email}}", desc: "Email Address", cat: "Temple" },
-	{ name: "{{website}}", desc: "Website URL", cat: "Temple" },
-	{ name: "{{receipt_number}}", desc: "Unique Receipt ID", cat: "Common" },
-	{ name: "{{receipt_date}}", desc: "Posting/Creation Date", cat: "Common" },
-	{ name: "{{cashier}}", desc: "Cashier Name", cat: "Common" },
-	{ name: "{{qr_code}}", desc: "QR Code verification image tag", cat: "Common" },
-	{ name: "{{donor_name}}", desc: "Donor Name", cat: "Donation" },
-	{ name: "{{mobile}}", desc: "Donor Contact No", cat: "Donation" },
-	{ name: "{{donation_type}}", desc: "Donation category/items", cat: "Donation" },
-	{ name: "{{amount}}", desc: "Receipt Amount (numeric)", cat: "Donation / Room" },
-	{ name: "{{payment_mode}}", desc: "Mode of Payment", cat: "Donation / Room" },
-	{ name: "{{guest_name}}", desc: "Room Guest Name", cat: "Room" },
-	{ name: "{{room_number}}", desc: "Assigned Room Number", cat: "Room" },
-	{ name: "{{room_type}}", desc: "Room Category", cat: "Room" },
-	{ name: "{{building}}", desc: "Guest House Building", cat: "Room" },
-	{ name: "{{check_in}}", desc: "Check-in Date & Time", cat: "Room" },
-	{ name: "{{check_out}}", desc: "Check-out Date & Time", cat: "Room" },
-	{ name: "{{days}}", desc: "Total Number of Days", cat: "Room" },
-	{ name: "{{entry_number}}", desc: "Stock Entry Doc ID", cat: "Inventory" },
-	{ name: "{{entry_type}}", desc: "Stock In/Out/Adjustment", cat: "Inventory" },
-	{ name: "{{item_name}}", desc: "First item name", cat: "Inventory" },
-	{ name: "{{quantity}}", desc: "Total quantity of entry", cat: "Inventory" },
-	{ name: "{{unit}}", desc: "Unit of measurement", cat: "Inventory" },
-	{ name: "{{rate}}", desc: "Valuation/Rate per unit", cat: "Inventory" },
-	{ name: "{{total}}", desc: "Inventory Entry Value", cat: "Inventory" },
-	{ name: "{{reference}}", desc: "Purchase order/invoice reference", cat: "Inventory" }
+    { name: "{{temple_name}}", desc: "Name of the Temple", cat: "Temple" },
+    { name: "{{trust_name}}", desc: "Name of the Trust", cat: "Temple" },
+    { name: "{{address}}", desc: "Temple Address", cat: "Temple" },
+    { name: "{{city}}", desc: "Temple City", cat: "Temple" },
+    { name: "{{state}}", desc: "Temple State", cat: "Temple" },
+    { name: "{{phone}}", desc: "Contact Number", cat: "Temple" },
+    { name: "{{email}}", desc: "Email Address", cat: "Temple" },
+    { name: "{{website}}", desc: "Website URL", cat: "Temple" },
+    { name: "{{receipt_number}}", desc: "Unique Receipt ID", cat: "Common" },
+    { name: "{{receipt_date}}", desc: "Posting/Creation Date", cat: "Common" },
+    { name: "{{cashier}}", desc: "Cashier Name", cat: "Common" },
+    { name: "{{qr_code}}", desc: "QR Code verification image tag", cat: "Common" },
+    { name: "{{donor_name}}", desc: "Donor Name", cat: "Donation" },
+    { name: "{{mobile}}", desc: "Donor Contact No", cat: "Donation" },
+    { name: "{{donation_type}}", desc: "Donation category/items", cat: "Donation" },
+    { name: "{{amount}}", desc: "Receipt Amount (numeric)", cat: "Donation / Room" },
+    { name: "{{payment_mode}}", desc: "Mode of Payment", cat: "Donation / Room" },
+    { name: "{{guest_name}}", desc: "Room Guest Name", cat: "Room" },
+    { name: "{{room_number}}", desc: "Assigned Room Number", cat: "Room" },
+    { name: "{{room_type}}", desc: "Room Category", cat: "Room" },
+    { name: "{{building}}", desc: "Guest House Building", cat: "Room" },
+    { name: "{{check_in}}", desc: "Check-in Date & Time", cat: "Room" },
+    { name: "{{check_out}}", desc: "Check-out Date & Time", cat: "Room" },
+    { name: "{{days}}", desc: "Total Number of Days", cat: "Room" },
+    { name: "{{entry_number}}", desc: "Stock Entry Doc ID", cat: "Inventory" },
+    { name: "{{entry_type}}", desc: "Stock In/Out/Adjustment", cat: "Inventory" },
+    { name: "{{item_name}}", desc: "First item name", cat: "Inventory" },
+    { name: "{{quantity}}", desc: "Total quantity of entry", cat: "Inventory" },
+    { name: "{{unit}}", desc: "Unit of measurement", cat: "Inventory" },
+    { name: "{{rate}}", desc: "Valuation/Rate per unit", cat: "Inventory" },
+    { name: "{{total}}", desc: "Inventory Entry Value", cat: "Inventory" },
+    { name: "{{reference}}", desc: "Purchase order/invoice reference", cat: "Inventory" }
 ];
 
 const DocumentTemplateForm = ({ id, onBack }) => {
     const isEdit = !!id;
     const [form] = Form.useForm();
-    
+
     // --- API Hooks ---
     const { createDoc, loading: creating } = useFrappeCreateDoc();
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
-    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", { fields: ["name", "temple_name"], limit: 1000 });
+    const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name", "city", "state", "temple_address", "country", "pincode"],
+        limit: 1000
+    });
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DOCUMENT_TEMPLATE, id);
 
     // Live HTML state for rendering inside the sandbox iframe
+    const [selectedTemple, setSelectedTemple] = useState(undefined);
     const [headerHtml, setHeaderHtml] = useState("");
     const [bodyHtml, setBodyHtml] = useState("");
     const [footerHtml, setFooterHtml] = useState("");
@@ -112,10 +116,12 @@ const DocumentTemplateForm = ({ id, onBack }) => {
     const [margins, setMargins] = useState("15px");
     const [paperSize, setPaperSize] = useState("A4");
     const [orientation, setOrientation] = useState("Portrait");
+    const [previewModalVisible, setPreviewModalVisible] = useState(false);
 
     useEffect(() => {
         if (isEdit && data) {
             form.setFieldsValue(data);
+            setSelectedTemple(data.temple || undefined);
             setHeaderHtml(data.header_html || "");
             setBodyHtml(data.body_html || "");
             setFooterHtml(data.footer_html || "");
@@ -193,6 +199,7 @@ const DocumentTemplateForm = ({ id, onBack }) => {
     }, [isEdit, data, form]);
 
     const handleFormValuesChange = (changed, all) => {
+        if (changed.temple !== undefined) setSelectedTemple(changed.temple);
         if (changed.header_html !== undefined) setHeaderHtml(changed.header_html);
         if (changed.body_html !== undefined) setBodyHtml(changed.body_html);
         if (changed.footer_html !== undefined) setFooterHtml(changed.footer_html);
@@ -222,6 +229,218 @@ const DocumentTemplateForm = ({ id, onBack }) => {
         message.success(`Copied placeholder: ${text}`);
     };
 
+    const handleLoadPreset = (value) => {
+        const presets = {
+            donation: {
+                header: `<div style="display: flex; align-items: center; border-bottom: 2px solid {{primary_color}}; padding-bottom: 12px; margin-bottom: 15px;">
+    {% if logo_tag %}
+    <div style="flex-shrink: 0; margin-right: 18px;">
+        {{logo_tag}}
+    </div>
+    {% endif %}
+    <div style="flex-grow: 1;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: {{primary_color}}; line-height: 1.2;">{{temple_name}}</h1>
+        {% if trust_name and trust_name != temple_name %}
+        <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: {{secondary_color}}; text-transform: uppercase; letter-spacing: 0.5px;">{{trust_name}}</p>
+        {% endif %}
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: #4b5563; line-height: 1.4;">{{address}}, {{city}}, {{state}}</p>
+        <p style="margin: 2px 0 0 0; font-size: 11px; color: #6b7280;">Phone: {{phone}} | Email: {{email}}</p>
+    </div>
+</div>`,
+                body: `<div style="margin-top: 15px;">
+    <div style="display: flex; justify-content: space-between; border-bottom: 2px solid {{primary_color}}; padding-bottom: 8px;">
+        <span style="font-weight: 800; font-size: 15px; color: {{primary_color}};">DONATION RECEIPT</span>
+        <span style="font-weight: 700; font-size: 14px; color: #1f2937;">No: {{receipt_number}}</span>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <tbody>
+            <tr>
+                <td style="padding: 8px 0; font-size: 13px; color: #6b7280; width: 30%;">Date:</td>
+                <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{receipt_date}}</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px 0; font-size: 13px; color: #6b7280;">Received From:</td>
+                <td style="padding: 8px 0; font-size: 13px; font-weight: 700; color: {{primary_color}};">{{donor_name}} {% if mobile %}(+91 {{mobile}}){% endif %}</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px 0; font-size: 13px; color: #6b7280;">Towards Purpose:</td>
+                <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{donation_type}}</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px 0; font-size: 13px; color: #6b7280;">Payment Mode:</td>
+                <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{payment_mode}}</td>
+            </tr>
+            <tr style="border-top: 1px solid #e5e7eb; border-bottom: 2px solid {{primary_color}};">
+                <td style="padding: 10px 0; font-size: 14px; font-weight: 700; color: {{primary_color}};">Total Amount:</td>
+                <td style="padding: 10px 0; font-size: 16px; font-weight: 800; color: {{primary_color}};">₹{{amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if notes %}
+    <div style="margin-top: 12px; padding: 8px; background-color: #f9fafb; border-left: 3px solid {{secondary_color}}; font-size: 12px; font-style: italic; color: #4b5563;">
+        Note: {{notes}}
+    </div>
+    {% endif %}
+</div>`,
+                footer: `<div style="text-align: center; font-size: 11px; color: {{secondary_color}}; padding-top: 8px;">
+    <p style="margin: 0; font-style: italic; font-weight: 500;">
+        "May the blessings of the Almighty bring health, prosperity, and peace to your family."
+    </p>
+    <p style="margin: 4px 0 0 0; font-size: 9px; color: #9ca3af;">
+        This is a computer-generated document and does not require a physical signature.
+    </p>
+</div>`
+            },
+            room: {
+                header: `<div style="display: flex; align-items: center; border-bottom: 2px solid {{primary_color}}; padding-bottom: 12px; margin-bottom: 15px;">
+    {% if logo_tag %}
+    <div style="flex-shrink: 0; margin-right: 18px;">
+        {{logo_tag}}
+    </div>
+    {% endif %}
+    <div style="flex-grow: 1;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: {{primary_color}}; line-height: 1.2;">{{temple_name}}</h1>
+        {% if trust_name and trust_name != temple_name %}
+        <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: {{secondary_color}}; text-transform: uppercase; letter-spacing: 0.5px;">{{trust_name}}</p>
+        {% endif %}
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: #4b5563; line-height: 1.4;">{{address}}, {{city}}, {{state}}</p>
+        <p style="margin: 2px 0 0 0; font-size: 11px; color: #6b7280;">Phone: {{phone}} | Email: {{email}}</p>
+    </div>
+</div>`,
+                body: `<div style="margin-top: 15px;">
+    <div style="display: flex; justify-content: space-between; border-bottom: 2px solid {{primary_color}}; padding-bottom: 8px;">
+        <span style="font-weight: 800; font-size: 15px; color: {{primary_color}};">ROOM BOOKING RECEIPT</span>
+        <span style="font-weight: 700; font-size: 14px; color: #1f2937;">No: {{receipt_number}}</span>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <tbody>
+            <tr>
+                <td style="padding: 6px 0; font-size: 13px; color: #6b7280; width: 30%;">Guest Name:</td>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 700; color: #1f2937;">{{guest_name}}</td>
+            </tr>
+            <tr>
+                <td style="padding: 6px 0; font-size: 13px; color: #6b7280;">Guest House / Bldg:</td>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{building}}</td>
+            </tr>
+            <tr>
+                <td style="padding: 6px 0; font-size: 13px; color: #6b7280;">Room Info:</td>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #1f2937;">Room No. {{room_number}} ({{room_type}})</td>
+            </tr>
+            <tr>
+                <td style="padding: 6px 0; font-size: 13px; color: #6b7280;">Duration:</td>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{check_in}} to {{check_out}} ({{days}})</td>
+            </tr>
+            <tr>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #1f2937;">Payment Mode:</td>
+                <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #1f2937;">{{payment_mode}}</td>
+            </tr>
+            <tr style="border-top: 1.5px solid #e5e7eb; border-bottom: 2px solid {{primary_color}};">
+                <td style="padding: 10px 0; font-size: 14px; font-weight: 700; color: {{primary_color}};">Paid Amount:</td>
+                <td style="padding: 10px 0; font-size: 16px; font-weight: 800; color: {{primary_color}};">₹{{amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if notes %}
+    <div style="margin-top: 12px; padding: 8px; background-color: #f9fafb; border-left: 3px solid {{secondary_color}}; font-size: 12px; font-style: italic; color: #4b5563;">
+        Remarks: {{notes}}
+    </div>
+    {% endif %}
+</div>`,
+                footer: `<div style="text-align: center; font-size: 11px; color: {{secondary_color}}; padding-top: 8px;">
+    <p style="margin: 0; font-style: italic; font-weight: 500;">
+        "May the blessings of the Almighty bring health, prosperity, and peace to your family."
+    </p>
+    <p style="margin: 4px 0 0 0; font-size: 9px; color: #9ca3af;">
+        This is a computer-generated document and does not require a physical signature.
+    </p>
+</div>`
+            },
+            inventory: {
+                header: `<div style="display: flex; align-items: center; border-bottom: 2px solid {{primary_color}}; padding-bottom: 12px; margin-bottom: 15px;">
+    {% if logo_tag %}
+    <div style="flex-shrink: 0; margin-right: 18px;">
+        {{logo_tag}}
+    </div>
+    {% endif %}
+    <div style="flex-grow: 1;">
+        <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: {{primary_color}}; line-height: 1.2;">{{temple_name}}</h1>
+        {% if trust_name and trust_name != temple_name %}
+        <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: {{secondary_color}}; text-transform: uppercase; letter-spacing: 0.5px;">{{trust_name}}</p>
+        {% endif %}
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: #4b5563; line-height: 1.4;">{{address}}, {{city}}, {{state}}</p>
+        <p style="margin: 2px 0 0 0; font-size: 11px; color: #6b7280;">Phone: {{phone}} | Email: {{email}}</p>
+    </div>
+</div>`,
+                body: `<div style="margin-top: 15px;">
+    <div style="display: flex; justify-content: space-between; border-bottom: 2px solid {{primary_color}}; padding-bottom: 8px;">
+        <span style="font-weight: 800; font-size: 15px; color: {{primary_color}};">STOCK MOVEMENT VOUCHER</span>
+        <span style="font-weight: 700; font-size: 14px; color: #1f2937;">No: {{entry_number}}</span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 12px; color: #4b5563;">
+        <div><strong>Type:</strong> {{entry_type}}</div>
+        <div><strong>Date:</strong> {{receipt_date}}</div>
+        {% if reference %}<div><strong>Ref No:</strong> {{reference}}</div>{% endif %}
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px;">
+        <thead>
+            <tr style="border-bottom: 2px solid {{primary_color}}; border-top: 1px solid #e5e7eb;">
+                <th style="padding: 8px 4px; text-align: left; background: none; color: #1f2937; font-weight: 700;">Item Name</th>
+                <th style="padding: 8px 4px; text-align: right; background: none; color: #1f2937; font-weight: 700; width: 25%;">Qty</th>
+                <th style="padding: 8px 4px; text-align: right; background: none; color: #1f2937; font-weight: 700; width: 25%;">Rate</th>
+                <th style="padding: 8px 4px; text-align: right; background: none; color: #1f2937; font-weight: 700; width: 25%;">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px 4px; border-bottom: 1px solid #f3f4f6; color: #1f2937; font-weight: 500;">{{item_name}}</td>
+                <td style="padding: 10px 4px; border-bottom: 1px solid #f3f4f6; text-align: right; color: #4b5563;">{{quantity}} {{unit}}</td>
+                <td style="padding: 10px 4px; border-bottom: 1px solid #f3f4f6; text-align: right; color: #4b5563;">₹{{rate}}</td>
+                <td style="padding: 10px 4px; border-bottom: 1px solid #f3f4f6; text-align: right; font-weight: 600; color: #1f2937;">₹{{total}}</td>
+            </tr>
+            <tr style="border-top: 1.5px solid #e5e7eb; border-bottom: 2px solid {{primary_color}}; font-weight: 700;">
+                <td colspan="3" style="padding: 10px 4px; color: {{primary_color}};">Grand Total:</td>
+                <td style="padding: 10px 4px; text-align: right; color: {{primary_color}}; font-size: 14px; font-weight: 800;">₹{{total}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if notes %}
+    <div style="margin-top: 15px; padding: 8px; background-color: #f9fafb; border-left: 3px solid {{secondary_color}}; font-size: 12px; font-style: italic; color: #4b5563;">
+        Remarks: {{notes}}
+    </div>
+    {% endif %}
+</div>`,
+                footer: `<div style="text-align: center; font-size: 11px; color: {{secondary_color}}; padding-top: 8px;">
+    <p style="margin: 0; font-style: italic; font-weight: 500;">
+        "May the blessings of the Almighty bring health, prosperity, and peace to your family."
+    </p>
+    <p style="margin: 4px 0 0 0; font-size: 9px; color: #9ca3af;">
+        This is a computer-generated document and does not require a physical signature.
+    </p>
+</div>`
+            }
+        };
+
+        const preset = presets[value];
+        if (preset) {
+            form.setFieldsValue({
+                header_html: preset.header,
+                body_html: preset.body,
+                footer_html: preset.footer
+            });
+            setHeaderHtml(preset.header);
+            setBodyHtml(preset.body);
+            setFooterHtml(preset.footer);
+            message.success("Preset loaded successfully!");
+        }
+    };
+
     // Calculate simulated preview sandbox HTML
     const getPreviewHtml = () => {
         let h = headerHtml;
@@ -233,12 +452,26 @@ const DocumentTemplateForm = ({ id, onBack }) => {
         b = b.replace(/{{primary_color}}/g, primaryColor).replace(/{{secondary_color}}/g, secondaryColor);
         f = f.replace(/{{primary_color}}/g, primaryColor).replace(/{{secondary_color}}/g, secondaryColor);
 
+        const selectedTempleObj = temples?.find(t => t.name === selectedTemple);
+
+        const currentSampleData = {
+            ...sampleData,
+            ...(selectedTempleObj ? {
+                temple_name: selectedTempleObj.temple_name || sampleData.temple_name,
+                trust_name: selectedTempleObj.temple_name || sampleData.trust_name,
+                address: selectedTempleObj.temple_address || sampleData.address,
+                city: selectedTempleObj.city || sampleData.city,
+                state: selectedTempleObj.state || sampleData.state,
+                country: selectedTempleObj.country || sampleData.country
+            } : {})
+        };
+
         // Replace custom sample data
-        Object.keys(sampleData).forEach(key => {
+        Object.keys(currentSampleData).forEach(key => {
             const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g");
-            h = h.replace(regex, sampleData[key]);
-            b = b.replace(regex, sampleData[key]);
-            f = f.replace(regex, sampleData[key]);
+            h = h.replace(regex, currentSampleData[key]);
+            b = b.replace(regex, currentSampleData[key]);
+            f = f.replace(regex, currentSampleData[key]);
         });
 
         // Strip any raw Jinja code tags for safe frontend-only preview rendering
@@ -344,19 +577,19 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                 showBack={true}
             />
 
-            <Form 
-                form={form} 
-                layout="vertical" 
-                onFinish={handleSave} 
+            <Form
+                form={form}
+                layout="vertical"
+                onFinish={handleSave}
                 onValuesChange={handleFormValuesChange}
-                requiredMark={false} 
+                requiredMark={false}
                 size="middle"
             >
                 <Row gutter={[24, 0]}>
                     {/* ================= LEFT COLUMN: SETTINGS & HTML EDITOR ================= */}
                     <Col xs={24} xl={14}>
                         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                            
+
                             {/* Card 1: Basic Config */}
                             <Card title={<span><LayoutOutlined /> Basic Settings</span>} bordered={false} className="shadow-sm">
                                 <Row gutter={[16, 0]}>
@@ -367,8 +600,8 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                     </Col>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="temple" label="Temple / Trust" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
-                                            <Select 
-                                                showSearch 
+                                            <Select
+                                                showSearch
                                                 placeholder="Select Temple"
                                                 loading={loadingTemples}
                                                 options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
@@ -465,8 +698,24 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                 </Row>
                             </Card>
 
-                            {/* Card 3: HTML Editor Tabs */}
-                            <Card title={<span><EditOutlined /> HTML Template Editor</span>} bordered={false} className="shadow-sm">
+                            <Card
+                                title={<span><EditOutlined /> HTML Template Editor</span>}
+                                extra={
+                                    <Select
+                                        placeholder="Load Preset Template"
+                                        style={{ width: 220 }}
+                                        onChange={handleLoadPreset}
+                                        options={[
+                                            { label: "Standard Donation Receipt", value: "donation" },
+                                            { label: "Standard Room Booking", value: "room" },
+                                            { label: "Standard Stock Voucher", value: "inventory" }
+                                        ]}
+                                        value={null}
+                                    />
+                                }
+                                bordered={false}
+                                className="shadow-sm"
+                            >
                                 <Tabs defaultActiveKey="body" items={[
                                     {
                                         key: "header",
@@ -474,9 +723,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                         forceRender: true,
                                         children: (
                                             <Form.Item name="header_html" style={{ marginBottom: 0 }}>
-                                                <Input.TextArea 
-                                                    rows={10} 
-                                                    placeholder="HTML/CSS header section..." 
+                                                <Input.TextArea
+                                                    rows={10}
+                                                    placeholder="HTML/CSS header section..."
                                                     style={{ fontFamily: "monospace", fontSize: "13px", lineHeight: "1.5", background: "#1e1e1e", color: "#d4d4d4" }}
                                                 />
                                             </Form.Item>
@@ -488,9 +737,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                         forceRender: true,
                                         children: (
                                             <Form.Item name="body_html" style={{ marginBottom: 0 }}>
-                                                <Input.TextArea 
-                                                    rows={14} 
-                                                    placeholder="HTML body section with placeholders..." 
+                                                <Input.TextArea
+                                                    rows={14}
+                                                    placeholder="HTML body section with placeholders..."
                                                     style={{ fontFamily: "monospace", fontSize: "13px", lineHeight: "1.5", background: "#1e1e1e", color: "#d4d4d4" }}
                                                 />
                                             </Form.Item>
@@ -502,9 +751,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                         forceRender: true,
                                         children: (
                                             <Form.Item name="footer_html" style={{ marginBottom: 0 }}>
-                                                <Input.TextArea 
-                                                    rows={8} 
-                                                    placeholder="HTML footer section..." 
+                                                <Input.TextArea
+                                                    rows={8}
+                                                    placeholder="HTML footer section..."
                                                     style={{ fontFamily: "monospace", fontSize: "13px", lineHeight: "1.5", background: "#1e1e1e", color: "#d4d4d4" }}
                                                 />
                                             </Form.Item>
@@ -519,23 +768,33 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                     {/* ================= RIGHT COLUMN: LIVE PREVIEW & VARIABLE GUIDE ================= */}
                     <Col xs={24} xl={10}>
                         <div style={{ display: "flex", flexDirection: "column", gap: "20px", position: "sticky", top: "84px" }}>
-                            
+
                             {/* Sandbox Sandbox Preview */}
-                            <Card 
-                                title={<span><EyeOutlined /> Live Sandbox Preview</span>} 
-                                bordered={false} 
+                            <Card
+                                title={<span><EyeOutlined /> Live Sandbox Preview</span>}
+                                extra={
+                                    <Button
+                                        type="primary"
+                                        size="small"
+                                        icon={<EyeOutlined />}
+                                        onClick={() => setPreviewModalVisible(true)}
+                                    >
+                                        Fullscreen Preview
+                                    </Button>
+                                }
+                                bordered={false}
                                 className="shadow-sm"
                                 bodyStyle={{ padding: "12px", background: "#e4e4e7", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" }}
                             >
                                 <div style={{ border: "1px solid #d4d4d8", borderRadius: "6px", background: "#f4f4f5", overflow: "hidden" }}>
-                                    <iframe 
+                                    <iframe
                                         title="Live Output Sandbox"
-                                        srcDoc={getPreviewHtml()} 
-                                        style={{ 
-                                            width: "100%", 
-                                            height: "460px", 
-                                            border: "none" 
-                                        }} 
+                                        srcDoc={getPreviewHtml()}
+                                        style={{
+                                            width: "100%",
+                                            height: "460px",
+                                            border: "none"
+                                        }}
                                     />
                                 </div>
                                 <div style={{ marginTop: "8px", textAlign: "center" }}>
@@ -546,9 +805,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                             </Card>
 
                             {/* Click to Copy Variables Tray */}
-                            <Card 
-                                title={<span><CopyOutlined /> Dynamic Variable Assistant</span>} 
-                                bordered={false} 
+                            <Card
+                                title={<span><CopyOutlined /> Dynamic Variable Assistant</span>}
+                                bordered={false}
                                 className="shadow-sm"
                                 bodyStyle={{ padding: "0 16px 16px" }}
                             >
@@ -557,14 +816,14 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                                         size="small"
                                         dataSource={variablesList}
                                         renderItem={item => (
-                                            <List.Item 
+                                            <List.Item
                                                 actions={[
                                                     <Tooltip title="Copy placeholder">
-                                                        <Button 
-                                                            type="text" 
-                                                            size="small" 
-                                                            icon={<CopyOutlined />} 
-                                                            onClick={() => copyToClipboard(item.name)} 
+                                                        <Button
+                                                            type="text"
+                                                            size="small"
+                                                            icon={<CopyOutlined />}
+                                                            onClick={() => copyToClipboard(item.name)}
                                                         />
                                                     </Tooltip>
                                                 ]}
@@ -599,6 +858,34 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                     />
                 </div>
             </Form>
+
+            <Modal
+                title="Document Print Preview"
+                open={previewModalVisible}
+                onCancel={() => setPreviewModalVisible(false)}
+                footer={[
+                    <Button key="close" onClick={() => setPreviewModalVisible(false)}>
+                        Close
+                    </Button>
+                ]}
+                width={850}
+                bodyStyle={{ padding: 0 }}
+                destroyOnClose
+            >
+                <div style={{ background: "#f4f4f5", padding: "20px", display: "flex", justifyContent: "center" }}>
+                    <iframe
+                        title="Fullscreen Preview Sandbox"
+                        srcDoc={getPreviewHtml()}
+                        style={{
+                            width: "100%",
+                            height: "600px",
+                            border: "1px solid #d4d4d8",
+                            borderRadius: "6px",
+                            background: "#ffffff"
+                        }}
+                    />
+                </div>
+            </Modal>
         </ViewContainer>
     );
 };

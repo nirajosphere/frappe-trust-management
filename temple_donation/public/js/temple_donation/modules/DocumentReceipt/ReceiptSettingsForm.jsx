@@ -5,7 +5,7 @@ import {
 } from "antd";
 import { 
     SettingOutlined, SaveOutlined, ArrowLeftOutlined, 
-    SafetyCertificateOutlined, FileProtectOutlined, LoadingOutlined 
+    SafetyCertificateOutlined, FileProtectOutlined, LoadingOutlined, PlusOutlined 
 } from "@ant-design/icons";
 import { 
     useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDocList 
@@ -195,7 +195,24 @@ const ReceiptSettingsForm = ({ onBack }) => {
                                 </Card>
 
                                 {/* Default Layout Mapping */}
-                                <Card title={<span><SettingOutlined /> Default Layout Templates</span>} bordered={false} className="shadow-sm">
+                                <Card 
+                                    title={<span><SettingOutlined /> Default Layout Templates</span>} 
+                                    extra={
+                                        <Button 
+                                            type="link" 
+                                            icon={<PlusOutlined />} 
+                                            onClick={() => {
+                                                if (typeof frappe !== "undefined") {
+                                                    frappe.set_route("temple-donation", "document-templates", "new");
+                                                }
+                                            }}
+                                        >
+                                            Create New Template
+                                        </Button>
+                                    }
+                                    bordered={false} 
+                                    className="shadow-sm"
+                                >
                                     <Paragraph type="secondary" style={{ fontSize: "13px" }}>
                                         Map specific document template layouts as the default print format for each module.
                                     </Paragraph>

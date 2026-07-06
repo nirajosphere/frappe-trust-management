@@ -1207,7 +1207,7 @@ def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
     if temple:
         item_filters["temple"] = temple
         
-    items = frappe.get_all("Item", filters=item_filters, fields=["name", "total_stock", "minimum_stock", "item_category"])
+    items = frappe.get_all("Item", filters=item_filters, fields=["name", "total_stock", "minimum_stock", "item_category","item_category"])
     
     total_items = len(items)
     total_stock_qty = sum(flt(i.total_stock) for i in items)
@@ -1348,6 +1348,7 @@ def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
     for entry in latest_entries:
         entry["purpose"] = "Receipt" if entry.entry_type in ["Stock In", "IN"] else ("Issue" if entry.entry_type in ["Stock Out", "OUT"] else "Adjustment")
         entry["owner_name"] = frappe.db.get_value("User", entry.owner, "full_name") or entry.owner
+        entry["temple_name"] = frappe.db.get_value("Temple", entry.temple, "temple_name") or entry.temple
         
     latest_issues = frappe.get_all("Inventory Entry",
         filters={**activities_filters, "entry_type": ["in", ["Stock Out", "OUT"]]},
@@ -1358,6 +1359,7 @@ def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
     for issue in latest_issues:
         issue["purpose"] = "Issue"
         issue["owner_name"] = frappe.db.get_value("User", issue.owner, "full_name") or issue.owner
+        issue["temple_name"] = frappe.db.get_value("Temple", issue.temple, "temple_name") or issue.temple
 
     latest_donations = frappe.get_all("Inventory Entry",
         filters={**activities_filters, "reference_type": "Donation"},
@@ -1369,6 +1371,7 @@ def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
         donor_name, amount = frappe.db.get_value("Donation", d.reference_name, ["donor_name", "total_amount"]) or ("Anonymous", 0)
         d["donor_name"] = donor_name
         d["amount"] = amount
+        d["temple_name"] = frappe.db.get_value("Temple", d.temple, "temple_name") or d.temple
 
     # Top most stocked items (highest current stock)
     temple_cond_stock = ""
@@ -1378,16 +1381,18 @@ def get_inventory_dashboard_data(temple=None, from_date=None, to_date=None):
         query_args_stock["temple"] = temple
 
     top_most_stock = frappe.db.sql(f"""
-        SELECT 
-            item_name as name,
-            total_stock as qty,
-            unit,
-            item_category as category
-        FROM `tabItem`
-        WHERE status = 'Active' {temple_cond_stock}
-        ORDER BY total_stock DESC
-        LIMIT 10
-    """, query_args_stock, as_dict=True)
+    SELECT
+        i.item_name AS name,
+        i.total_stock AS qty,
+        i.unit,
+        IFNULL(c.category_name, 'Uncategorized') AS category
+    FROM `tabItem` i
+    LEFT JOIN `tabItem Category` c
+        ON i.item_category = c.name
+    WHERE i.status = 'Active' {temple_cond_stock}
+    ORDER BY i.total_stock DESC
+    LIMIT 10
+""", query_args_stock, as_dict=True)
 
     return {
         "summary": {
