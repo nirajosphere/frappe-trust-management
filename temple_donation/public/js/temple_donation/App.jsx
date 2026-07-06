@@ -21,7 +21,7 @@ const App = () => {
     const [currentRoute, setCurrentRoute] = useState("dashboard");
     const [mobileOpen, setMobileOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
-    const { user, roles, logout, isAdmin, loading } = useUser();
+    const { user, roles, logout, isSystemManager, loading } = useUser();
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
@@ -106,7 +106,7 @@ const App = () => {
         width: "100%",
         borderBottom: "1px solid #e4e4e7",
         position: "fixed",
-        top: isAdmin ? "48px" : 0,
+        top: isSystemManager ? "48px" : 0,
         left: 0,
         zIndex: 50
     };
@@ -128,7 +128,7 @@ const App = () => {
     };
 
     const logoImgStyle = {
-        height: "42px",
+        height: "56px",
         width: "auto",
         objectFit: "contain",
         display: "block"
@@ -174,7 +174,7 @@ const App = () => {
     return (
         <ConfigProvider theme={themeConfig}>
             <AntApp>
-                <div className={`temple-donation-app`}>
+                <div className={`temple-donation-app ${isSystemManager ? 'is-admin' : ''}`}>
                     <Layout className={`min-h-screen`} style={{ paddingTop: '64px' }}>
                         {/* Custom Top Navigation Bar */}
                         {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
