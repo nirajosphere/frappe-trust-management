@@ -1,28 +1,29 @@
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer glowing rings -->
-  <circle cx="100" cy="100" r="80" fill="none" stroke="url(#accentGradient)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4" />
+<svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left Side: Clean Monogram Emblem -->
+  <!-- Outer Ring -->
+  <circle cx="75" cy="75" r="48" fill="none" stroke="url(#goldGradient)" stroke-width="2" opacity="0.3" />
+  <circle cx="75" cy="75" r="42" fill="none" stroke="url(#goldGradient)" stroke-width="1.5" />
   
-  <!-- Stylized Trust Emblem -->
-  <!-- Left curve representing community care/support -->
-  <path d="M 60,130 C 45,100 55,60 90,55 C 95,70 90,85 80,95 C 75,100 70,110 80,120 C 85,125 95,130 100,135 C 90,135 70,135 60,130 Z" 
-        fill="url(#primaryGradient)" opacity="0.9" />
+  <!-- Solid Center Circle -->
+  <circle cx="75" cy="75" r="34" fill="url(#goldGradient)" />
   
-  <!-- Right curve representing protection/trust -->
-  <path d="M 140,130 C 155,100 145,60 110,55 C 105,70 110,85 120,95 C 125,100 130,110 120,120 C 115,125 105,130 100,135 C 110,135 130,135 140,130 Z" 
-        fill="url(#primaryGradient)" opacity="0.9" />
-  
-  <!-- Heart/Leaf shape in center representing life/charity -->
-  <path d="M 100,60 C 108,70 115,80 115,90 C 115,102 108,110 100,110 C 92,110 85,102 85,90 C 85,80 92,70 100,60 Z" 
-        fill="url(#accentGradient)" />
+  <!-- Symmetrical Monogram Text -->
+  <text x="75" y="87" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-size="34" font-weight="800" fill="#ffffff" text-anchor="middle">T</text>
 
+  <!-- Right Side: Brand Typography -->
+  <!-- "TRUST" Text -->
+  <text x="165" y="70" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-size="38" font-weight="900" fill="url(#darkGradient)" letter-spacing="1.5">TRUST</text>
+  <!-- "MANAGEMENT" Text -->
+  <text x="165" y="105" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-size="24" font-weight="500" fill="#71717a" letter-spacing="5.5">MANAGEMENT</text>
+  
   <defs>
-    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#18181b" />
-      <stop offset="100%" stop-color="#27272a" />
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
     </linearGradient>
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#10b981" />
-      <stop offset="100%" stop-color="#059669" />
+    <linearGradient id="darkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#3f3f46" />
     </linearGradient>
   </defs>
 </svg>

@@ -1,9 +1,10 @@
 import React from "react";
-import { Row, Col, Typography, Empty, Cell } from "antd";
+import { Row, Col, Typography, Empty } from "antd";
 import { AreaChartOutlined, PieChartOutlined } from "@ant-design/icons";
 import {
     PieChart, Pie, ResponsiveContainer, BarChart, Bar, 
-    XAxis, YAxis, CartesianGrid, Legend, Tooltip as ReTooltip
+    XAxis, YAxis, CartesianGrid, Legend, Tooltip as ReTooltip,
+    Cell
 } from "recharts";
 import SectionCard from "../../components/common/SectionCard";
 

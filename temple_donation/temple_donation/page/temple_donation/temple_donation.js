@@ -39,33 +39,23 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
             }
           </style>
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-            <div style="width: 180px; height: 180px; margin-bottom: 16px; filter: drop-shadow(0 12px 24px rgba(16, 185, 129, 0.18)); position: relative; display: flex; align-items: center; justify-content: center;">
-              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%); border-radius: 50%; z-index: 1;"></div>
-              <svg viewBox="0 0 200 200" style="position: relative; z-index: 2; width: 100%; height: 100%;" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer glowing rings -->
-                <circle cx="100" cy="100" r="80" fill="none" stroke="url(#accentGradientLoader)" stroke-width="2" stroke-dasharray="5 5" opacity="0.4" style="transform-origin: center; animation: spinLoader 8s linear infinite;" />
+            <div style="width: 180px; height: 180px; margin-bottom: 16px; filter: drop-shadow(0 12px 24px rgba(245, 158, 11, 0.15)); position: relative; display: flex; align-items: center; justify-content: center;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0) 70%); border-radius: 50%; z-index: 1;"></div>
+              <svg viewBox="0 0 150 150" style="position: relative; z-index: 2; width: 100%; height: 100%;" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Ring -->
+                <circle cx="75" cy="75" r="68" fill="none" stroke="url(#goldGradientLoader)" stroke-width="2" opacity="0.3" style="transform-origin: center; animation: spinLoader 8s linear infinite;" />
+                <circle cx="75" cy="75" r="58" fill="none" stroke="url(#goldGradientLoader)" stroke-width="1.5" />
                 
-                <!-- Stylized Trust Emblem -->
-                <!-- Left curve representing community care/support -->
-                <path d="M 60,130 C 45,100 55,60 90,55 C 95,70 90,85 80,95 C 75,100 70,110 80,120 C 85,125 95,130 100,135 C 90,135 70,135 60,130 Z" 
-                      fill="url(#primaryGradientLoader)" opacity="0.9" />
+                <!-- Solid Center Circle -->
+                <circle cx="75" cy="75" r="48" fill="url(#goldGradientLoader)" />
                 
-                <!-- Right curve representing protection/trust -->
-                <path d="M 140,130 C 155,100 145,60 110,55 C 105,70 110,85 120,95 C 125,100 130,110 120,120 C 115,125 105,130 100,135 C 110,135 130,135 140,130 Z" 
-                      fill="url(#primaryGradientLoader)" opacity="0.9" />
-                
-                <!-- Heart/Leaf shape in center representing life/charity -->
-                <path d="M 100,60 C 108,70 115,80 115,90 C 115,102 108,110 100,110 C 92,110 85,102 85,90 C 85,80 92,70 100,60 Z" 
-                      fill="url(#accentGradientLoader)" />
+                <!-- Symmetrical Monogram Text -->
+                <text x="75" y="91" font-family="-apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif" font-size="46" font-weight="900" fill="#ffffff" text-anchor="middle">T</text>
 
                 <defs>
-                  <linearGradient id="primaryGradientLoader" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#18181b" />
-                    <stop offset="100%" stop-color="#27272a" />
-                  </linearGradient>
-                  <linearGradient id="accentGradientLoader" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#10b981" />
-                    <stop offset="100%" stop-color="#059669" />
+                  <linearGradient id="goldGradientLoader" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#d97706" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -73,7 +63,7 @@ frappe.pages["temple-donation"].on_page_show = function (wrapper) {
             <h2 style="font-size: 1.35rem; font-weight: 700; color: #18181b; margin: 16px 0 0 0; letter-spacing: -0.025em;">Trust Management Portal</h2>
             <p style="font-size: 0.875rem; color: #71717a; margin: 6px 0 0 0;">Initializing services, please wait...</p>
             <div style="width: 140px; height: 4px; background-color: #e4e4e7; border-radius: 2px; margin-top: 24px; overflow: hidden; position: relative;">
-              <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: linear-gradient(90deg, #10b981, #059669); transform-origin: left; animation: progressAnim 1.6s infinite ease-in-out;"></div>
+              <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: linear-gradient(90deg, #f59e0b, #d97706); transform-origin: left; animation: progressAnim 1.6s infinite ease-in-out;"></div>
             </div>
           </div>
         </div>

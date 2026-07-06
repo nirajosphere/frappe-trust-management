@@ -128,7 +128,7 @@ const App = () => {
     };
 
     const logoImgStyle = {
-        height: "60px",
+        height: "42px",
         width: "auto",
         objectFit: "contain",
         display: "block"
@@ -176,8 +176,8 @@ const App = () => {
             <AntApp>
                 <div className={`temple-donation-app`}>
                     <Layout className={`min-h-screen`} style={{ paddingTop: '64px' }}>
-                    {/* Custom Top Navigation Bar */}
-                    {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
+                        {/* Custom Top Navigation Bar */}
+                        {/* <Header className={`aavatto-topbar p-0 ${isAdmin ? 'is-admin' : ''}`}>
                         <div className="flex items-center w-full">
                             <div className="aavatto-topbar-brand">
                                 <span>Trust Management</span>
@@ -214,223 +214,223 @@ const App = () => {
                             />
                         </div>
                     </Header> */}
-                    <Header style={headerStyle}>
-                        <div style={headerInnerStyle}>
+                        <Header style={headerStyle}>
+                            <div style={headerInnerStyle}>
 
-                            <div style={logoContainerStyle}>
-                                <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={logoImgStyle} />
-                            </div>
-
-                            <div style={rightContainerStyle}>
-                                {!isMobile && (
-                                    <div style={{ display: 'flex', gap: '24px', alignItems: 'stretch', height: '100%' }}>
-                                        {groupedMenuItems.map(group => {
-                                            const isSingle = group.isSingle || (group.children && group.children.length === 1);
-                                            
-                                            if (isSingle) {
-                                                const targetKey = group.isSingle ? group.key : group.children[0].key;
-                                                const label = group.isSingle ? group.label : group.children[0].label;
-                                                const isActive = currentRoute.split('/')[0] === targetKey;
-                                                
-                                                return (
-                                                    <button
-                                                        key={targetKey}
-                                                        onClick={() => handleMenuClick({ key: targetKey })}
-                                                        style={{
-                                                            background: 'none',
-                                                            border: 'none',
-                                                            borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
-                                                            padding: '0 4px',
-                                                            cursor: 'pointer',
-                                                            fontSize: '14px',
-                                                            fontWeight: '600',
-                                                            color: isActive ? '#18181b' : '#71717a',
-                                                            transition: 'all 0.2s',
-                                                            outline: 'none',
-                                                            height: '100%',
-                                                            display: 'flex',
-                                                            alignItems: 'center'
-                                                        }}
-                                                    >
-                                                        {label}
-                                                    </button>
-                                                );
-                                            }
-
-                                            const isGroupActive = group.children.some(child => currentRoute.split('/')[0] === child.key);
-                                            const dropdownMenuProps = {
-                                                items: group.children.map(child => ({
-                                                    key: child.key,
-                                                    label: child.label
-                                                })),
-                                                onClick: handleMenuClick,
-                                                selectable: true,
-                                                selectedKeys: [currentRoute.split('/')[0]]
-                                            };
-
-                                            return (
-                                                <Dropdown key={group.key} menu={dropdownMenuProps} placement="bottomLeft">
-                                                    <button
-                                                        style={{
-                                                            background: 'none',
-                                                            border: 'none',
-                                                            borderBottom: isGroupActive ? '3px solid #18181b' : '3px solid transparent',
-                                                            padding: '0 4px',
-                                                            cursor: 'pointer',
-                                                            fontSize: '14px',
-                                                            fontWeight: '600',
-                                                            color: isGroupActive ? '#18181b' : '#71717a',
-                                                            transition: 'all 0.2s',
-                                                            outline: 'none',
-                                                            height: '100%',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            gap: '4px'
-                                                        }}
-                                                    >
-                                                        <span>{group.label}</span>
-                                                        <ChevronDown size={14} style={{ color: isGroupActive ? '#18181bd' : '#71717a' }} />
-                                                    </button>
-                                                </Dropdown>
-                                            );
-                                        })}
-                                    </div>
-                                )}
-
-                                <div style={rightActionsStyle}>
-                                    {user && (
-                                        <NotificationDropdown currentUser={user.email || user.name} />
-                                    )}
-                                    {user && !isMobile && (
-                                        <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-                                            <div style={userProfileStyle}>
-                                                <Avatar
-                                                    src={user?.image}
-                                                    icon={!user?.image && <UserOutlined />}
-                                                />
-                 
-                                            </div>
-                                        </Dropdown>
-                                    )}
-
-                                    {isMobile && (
-                                        <Button
-                                            icon={<MenuOutlined />}
-                                            onClick={() => setMobileOpen(true)}
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                border: '1px solid #e4e4e7',
-                                                background: '#ffffff',
-                                                color: '#18181b',
-                                                borderRadius: '6px',
-                                                width: '40px',
-                                                height: '40px'
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </Header>
-
-                    <Drawer
-                        placement="right"
-                        onClose={() => setMobileOpen(false)}
-                        open={mobileOpen}
-                        size={280}
-                        closable={false}
-                        styles={{ body: { padding: 0 } }}
-                    >
-                        <div className="temple-donation-app" style={{ height: '100%' }}>
-                            <div className="flex flex-col h-full" style={{ padding: 0, background: '#ffffff' }}>
-                                {/* Custom Header for Drawer */}
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #f4f4f5' }}>
-                                    <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '36px', objectFit: 'contain' }} />
-                                    <button 
-                                        onClick={() => setMobileOpen(false)}
-                                        style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px', borderRadius: '50%', color: '#71717a' }}
-                                    >
-                                        <X size={18} />
-                                    </button>
+                                <div style={logoContainerStyle}>
+                                    <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={logoImgStyle} />
                                 </div>
 
-                                <div style={{ flex: 1, overflowY: 'auto', padding: '12px 4px' }}>
-                                    <Menu
-                                        mode="inline"
-                                        selectedKeys={[currentRoute.split('/')[0]]}
-                                        defaultOpenKeys={groupedMenuItems.map(g => g.key)}
-                                        onClick={({ key }) => {
-                                            handleMenuClick({ key });
-                                            setMobileOpen(false);
-                                        }}
-                                        style={{ border: 'none' }}
-                                        items={groupedMenuItems.map(group => {
-                                            const isSingle = group.isSingle || (group.children && group.children.length === 1);
-                                            if (isSingle) {
-                                                const targetKey = group.isSingle ? group.key : group.children[0].key;
-                                                const label = group.isSingle ? group.label : group.children[0].label;
-                                                return {
-                                                    key: targetKey,
-                                                    label: label
+                                <div style={rightContainerStyle}>
+                                    {!isMobile && (
+                                        <div style={{ display: 'flex', gap: '24px', alignItems: 'stretch', height: '100%' }}>
+                                            {groupedMenuItems.map(group => {
+                                                const isSingle = group.isSingle || (group.children && group.children.length === 1);
+
+                                                if (isSingle) {
+                                                    const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                                    const label = group.isSingle ? group.label : group.children[0].label;
+                                                    const isActive = currentRoute.split('/')[0] === targetKey;
+
+                                                    return (
+                                                        <button
+                                                            key={targetKey}
+                                                            onClick={() => handleMenuClick({ key: targetKey })}
+                                                            style={{
+                                                                background: 'none',
+                                                                border: 'none',
+                                                                borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
+                                                                padding: '0 4px',
+                                                                cursor: 'pointer',
+                                                                fontSize: '14px',
+                                                                fontWeight: '600',
+                                                                color: isActive ? '#18181b' : '#71717a',
+                                                                transition: 'all 0.2s',
+                                                                outline: 'none',
+                                                                height: '100%',
+                                                                display: 'flex',
+                                                                alignItems: 'center'
+                                                            }}
+                                                        >
+                                                            {label}
+                                                        </button>
+                                                    );
+                                                }
+
+                                                const isGroupActive = group.children.some(child => currentRoute.split('/')[0] === child.key);
+                                                const dropdownMenuProps = {
+                                                    items: group.children.map(child => ({
+                                                        key: child.key,
+                                                        label: child.label
+                                                    })),
+                                                    onClick: handleMenuClick,
+                                                    selectable: true,
+                                                    selectedKeys: [currentRoute.split('/')[0]]
                                                 };
-                                            }
-                                            return {
-                                                key: group.key,
-                                                label: group.label,
-                                                children: group.children.map(child => ({
-                                                    key: child.key,
-                                                    label: child.label
-                                                }))
-                                            };
-                                        })}
-                                    />
-                                </div>
 
-                                {user && (
-                                    <div style={{ padding: '16px 20px', borderTop: '1px solid #f4f4f5', background: '#ffffff', flexShrink: 0 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                                            <Avatar size={40} src={user?.image} icon={<UserOutlined />} style={{ border: '2px solid #f4f4f5' }} />
-                                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                <span style={{ fontSize: '14px', fontWeight: '700', color: '#18181b', lineHeight: '1.2' }}>{user?.name}</span>
-                                                <span style={{ fontSize: '10px', color: '#71717a', fontWeight: '600', textTransform: 'uppercase', tracking: '0.05em', marginTop: '2px' }}>{roles?.[0]}</span>
-                                            </div>
+                                                return (
+                                                    <Dropdown key={group.key} menu={dropdownMenuProps} placement="bottomLeft">
+                                                        <button
+                                                            style={{
+                                                                background: 'none',
+                                                                border: 'none',
+                                                                borderBottom: isGroupActive ? '3px solid #18181b' : '3px solid transparent',
+                                                                padding: '0 4px',
+                                                                cursor: 'pointer',
+                                                                fontSize: '14px',
+                                                                fontWeight: '600',
+                                                                color: isGroupActive ? '#18181b' : '#71717a',
+                                                                transition: 'all 0.2s',
+                                                                outline: 'none',
+                                                                height: '100%',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '4px'
+                                                            }}
+                                                        >
+                                                            <span>{group.label}</span>
+                                                            <ChevronDown size={14} style={{ color: isGroupActive ? '#18181bd' : '#71717a' }} />
+                                                        </button>
+                                                    </Dropdown>
+                                                );
+                                            })}
                                         </div>
+                                    )}
+
+                                    <div style={rightActionsStyle}>
+                                        {user && (
+                                            <NotificationDropdown currentUser={user.email || user.name} />
+                                        )}
+                                        {user && !isMobile && (
+                                            <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+                                                <div style={userProfileStyle}>
+                                                    <Avatar
+                                                        src={user?.image}
+                                                        icon={!user?.image && <UserOutlined />}
+                                                    />
+
+                                                </div>
+                                            </Dropdown>
+                                        )}
+
+                                        {isMobile && (
+                                            <Button
+                                                icon={<MenuOutlined />}
+                                                onClick={() => setMobileOpen(true)}
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    border: '1px solid #e4e4e7',
+                                                    background: '#ffffff',
+                                                    color: '#18181b',
+                                                    borderRadius: '6px',
+                                                    width: '40px',
+                                                    height: '40px'
+                                                }}
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </Header>
+
+                        <Drawer
+                            placement="right"
+                            onClose={() => setMobileOpen(false)}
+                            open={mobileOpen}
+                            size={280}
+                            closable={false}
+                            styles={{ body: { padding: 0 } }}
+                        >
+                            <div className="temple-donation-app" style={{ height: '100%' }}>
+                                <div className="flex flex-col h-full" style={{ padding: 0, background: '#ffffff' }}>
+                                    {/* Custom Header for Drawer */}
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #f4f4f5' }}>
+                                        <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '36px', objectFit: 'contain' }} />
                                         <button
-                                            onClick={logout}
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                gap: '8px',
-                                                width: '100%',
-                                                background: '#fef2f2',
-                                                border: '1px solid #fee2e2',
-                                                padding: '8px 16px',
-                                                borderRadius: '8px',
-                                                cursor: 'pointer',
-                                                color: '#ef4444',
-                                                fontWeight: '600',
-                                                fontSize: '14px',
-                                                outline: 'none'
-                                            }}
+                                            onClick={() => setMobileOpen(false)}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px', borderRadius: '50%', color: '#71717a' }}
                                         >
-                                            <LogoutOutlined />
-                                            <span>Logout</span>
+                                            <X size={18} />
                                         </button>
                                     </div>
-                                )}
-                            </div>
-                        </div>
-                    </Drawer>
 
-                    {/* Page Content */}
-                    <Content className="bg-transparent py-8">
-                        <div className="aavatto-content-wrapper">
-                            {getComponentForRoute(currentRoute, roles)}
-                        </div>
-                    </Content>
+                                    <div style={{ flex: 1, overflowY: 'auto', padding: '12px 4px' }}>
+                                        <Menu
+                                            mode="inline"
+                                            selectedKeys={[currentRoute.split('/')[0]]}
+                                            defaultOpenKeys={groupedMenuItems.map(g => g.key)}
+                                            onClick={({ key }) => {
+                                                handleMenuClick({ key });
+                                                setMobileOpen(false);
+                                            }}
+                                            style={{ border: 'none' }}
+                                            items={groupedMenuItems.map(group => {
+                                                const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                                                if (isSingle) {
+                                                    const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                                    const label = group.isSingle ? group.label : group.children[0].label;
+                                                    return {
+                                                        key: targetKey,
+                                                        label: label
+                                                    };
+                                                }
+                                                return {
+                                                    key: group.key,
+                                                    label: group.label,
+                                                    children: group.children.map(child => ({
+                                                        key: child.key,
+                                                        label: child.label
+                                                    }))
+                                                };
+                                            })}
+                                        />
+                                    </div>
+
+                                    {user && (
+                                        <div style={{ padding: '16px 20px', borderTop: '1px solid #f4f4f5', background: '#ffffff', flexShrink: 0 }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                                                <Avatar size={40} src={user?.image} icon={<UserOutlined />} style={{ border: '2px solid #f4f4f5' }} />
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#18181b', lineHeight: '1.2' }}>{user?.name}</span>
+                                                    <span style={{ fontSize: '10px', color: '#71717a', fontWeight: '600', textTransform: 'uppercase', tracking: '0.05em', marginTop: '2px' }}>{roles?.[0]}</span>
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={logout}
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    gap: '8px',
+                                                    width: '100%',
+                                                    background: '#fef2f2',
+                                                    border: '1px solid #fee2e2',
+                                                    padding: '8px 16px',
+                                                    borderRadius: '8px',
+                                                    cursor: 'pointer',
+                                                    color: '#ef4444',
+                                                    fontWeight: '600',
+                                                    fontSize: '14px',
+                                                    outline: 'none'
+                                                }}
+                                            >
+                                                <LogoutOutlined />
+                                                <span>Logout</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </Drawer>
+
+                        {/* Page Content */}
+                        <Content className="bg-transparent py-8">
+                            <div className="aavatto-content-wrapper">
+                                {getComponentForRoute(currentRoute, roles)}
+                            </div>
+                        </Content>
                     </Layout>
                 </div>
             </AntApp>

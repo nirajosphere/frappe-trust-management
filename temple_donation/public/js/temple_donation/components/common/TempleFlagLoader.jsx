@@ -27,7 +27,7 @@ const TempleFlagLoader = ({
                     position: 'absolute',
                     width: `${loaderSize * 0.9}px`,
                     height: `${loaderSize * 0.9}px`,
-                    background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%)',
+                    background: 'radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0) 70%)',
                     borderRadius: '50%',
                     zIndex: 1,
                     animation: 'pulseGlow 2s ease-in-out infinite alternate'
@@ -54,20 +54,20 @@ const TempleFlagLoader = ({
                         cx="50" 
                         cy="50" 
                         r="42" 
-                        stroke="url(#emeraldGrad)" 
+                        stroke="url(#goldGrad)" 
                         strokeWidth="4" 
                         strokeDasharray="70 200" 
                         strokeLinecap="round"
                         fill="none" 
                     />
                     <defs>
-                        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#10b981" />
-                            <stop offset="100%" stopColor="#059669" />
+                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#f59e0b" />
+                            <stop offset="100%" stopColor="#d97706" />
                         </linearGradient>
                     </defs>
                 </svg>
-
+ 
                 {/* Pulsing Central Logo */}
                 <div style={{
                     position: 'relative',
@@ -84,15 +84,16 @@ const TempleFlagLoader = ({
                     padding: '8px',
                     animation: 'pulseLogo 2s ease-in-out infinite alternate'
                 }}>
-                    <img 
-                        src="/assets/temple_donation/img/logo.svg" 
-                        alt="Logo" 
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'contain'
-                        }} 
-                    />
+                    <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }} xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="42" fill="url(#goldGradLoader)" />
+                        <text x="50" y="63" font-family="-apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif" font-size="42" font-weight="900" fill="#ffffff" text-anchor="middle">T</text>
+                        <defs>
+                            <linearGradient id="goldGradLoader" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f59e0b" />
+                                <stop offset="100%" stop-color="#d97706" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
             </div>
             {size !== "small" && text && (
