@@ -462,40 +462,23 @@ def sync_user_roles(doc, method=None):
     """
     if not doc.get("custom_user_role"):
         return
-        
-    role_map = {
-        "Super Admin": "Super Admin",
-        "Temple Admin": "Temple Admin",
-        "Cashier": "Cashier"
-    }
-    
-    # Identify the target role from our custom field
+
     selected_role = doc.custom_user_role.strip()
-    target_role = role_map.get(selected_role)
-    
-    if not target_role:
+    assignable_roles = _get_assignable_role_names()
+
+    if selected_role not in assignable_roles:
         return
 
-    # List of roles we manage via this custom field
-    managed_roles = list(role_map.values())
-    
-    # Get current roles set on the user
     current_roles = [r.role for r in doc.roles]
-    
-    # If the user doesn't have the target role, sync it
-    if target_role not in current_roles:
-        # 1. Remove other previously managed roles to keep it exclusive to the selection
-        filtered_roles = [r for r in doc.roles if r.role not in managed_roles or r.role == target_role]
+
+    if selected_role not in current_roles:
+        filtered_roles = [
+            r for r in doc.roles
+            if r.role not in assignable_roles or r.role == selected_role
+        ]
         doc.set("roles", filtered_roles)
-        
-        # 2. Add the target role
-        doc.append("roles", {"role": target_role})
-        
-        # 3. Ensure user type is System User for desk access
+        doc.append("roles", {"role": selected_role})
         doc.user_type = "System User"
-        
-        # Note: No doc.save() here as this is a before_save hook. 
-        # Modifications to the doc object will be persisted automatically.
 
 @frappe.whitelist()
 def get_children(doctype, parent_names, parenttype, parentfield):
@@ -1626,4 +1609,420 @@ def get_latest_item_rate(item):
         frappe.log_error(f"Error fetching latest item rate: {str(e)}")
     return 0.0
 
+
+# ---------------------------------------------------------------------------
+# Role & Permission Management (scoped to app Role Profile)
+# ---------------------------------------------------------------------------
+
+SYSTEM_PROTECTED_ROLES = {"Administrator", "System Manager", "All", "Guest"}
+APP_STATIC_ROLES = {"Super Admin", "Temple Admin", "Cashier"}
+ROLE_ADMIN_ROLES = {"Administrator", "System Manager", "Super Admin", "Temple Admin"}
+APP_ROLE_PROFILE_NAME = "Trust Management Roles"
+
+PERMISSION_DOCTYPES = [
+    "Donor", "Temple", "Donation", "Donation Type", "User", "Item",
+    "Inventory Entry", "Room", "Room Booking", "Building", "Room Type",
+    "Item Category", "Store Location", "Document Template", "Receipt Settings",
+    "Temple General Settings", "Temple Booking Settings", "Temple Notification Settings",
+]
+
+ROLE_DISPLAY_LABELS = {
+    "Temple Admin": "Trust Admin",
+}
+
+
+def _ensure_role_admin():
+    if not any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
+        frappe.throw(_("Not permitted to manage roles"), frappe.PermissionError)
+
+
+def _ensure_app_role_profile():
+    """Ensure the app Role Profile exists with default static roles."""
+    if frappe.db.exists("Role Profile", APP_ROLE_PROFILE_NAME):
+        return APP_ROLE_PROFILE_NAME
+
+    profile = frappe.new_doc("Role Profile")
+    profile.role_profile = APP_ROLE_PROFILE_NAME
+    for role_name in sorted(APP_STATIC_ROLES):
+        if frappe.db.exists("Role", role_name):
+            profile.append("roles", {"role": role_name})
+    profile.insert(ignore_permissions=True)
+    frappe.db.commit()
+    return APP_ROLE_PROFILE_NAME
+
+
+def _get_app_role_profile_doc():
+    _ensure_app_role_profile()
+    return frappe.get_doc("Role Profile", APP_ROLE_PROFILE_NAME)
+
+
+def _get_profile_role_names():
+    _ensure_app_role_profile()
+    return frappe.get_all(
+        "Has Role",
+        filters={"parenttype": "Role Profile", "parent": APP_ROLE_PROFILE_NAME},
+        pluck="role",
+        order_by="idx asc",
+    )
+
+
+def _add_role_to_profile(role_name):
+    profile = _get_app_role_profile_doc()
+    if any(row.role == role_name for row in profile.roles):
+        return
+    profile.append("roles", {"role": role_name})
+    profile.save(ignore_permissions=True)
+
+
+def _remove_role_from_profile(role_name):
+    profile = _get_app_role_profile_doc()
+    profile.roles = [row for row in profile.roles if row.role != role_name]
+    profile.save(ignore_permissions=True)
+
+
+def _ensure_role_in_profile(role_name):
+    if role_name not in _get_profile_role_names():
+        frappe.throw(_("Role '{0}' is not part of the app role profile.").format(role_name))
+
+
+def _get_protected_role_names():
+    return APP_STATIC_ROLES
+
+
+def _get_assignable_role_names():
+    return sorted(_get_profile_role_names())
+
+
+def _parse_json_arg(value, default=None):
+    import json
+
+    if value is None:
+        return default if default is not None else []
+    if isinstance(value, str):
+        return json.loads(value)
+    return value
+
+
+def _upsert_custom_docperm(role_name, doctype, read=0, write=0, create=0, delete=0):
+    existing = frappe.db.exists("Custom DocPerm", {
+        "role": role_name,
+        "parent": doctype,
+        "permlevel": 0,
+    })
+
+    if existing:
+        doc = frappe.get_doc("Custom DocPerm", existing)
+        doc.read = read
+        doc.write = write
+        doc.create = create
+        doc.delete = delete
+        doc.save(ignore_permissions=True)
+        return doc.name
+
+    doc = frappe.new_doc("Custom DocPerm")
+    doc.parent = doctype
+    doc.parenttype = "DocType"
+    doc.parentfield = "permissions"
+    doc.role = role_name
+    doc.permlevel = 0
+    doc.read = read
+    doc.write = write
+    doc.create = create
+    doc.delete = delete
+    doc.insert(ignore_permissions=True)
+    return doc.name
+
+
+def _get_role_permission_doctypes(role_name):
+    configured = frappe.get_all(
+        "Custom DocPerm",
+        filters={"role": role_name, "parent": ["in", PERMISSION_DOCTYPES], "permlevel": 0},
+        pluck="parent",
+    )
+    configured = list(dict.fromkeys(configured))
+
+    if configured:
+        return [dt for dt in PERMISSION_DOCTYPES if dt in configured]
+
+    if role_name in APP_STATIC_ROLES:
+        return list(PERMISSION_DOCTYPES)
+
+    return []
+
+
+def _build_permission_row(role_name, doctype):
+    custom_perm = frappe.get_all(
+        "Custom DocPerm",
+        filters={"role": role_name, "parent": doctype, "permlevel": 0},
+        fields=["name", "read", "write", "create", "delete"],
+        limit=1,
+    )
+    if custom_perm:
+        perm = custom_perm[0]
+        return {
+            "doctype": doctype,
+            "read": perm.read or 0,
+            "write": perm.write or 0,
+            "create": perm.create or 0,
+            "delete": perm.delete or 0,
+            "is_custom": True,
+        }
+
+    std_perm = frappe.get_all(
+        "DocPerm",
+        filters={"role": role_name, "parent": doctype, "permlevel": 0},
+        fields=["read", "write", "create", "delete"],
+        limit=1,
+    )
+    if std_perm:
+        perm = std_perm[0]
+        return {
+            "doctype": doctype,
+            "read": perm.read or 0,
+            "write": perm.write or 0,
+            "create": perm.create or 0,
+            "delete": perm.delete or 0,
+            "is_custom": False,
+        }
+
+    return {
+        "doctype": doctype,
+        "read": 0,
+        "write": 0,
+        "create": 0,
+        "delete": 0,
+        "is_custom": False,
+    }
+
+
+@frappe.whitelist()
+def get_permission_doctypes():
+    """Return all app doctypes available for role permission configuration."""
+    _ensure_role_admin()
+    return PERMISSION_DOCTYPES
+
+
+@frappe.whitelist()
+def get_role_profile_info():
+    """Return the app Role Profile used to scope role management."""
+    _ensure_role_admin()
+    _ensure_app_role_profile()
+    role_names = _get_profile_role_names()
+    return {
+        "name": APP_ROLE_PROFILE_NAME,
+        "role_count": len(role_names),
+    }
+
+
+@frappe.whitelist()
+def get_assignable_roles():
+    """Return roles from the app Role Profile for the User form."""
+    roles = []
+    for role_name in _get_assignable_role_names():
+        roles.append({
+            "name": role_name,
+            "label": ROLE_DISPLAY_LABELS.get(role_name, role_name),
+            "is_static": role_name in APP_STATIC_ROLES,
+        })
+    return roles
+
+
+@frappe.whitelist()
+def get_custom_roles():
+    """Fetch only roles inside the app Role Profile."""
+    _ensure_role_admin()
+    protected = _get_protected_role_names()
+    result = []
+
+    for role_name in _get_profile_role_names():
+        if not frappe.db.exists("Role", role_name):
+            continue
+        disabled = frappe.db.get_value("Role", role_name, "disabled") or 0
+        user_count = frappe.db.count("User", {"custom_user_role": role_name})
+        result.append({
+            "name": role_name,
+            "disabled": disabled,
+            "is_protected": role_name in protected,
+            "is_static": role_name in APP_STATIC_ROLES,
+            "user_count": user_count,
+        })
+    return result
+
+
+@frappe.whitelist()
+def create_custom_role(role_name, doctypes=None):
+    """Create a new custom role with optional initial doctype permissions."""
+    _ensure_role_admin()
+    role_name = (role_name or "").strip()
+    if not role_name:
+        frappe.throw(_("Role name is required."))
+
+    if frappe.db.exists("Role", role_name):
+        frappe.throw(_("Role '{0}' already exists.").format(role_name))
+
+    if role_name in SYSTEM_PROTECTED_ROLES:
+        frappe.throw(_("Role '{0}' is reserved and cannot be created.").format(role_name))
+
+    role = frappe.new_doc("Role")
+    role.role_name = role_name
+    role.insert(ignore_permissions=True)
+    _add_role_to_profile(role_name)
+
+    selected_doctypes = _parse_json_arg(doctypes, [])
+    allowed = set(PERMISSION_DOCTYPES)
+    for doctype in selected_doctypes:
+        if doctype in allowed:
+            _upsert_custom_docperm(role_name, doctype)
+
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return {"name": role.name}
+
+
+@frappe.whitelist()
+def update_custom_role(role_name, new_role_name=None):
+    """Rename a custom role."""
+    _ensure_role_admin()
+    role_name = (role_name or "").strip()
+    new_role_name = (new_role_name or "").strip()
+
+    if role_name in _get_protected_role_names():
+        frappe.throw(_("Role '{0}' cannot be renamed.").format(role_name))
+
+    _ensure_role_in_profile(role_name)
+
+    if not frappe.db.exists("Role", role_name):
+        frappe.throw(_("Role '{0}' does not exist.").format(role_name))
+
+    if not new_role_name or new_role_name == role_name:
+        return {"name": role_name}
+
+    if frappe.db.exists("Role", new_role_name):
+        frappe.throw(_("Role '{0}' already exists.").format(new_role_name))
+
+    frappe.rename_doc("Role", role_name, new_role_name, force=True, ignore_permissions=True)
+    frappe.db.sql(
+        "UPDATE `tabUser` SET custom_user_role = %s WHERE custom_user_role = %s",
+        (new_role_name, role_name),
+    )
+    frappe.db.sql(
+        """
+        UPDATE `tabHas Role`
+        SET role = %s
+        WHERE parenttype = 'Role Profile' AND parent = %s AND role = %s
+        """,
+        (new_role_name, APP_ROLE_PROFILE_NAME, role_name),
+    )
+    frappe.db.commit()
+    return {"name": new_role_name}
+
+
+@frappe.whitelist()
+def delete_custom_role(role_name):
+    """Delete a custom role and its permission configuration."""
+    _ensure_role_admin()
+
+    if role_name in _get_protected_role_names():
+        frappe.throw(_("Role '{0}' is a system-protected role and cannot be deleted.").format(role_name))
+
+    _ensure_role_in_profile(role_name)
+
+    if not frappe.db.exists("Role", role_name):
+        frappe.throw(_("Role '{0}' does not exist.").format(role_name))
+
+    assigned_users = frappe.db.count("User", {"custom_user_role": role_name})
+    if assigned_users:
+        frappe.throw(
+            _("Role '{0}' is assigned to {1} user(s). Reassign them before deleting.").format(
+                role_name, assigned_users
+            )
+        )
+
+    for perm in frappe.get_all("Custom DocPerm", filters={"role": role_name}, pluck="name"):
+        frappe.delete_doc("Custom DocPerm", perm, ignore_permissions=True)
+
+    _remove_role_from_profile(role_name)
+    frappe.delete_doc("Role", role_name, ignore_permissions=True)
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return True
+
+
+@frappe.whitelist()
+def get_role_permissions(role_name):
+    """Fetch read/write/create/delete permissions for configured doctypes."""
+    _ensure_role_admin()
+    _ensure_role_in_profile(role_name)
+    doctypes = _get_role_permission_doctypes(role_name)
+    return [_build_permission_row(role_name, doctype) for doctype in doctypes]
+
+
+@frappe.whitelist()
+def add_role_doctypes(role_name, doctypes):
+    """Add doctypes to a role permission matrix."""
+    _ensure_role_admin()
+    _ensure_role_in_profile(role_name)
+    selected = _parse_json_arg(doctypes, [])
+    allowed = set(PERMISSION_DOCTYPES)
+
+    for doctype in selected:
+        if doctype not in allowed:
+            continue
+        _upsert_custom_docperm(role_name, doctype)
+
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return get_role_permissions(role_name)
+
+
+@frappe.whitelist()
+def remove_role_doctype(role_name, doctype):
+    """Remove a doctype from a role permission matrix."""
+    _ensure_role_admin()
+    _ensure_role_in_profile(role_name)
+
+    if role_name in APP_STATIC_ROLES:
+        frappe.throw(_("Cannot remove doctypes from static app roles."))
+
+    existing = frappe.db.exists("Custom DocPerm", {
+        "role": role_name,
+        "parent": doctype,
+        "permlevel": 0,
+    })
+    if existing:
+        frappe.delete_doc("Custom DocPerm", existing, ignore_permissions=True)
+
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return True
+
+
+@frappe.whitelist()
+def save_role_permissions(role_name, permissions):
+    """Save custom role permissions for selected doctypes."""
+    _ensure_role_admin()
+    _ensure_role_in_profile(role_name)
+    permissions = _parse_json_arg(permissions, [])
+
+    for perm in permissions:
+        doctype = perm.get("doctype")
+        if doctype not in PERMISSION_DOCTYPES:
+            continue
+        _upsert_custom_docperm(
+            role_name,
+            doctype,
+            read=int(perm.get("read", 0)),
+            write=int(perm.get("write", 0)),
+            create=int(perm.get("create", 0)),
+            delete=int(perm.get("delete", 0)),
+        )
+
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return True
+
+
+def ensure_temple_donation_roles():
+    """Called after migrate to ensure app Role Profile and static roles exist."""
+    _ensure_app_role_profile()
 

@@ -95,7 +95,7 @@ role_home_page = {
 # ------------
 
 # before_install = "temple_donation.install.before_install"
-# after_install = "temple_donation.install.after_install"
+after_migrate = ["temple_donation.api.ensure_temple_donation_roles"]
 
 # Uninstallation
 # ------------
@@ -248,11 +248,16 @@ scheduler_events = {
 # ignore_translatable_strings_from = []
 
 fixtures = [
-    # "Role Profile",
     {
-        "dt":"Role",
-        "filters":[
-            ["name","in",["Temple Admin","Super Admin","Cashier"]]
+        "dt": "Role",
+        "filters": [
+            ["name", "in", ["Temple Admin", "Super Admin", "Cashier"]]
+        ]
+    },
+    {
+        "dt": "Role Profile",
+        "filters": [
+            ["name", "in", ["Trust Management Roles"]]
         ]
     }
 ]

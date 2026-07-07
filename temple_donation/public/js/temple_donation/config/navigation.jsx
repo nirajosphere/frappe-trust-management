@@ -42,6 +42,7 @@ import DonationTypeForm from "../modules/DonationType/DonationTypeForm";
 import UserList from "../modules/User/UserList";
 import UserForm from "../modules/User/UserForm";
 import UserView from "../modules/User/UserView";
+import RolePermissions from "../modules/User/RolePermissions";
 
 import OpeningBalance from "../modules/Ledger/OpeningBalance";
 import LedgerView from "../modules/Ledger/LedgerView";
@@ -194,6 +195,13 @@ export const navigationItems = [
         // icon: <UserOutlined />,
         label: "Users",
         component: <UserList />,
+        roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
+    },
+    {
+        key: "role-permissions",
+        icon: <SettingOutlined />,
+        label: "Role Permissions",
+        component: <RolePermissions />,
         roles: ["Super Admin", "Temple Admin", "Administrator", "System Manager"]
     },
     {
@@ -412,7 +420,8 @@ export const groupedNavigationStructure = [
         label: "Administration",
         key: "admin-group",
         children: [
-            { key: "users", label: "Users" }
+            { key: "users", label: "Users" },
+            { key: "role-permissions", label: "Role Permissions" }
         ]
     },
     {

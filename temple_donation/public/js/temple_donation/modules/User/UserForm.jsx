@@ -34,6 +34,17 @@ const UserForm = ({ id, onBack }) => {
     const { updateDoc, loading: updating } = useFrappeUpdateDoc();
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_USER, id);
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
+    const [assignableRoles, setAssignableRoles] = useState([]);
+
+    useEffect(() => {
+        if (typeof frappe === "undefined") return;
+        frappe.call({
+            method: "temple_donation.api.get_assignable_roles",
+            callback: (r) => {
+                if (r.message) setAssignableRoles(r.message);
+            },
+        });
+    }, []);
 
     // --- Form Watchers for Live Preview Panel ---
     const firstName  = Form.useWatch("first_name", form) || "";
@@ -202,12 +213,20 @@ const UserForm = ({ id, onBack }) => {
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="custom_user_role" label={<span style={{ fontWeight: 600, color: '#27272a' }}>User Role</span>} rules={[{ required: true, message: "Required" }]}>
-                                            <Select placeholder="Select Role" disabled={disableAdminFields} style={{ width: '100%' }}
-                                                options={[
-                                                    { label: "Super Admin",  value: "Super Admin"  },
-                                                    { label: "Trust Admin", value: "Temple Admin" },
-                                                    { label: "Cashier",      value: "Cashier"      },
-                                                ]}
+                                            <Select
+                                                placeholder="Select Role"
+                                                disabled={disableAdminFields}
+                                                style={{ width: '100%' }}
+                                                options={assignableRoles.length > 0
+                                                    ? assignableRoles.map((role) => ({
+                                                        label: role.label,
+                                                        value: role.name,
+                                                    }))
+                                                    : [
+                                                        { label: "Super Admin", value: "Super Admin" },
+                                                        { label: "Trust Admin", value: "Temple Admin" },
+                                                        { label: "Cashier", value: "Cashier" },
+                                                    ]}
                                             />
                                         </Form.Item>
                                     </Col>

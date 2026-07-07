@@ -365,7 +365,7 @@
    "name": "User-custom_user_role",
    "no_copy": 0,
    "non_negative": 0,
-   "options": "Role Profile",
+   "options": "Role",
    "owner": "Administrator",
    "permlevel": 0,
    "placeholder": null,
