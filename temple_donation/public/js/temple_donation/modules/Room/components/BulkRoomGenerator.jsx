@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Form, Select, Input, InputNumber, Button, Card, Typography, Row, Col, Alert, notification } from "antd";
+import { Form, Select, Input, InputNumber, Button, Typography, Row, Col, Alert, notification } from "antd";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
+import SectionCard from "../../../components/common/SectionCard";
+import { BuildOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph } = Typography;
 
@@ -85,22 +87,14 @@ const BulkRoomGenerator = ({ onComplete }) => {
     };
 
     return (
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "24px 0" }}>
-            <Card 
-                bordered={false} 
-                style={{ 
-                    borderRadius: "12px", 
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
-                    background: "rgba(255, 255, 255, 0.8)",
-                    backdropFilter: "blur(10px)"
-                }}
+        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "24px 16px" }}>
+            <SectionCard 
+                title="Bulk Room Generator" 
+                icon={<BuildOutlined style={{ color: '#002140' }} />}
             >
-                <div style={{ marginBottom: "24px" }}>
-                    <Title level={3} style={{ margin: 0 }}>Bulk Room Generator</Title>
-                    <Paragraph type="secondary">
-                        Automatically create hundreds of rooms sequentially. If a room number already exists, the generator will skip it automatically.
-                    </Paragraph>
-                </div>
+                <Paragraph type="secondary" style={{ marginBottom: "24px" }}>
+                    Automatically create hundreds of rooms sequentially. If a room number already exists, the generator will skip it automatically.
+                </Paragraph>
 
                 <Form 
                     form={form} 
@@ -109,8 +103,8 @@ const BulkRoomGenerator = ({ onComplete }) => {
                     initialValues={{ capacity: 2, price_per_day: 0, room_prefix: "", floor: 0 }}
                     requiredMark={false}
                 >
-                    <Row gutter={16}>
-                        <Col span={12}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 name="temple" 
                                 label="Temple / Trust" 
@@ -126,7 +120,7 @@ const BulkRoomGenerator = ({ onComplete }) => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 name="building" 
                                 label="Building" 
@@ -143,13 +137,13 @@ const BulkRoomGenerator = ({ onComplete }) => {
                         </Col>
                     </Row>
 
-                    <Row gutter={16}>
-                        <Col span={12}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} sm={12}>
                             <Form.Item name="floor" label="Floor Number">
                                 <InputNumber min={0} style={{ width: "100%" }} placeholder="e.g. 1" />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 name="room_type" 
                                 label="Room Category" 
@@ -167,13 +161,13 @@ const BulkRoomGenerator = ({ onComplete }) => {
                         </Col>
                     </Row>
 
-                    <Row gutter={16}>
-                        <Col span={8}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} sm={8}>
                             <Form.Item name="room_prefix" label="Room Prefix">
                                 <Input placeholder="e.g. A-, B-, VIP-" />
                             </Form.Item>
                         </Col>
-                        <Col span={8}>
+                        <Col xs={24} sm={8}>
                             <Form.Item 
                                 name="starting_number" 
                                 label="Start Number" 
@@ -182,7 +176,7 @@ const BulkRoomGenerator = ({ onComplete }) => {
                                 <InputNumber min={1} style={{ width: "100%" }} placeholder="e.g. 101" />
                             </Form.Item>
                         </Col>
-                        <Col span={8}>
+                        <Col xs={24} sm={8}>
                             <Form.Item 
                                 name="ending_number" 
                                 label="End Number" 
@@ -203,13 +197,13 @@ const BulkRoomGenerator = ({ onComplete }) => {
                         </Col>
                     </Row>
 
-                    <Row gutter={16}>
-                        <Col span={12}>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={24} sm={12}>
                             <Form.Item name="capacity" label="Capacity (Persons)">
                                 <InputNumber min={1} style={{ width: "100%" }} />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item name="price_per_day" label="Price Per Day (₹)">
                                 <InputNumber min={0} style={{ width: "100%" }} />
                             </Form.Item>
@@ -222,7 +216,7 @@ const BulkRoomGenerator = ({ onComplete }) => {
                         </Button>
                     </Form.Item>
                 </Form>
-            </Card>
+            </SectionCard>
         </div>
     );
 };

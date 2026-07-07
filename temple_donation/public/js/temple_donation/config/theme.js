@@ -66,6 +66,10 @@ export const themeConfig = {
             borderRadius: 6,
             controlHeight: 38,
         },
+        InputNumber: {
+            borderRadius: 6,
+            controlHeight: 38,
+        },
         Select: {
             borderRadius: 6,
             controlHeight: 38,

@@ -202,7 +202,7 @@ const ItemBulkImporter = ({ onBack }) => {
                                         setParsedData(updated);
                                     }
                                 }}
-                                className="w-full h-10 border-zinc-200 text-zinc-700 font-semibold"
+                                className="w-full"
                                 options={temples.map(t => ({ label: t.temple_name || t.name, value: t.name }))}
                             />
                         </SectionCard>
@@ -218,7 +218,6 @@ const ItemBulkImporter = ({ onBack }) => {
                                 onClick={handleDownloadTemplate}
                                 disabled={!selectedTemple}
                                 block
-                                className="h-10 border-zinc-300 text-zinc-700 font-semibold"
                             >
                                 Download Template CSV
                             </Button>
@@ -234,15 +233,14 @@ const ItemBulkImporter = ({ onBack }) => {
                                 accept=".csv,.xlsx,.xls"
                                 fileList={[]}
                                 disabled={!selectedTemple}
-                                className="bg-zinc-50/50 border-2 border-dashed border-zinc-200 rounded-xl hover:border-zinc-900 transition-colors p-4 block"
                             >
-                                <p className="ant-upload-drag-icon text-zinc-400 text-3xl mb-1">
-                                    <InboxOutlined className="!text-zinc-600" />
+                                <p className="ant-upload-drag-icon">
+                                    <InboxOutlined />
                                 </p>
-                                <p className="ant-upload-text font-bold text-zinc-700 text-xs">
+                                <p className="ant-upload-text">
                                     Click to select or drag CSV or Excel file here
                                 </p>
-                                <p className="ant-upload-hint text-zinc-400 text-[10px] mt-1">
+                                <p className="ant-upload-hint">
                                     Supports CSV, Excel (.xlsx, .xls) and Google Sheets (exported)
                                 </p>
                             </Upload.Dragger>
@@ -259,7 +257,7 @@ const ItemBulkImporter = ({ onBack }) => {
                     {/* Results / Import Logs Card */}
                     {importResult && (
                         <div className="flex flex-col gap-6 mb-6">
-                            <Card className="card-glass border-zinc-100" title="Import Summary" bordered={false}>
+                            <SectionCard title="Import Summary">
                                 <Row gutter={[16, 16]} className="text-center">
                                     <Col xs={8}>
                                         <Card className="bg-emerald-50/50 border-emerald-100/50" bordered={false}>
@@ -300,7 +298,7 @@ const ItemBulkImporter = ({ onBack }) => {
                                         </div>
                                     </div>
                                 )}
-                            </Card>
+                            </SectionCard>
                         </div>
                     )}
 
@@ -310,11 +308,11 @@ const ItemBulkImporter = ({ onBack }) => {
                             title={`Preview Parsed Data (${parsedData.length} records)`}
                             right={
                                 <Button
+                                    size="small"
                                     type="primary"
                                     icon={<PlayCircleOutlined />}
                                     loading={importing}
                                     onClick={handleStartImport}
-                                    className="bg-black hover:bg-zinc-800"
                                 >
                                     Process & Import
                                 </Button>
@@ -331,7 +329,7 @@ const ItemBulkImporter = ({ onBack }) => {
                         </SectionCard>
                     ) : (
                         !importResult && (
-                            <Card className="card-glass border-zinc-100 flex items-center justify-center p-12 text-center" bordered={false}>
+                            <Card className="flex items-center justify-center p-12 text-center" bordered={false}>
                                 <Empty 
                                     image={Empty.PRESENTED_IMAGE_SIMPLE}
                                     description={

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification, Dropdown, Divider } from "antd";
-import { DownloadOutlined, InboxOutlined, CloseOutlined, CheckOutlined, EyeOutlined } from "@ant-design/icons";
+import { Card, Select, Button, Upload, Typography, Alert, Space, Table, notification, Dropdown, Row, Col, Empty, Tag } from "antd";
+import { DownloadOutlined, InboxOutlined, CloseOutlined, CheckOutlined, EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
 import { parseSpreadsheetFile, convertToCSVString } from "../../../utils/importUtils";
+import SectionCard from "../../../components/common/SectionCard";
 
 const { Title, Paragraph, Text } = Typography;
 const { Dragger } = Upload;
@@ -152,158 +153,165 @@ const RoomImport = () => {
     ];
 
     return (
-        <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "24px 0" }}>
-            <Card 
-                bordered={false} 
-                style={{ 
-                    borderRadius: "12px", 
-                    boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
-                    background: "rgba(255, 255, 255, 0.8)",
-                    backdropFilter: "blur(10px)"
-                }}
-            >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
-                    <div>
-                        <Title level={3} style={{ margin: 0 }}>Bulk Room Import</Title>
-                        <Paragraph type="secondary" style={{ margin: 0 }}>
-                            Upload a CSV or Excel file to preview and import rooms in bulk. Ensure Building Codes and Room Categories exist in the system first.
-                        </Paragraph>
+        <div style={{ padding: "16px 0" }}>
+            <Row gutter={[24, 24]}>
+                {/* Left Configuration Column */}
+                <Col xs={24} lg={8}>
+                    <div className="flex flex-col gap-6">
+                        
+                        {/* Select Destination Temple */}
+                        <SectionCard title="1. Select Destination Temple">
+                            <Paragraph className="text-zinc-500 text-xs" style={{ marginBottom: "12px" }}>
+                                Choose the Temple or Trust you are importing rooms into. This must be selected before uploading files.
+                            </Paragraph>
+                            <Select 
+                                showSearch 
+                                placeholder="Select Temple to Import Rooms Into"
+                                className="w-full"
+                                optionFilterProp="children"
+                                loading={loadingTemples}
+                                disabled={previewData !== null || loading}
+                                onChange={(val) => setSelectedTemple(val)}
+                                options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
+                            />
+                        </SectionCard>
+
+                        {/* Download Template Card */}
+                        <SectionCard title="2. Download Template">
+                            <Paragraph className="text-zinc-500 text-xs" style={{ marginBottom: "12px" }}>
+                                Download the official CSV or Excel template structure. Fill in the room numbers and configurations.
+                            </Paragraph>
+                            <Dropdown menu={{ items: templateMenuItems }} trigger={["click"]}>
+                                <Button 
+                                    type="dashed" 
+                                    icon={<DownloadOutlined />}
+                                    block
+                                >
+                                    Download Sample Template
+                                </Button>
+                            </Dropdown>
+                        </SectionCard>
+
+                        {/* Upload CSV Card */}
+                        <SectionCard title="3. Upload Template File">
+                            <Paragraph className="text-zinc-500 text-xs" style={{ marginBottom: "12px" }}>
+                                Select or drag and drop your completed CSV or Excel template here.
+                            </Paragraph>
+                            <Dragger 
+                                accept=".csv,.xlsx,.xls"
+                                beforeUpload={handleUpload}
+                                showUploadList={false}
+                                disabled={!selectedTemple || loading}
+                            >
+                                <p className="ant-upload-drag-icon">
+                                    <InboxOutlined />
+                                </p>
+                                <p className="ant-upload-text">Click or drag template file here</p>
+                                <p className="ant-upload-hint">
+                                    {!selectedTemple 
+                                        ? "Select a destination temple first." 
+                                        : "Supports CSV, Excel (.xlsx, .xls)"}
+                                </p>
+                            </Dragger>
+                        </SectionCard>
                     </div>
-                    <Dropdown menu={{ items: templateMenuItems }} trigger={["click"]}>
-                        <Button 
-                            type="dashed" 
-                            icon={<DownloadOutlined />}
+                </Col>
+
+                {/* Right Results & Preview Column */}
+                <Col xs={24} lg={16}>
+                    {/* Stats Summary Panel */}
+                    {stats && (
+                        <div className="flex flex-col gap-6 mb-6">
+                            <SectionCard title="Import Results Summary">
+                                <Row gutter={[16, 16]} className="text-center">
+                                    <Col xs={12}>
+                                        <Card className="bg-emerald-50/50 border-emerald-100/50" bordered={false}>
+                                            <Text className="block text-2xl font-bold text-emerald-600">{stats.success}</Text>
+                                            <Text className="text-[10px] uppercase font-bold text-zinc-400">Imported Successfully</Text>
+                                        </Card>
+                                    </Col>
+                                    <Col xs={12}>
+                                        <Card className="bg-red-50/50 border-red-100/50" bordered={false}>
+                                            <Text className="block text-2xl font-bold text-red-600">{stats.failed}</Text>
+                                            <Text className="text-[10px] uppercase font-bold text-zinc-400">Failed / Skipped</Text>
+                                        </Card>
+                                    </Col>
+                                </Row>
+
+                                {importLogs.length > 0 && (
+                                    <div className="mt-6">
+                                        <div className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Import Logs</div>
+                                        <div className="max-h-60 overflow-y-auto border border-zinc-100 rounded-lg p-3 bg-zinc-50/50 flex flex-col gap-1.5">
+                                            {importLogs.map((log, i) => {
+                                                const isError = log.includes("Error") || log.includes("does not exist") || log.includes("required") || log.includes("failed");
+                                                return (
+                                                    <div key={i} className="text-xs flex items-start gap-1.5">
+                                                        <Tag color={isError ? "red" : "green"} className="m-0 text-[10px] font-bold rounded">
+                                                            {isError ? "ERROR" : "SUCCESS"}
+                                                        </Tag>
+                                                        <span className="text-zinc-700">{log}</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
+                            </SectionCard>
+                        </div>
+                    )}
+
+                    {/* Preview Table */}
+                    {previewData ? (
+                        <SectionCard 
+                            title={`Preview Rooms to Import (${previewData.length} records)`}
+                            right={
+                                <Space size={8}>
+                                    <Button 
+                                        size="small"
+                                        danger 
+                                        icon={<CloseOutlined />} 
+                                        onClick={handleCancelPreview}
+                                        disabled={loading}
+                                    >
+                                        Reset
+                                    </Button>
+                                    <Button 
+                                        size="small"
+                                        type="primary" 
+                                        icon={<PlayCircleOutlined />} 
+                                        loading={loading}
+                                        onClick={handleConfirmImport}
+                                    >
+                                        Import Rooms
+                                    </Button>
+                                </Space>
+                            }
                         >
-                            Download Sample Template
-                        </Button>
-                    </Dropdown>
-                </div>
-
-                <div style={{ marginBottom: "24px" }}>
-                    <Text strong style={{ display: "block", marginBottom: "8px" }}>Select Destination Temple</Text>
-                    <Select 
-                        showSearch 
-                        placeholder="Select Temple to Import Rooms Into"
-                        style={{ width: "100%" }}
-                        optionFilterProp="children"
-                        loading={loadingTemples}
-                        disabled={previewData !== null || loading}
-                        onChange={(val) => setSelectedTemple(val)}
-                        options={temples?.map(t => ({ label: t.temple_name, value: t.name })) || []}
-                    />
-                </div>
-
-                {!previewData ? (
-                    <Dragger 
-                        accept=".csv,.xlsx,.xls"
-                        beforeUpload={handleUpload}
-                        showUploadList={false}
-                        disabled={!selectedTemple || loading}
-                    >
-                        <p className="ant-upload-drag-icon">
-                            <InboxOutlined />
-                        </p>
-                        <p className="ant-upload-text">Click or drag CSV or Excel file to this area to import</p>
-                        <p className="ant-upload-hint">
-                            {!selectedTemple 
-                                ? "Please select a destination temple above first." 
-                                : "Supports CSV, Excel (.xlsx, .xls) and Google Sheets (exported)"}
-                        </p>
-                    </Dragger>
-                ) : (
-                    <div style={{ marginTop: "16px" }}>
-                        <Alert 
-                            message="File Loaded — Review Before Importing" 
-                            description={`Found ${previewData.length} room records. Please review the preview below and confirm only when ready.`} 
-                            type="info" 
-                            showIcon 
-                            style={{ marginBottom: "16px" }}
-                        />
-
-                        <Divider orientation="left" style={{ margin: "16px 0 12px" }}>
-                            <Space>
-                                <EyeOutlined />
-                                <span style={{ fontWeight: 600 }}>Room Preview</span>
-                            </Space>
-                        </Divider>
-
-                        <div style={{ marginBottom: "16px", overflowX: "auto" }}>
                             <Table 
                                 dataSource={previewData.map((row, idx) => ({ ...row, key: idx }))} 
                                 columns={previewColumns} 
                                 pagination={{ pageSize: 5 }} 
                                 size="small"
-                                bordered
+                                className="border border-zinc-100 rounded-lg overflow-hidden"
                             />
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "flex-end", gap: "12px" }}>
-                            <Button 
-                                danger 
-                                icon={<CloseOutlined />} 
-                                onClick={handleCancelPreview}
-                                disabled={loading}
-                            >
-                                Cancel & Reset
-                            </Button>
-                            <Button 
-                                type="primary" 
-                                icon={<CheckOutlined />} 
-                                loading={loading}
-                                onClick={handleConfirmImport}
-                                style={{ backgroundColor: "#000", borderColor: "#000" }}
-                            >
-                                Confirm & Import {previewData.length} Rooms
-                            </Button>
-                        </div>
-                    </div>
-                )}
-
-                {stats && (
-                    <div style={{ marginTop: "24px" }}>
-                        <Alert 
-                            message="Import Results Summary" 
-                            description={
-                                <div>
-                                    <p>{stats.message}</p>
-                                    <Space>
-                                        <Text type="success">Succeeded: {stats.success}</Text>
-                                        <Text type="danger">Failed: {stats.failed}</Text>
-                                    </Space>
-                                </div>
-                            } 
-                            type={stats.failed > 0 ? "warning" : "success"} 
-                            showIcon 
-                        />
-                    </div>
-                )}
-
-                {importLogs.length > 0 && (
-                    <div style={{ marginTop: "24px" }}>
-                        <Text strong style={{ display: "block", marginBottom: "8px" }}>Import Logs</Text>
-                        <div 
-                            style={{ 
-                                height: "200px", 
-                                overflowY: "auto", 
-                                background: "#090d16", 
-                                color: "#a9b2c3", 
-                                fontFamily: "monospace", 
-                                padding: "12px", 
-                                borderRadius: "6px",
-                                fontSize: "12px"
-                            }}
-                        >
-                            {importLogs.map((log, i) => {
-                                const isError = log.includes("Error");
-                                return (
-                                    <div key={i} style={{ color: isError ? "#f87171" : "#34d399", marginBottom: "4px" }}>
-                                        {log}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-            </Card>
+                        </SectionCard>
+                    ) : (
+                        !stats && (
+                            <Card className="flex items-center justify-center p-12 text-center" bordered={false}>
+                                <Empty 
+                                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                                    description={
+                                        <div className="flex flex-col gap-1.5">
+                                            <Text className="font-semibold text-zinc-700">No import file loaded</Text>
+                                            <Text className="text-zinc-400 text-xs">Select a Temple and upload a completed template to preview room configurations here.</Text>
+                                        </div>
+                                    } 
+                                />
+                            </Card>
+                        )
+                    )}
+                </Col>
+            </Row>
         </div>
     );
 };

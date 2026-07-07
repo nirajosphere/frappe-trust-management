@@ -4,6 +4,40 @@ import io
 from frappe import _
 from frappe.utils import now_datetime, get_datetime, flt
 
+def has_active_booking_for_room(room_id, exclude_booking=None):
+    """
+    Checks if a room has an active (Booked or Checked In) booking in either the
+    legacy single room field or the booking_room child table.
+    """
+    filters_main = {
+        "room": room_id,
+        "status": ("in", ["Booked", "Checked In"]),
+        "docstatus": 1
+    }
+    if exclude_booking:
+        filters_main["name"] = ("!=", exclude_booking)
+        
+    if frappe.db.exists("Room Booking", filters_main):
+        return True
+        
+    # Check child table mapping
+    query = """
+        SELECT rb.name 
+        FROM `tabRoom Booking` rb
+        INNER JOIN `tabbooking_room` br ON br.parent = rb.name
+        WHERE br.room_id = %s
+          AND rb.status IN ('Booked', 'Checked In')
+          AND rb.docstatus = 1
+    """
+    args = [room_id]
+    if exclude_booking:
+        query += " AND rb.name != %s"
+        args.append(exclude_booking)
+        
+    res = frappe.db.sql(query, args)
+    return len(res) > 0
+
+
 @frappe.whitelist()
 def update_room_statuses():
     """
@@ -22,7 +56,15 @@ def update_room_statuses():
 
     for b in booked_bookings:
         frappe.db.set_value("Room Booking", b.name, "status", "Checked In")
-        frappe.db.set_value("Room", b.room, "status", "Occupied")
+        
+        # Get all child rooms
+        rooms = frappe.get_all("booking_room", filters={"parent": b.name}, fields=["room_id"])
+        assigned_rooms = [r.room_id for r in rooms]
+        if b.room and b.room not in assigned_rooms:
+            assigned_rooms.append(b.room)
+            
+        for room_id in assigned_rooms:
+            frappe.db.set_value("Room", room_id, "status", "Occupied")
 
     # 2. Checked In → Checked Out (check-out time has passed)
     checked_in_bookings = frappe.get_all("Room Booking", filters={
@@ -33,15 +75,17 @@ def update_room_statuses():
 
     for b in checked_in_bookings:
         frappe.db.set_value("Room Booking", b.name, "status", "Checked Out")
-        # Check if another active booking exists for this room
-        has_active = frappe.db.exists("Room Booking", {
-            "room": b.room,
-            "status": ("in", ["Booked", "Checked In"]),
-            "docstatus": 1,
-            "name": ("!=", b.name)
-        })
-        if not has_active:
-            frappe.db.set_value("Room", b.room, "status", "Available")
+        
+        # Get all child rooms
+        rooms = frappe.get_all("booking_room", filters={"parent": b.name}, fields=["room_id"])
+        assigned_rooms = [r.room_id for r in rooms]
+        if b.room and b.room not in assigned_rooms:
+            assigned_rooms.append(b.room)
+            
+        for room_id in assigned_rooms:
+            has_active = has_active_booking_for_room(room_id, exclude_booking=b.name)
+            if not has_active:
+                frappe.db.set_value("Room", room_id, "status", "Available")
 
     if booked_bookings or checked_in_bookings:
         frappe.db.commit()
@@ -53,21 +97,48 @@ def check_room_availability(room, check_in, check_out, exclude_booking=None):
     Check if a room is available for the given time period.
     Returns {"available": True/False, "conflicting_booking": "RB-xxx" or None}
     """
+    # Check legacy main field
     filters = {
         "room": room,
         "status": ("not in", ["Cancelled", "Checked Out"]),
         "check_in": ("<", check_out),
         "check_out": (">", check_in)
     }
-
     if exclude_booking:
         filters["name"] = ("!=", exclude_booking)
-
+        
     conflicting = frappe.db.get_value("Room Booking", filters, "name")
+    if conflicting:
+        return {
+            "available": False,
+            "conflicting_booking": conflicting
+        }
+        
+    # Check child table mapping
+    query = """
+        SELECT rb.name 
+        FROM `tabRoom Booking` rb
+        INNER JOIN `tabbooking_room` br ON br.parent = rb.name
+        WHERE br.room_id = %s
+          AND rb.status NOT IN ('Cancelled', 'Checked Out')
+          AND rb.check_in < %s
+          AND rb.check_out > %s
+    """
+    args = [room, check_out, check_in]
+    if exclude_booking:
+        query += " AND rb.name != %s"
+        args.append(exclude_booking)
+        
+    res = frappe.db.sql(query, args)
+    if res:
+        return {
+            "available": False,
+            "conflicting_booking": res[0][0]
+        }
 
     return {
-        "available": not conflicting,
-        "conflicting_booking": conflicting
+        "available": True,
+        "conflicting_booking": None
     }
 
 
@@ -85,14 +156,24 @@ def get_available_rooms(check_in, check_out, temple=None):
         "name", "room_number", "temple", "building", "floor_number", "room_type", "capacity", "price_per_day", "status"
     ], order_by="room_number asc")
 
-    # Find all rooms that have conflicting bookings
+    # Find all rooms that have conflicting bookings (legacy room field)
     booked_rooms = frappe.get_all("Room Booking", filters={
         "status": ("not in", ["Cancelled", "Checked Out"]),
         "check_in": ("<", check_out),
         "check_out": (">", check_in)
     }, fields=["room"], pluck="room")
 
-    booked_set = set(booked_rooms)
+    # Find all rooms that have conflicting bookings (child table room mapping)
+    booked_child = frappe.db.sql("""
+        SELECT br.room_id 
+        FROM `tabRoom Booking` rb
+        INNER JOIN `tabbooking_room` br ON br.parent = rb.name
+        WHERE rb.status NOT IN ('Cancelled', 'Checked Out')
+          AND rb.check_in < %s
+          AND rb.check_out > %s
+    """, (check_out, check_in), pluck=True)
+
+    booked_set = set(list(filter(None, booked_rooms)) + list(filter(None, booked_child)))
 
     for room in rooms:
         room["is_available"] = room["name"] not in booked_set
@@ -106,7 +187,7 @@ def get_available_rooms(check_in, check_out, temple=None):
 @frappe.whitelist()
 def check_in_booking(booking_name):
     """
-    Check in guest: sets booking status to Checked In, room to Occupied.
+    Check in guest: sets booking status to Checked In, all assigned rooms to Occupied.
     """
     booking = frappe.get_doc("Room Booking", booking_name)
 
@@ -114,7 +195,16 @@ def check_in_booking(booking_name):
         frappe.throw(_("Only Booked rooms can be checked in."))
 
     frappe.db.set_value("Room Booking", booking_name, "status", "Checked In")
-    frappe.db.set_value("Room", booking.room, "status", "Occupied")
+    
+    # Get all assigned rooms
+    rooms = frappe.get_all("booking_room", filters={"parent": booking_name}, fields=["room_id"])
+    assigned_rooms = [r.room_id for r in rooms]
+    if booking.room and booking.room not in assigned_rooms:
+        assigned_rooms.append(booking.room)
+        
+    for room_id in assigned_rooms:
+        frappe.db.set_value("Room", room_id, "status", "Occupied")
+        
     frappe.db.commit()
 
     return {"success": True}
@@ -123,8 +213,7 @@ def check_in_booking(booking_name):
 @frappe.whitelist()
 def early_checkout(booking_name):
     """
-    Early checkout: sets booking status to Checked Out, room to Available.
-    Stores actual checkout timestamp.
+    Early checkout: sets booking status to Checked Out, releases all assigned rooms.
     """
     booking = frappe.get_doc("Room Booking", booking_name)
 
@@ -138,15 +227,16 @@ def early_checkout(booking_name):
         "check_out": now
     })
 
-    # Check if another active booking exists
-    has_active = frappe.db.exists("Room Booking", {
-        "room": booking.room,
-        "status": ("in", ["Booked", "Checked In"]),
-        "docstatus": 1,
-        "name": ("!=", booking_name)
-    })
-    if not has_active:
-        frappe.db.set_value("Room", booking.room, "status", "Available")
+    # Release all assigned rooms
+    rooms = frappe.get_all("booking_room", filters={"parent": booking_name}, fields=["room_id"])
+    assigned_rooms = [r.room_id for r in rooms]
+    if booking.room and booking.room not in assigned_rooms:
+        assigned_rooms.append(booking.room)
+
+    for room_id in assigned_rooms:
+        has_active = has_active_booking_for_room(room_id, exclude_booking=booking_name)
+        if not has_active:
+            frappe.db.set_value("Room", room_id, "status", "Available")
 
     frappe.db.commit()
 
@@ -156,24 +246,25 @@ def early_checkout(booking_name):
 @frappe.whitelist()
 def extend_booking(booking_name, new_check_out):
     """
-    Late checkout / extend stay: update check-out time after validating no conflicts.
+    Late checkout / extend stay: update check-out time after validating no conflicts for all assigned rooms.
     """
     booking = frappe.get_doc("Room Booking", booking_name)
 
     if booking.status in ("Checked Out", "Cancelled"):
         frappe.throw(_("Cannot extend a completed or cancelled booking."))
 
-    # Check for conflicts with the new checkout time
-    conflicting = frappe.db.get_value("Room Booking", {
-        "room": booking.room,
-        "name": ("!=", booking_name),
-        "status": ("not in", ["Cancelled", "Checked Out"]),
-        "check_in": ("<", new_check_out),
-        "check_out": (">", booking.check_in)
-    }, "name")
+    # Get all assigned rooms
+    rooms = frappe.get_all("booking_room", filters={"parent": booking_name}, fields=["room_id"])
+    assigned_rooms = [r.room_id for r in rooms]
+    if booking.room and booking.room not in assigned_rooms:
+        assigned_rooms.append(booking.room)
 
-    if conflicting:
-        frappe.throw(_("Cannot extend stay. Room has another booking ({0}) that conflicts.").format(conflicting))
+    for room_id in assigned_rooms:
+        availability = check_room_availability(room_id, booking.check_in, new_check_out, exclude_booking=booking_name)
+        if not availability["available"]:
+            frappe.throw(_("Cannot extend stay. Room {0} has a conflict ({1}).").format(
+                room_id, availability["conflicting_booking"]
+            ))
 
     frappe.db.set_value("Room Booking", booking_name, "check_out", new_check_out)
     frappe.db.commit()
@@ -475,3 +566,219 @@ def import_rooms_from_csv(csv_content, temple):
         "logs": logs,
         "message": f"Import completed. Succeeded: {success_count}, Failed: {failure_count}."
     }
+
+
+@frappe.whitelist()
+def search_rooms(
+    search=None, 
+    check_in=None, 
+    check_out=None, 
+    temple=None, 
+    availability=None, 
+    floor=None, 
+    room_type=None, 
+    capacity=None, 
+    limit=20, 
+    offset=0
+):
+    """
+    Whitelisted API method to search rooms with debounce support, server-side filtering,
+    date-range availability, and pagination.
+    """
+    try:
+        limit = int(limit)
+    except Exception:
+        limit = 20
+    try:
+        offset = int(offset)
+    except Exception:
+        offset = 0
+
+    conditions = []
+    values = {}
+
+    if temple:
+        conditions.append("r.temple = %(temple)s")
+        values["temple"] = temple
+
+    if floor and floor != "All":
+        floor_val = None
+        if isinstance(floor, str):
+            floor_lower = floor.lower()
+            if "ground" in floor_lower:
+                floor_val = 0
+            elif "first" in floor_lower:
+                floor_val = 1
+            elif "second" in floor_lower:
+                floor_val = 2
+            elif "third" in floor_lower:
+                floor_val = 3
+            elif "fourth" in floor_lower:
+                floor_val = 4
+            elif "fifth" in floor_lower:
+                floor_val = 5
+            elif "sixth" in floor_lower:
+                floor_val = 6
+            elif "seventh" in floor_lower:
+                floor_val = 7
+            elif "eighth" in floor_lower:
+                floor_val = 8
+            elif "ninth" in floor_lower:
+                floor_val = 9
+            elif "tenth" in floor_lower:
+                floor_val = 10
+            else:
+                digits = "".join(filter(str.isdigit, floor))
+                if digits:
+                    floor_val = int(digits)
+        else:
+            try:
+                floor_val = int(floor)
+            except Exception:
+                pass
+        
+        if floor_val is not None:
+            conditions.append("r.floor_number = %(floor_val)s")
+            values["floor_val"] = floor_val
+
+    if room_type and room_type != "All":
+        conditions.append("rt.room_type_name = %(room_type)s")
+        values["room_type"] = room_type
+
+    if capacity and capacity != "All":
+        capacity_val = None
+        if isinstance(capacity, str):
+            digits = "".join(filter(str.isdigit, capacity))
+            if digits:
+                capacity_val = int(digits)
+        else:
+            try:
+                capacity_val = int(capacity)
+            except Exception:
+                pass
+        
+        if capacity_val is not None:
+            conditions.append("r.capacity = %(capacity_val)s")
+            values["capacity_val"] = capacity_val
+
+    if search:
+        search_like = f"%{search}%"
+        values["search_like"] = search_like
+        search_conditions = [
+            "r.room_number LIKE %(search_like)s",
+            "r.name LIKE %(search_like)s",
+            "r.description LIKE %(search_like)s",
+            "rt.room_type_name LIKE %(search_like)s",
+            "b.building_name LIKE %(search_like)s"
+        ]
+        
+        # Floor search matching
+        search_floor_val = None
+        search_lower = search.lower()
+        floor_map = {
+            "ground": 0, "first": 1, "second": 2, "third": 3, "fourth": 4, 
+            "fifth": 5, "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10
+        }
+        for k, v in floor_map.items():
+            if k in search_lower:
+                search_floor_val = v
+                break
+        
+        if not search_floor_val and search.isdigit():
+            search_floor_val = int(search)
+            
+        if search_floor_val is not None:
+            search_conditions.append("r.floor_number = %(search_floor_val)s")
+            values["search_floor_val"] = search_floor_val
+            
+        conditions.append(f"({' OR '.join(search_conditions)})")
+
+    where_clause = ""
+    if conditions:
+        where_clause = "WHERE " + " AND ".join(conditions)
+
+    sql_query = f"""
+        SELECT 
+            r.name, 
+            r.room_number, 
+            r.temple, 
+            r.building, 
+            r.floor_number, 
+            r.room_type, 
+            r.capacity, 
+            r.price_per_day, 
+            r.status, 
+            r.description, 
+            rt.room_type_name,
+            b.building_name
+        FROM 
+            `tabRoom` r
+        LEFT JOIN 
+            `tabRoom Type` rt ON r.room_type = rt.name
+        LEFT JOIN 
+            `tabBuilding` b ON r.building = b.name
+        {where_clause}
+        ORDER BY r.room_number ASC
+    """
+
+    rooms = frappe.db.sql(sql_query, values, as_dict=True)
+
+    booked_set = set()
+    if check_in and check_out:
+        try:
+            check_in_str = str(check_in).replace("T", " ")
+            check_out_str = str(check_out).replace("T", " ")
+            
+            # 1. Main room bookings
+            booked_rooms = frappe.get_all("Room Booking", filters={
+                "status": ("not in", ["Cancelled", "Checked Out"]),
+                "check_in": ("<", check_out_str),
+                "check_out": (">", check_in_str)
+            }, fields=["room"], pluck="room")
+            
+            # 2. Child table bookings
+            booked_child = frappe.db.sql("""
+                SELECT br.room_id 
+                FROM `tabRoom Booking` rb
+                INNER JOIN `tabbooking_room` br ON br.parent = rb.name
+                WHERE rb.status NOT IN ('Cancelled', 'Checked Out')
+                  AND rb.check_in < %s
+                  AND rb.check_out > %s
+            """, (check_out_str, check_in_str), pluck=True)
+            
+            booked_set = set(list(filter(None, booked_rooms)) + list(filter(None, booked_child)))
+        except Exception as e:
+            frappe.log_error(f"Error checking available rooms: {str(e)}")
+    else:
+        for room in rooms:
+            if room["status"] == "Occupied":
+                booked_set.add(room["name"])
+
+    filtered_rooms = []
+    for room in rooms:
+        room["is_available"] = room["name"] not in booked_set
+        if room["status"] in ("Cleaning", "Maintenance"):
+            room["is_available"] = False
+        
+        # Apply availability filter
+        if availability and availability != "All":
+            avail_lower = availability.lower()
+            if avail_lower == "available" and not room["is_available"]:
+                continue
+            elif avail_lower == "occupied" and (room["is_available"] or room["status"] in ("Cleaning", "Maintenance")):
+                continue
+            elif avail_lower == "cleaning" and room["status"] != "Cleaning":
+                continue
+            elif avail_lower == "maintenance" and room["status"] != "Maintenance":
+                continue
+        
+        filtered_rooms.append(room)
+
+    total_count = len(filtered_rooms)
+    paginated_rooms = filtered_rooms[offset : offset + limit]
+
+    return {
+        "rooms": paginated_rooms,
+        "total": total_count
+    }
+

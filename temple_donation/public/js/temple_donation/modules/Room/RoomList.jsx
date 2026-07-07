@@ -19,7 +19,14 @@ import RoomTypeList from "../RoomType/RoomTypeList";
 import BuildingList from "../Building/BuildingList";
 
 const RoomList = () => {
-    const [activeTab, setActiveTab] = useState("dashboard");
+    const [activeTab, setActiveTab] = useState(() => {
+        return localStorage.getItem("activeRoomTab") || "dashboard";
+    });
+
+    const handleTabChange = (key) => {
+        setActiveTab(key);
+        localStorage.setItem("activeRoomTab", key);
+    };
 
     const tabItems = [
         {
@@ -100,7 +107,7 @@ const RoomList = () => {
                     Bulk Generator
                 </span>
             ),
-            children: <BulkRoomGenerator onComplete={() => setActiveTab("list")} />
+            children: <BulkRoomGenerator onComplete={() => handleTabChange("list")} />
         },
         {
             key: "import",
@@ -118,7 +125,7 @@ const RoomList = () => {
         <ViewContainer>
             <Tabs 
                 activeKey={activeTab} 
-                onChange={(key) => setActiveTab(key)} 
+                onChange={handleTabChange} 
                 items={tabItems}
                 type="card"
                 style={{ marginTop: "12px" }}

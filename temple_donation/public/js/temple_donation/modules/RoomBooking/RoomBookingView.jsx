@@ -216,9 +216,30 @@ const RoomBookingView = ({ id, onBack, onEdit }) => {
                                     </FieldCell>
                                 </Col>
                                 <Col xs={24} sm={12}>
-                                    <FieldCell label="Room">
-                                        <span className="text-zinc-800 font-semibold">{roomName}</span>
-                                    </FieldCell>
+                                    {doc.rooms && doc.rooms.length > 0 ? (
+                                        <FieldCell label="Assigned Rooms">
+                                            <div className="flex flex-col gap-1.5 mt-1">
+                                                {doc.rooms.map((r, i) => {
+                                                    const matched = rooms?.find(room => room.name === r.room_id);
+                                                    const roomNum = matched ? `Room ${matched.room_number}` : r.room_id;
+                                                    return (
+                                                        <div key={i} className="flex justify-between items-center bg-zinc-50 border border-zinc-100 rounded px-3 py-1.5" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                            <span className="text-zinc-800 font-semibold text-sm">{roomNum}</span>
+                                                            <Tag color="blue" className="m-0 font-medium" style={{ marginRight: 0 }}>Capacity: {r.capacity} Pax</Tag>
+                                                        </div>
+                                                    );
+                                                })}
+                                                <div className="flex justify-between items-center border-t border-dashed border-zinc-200 pt-2 mt-1" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <span className="text-zinc-500 text-xs font-semibold">Total Capacity</span>
+                                                    <span className="text-zinc-800 font-bold text-sm">{doc.rooms.reduce((acc, r) => acc + Number(r.capacity || 0), 0)} Pax</span>
+                                                </div>
+                                            </div>
+                                        </FieldCell>
+                                    ) : (
+                                        <FieldCell label="Room">
+                                            <span className="text-zinc-800 font-semibold">{roomName}</span>
+                                        </FieldCell>
+                                    )}
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Booking Status">

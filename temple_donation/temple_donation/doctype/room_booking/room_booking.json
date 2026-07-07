@@ -8,6 +8,7 @@
   "donor",
   "temple",
   "room",
+  "rooms",
   "check_in",
   "check_out",
   "adults",
@@ -42,8 +43,13 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Room",
-   "options": "Room",
-   "reqd": 1
+   "options": "Room"
+  },
+  {
+   "fieldname": "rooms",
+   "fieldtype": "Table",
+   "label": "Assigned Rooms",
+   "options": "booking_room"
   },
   {
    "fieldname": "check_in",

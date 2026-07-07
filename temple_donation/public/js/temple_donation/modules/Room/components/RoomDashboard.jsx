@@ -370,6 +370,7 @@ const RoomDashboard = () => {
                             loading={loading}
                             pagination={{ pageSize: 5 }}
                             scroll={{ x: "max-content" }}
+                            childrenColumnName="unused_children"
                             locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
@@ -380,10 +381,11 @@ const RoomDashboard = () => {
                             className="aavatto-premium-table"
                             columns={columnsCheckOut} 
                             dataSource={data.todays_check_outs} 
-                            rowKey="name"
+                            rowKey="name"   
                             loading={loading}
                             pagination={{ pageSize: 5 }}
                             scroll={{ x: "max-content" }}
+                            childrenColumnName="unused_children"
                             locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
                         />
                     </Card>
@@ -398,6 +400,7 @@ const RoomDashboard = () => {
                             loading={loading}
                             pagination={{ pageSize: 10 }}
                             scroll={{ x: "max-content" }}
+                            childrenColumnName="unused_children"
                             locale={{ emptyText: "No upcoming bookings found" }}
                         />
                     </Card>
