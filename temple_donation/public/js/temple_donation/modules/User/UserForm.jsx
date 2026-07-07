@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-    Form, Input, Select, Avatar, Tag, Row, Col, Alert, Card, Space
+    Form, Input, Select, Avatar, Tag, Row, Col, Alert, Card, Space, Button, Modal, Checkbox, Spin
 } from "antd";
 import {
     UserOutlined, MailOutlined, PhoneOutlined, LockOutlined,
@@ -36,6 +36,11 @@ const UserForm = ({ id, onBack }) => {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
     const [assignableRoles, setAssignableRoles] = useState([]);
 
+    // --- Extra Permission State ---
+    const [permModalOpen, setPermModalOpen] = useState(false);
+    const [userPermissions, setUserPermissions] = useState([]);
+    const [loadingUserPerms, setLoadingUserPerms] = useState(false);
+
     useEffect(() => {
         if (typeof frappe === "undefined") return;
         frappe.call({
@@ -53,6 +58,68 @@ const UserForm = ({ id, onBack }) => {
     const userImage  = data?.user_image || "";
     const initials   = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase() || "U";
 
+    const fetchPermissionsForRole = (role) => {
+        if (typeof frappe === "undefined" || !role) return;
+        setLoadingUserPerms(true);
+        frappe.call({
+            method: "temple_donation.api.get_user_extra_permissions",
+            args: {
+                role_name: role,
+                user_name: isEdit ? id : undefined
+            },
+            callback: (r) => {
+                setLoadingUserPerms(false);
+                if (r.message) {
+                    setUserPermissions(r.message);
+                }
+            },
+            error: () => setLoadingUserPerms(false)
+        });
+    };
+
+    const handleRoleChange = (val) => {
+        form.setFieldValue("custom_user_role", val);
+        fetchPermissionsForRole(val);
+    };
+
+    const handleUserPermissionChange = (doctype, field, value) => {
+        setUserPermissions((prev) =>
+            prev.map((row) =>
+                row.doctype === doctype ? { ...row, [field]: value ? 1 : 0 } : row
+            )
+        );
+    };
+
+    const handleUserToggleAll = (doctype, checked) => {
+        const val = checked ? 1 : 0;
+        setUserPermissions((prev) =>
+            prev.map((row) =>
+                row.doctype === doctype
+                    ? {
+                          ...row,
+                          read: row.role_read ? row.read : val,
+                          write: row.role_write ? row.write : val,
+                          create: row.role_create ? row.create : val,
+                          delete: row.role_delete ? row.delete : val,
+                      }
+                    : row
+            )
+        );
+    };
+
+    const handleResetUserPermissions = () => {
+        setUserPermissions((prev) =>
+            prev.map((row) => ({
+                ...row,
+                read: 0,
+                write: 0,
+                create: 0,
+                delete: 0,
+                is_extra: false
+            }))
+        );
+    };
+
     // --- Effect for Form Setup and Binding ---
     useEffect(() => {
         if (isEdit && data) {
@@ -62,6 +129,9 @@ const UserForm = ({ id, onBack }) => {
                 values.custom_select_temple = data.custom_select_temple.map(t => t.temple);
             }
             form.setFieldsValue(values);
+            if (data.custom_user_role) {
+                fetchPermissionsForRole(data.custom_user_role);
+            }
         } else {
             form.setFieldsValue({ enabled: "Active" });
         }
@@ -76,8 +146,31 @@ const UserForm = ({ id, onBack }) => {
                 payload.custom_select_temple = payload.custom_select_temple.map(t => ({ temple: t }));
             delete payload.confirm_password;
             if (!payload.new_password) delete payload.new_password;
-            if (isEdit) await updateDoc(DOCTYPE_USER, id, payload);
-            else        await createDoc(DOCTYPE_USER, payload);
+
+            if (isEdit) {
+                await updateDoc(DOCTYPE_USER, id, payload);
+            } else {
+                await createDoc(DOCTYPE_USER, payload);
+            }
+
+            // Save the extra permissions!
+            const userName = isEdit ? id : values.email;
+            if (userName && userPermissions.length > 0 && typeof frappe !== "undefined") {
+                await new Promise((resolve, reject) => {
+                    frappe.call({
+                        method: "temple_donation.api.save_user_extra_permissions",
+                        args: {
+                            user_name: userName,
+                            permissions: JSON.stringify(userPermissions),
+                        },
+                        callback: (r) => {
+                            resolve(r.message);
+                        },
+                        error: (err) => reject(err)
+                    });
+                });
+            }
+
             if (onBack) onBack();
         } catch (err) { 
             console.error("Save Error:", err); 
@@ -213,21 +306,42 @@ const UserForm = ({ id, onBack }) => {
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="custom_user_role" label={<span style={{ fontWeight: 600, color: '#27272a' }}>User Role</span>} rules={[{ required: true, message: "Required" }]}>
-                                            <Select
-                                                placeholder="Select Role"
-                                                disabled={disableAdminFields}
-                                                style={{ width: '100%' }}
-                                                options={assignableRoles.length > 0
-                                                    ? assignableRoles.map((role) => ({
-                                                        label: role.label,
-                                                        value: role.name,
-                                                    }))
-                                                    : [
-                                                        { label: "Super Admin", value: "Super Admin" },
-                                                        { label: "Trust Admin", value: "Temple Admin" },
-                                                        { label: "Cashier", value: "Cashier" },
-                                                    ]}
-                                            />
+                                            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                                <Select
+                                                    placeholder="Select Role"
+                                                    disabled={disableAdminFields}
+                                                    style={{ flex: 1 }}
+                                                    onChange={handleRoleChange}
+                                                    options={assignableRoles.length > 0
+                                                        ? assignableRoles.map((role) => ({
+                                                            label: role.label,
+                                                            value: role.name,
+                                                        }))
+                                                        : [
+                                                            { label: "Super Admin", value: "Super Admin" },
+                                                            { label: "Trust Admin", value: "Temple Admin" },
+                                                            { label: "Cashier", value: "Cashier" },
+                                                        ]}
+                                                />
+                                                {userRole && (
+                                                    <Button
+                                                        type={userPermissions.some(p => p.read || p.write || p.create || p.delete) ? "primary" : "default"}
+                                                        icon={<SafetyOutlined />}
+                                                        onClick={() => setPermModalOpen(true)}
+                                                        style={{ 
+                                                            borderRadius: '8px', 
+                                                            display: 'flex', 
+                                                            alignItems: 'center', 
+                                                            justifyContent: 'center',
+                                                            backgroundColor: userPermissions.some(p => p.read || p.write || p.create || p.delete) ? '#09090b' : undefined,
+                                                            borderColor: userPermissions.some(p => p.read || p.write || p.create || p.delete) ? '#09090b' : undefined,
+                                                            color: userPermissions.some(p => p.read || p.write || p.create || p.delete) ? '#ffffff' : '#09090b',
+                                                        }}
+                                                    >
+                                                        Permissions
+                                                    </Button>
+                                                )}
+                                            </div>
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
@@ -311,6 +425,160 @@ const UserForm = ({ id, onBack }) => {
                     />
                 </div>
             </Form>
+
+            <Modal
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 16, fontWeight: 700, color: '#09090b' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: 8, backgroundColor: '#f4f4f5' }}>
+                            <SafetyOutlined style={{ color: '#09090b', fontSize: 16 }} />
+                        </div>
+                        <div>
+                            <div style={{ fontSize: 16, fontWeight: 700, lineHeight: '1.2' }}>Extra Permission Overrides</div>
+                            <div style={{ fontSize: 11, fontWeight: 400, color: '#71717a', marginTop: 2 }}>Custom overrides for user permissions</div>
+                        </div>
+                    </div>
+                }
+                open={permModalOpen}
+                onOk={() => setPermModalOpen(false)}
+                onCancel={() => setPermModalOpen(false)}
+                width={800}
+                bodyStyle={{ maxHeight: '60vh', overflowY: 'auto', padding: '16px 24px' }}
+                footer={
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 24px 16px 24px' }}>
+                        <Button 
+                            danger 
+                            type="text" 
+                            onClick={handleResetUserPermissions}
+                            style={{ 
+                                padding: 0, 
+                                fontWeight: 500, 
+                                fontSize: 13, 
+                                display: 'inline-flex', 
+                                alignItems: 'center',
+                                gap: 6 
+                            }}
+                        >
+                            Reset overrides to default
+                        </Button>
+                        <Space size={12}>
+                            <Button 
+                                onClick={() => setPermModalOpen(false)}
+                                style={{ borderRadius: 8, fontWeight: 500 }}
+                            >
+                                Close
+                            </Button>
+                            <Button 
+                                type="primary" 
+                                onClick={() => setPermModalOpen(false)}
+                                style={{ borderRadius: 8, fontWeight: 500, backgroundColor: '#09090b', borderColor: '#09090b' }}
+                            >
+                                Apply
+                            </Button>
+                        </Space>
+                    </div>
+                }
+            >
+                <div>
+                    <Alert
+                        message="Configure extra permissions that this user should have in addition to their default role. Grayed-out checkboxes are already active from the selected role."
+                        type="info"
+                        showIcon
+                        style={{ marginBottom: 20, borderRadius: 8, border: '1px solid #e0f2fe', backgroundColor: '#f0f9ff' }}
+                    />
+                    {loadingUserPerms ? (
+                        <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                            <Spin />
+                        </div>
+                    ) : userPermissions.length === 0 ? (
+                        <div style={{ textAlign: 'center', color: '#71717a', padding: '32px 0', fontSize: 13 }}>
+                            Please select a user role first to view permission defaults.
+                        </div>
+                    ) : (
+                        <div style={{ border: '1px solid #e4e4e7', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                                <thead>
+                                    <tr style={{ backgroundColor: '#fafafa', borderBottom: '1px solid #e4e4e7' }}>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>DocType</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Read</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Write</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Create</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Delete</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>All</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {userPermissions.map((row) => {
+                                        const isAllChecked =
+                                            (!!row.role_read || !!row.read) &&
+                                            (!!row.role_write || !!row.write) &&
+                                            (!!row.role_create || !!row.create) &&
+                                            (!!row.role_delete || !!row.delete);
+                                        const isAllDisabled =
+                                            !!row.role_read &&
+                                            !!row.role_write &&
+                                            !!row.role_create &&
+                                            !!row.role_delete;
+                                        const hasActiveOverride = row.read || row.write || row.create || row.delete;
+
+                                        return (
+                                            <tr 
+                                                key={row.doctype} 
+                                                style={{ borderBottom: '1px solid #f4f4f5', transition: 'background-color 0.2s' }}
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fafafa'}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                            >
+                                                <td style={{ padding: '12px 18px', fontSize: 13, fontWeight: 500, color: '#18181b' }}>
+                                                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                                                        {row.doctype}
+                                                        {hasActiveOverride ? (
+                                                            <Tag color="blue" style={{ fontSize: 10, borderRadius: 4, padding: '0 6px', fontWeight: 600, border: 'none', backgroundColor: '#eff6ff', color: '#1d4ed8' }}>override</Tag>
+                                                        ) : null}
+                                                    </span>
+                                                </td>
+                                                <td style={{ padding: '12px 18px', textAlign: 'center' }}>
+                                                    <Checkbox
+                                                        checked={!!row.role_read || !!row.read}
+                                                        disabled={!!row.role_read}
+                                                        onChange={(e) => handleUserPermissionChange(row.doctype, "read", e.target.checked)}
+                                                    />
+                                                </td>
+                                                <td style={{ padding: '12px 18px', textAlign: 'center' }}>
+                                                    <Checkbox
+                                                        checked={!!row.role_write || !!row.write}
+                                                        disabled={!!row.role_write}
+                                                        onChange={(e) => handleUserPermissionChange(row.doctype, "write", e.target.checked)}
+                                                    />
+                                                </td>
+                                                <td style={{ padding: '12px 18px', textAlign: 'center' }}>
+                                                    <Checkbox
+                                                        checked={!!row.role_create || !!row.create}
+                                                        disabled={!!row.role_create}
+                                                        onChange={(e) => handleUserPermissionChange(row.doctype, "create", e.target.checked)}
+                                                    />
+                                                </td>
+                                                <td style={{ padding: '12px 18px', textAlign: 'center' }}>
+                                                    <Checkbox
+                                                        checked={!!row.role_delete || !!row.delete}
+                                                        disabled={!!row.role_delete}
+                                                        onChange={(e) => handleUserPermissionChange(row.doctype, "delete", e.target.checked)}
+                                                    />
+                                                </td>
+                                                <td style={{ padding: '12px 18px', textAlign: 'center' }}>
+                                                    <Checkbox
+                                                        checked={!!isAllChecked}
+                                                        disabled={!!isAllDisabled}
+                                                        onChange={(e) => handleUserToggleAll(row.doctype, e.target.checked)}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </div>
+            </Modal>
         </ViewContainer>
     );
 };

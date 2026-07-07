@@ -417,8 +417,8 @@ export const groupedNavigationStructure = [
         ]
     },
     {
-        label: "Administration",
-        key: "admin-group",
+        label: "User Management",
+        key: "user-management-group",
         children: [
             { key: "users", label: "Users" },
             { key: "role-permissions", label: "Role Permissions" }

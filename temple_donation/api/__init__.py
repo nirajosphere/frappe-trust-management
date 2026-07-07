@@ -1734,6 +1734,9 @@ def _upsert_custom_docperm(role_name, doctype, read=0, write=0, create=0, delete
 
 
 def _get_role_permission_doctypes(role_name):
+    if role_name in APP_STATIC_ROLES:
+        return list(PERMISSION_DOCTYPES)
+
     configured = frappe.get_all(
         "Custom DocPerm",
         filters={"role": role_name, "parent": ["in", PERMISSION_DOCTYPES], "permlevel": 0},
@@ -1744,28 +1747,59 @@ def _get_role_permission_doctypes(role_name):
     if configured:
         return [dt for dt in PERMISSION_DOCTYPES if dt in configured]
 
-    if role_name in APP_STATIC_ROLES:
-        return list(PERMISSION_DOCTYPES)
-
     return []
 
 
-def _build_permission_row(role_name, doctype):
-    custom_perm = frappe.get_all(
-        "Custom DocPerm",
-        filters={"role": role_name, "parent": doctype, "permlevel": 0},
-        fields=["name", "read", "write", "create", "delete"],
-        limit=1,
+def _get_doctypes_with_custom_docperms():
+    """DocTypes that have any Custom DocPerm — standard DocPerm is ignored for these."""
+    return set(
+        frappe.get_all(
+            "Custom DocPerm",
+            filters={"parent": ["in", PERMISSION_DOCTYPES], "permlevel": 0},
+            pluck="parent",
+            distinct=1,
+        )
     )
-    if custom_perm:
-        perm = custom_perm[0]
+
+
+def _build_effective_permission_row(role_name, doctype):
+    """Return runtime-effective permissions (matches Frappe's get_valid_perms logic)."""
+    if role_name in ("Super Admin", "Administrator", "System Manager"):
         return {
             "doctype": doctype,
-            "read": perm.read or 0,
-            "write": perm.write or 0,
-            "create": perm.create or 0,
-            "delete": perm.delete or 0,
-            "is_custom": True,
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1,
+            "source": "standard",
+        }
+
+    doctypes_with_custom = _get_doctypes_with_custom_docperms()
+
+    if doctype in doctypes_with_custom:
+        custom_perm = frappe.get_all(
+            "Custom DocPerm",
+            filters={"role": role_name, "parent": doctype, "permlevel": 0},
+            fields=["read", "write", "create", "delete"],
+            limit=1,
+        )
+        if custom_perm:
+            perm = custom_perm[0]
+            return {
+                "doctype": doctype,
+                "read": perm.read or 0,
+                "write": perm.write or 0,
+                "create": perm.create or 0,
+                "delete": perm.delete or 0,
+                "source": "custom",
+            }
+        return {
+            "doctype": doctype,
+            "read": 0,
+            "write": 0,
+            "create": 0,
+            "delete": 0,
+            "source": "none",
         }
 
     std_perm = frappe.get_all(
@@ -1782,7 +1816,7 @@ def _build_permission_row(role_name, doctype):
             "write": perm.write or 0,
             "create": perm.create or 0,
             "delete": perm.delete or 0,
-            "is_custom": False,
+            "source": "standard",
         }
 
     return {
@@ -1791,8 +1825,139 @@ def _build_permission_row(role_name, doctype):
         "write": 0,
         "create": 0,
         "delete": 0,
-        "is_custom": False,
+        "source": "none",
     }
+
+
+def _build_permission_row(role_name, doctype):
+    row = _build_effective_permission_row(role_name, doctype)
+    return {
+        "doctype": row["doctype"],
+        "read": row["read"],
+        "write": row["write"],
+        "create": row["create"],
+        "delete": row["delete"],
+        "is_custom": row["source"] == "custom",
+    }
+
+
+def _summarize_permissions(permissions):
+    accessible = [p for p in permissions if p["read"] or p["write"] or p["create"] or p["delete"]]
+    full_access = [
+        p for p in permissions
+        if p["read"] and p["write"] and p["create"] and p["delete"]
+    ]
+    read_only = [
+        p for p in permissions
+        if p["read"] and not p["write"] and not p["create"] and not p["delete"]
+    ]
+    no_access = [
+        p for p in permissions
+        if not p["read"] and not p["write"] and not p["create"] and not p["delete"]
+    ]
+
+    return {
+        "total_modules": len(permissions),
+        "accessible_modules": len(accessible),
+        "full_access_modules": len(full_access),
+        "read_only_modules": len(read_only),
+        "no_access_modules": len(no_access),
+    }
+
+
+def _ensure_user_view_access(user_name):
+    current_user = frappe.session.user
+    if current_user == user_name:
+        return
+    if not any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
+        frappe.throw(_("Not permitted to view this user"), frappe.PermissionError)
+    if not frappe.has_permission("User", "read", user_name):
+        frappe.throw(_("Not permitted to view this user"), frappe.PermissionError)
+
+
+def _permission_access_level(perm):
+    if perm["read"] and perm["write"] and perm["create"] and perm["delete"]:
+        return "full"
+    if perm["read"] and not perm["write"] and not perm["create"] and not perm["delete"]:
+        return "read_only"
+    if perm["read"] or perm["write"] or perm["create"] or perm["delete"]:
+        return "partial"
+    return "none"
+
+
+def _serialize_user_module_permissions(role_name, permissions):
+    serialized = []
+    for perm in permissions:
+        serialized.append({
+            "doctype": perm["doctype"],
+            "read": perm["read"],
+            "write": perm["write"],
+            "create": perm["create"],
+            "delete": perm["delete"],
+            "access_level": _permission_access_level(perm),
+            "source": perm.get("source", "standard"),
+        })
+    return {
+        "role": role_name,
+        "role_label": ROLE_DISPLAY_LABELS.get(role_name, role_name),
+        "permissions": serialized,
+        "summary": _summarize_permissions(serialized),
+    }
+
+
+@frappe.whitelist()
+def get_user_module_permissions(user_name):
+    """Return effective module permissions for a user based on their assigned role and overrides."""
+    user_name = (user_name or "").strip()
+    if not user_name:
+        frappe.throw(_("User is required."))
+
+    _ensure_user_view_access(user_name)
+
+    role_name = frappe.db.get_value("User", user_name, "custom_user_role")
+    if not role_name:
+        return _serialize_user_module_permissions(None, [])
+
+    # Get user extra permissions override
+    extra_perms = {
+        p.doctype_name: p
+        for p in frappe.get_all(
+            "User Extra Permission",
+            filters={"user": user_name},
+            fields=["doctype_name", "read", "write", "create", "delete"]
+        )
+    }
+
+    permissions = []
+    for doctype in PERMISSION_DOCTYPES:
+        role_row = _build_effective_permission_row(role_name, doctype)
+        if doctype in extra_perms:
+            p = extra_perms[doctype]
+            
+            combined_read = role_row["read"] or (p.read or 0)
+            combined_write = role_row["write"] or (p.write or 0)
+            combined_create = role_row["create"] or (p.create or 0)
+            combined_delete = role_row["delete"] or (p.delete or 0)
+            
+            has_upgrade = (
+                (p.read and not role_row["read"]) or
+                (p.write and not role_row["write"]) or
+                (p.create and not role_row["create"]) or
+                (p.delete and not role_row["delete"])
+            )
+            
+            permissions.append({
+                "doctype": doctype,
+                "read": combined_read,
+                "write": combined_write,
+                "create": combined_create,
+                "delete": combined_delete,
+                "source": "extra" if has_upgrade else role_row.get("source", "standard"),
+            })
+        else:
+            permissions.append(role_row)
+
+    return _serialize_user_module_permissions(role_name, permissions)
 
 
 @frappe.whitelist()
@@ -2022,7 +2187,164 @@ def save_role_permissions(role_name, permissions):
     return True
 
 
+@frappe.whitelist()
+def get_user_extra_permissions(user_name=None, role_name=None):
+    """Fetch user-specific permission matrix alongside role defaults."""
+    _ensure_role_admin()
+    user_name = (user_name or "").strip()
+    
+    if not role_name and user_name:
+        role_name = frappe.db.get_value("User", user_name, "custom_user_role")
+
+    if not role_name:
+        return []
+
+    # Get existing overrides if user_name is provided
+    extra_perms = {}
+    if user_name:
+        extra_perms = {
+            p.doctype_name: p
+            for p in frappe.get_all(
+                "User Extra Permission",
+                filters={"user": user_name},
+                fields=["doctype_name", "read", "write", "create", "delete"]
+            )
+        }
+
+    result = []
+    for doctype in PERMISSION_DOCTYPES:
+        role_row = _build_effective_permission_row(role_name, doctype)
+        p = extra_perms.get(doctype) if extra_perms else None
+        result.append({
+            "doctype": doctype,
+            "read": p.read if p else 0,
+            "write": p.write if p else 0,
+            "create": p.create if p else 0,
+            "delete": p.delete if p else 0,
+            "role_read": role_row["read"],
+            "role_write": role_row["write"],
+            "role_create": role_row["create"],
+            "role_delete": role_row["delete"],
+            "is_extra": bool(p),
+        })
+
+    return result
+
+
+@frappe.whitelist()
+def save_user_extra_permissions(user_name, permissions):
+    """Save user-specific permission overrides."""
+    _ensure_role_admin()
+    user_name = (user_name or "").strip()
+    if not user_name:
+        frappe.throw(_("User name is required."))
+
+    permissions = _parse_json_arg(permissions, [])
+
+    for perm in permissions:
+        doctype = perm.get("doctype")
+        if doctype not in PERMISSION_DOCTYPES:
+            continue
+
+        read = int(perm.get("read", 0))
+        write = int(perm.get("write", 0))
+        create = int(perm.get("create", 0))
+        delete = int(perm.get("delete", 0))
+
+        # Check if an override already exists
+        existing = frappe.db.exists("User Extra Permission", {
+            "user": user_name,
+            "doctype_name": doctype
+        })
+
+        if existing:
+            doc = frappe.get_doc("User Extra Permission", existing)
+            doc.read = read
+            doc.write = write
+            doc.create = create
+            doc.delete = delete
+            doc.save(ignore_permissions=True)
+        else:
+            doc = frappe.new_doc("User Extra Permission")
+            doc.user = user_name
+            doc.doctype_name = doctype
+            doc.read = read
+            doc.write = write
+            doc.create = create
+            doc.delete = delete
+            doc.insert(ignore_permissions=True)
+
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return True
+
+
+@frappe.whitelist()
+def reset_user_extra_permissions(user_name):
+    """Delete all user-specific permission overrides, falling back to role defaults."""
+    _ensure_role_admin()
+    user_name = (user_name or "").strip()
+    if not user_name:
+        frappe.throw(_("User name is required."))
+
+    frappe.db.delete("User Extra Permission", {"user": user_name})
+    frappe.clear_cache(doctype="DocType")
+    frappe.db.commit()
+    return True
+
+
+def has_user_extra_permission(doc, ptype=None, user=None):
+    """Check user-specific permission overrides (used as a Frappe permission hook)."""
+    if not user:
+        user = frappe.session.user
+
+    # Administrator and Guest bypass custom overrides
+    if user in ("Administrator", "Guest"):
+        return None
+
+    doctype = doc if isinstance(doc, str) else doc.doctype
+    if doctype not in PERMISSION_DOCTYPES:
+        return None
+
+    # Super Admin and System Manager have all permissions for custom doctypes
+    user_roles = frappe.get_roles(user)
+    if "Super Admin" in user_roles or "System Manager" in user_roles:
+        return True
+
+    ptype_map = {
+        "read": "read",
+        "write": "write",
+        "create": "create",
+        "delete": "delete",
+    }
+    mapped_ptype = ptype_map.get(ptype)
+    if not mapped_ptype:
+        return None
+
+    # Check if there is an extra permission override
+    extra_perm = frappe.get_all(
+        "User Extra Permission",
+        filters={"user": user, "doctype_name": doctype},
+        fields=["read", "write", "create", "delete"],
+        limit=1,
+    )
+
+    if extra_perm and bool(extra_perm[0].get(mapped_ptype)):
+        return True
+
+    return None
+
+
 def ensure_temple_donation_roles():
     """Called after migrate to ensure app Role Profile and static roles exist."""
     _ensure_app_role_profile()
+    for doctype in PERMISSION_DOCTYPES:
+        _upsert_custom_docperm(
+            role_name="Super Admin",
+            doctype=doctype,
+            read=1,
+            write=1,
+            create=1,
+            delete=1
+        )
 

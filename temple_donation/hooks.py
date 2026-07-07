@@ -132,10 +132,27 @@ after_migrate = ["temple_donation.api.ensure_temple_donation_roles"]
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+
+has_permission = {
+	"Donor": "temple_donation.api.has_user_extra_permission",
+	"Temple": "temple_donation.api.has_user_extra_permission",
+	"Donation": "temple_donation.api.has_user_extra_permission",
+	"Donation Type": "temple_donation.api.has_user_extra_permission",
+	"User": "temple_donation.api.has_user_extra_permission",
+	"Item": "temple_donation.api.has_user_extra_permission",
+	"Inventory Entry": "temple_donation.api.has_user_extra_permission",
+	"Room": "temple_donation.api.has_user_extra_permission",
+	"Room Booking": "temple_donation.api.has_user_extra_permission",
+	"Building": "temple_donation.api.has_user_extra_permission",
+	"Room Type": "temple_donation.api.has_user_extra_permission",
+	"Item Category": "temple_donation.api.has_user_extra_permission",
+	"Store Location": "temple_donation.api.has_user_extra_permission",
+	"Document Template": "temple_donation.api.has_user_extra_permission",
+	"Receipt Settings": "temple_donation.api.has_user_extra_permission",
+	"Temple General Settings": "temple_donation.api.has_user_extra_permission",
+	"Temple Booking Settings": "temple_donation.api.has_user_extra_permission",
+	"Temple Notification Settings": "temple_donation.api.has_user_extra_permission"
+}
 
 # DocType Class
 # ---------------
