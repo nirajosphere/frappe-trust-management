@@ -270,9 +270,57 @@ export const navigationItems = [
 ];
 
 /**
+ * Helper to check user permission including custom extra overrides
+ */
+export const checkUserPermission = (navKey, userRoles = [], userPermissions = []) => {
+    // 1. If user is Super Admin, System Manager or Administrator, grant all permissions
+    const isManager = userRoles.includes("System Manager") || userRoles.includes("Super Admin") || userRoles.includes("Administrator");
+    if (isManager) return true;
+
+    // 2. Find the navigation item configuration
+    const navItem = navigationItems.find(item => item.key === navKey);
+    if (!navItem) return false;
+
+    // 3. Map the navigation key to the corresponding DocType
+    const doctypeMap = {
+        "donors": DOCTYPE_DONOR,
+        "temples": DOCTYPE_TEMPLE,
+        "donations": DOCTYPE_DONATION,
+        "donation-types": DOCTYPE_DONATION_TYPE,
+        "users": DOCTYPE_USER,
+        "items": DOCTYPE_ITEM,
+        "item-categories": DOCTYPE_ITEM_CATEGORY,
+        "store-locations": DOCTYPE_STORE_LOCATION,
+        "inventory-entries": DOCTYPE_INVENTORY_ENTRY,
+        "rooms": DOCTYPE_ROOM,
+        "room-bookings": DOCTYPE_ROOM_BOOKING,
+        "buildings": DOCTYPE_BUILDING,
+        "room-types": DOCTYPE_ROOM_TYPE,
+        "document-templates": DOCTYPE_DOCUMENT_TEMPLATE,
+        "receipt-settings": DOCTYPE_RECEIPT_SETTINGS,
+        "general-settings": DOCTYPE_GENERAL_SETTINGS,
+        "booking-settings": DOCTYPE_BOOKING_SETTINGS,
+        "notification-settings": DOCTYPE_NOTIFICATION_SETTINGS,
+        "inventory-dashboard": DOCTYPE_ITEM // Map inventory dashboard to items
+    };
+
+    const doctype = doctypeMap[navKey];
+    if (doctype) {
+        // If it is a doctype page, check user-specific permission override
+        const perm = userPermissions.find(p => p.doctype === doctype);
+        if (perm) {
+            return !!perm.read;
+        }
+    }
+
+    // 4. Fallback to default role check
+    return navItem.roles.some(role => userRoles.includes(role));
+};
+
+/**
  * Enhanced route resolver.
  */
-export const getComponentForRoute = (currentRoute, userRoles = []) => {
+export const getComponentForRoute = (currentRoute, userRoles = [], userPermissions = []) => {
     const parts = currentRoute.split('/');
     const baseKey = parts[0];
     let subRoute = parts[1];
@@ -316,7 +364,7 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     }
 
     // Permission check
-    const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+    const hasPermission = !baseKey || baseKey === "dashboard" || checkUserPermission(baseKey, userRoles, userPermissions);
 
     if (!hasPermission) {
         return (
@@ -397,9 +445,9 @@ export const getComponentForRoute = (currentRoute, userRoles = []) => {
     return <Dashboard />;
 };
 
-export const getFilteredMenuItems = (userRoles = []) => {
+export const getFilteredMenuItems = (userRoles = [], userPermissions = []) => {
     return navigationItems
-        .filter(item => !item.hidden && item.roles.some(role => userRoles.includes(role)))
+        .filter(item => !item.hidden && checkUserPermission(item.key, userRoles, userPermissions))
         .map(({ key, icon, label }) => ({ key, icon, label }));
 };
 
@@ -462,31 +510,27 @@ export const settingsNavigationStructure = [
     { key: "receipt-settings", label: "Receipt Settings" }
 ];
 
-export const getFilteredSettingsItems = (userRoles = []) => {
+export const getFilteredSettingsItems = (userRoles = [], userPermissions = []) => {
     return settingsNavigationStructure
         .map(child => {
-            const navItem = navigationItems.find(item => item.key === child.key);
-            const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+            const hasPermission = checkUserPermission(child.key, userRoles, userPermissions);
             if (!hasPermission) return null;
             return child;
         })
         .filter(Boolean);
 };
 
-
-export const getGroupedMenuItems = (userRoles = []) => {
+export const getGroupedMenuItems = (userRoles = [], userPermissions = []) => {
     return groupedNavigationStructure
         .map(group => {
             if (group.isSingle) {
-                const navItem = navigationItems.find(item => item.key === group.key);
-                const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+                const hasPermission = checkUserPermission(group.key, userRoles, userPermissions);
                 if (!hasPermission) return null;
                 return { ...group };
             }
             
             const filteredChildren = group.children.map(child => {
-                const navItem = navigationItems.find(item => item.key === child.key);
-                const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+                const hasPermission = checkUserPermission(child.key, userRoles, userPermissions);
                 if (!hasPermission) return null;
                 return child;
             }).filter(Boolean);

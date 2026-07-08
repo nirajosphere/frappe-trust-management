@@ -239,16 +239,102 @@ def get_active_user_donations(user):
     return donations
 
 @frappe.whitelist()
+def get_users_assigned_to_temples(temples):
+    """
+    Returns a list of users who are assigned to the specified temples.
+    """
+    temples = _parse_json_arg(temples)
+    if not temples:
+        return []
+        
+    details = frappe.db.get_all(
+        "Temple Details",
+        filters={"temple": ["in", temples], "parenttype": "User"},
+        fields=["parent"]
+    )
+    return list(set(d.parent for d in details))
+
+def _get_user_assignment_filters(temple=None, user=None):
+    """
+    Returns a dict containing:
+      - 'temple_filter': None, a single temple name, or a list of temple names.
+      - 'user_filter': None, a single user name, or a list of user names.
+      - 'assigned_temples': list of temple names.
+      - 'allowed_users': list of user names.
+    Enforces permissions.
+    """
+    current_user = frappe.session.user
+    user_roles = frappe.get_roles(current_user)
+    
+    # If the user is Administrator, Super Admin, or System Manager, they have no restrictions
+    if "System Manager" in user_roles or "Super Admin" in user_roles or current_user == "Administrator":
+        return {
+            "temple_filter": temple,
+            "user_filter": user,
+            "assigned_temples": [],
+            "allowed_users": []
+        }
+        
+    # Get assigned temples for the current user
+    assigned_temples = [
+        t.temple for t in frappe.get_all(
+            "Temple Details", 
+            filters={"parent": current_user}, 
+            fields=["temple"]
+        )
+    ]
+    
+    # If they are restricted but have no assigned temples, they can see nothing!
+    if not assigned_temples:
+        frappe.throw(_("You are not assigned to any temples."))
+        
+    # Validate requested temple
+    if temple:
+        if temple not in assigned_temples:
+            frappe.throw(_("Not permitted to access data for temple {0}").format(temple))
+        temple_filter = temple
+    else:
+        temple_filter = ["in", assigned_temples]
+        
+    # Get allowed users (users assigned to the same temples)
+    allowed_users = [
+        d.parent for d in frappe.get_all(
+            "Temple Details", 
+            filters={"temple": ["in", assigned_temples], "parenttype": "User"}, 
+            fields=["parent"]
+        )
+    ]
+    if current_user not in allowed_users:
+        allowed_users.append(current_user)
+        
+    # Validate requested user
+    if user:
+        if user not in allowed_users:
+            frappe.throw(_("Not permitted to access data for user {0}").format(user))
+        user_filter = user
+    else:
+        user_filter = ["in", allowed_users]
+        
+    return {
+        "temple_filter": temple_filter,
+        "user_filter": user_filter,
+        "assigned_temples": assigned_temples,
+        "allowed_users": allowed_users
+    }
+
+@frappe.whitelist()
 def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns core stats for the dashboard.
     Total Donation = (Sum of Handed-over Cash from Ledger) + (Sum of non-Cash donations).
     """
+    assign = _get_user_assignment_filters(temple, user)
+    
     filters = {}
-    if temple:
-        filters["temple"] = temple
-    if user:
-        filters["cashier"] = user
+    if assign["temple_filter"]:
+        filters["temple"] = assign["temple_filter"]
+    if assign["user_filter"]:
+        filters["cashier"] = assign["user_filter"]
     if from_date and to_date:
         filters["creation"] = ["between", [from_date, to_date]]
     elif from_date:
@@ -256,11 +342,6 @@ def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     elif to_date:
         filters["creation"] = ["<=", to_date]
 
-    # 1. Handed-over Cash from Ledger
-    # Note: Ledger doesn't have 'temple' field directly usually, 
-    # but let's assume we want to filter donations. 
-    # If we filter by temple, we should probably look at tabDonation.
-    
     # Let's simplify: Sum of total_amount from tabDonation with filters
     total_donation = frappe.db.get_value("Donation", 
                                           filters=filters, 
@@ -275,12 +356,25 @@ def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
         WHERE 1=1
     """
     params = []
-    if temple:
-        query += " AND d.temple = %s"
-        params.append(temple)
-    if user:
-        query += " AND d.cashier = %s"
-        params.append(user)
+    
+    if assign["temple_filter"]:
+        if isinstance(assign["temple_filter"], list) and assign["temple_filter"][0] == "in":
+            temples_list = assign["temple_filter"][1]
+            query += " AND d.temple IN ({})".format(", ".join(["%s"] * len(temples_list)))
+            params.extend(temples_list)
+        else:
+            query += " AND d.temple = %s"
+            params.append(assign["temple_filter"])
+            
+    if assign["user_filter"]:
+        if isinstance(assign["user_filter"], list) and assign["user_filter"][0] == "in":
+            users_list = assign["user_filter"][1]
+            query += " AND d.cashier IN ({})".format(", ".join(["%s"] * len(users_list)))
+            params.extend(users_list)
+        else:
+            query += " AND d.cashier = %s"
+            params.append(assign["user_filter"])
+            
     if from_date and to_date:
         query += " AND d.creation BETWEEN %s AND %s"
         params.extend([from_date, to_date])
@@ -297,7 +391,17 @@ def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     else:
         donor_filters["creation"] = (">=", nowdate())
         
-    new_donors = frappe.db.count("Donor", filters=donor_filters)
+    if assign["assigned_temples"]:
+        donors_in_temples = frappe.get_all("Donation", 
+            filters={
+                "temple": ["in", assign["assigned_temples"]],
+                "creation": donor_filters["creation"]
+            },
+            fields=["donor"]
+        )
+        new_donors = len(set(d.donor for d in donors_in_temples if d.get("donor")))
+    else:
+        new_donors = frappe.db.count("Donor", filters=donor_filters)
     
     return {
         "total_donation": total_donation,
@@ -310,6 +414,7 @@ def get_donations_by_type(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns donation breakdown for pie chart.
     """
+    assign = _get_user_assignment_filters(temple, user)
     query = """
         SELECT dt.donation_type as type, SUM(di.amount) as value 
         FROM `tabDonation Item` di
@@ -318,12 +423,25 @@ def get_donations_by_type(temple=None, user=None, from_date=None, to_date=None):
         WHERE 1=1
     """
     params = []
-    if temple:
-        query += " AND d.temple = %s"
-        params.append(temple)
-    if user:
-        query += " AND d.cashier = %s"
-        params.append(user)
+    
+    if assign["temple_filter"]:
+        if isinstance(assign["temple_filter"], list) and assign["temple_filter"][0] == "in":
+            temples_list = assign["temple_filter"][1]
+            query += " AND d.temple IN ({})".format(", ".join(["%s"] * len(temples_list)))
+            params.extend(temples_list)
+        else:
+            query += " AND d.temple = %s"
+            params.append(assign["temple_filter"])
+            
+    if assign["user_filter"]:
+        if isinstance(assign["user_filter"], list) and assign["user_filter"][0] == "in":
+            users_list = assign["user_filter"][1]
+            query += " AND d.cashier IN ({})".format(", ".join(["%s"] * len(users_list)))
+            params.extend(users_list)
+        else:
+            query += " AND d.cashier = %s"
+            params.append(assign["user_filter"])
+            
     if from_date and to_date:
         query += " AND d.creation BETWEEN %s AND %s"
         params.extend([from_date, to_date])
@@ -337,14 +455,28 @@ def get_top_donors(temple=None, user=None, from_date=None, to_date=None):
     """
     Returns top 10 donors by total contribution.
     """
+    assign = _get_user_assignment_filters(temple, user)
     query = "SELECT donor_name as name, SUM(total_amount) as total FROM `tabDonation` WHERE 1=1"
     params = []
-    if temple:
-        query += " AND temple = %s"
-        params.append(temple)
-    if user:
-        query += " AND cashier = %s"
-        params.append(user)
+    
+    if assign["temple_filter"]:
+        if isinstance(assign["temple_filter"], list) and assign["temple_filter"][0] == "in":
+            temples_list = assign["temple_filter"][1]
+            query += " AND temple IN ({})".format(", ".join(["%s"] * len(temples_list)))
+            params.extend(temples_list)
+        else:
+            query += " AND temple = %s"
+            params.append(assign["temple_filter"])
+            
+    if assign["user_filter"]:
+        if isinstance(assign["user_filter"], list) and assign["user_filter"][0] == "in":
+            users_list = assign["user_filter"][1]
+            query += " AND cashier IN ({})".format(", ".join(["%s"] * len(users_list)))
+            params.extend(users_list)
+        else:
+            query += " AND cashier = %s"
+            params.append(assign["user_filter"])
+            
     if from_date and to_date:
         query += " AND creation BETWEEN %s AND %s"
         params.extend([from_date, to_date])
@@ -358,11 +490,12 @@ def get_recent_donations(temple=None, user=None, limit=5):
     """
     Returns the most recent donations with their primary category tag.
     """
+    assign = _get_user_assignment_filters(temple, user)
     filters = {}
-    if temple:
-        filters["temple"] = temple
-    if user:
-        filters["cashier"] = user
+    if assign["temple_filter"]:
+        filters["temple"] = assign["temple_filter"]
+    if assign["user_filter"]:
+        filters["cashier"] = assign["user_filter"]
 
     donations = frappe.get_list("Donation", 
         filters=filters,
@@ -399,6 +532,8 @@ def get_monthly_donations(temple=None, user=None):
     """
     from frappe.utils import add_months, getdate, formatdate
     
+    assign = _get_user_assignment_filters(temple, user)
+    
     data = []
     for i in range(5, -1, -1):
         target_date = add_months(nowdate(), -i)
@@ -408,10 +543,10 @@ def get_monthly_donations(temple=None, user=None):
         month_label = formatdate(month_start, "MMM")
         
         filters = {"creation": ["between", [month_start, next_month]]}
-        if temple:
-            filters["temple"] = temple
-        if user:
-            filters["cashier"] = user
+        if assign["temple_filter"]:
+            filters["temple"] = assign["temple_filter"]
+        if assign["user_filter"]:
+            filters["cashier"] = assign["user_filter"]
 
         total = frappe.db.get_value("Donation", 
             filters=filters,

@@ -21,7 +21,7 @@ const App = () => {
     const [currentRoute, setCurrentRoute] = useState("dashboard");
     const [mobileOpen, setMobileOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
-    const { user, roles, logout, isSystemManager, loading } = useUser();
+    const { user, roles, permissions, logout, isSystemManager, loading } = useUser();
 
     useEffect(() => {
         const handleResize = () => setWindowWidth(window.innerWidth);
@@ -77,7 +77,7 @@ const App = () => {
         setMobileOpen(false);
     };
 
-    const settingsItems = getFilteredSettingsItems(roles);
+    const settingsItems = getFilteredSettingsItems(roles, permissions);
 
     const userMenuItems = [
         {
@@ -119,8 +119,8 @@ const App = () => {
     );
 
     // Navigation items filtered by role
-    const menuItems = getFilteredMenuItems(roles);
-    const groupedMenuItems = getGroupedMenuItems(roles);
+    const menuItems = getFilteredMenuItems(roles, permissions);
+    const groupedMenuItems = getGroupedMenuItems(roles, permissions);
 
     const headerStyle = {
         background: "#ffffff",
@@ -476,7 +476,7 @@ const App = () => {
                         {/* Page Content */}
                         <Content className="bg-transparent py-8">
                             <div className="aavatto-content-wrapper">
-                                {getComponentForRoute(currentRoute, roles)}
+                                {getComponentForRoute(currentRoute, roles, permissions)}
                             </div>
                         </Content>
                     </Layout>

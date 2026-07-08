@@ -43,6 +43,8 @@ const Dashboard = () => {
         new_donors: 0
     });
 
+    console.log(filters, "filters")
+
     const [typeData, setTypeData] = useState([]);
     const [topDonors, setTopDonors] = useState([]);
     const [trendData, setTrendData] = useState([]);
@@ -51,6 +53,10 @@ const Dashboard = () => {
     const [temples, setTemples] = useState([]);
     const [users, setUsers] = useState([]);
     const [optionsLoading, setOptionsLoading] = useState({ temple: false, user: false });
+
+    const [allowedTemples, setAllowedTemples] = useState([]);
+    const [allowedUsers, setAllowedUsers] = useState([]);
+    const [isSystemManager, setIsSystemManager] = useState(true);
 
     const templeSearchTimer = useRef(null);
     const userSearchTimer = useRef(null);
@@ -62,15 +68,22 @@ const Dashboard = () => {
         to_date: filterState.dateRange?.[1]?.format("YYYY-MM-DD")
     }), [filters]);
 
-    const searchTemples = async (searchText = "") => {
+    const searchTemples = async (searchText = "", limitToTemples = null) => {
         setOptionsLoading((prev) => ({ ...prev, temple: true }));
         try {
             const args = {
                 doctype: "Temple",
                 fields: ["name", "temple_name"],
+                filters: {},
                 limit_page_length: 50,
                 order_by: "temple_name asc"
             };
+
+            const targetAllowed = limitToTemples !== null ? limitToTemples : allowedTemples;
+            if (targetAllowed && targetAllowed.length > 0) {
+                args.filters.name = ["in", targetAllowed];
+            }
+
             if (searchText?.trim()) {
                 args.or_filters = [
                     ["temple_name", "like", `%${searchText.trim()}%`],
@@ -86,7 +99,7 @@ const Dashboard = () => {
         }
     };
 
-    const searchUsers = async (searchText = "") => {
+    const searchUsers = async (searchText = "", limitToUsers = null) => {
         setOptionsLoading((prev) => ({ ...prev, user: true }));
         try {
             const args = {
@@ -96,6 +109,12 @@ const Dashboard = () => {
                 limit_page_length: 50,
                 order_by: "full_name asc"
             };
+
+            const targetAllowed = limitToUsers !== null ? limitToUsers : allowedUsers;
+            if (targetAllowed && targetAllowed.length > 0) {
+                args.filters.name = ["in", targetAllowed];
+            }
+
             if (searchText?.trim()) {
                 args.or_filters = [
                     ["full_name", "like", `%${searchText.trim()}%`],
@@ -162,9 +181,66 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        searchTemples();
-        searchUsers();
-        fetchData();
+        const initDashboard = async () => {
+            setLoading(true);
+            try {
+                let systemManager = true;
+                let templesToAllow = null;
+                let usersToAllow = null;
+
+                if (typeof frappe !== "undefined" && frappe.session.user !== "Administrator") {
+                    const userRoles = frappe.user_roles || [];
+                    const isManager = userRoles.includes("System Manager") || userRoles.includes("Super Admin");
+
+                    if (!isManager) {
+                        systemManager = false;
+                        // Fetch assigned temples for the current user
+                        const userRes = await frappe.call({
+                            method: "frappe.client.get",
+                            args: {
+                                doctype: "User",
+                                name: frappe.session.user
+                            }
+                        });
+
+                        const myTemples = userRes.message?.custom_select_temple?.map(t => t.temple) || [];
+                        if (myTemples.length > 0) {
+                            templesToAllow = myTemples;
+
+                            // Fetch other users who are also assigned to these temples
+                            const userDetailsRes = await frappe.call({
+                                method: "temple_donation.api.get_users_assigned_to_temples",
+                                args: {
+                                    temples: JSON.stringify(myTemples)
+                                }
+                            });
+
+                            const matchedUsers = Array.from(new Set(userDetailsRes.message || []));
+                            if (!matchedUsers.includes(frappe.session.user)) {
+                                matchedUsers.push(frappe.session.user);
+                            }
+                            usersToAllow = matchedUsers;
+                        }
+                    }
+                }
+
+                setIsSystemManager(systemManager);
+                setAllowedTemples(templesToAllow || []);
+                setAllowedUsers(usersToAllow || []);
+
+                await Promise.all([
+                    searchTemples("", templesToAllow),
+                    searchUsers("", usersToAllow),
+                    fetchData()
+                ]);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        initDashboard();
     }, []);
 
     // 🔥 DATE TYPE HANDLER
@@ -225,100 +301,103 @@ const Dashboard = () => {
     return (
         <ViewContainer>
             <PageHeader title="Dashboard" description="Analytics Overview" />
-                {/* 🔥 FILTER */}
-                <Card className="border border-zinc-200 mb-6">
+            {/* 🔥 FILTER */}
+            <Card className="border border-zinc-200 mb-6">
 
-                    <Row gutter={[16, 16]}>
+                <Row gutter={[16, 16]}>
 
-                        {/* TEMPLE */}
-                        <Col xs={24} md={8}>
-                            <Text>Search By Trust</Text>
+                    {/* TEMPLE */}
+                    <Col xs={24} md={6}>
+                        <Text>Search By Trust</Text>
+                        <Select
+                            showSearch
+                            value={filters.temple}
+                            onChange={handleTempleChange}
+                            onSearch={handleTempleSearch}
+                            onClear={() => searchTemples()}
+                            placeholder="Search temple..."
+                            className="w-full mt-1"
+                            allowClear
+                            loading={optionsLoading.temple}
+                            filterOption={false}
+                            notFoundContent={optionsLoading.temple ? "Loading..." : "No temples found"}
+                            options={temples.map(t => ({
+                                label: t.temple_name || t.name,
+                                value: t.name
+                            }))}
+                        />
+                    </Col>
+
+                    {/* USER */}
+                    <Col xs={24} md={6}>
+                        <Text>Search By User</Text>
+                        <Select
+                            showSearch
+                            value={filters.user}
+                            onChange={handleUserChange}
+                            onSearch={handleUserSearch}
+                            onClear={() => searchUsers()}
+                            placeholder="Search user..."
+                            className="w-full mt-1"
+                            allowClear
+                            loading={optionsLoading.user}
+                            filterOption={false}
+                            notFoundContent={optionsLoading.user ? "Loading..." : "No users found"}
+                            options={users.map(u => ({
+                                label: u.full_name || u.name,
+                                value: u.name
+                            }))}
+                        />
+                    </Col>
+
+                    {/* DATE */}
+                    <Col xs={24} md={6}>
+                        <Text>Filter By Date</Text>
+
+                        <Space direction="vertical" className="w-full mt-1">
+
                             <Select
-                                showSearch
-                                value={filters.temple}
-                                onChange={handleTempleChange}
-                                onSearch={handleTempleSearch}
-                                onClear={() => searchTemples()}
-                                placeholder="Search temple..."
-                                className="w-full mt-1"
-                                allowClear
-                                loading={optionsLoading.temple}
-                                filterOption={false}
-                                notFoundContent={optionsLoading.temple ? "Loading..." : "No temples found"}
-                                options={temples.map(t => ({
-                                    label: t.temple_name || t.name,
-                                    value: t.name
-                                }))}
+                                placeholder="Select Range"
+                                value={filters.dateType}
+                                onChange={handleDateTypeChange}
+                                className="w-full"
+                                options={[
+                                    { label: "Today", value: "today" },
+                                    { label: "This Week", value: "week" },
+                                    { label: "This Month", value: "month" },
+                                    { label: "Custom Range", value: "custom" }
+                                ]}
                             />
-                        </Col>
 
-                        {/* USER */}
-                        <Col xs={24} md={8}>
-                            <Text>Search By User</Text>
-                            <Select
-                                showSearch
-                                value={filters.user}
-                                onChange={handleUserChange}
-                                onSearch={handleUserSearch}
-                                onClear={() => searchUsers()}
-                                placeholder="Search user..."
-                                className="w-full mt-1"
-                                allowClear
-                                loading={optionsLoading.user}
-                                filterOption={false}
-                                notFoundContent={optionsLoading.user ? "Loading..." : "No users found"}
-                                options={users.map(u => ({
-                                    label: u.full_name || u.name,
-                                    value: u.name
-                                }))}
-                            />
-                        </Col>
-
-                        {/* DATE */}
-                        <Col xs={24} md={8}>
-                            <Text>Filter By Date</Text>
-
-                            <Space direction="vertical" className="w-full mt-1">
-
-                                <Select
-                                    placeholder="Select Range"
-                                    value={filters.dateType}
-                                    onChange={handleDateTypeChange}
+                            {filters.dateType === "custom" && (
+                                <RangePicker
                                     className="w-full"
-                                    options={[
-                                        { label: "Today", value: "today" },
-                                        { label: "This Week", value: "week" },
-                                        { label: "This Month", value: "month" },
-                                        { label: "Custom Range", value: "custom" }
-                                    ]}
+                                    value={filters.dateRange}
+                                    onChange={(dates) =>
+                                        setFilters({ ...filters, dateRange: dates })
+                                    }
                                 />
+                            )}
 
-                                {filters.dateType === "custom" && (
-                                    <RangePicker
-                                        className="w-full"
-                                        value={filters.dateRange}
-                                        onChange={(dates) =>
-                                            setFilters({ ...filters, dateRange: dates })
-                                        }
-                                    />
-                                )}
+                        </Space>
+                    </Col>
 
-                            </Space>
-                        </Col>
+                    <Col xs={24} md={6}>
+                        <div className="flex justify-end gap-2 mt-4">
+                            <Button onClick={handleClear}>Clear Filter</Button>
+                            <Button type="primary" onClick={handleSubmit}>
+                                Submit
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
 
-                    </Row>
 
-                    <div className="flex justify-end gap-2 mt-4">
-                        <Button onClick={handleClear}>Clear Filter</Button>
-                        <Button type="primary" onClick={handleSubmit}>
-                            Submit
-                        </Button>
-                    </div>
 
-                </Card>
+            </Card>
 
-                {/* 🔥 STATS */}
-                <Spin spinning={loading}>
+            {/* 🔥 STATS */}
+            <Spin spinning={loading}>
                 <Row gutter={[16, 16]} className="mb-6">
 
                     <Col xs={24} md={8}>
@@ -357,7 +436,7 @@ const Dashboard = () => {
                 <Row gutter={[16, 16]} className="mb-6">
 
                     <Col xs={24} md={12}>
-                        <Card title={<Space><PieChartOutlined /> Donation Distribution</Space>} className="border">
+                        <Card title={<Space><PieChartOutlined /> Donation Distribution</Space>} className="border !h-full">
 
                             {typeData.length > 0 ? (
                                 <ResponsiveContainer width="100%" height={300}>
@@ -383,7 +462,7 @@ const Dashboard = () => {
 
                     {/* TREND CHART */}
                     <Col xs={24} md={12}>
-                        <Card title={<Space><AreaChartOutlined /> Collection Trend</Space>} className="border">
+                        <Card title={<Space><AreaChartOutlined /> Collection Trend</Space>} className="border !h-full">
                             {trendData.length > 0 ? (
                                 <ResponsiveContainer width="100%" height={300}>
                                     <AreaChart data={trendData}>
@@ -443,7 +522,7 @@ const Dashboard = () => {
                     </Col>
 
                 </Row>
-                </Spin>
+            </Spin>
         </ViewContainer>
     );
 };

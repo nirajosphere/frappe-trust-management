@@ -308,6 +308,7 @@ const UserForm = ({ id, onBack }) => {
                                         <Form.Item name="custom_user_role" label={<span style={{ fontWeight: 600, color: '#27272a' }}>User Role</span>} rules={[{ required: true, message: "Required" }]}>
                                             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                                                 <Select
+                                                    value={userRole || undefined}
                                                     placeholder="Select Role"
                                                     disabled={disableAdminFields}
                                                     style={{ flex: 1 }}
@@ -345,8 +346,8 @@ const UserForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="custom_select_temple" label={<span style={{ fontWeight: 600, color: '#27272a' }}>Assigned Temples</span>} rules={[{ required: true, message: "Required" }]}>
-                                            <Select mode="multiple" placeholder="Select Temples" disabled={disableAdminFields} allowClear maxTagCount="responsive" style={{ width: '100%' }}>
+                                        <Form.Item name="custom_select_temple" label={<span style={{ fontWeight: 600, color: '#27272a' }}>Assigned Trust</span>} rules={[{ required: true, message: "Required" }]}>
+                                            <Select mode="multiple" placeholder="Select Trusts" disabled={disableAdminFields} allowClear maxTagCount="responsive" style={{ width: '100%' }}>
                                                 {temples?.map(t => (
                                                     <Select.Option key={t.name} value={t.name}>{t.temple_name}</Select.Option>
                                                 ))}

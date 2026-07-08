@@ -5,6 +5,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [roles, setRoles] = useState([]);
+    const [permissions, setPermissions] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // console.log(user, "user");
@@ -26,6 +27,22 @@ export const UserProvider = ({ children }) => {
                     image: frappe.boot.user_info[currentUser]?.image
                 });
                 setRoles(userRoles);
+
+                // Fetch extra permissions override for the current user
+                try {
+                    const permRes = await new Promise((resolve) => {
+                        frappe.call({
+                            method: "temple_donation.api.get_user_module_permissions",
+                            args: { user_name: currentUser },
+                            callback: (r) => resolve(r.message || null)
+                        });
+                    });
+                    if (permRes && permRes.permissions) {
+                        setPermissions(permRes.permissions);
+                    }
+                } catch (err) {
+                    console.error("Error fetching user permissions:", err);
+                }
 
                 // Logic to hide/show Frappe Header
                 // Check if user has any of the specific roles
@@ -75,6 +92,7 @@ export const UserProvider = ({ children }) => {
     const value = {
         user,
         roles,
+        permissions,
         loading,
         logout,
         isSuperAdmin: roles.includes('Super Admin'),
