@@ -451,19 +451,28 @@ export const groupedNavigationStructure = [
             { key: "store-locations", label: "Store Locations" },
             { key: "inventory-entries", label: "Stock Entries" }
         ]
-    },
-    {
-        label: "Settings",
-        key: "settings-group",
-        children: [
-            { key: "general-settings", label: "General Settings" },
-            { key: "booking-settings", label: "Booking Settings" },
-            { key: "notification-settings", label: "Notification Settings" },
-            { key: "document-templates", label: "Document Templates" },
-            { key: "receipt-settings", label: "Receipt Settings" }
-        ]
     }
 ];
+
+export const settingsNavigationStructure = [
+    { key: "general-settings", label: "General Settings" },
+    { key: "booking-settings", label: "Booking Settings" },
+    { key: "notification-settings", label: "Notification Settings" },
+    { key: "document-templates", label: "Document Templates" },
+    { key: "receipt-settings", label: "Receipt Settings" }
+];
+
+export const getFilteredSettingsItems = (userRoles = []) => {
+    return settingsNavigationStructure
+        .map(child => {
+            const navItem = navigationItems.find(item => item.key === child.key);
+            const hasPermission = !navItem || navItem.roles.some(role => userRoles.includes(role));
+            if (!hasPermission) return null;
+            return child;
+        })
+        .filter(Boolean);
+};
+
 
 export const getGroupedMenuItems = (userRoles = []) => {
     return groupedNavigationStructure

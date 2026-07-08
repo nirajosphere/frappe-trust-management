@@ -18,6 +18,7 @@ const Donation = ({ onBack }) => {
     const [cartItems, setCartItems] = useState([]);
     const [paymentMode, setPaymentMode] = useState("Cash");
     const [submitting, setSubmitting] = useState(false);
+    const [donorMobile, setDonorMobile] = useState("");
 
     // Synchronize cart with selected temples
     // If a temple is unselected, remove its items from the cart
@@ -75,6 +76,7 @@ const Donation = ({ onBack }) => {
         setSelectedTemple([]);
         setCartItems([]);
         setPaymentMode("Cash");
+        setDonorMobile("");
     }, []);
 
     const handleSubmit = useCallback(async () => {
@@ -150,7 +152,9 @@ const Donation = ({ onBack }) => {
         if (successCount === templeNames.length) {
             message.success("All donations processed successfully!");
             setSelectedDonor(null);
+            setSelectedTemple([]);
             setCartItems([]);
+            setDonorMobile("");
         } else if (successCount > 0) {
             message.warning(`Processed ${successCount} of ${templeNames.length} donations. Errors: ${errorMessages.join(', ')}`);
             // Only clear items that were successfully processed? Tricky.
@@ -184,6 +188,8 @@ const Donation = ({ onBack }) => {
                         <DonorSection
                             onDonorSelect={setSelectedDonor}
                             selectedDonor={selectedDonor}
+                            mobile={donorMobile}
+                            setMobile={setDonorMobile}
                         />
 
                         <TempleSelect

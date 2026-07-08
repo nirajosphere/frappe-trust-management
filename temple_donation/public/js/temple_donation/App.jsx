@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin, App as AntApp } from "antd";
-import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined } from "@ant-design/icons";
+import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { ChevronDown, X } from "lucide-react";
 
 // Centralized Configs
 import { themeConfig } from "./config/theme";
-import { getFilteredMenuItems, getGroupedMenuItems, getComponentForRoute } from "./config/navigation";
+import { getFilteredMenuItems, getGroupedMenuItems, getComponentForRoute, getFilteredSettingsItems } from "./config/navigation";
 import { useUser } from "./context/UserContext";
 import TempleFlagLoader from "./components/common/TempleFlagLoader";
 import NotificationDropdown from "./components/common/NotificationDropdown";
@@ -77,6 +77,8 @@ const App = () => {
         setMobileOpen(false);
     };
 
+    const settingsItems = getFilteredSettingsItems(roles);
+
     const userMenuItems = [
         {
             key: 'profile',
@@ -87,7 +89,23 @@ const App = () => {
                     window.location.href = '/me';
                 }
             }
-        },
+        }
+    ];
+
+    if (settingsItems.length > 0) {
+        userMenuItems.push({
+            key: 'settings-submenu',
+            label: 'Settings',
+            icon: <SettingOutlined />,
+            children: settingsItems.map(item => ({
+                key: item.key,
+                label: item.label,
+                onClick: () => handleMenuClick({ key: item.key })
+            }))
+        });
+    }
+
+    userMenuItems.push(
         {
             type: 'divider',
         },
@@ -98,7 +116,7 @@ const App = () => {
             danger: true,
             onClick: logout
         }
-    ];
+    );
 
     // Navigation items filtered by role
     const menuItems = getFilteredMenuItems(roles);
@@ -142,10 +160,12 @@ const App = () => {
         display: "block"
     };
 
+    const desktopGap = windowWidth < 1200 ? "12px" : "24px";
+
     const rightContainerStyle = {
         display: "flex",
         alignItems: "stretch",
-        gap: "24px",
+        gap: desktopGap,
         height: "100%"
     };
 
@@ -231,7 +251,7 @@ const App = () => {
 
                                 <div style={rightContainerStyle}>
                                     {!isMobile && (
-                                        <div style={{ display: 'flex', gap: '24px', alignItems: 'stretch', height: '100%' }}>
+                                        <div style={{ display: 'flex', gap: desktopGap, alignItems: 'stretch', height: '100%' }}>
                                             {groupedMenuItems.map(group => {
                                                 const isSingle = group.isSingle || (group.children && group.children.length === 1);
 
@@ -250,14 +270,15 @@ const App = () => {
                                                                 borderBottom: isActive ? '3px solid #18181b' : '3px solid transparent',
                                                                 padding: '0 4px',
                                                                 cursor: 'pointer',
-                                                                fontSize: '14px',
+                                                                fontSize: windowWidth < 1200 ? '13px' : '14px',
                                                                 fontWeight: '600',
                                                                 color: isActive ? '#18181b' : '#71717a',
                                                                 transition: 'all 0.2s',
                                                                 outline: 'none',
                                                                 height: '100%',
                                                                 display: 'flex',
-                                                                alignItems: 'center'
+                                                                alignItems: 'center',
+                                                                whiteSpace: 'nowrap'
                                                             }}
                                                         >
                                                             {label}
@@ -285,7 +306,7 @@ const App = () => {
                                                                 borderBottom: isGroupActive ? '3px solid #18181b' : '3px solid transparent',
                                                                 padding: '0 4px',
                                                                 cursor: 'pointer',
-                                                                fontSize: '14px',
+                                                                fontSize: windowWidth < 1200 ? '13px' : '14px',
                                                                 fontWeight: '600',
                                                                 color: isGroupActive ? '#18181b' : '#71717a',
                                                                 transition: 'all 0.2s',
@@ -293,7 +314,8 @@ const App = () => {
                                                                 height: '100%',
                                                                 display: 'flex',
                                                                 alignItems: 'center',
-                                                                gap: '4px'
+                                                                gap: '4px',
+                                                                whiteSpace: 'nowrap'
                                                             }}
                                                         >
                                                             <span>{group.label}</span>
@@ -374,31 +396,49 @@ const App = () => {
                                                 setMobileOpen(false);
                                             }}
                                             style={{ border: 'none' }}
-                                            items={groupedMenuItems.map(group => {
-                                                const isSingle = group.isSingle || (group.children && group.children.length === 1);
-                                                if (isSingle) {
-                                                    const targetKey = group.isSingle ? group.key : group.children[0].key;
-                                                    const label = group.isSingle ? group.label : group.children[0].label;
+                                            items={[
+                                                ...groupedMenuItems.map(group => {
+                                                    const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                                                    if (isSingle) {
+                                                        const targetKey = group.isSingle ? group.key : group.children[0].key;
+                                                        const label = group.isSingle ? group.label : group.children[0].label;
+                                                        return {
+                                                            key: targetKey,
+                                                            label: label
+                                                        };
+                                                    }
                                                     return {
-                                                        key: targetKey,
-                                                        label: label
+                                                        key: group.key,
+                                                        label: group.label,
+                                                        children: group.children.map(child => ({
+                                                            key: child.key,
+                                                            label: child.label
+                                                        }))
                                                     };
-                                                }
-                                                return {
-                                                    key: group.key,
-                                                    label: group.label,
-                                                    children: group.children.map(child => ({
-                                                        key: child.key,
-                                                        label: child.label
+                                                }),
+                                                ...(settingsItems.length > 0 ? [{
+                                                    key: 'settings-mobile-group',
+                                                    label: 'Settings',
+                                                    icon: <SettingOutlined />,
+                                                    children: settingsItems.map(item => ({
+                                                        key: item.key,
+                                                        label: item.label
                                                     }))
-                                                };
-                                            })}
+                                                }] : [])
+                                            ]}
                                         />
                                     </div>
 
                                     {user && (
                                         <div style={{ padding: '16px 20px', borderTop: '1px solid #f4f4f5', background: '#ffffff', flexShrink: 0 }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                                            <div 
+                                                onClick={() => {
+                                                    if (typeof window !== 'undefined') {
+                                                        window.location.href = '/me';
+                                                    }
+                                                }}
+                                                style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', cursor: 'pointer' }}
+                                            >
                                                 <Avatar size={40} src={user?.image} icon={<UserOutlined />} style={{ border: '2px solid #f4f4f5' }} />
                                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                                     <span style={{ fontSize: '14px', fontWeight: '700', color: '#18181b', lineHeight: '1.2' }}>{user?.name}</span>

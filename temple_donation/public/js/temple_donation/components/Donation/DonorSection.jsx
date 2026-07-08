@@ -144,8 +144,7 @@ import { Card, Input, Button } from "antd";
 import { SearchOutlined, UserAddOutlined } from "@ant-design/icons";
 import DonorModal from "./DonorModal";
 
-const DonorSection = ({ selectedDonor, onDonorSelect }) => {
-    const [mobile, setMobile] = useState("");
+const DonorSection = ({ selectedDonor, onDonorSelect, mobile = "", setMobile }) => {
     const [modal, setModal] = useState(false);
 
     const search = (val) => {
