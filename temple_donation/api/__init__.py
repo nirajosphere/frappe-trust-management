@@ -2293,6 +2293,55 @@ def reset_user_extra_permissions(user_name):
     return True
 
 
+RELATIONAL_DEPENDENCIES = {
+    "Donor": ["Donation", "Room Booking"],
+    "Temple": ["Donation", "Room Booking"],
+    "Donation Type": ["Donation"],
+    "Item": ["Inventory Entry"],
+    "Store Location": ["Inventory Entry"],
+    "Item Category": ["Item"],
+    "Room": ["Room Booking"],
+    "Building": ["Room"],
+    "Room Type": ["Room"],
+    "User": ["Donation"],
+}
+
+
+def _user_has_recursive_permission(user, doctype, mapped_ptype, visited=None):
+    if visited is None:
+        visited = set()
+
+    if doctype in visited:
+        return False
+    visited.add(doctype)
+
+    # 1. Check direct override for this doctype
+    extra_perm = frappe.db.get_value(
+        "User Extra Permission",
+        {"user": user, "doctype_name": doctype},
+        ["read", "write", "create", "delete"],
+        as_dict=True
+    )
+    if extra_perm and bool(extra_perm.get(mapped_ptype)):
+        return True
+
+    # 2. Check direct role default permission for this doctype
+    user_role = frappe.db.get_value("User", user, "custom_user_role")
+    if user_role:
+        role_row = _build_effective_permission_row(user_role, doctype)
+        if role_row and role_row.get(mapped_ptype):
+            return True
+
+    # 3. If checking read permission, check if the user has read permission on any parent that links to it
+    if mapped_ptype == "read":
+        parents = RELATIONAL_DEPENDENCIES.get(doctype, [])
+        for parent in parents:
+            if _user_has_recursive_permission(user, parent, "read", visited):
+                return True
+
+    return False
+
+
 def has_user_extra_permission(doc, ptype=None, user=None):
     """Check user-specific permission overrides (used as a Frappe permission hook)."""
     if not user:
@@ -2321,15 +2370,8 @@ def has_user_extra_permission(doc, ptype=None, user=None):
     if not mapped_ptype:
         return None
 
-    # Check if there is an extra permission override
-    extra_perm = frappe.get_all(
-        "User Extra Permission",
-        filters={"user": user, "doctype_name": doctype},
-        fields=["read", "write", "create", "delete"],
-        limit=1,
-    )
-
-    if extra_perm and bool(extra_perm[0].get(mapped_ptype)):
+    # Resolve recursively
+    if _user_has_recursive_permission(user, doctype, mapped_ptype):
         return True
 
     return None

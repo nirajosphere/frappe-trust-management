@@ -1,38 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-    Alert,
-    Button,
     Card,
-    Checkbox,
     Col,
     Empty,
     Form,
     Input,
-    List,
     Modal,
-    Popconfirm,
     Row,
     Select,
     Space,
-    Spin,
-    Tag,
-    Tooltip,
     Typography,
     Tabs,
+    Button,
     message,
 } from "antd";
-import {
-    DeleteOutlined,
-    EditOutlined,
-    LockOutlined,
-    PlusOutlined,
-    SafetyCertificateOutlined,
-    SafetyOutlined,
-    SaveOutlined,
-    UserOutlined,
-    UndoOutlined,
-} from "@ant-design/icons";
-import SectionCard from "../../components/common/SectionCard";
+import RoleListSidePanel from "./components/RoleListSidePanel";
+import RolePermissionsTable from "./components/RolePermissionsTable";
+import UserListSidePanel from "./components/UserListSidePanel";
+import UserExtraPermissionsTable from "./components/UserExtraPermissionsTable";
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -390,6 +375,31 @@ const RolePermissions = () => {
         });
     };
 
+    const handleUpdateUserRole = (userName, newRole) => {
+        if (typeof frappe === "undefined") return;
+        
+        frappe.call({
+            method: "frappe.client.set_value",
+            args: {
+                doctype: "User",
+                name: userName,
+                fieldname: "custom_user_role",
+                value: newRole,
+            },
+            callback: (r) => {
+                if (r.message) {
+                    message.success(`Assigned role "${newRole}" to user "${userName}" successfully.`);
+                    setUsers((prev) =>
+                        prev.map((u) =>
+                            u.name === userName ? { ...u, custom_user_role: newRole } : u
+                        )
+                    );
+                    fetchUserPermissions(userName);
+                }
+            },
+        });
+    };
+
     const openEditModal = () => {
         editForm.setFieldsValue({ new_role_name: selectedRole });
         setEditModalOpen(true);
@@ -404,283 +414,34 @@ const RolePermissions = () => {
             children: (
                 <Row gutter={[24, 24]}>
                     <Col xs={24} lg={8}>
-                        <SectionCard
-                            title="Roles"
-                            icon={<SafetyOutlined style={{ color: "#002140" }} />}
-                            right={
-                                <Button
-                                    size="small"
-                                    type="primary"
-                                    icon={<PlusOutlined />}
-                                    onClick={() => setCreateModalOpen(true)}
-                                >
-                                    Add Role
-                                </Button>
-                            }
-                        >
-                            <List
-                                loading={loadingRoles}
-                                dataSource={roles}
-                                locale={{ emptyText: "No roles found" }}
-                                renderItem={(item) => {
-                                    const isSelected = selectedRole === item.name;
-                                    return (
-                                        <List.Item
-                                            onClick={() => {
-                                                setSelectedRole(item.name);
-                                                setSelectedRoleMeta(item);
-                                            }}
-                                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-colors flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 ${
-                                                isSelected
-                                                    ? "bg-zinc-100/80 border-l-4 border-zinc-900 font-semibold"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <Space size={8} wrap>
-                                                {item.is_protected ? (
-                                                    <Tooltip title="Protected role">
-                                                        <LockOutlined className="text-zinc-400 text-xs" />
-                                                    </Tooltip>
-                                                ) : (
-                                                    <SafetyCertificateOutlined className="text-zinc-500 text-xs" />
-                                                )}
-                                                <span className="text-sm text-zinc-700">{item.name}</span>
-                                                {item.is_static && (
-                                                    <Tag className="!m-0 text-[10px]">Static</Tag>
-                                                )}
-                                                {item.user_count > 0 && (
-                                                    <Tag className="!m-0 text-[10px]">
-                                                        {item.user_count} user{item.user_count > 1 ? "s" : ""}
-                                                    </Tag>
-                                                )}
-                                            </Space>
-
-                                            {!item.is_protected && (
-                                                <div onClick={(e) => e.stopPropagation()}>
-                                                    <Popconfirm
-                                                        title="Delete this role?"
-                                                        description="This removes the role and its permission configuration."
-                                                        onConfirm={() => handleDeleteRole(item.name)}
-                                                        okText="Delete"
-                                                        cancelText="Cancel"
-                                                        okButtonProps={{ danger: true, size: "small" }}
-                                                        cancelButtonProps={{ size: "small" }}
-                                                    >
-                                                        <Button
-                                                            type="text"
-                                                            danger
-                                                            size="small"
-                                                            icon={
-                                                                <DeleteOutlined className="text-zinc-400 hover:text-red-500" />
-                                                            }
-                                                        />
-                                                    </Popconfirm>
-                                                </div>
-                                            )}
-                                        </List.Item>
-                                    );
-                                }}
-                            />
-                        </SectionCard>
+                        <RoleListSidePanel
+                            loading={loadingRoles}
+                            roles={roles}
+                            selectedRole={selectedRole}
+                            onSelectRole={(item) => {
+                                setSelectedRole(item.name);
+                                setSelectedRoleMeta(item);
+                            }}
+                            onAddRoleClick={() => setCreateModalOpen(true)}
+                            onDeleteRole={handleDeleteRole}
+                        />
                     </Col>
 
                     <Col xs={24} lg={16}>
                         {selectedRole ? (
-                            <SectionCard
-                                title={`Permissions — ${selectedRole}`}
-                                right={
-                                    <Space wrap>
-                                        {!selectedRoleMeta?.is_protected && !selectedRoleMeta?.is_static && (
-                                            <Button
-                                                size="small"
-                                                icon={<EditOutlined />}
-                                                onClick={openEditModal}
-                                            >
-                                                Edit Role
-                                            </Button>
-                                        )}
-                                        <Button
-                                            size="small"
-                                            icon={<PlusOutlined />}
-                                            onClick={() => setAddDoctypeModalOpen(true)}
-                                            disabled={addableDoctypes.length === 0}
-                                        >
-                                            Add DocType
-                                        </Button>
-                                        <Button
-                                            size="small"
-                                            type="primary"
-                                            icon={<SaveOutlined />}
-                                            loading={saving}
-                                            onClick={handleSavePermissions}
-                                        >
-                                            Save Changes
-                                        </Button>
-                                    </Space>
-                                }
-                            >
-                                <Alert
-                                    message="Permission changes apply immediately after saving."
-                                    type="info"
-                                    showIcon
-                                    style={{ marginBottom: "20px" }}
-                                />
-
-                                {loadingPerms ? (
-                                    <div className="py-16 text-center">
-                                        <Spin />
-                                    </div>
-                                ) : permissions.length === 0 ? (
-                                    <Empty
-                                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                                        description={
-                                            <div className="flex flex-col gap-2">
-                                                <Text className="font-semibold text-zinc-700">
-                                                    No DocTypes configured
-                                                </Text>
-                                                <Text className="text-zinc-400 text-xs">
-                                                    Add DocTypes to this role to configure permissions.
-                                                </Text>
-                                                <Button
-                                                    type="primary"
-                                                    size="small"
-                                                    icon={<PlusOutlined />}
-                                                    onClick={() => setAddDoctypeModalOpen(true)}
-                                                    className="mt-2"
-                                                >
-                                                    Add DocType
-                                                </Button>
-                                            </div>
-                                        }
-                                    />
-                                ) : (
-                                    <div className="overflow-x-auto border border-zinc-100 rounded-lg bg-white">
-                                        <table className="w-full text-left border-collapse">
-                                            <thead>
-                                                <tr className="bg-zinc-50/70 border-b border-zinc-100">
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                                                        DocType
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Read
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Write
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Create
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Delete
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        All
-                                                    </th>
-                                                    {canRemoveDoctypes && (
-                                                        <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                            Remove
-                                                        </th>
-                                                    )}
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-zinc-100">
-                                                {permissions.map((row) => {
-                                                    const isAllChecked =
-                                                        row.read && row.write && row.create && row.delete;
-                                                    return (
-                                                        <tr
-                                                            key={row.doctype}
-                                                            className="hover:bg-zinc-50/50 transition-colors"
-                                                        >
-                                                            <td className="p-3 text-sm font-medium text-zinc-700">
-                                                                {row.doctype}
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.read}
-                                                                    onChange={(e) =>
-                                                                        handlePermissionChange(
-                                                                            row.doctype,
-                                                                            "read",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.write}
-                                                                    onChange={(e) =>
-                                                                        handlePermissionChange(
-                                                                            row.doctype,
-                                                                            "write",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.create}
-                                                                    onChange={(e) =>
-                                                                        handlePermissionChange(
-                                                                            row.doctype,
-                                                                            "create",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.delete}
-                                                                    onChange={(e) =>
-                                                                        handlePermissionChange(
-                                                                            row.doctype,
-                                                                            "delete",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!isAllChecked}
-                                                                    onChange={(e) =>
-                                                                        handleToggleAll(
-                                                                            row.doctype,
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            {canRemoveDoctypes && (
-                                                                <td className="p-3 text-center">
-                                                                    <Popconfirm
-                                                                        title={`Remove ${row.doctype}?`}
-                                                                        onConfirm={() =>
-                                                                            handleRemoveDoctype(row.doctype)
-                                                                        }
-                                                                        okText="Remove"
-                                                                        cancelText="Cancel"
-                                                                    >
-                                                                        <Button
-                                                                            type="text"
-                                                                            danger
-                                                                            size="small"
-                                                                            icon={<DeleteOutlined />}
-                                                                        />
-                                                                    </Popconfirm>
-                                                                </td>
-                                                            )}
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                )}
-                            </SectionCard>
+                            <RolePermissionsTable
+                                selectedRole={selectedRole}
+                                selectedRoleMeta={selectedRoleMeta}
+                                loadingPerms={loadingPerms}
+                                saving={saving}
+                                permissions={permissions}
+                                onEditRoleClick={openEditModal}
+                                onSavePermissions={handleSavePermissions}
+                                onPermissionChange={handlePermissionChange}
+                                onToggleAll={handleToggleAll}
+                                onRemoveDoctype={handleRemoveDoctype}
+                                canRemoveDoctypes={canRemoveDoctypes}
+                            />
                         ) : (
                             <Card className="flex items-center justify-center p-16 text-center" bordered={false}>
                                 <Empty
@@ -708,214 +469,30 @@ const RolePermissions = () => {
             children: (
                 <Row gutter={[24, 24]}>
                     <Col xs={24} lg={8}>
-                        <SectionCard
-                            title="Users"
-                            icon={<UserOutlined style={{ color: "#002140" }} />}
-                        >
-                            <List
-                                loading={loadingUsers}
-                                dataSource={users}
-                                locale={{ emptyText: "No users found" }}
-                                renderItem={(item) => {
-                                    const isSelected = selectedUser === item.name;
-                                    return (
-                                        <List.Item
-                                            onClick={() => {
-                                                setSelectedUser(item.name);
-                                            }}
-                                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-colors flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 ${
-                                                isSelected
-                                                    ? "bg-zinc-100/80 border-l-4 border-zinc-900 font-semibold"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <Space size={8} wrap>
-                                                <UserOutlined className="text-zinc-500 text-xs" />
-                                                <div className="flex flex-col">
-                                                    <span className="text-sm text-zinc-700 font-medium">
-                                                        {item.full_name || item.name}
-                                                    </span>
-                                                    <span className="text-[10px] text-zinc-400 font-mono">
-                                                        {item.name}
-                                                    </span>
-                                                </div>
-                                                {item.custom_user_role && (
-                                                    <Tag className="!m-0 text-[10px] bg-zinc-50">
-                                                        {item.custom_user_role}
-                                                    </Tag>
-                                                )}
-                                            </Space>
-                                        </List.Item>
-                                    );
-                                }}
-                            />
-                        </SectionCard>
+                        <UserListSidePanel
+                            loading={loadingUsers}
+                            users={users}
+                            selectedUser={selectedUser}
+                            onSelectUser={setSelectedUser}
+                        />
                     </Col>
 
                     <Col xs={24} lg={16}>
                         {selectedUser ? (
-                            <SectionCard
-                                title={`Extra Permissions — ${users.find(u => u.name === selectedUser)?.full_name || selectedUser}`}
-                                right={
-                                    <Space wrap>
-                                        <Button
-                                            size="small"
-                                            danger
-                                            type="dashed"
-                                            icon={<UndoOutlined />}
-                                            loading={savingUserPerms}
-                                            onClick={handleResetUserPermissions}
-                                        >
-                                            Reset to Role Defaults
-                                        </Button>
-                                        <Button
-                                            size="small"
-                                            type="primary"
-                                            icon={<SaveOutlined />}
-                                            loading={savingUserPerms}
-                                            onClick={handleSaveUserPermissions}
-                                        >
-                                            Save Changes
-                                        </Button>
-                                    </Space>
-                                }
-                            >
-                                <Alert
-                                    message="These permissions are added to (beside) the user's role-based permissions. Gray checkboxes show permissions already active from the user's role."
-                                    type="info"
-                                    showIcon
-                                    style={{ marginBottom: "20px" }}
-                                />
-
-                                {loadingUserPerms ? (
-                                    <div className="py-16 text-center">
-                                        <Spin />
-                                    </div>
-                                ) : userPermissions.length === 0 ? (
-                                    <Empty
-                                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                                        description="No permissions loadable"
-                                    />
-                                ) : (
-                                    <div className="overflow-x-auto border border-zinc-100 rounded-lg bg-white">
-                                        <table className="w-full text-left border-collapse">
-                                            <thead>
-                                                <tr className="bg-zinc-50/70 border-b border-zinc-100">
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                                                        DocType
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Read
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Write
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Create
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        Delete
-                                                    </th>
-                                                    <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
-                                                        All
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-zinc-100">
-                                                {userPermissions.map((row) => {
-                                                    const isAllChecked =
-                                                        (!!row.role_read || !!row.read) &&
-                                                        (!!row.role_write || !!row.write) &&
-                                                        (!!row.role_create || !!row.create) &&
-                                                        (!!row.role_delete || !!row.delete);
-                                                    const isAllDisabled =
-                                                        !!row.role_read &&
-                                                        !!row.role_write &&
-                                                        !!row.role_create &&
-                                                        !!row.role_delete;
-                                                    return (
-                                                        <tr
-                                                            key={row.doctype}
-                                                            className="hover:bg-zinc-50/50 transition-colors"
-                                                        >
-                                                            <td className="p-3 text-sm font-medium text-zinc-700">
-                                                                {row.doctype}
-                                                                {row.is_extra && (
-                                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-2 inline-block animate-pulse" title="Has active override" />
-                                                                )}
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.role_read || !!row.read}
-                                                                    disabled={!!row.role_read}
-                                                                    onChange={(e) =>
-                                                                        handleUserPermissionChange(
-                                                                            row.doctype,
-                                                                            "read",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.role_write || !!row.write}
-                                                                    disabled={!!row.role_write}
-                                                                    onChange={(e) =>
-                                                                        handleUserPermissionChange(
-                                                                            row.doctype,
-                                                                            "write",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.role_create || !!row.create}
-                                                                    disabled={!!row.role_create}
-                                                                    onChange={(e) =>
-                                                                        handleUserPermissionChange(
-                                                                            row.doctype,
-                                                                            "create",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!row.role_delete || !!row.delete}
-                                                                    disabled={!!row.role_delete}
-                                                                    onChange={(e) =>
-                                                                        handleUserPermissionChange(
-                                                                            row.doctype,
-                                                                            "delete",
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                            <td className="p-3 text-center">
-                                                                <Checkbox
-                                                                    checked={!!isAllChecked}
-                                                                    disabled={!!isAllDisabled}
-                                                                    onChange={(e) =>
-                                                                        handleUserToggleAll(
-                                                                            row.doctype,
-                                                                            e.target.checked
-                                                                        )
-                                                                    }
-                                                                />
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                )}
-                            </SectionCard>
+                            <UserExtraPermissionsTable
+                                selectedUser={selectedUser}
+                                userNameDisplay={users.find(u => u.name === selectedUser)?.full_name || selectedUser}
+                                loadingUserPerms={loadingUserPerms}
+                                savingUserPerms={savingUserPerms}
+                                userPermissions={userPermissions}
+                                roles={roles}
+                                currentRole={users.find(u => u.name === selectedUser)?.custom_user_role}
+                                onRoleChange={(newRole) => handleUpdateUserRole(selectedUser, newRole)}
+                                onReset={handleResetUserPermissions}
+                                onSave={handleSaveUserPermissions}
+                                onPermissionChange={handleUserPermissionChange}
+                                onToggleAll={handleUserToggleAll}
+                            />
                         ) : (
                             <Card className="flex items-center justify-center p-16 text-center" bordered={false}>
                                 <Empty
