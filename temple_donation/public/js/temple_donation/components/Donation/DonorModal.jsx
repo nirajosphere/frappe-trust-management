@@ -144,10 +144,10 @@ const DonorModal = ({ open, onCancel, onSuccess, initialMobileNumber }) => {
         try {
             const values = await form.validateFields();
 
-            await createDoc("Donor", values);
+            const res = await createDoc("Donor", values);
 
             form.resetFields();
-            onSuccess(values);
+            onSuccess(res);
 
         } catch (err) {
             console.error(err);
