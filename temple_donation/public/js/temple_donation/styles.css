@@ -72,6 +72,10 @@
   right: 0.5rem;
 }
 
+.temple-donation-app .top-0{
+  top: 0px;
+}
+
 .temple-donation-app .top-2{
   top: 0.5rem;
 }
@@ -107,6 +111,11 @@
   margin-bottom: 2rem !important;
 }
 
+.temple-donation-app .mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .temple-donation-app .my-0\.5{
   margin-top: 0.125rem;
   margin-bottom: 0.125rem;
@@ -118,6 +127,10 @@
 
 .temple-donation-app .mb-1{
   margin-bottom: 0.25rem;
+}
+
+.temple-donation-app .mb-1\.5{
+  margin-bottom: 0.375rem;
 }
 
 .temple-donation-app .mb-2{
@@ -140,6 +153,10 @@
   margin-bottom: 1.5rem;
 }
 
+.temple-donation-app .ml-2{
+  margin-left: 0.5rem;
+}
+
 .temple-donation-app .ml-auto{
   margin-left: auto;
 }
@@ -150,6 +167,10 @@
 
 .temple-donation-app .mt-1{
   margin-top: 0.25rem;
+}
+
+.temple-donation-app .mt-1\.5{
+  margin-top: 0.375rem;
 }
 
 .temple-donation-app .mt-2{
@@ -196,8 +217,16 @@
   display: table;
 }
 
+.temple-donation-app .grid{
+  display: grid;
+}
+
 .temple-donation-app .hidden{
   display: none;
+}
+
+.temple-donation-app .h-1\.5{
+  height: 0.375rem;
 }
 
 .temple-donation-app .h-10{
@@ -240,6 +269,10 @@
   max-height: 15rem;
 }
 
+.temple-donation-app .max-h-\[450px\]{
+  max-height: 450px;
+}
+
 .temple-donation-app .min-h-\[20px\]{
   min-height: 20px;
 }
@@ -248,12 +281,20 @@
   min-height: 100vh;
 }
 
+.temple-donation-app .w-1\.5{
+  width: 0.375rem;
+}
+
 .temple-donation-app .w-10{
   width: 2.5rem;
 }
 
 .temple-donation-app .w-14{
   width: 3.5rem;
+}
+
+.temple-donation-app .w-16{
+  width: 4rem;
 }
 
 .temple-donation-app .w-20{
@@ -309,6 +350,16 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes pulse{
+  50%{
+    opacity: .5;
+  }
+}
+
+.temple-donation-app .animate-pulse{
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .temple-donation-app .cursor-not-allowed{
   cursor: not-allowed;
 }
@@ -325,6 +376,10 @@
 
 .temple-donation-app .resize{
   resize: both;
+}
+
+.temple-donation-app .grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .temple-donation-app .flex-col{
@@ -391,6 +446,10 @@
   gap: 1rem;
 }
 
+.temple-donation-app .gap-5{
+  gap: 1.25rem;
+}
+
 .temple-donation-app .gap-6{
   gap: 1.5rem;
 }
@@ -407,8 +466,23 @@
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
 
+.temple-donation-app :is(.divide-y > :not([hidden]) ~ :not([hidden])){
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.temple-donation-app :is(.divide-zinc-100 > :not([hidden]) ~ :not([hidden])){
+  --tw-divide-opacity: 1;
+  border-color: rgb(244 244 245 / var(--tw-divide-opacity, 1));
+}
+
 .temple-donation-app .overflow-hidden{
   overflow: hidden;
+}
+
+.temple-donation-app .overflow-x-auto{
+  overflow-x: auto;
 }
 
 .temple-donation-app .overflow-y-auto{
@@ -466,16 +540,16 @@
   border-width: 1px;
 }
 
-.temple-donation-app .border-2{
-  border-width: 2px;
-}
-
 .temple-donation-app .border-b{
   border-bottom-width: 1px;
 }
 
 .temple-donation-app .border-l-2{
   border-left-width: 2px;
+}
+
+.temple-donation-app .border-l-4{
+  border-left-width: 4px;
 }
 
 .temple-donation-app .border-t{
@@ -570,6 +644,11 @@
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
+.temple-donation-app .bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+}
+
 .temple-donation-app .bg-emerald-50{
   --tw-bg-opacity: 1;
   background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
@@ -612,6 +691,10 @@
   background-color: rgb(244 244 245 / var(--tw-bg-opacity, 1));
 }
 
+.temple-donation-app .bg-zinc-100\/80{
+  background-color: rgb(244 244 245 / 0.8);
+}
+
 .temple-donation-app .bg-zinc-200{
   --tw-bg-opacity: 1;
   background-color: rgb(228 228 231 / var(--tw-bg-opacity, 1));
@@ -628,6 +711,14 @@
 
 .temple-donation-app .bg-zinc-50\/50{
   background-color: rgb(250 250 250 / 0.5);
+}
+
+.temple-donation-app .bg-zinc-50\/60{
+  background-color: rgb(250 250 250 / 0.6);
+}
+
+.temple-donation-app .bg-zinc-50\/70{
+  background-color: rgb(250 250 250 / 0.7);
 }
 
 .temple-donation-app .bg-zinc-800{
@@ -709,6 +800,11 @@
   padding-right: 0px;
 }
 
+.temple-donation-app .px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .temple-donation-app .px-1\.5{
   padding-left: 0.375rem;
   padding-right: 0.375rem;
@@ -739,6 +835,11 @@
   padding-right: 1.5rem;
 }
 
+.temple-donation-app .py-0{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .temple-donation-app .py-0\.5{
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -764,9 +865,19 @@
   padding-bottom: 3rem;
 }
 
+.temple-donation-app .py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .temple-donation-app .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.temple-donation-app .py-2\.5{
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .temple-donation-app .py-3{
@@ -838,6 +949,10 @@
   padding-top: 1rem;
 }
 
+.temple-donation-app .text-left{
+  text-align: left;
+}
+
 .temple-donation-app .text-center{
   text-align: center;
 }
@@ -853,11 +968,6 @@
 .temple-donation-app .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
-}
-
-.temple-donation-app .text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .temple-donation-app .text-\[10px\]{
@@ -966,11 +1076,6 @@
   letter-spacing: 0.1em;
 }
 
-.temple-donation-app .\!text-zinc-600{
-  --tw-text-opacity: 1 !important;
-  color: rgb(82 82 91 / var(--tw-text-opacity, 1)) !important;
-}
-
 .temple-donation-app .text-amber-500{
   --tw-text-opacity: 1;
   color: rgb(245 158 11 / var(--tw-text-opacity, 1));
@@ -991,6 +1096,11 @@
   color: rgb(59 130 246 / var(--tw-text-opacity, 1));
 }
 
+.temple-donation-app .text-blue-600{
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+}
+
 .temple-donation-app .text-blue-700{
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity, 1));
@@ -999,6 +1109,11 @@
 .temple-donation-app .text-emerald-600{
   --tw-text-opacity: 1;
   color: rgb(5 150 105 / var(--tw-text-opacity, 1));
+}
+
+.temple-donation-app .text-emerald-700{
+  --tw-text-opacity: 1;
+  color: rgb(4 120 87 / var(--tw-text-opacity, 1));
 }
 
 .temple-donation-app .text-gray-400{
@@ -2477,8 +2592,48 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   flex: 1 !important;
 }
 
+/* Premium Ant Design Dropdown Menu Styling */
+
+.ant-dropdown .ant-dropdown-menu {
+  background-color: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
+  padding: 6px !important;
+  border-radius: 8px !important;
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #3f3f46 !important;
+  padding: 8px 12px !important;
+  margin: 2px 0 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  /* Hover/Active State */
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover, .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item.ant-dropdown-menu-item-active {
+  background-color: #f4f4f5 !important;
+  color: #18181b !important;
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+  /* Selected State */
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item.ant-dropdown-menu-item-selected {
+  background-color: #f4f4f5 !important;
+  color: #18181b !important;
+  font-weight: 600 !important;
+}
+
 .temple-donation-app .first\:pt-3:first-child{
   padding-top: 0.75rem;
+}
+
+.temple-donation-app .last\:mb-0:last-child{
+  margin-bottom: 0px;
 }
 
 .temple-donation-app .last\:border-0:last-child{
@@ -2593,13 +2748,12 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
   background-color: rgb(250 250 250 / var(--tw-bg-opacity, 1));
 }
 
-.temple-donation-app .hover\:bg-zinc-50\/50:hover{
-  background-color: rgb(250 250 250 / 0.5);
+.temple-donation-app .hover\:bg-zinc-50\/30:hover{
+  background-color: rgb(250 250 250 / 0.3);
 }
 
-.temple-donation-app .hover\:bg-zinc-800:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
+.temple-donation-app .hover\:bg-zinc-50\/50:hover{
+  background-color: rgb(250 250 250 / 0.5);
 }
 
 .temple-donation-app .hover\:bg-zinc-900:hover{
@@ -2710,6 +2864,10 @@ body[data-path=login] header, body[data-path=login] footer, body[data-path=login
 
   .temple-donation-app .sm\:w-\[40\%\]{
     width: 40%;
+  }
+
+  .temple-donation-app .sm\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .temple-donation-app .sm\:flex-row{

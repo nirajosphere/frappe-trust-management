@@ -1255,6 +1255,41 @@ body[data-path="login"] {
   }
 }
 
+/* Premium Ant Design Dropdown Menu Styling */
+.ant-dropdown {
+  .ant-dropdown-menu {
+    background-color: #ffffff !important;
+    border: 1px solid #e4e4e7 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
+    padding: 6px !important;
+    border-radius: 8px !important;
+
+    .ant-dropdown-menu-item {
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      color: #3f3f46 !important;
+      padding: 8px 12px !important;
+      margin: 2px 0 !important;
+      border-radius: 6px !important;
+      transition: all 0.2s ease !important;
+
+      /* Hover/Active State */
+      &:hover, &.ant-dropdown-menu-item-active {
+        background-color: #f4f4f5 !important;
+        color: #18181b !important;
+      }
+
+      /* Selected State */
+      &.ant-dropdown-menu-item-selected {
+        background-color: #f4f4f5 !important;
+        color: #18181b !important;
+        font-weight: 600 !important;
+      }
+    }
+  }
+}
+
+
 
 
 
