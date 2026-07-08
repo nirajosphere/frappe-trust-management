@@ -24,6 +24,19 @@ const RoomDashboard = () => {
     });
     const [loading, setLoading] = useState(false);
 
+    const [checkInsPage, setCheckInsPage] = useState(1);
+    const [checkInsPageSize, setCheckInsPageSize] = useState(5);
+    const [checkOutsPage, setCheckOutsPage] = useState(1);
+    const [checkOutsPageSize, setCheckOutsPageSize] = useState(5);
+    const [upcomingPage, setUpcomingPage] = useState(1);
+    const [upcomingPageSize, setUpcomingPageSize] = useState(10);
+
+    useEffect(() => {
+        setCheckInsPage(1);
+        setCheckOutsPage(1);
+        setUpcomingPage(1);
+    }, [selectedTemple, periodType, customRange, data?.todays_check_ins?.length, data?.todays_check_outs?.length, data?.upcoming_bookings?.length]);
+
     // Fetch Temples
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
@@ -368,7 +381,15 @@ const RoomDashboard = () => {
                             dataSource={data.todays_check_ins} 
                             rowKey="name"
                             loading={loading}
-                            pagination={{ pageSize: 5 }}
+                            pagination={{
+                                current: checkInsPage,
+                                pageSize: checkInsPageSize,
+                                showSizeChanger: true,
+                                onChange: (p, s) => {
+                                    setCheckInsPage(p);
+                                    setCheckInsPageSize(s);
+                                }
+                            }}
                             scroll={{ x: "max-content" }}
                             childrenColumnName="unused_children"
                             locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
@@ -383,7 +404,15 @@ const RoomDashboard = () => {
                             dataSource={data.todays_check_outs} 
                             rowKey="name"   
                             loading={loading}
-                            pagination={{ pageSize: 5 }}
+                            pagination={{
+                                current: checkOutsPage,
+                                pageSize: checkOutsPageSize,
+                                showSizeChanger: true,
+                                onChange: (p, s) => {
+                                    setCheckOutsPage(p);
+                                    setCheckOutsPageSize(s);
+                                }
+                            }}
                             scroll={{ x: "max-content" }}
                             childrenColumnName="unused_children"
                             locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
@@ -398,7 +427,15 @@ const RoomDashboard = () => {
                             dataSource={data.upcoming_bookings} 
                             rowKey="name"
                             loading={loading}
-                            pagination={{ pageSize: 10 }}
+                            pagination={{
+                                current: upcomingPage,
+                                pageSize: upcomingPageSize,
+                                showSizeChanger: true,
+                                onChange: (p, s) => {
+                                    setUpcomingPage(p);
+                                    setUpcomingPageSize(s);
+                                }
+                            }}
                             scroll={{ x: "max-content" }}
                             childrenColumnName="unused_children"
                             locale={{ emptyText: "No upcoming bookings found" }}

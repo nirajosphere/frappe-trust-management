@@ -23,6 +23,13 @@ const RoomCalendar = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(15);
+
+    useEffect(() => {
+        setPage(1);
+    }, [selectedTemple, startDate, rooms?.length]);
+
     // Fetch Temples
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
@@ -341,7 +348,15 @@ const RoomCalendar = () => {
                     dataSource={rooms} 
                     rowKey="name"
                     loading={loading}
-                    pagination={{ pageSize: 15 }}
+                    pagination={{
+                        current: page,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        onChange: (p, s) => {
+                            setPage(p);
+                            setPageSize(s);
+                        }
+                    }}
                     scroll={{ x: 1100 }}
                 />
             </Card>

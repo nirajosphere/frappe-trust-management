@@ -27,6 +27,8 @@ const CommonTable = ({
     showDelete = true,
 }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
         const handleResize = () => {
@@ -35,6 +37,10 @@ const CommonTable = ({
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchText, dataSource?.length]);
 
     const filteredData = dataSource?.filter(item => {
         if (!searchText) return true;
@@ -126,10 +132,15 @@ const CommonTable = ({
             rowKey={rowKey}
             loading={loading}
             pagination={{
-                pageSize: 10,
+                current: currentPage,
+                pageSize: pageSize,
                 showSizeChanger: true,
                 showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-zinc-900 font-bold">{total}</span> records</span>,
-                className: "!my-8"
+                className: "!my-8",
+                onChange: (page, size) => {
+                    setCurrentPage(page);
+                    setPageSize(size);
+                }
             }}
             bordered
             className="aavatto-premium-table"

@@ -16,6 +16,12 @@ const RoomImport = () => {
     
     const [csvContent, setCsvContent] = useState(null);
     const [previewData, setPreviewData] = useState(null);
+    const [previewPage, setPreviewPage] = useState(1);
+    const [previewPageSize, setPreviewPageSize] = useState(5);
+
+    React.useEffect(() => {
+        setPreviewPage(1);
+    }, [previewData?.length]);
 
     // Fetch Temples
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
@@ -290,7 +296,15 @@ const RoomImport = () => {
                             <Table 
                                 dataSource={previewData.map((row, idx) => ({ ...row, key: idx }))} 
                                 columns={previewColumns} 
-                                pagination={{ pageSize: 5 }} 
+                                pagination={{
+                                    current: previewPage,
+                                    pageSize: previewPageSize,
+                                    showSizeChanger: true,
+                                    onChange: (p, s) => {
+                                        setPreviewPage(p);
+                                        setPreviewPageSize(s);
+                                    }
+                                }} 
                                 size="small"
                                 className="border border-zinc-100 rounded-lg overflow-hidden"
                             />

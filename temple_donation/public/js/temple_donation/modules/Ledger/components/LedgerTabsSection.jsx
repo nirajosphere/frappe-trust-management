@@ -94,13 +94,24 @@
 // export default LedgerTabsSection;
 
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Table, Input } from "antd";
 import { WalletOutlined, HistoryOutlined, SearchOutlined } from "@ant-design/icons";
 
 const LedgerTabsSection = ({ donations, handovers, donationColumns, handoverColumns }) => {
   const [activeTab, setActiveTab] = useState("donations");
   const [searchText, setSearchText] = useState("");
+
+  const [donationsPage, setDonationsPage] = useState(1);
+  const [donationsPageSize, setDonationsPageSize] = useState(10);
+
+  const [handoversPage, setHandoversPage] = useState(1);
+  const [handoversPageSize, setHandoversPageSize] = useState(10);
+
+  useEffect(() => {
+    setDonationsPage(1);
+    setHandoversPage(1);
+  }, [searchText, activeTab]);
 
   const filteredDonations = useMemo(() => {
     if (!searchText) return donations || [];
@@ -218,9 +229,14 @@ const LedgerTabsSection = ({ donations, handovers, donationColumns, handoverColu
             columns={donationColumns}
             rowKey="name"
             pagination={{
-              pageSize: 10,
+              current: donationsPage,
+              pageSize: donationsPageSize,
               showSizeChanger: true,
-              className: "!my-4"
+              className: "!my-4",
+              onChange: (page, size) => {
+                setDonationsPage(page);
+                setDonationsPageSize(size);
+              }
             }}
             bordered
             className="aavatto-premium-table"
@@ -232,9 +248,14 @@ const LedgerTabsSection = ({ donations, handovers, donationColumns, handoverColu
             columns={handoverColumns}
             rowKey="name"
             pagination={{
-              pageSize: 10,
+              current: handoversPage,
+              pageSize: handoversPageSize,
               showSizeChanger: true,
-              className: "!my-4"
+              className: "!my-4",
+              onChange: (page, size) => {
+                setHandoversPage(page);
+                setHandoversPageSize(size);
+              }
             }}
             bordered
             className="aavatto-premium-table"

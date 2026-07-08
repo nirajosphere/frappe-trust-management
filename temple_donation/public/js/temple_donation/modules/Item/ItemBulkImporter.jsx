@@ -18,6 +18,12 @@ const ItemBulkImporter = ({ onBack }) => {
     const [fileName, setFileName] = useState("");
     const [temples, setTemples] = useState([]);
     const [selectedTemple, setSelectedTemple] = useState(null);
+    const [importPage, setImportPage] = useState(1);
+    const [importPageSize, setImportPageSize] = useState(5);
+
+    useEffect(() => {
+        setImportPage(1);
+    }, [parsedData?.length]);
 
     useEffect(() => {
         const fetchTemples = async () => {
@@ -322,7 +328,15 @@ const ItemBulkImporter = ({ onBack }) => {
                                 dataSource={parsedData}
                                 columns={previewColumns}
                                 rowKey={(record, index) => index}
-                                pagination={{ pageSize: 5 }}
+                                pagination={{
+                                    current: importPage,
+                                    pageSize: importPageSize,
+                                    showSizeChanger: true,
+                                    onChange: (p, s) => {
+                                        setImportPage(p);
+                                        setImportPageSize(s);
+                                    }
+                                }}
                                 size="small"
                                 className="border border-zinc-100 rounded-lg overflow-hidden"
                             />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Table } from 'antd';
 
 const ActiveDonationsModal = ({
@@ -10,6 +10,12 @@ const ActiveDonationsModal = ({
     loading,
     columns
 }) => {
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+
+    useEffect(() => {
+        setPage(1);
+    }, [selectedUser, activeDonations?.length, isOpen]);
     return (
         <Modal
             title={
@@ -44,9 +50,14 @@ const ActiveDonationsModal = ({
                     rowKey="name"
                     loading={loading}
                     pagination={{
-                        pageSize: 5,
+                        current: page,
+                        pageSize: pageSize,
                         showSizeChanger: true,
-                        className: "!my-2"
+                        className: "!my-2",
+                        onChange: (p, s) => {
+                            setPage(p);
+                            setPageSize(s);
+                        }
                     }}
                     bordered
                     className="aavatto-premium-table"

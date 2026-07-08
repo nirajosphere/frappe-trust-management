@@ -27,6 +27,13 @@ const InventoryDashboard = () => {
     const [customRange, setCustomRange] = useState([]); // [dayjs, dayjs]
     const [popoverVisible, setPopoverVisible] = useState(false);
 
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+
+    useEffect(() => {
+        setPage(1);
+    }, [selectedTemple, periodType, customRange, data?.top_most_stock?.length]);
+
     const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
@@ -241,7 +248,15 @@ const InventoryDashboard = () => {
                                 { title: "Category", dataIndex: "category", key: "category", render: (cat) => <Tag color="blue">{cat || "Uncategorized"}</Tag> },
                                 { title: "Current Stock", dataIndex: "qty", key: "qty", align: "right", render: (val, record) => <Text strong className={val <= 0 ? "text-red-600" : "text-zinc-900"}>{val} {record.unit || 'Nos'}</Text> }
                             ]}
-                            pagination={{ pageSize: 5 }}
+                            pagination={{
+                                current: page,
+                                pageSize: pageSize,
+                                showSizeChanger: true,
+                                onChange: (p, s) => {
+                                    setPage(p);
+                                    setPageSize(s);
+                                }
+                            }}
                             size="middle"
                             bordered={false}
                             className="clean-table"

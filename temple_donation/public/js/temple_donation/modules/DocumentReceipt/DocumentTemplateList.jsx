@@ -19,6 +19,13 @@ const DocumentTemplateList = () => {
     const [searchText, setSearchText] = useState("");
     const [selectedTemple, setSelectedTemple] = useState(null);
     const [previewVisible, setPreviewVisible] = useState(false);
+    
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+
+    useEffect(() => {
+        setPage(1);
+    }, [searchText, selectedTemple, templatesList?.length]);
     const [previewHtml, setPreviewHtml] = useState("");
     const [previewTitle, setPreviewTitle] = useState("");
 
@@ -361,7 +368,15 @@ const DocumentTemplateList = () => {
                 columns={columns}
                 rowKey="name"
                 loading={loadingTemplates}
-                pagination={{ pageSize: 10 }}
+                pagination={{
+                    current: page,
+                    pageSize: pageSize,
+                    showSizeChanger: true,
+                    onChange: (p, s) => {
+                        setPage(p);
+                        setPageSize(s);
+                    }
+                }}
                 bordered
                 className="aavatto-premium-table"
                 style={{ background: "#fff", borderRadius: "8px" }}
