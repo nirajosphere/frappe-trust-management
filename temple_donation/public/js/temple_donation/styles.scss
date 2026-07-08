@@ -732,19 +732,23 @@ body.non-admin-user {
     
     .toggle-password {
       position: absolute;
-      right: 16px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 0.85rem;
       cursor: pointer;
-      color: #71717a;
+      color: #8c8c8c;
+      font-size: 16px;
+      transition: color 0.2s;
+      z-index: 5;
       user-select: none;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
       
       &:hover {
         color: #18181b;
       }
+    }
+
+    #login_password, #new_password, #confirm_password {
+      padding-right: 45px !important;
     }
   }
   
