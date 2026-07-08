@@ -32,6 +32,8 @@ const App = () => {
     const isMobile = windowWidth < 1024;
 
     useEffect(() => {
+
+        
         if (!loading) {
             // Remove the static initial loader from document.body if present
             const initLoader = document.getElementById("temple-initial-loader");

@@ -113,7 +113,7 @@ const RolePermissionsTable = ({
                                         className="hover:bg-zinc-50/50 transition-colors"
                                     >
                                         <td className="p-3 text-sm font-medium text-zinc-700">
-                                            {row.doctype}
+                                            {row.doctype === "Temple" ? "Trust" : (row.doctype === "Temple Details" ? "Trust Details" : row.doctype)}
                                         </td>
                                         <td className="p-3 text-center">
                                             <Checkbox
@@ -158,7 +158,7 @@ const RolePermissionsTable = ({
                                         {canRemoveDoctypes && (
                                             <td className="p-3 text-center">
                                                 <Popconfirm
-                                                    title={`Remove ${row.doctype}?`}
+                                                    title={`Remove ${row.doctype === "Temple" ? "Trust" : (row.doctype === "Temple Details" ? "Trust Details" : row.doctype)}?`}
                                                     onConfirm={() => onRemoveDoctype(row.doctype)}
                                                     okText="Remove"
                                                     cancelText="Cancel"

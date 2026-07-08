@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Input, List, Space, Tag } from "antd";
+import { Avatar, Input, List, Space, Tag } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import SectionCard from "../../../components/common/SectionCard";
 
@@ -45,10 +45,15 @@ const UserListSidePanel = ({
                                 isSelected
                                     ? "bg-zinc-100/80 border-l-4 border-zinc-900 font-semibold"
                                     : ""
-                            }`}
+                             }`}
                         >
-                            <Space size={8} wrap>
-                                <UserOutlined className="text-zinc-500 text-xs" />
+                            <Space size={10} align="center">
+                                <Avatar 
+                                    src={item.user_image} 
+                                    icon={<UserOutlined />} 
+                                    size={32}
+                                    className="bg-zinc-100 text-zinc-900 border border-zinc-200"
+                                />
                                 <div className="flex flex-col">
                                     <span className="text-sm text-zinc-700 font-medium">
                                         {item.full_name || item.name}

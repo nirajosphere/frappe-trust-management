@@ -86,7 +86,7 @@ const RolePermissions = () => {
             method: "frappe.client.get_list",
             args: {
                 doctype: "User",
-                fields: ["name", "full_name", "custom_user_role", "enabled"],
+                fields: ["name", "full_name", "custom_user_role", "enabled", "user_image"],
                 filters: {
                     enabled: 1,
                     name: ["not in", ["Administrator", "Guest"]]
@@ -570,7 +570,7 @@ const RolePermissions = () => {
                             mode="multiple"
                             allowClear
                             placeholder="Select DocTypes"
-                            options={availableDoctypes.map((dt) => ({ label: dt, value: dt }))}
+                            options={availableDoctypes.map((dt) => ({ label: dt === "Temple" ? "Trust" : (dt === "Temple Details" ? "Trust Details" : dt), value: dt }))}
                             maxTagCount="responsive"
                         />
                     </Form.Item>
@@ -656,7 +656,7 @@ const RolePermissions = () => {
                             mode="multiple"
                             allowClear
                             placeholder="Select DocTypes to add"
-                            options={addableDoctypes.map((dt) => ({ label: dt, value: dt }))}
+                            options={addableDoctypes.map((dt) => ({ label: dt === "Temple" ? "Trust" : (dt === "Temple Details" ? "Trust Details" : dt), value: dt }))}
                             maxTagCount="responsive"
                         />
                     </Form.Item>

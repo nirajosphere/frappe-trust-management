@@ -131,7 +131,7 @@ const UserExtraPermissionsTable = ({
                                         className="hover:bg-zinc-50/50 transition-colors"
                                     >
                                         <td className="p-3 text-sm font-medium text-zinc-700">
-                                            {row.doctype}
+                                            {row.doctype === "Temple" ? "Trust" : (row.doctype === "Temple Details" ? "Trust Details" : row.doctype)}
                                             {row.is_extra && (
                                                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 ml-2 inline-block animate-pulse" title="Has active override" />
                                             )}
