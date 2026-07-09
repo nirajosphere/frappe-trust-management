@@ -9,6 +9,7 @@ import ActiveFiltersBar from "./ActiveFiltersBar";
 import { exportToCSV, exportToExcel, exportToPDF } from "../../utils/exportUtils";
 import { getTagConfig } from "../../utils/tagUtils";
 import ViewContainer from "./ViewContainer";
+import { useUser } from "../../context/UserContext";
 
 
 /**
@@ -44,6 +45,21 @@ const ListingPage = ({
     extra,
     dependentDocTypes = []
 }) => {
+    const { permissions, isSystemManager, isSuperAdmin, isAdmin } = useUser();
+    const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+
+    const docPerm = permissions?.find(p => p.doctype === doctype);
+
+    const hasRead = hasFullAccess || (docPerm ? !!docPerm.read : true);
+    const hasWrite = hasFullAccess || (docPerm ? !!docPerm.write : true);
+    const hasCreate = hasFullAccess || (docPerm ? !!docPerm.create : true);
+    const hasDelete = hasFullAccess || (docPerm ? !!docPerm.delete : true);
+
+    const finalAllowView = allowView && hasRead;
+    const finalAllowEdit = allowEdit && hasWrite;
+    const finalAllowAdd = allowAdd && hasCreate;
+    const finalAllowDelete = allowDelete && hasDelete;
+
     const [appliedFilters, setAppliedFilters] = useState([]);
     const [appliedSorters, setAppliedSorters] = useState([]);
 
@@ -673,6 +689,15 @@ const ListingPage = ({
         });
     }, [visibleColumns, temples, donations, donors, rooms, buildings, roomTypes, categories, storeLocations]);
 
+    if (!hasRead) {
+        return (
+            <div className="p-16 text-center">
+                <h3 className="text-xl font-bold text-zinc-800">Access Restricted</h3>
+                <p className="text-zinc-500 mt-1">You do not have permission to view this section.</p>
+            </div>
+        );
+    }
+
     if (error) {
         return (
             <div className="p-6">
@@ -695,7 +720,7 @@ const ListingPage = ({
                 <PageHeader
                     title={title}
                     description={description}
-                    onAdd={allowAdd ? handleAdd : undefined}
+                    onAdd={finalAllowAdd ? handleAdd : undefined}
                     onExport={handleExport}
                     onSearch={setSearchText}
                     searchPlaceholder={`Search ${doctype}s...`}
@@ -712,7 +737,7 @@ const ListingPage = ({
                     onRefreshViews={fetchSavedViews}
                     customizedColumns={customizedColumns}
                     onSaveColumns={handleSaveColumns}
-                    extra={extra}
+                    extra={finalAllowAdd ? extra : null}
                 />
 
                 {allowFilter && savedViews.length > 0 && (
@@ -775,9 +800,9 @@ const ListingPage = ({
                     onDelete={handleDelete}
                     onView={handleView}
                     onPrint={handlePrint}
-                    showView={allowView}
-                    showEdit={allowEdit}
-                    showDelete={allowDelete}
+                    showView={finalAllowView}
+                    showEdit={finalAllowEdit}
+                    showDelete={finalAllowDelete}
                     showPrint={allowPrint}
                 />
             </div>

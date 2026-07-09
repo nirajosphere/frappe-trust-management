@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Button, Table, Alert, Tag } from "antd";
 import { ArrowLeftOutlined, PrinterOutlined, EditOutlined } from "@ant-design/icons";
 import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
+import { useUser } from "../../context/UserContext";
 import PageHeader from "./PageHeader";
 import DonationPrint from "../Donation/DonationPrint";
 import { formConfigs } from "../../config/formConfig";
@@ -127,6 +128,11 @@ function SectionCard({ title, right, children }) {
    MAIN COMPONENT
    ═════════════════════════════════════════ */
 const CommonView = ({ doctype, id, onBack, onEdit }) => {
+  const { permissions, isSystemManager, isSuperAdmin, isAdmin } = useUser();
+  const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+  const docPerm = permissions?.find(p => p.doctype === doctype);
+  const canWrite = hasFullAccess || (docPerm ? !!docPerm.write : true);
+
   const { data: doc, loading, error } = useFrappeGetDoc(doctype, id);
   const config = formConfigs[doctype];
   const { data: temples } = useFrappeGetDocList("Temple", {
@@ -416,16 +422,18 @@ const CommonView = ({ doctype, id, onBack, onEdit }) => {
             >
               <PrinterOutlined style={{ fontSize: 14 }} /> Print
             </HoverButton>
-            <HoverButton
-              style={{ height: 40, padding: "0 22px", borderRadius: 10, border: "none",
-                background: C.black, color: "#fff", fontSize: 13, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
-              hoverStyle={{ background: "#1E293B" }}
-              onClick={() => onEdit && onEdit(doc)}
-            >
-              <EditOutlined style={{ fontSize: 14 }} /> Edit
-            </HoverButton>
+            {canWrite && (
+              <HoverButton
+                style={{ height: 40, padding: "0 22px", borderRadius: 10, border: "none",
+                  background: C.black, color: "#fff", fontSize: 13, fontWeight: 600,
+                  display: "flex", alignItems: "center", gap: 8, cursor: "pointer", transition: "all 0.15s",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.18)" }}
+                hoverStyle={{ background: "#1E293B" }}
+                onClick={() => onEdit && onEdit(doc)}
+              >
+                <EditOutlined style={{ fontSize: 14 }} /> Edit
+              </HoverButton>
+            )}
           </div>
         </div>
 

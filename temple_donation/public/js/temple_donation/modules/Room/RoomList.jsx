@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs } from "antd";
 import { 
     UnorderedListOutlined, DashboardOutlined, CalendarOutlined, 
     BuildOutlined, CloudUploadOutlined, ScheduleOutlined, AppstoreOutlined, BankOutlined
 } from "@ant-design/icons";
 import ListingPage from "../../components/common/ListingPage";
-import { DOCTYPE_ROOM } from "../../config/constants";
+import { DOCTYPE_ROOM, DOCTYPE_ROOM_BOOKING, DOCTYPE_BUILDING, DOCTYPE_ROOM_TYPE } from "../../config/constants";
 import { roomColumns } from "../../tabelcolumn/roomTable";
 import RoomDashboard from "./components/RoomDashboard";
 import RoomCalendar from "./components/RoomCalendar";
 import BulkRoomGenerator from "./components/BulkRoomGenerator";
 import RoomImport from "./components/RoomImport";
 import ViewContainer from "../../components/common/ViewContainer";
+import { useUser } from "../../context/UserContext";
 
 // Import other lists to render as tabs
 import RoomBookingList from "../RoomBooking/RoomBookingList";
@@ -19,6 +20,25 @@ import RoomTypeList from "../RoomType/RoomTypeList";
 import BuildingList from "../Building/BuildingList";
 
 const RoomList = () => {
+    const { permissions, isSystemManager, isSuperAdmin, isAdmin } = useUser();
+    const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+
+    const getPerm = (dt) => {
+        if (hasFullAccess) return { read: true, write: true, create: true, delete: true };
+        const p = permissions?.find(item => item.doctype === dt);
+        return {
+            read: p ? !!p.read : true,
+            write: p ? !!p.write : true,
+            create: p ? !!p.create : true,
+            delete: p ? !!p.delete : true
+        };
+    };
+
+    const roomPerm = getPerm(DOCTYPE_ROOM);
+    const bookingPerm = getPerm(DOCTYPE_ROOM_BOOKING);
+    const buildingPerm = getPerm(DOCTYPE_BUILDING);
+    const roomTypePerm = getPerm(DOCTYPE_ROOM_TYPE);
+
     const [activeTab, setActiveTab] = useState(() => {
         return localStorage.getItem("activeRoomTab") || "dashboard";
     });
@@ -39,7 +59,7 @@ const RoomList = () => {
             ),
             children: <RoomDashboard />
         },
-        {
+        bookingPerm.read && {
             key: "calendar",
             label: (
                 <span>
@@ -49,7 +69,7 @@ const RoomList = () => {
             ),
             children: <RoomCalendar />
         },
-        {
+        bookingPerm.read && {
             key: "bookings",
             label: (
                 <span>
@@ -59,7 +79,7 @@ const RoomList = () => {
             ),
             children: <RoomBookingList />
         },
-        {
+        roomPerm.read && {
             key: "list",
             label: (
                 <span>
@@ -79,7 +99,7 @@ const RoomList = () => {
                 />
             )
         },
-        {
+        buildingPerm.read && {
             key: "buildings",
             label: (
                 <span>
@@ -89,7 +109,7 @@ const RoomList = () => {
             ),
             children: <BuildingList />
         },
-        {
+        roomTypePerm.read && {
             key: "room-types",
             label: (
                 <span>
@@ -99,7 +119,7 @@ const RoomList = () => {
             ),
             children: <RoomTypeList />
         },
-        {
+        roomPerm.create && {
             key: "generator",
             label: (
                 <span>
@@ -109,7 +129,7 @@ const RoomList = () => {
             ),
             children: <BulkRoomGenerator onComplete={() => handleTabChange("list")} />
         },
-        {
+        roomPerm.create && {
             key: "import",
             label: (
                 <span>
@@ -119,7 +139,16 @@ const RoomList = () => {
             ),
             children: <RoomImport />
         }
-    ];
+    ].filter(Boolean);
+
+    useEffect(() => {
+        if (tabItems.length > 0) {
+            const hasActiveTab = tabItems.some(t => t.key === activeTab);
+            if (!hasActiveTab) {
+                setActiveTab(tabItems[0].key);
+            }
+        }
+    }, [activeTab, tabItems.length]);
 
     return (
         <ViewContainer>

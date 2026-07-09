@@ -13,8 +13,11 @@ import { useUser } from "../../context/UserContext";
 const { Text, Title } = Typography;
 
 const DocumentTemplateList = () => {
-    const { roles } = useUser();
-    const canManage = roles.some(r => ["Super Admin", "Temple Admin", "System Manager", "Administrator"].includes(r));
+    const { permissions, isSystemManager, isSuperAdmin, isAdmin, roles } = useUser();
+    const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+    const templatePerm = permissions?.find(p => p.doctype === DOCTYPE_DOCUMENT_TEMPLATE);
+    const canRead = hasFullAccess || (templatePerm ? !!templatePerm.read : roles.some(r => ["Super Admin", "Temple Admin", "System Manager", "Administrator"].includes(r)));
+    const canManage = hasFullAccess || (templatePerm ? !!templatePerm.write : roles.some(r => ["Super Admin", "Temple Admin", "System Manager", "Administrator"].includes(r)));
     
     const [searchText, setSearchText] = useState("");
     const [selectedTemple, setSelectedTemple] = useState(null);
@@ -322,6 +325,15 @@ const DocumentTemplateList = () => {
             )
         }
     ];
+
+    if (!canRead) {
+        return (
+            <div className="p-16 text-center">
+                <h3 className="text-xl font-bold text-zinc-800">Access Restricted</h3>
+                <p className="text-zinc-500 mt-1">You do not have permission to view this section.</p>
+            </div>
+        );
+    }
 
     return (
         <ViewContainer>

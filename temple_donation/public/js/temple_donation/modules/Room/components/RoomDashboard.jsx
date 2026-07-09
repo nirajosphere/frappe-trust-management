@@ -7,10 +7,20 @@ import {
 import dayjs from "dayjs";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
 import PageHeader from "../../../components/common/PageHeader";
+import { useUser } from "../../../context/UserContext";
 
 const { Title, Text } = Typography;
 
 const RoomDashboard = () => {
+    const { permissions, isSystemManager, isSuperAdmin, isAdmin } = useUser();
+    const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+
+    const bookingPermOverride = permissions?.find(p => p.doctype === "Room Booking");
+    const bookingPerm = {
+        read: hasFullAccess || (bookingPermOverride ? !!bookingPermOverride.read : true),
+        write: hasFullAccess || (bookingPermOverride ? !!bookingPermOverride.write : true)
+    };
+
     const [selectedTemple, setSelectedTemple] = useState(null);
     const [periodType, setPeriodType] = useState("today"); // 'today', 'week', 'month', 'custom'
     const [customRange, setCustomRange] = useState([]); // [dayjs, dayjs]
@@ -142,7 +152,7 @@ const RoomDashboard = () => {
         { title: "Room Number", dataIndex: "room", key: "room", render: (r) => <Tag color="blue">{r}</Tag> },
         { title: "Scheduled In", dataIndex: "check_in", key: "check_in", render: formatDateTime },
         { title: "Adults/Kids", key: "guests", render: (_, record) => `${record.adults || 1}A / ${record.children || 0}C` },
-        { 
+        ...(bookingPerm.write ? [{ 
             title: "Actions", 
             key: "actions", 
             render: (_, record) => (
@@ -155,7 +165,7 @@ const RoomDashboard = () => {
                     Check In
                 </Button>
             ) 
-        }
+        }] : [])
     ];
 
     const columnsCheckOut = [
@@ -166,7 +176,7 @@ const RoomDashboard = () => {
             const color = p === "Paid" ? "green" : p === "Partial" ? "gold" : "red";
             return <Tag color={color}>{p}</Tag>;
         }},
-        { 
+        ...(bookingPerm.write ? [{ 
             title: "Actions", 
             key: "actions", 
             render: (_, record) => (
@@ -180,7 +190,7 @@ const RoomDashboard = () => {
                     Check Out
                 </Button>
             ) 
-        }
+        }] : [])
     ];
 
     const columnsUpcoming = [
@@ -372,77 +382,87 @@ const RoomDashboard = () => {
             </Row>
 
             {/* Operational Action Lists */}
-            <Row gutter={[24, 24]}>
-                <Col xs={24} lg={12}>
-                    <Card title={`${getPeriodSuffix()} Check Ins`} style={cardStyles} bordered={false}>
-                        <Table 
-                            className="aavatto-premium-table"
-                            columns={columnsCheckIn} 
-                            dataSource={data.todays_check_ins} 
-                            rowKey="name"
-                            loading={loading}
-                            pagination={{
-                                current: checkInsPage,
-                                pageSize: checkInsPageSize,
-                                showSizeChanger: true,
-                                onChange: (p, s) => {
-                                    setCheckInsPage(p);
-                                    setCheckInsPageSize(s);
-                                }
-                            }}
-                            scroll={{ x: "max-content" }}
-                            childrenColumnName="unused_children"
-                            locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24} lg={12}>
-                    <Card title={`${getPeriodSuffix()} Check Outs`} style={cardStyles} bordered={false}>
-                        <Table 
-                            className="aavatto-premium-table"
-                            columns={columnsCheckOut} 
-                            dataSource={data.todays_check_outs} 
-                            rowKey="name"   
-                            loading={loading}
-                            pagination={{
-                                current: checkOutsPage,
-                                pageSize: checkOutsPageSize,
-                                showSizeChanger: true,
-                                onChange: (p, s) => {
-                                    setCheckOutsPage(p);
-                                    setCheckOutsPageSize(s);
-                                }
-                            }}
-                            scroll={{ x: "max-content" }}
-                            childrenColumnName="unused_children"
-                            locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24}>
-                    <Card title="Upcoming Bookings (Next 7 Days)" style={cardStyles} bordered={false}>
-                        <Table 
-                            className="aavatto-premium-table"
-                            columns={columnsUpcoming} 
-                            dataSource={data.upcoming_bookings} 
-                            rowKey="name"
-                            loading={loading}
-                            pagination={{
-                                current: upcomingPage,
-                                pageSize: upcomingPageSize,
-                                showSizeChanger: true,
-                                onChange: (p, s) => {
-                                    setUpcomingPage(p);
-                                    setUpcomingPageSize(s);
-                                }
-                            }}
-                            scroll={{ x: "max-content" }}
-                            childrenColumnName="unused_children"
-                            locale={{ emptyText: "No upcoming bookings found" }}
-                        />
-                    </Card>
-                </Col>
-            </Row>
+            {bookingPerm.read ? (
+                <Row gutter={[24, 24]}>
+                    <Col xs={24} lg={12}>
+                        <Card title={`${getPeriodSuffix()} Check Ins`} style={cardStyles} bordered={false}>
+                            <Table 
+                                className="aavatto-premium-table"
+                                columns={columnsCheckIn} 
+                                dataSource={data.todays_check_ins} 
+                                rowKey="name"
+                                loading={loading}
+                                pagination={{
+                                    current: checkInsPage,
+                                    pageSize: checkInsPageSize,
+                                    showSizeChanger: true,
+                                    onChange: (p, s) => {
+                                        setCheckInsPage(p);
+                                        setCheckInsPageSize(s);
+                                    }
+                                }}
+                                scroll={{ x: "max-content" }}
+                                childrenColumnName="unused_children"
+                                locale={{ emptyText: `No check-ins scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
+                            />
+                        </Card>
+                    </Col>
+                    <Col xs={24} lg={12}>
+                        <Card title={`${getPeriodSuffix()} Check Outs`} style={cardStyles} bordered={false}>
+                            <Table 
+                                className="aavatto-premium-table"
+                                columns={columnsCheckOut} 
+                                dataSource={data.todays_check_outs} 
+                                rowKey="name"   
+                                loading={loading}
+                                pagination={{
+                                    current: checkOutsPage,
+                                    pageSize: checkOutsPageSize,
+                                    showSizeChanger: true,
+                                    onChange: (p, s) => {
+                                        setCheckOutsPage(p);
+                                        setCheckOutsPageSize(s);
+                                    }
+                                }}
+                                scroll={{ x: "max-content" }}
+                                childrenColumnName="unused_children"
+                                locale={{ emptyText: `No check-outs scheduled for ${periodType === 'today' ? 'today' : 'this period'}` }}
+                            />
+                        </Card>
+                    </Col>
+                    <Col xs={24}>
+                        <Card title="Upcoming Bookings (Next 7 Days)" style={cardStyles} bordered={false}>
+                            <Table 
+                                className="aavatto-premium-table"
+                                columns={columnsUpcoming} 
+                                dataSource={data.upcoming_bookings} 
+                                rowKey="name"
+                                loading={loading}
+                                pagination={{
+                                    current: upcomingPage,
+                                    pageSize: upcomingPageSize,
+                                    showSizeChanger: true,
+                                    onChange: (p, s) => {
+                                        setUpcomingPage(p);
+                                        setUpcomingPageSize(s);
+                                    }
+                                }}
+                                scroll={{ x: "max-content" }}
+                                childrenColumnName="unused_children"
+                                locale={{ emptyText: "No upcoming bookings found" }}
+                            />
+                        </Card>
+                    </Col>
+                </Row>
+            ) : (
+                <>
+                </>
+                // <Card style={cardStyles} bordered={false}>
+                //     <div style={{ textAlign: "center", padding: "40px", color: "#8c8c8c" }}>
+                //         You do not have permission to view room bookings.
+                //     </div>
+                // </Card>
+            )}
         </div>
     );
 };

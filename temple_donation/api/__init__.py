@@ -330,17 +330,20 @@ def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
     """
     assign = _get_user_assignment_filters(temple, user)
     
+    f_date = from_date if (from_date and " " in from_date) else (f"{from_date} 00:00:00" if from_date else None)
+    t_date = to_date if (to_date and " " in to_date) else (f"{to_date} 23:59:59" if to_date else None)
+
     filters = {}
     if assign["temple_filter"]:
         filters["temple"] = assign["temple_filter"]
     if assign["user_filter"]:
         filters["cashier"] = assign["user_filter"]
-    if from_date and to_date:
-        filters["creation"] = ["between", [from_date, to_date]]
-    elif from_date:
-        filters["creation"] = [">=", from_date]
-    elif to_date:
-        filters["creation"] = ["<=", to_date]
+    if f_date and t_date:
+        filters["creation"] = ["between", [f_date, t_date]]
+    elif f_date:
+        filters["creation"] = [">=", f_date]
+    elif t_date:
+        filters["creation"] = ["<=", t_date]
 
     # Let's simplify: Sum of total_amount from tabDonation with filters
     total_donation = frappe.db.get_value("Donation", 
@@ -375,33 +378,50 @@ def get_dashboard_stats(temple=None, user=None, from_date=None, to_date=None):
             query += " AND d.cashier = %s"
             params.append(assign["user_filter"])
             
-    if from_date and to_date:
+    if f_date and t_date:
         query += " AND d.creation BETWEEN %s AND %s"
-        params.extend([from_date, to_date])
+        params.extend([f_date, t_date])
     
     query += " GROUP BY dt.donation_type ORDER BY total DESC LIMIT 1"
     
     top_cat_result = frappe.db.sql(query, tuple(params), as_dict=True)
     top_category = top_cat_result[0].donation_type if top_cat_result and top_cat_result[0].donation_type else "N/A"
     
-    # 3. New Donors Today
-    donor_filters = {}
-    if from_date and to_date:
-        donor_filters["creation"] = ["between", [from_date, to_date]]
+    # 3. New Donors
+    new_donor_f_date = f_date
+    new_donor_t_date = t_date
+    if not new_donor_f_date or not new_donor_t_date:
+        new_donor_f_date = f"{frappe.utils.add_days(nowdate(), -30)} 00:00:00"
+        new_donor_t_date = f"{nowdate()} 23:59:59"
+
+    query_new_donors = """
+        SELECT COUNT(DISTINCT dr.name)
+        FROM `tabDonor` dr
+    """
+    params_new_donors = [new_donor_f_date, new_donor_t_date]
+    
+    if assign["temple_filter"] or assign["user_filter"]:
+        query_new_donors += " JOIN `tabDonation` d ON d.donor = dr.name WHERE dr.creation BETWEEN %s AND %s"
+        if assign["temple_filter"]:
+            if isinstance(assign["temple_filter"], list) and assign["temple_filter"][0] == "in":
+                temples_list = assign["temple_filter"][1]
+                query_new_donors += " AND d.temple IN ({})".format(", ".join(["%s"] * len(temples_list)))
+                params_new_donors.extend(temples_list)
+            else:
+                query_new_donors += " AND d.temple = %s"
+                params_new_donors.append(assign["temple_filter"])
+        if assign["user_filter"]:
+            if isinstance(assign["user_filter"], list) and assign["user_filter"][0] == "in":
+                users_list = assign["user_filter"][1]
+                query_new_donors += " AND d.cashier IN ({})".format(", ".join(["%s"] * len(users_list)))
+                params_new_donors.extend(users_list)
+            else:
+                query_new_donors += " AND d.cashier = %s"
+                params_new_donors.append(assign["user_filter"])
     else:
-        donor_filters["creation"] = (">=", nowdate())
-        
-    if assign["assigned_temples"]:
-        donors_in_temples = frappe.get_all("Donation", 
-            filters={
-                "temple": ["in", assign["assigned_temples"]],
-                "creation": donor_filters["creation"]
-            },
-            fields=["donor"]
-        )
-        new_donors = len(set(d.donor for d in donors_in_temples if d.get("donor")))
-    else:
-        new_donors = frappe.db.count("Donor", filters=donor_filters)
+        query_new_donors += " WHERE dr.creation BETWEEN %s AND %s"
+
+    new_donors = frappe.db.sql(query_new_donors, tuple(params_new_donors))[0][0] or 0
     
     return {
         "total_donation": total_donation,
@@ -415,6 +435,10 @@ def get_donations_by_type(temple=None, user=None, from_date=None, to_date=None):
     Returns donation breakdown for pie chart.
     """
     assign = _get_user_assignment_filters(temple, user)
+    
+    f_date = from_date if (from_date and " " in from_date) else (f"{from_date} 00:00:00" if from_date else None)
+    t_date = to_date if (to_date and " " in to_date) else (f"{to_date} 23:59:59" if to_date else None)
+
     query = """
         SELECT dt.donation_type as type, SUM(di.amount) as value 
         FROM `tabDonation Item` di
@@ -442,9 +466,9 @@ def get_donations_by_type(temple=None, user=None, from_date=None, to_date=None):
             query += " AND d.cashier = %s"
             params.append(assign["user_filter"])
             
-    if from_date and to_date:
+    if f_date and t_date:
         query += " AND d.creation BETWEEN %s AND %s"
-        params.extend([from_date, to_date])
+        params.extend([f_date, t_date])
         
     query += " GROUP BY dt.donation_type ORDER BY value DESC"
     
@@ -456,6 +480,10 @@ def get_top_donors(temple=None, user=None, from_date=None, to_date=None):
     Returns top 10 donors by total contribution.
     """
     assign = _get_user_assignment_filters(temple, user)
+    
+    f_date = from_date if (from_date and " " in from_date) else (f"{from_date} 00:00:00" if from_date else None)
+    t_date = to_date if (to_date and " " in to_date) else (f"{to_date} 23:59:59" if to_date else None)
+
     query = "SELECT donor_name as name, SUM(total_amount) as total FROM `tabDonation` WHERE 1=1"
     params = []
     
@@ -477,9 +505,9 @@ def get_top_donors(temple=None, user=None, from_date=None, to_date=None):
             query += " AND cashier = %s"
             params.append(assign["user_filter"])
             
-    if from_date and to_date:
+    if f_date and t_date:
         query += " AND creation BETWEEN %s AND %s"
-        params.extend([from_date, to_date])
+        params.extend([f_date, t_date])
         
     query += " GROUP BY donor_name ORDER BY total DESC LIMIT 10"
     

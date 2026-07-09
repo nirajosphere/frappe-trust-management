@@ -2,10 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Table, Card, Select, Button, Space, Typography, Tag, Tooltip, notification } from "antd";
 import { LeftOutlined, RightOutlined, PlusOutlined, CalendarOutlined } from "@ant-design/icons";
 import { useFrappeGetDocList } from "../../../hooks/useFrappe";
+import { useUser } from "../../../context/UserContext";
 
 const { Title, Text } = Typography;
 
 const RoomCalendar = () => {
+    const { permissions, isSystemManager, isSuperAdmin, isAdmin } = useUser();
+    const hasFullAccess = isSystemManager || isSuperAdmin || isAdmin;
+
+    const bookingPermOverride = permissions?.find(p => p.doctype === "Room Booking");
+    const canCreateBooking = hasFullAccess || (bookingPermOverride ? !!bookingPermOverride.create : true);
+
     const [selectedTemple, setSelectedTemple] = useState(null);
     
     // Helper to get the Monday of any date
@@ -222,14 +229,14 @@ const RoomCalendar = () => {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        cursor: "pointer",
+                                        cursor: canCreateBooking ? "pointer" : "default",
                                         borderRadius: "6px",
                                         border: "1px dashed transparent"
                                     }}
-                                    className="hover:border-blue-300 hover:bg-blue-50"
-                                    onClick={() => handleNewBooking(record.name, date)}
+                                    className={canCreateBooking ? "hover:border-blue-300 hover:bg-blue-50" : ""}
+                                    onClick={() => canCreateBooking && handleNewBooking(record.name, date)}
                                 >
-                                    <PlusOutlined style={{ color: "#d1d5db" }} />
+                                    {canCreateBooking && <PlusOutlined style={{ color: "#d1d5db" }} />}
                                 </div>
                             ),
                             props: {

@@ -249,21 +249,23 @@ const Dashboard = () => {
 
         if (value === "today") {
             range = [dayjs().startOf("day"), dayjs().endOf("day")];
-        }
-
-        if (value === "week") {
+        } else if (value === "week") {
             range = [dayjs().startOf("week"), dayjs().endOf("week")];
-        }
-
-        if (value === "month") {
+        } else if (value === "month") {
             range = [dayjs().startOf("month"), dayjs().endOf("month")];
         }
 
-        setFilters({
+        const nextFilters = {
             ...filters,
             dateType: value,
             dateRange: range
-        });
+        };
+
+        setFilters(nextFilters);
+
+        if (value !== "custom") {
+            fetchData(buildFilterParams(nextFilters));
+        }
     };
 
     const handleTempleChange = (value) => {
@@ -373,9 +375,13 @@ const Dashboard = () => {
                                 <RangePicker
                                     className="w-full"
                                     value={filters.dateRange}
-                                    onChange={(dates) =>
-                                        setFilters({ ...filters, dateRange: dates })
-                                    }
+                                    onChange={(dates) => {
+                                        const nextFilters = { ...filters, dateRange: dates };
+                                        setFilters(nextFilters);
+                                        if (dates && dates[0] && dates[1]) {
+                                            fetchData(buildFilterParams(nextFilters));
+                                        }
+                                    }}
                                 />
                             )}
 
