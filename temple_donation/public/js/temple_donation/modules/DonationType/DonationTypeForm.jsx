@@ -236,6 +236,8 @@ const DonationTypeForm = ({ id, onBack }) => {
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
 
 
+    const originalTemplesRef = React.useRef([]);
+
     // --- Effect for Form Binding in Edit Mode ---
     useEffect(() => {
         if (isEdit && data) {
@@ -246,29 +248,43 @@ const DonationTypeForm = ({ id, onBack }) => {
                     : `${window.location.origin}${data.donation_image.startsWith("/") ? "" : "/"}${data.donation_image}`;
                 initialFileList = [{ uid: "-1", name: "image", status: "done", url, thumbUrl: url }];
             }
-            let initialTemples = [];
+            let parsedTemples = [];
             if (data.temple) {
                 try {
                     if (data.temple.startsWith("[")) {
-                        initialTemples = JSON.parse(data.temple);
+                        parsedTemples = JSON.parse(data.temple);
                     } else {
-                        initialTemples = data.temple.split(",").map(s => s.trim());
+                        parsedTemples = data.temple.split(",").map(s => s.trim());
                     }
                 } catch (e) {
-                    initialTemples = [data.temple];
+                    parsedTemples = [data.temple];
                 }
             }
-            form.setFieldsValue({ ...data, donation_image: initialFileList, temple: initialTemples });
+            originalTemplesRef.current = parsedTemples;
+
+            // Filter out temples the user does not have access to (not present in fetched temples list)
+            const filteredTemples = temples 
+                ? parsedTemples.filter(id => temples.some(t => t.name === id))
+                : parsedTemples;
+
+            form.setFieldsValue({ ...data, donation_image: initialFileList, temple: filteredTemples });
         }
-    }, [isEdit, data, form]);
+    }, [isEdit, data, form, temples]);
 
     // --- Form Submission Logic ---
     const handleSave = async (values) => {
         try {
             const { donation_image, ...rest } = values;
-            if (rest.temple && Array.isArray(rest.temple)) {
-                rest.temple = JSON.stringify(rest.temple);
+            
+            // Merge with temples the user had no access to, so they are not accidentally removed
+            let finalTemples = [...(rest.temple || [])];
+            if (originalTemplesRef.current.length > 0 && temples) {
+                const inaccessibleTemples = originalTemplesRef.current.filter(
+                    tId => !temples.some(t => t.name === tId)
+                );
+                finalTemples = [...finalTemples, ...inaccessibleTemples];
             }
+            rest.temple = JSON.stringify(finalTemples);
             let doc;
             
             if (isEdit) {

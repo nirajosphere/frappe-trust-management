@@ -343,7 +343,7 @@ const ListingPage = ({
     const isDepEnabled = (dtName) => Array.isArray(dependentDocTypes) && dependentDocTypes.includes(dtName);
 
     // Fetch Temples list for link field mapping in columns
-    const { data: temples } = useFrappeGetDocList(isDepEnabled("Temple") ? "Temple" : null, {
+    const { data: temples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
         limit: 1000
     });
@@ -425,9 +425,28 @@ const ListingPage = ({
                 }
             });
         } else if (data) {
-            setEnrichedData(data);
+            if (doctype === "Donation Type" && temples) {
+                const allowedIds = temples.map(t => t.name);
+                const filtered = data.filter(type => {
+                    if (!type.temple) return false;
+                    let templeIds = [];
+                    try {
+                        if (type.temple.startsWith("[")) {
+                            templeIds = JSON.parse(type.temple);
+                        } else {
+                            templeIds = type.temple.split(",").map(s => s.trim());
+                        }
+                    } catch (e) {
+                        templeIds = [type.temple];
+                    }
+                    return templeIds.some(t => allowedIds.includes(t));
+                });
+                setEnrichedData(filtered);
+            } else {
+                setEnrichedData(data);
+            }
         }
-    }, [data, childTable, doctype]);
+    }, [data, childTable, doctype, temples]);
 
     const { deleteDoc } = useFrappeDeleteDoc();
 

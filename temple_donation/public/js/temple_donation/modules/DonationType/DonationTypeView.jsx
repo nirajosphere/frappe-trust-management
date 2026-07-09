@@ -74,7 +74,14 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
       } catch (e) {
         templeIds = [String(value)];
       }
-      const names = templeIds.map(id => {
+      // Filter out temples the user does not have access to
+      const allowedTempleIds = temples 
+        ? templeIds.filter(id => temples.some(t => t.name === id))
+        : templeIds;
+
+      if (allowedTempleIds.length === 0) return <span className="text-zinc-300 font-medium">—</span>;
+
+      const names = allowedTempleIds.map(id => {
         const t = temples?.find(t => t.name === id);
         return t ? t.temple_name : id;
       });

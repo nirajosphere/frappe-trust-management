@@ -12,6 +12,24 @@ const getErrorMessage = (err) => {
 let cachedUserTemples = null;
 let fetchingUserTemplesPromise = null;
 
+const DOCTYPES_WITH_TEMPLE = [
+    "Donation",
+    "Room",
+    "Temple Notification Settings",
+    "Temple General Settings",
+    "Temple Room",
+    "Document Template",
+    "Temple Ledger",
+    "Store Location",
+    "Building",
+    "Room Booking",
+    "Temple Booking Settings",
+    "Temple Details",
+    "Item",
+    "Inventory Entry",
+    "Receipt Settings"
+];
+
 const getUserTemples = () => {
     if (typeof frappe === "undefined") return Promise.resolve(null);
     
@@ -124,13 +142,29 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
             }
         }
 
+        let order_by = undefined;
+        if (options.orderBy) {
+            if (typeof options.orderBy === "string") {
+                order_by = options.orderBy.includes("tab") ? options.orderBy : `\`tab${doctype}\`.${options.orderBy}`;
+            } else if (typeof options.orderBy === "object") {
+                const field = options.orderBy.field || "modified";
+                const order = options.orderBy.order || "desc";
+                order_by = `\`tab${doctype}\`.${field} ${order}`;
+            }
+        } else if (options.order_by) {
+            order_by = options.order_by.includes("tab") ? options.order_by : `\`tab${doctype}\`.${options.order_by}`;
+        } else {
+            order_by = `\`tab${doctype}\`.creation desc`;
+        }
+
         frappe.call({
             method: "frappe.client.get_list",
             args: {
                 doctype: doctype,
                 fields: options.fields || ["name"],
                 filters: finalFilters,
-                limit_page_length: options.limit || 50
+                limit_page_length: options.limit || 50,
+                order_by: order_by
             },
             callback: (r) => {
                 setLoading(false);

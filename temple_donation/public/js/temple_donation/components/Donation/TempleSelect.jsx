@@ -63,6 +63,7 @@ const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
                 value={selectedTemple || []}
                 onChange={onTempleSelect}
                 loading={loading}
+                disabled={data && data.length === 1}
                 options={data?.map(t => ({
                     value: t.name,
                     label: t.temple_name
@@ -70,7 +71,7 @@ const TempleSelect = ({ selectedTemple, onTempleSelect }) => {
                 filterOption={(input, option) =>
                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                 }
-                allowClear
+                allowClear={!(data && data.length === 1)}
                 dropdownStyle={{ borderRadius: '6px' }}
             />
         </Card>
