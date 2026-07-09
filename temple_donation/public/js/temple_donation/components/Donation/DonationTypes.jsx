@@ -143,12 +143,18 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Spin, Empty, Typography, Space } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
+import { useFrappeGetDocList } from "../../hooks/useFrappe";
 
 const { Text } = Typography;
 
 const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
     const [donationTypes, setDonationTypes] = useState([]);
     const [loading, setLoading] = useState(false);
+    
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     useEffect(() => {
         if (selectedTemple && selectedTemple.length > 0) {
@@ -230,7 +236,26 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
                                         <img src={type.donation_image || "/assets/temple_donation/js/temple_donation/assets/donation_placeholder.png"} alt={type.donation_type} className="w-full h-full object-contain" />
                                     </div>
                                     <Text strong className="block text-center text-zinc-800 text-sm">{type.donation_type}</Text>
-                                    <Text type="secondary" className="block text-center text-[11px] text-zinc-400 mt-0.5">{type["temple.temple_name"] || type.temple}</Text>
+                                    <Text type="secondary" className="block text-center text-[11px] text-zinc-400 mt-0.5">
+                                        {(() => {
+                                            if (!type.temple) return "";
+                                            let ids = [];
+                                            try {
+                                                if (type.temple.startsWith("[")) {
+                                                    ids = JSON.parse(type.temple);
+                                                } else {
+                                                    ids = type.temple.split(",").map(s => s.trim());
+                                                }
+                                            } catch (e) {
+                                                ids = [type.temple];
+                                            }
+                                            const names = ids.map(id => {
+                                                const found = temples?.find(t => t.name === id);
+                                                return found ? found.temple_name : id;
+                                            });
+                                            return names.join(", ");
+                                        })()}
+                                    </Text>
                                     {type.default_amount > 0 && (
                                         <Text className="block text-center font-semibold text-zinc-900 mt-auto pt-2 text-xs">₹ {type.default_amount}</Text>
                                     )}

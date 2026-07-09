@@ -92,11 +92,17 @@
 import React from "react";
 import { Card, Table, InputNumber, Button, Row, Typography, Empty } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useFrappeGetDocList } from "../../hooks/useFrappe";
 
 const { Text } = Typography;
 
 const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
     const quickAmounts = [101, 201, 501, 1001];
+
+    const { data: temples } = useFrappeGetDocList("Temple", {
+        fields: ["name", "temple_name"],
+        limit: 1000
+    });
 
     const columns = [
         {
@@ -105,7 +111,12 @@ const Cart = ({ items, onUpdateAmount, onRemoveItem, totalAmount }) => {
             render: (text, record) => (
                 <div style={{ padding: '4px 0' }}>
                     <Text style={{ fontWeight: 600, color: '#1f2937', fontSize: '13px' }}>{text}</Text>
-                    <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '2px' }}>{record.temple}</div>
+                    <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '2px' }}>
+                        {(() => {
+                            const found = temples?.find(t => t.name === record.temple);
+                            return found ? found.temple_name : record.temple;
+                        })()}
+                    </div>
                 </div>
             ),
         },

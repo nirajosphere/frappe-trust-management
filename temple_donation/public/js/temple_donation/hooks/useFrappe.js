@@ -140,6 +140,60 @@ export const useFrappeGetDocList = (doctype, options = {}) => {
             } catch (err) {
                 console.error("Error applying temple filters:", err);
             }
+        } else if (DOCTYPES_WITH_TEMPLE.includes(doctype)) {
+            try {
+                const myTemples = await getUserTemples();
+                if (myTemples !== null) {
+                    if (myTemples.length > 0) {
+                        if (Array.isArray(finalFilters)) {
+                            const templeFilterIdx = finalFilters.findIndex(f => Array.isArray(f) && f[0] === "temple");
+                            if (templeFilterIdx > -1) {
+                                const existing = finalFilters[templeFilterIdx];
+                                const op = existing[1];
+                                const val = existing[2];
+                                if (op === "in") {
+                                    const valArray = Array.isArray(val) ? val : [val];
+                                    const allowed = valArray.filter(t => myTemples.includes(t));
+                                    finalFilters[templeFilterIdx] = ["temple", "in", allowed.length > 0 ? allowed : ["NO_ACCESS"]];
+                                } else if (op === "=" || typeof op === "string") {
+                                    if (!myTemples.includes(val)) {
+                                        finalFilters[templeFilterIdx] = ["temple", "=", "NO_ACCESS"];
+                                    }
+                                } else {
+                                    finalFilters[templeFilterIdx] = ["temple", "in", myTemples];
+                                }
+                            } else {
+                                finalFilters.push(["temple", "in", myTemples]);
+                            }
+                        } else {
+                            if (finalFilters.temple) {
+                                const existing = Array.isArray(finalFilters.temple) ? finalFilters.temple : [finalFilters.temple];
+                                if (existing[0] === "in") {
+                                    const allowed = existing[1].filter(t => myTemples.includes(t));
+                                    finalFilters.temple = ["in", allowed.length > 0 ? allowed : ["NO_ACCESS"]];
+                                } else if (existing[0] === "=" || typeof existing === "string") {
+                                    const val = typeof existing === "string" ? existing : existing[1];
+                                    if (!myTemples.includes(val)) {
+                                        finalFilters.temple = "NO_ACCESS";
+                                    }
+                                } else {
+                                    finalFilters.temple = ["in", myTemples];
+                                }
+                            } else {
+                                finalFilters.temple = ["in", myTemples];
+                            }
+                        }
+                    } else {
+                        if (Array.isArray(finalFilters)) {
+                            finalFilters.push(["temple", "=", "NO_TEMPLE_ASSIGNED"]);
+                        } else {
+                            finalFilters.temple = "NO_TEMPLE_ASSIGNED";
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Error applying temple filters to doctype:", doctype, err);
+            }
         }
 
         let order_by = undefined;
