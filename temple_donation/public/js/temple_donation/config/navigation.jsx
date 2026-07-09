@@ -288,6 +288,7 @@ export const checkUserPermission = (navKey, userRoles = [], userPermissions = []
         "donations": DOCTYPE_DONATION,
         "donation-types": DOCTYPE_DONATION_TYPE,
         "users": DOCTYPE_USER,
+        "role-permissions": DOCTYPE_USER,
         "items": DOCTYPE_ITEM,
         "item-categories": DOCTYPE_ITEM_CATEGORY,
         "store-locations": DOCTYPE_STORE_LOCATION,
@@ -301,7 +302,8 @@ export const checkUserPermission = (navKey, userRoles = [], userPermissions = []
         "general-settings": DOCTYPE_GENERAL_SETTINGS,
         "booking-settings": DOCTYPE_BOOKING_SETTINGS,
         "notification-settings": DOCTYPE_NOTIFICATION_SETTINGS,
-        "inventory-dashboard": DOCTYPE_ITEM // Map inventory dashboard to items
+        "inventory-dashboard": DOCTYPE_ITEM,
+        "ledger": DOCTYPE_DONATION
     };
 
     const doctype = doctypeMap[navKey];

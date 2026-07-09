@@ -627,6 +627,19 @@ def sync_user_roles(doc, method=None):
         return
 
     selected_role = doc.custom_user_role.strip()
+
+    # Ensure only Super Admin can create or modify a user with the role "Super Admin"
+    current_user = frappe.session.user
+    user_roles = frappe.get_roles()
+    is_super_admin = "Super Admin" in user_roles or current_user == "Administrator"
+
+    existing_role = None
+    if not doc.is_new():
+        existing_role = frappe.db.get_value("User", doc.name, "custom_user_role")
+
+    if (selected_role == "Super Admin" or existing_role == "Super Admin") and not is_super_admin:
+        frappe.throw(_("Only a Super Admin can create or modify a Super Admin user."), frappe.PermissionError)
+
     assignable_roles = _get_assignable_role_names()
 
     if selected_role not in assignable_roles:
@@ -1794,9 +1807,21 @@ ROLE_DISPLAY_LABELS = {
 }
 
 
-def _ensure_role_admin():
-    if not any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
-        frappe.throw(_("Not permitted to manage roles"), frappe.PermissionError)
+def _ensure_role_admin(allow_read_only=False):
+    current_user = frappe.session.user
+    if current_user == "Administrator":
+        return True
+
+    # 1. Check direct roles
+    if any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
+        return True
+
+    # 2. Check custom/recursive User permissions override
+    action = "read" if allow_read_only else "write"
+    if _user_has_recursive_permission(current_user, "User", action):
+        return True
+
+    frappe.throw(_("Not permitted to manage roles"), frappe.PermissionError)
 
 
 def _ensure_app_role_profile():
@@ -2126,14 +2151,14 @@ def get_user_module_permissions(user_name):
 @frappe.whitelist()
 def get_permission_doctypes():
     """Return all app doctypes available for role permission configuration."""
-    _ensure_role_admin()
+    _ensure_role_admin(allow_read_only=True)
     return PERMISSION_DOCTYPES
 
 
 @frappe.whitelist()
 def get_role_profile_info():
     """Return the app Role Profile used to scope role management."""
-    _ensure_role_admin()
+    _ensure_role_admin(allow_read_only=True)
     _ensure_app_role_profile()
     role_names = _get_profile_role_names()
     return {
@@ -2158,7 +2183,7 @@ def get_assignable_roles():
 @frappe.whitelist()
 def get_custom_roles():
     """Fetch only roles inside the app Role Profile."""
-    _ensure_role_admin()
+    _ensure_role_admin(allow_read_only=True)
     protected = _get_protected_role_names()
     result = []
 
@@ -2279,7 +2304,7 @@ def delete_custom_role(role_name):
 @frappe.whitelist()
 def get_role_permissions(role_name):
     """Fetch read/write/create/delete permissions for configured doctypes."""
-    _ensure_role_admin()
+    _ensure_role_admin(allow_read_only=True)
     _ensure_role_in_profile(role_name)
     doctypes = _get_role_permission_doctypes(role_name)
     return [_build_permission_row(role_name, doctype) for doctype in doctypes]
@@ -2353,7 +2378,7 @@ def save_role_permissions(role_name, permissions):
 @frappe.whitelist()
 def get_user_extra_permissions(user_name=None, role_name=None):
     """Fetch user-specific permission matrix alongside role defaults."""
-    _ensure_role_admin()
+    _ensure_role_admin(allow_read_only=True)
     user_name = (user_name or "").strip()
     
     if not role_name and user_name:
@@ -2402,6 +2427,13 @@ def save_user_extra_permissions(user_name, permissions):
     if not user_name:
         frappe.throw(_("User name is required."))
 
+    target_user_role = frappe.db.get_value("User", user_name, "custom_user_role")
+    if target_user_role == "Super Admin":
+        current_roles = frappe.get_roles()
+        is_current_super_admin = "Super Admin" in current_roles or frappe.session.user == "Administrator"
+        if not is_current_super_admin:
+            frappe.throw(_("Only a Super Admin can modify permissions of a Super Admin user."), frappe.PermissionError)
+
     permissions = _parse_json_arg(permissions, [])
 
     for perm in permissions:
@@ -2449,6 +2481,13 @@ def reset_user_extra_permissions(user_name):
     user_name = (user_name or "").strip()
     if not user_name:
         frappe.throw(_("User name is required."))
+
+    target_user_role = frappe.db.get_value("User", user_name, "custom_user_role")
+    if target_user_role == "Super Admin":
+        current_roles = frappe.get_roles()
+        is_current_super_admin = "Super Admin" in current_roles or frappe.session.user == "Administrator"
+        if not is_current_super_admin:
+            frappe.throw(_("Only a Super Admin can reset permissions of a Super Admin user."), frappe.PermissionError)
 
     frappe.db.delete("User Extra Permission", {"user": user_name})
     frappe.clear_cache(doctype="DocType")

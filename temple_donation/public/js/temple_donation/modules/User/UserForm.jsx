@@ -26,6 +26,7 @@ const UserForm = ({ id, onBack }) => {
 
     const userRoles = typeof frappe !== "undefined" ? (frappe.user_roles || []) : [];
     const isUserAdmin = userRoles.some(r => ["System Manager","Super Admin","Administrator","Temple Admin"].includes(r));
+    const isSuperAdmin = userRoles.some(r => ["System Manager","Super Admin","Administrator"].includes(r));
     const isSelfProfile = isEdit && id === (typeof frappe !== "undefined" ? frappe.session.user : "");
     const disableAdminFields = isSelfProfile && !isUserAdmin;
 
@@ -60,6 +61,7 @@ const UserForm = ({ id, onBack }) => {
 
     const fetchPermissionsForRole = (role) => {
         if (typeof frappe === "undefined" || !role) return;
+        if (!isSuperAdmin) return;
         setLoadingUserPerms(true);
         frappe.call({
             method: "temple_donation.api.get_user_extra_permissions",
@@ -142,10 +144,15 @@ const UserForm = ({ id, onBack }) => {
         try {
             const payload = { ...values };
             payload.enabled = payload.enabled === "Active" ? 1 : 0;
+            payload.custom_status = payload.enabled ? "Active" : "Inactive";
             if (payload.custom_select_temple)
                 payload.custom_select_temple = payload.custom_select_temple.map(t => ({ temple: t }));
             delete payload.confirm_password;
-            if (!payload.new_password) delete payload.new_password;
+            delete payload.new_password;
+
+            if (!isEdit) {
+                payload.send_welcome_email = 1;
+            }
 
             if (isEdit) {
                 await updateDoc(DOCTYPE_USER, id, payload);
@@ -306,14 +313,14 @@ const UserForm = ({ id, onBack }) => {
                                 <Row gutter={[16, 4]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="custom_user_role" label={<span style={{ fontWeight: 600, color: '#27272a' }}>User Role</span>} rules={[{ required: true, message: "Required" }]}>
-                                            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                            <div style={isSuperAdmin ? { display: 'flex', gap: '8px', alignItems: 'center' } : {}}>
                                                 <Select
                                                     value={userRole || undefined}
                                                     placeholder="Select Role"
                                                     disabled={disableAdminFields}
-                                                    style={{ flex: 1 }}
+                                                    style={isSuperAdmin ? { flex: 1 } : { width: '100%' }}
                                                     onChange={handleRoleChange}
-                                                    options={assignableRoles.length > 0
+                                                    options={(assignableRoles.length > 0
                                                         ? assignableRoles.map((role) => ({
                                                             label: role.label,
                                                             value: role.name,
@@ -322,9 +329,9 @@ const UserForm = ({ id, onBack }) => {
                                                             { label: "Super Admin", value: "Super Admin" },
                                                             { label: "Trust Admin", value: "Temple Admin" },
                                                             { label: "Cashier", value: "Cashier" },
-                                                        ]}
+                                                        ]).filter(r => isSuperAdmin || r.value !== "Super Admin")}
                                                 />
-                                                {userRole && (
+                                                {isSuperAdmin && userRole && (
                                                     <Button
                                                         type={userPermissions.some(p => p.read || p.write || p.create || p.delete) ? "primary" : "default"}
                                                         icon={<SafetyOutlined />}
@@ -364,52 +371,24 @@ const UserForm = ({ id, onBack }) => {
                                             />
                                         </Form.Item>
                                     </Col>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="custom_status" label={<span style={{ fontWeight: 600, color: '#27272a' }}>System Status</span>} rules={[{ required: true }]}>
-                                            <Select disabled={disableAdminFields} style={{ width: '100%' }}
-                                                options={[
-                                                    { label: "Active",   value: "Active"   },
-                                                    { label: "Inactive", value: "Inactive" },
-                                                ]}
-                                            />
-                                        </Form.Item>
-                                    </Col>
                                 </Row>
                             </SectionCard>
 
-                            {/* Section 3: Security */}
-                            <SectionCard 
-                                title="Security & Balances"
-                                icon={<LockOutlined style={{ color: '#09090b' }} />}
-                            >
-                                <Row gutter={[16, 4]}>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="new_password" label={<span style={{ fontWeight: 600, color: '#27272a' }}>{isEdit ? "New Password (optional)" : "Password"}</span>} rules={[{ required: !isEdit, message: "Required" }]}>
-                                            <Input.Password prefix={<LockOutlined style={{ color: '#a1a1aa' }} />} placeholder={isEdit ? "Leave blank to keep current" : "Set password"} style={{ borderRadius: '8px' }} />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col xs={24} sm={12}>
-                                        <Form.Item name="custom_opening_balance" label={<span style={{ fontWeight: 600, color: '#27272a' }}>Opening Balance</span>}>
-                                            <Input prefix={<DollarOutlined style={{ color: '#a1a1aa' }} />} placeholder="0.00" disabled={disableAdminFields} type="number" step="0.01" style={{ borderRadius: '8px' }} />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </SectionCard>
-
-                            {/* Section 4: Notes */}
-                            <SectionCard 
-                                title="Internal Notes"
-                                icon={<FileTextOutlined style={{ color: '#09090b' }} />}
-                            >
-                                <Form.Item name="custom_internal_notes" style={{ marginBottom: 0 }}>
-                                    <Input.TextArea
-                                        rows={3}
-                                        placeholder="Add sensitive internal logs or operation notes here..."
-                                        disabled={disableAdminFields}
-                                        style={{ resize: 'none', borderRadius: '8px', padding: '10px' }}
-                                    />
-                                </Form.Item>
-                            </SectionCard>
+                            {/* Section 3: Opening Balance (Only for Cashier) */}
+                            {userRole === "Cashier" && (
+                                <SectionCard 
+                                    title="Opening Balance"
+                                    icon={<DollarOutlined style={{ color: '#09090b' }} />}
+                                >
+                                    <Row gutter={[16, 4]}>
+                                        <Col xs={24}>
+                                            <Form.Item name="custom_opening_balance" label={<span style={{ fontWeight: 600, color: '#27272a' }}>Opening Balance</span>}>
+                                                <Input prefix={<DollarOutlined style={{ color: '#a1a1aa' }} />} placeholder="0.00" disabled={disableAdminFields} type="number" step="0.01" style={{ borderRadius: '8px' }} />
+                                            </Form.Item>
+                                        </Col>
+                                    </Row>
+                                </SectionCard>
+                            )}
 
                         </div>
                     </Col>
