@@ -9,23 +9,127 @@ const getErrorMessage = (err) => {
     return "Request failed";
 };
 
+let cachedUserTemples = null;
+let fetchingUserTemplesPromise = null;
+
+const getUserTemples = () => {
+    if (typeof frappe === "undefined") return Promise.resolve(null);
+    
+    const currentUser = frappe.session.user;
+    if (!currentUser || currentUser === "Administrator") {
+        return Promise.resolve(null);
+    }
+
+    const userRoles = frappe.user_roles || [];
+    const isManager = userRoles.includes("System Manager") || userRoles.includes("Super Admin");
+    if (isManager) {
+        return Promise.resolve(null);
+    }
+
+    if (cachedUserTemples !== null) {
+        return Promise.resolve(cachedUserTemples);
+    }
+
+    if (fetchingUserTemplesPromise) {
+        return fetchingUserTemplesPromise;
+    }
+
+    fetchingUserTemplesPromise = new Promise((resolve) => {
+        frappe.call({
+            method: "frappe.client.get",
+            args: { doctype: "User", name: currentUser },
+            callback: (r) => {
+                const myTemples = r.message?.custom_select_temple?.map(t => t.temple) || [];
+                cachedUserTemples = myTemples;
+                resolve(myTemples);
+            },
+            error: (err) => {
+                console.error("Error loading user temples:", err);
+                resolve([]);
+            }
+        });
+    });
+
+    return fetchingUserTemplesPromise;
+};
+
 export const useFrappeGetDocList = (doctype, options = {}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(!!doctype);
     const [error, setError] = useState(null);
 
-    const fetchData = () => {
+    const fetchData = async () => {
         if (!doctype || typeof frappe === "undefined") {
             setLoading(false);
             return;
         }
         setLoading(true);
+
+        let finalFilters = Array.isArray(options.filters)
+            ? [...options.filters]
+            : { ...(options.filters || {}) };
+
+        if (doctype === "Temple") {
+            try {
+                const myTemples = await getUserTemples();
+                if (myTemples !== null) {
+                    if (myTemples.length > 0) {
+                        if (Array.isArray(finalFilters)) {
+                            const nameFilterIdx = finalFilters.findIndex(f => Array.isArray(f) && f[0] === "name");
+                            if (nameFilterIdx > -1) {
+                                const existing = finalFilters[nameFilterIdx];
+                                const op = existing[1];
+                                const val = existing[2];
+                                if (op === "in") {
+                                    const allowed = val.filter(t => myTemples.includes(t));
+                                    finalFilters[nameFilterIdx] = ["name", "in", allowed.length > 0 ? allowed : ["NO_ACCESS"]];
+                                } else if (op === "=" || typeof op === "string") {
+                                    if (!myTemples.includes(val)) {
+                                        finalFilters[nameFilterIdx] = ["name", "=", "NO_ACCESS"];
+                                    }
+                                } else {
+                                    finalFilters[nameFilterIdx] = ["name", "in", myTemples];
+                                }
+                            } else {
+                                finalFilters.push(["name", "in", myTemples]);
+                            }
+                        } else {
+                            if (finalFilters.name) {
+                                const existing = Array.isArray(finalFilters.name) ? finalFilters.name : [finalFilters.name];
+                                if (existing[0] === "in") {
+                                    const allowed = existing[1].filter(t => myTemples.includes(t));
+                                    finalFilters.name = ["in", allowed.length > 0 ? allowed : ["NO_ACCESS"]];
+                                } else if (existing[0] === "=" || typeof existing === "string") {
+                                    const val = typeof existing === "string" ? existing : existing[1];
+                                    if (!myTemples.includes(val)) {
+                                        finalFilters.name = "NO_ACCESS";
+                                    }
+                                } else {
+                                    finalFilters.name = ["in", myTemples];
+                                }
+                            } else {
+                                finalFilters.name = ["in", myTemples];
+                            }
+                        }
+                    } else {
+                        if (Array.isArray(finalFilters)) {
+                            finalFilters.push(["name", "=", "NO_TEMPLE_ASSIGNED"]);
+                        } else {
+                            finalFilters.name = "NO_TEMPLE_ASSIGNED";
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error("Error applying temple filters:", err);
+            }
+        }
+
         frappe.call({
             method: "frappe.client.get_list",
             args: {
                 doctype: doctype,
                 fields: options.fields || ["name"],
-                filters: options.filters || {},
+                filters: finalFilters,
                 limit_page_length: options.limit || 50
             },
             callback: (r) => {
