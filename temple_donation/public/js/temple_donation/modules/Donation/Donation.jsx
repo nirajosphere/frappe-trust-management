@@ -8,6 +8,7 @@ import DonationTypes from "../../components/Donation/DonationTypes";
 import Cart from "../../components/Donation/Cart";
 import PaymentSection from "../../components/Donation/PaymentSection";
 import AddPageHeader from "../../components/common/AddPageHeader";
+import { useFrappeGetDocList } from "../../hooks/useFrappe";
 
 const { Title, Text } = Typography;
 
@@ -20,15 +21,81 @@ const Donation = ({ onBack }) => {
     const [submitting, setSubmitting] = useState(false);
     const [donorMobile, setDonorMobile] = useState("");
 
-    // Synchronize cart with selected temples
-    // If a temple is unselected, remove its items from the cart
+    const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
+        fields: ["name", "donation_type", "default_amount", "donation_image", "temple"],
+        limit: 1000
+    });
+
+    // Keep track of previous selected temples to determine newly added/removed temples
+    const prevSelectedTempleRef = React.useRef([]);
+
     React.useEffect(() => {
-        if (!selectedTemple || selectedTemple.length === 0) {
-            setCartItems([]);
-        } else {
-            setCartItems(prev => prev.filter(item => selectedTemple.includes(item.temple)));
+        const prev = prevSelectedTempleRef.current || [];
+        const added = selectedTemple.filter(t => !prev.includes(t));
+        const removed = prev.filter(t => !selectedTemple.includes(t));
+
+        let newCart = [...cartItems];
+
+        // 1. Remove items for temples that are no longer selected
+        if (selectedTemple.length === 0) {
+            newCart = [];
+        } else if (removed.length > 0) {
+            newCart = newCart.filter(item => selectedTemple.includes(item.temple));
         }
-    }, [selectedTemple]);
+
+        // 2. Add items for newly added temples if they match currently active types in cart
+        if (added.length > 0 && newCart.length > 0) {
+            const itemsToAdd = [];
+            const currentCartTypes = [...new Set(newCart.map(item => item.donation_type))];
+
+            currentCartTypes.forEach(typeName => {
+                const typeDef = donationTypes?.find(t => t.name === typeName);
+                if (typeDef) {
+                    let associated = [];
+                    if (typeDef.temple) {
+                        try {
+                            if (typeDef.temple.startsWith("[")) {
+                                associated = JSON.parse(typeDef.temple);
+                            } else {
+                                associated = typeDef.temple.split(",").map(s => s.trim());
+                            }
+                        } catch (e) {
+                            associated = [typeDef.temple];
+                        }
+                    }
+
+                    added.forEach(tName => {
+                        if (associated.includes(tName)) {
+                            const alreadyExists = newCart.some(item => 
+                                item.donation_type === typeName && item.temple === tName
+                            );
+                            if (!alreadyExists) {
+                                itemsToAdd.push({
+                                    donation_type: typeDef.name,
+                                    donation_type_label: typeDef.donation_type,
+                                    amount: typeDef.default_amount || 101,
+                                    temple: tName
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+
+            if (itemsToAdd.length > 0) {
+                newCart = [...newCart, ...itemsToAdd];
+            }
+        }
+
+        // Only update cartItems if it actually changed to avoid state update loops
+        const changed = JSON.stringify(cartItems.map(i => `${i.donation_type}-${i.temple}`)) !== 
+                        JSON.stringify(newCart.map(i => `${i.donation_type}-${i.temple}`));
+        if (changed) {
+            setCartItems(newCart);
+        }
+
+        prevSelectedTempleRef.current = selectedTemple;
+    }, [selectedTemple, donationTypes, cartItems]);
 
     // Calculate total amount
     const totalAmount = useMemo(() =>
@@ -58,20 +125,23 @@ const Donation = ({ onBack }) => {
             matchedTemples.push(selectedTemple[0]);
         }
 
-        // Check if any matched temple is in the cart
+        // Check if all matched temples are in the cart
         const alreadyInCart = cartItems.filter(item => 
             item.donation_type === donationType.name && matchedTemples.includes(item.temple)
         );
 
-        if (alreadyInCart.length > 0) {
+        if (alreadyInCart.length === matchedTemples.length) {
             // Remove those from cart
             setCartItems(prev => prev.filter(item => 
                 !(item.donation_type === donationType.name && matchedTemples.includes(item.temple))
             ));
             message.info(`Removed ${donationType.donation_type}`);
         } else {
-            // Add for all matched temples
-            const newItems = matchedTemples.map(tName => ({
+            // Add only missing matched temples
+            const missingTemples = matchedTemples.filter(t => 
+                !alreadyInCart.some(item => item.temple === t)
+            );
+            const newItems = missingTemples.map(tName => ({
                 donation_type: donationType.name,
                 donation_type_label: donationType.donation_type,
                 amount: donationType.default_amount || 101,

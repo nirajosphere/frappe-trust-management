@@ -216,7 +216,25 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
             ) : donationTypes.length > 0 ? (
                 <Row gutter={[12, 12]}>
                     {donationTypes.map((type) => {
-                        const isSelected = cartItems.some(item => item.donation_type === type.name);
+                        let associatedTemples = [];
+                        if (type.temple) {
+                            try {
+                                if (type.temple.startsWith("[")) {
+                                    associatedTemples = JSON.parse(type.temple);
+                                } else {
+                                    associatedTemples = type.temple.split(",").map(s => s.trim());
+                                }
+                            } catch (e) {
+                                associatedTemples = [type.temple];
+                            }
+                        }
+                        const matchedTemples = associatedTemples.filter(t => selectedTemple.includes(t));
+                        if (matchedTemples.length === 0 && selectedTemple.length > 0) {
+                            matchedTemples.push(selectedTemple[0]);
+                        }
+                        const isSelected = matchedTemples.length > 0 && matchedTemples.some(t => 
+                            cartItems.some(item => item.donation_type === type.name && item.temple === t)
+                        );
                         return (
                             <Col xs={12} sm={8} md={6} key={type.name} className="flex">
                                 <Card
