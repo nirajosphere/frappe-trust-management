@@ -222,6 +222,7 @@ import PageLoader from "../../components/common/PageLoader";
 import FormFooter from "../../components/common/FormFooter";
 import ViewContainer from "../../components/common/ViewContainer";
 import SectionCard from "../../components/common/SectionCard";
+import FileUpload from "../../components/FileUpload";
 
 const DonationTypeForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -234,9 +235,6 @@ const DonationTypeForm = ({ id, onBack }) => {
     const { data, loading, error } = useFrappeGetDoc(DOCTYPE_DONATION_TYPE, id);
     const { data: temples } = useFrappeGetDocList(DOCTYPE_TEMPLE, { fields: ["name", "temple_name"] });
 
-    // --- Form Watchers for Live Image Configuration ---
-    const fileList         = Form.useWatch("donation_image", form) || [];
-    const previewUrl       = fileList?.[0]?.url || fileList?.[0]?.thumbUrl || "";
 
     // --- Effect for Form Binding in Edit Mode ---
     useEffect(() => {
@@ -248,7 +246,19 @@ const DonationTypeForm = ({ id, onBack }) => {
                     : `${window.location.origin}${data.donation_image.startsWith("/") ? "" : "/"}${data.donation_image}`;
                 initialFileList = [{ uid: "-1", name: "image", status: "done", url, thumbUrl: url }];
             }
-            form.setFieldsValue({ ...data, donation_image: initialFileList });
+            let initialTemples = [];
+            if (data.temple) {
+                try {
+                    if (data.temple.startsWith("[")) {
+                        initialTemples = JSON.parse(data.temple);
+                    } else {
+                        initialTemples = data.temple.split(",").map(s => s.trim());
+                    }
+                } catch (e) {
+                    initialTemples = [data.temple];
+                }
+            }
+            form.setFieldsValue({ ...data, donation_image: initialFileList, temple: initialTemples });
         }
     }, [isEdit, data, form]);
 
@@ -256,6 +266,9 @@ const DonationTypeForm = ({ id, onBack }) => {
     const handleSave = async (values) => {
         try {
             const { donation_image, ...rest } = values;
+            if (rest.temple && Array.isArray(rest.temple)) {
+                rest.temple = JSON.stringify(rest.temple);
+            }
             let doc;
             
             if (isEdit) {
@@ -338,48 +351,15 @@ const DonationTypeForm = ({ id, onBack }) => {
                                 
                                 <Form.Item
                                     name="donation_image"
-                                    valuePropName="fileList"
-                                    getValueFromEvent={(e) => Array.isArray(e) ? e : e?.fileList}
-                                    style={{ marginBottom: 0 }}
+                                    style={{ marginBottom: 0, width: '100%' }}
                                 >
-                                    <Upload maxCount={1} beforeUpload={() => false} listType="picture" showUploadList={false}>
-                                        <div style={{
-                                            width: '130px',
-                                            height: '130px',
-                                            borderRadius: '14px',
-                                            border: previewUrl ? '1px solid #e4e4e7' : '2px dashed #cbd5e1',
-                                            backgroundColor: '#f8fafc',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '6px',
-                                            cursor: 'pointer',
-                                            overflow: 'hidden',
-                                            transition: 'all 0.2s ease',
-                                            boxShadow: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.03)'
-                                        }}>
-                                            {previewUrl ? (
-                                                <img src={previewUrl} alt="donation configuration banner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                            ) : (
-                                                <>
-                                                    <CloudUploadOutlined style={{ fontSize: '26px', color: '#64748b' }} />
-                                                    <span style={{ fontSize: '12px', fontWeight: 600, color: '#475569' }}>Upload Photo</span>
-                                                </>
-                                            )}
-                                        </div>
-                                    </Upload>
+                                    <FileUpload 
+                                        accept="image/*"
+                                        placeholder="Upload Photo"
+                                        description="Recommended 1:1 ratio. PNG or JPG."
+                                        listType="picture-card"
+                                    />
                                 </Form.Item>
-
-                                {/* Improved & Highly Professional Helper Text */}
-                                <div style={{ marginTop: '16px' }}>
-                                    <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: 600, color: '#1e293b' }}>
-                                        Category Banner
-                                    </h5>
-                                    <p style={{ margin: 0, fontSize: '11px', color: '#64748b', lineHeight: '1.5', maxWidth: '210px' }}>
-                                        Recommended square aspect (1:1 Ratio). Supports high-quality PNG or JPG formats.
-                                    </p>
-                                </div>
 
                             </div>
                         </SectionCard>
@@ -407,6 +387,7 @@ const DonationTypeForm = ({ id, onBack }) => {
                                 <Col xs={24}>
                                     <Form.Item name="temple" label="Associated Trust" style={formItemStyle}>
                                         <Select
+                                            mode="multiple"
                                             placeholder="Select Associated Trust"
                                             allowClear
                                             suffixIcon={<BankOutlined style={{ color: '#a1a1aa' }} />}

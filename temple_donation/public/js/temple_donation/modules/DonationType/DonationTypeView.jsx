@@ -61,8 +61,24 @@ const DonationTypeView = ({ id, onBack, onEdit }) => {
       );
 
     if (field.name === "temple") {
-      const t = temples?.find(t => t.name === value);
-      return <span className="text-zinc-800 font-semibold">{t ? t.temple_name : String(value)}</span>;
+      if (!value) return <span className="text-zinc-300 font-medium">—</span>;
+      let templeIds = [];
+      try {
+        if (typeof value === "string" && value.startsWith("[")) {
+          templeIds = JSON.parse(value);
+        } else if (Array.isArray(value)) {
+          templeIds = value;
+        } else {
+          templeIds = String(value).split(",").map(s => s.trim());
+        }
+      } catch (e) {
+        templeIds = [String(value)];
+      }
+      const names = templeIds.map(id => {
+        const t = temples?.find(t => t.name === id);
+        return t ? t.temple_name : id;
+      });
+      return <span className="text-zinc-800 font-semibold">{names.join(", ")}</span>;
     }
 
     if (field.name === "default_amount") {

@@ -27,9 +27,8 @@
   },
   {
    "fieldname": "temple",
-   "fieldtype": "Link",
-   "label": "Temple",
-   "options": "Temple"
+   "fieldtype": "Small Text",
+   "label": "Temple"
   },
   {
    "fieldname": "default_amount",

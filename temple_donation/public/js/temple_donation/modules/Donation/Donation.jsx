@@ -41,22 +41,43 @@ const Donation = ({ onBack }) => {
             return;
         }
 
-        // Check if already in cart
-        const existingIndex = cartItems.findIndex(item => item.donation_type === donationType.name);
-        
-        if (existingIndex > -1) {
-            // Remove if exists
-            setCartItems(prev => prev.filter((_, i) => i !== existingIndex));
+        let associatedTemples = [];
+        if (donationType.temple) {
+            try {
+                if (donationType.temple.startsWith("[")) {
+                    associatedTemples = JSON.parse(donationType.temple);
+                } else {
+                    associatedTemples = donationType.temple.split(",").map(s => s.trim());
+                }
+            } catch (e) {
+                associatedTemples = [donationType.temple];
+            }
+        }
+        const matchedTemples = associatedTemples.filter(t => selectedTemple.includes(t));
+        if (matchedTemples.length === 0) {
+            matchedTemples.push(selectedTemple[0]);
+        }
+
+        // Check if any matched temple is in the cart
+        const alreadyInCart = cartItems.filter(item => 
+            item.donation_type === donationType.name && matchedTemples.includes(item.temple)
+        );
+
+        if (alreadyInCart.length > 0) {
+            // Remove those from cart
+            setCartItems(prev => prev.filter(item => 
+                !(item.donation_type === donationType.name && matchedTemples.includes(item.temple))
+            ));
             message.info(`Removed ${donationType.donation_type}`);
         } else {
-            // Add if not exists
-            const newItem = {
+            // Add for all matched temples
+            const newItems = matchedTemples.map(tName => ({
                 donation_type: donationType.name,
                 donation_type_label: donationType.donation_type,
                 amount: donationType.default_amount || 101,
-                temple: donationType.temple
-            };
-            setCartItems(prev => [...prev, newItem]);
+                temple: tName
+            }));
+            setCartItems(prev => [...prev, ...newItems]);
             message.success(`Added ${donationType.donation_type}`);
         }
     }, [cartItems, selectedTemple]);

@@ -164,12 +164,27 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
             method: "frappe.client.get_list",
             args: {
                 doctype: "Donation Type",
-                filters: { temple: ["in", selectedTemple] },
-                fields: ["name", "donation_type", "default_amount", "donation_image", "temple", "temple.temple_name"]
+                fields: ["name", "donation_type", "default_amount", "donation_image", "temple"],
+                limit: 1000
             },
             callback: (r) => {
                 setLoading(false);
-                setDonationTypes(r.message || []);
+                const allTypes = r.message || [];
+                const filtered = allTypes.filter(type => {
+                    if (!type.temple) return false;
+                    let templeIds = [];
+                    try {
+                        if (type.temple.startsWith("[")) {
+                            templeIds = JSON.parse(type.temple);
+                        } else {
+                            templeIds = type.temple.split(",").map(s => s.trim());
+                        }
+                    } catch (e) {
+                        templeIds = [type.temple];
+                    }
+                    return templeIds.some(t => selectedTemple.includes(t));
+                });
+                setDonationTypes(filtered);
             }
         });
     };
