@@ -298,8 +298,24 @@ const UserForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="custom_test" label={<span style={{ fontWeight: 600, color: '#27272a' }}>Contact Number</span>} rules={[{ required: true, message: "Required" }]}>
-                                            <Input prefix={<PhoneOutlined style={{ color: '#a1a1aa' }} />} placeholder="Mobile Number" maxLength={10} style={{ borderRadius: '8px' }} />
+                                        <Form.Item
+                                            name="custom_test"
+                                            label={<span style={{ fontWeight: 600, color: '#27272a' }}>Contact Number</span>}
+                                            rules={[
+                                                { required: true, message: "Required" },
+                                                { pattern: /^\d{10}$/, message: "Please enter a valid 10-digit mobile number" }
+                                            ]}
+                                        >
+                                            <Input
+                                                prefix={<PhoneOutlined style={{ color: '#a1a1aa' }} />}
+                                                placeholder="Mobile Number"
+                                                maxLength={10}
+                                                style={{ borderRadius: '8px' }}
+                                                onChange={(e) => {
+                                                    const val = e.target.value.replace(/\D/g, "");
+                                                    form.setFieldsValue({ custom_test: val });
+                                                }}
+                                            />
                                         </Form.Item>
                                     </Col>
                                 </Row>

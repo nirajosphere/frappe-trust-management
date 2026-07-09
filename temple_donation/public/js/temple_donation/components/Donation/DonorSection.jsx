@@ -148,13 +148,14 @@ const DonorSection = ({ selectedDonor, onDonorSelect, mobile = "", setMobile }) 
     const [modal, setModal] = useState(false);
 
     const search = (val) => {
-        setMobile(val);
-        if (val.length === 10) {
+        const cleanVal = val.replace(/\D/g, "");
+        setMobile(cleanVal);
+        if (cleanVal.length === 10) {
             frappe.call({
                 method: "frappe.client.get_list",
                 args: {
                     doctype: "Donor",
-                    filters: { mobile_number: val },
+                    filters: { mobile_number: cleanVal },
                     fields: ["name", "donor_name", "mobile_number"]
                 },
                 callback: (r) => {

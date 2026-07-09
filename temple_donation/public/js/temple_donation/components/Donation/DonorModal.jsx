@@ -193,6 +193,10 @@ const DonorModal = ({ open, onCancel, onSuccess, initialMobileNumber }) => {
                     <Input
                         maxLength={10}
                         placeholder="10-digit number"
+                        onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "");
+                            form.setFieldsValue({ mobile_number: val });
+                        }}
                     />
                 </Form.Item>
 
