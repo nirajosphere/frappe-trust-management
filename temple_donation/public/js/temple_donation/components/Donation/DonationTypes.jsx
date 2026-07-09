@@ -269,8 +269,8 @@ const DonationTypes = ({ selectedTemple, onToggleCart, cartItems = [] }) => {
                                             }
                                             const names = ids.map(id => {
                                                 const found = temples?.find(t => t.name === id);
-                                                return found ? found.temple_name : id;
-                                            });
+                                                return found ? found.temple_name : null;
+                                            }).filter(Boolean);
                                             return names.join(", ");
                                         })()}
                                     </Text>
