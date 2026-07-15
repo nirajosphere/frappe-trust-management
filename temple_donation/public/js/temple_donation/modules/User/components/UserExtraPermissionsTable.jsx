@@ -88,6 +88,8 @@ const UserExtraPermissionsTable = ({
     onPermissionChange,
     onToggleAll
 }) => {
+    const isSuperAdminUser = currentRole === "Super Admin";
+
     return (
         <SectionCard
             title={`Extra Permissions — ${userNameDisplay}`}
@@ -155,8 +157,9 @@ const UserExtraPermissionsTable = ({
                                                     <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                                                         <span className="text-[10px] font-normal text-zinc-400 normal-case">Select Group:</span>
                                                         <Checkbox
-                                                            checked={isGroupAllChecked}
-                                                            indeterminate={isGroupIndeterminate}
+                                                            checked={isSuperAdminUser ? true : isGroupAllChecked}
+                                                            indeterminate={isSuperAdminUser ? false : isGroupIndeterminate}
+                                                            disabled={isSuperAdminUser}
                                                             onChange={(e) => {
                                                                 group.items.forEach(item => {
                                                                     onToggleAll(item.doctype, e.target.checked);
@@ -194,8 +197,8 @@ const UserExtraPermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.role_read || !!row.read}
-                                                        disabled={!!row.role_read}
+                                                        checked={isSuperAdminUser ? true : (!!row.role_read || !!row.read)}
+                                                        disabled={isSuperAdminUser || !!row.role_read}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "read", e.target.checked)
                                                         }
@@ -203,8 +206,8 @@ const UserExtraPermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.role_write || !!row.write}
-                                                        disabled={!!row.role_write}
+                                                        checked={isSuperAdminUser ? true : (!!row.role_write || !!row.write)}
+                                                        disabled={isSuperAdminUser || !!row.role_write}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "write", e.target.checked)
                                                         }
@@ -212,8 +215,8 @@ const UserExtraPermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.role_create || !!row.create}
-                                                        disabled={!!row.role_create}
+                                                        checked={isSuperAdminUser ? true : (!!row.role_create || !!row.create)}
+                                                        disabled={isSuperAdminUser || !!row.role_create}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "create", e.target.checked)
                                                         }
@@ -221,8 +224,8 @@ const UserExtraPermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.role_delete || !!row.delete}
-                                                        disabled={!!row.role_delete}
+                                                        checked={isSuperAdminUser ? true : (!!row.role_delete || !!row.delete)}
+                                                        disabled={isSuperAdminUser || !!row.role_delete}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "delete", e.target.checked)
                                                         }
@@ -230,9 +233,9 @@ const UserExtraPermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!isAllChecked}
-                                                        indeterminate={!!isIndeterminate}
-                                                        disabled={!!isAllDisabled}
+                                                        checked={isSuperAdminUser ? true : !!isAllChecked}
+                                                        indeterminate={isSuperAdminUser ? false : !!isIndeterminate}
+                                                        disabled={isSuperAdminUser || !!isAllDisabled}
                                                         onChange={(e) =>
                                                             onToggleAll(row.doctype, e.target.checked)
                                                         }
@@ -249,7 +252,7 @@ const UserExtraPermissionsTable = ({
                 </div>
             )}
 
-            {!loadingUserPerms && userPermissions.length > 0 && (
+            {!loadingUserPerms && userPermissions.length > 0 && !isSuperAdminUser && (
                 <FormFooter
                     onCancel={onReset}
                     cancelText="Reset Overrides"

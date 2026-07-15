@@ -557,6 +557,19 @@ const RolePermissions = () => {
                                 pattern: /^[a-zA-Z0-9\s_-]+$/,
                                 message: "Only letters, numbers, spaces, underscores, and dashes allowed",
                             },
+                            {
+                                validator: (_, value) => {
+                                    if (!value) return Promise.resolve();
+                                    const cleanVal = value.trim().toLowerCase();
+                                    if (cleanVal === "super admin") {
+                                        return Promise.reject("Cannot create a role named 'Super Admin'");
+                                    }
+                                    if (roles.some(r => r.name.trim().toLowerCase() === cleanVal)) {
+                                        return Promise.reject("This role name already exists");
+                                    }
+                                    return Promise.resolve();
+                                }
+                            }
                         ]}
                     >
                         <Input placeholder="e.g. Accounts Manager, Front Desk" />

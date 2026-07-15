@@ -90,12 +90,15 @@ const RolePermissionsTable = ({
     onRemoveDoctype,
     canRemoveDoctypes
 }) => {
+    const isSuperAdminRole = selectedRole === "Super Admin";
+    const finalCanRemoveDoctypes = canRemoveDoctypes && !isSuperAdminRole;
+
     return (
         <SectionCard
             title={`Permissions — ${selectedRole === "Temple Admin" ? "Trust Admin" : selectedRole}`}
             right={
                 <Space wrap>
-                    {!selectedRoleMeta?.is_protected && !selectedRoleMeta?.is_static && (
+                    {!selectedRoleMeta?.is_protected && !selectedRoleMeta?.is_static && !isSuperAdminRole && (
                         <>
                             <Button
                                 size="small"
@@ -164,7 +167,7 @@ const RolePermissionsTable = ({
                                 <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
                                     All
                                 </th>
-                                {canRemoveDoctypes && (
+                                {finalCanRemoveDoctypes && (
                                     <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
                                         Remove
                                     </th>
@@ -183,14 +186,15 @@ const RolePermissionsTable = ({
                                 return (
                                     <React.Fragment key={group.title}>
                                         <tr className="bg-zinc-50/50" style={{ borderTop: "2px solid #e4e4e7", borderBottom: "2px solid #e4e4e7" }}>
-                                            <td colSpan={canRemoveDoctypes ? 7 : 6} className="px-4 py-2 text-xs font-bold text-zinc-700 uppercase tracking-wider">
+                                            <td colSpan={finalCanRemoveDoctypes ? 7 : 6} className="px-4 py-2 text-xs font-bold text-zinc-700 uppercase tracking-wider">
                                                 <div className="flex items-center justify-between w-full">
                                                     <span>{getCategoryIcon(group.title)} &nbsp; {group.title}</span>
                                                     <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                                                         <span className="text-[10px] font-normal text-zinc-400 normal-case">Select Group:</span>
                                                         <Checkbox
-                                                            checked={isGroupAllChecked}
-                                                            indeterminate={isGroupIndeterminate}
+                                                            checked={isSuperAdminRole ? true : isGroupAllChecked}
+                                                            indeterminate={isSuperAdminRole ? false : isGroupIndeterminate}
+                                                            disabled={isSuperAdminRole}
                                                             onChange={(e) => {
                                                                 group.items.forEach(item => {
                                                                     onToggleAll(item.doctype, e.target.checked);
@@ -217,7 +221,8 @@ const RolePermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.read}
+                                                        checked={isSuperAdminRole ? true : !!row.read}
+                                                        disabled={isSuperAdminRole}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "read", e.target.checked)
                                                         }
@@ -225,7 +230,8 @@ const RolePermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.write}
+                                                        checked={isSuperAdminRole ? true : !!row.write}
+                                                        disabled={isSuperAdminRole}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "write", e.target.checked)
                                                         }
@@ -233,7 +239,8 @@ const RolePermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.create}
+                                                        checked={isSuperAdminRole ? true : !!row.create}
+                                                        disabled={isSuperAdminRole}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "create", e.target.checked)
                                                         }
@@ -241,7 +248,8 @@ const RolePermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!row.delete}
+                                                        checked={isSuperAdminRole ? true : !!row.delete}
+                                                        disabled={isSuperAdminRole}
                                                         onChange={(e) =>
                                                             onPermissionChange(row.doctype, "delete", e.target.checked)
                                                         }
@@ -249,14 +257,15 @@ const RolePermissionsTable = ({
                                                 </td>
                                                 <td className="p-3 text-center">
                                                     <Checkbox
-                                                        checked={!!isAllChecked}
-                                                        indeterminate={!!isIndeterminate}
+                                                        checked={isSuperAdminRole ? true : !!isAllChecked}
+                                                        indeterminate={isSuperAdminRole ? false : !!isIndeterminate}
+                                                        disabled={isSuperAdminRole}
                                                         onChange={(e) =>
                                                             onToggleAll(row.doctype, e.target.checked)
                                                         }
                                                     />
                                                 </td>
-                                                {canRemoveDoctypes && (
+                                                {finalCanRemoveDoctypes && (
                                                     <td className="p-3 text-center">
                                                         <Popconfirm
                                                             title={`Remove ${getModuleLabel(row.doctype)}?`}
@@ -277,14 +286,14 @@ const RolePermissionsTable = ({
                                         );
                                     })}
                                 </React.Fragment>
-                                );
+                            );
                             })}
                         </tbody>
                     </table>
                 </div>
             )}
 
-            {!loadingPerms && permissions.length > 0 && (
+            {!loadingPerms && permissions.length > 0 && !isSuperAdminRole && (
                 <FormFooter
                     loading={saving}
                     saveText="Save Changes"
