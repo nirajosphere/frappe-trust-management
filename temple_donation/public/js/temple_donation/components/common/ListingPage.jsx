@@ -379,7 +379,7 @@ const ListingPage = ({
     });
 
     const { data: storeLocations } = useFrappeGetDocList(isDepEnabled("Store Location") ? "Store Location" : null, {
-        fields: ["name", "location_name"],
+        fields: ["name", "location_name", "temple"],
         limit: 1000
     });
 
@@ -495,7 +495,7 @@ const ListingPage = ({
                     const cB = categories?.find(item => item.name === valB);
                     valA = cA ? cA.category_name : valA;
                     valB = cB ? cB.category_name : valB;
-                } else if (field === "store_location" || field === "store_location.location_name") {
+                } else if (field === "store_location" || field === "store_location.location_name" || field === "source_location" || field === "target_location") {
                     const slA = storeLocations?.find(item => item.name === valA);
                     const slB = storeLocations?.find(item => item.name === valB);
                     valA = slA ? slA.location_name : valA;
@@ -589,18 +589,59 @@ const ListingPage = ({
             if (col.dataIndex === "temple") {
                 return {
                     ...col,
-                    render: (text) => {
-                        if (!text) return <span className="text-gray-400 text-xs italic">Global</span>;
-                        const t = temples?.find(item => item.name === text);
-                        const name = t ? t.temple_name : text;
-                        const config = getTagConfig("temple admin");
-                        return (
-                            <span style={{ whiteSpace: "nowrap" }}>
-                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
-                                    {name}
-                                </Tag>
-                            </span>
-                        );
+                    render: (text, record) => {
+                        let name = "";
+                        let isTransfer = false;
+                        let sourceTempleName = "";
+                        let targetTempleName = "";
+
+                        if (record.source_location && record.target_location) {
+                            const sourceLoc = storeLocations?.find(sl => sl.name === record.source_location);
+                            const targetLoc = storeLocations?.find(sl => sl.name === record.target_location);
+                            
+                            const sourceTemp = temples?.find(t => t.name === sourceLoc?.temple);
+                            const targetTemp = temples?.find(t => t.name === targetLoc?.temple);
+                            
+                            if (sourceTemp && targetTemp) {
+                                if (sourceTemp.name !== targetTemp.name) {
+                                    isTransfer = true;
+                                    sourceTempleName = sourceTemp.temple_name;
+                                    targetTempleName = targetTemp.temple_name;
+                                } else {
+                                    name = sourceTemp.temple_name;
+                                }
+                            }
+                        }
+
+                        if (!isTransfer) {
+                            if (!name) {
+                                if (!text) return <span className="text-gray-400 text-xs italic">Global</span>;
+                                const t = temples?.find(item => item.name === text);
+                                name = t ? t.temple_name : text;
+                            }
+                            const config = getTagConfig("temple admin");
+                            return (
+                                <span style={{ whiteSpace: "nowrap" }}>
+                                    <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                        {name}
+                                    </Tag>
+                                </span>
+                            );
+                        } else {
+                            const configSrc = getTagConfig("temple admin");
+                            const configDst = getTagConfig("default");
+                            return (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap' }}>
+                                    <Tag className={`tag-glass ${configSrc.glassClass} font-bold rounded-full`} style={{ marginRight: 0 }}>
+                                        {sourceTempleName}
+                                    </Tag>
+                                    <span style={{ color: '#9ca3af', fontWeight: 600 }}>➔</span>
+                                    <Tag className={`tag-glass ${configDst.glassClass} font-bold rounded-full`} style={{ marginRight: 0 }}>
+                                        {targetTempleName}
+                                    </Tag>
+                                </div>
+                            );
+                        }
                     }
                 };
             }
@@ -698,6 +739,56 @@ const ListingPage = ({
                             <span style={{ whiteSpace: "nowrap" }}>
                                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                                     {name}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
+            if (col.dataIndex === "source_location" || col.dataIndex === "target_location") {
+                return {
+                    ...col,
+                    render: (text) => {
+                        if (!text) return <span className="text-zinc-400">—</span>;
+                        const sl = storeLocations?.find(item => item.name === text);
+                        return sl ? sl.location_name : text;
+                    }
+                };
+            }
+            if (col.dataIndex === "entry_type") {
+                return {
+                    ...col,
+                    render: (entry_type, record) => {
+                        let status = "default";
+                        let label = entry_type;
+                        if (entry_type === "Stock In" || entry_type === "IN") {
+                            status = "active";
+                            label = "Receipt (External)";
+                        } else if (entry_type === "Stock Out" || entry_type === "OUT") {
+                            status = "inactive";
+                            label = "Issue (External)";
+                        } else if (entry_type === "Stock Adjustment") {
+                            if (record.source_location && record.target_location) {
+                                const sourceLoc = storeLocations?.find(sl => sl.name === record.source_location);
+                                const targetLoc = storeLocations?.find(sl => sl.name === record.target_location);
+                                if (sourceLoc && targetLoc && sourceLoc.temple !== targetLoc.temple) {
+                                    status = "inactive"; // Red/Inactive tag style for external movements
+                                    label = "Transfer (External)";
+                                } else {
+                                    status = "manager"; // Blue/Manager tag style for internal transfers
+                                    label = "Transfer (Internal)";
+                                }
+                            } else {
+                                status = "manager";
+                                label = "Adjustment";
+                            }
+                        }
+                        
+                        const config = getTagConfig(status);
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {label || "Receipt (External)"}
                                 </Tag>
                             </span>
                         );

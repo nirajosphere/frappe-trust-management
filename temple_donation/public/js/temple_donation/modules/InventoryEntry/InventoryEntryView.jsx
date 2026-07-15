@@ -32,6 +32,11 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
         fields: ["name", "item_name", "item_code"],
         limit: 1000
     });
+    
+    const { data: storeLocations } = useFrappeGetDocList("Store Location", {
+        fields: ["name", "location_name"],
+        limit: 1000
+    });
 
     if (loading) return <PageLoader />;
 
@@ -56,25 +61,50 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
         );
     }
 
-    const entryTypeMap = {
-        "Stock In": "Receipt",
-        "Stock Out": "Issue",
-        "Stock Adjustment": "Adjustment",
-        "IN": "Receipt",
-        "OUT": "Issue"
-    };
-    const purpose = entryTypeMap[doc.entry_type] || doc.entry_type || "Receipt";
+    let purpose = "Receipt (External)";
+    let purposeStatus = "active";
+    
+    const sourceLocObj = storeLocations?.find(sl => sl.name === doc.source_location);
+    const targetLocObj = storeLocations?.find(sl => sl.name === doc.target_location);
+    
+    const sourceTempleObj = temples?.find(t => t.name === sourceLocObj?.temple);
+    const targetTempleObj = temples?.find(t => t.name === targetLocObj?.temple);
 
-    let purposeStatus = "default";
-    if (purpose === "Receipt") purposeStatus = "active";
-    else if (purpose === "Issue") purposeStatus = "inactive";
-    else if (purpose === "Transfer" || purpose === "Adjustment") purposeStatus = "manager";
+    const sourceTempleName = sourceTempleObj ? sourceTempleObj.temple_name : "";
+    const targetTempleName = targetTempleObj ? targetTempleObj.temple_name : "";
+
+    if (doc.entry_type === "Stock In" || doc.entry_type === "IN") {
+        purpose = "Receipt (External)";
+        purposeStatus = "active";
+    } else if (doc.entry_type === "Stock Out" || doc.entry_type === "OUT") {
+        purpose = "Issue (External)";
+        purposeStatus = "inactive";
+    } else if (doc.entry_type === "Stock Adjustment") {
+        if (doc.source_location && doc.target_location) {
+            if (sourceTempleObj && targetTempleObj && sourceTempleObj.name !== targetTempleObj.name) {
+                purpose = "Transfer (External)";
+                purposeStatus = "inactive";
+            } else {
+                purpose = "Transfer (Internal)";
+                purposeStatus = "manager";
+            }
+        } else {
+            purpose = "Adjustment";
+            purposeStatus = "manager";
+        }
+    }
     const purposeTag = getTagConfig(purposeStatus);
 
     const refTag = getTagConfig(doc.reference_type || "Manual");
     
-    const templeObj = temples?.find(t => t.name === doc.temple);
-    const templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
+    let templeName = "";
+    let isExternalTransfer = false;
+    if (purpose === "Transfer (External)") {
+        isExternalTransfer = true;
+    } else {
+        const templeObj = temples?.find(t => t.name === doc.temple);
+        templeName = templeObj ? templeObj.temple_name : (doc.temple || "Global");
+    }
 
     const donationObj = doc.reference_type === "Donation" ? donations?.find(d => d.name === doc.reference_name) : null;
     const referenceNameDisplay = donationObj 
@@ -163,22 +193,42 @@ const InventoryEntryView = ({ id, onBack, onEdit }) => {
                                 </Col>
                                 <Col xs={24} sm={12}>
                                     <FieldCell label="Trust Name">
-                                        <span className="text-zinc-800 font-semibold">{templeName}</span>
+                                        {isExternalTransfer ? (
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                                                <span className="text-zinc-800 font-semibold">{sourceTempleName}</span>
+                                                <span className="text-zinc-400 font-bold">➔</span>
+                                                <span className="text-zinc-800 font-semibold">{targetTempleName}</span>
+                                            </div>
+                                        ) : (
+                                            <span className="text-zinc-800 font-semibold">{templeName}</span>
+                                        )}
                                     </FieldCell>
                                 </Col>
 
-                                {(purpose === "Issue" || purpose === "Transfer") && (
+                                {(purpose === "Issue" || purpose === "Transfer" || purpose === "Transfer (Internal)" || purpose === "Issue (External)") && (
                                     <Col xs={24} sm={12}>
                                         <FieldCell label="Source Location">
-                                            <span className="text-zinc-800 font-semibold">{doc.source_location || "—"}</span>
+                                            <span className="text-zinc-800 font-semibold">
+                                                {(() => {
+                                                    if (!doc.source_location) return "—";
+                                                    const sl = storeLocations?.find(item => item.name === doc.source_location);
+                                                    return sl ? sl.location_name : doc.source_location;
+                                                })()}
+                                            </span>
                                         </FieldCell>
                                     </Col>
                                 )}
 
-                                {(purpose === "Receipt" || purpose === "Transfer") && (
+                                {(purpose === "Receipt" || purpose === "Transfer" || purpose === "Transfer (Internal)" || purpose === "Receipt (External)") && (
                                     <Col xs={24} sm={12}>
                                         <FieldCell label="Target Location">
-                                            <span className="text-zinc-800 font-semibold">{doc.target_location || "—"}</span>
+                                            <span className="text-zinc-800 font-semibold">
+                                                {(() => {
+                                                    if (!doc.target_location) return "—";
+                                                    const sl = storeLocations?.find(item => item.name === doc.target_location);
+                                                    return sl ? sl.location_name : doc.target_location;
+                                                })()}
+                                            </span>
                                         </FieldCell>
                                     </Col>
                                 )}

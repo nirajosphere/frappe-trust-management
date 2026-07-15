@@ -22,24 +22,29 @@ export const inventoryEntryColumns = [
         dataIndex: "entry_type",
         key: "entry_type",
         width: 130,
-        render: (entry_type) => {
+        render: (entry_type, record) => {
             let status = "default";
             let label = entry_type;
             if (entry_type === "Stock In" || entry_type === "IN") {
                 status = "active";
-                label = "Receipt";
+                label = "Receipt (External)";
             } else if (entry_type === "Stock Out" || entry_type === "OUT") {
                 status = "inactive";
-                label = "Issue";
+                label = "Issue (External)";
             } else if (entry_type === "Stock Adjustment") {
-                status = "manager";
-                label = "Adjustment";
+                if (record.source_location && record.target_location) {
+                    status = "manager";
+                    label = "Transfer (Internal)";
+                } else {
+                    status = "manager";
+                    label = "Adjustment";
+                }
             }
             
             const config = getTagConfig(status);
             return (
                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
-                    {label || "Receipt"}
+                    {label || "Receipt (External)"}
                 </Tag>
             );
         },
