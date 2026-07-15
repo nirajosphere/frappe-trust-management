@@ -297,5 +297,8 @@ export const themeConfig = {
         Alert: {
             borderRadiusLG: 8,
         },
+        Checkbox: {
+            borderRadiusSM: 4,
+        },
     },
 };

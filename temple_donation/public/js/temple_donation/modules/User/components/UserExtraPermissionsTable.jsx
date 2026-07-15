@@ -5,6 +5,7 @@ import {
     UndoOutlined,
 } from "@ant-design/icons";
 import SectionCard from "../../../components/common/SectionCard";
+import FormFooter from "../../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -30,6 +31,17 @@ const DOCTYPE_GROUPS = [
         doctypes: ["User"]
     }
 ];
+
+const getCategoryIcon = (title) => {
+    switch (title) {
+        case "Trust Management": return "🏛";
+        case "Donations & Donors": return "💰";
+        case "Room Booking": return "🏨";
+        case "Inventory Management": return "📦";
+        case "System & Users": return "👥";
+        default: return "🧩";
+    }
+};
 
 const getModuleLabel = (doctype) => {
     switch (doctype) {
@@ -79,28 +91,6 @@ const UserExtraPermissionsTable = ({
     return (
         <SectionCard
             title={`Extra Permissions — ${userNameDisplay}`}
-            right={
-                <Space wrap>
-                    <Button
-                        size="small"
-                        danger
-                        icon={<UndoOutlined />}
-                        loading={savingUserPerms}
-                        onClick={onReset}
-                    >
-                        Reset Overrides
-                    </Button>
-                    <Button
-                        size="small"
-                        type="primary"
-                        icon={<SaveOutlined />}
-                        loading={savingUserPerms}
-                        onClick={onSave}
-                    >
-                        Save Changes
-                    </Button>
-                </Space>
-            }
         >
             <Alert
                 message="These permissions are overrides added beside the user's role. Gray checkboxes show permissions already active from their role."
@@ -144,19 +134,48 @@ const UserExtraPermissionsTable = ({
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-zinc-100">
-                            {groupPermissions(userPermissions).map((group) => (
-                                <React.Fragment key={group.title}>
-                                    <tr className="bg-zinc-50/40 border-y border-zinc-100/60">
-                                        <td colSpan={6} className="px-3 py-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-zinc-50/10">
-                                            {group.title}
-                                        </td>
-                                    </tr>
+                            {groupPermissions(userPermissions).map((group, groupIdx) => {
+                                const totalPossible = group.items.length * 4;
+                                const checkedCount = group.items.reduce((acc, row) => {
+                                    const r = !!row.role_read || !!row.read;
+                                    const w = !!row.role_write || !!row.write;
+                                    const c = !!row.role_create || !!row.create;
+                                    const d = !!row.role_delete || !!row.delete;
+                                    return acc + (r ? 1 : 0) + (w ? 1 : 0) + (c ? 1 : 0) + (d ? 1 : 0);
+                                }, 0);
+                                const isGroupAllChecked = checkedCount === totalPossible;
+                                const isGroupIndeterminate = checkedCount > 0 && checkedCount < totalPossible;
+
+                                return (
+                                    <React.Fragment key={group.title}>
+                                        <tr className="bg-zinc-50/50" style={{ borderTop: "2px solid #e4e4e7", borderBottom: "2px solid #e4e4e7" }}>
+                                            <td colSpan={6} className="px-4 py-2 text-xs font-bold text-zinc-700 uppercase tracking-wider">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>{getCategoryIcon(group.title)} &nbsp; {group.title}</span>
+                                                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                                                        <span className="text-[10px] font-normal text-zinc-400 normal-case">Select Group:</span>
+                                                        <Checkbox
+                                                            checked={isGroupAllChecked}
+                                                            indeterminate={isGroupIndeterminate}
+                                                            onChange={(e) => {
+                                                                group.items.forEach(item => {
+                                                                    onToggleAll(item.doctype, e.target.checked);
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     {group.items.map((row) => {
-                                        const isAllChecked =
-                                            (!!row.role_read || !!row.read) &&
-                                            (!!row.role_write || !!row.write) &&
-                                            (!!row.role_create || !!row.create) &&
-                                            (!!row.role_delete || !!row.delete);
+                                        const actualRead = !!row.role_read || !!row.read;
+                                        const actualWrite = !!row.role_write || !!row.write;
+                                        const actualCreate = !!row.role_create || !!row.create;
+                                        const actualDelete = !!row.role_delete || !!row.delete;
+
+                                        const isAllChecked = actualRead && actualWrite && actualCreate && actualDelete;
+                                        const hasSomeChecked = actualRead || actualWrite || actualCreate || actualDelete;
+                                        const isIndeterminate = hasSomeChecked && !isAllChecked;
                                         const isAllDisabled =
                                             !!row.role_read &&
                                             !!row.role_write &&
@@ -212,6 +231,7 @@ const UserExtraPermissionsTable = ({
                                                 <td className="p-3 text-center">
                                                     <Checkbox
                                                         checked={!!isAllChecked}
+                                                        indeterminate={!!isIndeterminate}
                                                         disabled={!!isAllDisabled}
                                                         onChange={(e) =>
                                                             onToggleAll(row.doctype, e.target.checked)
@@ -222,10 +242,21 @@ const UserExtraPermissionsTable = ({
                                         );
                                     })}
                                 </React.Fragment>
-                            ))}
+                            );
+                            })}
                         </tbody>
                     </table>
                 </div>
+            )}
+
+            {!loadingUserPerms && userPermissions.length > 0 && (
+                <FormFooter
+                    onCancel={onReset}
+                    cancelText="Reset Overrides"
+                    loading={savingUserPerms}
+                    saveText="Save Changes"
+                    onSubmit={onSave}
+                />
             )}
         </SectionCard>
     );

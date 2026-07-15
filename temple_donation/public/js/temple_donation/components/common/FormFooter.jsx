@@ -64,12 +64,14 @@ const FormFooter = ({
     return (
         <div style={footerStyle}>
             <div style={innerStyle}>
-                <Button 
-                    onClick={onCancel} 
-                    style={cancelButtonStyle}
-                >
-                    {cancelText}
-                </Button>
+                {onCancel && (
+                    <Button 
+                        onClick={onCancel} 
+                        style={cancelButtonStyle}
+                    >
+                        {cancelText}
+                    </Button>
+                )}
                 <Button
                     type="primary"
                     htmlType={onSubmit ? "button" : "submit"}

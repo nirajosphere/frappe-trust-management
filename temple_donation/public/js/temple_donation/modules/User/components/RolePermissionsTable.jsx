@@ -7,6 +7,7 @@ import {
     PlusOutlined,
 } from "@ant-design/icons";
 import SectionCard from "../../../components/common/SectionCard";
+import FormFooter from "../../../components/common/FormFooter";
 
 const { Text } = Typography;
 
@@ -32,6 +33,17 @@ const DOCTYPE_GROUPS = [
         doctypes: ["User"]
     }
 ];
+
+const getCategoryIcon = (title) => {
+    switch (title) {
+        case "Trust Management": return "🏛";
+        case "Donations & Donors": return "💰";
+        case "Room Booking": return "🏨";
+        case "Inventory Management": return "📦";
+        case "System & Users": return "👥";
+        default: return "🧩";
+    }
+};
 
 const getModuleLabel = (doctype) => {
     switch (doctype) {
@@ -101,15 +113,6 @@ const RolePermissionsTable = ({
                             </Button>
                         </>
                     )}
-                    <Button
-                        size="small"
-                        type="primary"
-                        icon={<SaveOutlined />}
-                        loading={saving}
-                        onClick={onSavePermissions}
-                    >
-                        Save Changes
-                    </Button>
                 </Space>
             }
         >
@@ -169,16 +172,41 @@ const RolePermissionsTable = ({
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-zinc-100">
-                            {groupPermissions(permissions).map((group) => (
-                                <React.Fragment key={group.title}>
-                                    <tr className="bg-zinc-50/40 border-y border-zinc-100/60">
-                                        <td colSpan={canRemoveDoctypes ? 7 : 6} className="px-3 py-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-zinc-50/10">
-                                            {group.title}
-                                        </td>
-                                    </tr>
+                            {groupPermissions(permissions).map((group, groupIdx) => {
+                                const totalPossible = group.items.length * 4;
+                                const checkedCount = group.items.reduce((acc, row) => {
+                                    return acc + (row.read ? 1 : 0) + (row.write ? 1 : 0) + (row.create ? 1 : 0) + (row.delete ? 1 : 0);
+                                }, 0);
+                                const isGroupAllChecked = checkedCount === totalPossible;
+                                const isGroupIndeterminate = checkedCount > 0 && checkedCount < totalPossible;
+
+                                return (
+                                    <React.Fragment key={group.title}>
+                                        <tr className="bg-zinc-50/50" style={{ borderTop: "2px solid #e4e4e7", borderBottom: "2px solid #e4e4e7" }}>
+                                            <td colSpan={canRemoveDoctypes ? 7 : 6} className="px-4 py-2 text-xs font-bold text-zinc-700 uppercase tracking-wider">
+                                                <div className="flex items-center justify-between w-full">
+                                                    <span>{getCategoryIcon(group.title)} &nbsp; {group.title}</span>
+                                                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                                                        <span className="text-[10px] font-normal text-zinc-400 normal-case">Select Group:</span>
+                                                        <Checkbox
+                                                            checked={isGroupAllChecked}
+                                                            indeterminate={isGroupIndeterminate}
+                                                            onChange={(e) => {
+                                                                group.items.forEach(item => {
+                                                                    onToggleAll(item.doctype, e.target.checked);
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     {group.items.map((row) => {
                                         const isAllChecked =
                                             row.read && row.write && row.create && row.delete;
+                                        const hasSomeChecked =
+                                            row.read || row.write || row.create || row.delete;
+                                        const isIndeterminate = hasSomeChecked && !isAllChecked;
                                         return (
                                             <tr
                                                 key={row.doctype}
@@ -222,6 +250,7 @@ const RolePermissionsTable = ({
                                                 <td className="p-3 text-center">
                                                     <Checkbox
                                                         checked={!!isAllChecked}
+                                                        indeterminate={!!isIndeterminate}
                                                         onChange={(e) =>
                                                             onToggleAll(row.doctype, e.target.checked)
                                                         }
@@ -248,10 +277,19 @@ const RolePermissionsTable = ({
                                         );
                                     })}
                                 </React.Fragment>
-                            ))}
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
+            )}
+
+            {!loadingPerms && permissions.length > 0 && (
+                <FormFooter
+                    loading={saving}
+                    saveText="Save Changes"
+                    onSubmit={onSavePermissions}
+                />
             )}
         </SectionCard>
     );

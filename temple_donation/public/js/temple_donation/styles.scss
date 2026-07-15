@@ -1293,6 +1293,13 @@ body[data-path="login"] {
   }
 }
 
+/* Overrides to force checkboxes to be clean squares instead of rounded circles */
+.temple-donation-app {
+  .ant-checkbox-inner {
+    border-radius: 4px !important;
+  }
+}
+
 
 
 
