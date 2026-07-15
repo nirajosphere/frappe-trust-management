@@ -563,13 +563,13 @@ const RolePermissions = () => {
 
                     <Form.Item
                         name="doctypes"
-                        label="DocTypes (optional)"
+                        label="Modules (optional)"
                         extra="Select which modules this role can access. You can add more later."
                     >
                         <Select
                             mode="multiple"
                             allowClear
-                            placeholder="Select DocTypes"
+                            placeholder="Select Modules"
                             options={availableDoctypes.map((dt) => ({ label: dt === "Temple" ? "Trust" : (dt === "Temple Details" ? "Trust Details" : dt), value: dt }))}
                             maxTagCount="responsive"
                         />
@@ -630,7 +630,7 @@ const RolePermissions = () => {
             </Modal>
 
             <Modal
-                title="Add DocTypes"
+                title="Add Modules"
                 open={addDoctypeModalOpen}
                 onCancel={() => {
                     setAddDoctypeModalOpen(false);
@@ -649,13 +649,13 @@ const RolePermissions = () => {
                 >
                     <Form.Item
                         name="doctypes"
-                        label="DocTypes"
-                        rules={[{ required: true, message: "Select at least one DocType" }]}
+                        label="Modules"
+                        rules={[{ required: true, message: "Select at least one module" }]}
                     >
                         <Select
                             mode="multiple"
                             allowClear
-                            placeholder="Select DocTypes to add"
+                            placeholder="Select modules to add"
                             options={addableDoctypes.map((dt) => ({ label: dt === "Temple" ? "Trust" : (dt === "Temple Details" ? "Trust Details" : dt), value: dt }))}
                             maxTagCount="responsive"
                         />

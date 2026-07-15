@@ -41,13 +41,13 @@ const UserListSidePanel = ({
                     return (
                         <List.Item
                             onClick={() => onSelectUser(item.name)}
-                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-colors flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 ${
+                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-all duration-200 flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 border border-transparent ${
                                 isSelected
-                                    ? "bg-zinc-100/80 font-semibold"
-                                    : ""
+                                    ? "bg-blue-50/50 border-blue-100/80 font-medium"
+                                    : "hover:border-zinc-100"
                              }`}
                         >
-                            <Space size={10} align="center">
+                            <div className="flex items-center gap-3">
                                 <Avatar 
                                     src={item.user_image} 
                                     icon={<UserOutlined />} 
@@ -58,16 +58,16 @@ const UserListSidePanel = ({
                                     <span className="text-sm text-zinc-700 font-medium">
                                         {item.full_name || item.name}
                                     </span>
-                                    <span className="text-[10px] text-zinc-400 font-mono">
+                                    <span className="text-[11px] text-zinc-400 font-normal">
                                         {item.name}
                                     </span>
                                 </div>
-                                {item.custom_user_role && (
-                                    <Tag className="!m-0 text-[10px] bg-zinc-50">
-                                        {item.custom_user_role}
-                                    </Tag>
-                                )}
-                            </Space>
+                            </div>
+                            {item.custom_user_role && (
+                                <Tag className="!m-0 text-[10px] px-2 py-0.5 rounded-full border-zinc-200 bg-zinc-50 text-zinc-600 font-medium">
+                                    {item.custom_user_role === "Temple Admin" ? "Trust Admin" : item.custom_user_role}
+                                </Tag>
+                            )}
                         </List.Item>
                     );
                 }}

@@ -494,7 +494,7 @@ const UserForm = ({ id, onBack }) => {
                             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                                 <thead>
                                     <tr style={{ backgroundColor: '#fafafa', borderBottom: '1px solid #e4e4e7' }}>
-                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>DocType</th>
+                                        <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Module</th>
                                         <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Read</th>
                                         <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Write</th>
                                         <th style={{ padding: '12px 18px', fontSize: 12, fontWeight: 600, color: '#52525b', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'center' }}>Create</th>

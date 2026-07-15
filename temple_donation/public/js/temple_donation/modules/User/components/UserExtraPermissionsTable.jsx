@@ -94,7 +94,7 @@ const UserExtraPermissionsTable = ({
                         <thead>
                             <tr className="bg-zinc-50/70 border-b border-zinc-100">
                                 <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                                    DocType
+                                    Module
                                 </th>
                                 <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
                                     Read

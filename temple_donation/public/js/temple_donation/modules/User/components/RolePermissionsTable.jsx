@@ -24,7 +24,7 @@ const RolePermissionsTable = ({
 }) => {
     return (
         <SectionCard
-            title={`Permissions — ${selectedRole}`}
+            title={`Permissions — ${selectedRole === "Temple Admin" ? "Trust Admin" : selectedRole}`}
             right={
                 <Space wrap>
                     {!selectedRoleMeta?.is_protected && !selectedRoleMeta?.is_static && (
@@ -65,7 +65,7 @@ const RolePermissionsTable = ({
                     description={
                         <div className="flex flex-col gap-2">
                             <Text className="font-semibold text-zinc-700">
-                                No DocTypes configured
+                                No Modules configured
                             </Text>
                             <Text className="text-zinc-400 text-xs">
                                 Edit/configure permissions for this role to see them.
@@ -79,7 +79,7 @@ const RolePermissionsTable = ({
                         <thead>
                             <tr className="bg-zinc-50/70 border-b border-zinc-100">
                                 <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                                    DocType
+                                    Module
                                 </th>
                                 <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
                                     Read

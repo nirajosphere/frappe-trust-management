@@ -57,33 +57,37 @@ const RoleListSidePanel = ({
                     return (
                         <List.Item
                             onClick={() => onSelectRole(item)}
-                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-colors flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 ${
+                            className={`cursor-pointer px-3 py-2.5 rounded-md transition-all duration-200 flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 border border-transparent ${
                                 isSelected
-                                    ? "bg-zinc-100/80 font-semibold"
-                                    : ""
+                                    ? "bg-blue-50/50 border-blue-100/80 font-medium"
+                                    : "hover:border-zinc-100"
                             }`}
                         >
-                            <Space size={8} wrap>
+                            <div className="flex items-center gap-2">
                                 {item.is_protected ? (
                                     <Tooltip title="Protected role">
-                                        <LockOutlined className="text-zinc-400 text-xs" />
+                                        <LockOutlined className="text-zinc-400 text-sm" />
                                     </Tooltip>
                                 ) : (
-                                    <SafetyCertificateOutlined className="text-zinc-500 text-xs" />
+                                    <SafetyCertificateOutlined className="text-blue-500 text-sm" />
                                 )}
-                                <span className="text-sm text-zinc-700">{item.name}</span>
+                                <span className="text-sm text-zinc-700 font-medium">
+                                    {item.name === "Temple Admin" ? "Trust Admin" : item.name}
+                                </span>
+                            </div>
+
+                            <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                                 {item.is_static && (
-                                    <Tag className="!m-0 text-[10px]">Static</Tag>
+                                    <Tag className="!m-0 text-[10px] px-1.5 py-0.5 rounded border-zinc-200 bg-zinc-50 text-zinc-500">
+                                        Static
+                                    </Tag>
                                 )}
                                 {item.user_count > 0 && (
-                                    <Tag className="!m-0 text-[10px]">
+                                    <Tag className="!m-0 text-[10px] px-1.5 py-0.5 rounded border-blue-100 bg-blue-50/40 text-blue-600 font-medium">
                                         {item.user_count} user{item.user_count > 1 ? "s" : ""}
                                     </Tag>
                                 )}
-                            </Space>
-
-                            {!item.is_protected && (
-                                <div onClick={(e) => e.stopPropagation()}>
+                                {!item.is_protected && (
                                     <Popconfirm
                                         title="Delete this role?"
                                         description="This removes the role and its permission configuration."
@@ -97,13 +101,14 @@ const RoleListSidePanel = ({
                                             type="text"
                                             danger
                                             size="small"
+                                            className="flex items-center justify-center p-1 rounded-md hover:bg-red-50"
                                             icon={
-                                                <DeleteOutlined className="text-zinc-400 hover:text-red-500" />
+                                                <DeleteOutlined className="text-zinc-400 hover:text-red-500 transition-colors" />
                                             }
                                         />
                                     </Popconfirm>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </List.Item>
                     );
                 }}

@@ -500,7 +500,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                   <thead>
                     <tr className="bg-zinc-50/70 border-b border-zinc-100 sticky top-0 z-10">
                       <th className="p-2.5 text-xs font-bold text-zinc-500 uppercase tracking-wider bg-zinc-50">
-                        DocType
+                        Module
                       </th>
                       <th className="p-2.5 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center bg-zinc-50 w-16">
                         Read
