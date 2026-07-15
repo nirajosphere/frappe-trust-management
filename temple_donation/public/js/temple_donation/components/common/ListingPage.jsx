@@ -312,7 +312,7 @@ const ListingPage = ({
         };
 
         const activeFiltersMapped = appliedFilters
-            .filter(row => row.field && row.operator && row.value !== undefined && row.value !== "")
+            .filter(row => row.field && row.operator && row.value !== undefined && row.value !== "" && row.field !== "movement_type")
             .map(row => {
                 let val = row.value;
                 let field = row.field;
@@ -454,9 +454,45 @@ const ListingPage = ({
 
     const sortedData = React.useMemo(() => {
         if (!enrichedData) return [];
-        if (!appliedSorters || appliedSorters.length === 0) return enrichedData;
 
-        return [...enrichedData].sort((a, b) => {
+        let filtered = [...enrichedData];
+
+        // Apply client-side movement_type filter
+        const mtFilter = appliedFilters?.find(row => row.field === "movement_type" && row.operator && row.value);
+        if (mtFilter) {
+            const expectedVal = mtFilter.value;
+            const op = mtFilter.operator;
+            
+            filtered = filtered.filter(record => {
+                let isExternal = true;
+                if (record.entry_type === "Stock In" || record.entry_type === "IN") {
+                    isExternal = true;
+                } else if (record.entry_type === "Stock Out" || record.entry_type === "OUT") {
+                    isExternal = true;
+                } else if (record.entry_type === "Stock Adjustment") {
+                    if (record.source_location && record.target_location) {
+                        const sourceLoc = storeLocations?.find(sl => sl.name === record.source_location);
+                        const targetLoc = storeLocations?.find(sl => sl.name === record.target_location);
+                        if (sourceLoc && targetLoc && sourceLoc.temple !== targetLoc.temple) {
+                            isExternal = true;
+                        } else {
+                            isExternal = false;
+                        }
+                    } else {
+                        isExternal = false;
+                    }
+                }
+                
+                const recordVal = isExternal ? "External" : "Internal";
+                if (op === "=") return recordVal === expectedVal;
+                if (op === "!=") return recordVal !== expectedVal;
+                return true;
+            });
+        }
+
+        if (!appliedSorters || appliedSorters.length === 0) return filtered;
+
+        return filtered.sort((a, b) => {
             for (const sorter of appliedSorters) {
                 const { field, order } = sorter;
                 if (!field) continue;
@@ -523,7 +559,7 @@ const ListingPage = ({
             }
             return 0;
         });
-    }, [enrichedData, appliedSorters, temples, donors, rooms, buildings, roomTypes, categories, storeLocations]);
+    }, [enrichedData, appliedSorters, appliedFilters, temples, donors, rooms, buildings, roomTypes, categories, storeLocations]);
 
     const handleAdd = () => {
         if (typeof frappe !== "undefined" && basePath) {
@@ -789,6 +825,44 @@ const ListingPage = ({
                             <span style={{ whiteSpace: "nowrap" }}>
                                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
                                     {label || "Receipt (External)"}
+                                </Tag>
+                            </span>
+                        );
+                    }
+                };
+            }
+            if (col.dataIndex === "movement_type") {
+                return {
+                    ...col,
+                    render: (_, record) => {
+                        let isExternal = true;
+                        
+                        if (record.entry_type === "Stock In" || record.entry_type === "IN") {
+                            isExternal = true;
+                        } else if (record.entry_type === "Stock Out" || record.entry_type === "OUT") {
+                            isExternal = true;
+                        } else if (record.entry_type === "Stock Adjustment") {
+                            if (record.source_location && record.target_location) {
+                                const sourceLoc = storeLocations?.find(sl => sl.name === record.source_location);
+                                const targetLoc = storeLocations?.find(sl => sl.name === record.target_location);
+                                if (sourceLoc && targetLoc && sourceLoc.temple !== targetLoc.temple) {
+                                    isExternal = true;
+                                } else {
+                                    isExternal = false;
+                                }
+                            } else {
+                                isExternal = false;
+                            }
+                        }
+                        
+                        const label = isExternal ? "External" : "Internal";
+                        const status = isExternal ? "inactive" : "active";
+                        const config = getTagConfig(status);
+                        
+                        return (
+                            <span style={{ whiteSpace: "nowrap" }}>
+                                <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
+                                    {label}
                                 </Tag>
                             </span>
                         );

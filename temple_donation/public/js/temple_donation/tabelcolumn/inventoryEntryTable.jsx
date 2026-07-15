@@ -27,14 +27,14 @@ export const inventoryEntryColumns = [
             let label = entry_type;
             if (entry_type === "Stock In" || entry_type === "IN") {
                 status = "active";
-                label = "Receipt (External)";
+                label = "Receipt";
             } else if (entry_type === "Stock Out" || entry_type === "OUT") {
                 status = "inactive";
-                label = "Issue (External)";
+                label = "Issue";
             } else if (entry_type === "Stock Adjustment") {
                 if (record.source_location && record.target_location) {
                     status = "manager";
-                    label = "Transfer (Internal)";
+                    label = "Transfer";
                 } else {
                     status = "manager";
                     label = "Adjustment";
@@ -44,10 +44,22 @@ export const inventoryEntryColumns = [
             const config = getTagConfig(status);
             return (
                 <Tag className={`tag-glass ${config.glassClass} font-bold rounded-full`}>
-                    {label || "Receipt (External)"}
+                    {label || "Receipt"}
                 </Tag>
             );
         },
+    },
+    {
+        title: "Movement Type",
+        dataIndex: "movement_type",
+        key: "movement_type",
+        width: 140,
+        filterType: "select",
+        filterOptions: [
+            { label: "Internal", value: "Internal" },
+            { label: "External", value: "External" }
+        ],
+        filterOperators: ["=", "!="]
     },
     {
         title: "Source Location",
