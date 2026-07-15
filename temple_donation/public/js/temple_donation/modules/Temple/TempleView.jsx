@@ -74,12 +74,12 @@ const TempleView = ({ id, onBack, onEdit }) => {
         tags={doc.custom_status || doc.status ? [doc.custom_status || doc.status] : []}
         actions={
           <>
-            <Button
+            {/* <Button
               onClick={() => window.print()}
               className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
             >
               Print
-            </Button>
+            </Button> */}
             <Button
               type="primary"
               onClick={() => onEdit && onEdit(doc)}

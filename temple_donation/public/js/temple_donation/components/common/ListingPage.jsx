@@ -429,7 +429,8 @@ const ListingPage = ({
             if (doctype === "Donation Type" && temples) {
                 const allowedIds = temples.map(t => t.name);
                 const filtered = data.filter(type => {
-                    if (!type.temple) return false;
+                    if (hasFullAccess) return true;
+                    if (!type.temple || type.temple === "[]" || type.temple === "") return false;
                     let templeIds = [];
                     try {
                         if (type.temple.startsWith("[")) {
