@@ -74,66 +74,69 @@ const ActivityLog = ({ doctype, docname }) => {
         if (!docname) return;
         setLoading(true);
 
-        try {
-            const limitStart = reset ? 0 : page * 5;
-
-            // 1. Fetch Version history records
-            const verRes = await fetch(
-                `/api/resource/Version?filters=${encodeURIComponent(JSON.stringify([
-                    ["ref_doctype", "=", doctype],
-                    ["docname", "=", docname]
-                ]))}&fields=${encodeURIComponent(JSON.stringify(["*"]))}&order_by=creation desc&limit_start=${limitStart}&limit_page_length=5`
-            );
-            const verJson = await verRes.json();
-            const fetchedVersions = (verJson.data || []).map(item => ({
-                ...item,
-                isVersion: true,
-                timestamp: new Date(item.creation).getTime()
-            }));
-
-            // 2. Fetch Comments
-            const commRes = await fetch(
-                `/api/resource/Comment?filters=${encodeURIComponent(JSON.stringify([
-                    ["reference_doctype", "=", doctype],
-                    ["reference_name", "=", docname],
-                    ["comment_type", "=", "Comment"]
-                ]))}&fields=${encodeURIComponent(JSON.stringify(["*"]))}&order_by=creation desc`
-            );
-            const commJson = await commRes.json();
-            const fetchedComments = (commJson.data || []).map(item => ({
-                ...item,
-                isComment: true,
-                timestamp: new Date(item.creation).getTime()
-            }));
-
-            // Merge and sort chronologically (newest first)
-            const combined = [...fetchedVersions, ...fetchedComments].sort((a, b) => b.timestamp - a.timestamp);
-
-            if (reset) {
-                setTimelineItems(combined);
-                setPage(1);
-            } else {
-                setTimelineItems(prev => {
-                    const allItems = [...prev, ...combined];
-                    // Deduplicate items based on type and unique record name
-                    const unique = [];
-                    const seen = new Set();
-                    for (const item of allItems) {
-                        const key = `${item.isVersion ? "v" : "c"}-${item.name}`;
-                        if (!seen.has(key)) {
-                            seen.add(key);
-                            unique.push(item);
-                        }
-                    }
-                    return unique.sort((a, b) => b.timestamp - a.timestamp);
-                });
-                setPage(prev => prev + 1);
-            }
-        } catch (err) {
-            console.error("Error loading ActivityLog timeline:", err);
+        if (typeof frappe === "undefined") {
+            setLoading(false);
+            return;
         }
-        setLoading(false);
+
+        const limitStart = reset ? 0 : page * 5;
+
+        frappe.call({
+            method: "temple_donation.api.activity.get_activity_log",
+            args: {
+                doctype: doctype,
+                docname: docname,
+                limit_start: limitStart,
+                limit_page_length: 5
+            },
+            callback: (r) => {
+                setLoading(false);
+                if (!r || !r.message) return;
+
+                const { versions = [], comments = [] } = r.message;
+
+                const fetchedVersions = (versions || []).map(item => ({
+                    ...item,
+                    isVersion: true,
+                    timestamp: new Date(item.creation).getTime()
+                }));
+
+                const fetchedComments = (comments || []).map(item => ({
+                    ...item,
+                    isComment: true,
+                    timestamp: new Date(item.creation).getTime()
+                }));
+
+                // Merge and sort chronologically (newest first)
+                const combined = [...fetchedVersions, ...fetchedComments].sort((a, b) => b.timestamp - a.timestamp);
+
+                if (reset) {
+                    setTimelineItems(combined);
+                    setPage(1);
+                } else {
+                    setTimelineItems(prev => {
+                        const allItems = [...prev, ...combined];
+                        const unique = [];
+                        const seen = new Set();
+                        for (const item of allItems) {
+                            const key = `${item.isVersion ? "v" : "c"}-${item.name}`;
+                            if (!seen.has(key)) {
+                                seen.add(key);
+                                unique.push(item);
+                            }
+                        }
+                        return unique.sort((a, b) => b.timestamp - a.timestamp);
+                    });
+                    setPage(prev => prev + 1);
+                }
+            },
+            error: (err) => {
+                console.error("Error loading ActivityLog timeline:", err);
+                setLoading(false);
+            }
+        });
     };
+
 
     // Load initial timeline data on load/change
     useEffect(() => {
