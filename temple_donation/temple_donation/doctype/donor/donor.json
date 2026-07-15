@@ -8,19 +8,30 @@
   "donor_name",
   "mobile_number",
   "email",
+  "pan_card",
+  "date_of_birth",
+  "marital_status",
+  "anniversary_date",
   "address",
-  "city"
+  "address_line_2",
+  "country",
+  "state",
+  "city",
+  "pincode",
+  "native_place"
  ],
  "fields": [
   {
    "fieldname": "donor_name",
    "fieldtype": "Data",
-   "label": "Donor Name"
+   "label": "Donor Name",
+   "reqd": 1
   },
   {
    "fieldname": "mobile_number",
    "fieldtype": "Data",
-   "label": "Mobile Number"
+   "label": "Mobile Number",
+   "reqd": 1
   },
   {
    "fieldname": "email",
@@ -28,14 +39,63 @@
    "label": "Email"
   },
   {
+   "fieldname": "pan_card",
+   "fieldtype": "Data",
+   "label": "PAN Card"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "marital_status",
+   "fieldtype": "Select",
+   "label": "Marital Status",
+   "options": "Unmarried\nMarried"
+  },
+  {
+   "fieldname": "anniversary_date",
+   "fieldtype": "Date",
+   "label": "Anniversary Date"
+  },
+  {
    "fieldname": "address",
    "fieldtype": "Small Text",
    "label": "Address"
   },
   {
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "label": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
    "fieldname": "city",
    "fieldtype": "Data",
-   "label": "City"
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fieldname": "native_place",
+   "fieldtype": "Data",
+   "label": "Native Place"
   }
  ],
  "grid_page_length": 50,

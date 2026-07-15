@@ -31,6 +31,7 @@ const ListingPage = ({
     basePath,
     fields = ["*"],
     filters = {},
+    orderBy = { field: "creation", order: "desc" },
     childTable,
     childDocType,
     allowAdd = true,
@@ -337,7 +338,7 @@ const ListingPage = ({
         fields: fields,
         filters: combinedFilters,
         limit: 100,
-        orderBy: { field: 'modified', order: 'desc' }
+        orderBy: orderBy
     });
 
     const isDepEnabled = (dtName) => Array.isArray(dependentDocTypes) && dependentDocTypes.includes(dtName);

@@ -33,10 +33,13 @@ const DonorForm = ({ id, onBack }) => {
         if (isEdit && data) {
             form.setFieldsValue({
                 ...data,
+                country: data.country || "India",
+                state: data.state || "Gujarat",
+                marital_status: data.marital_status || "Unmarried",
                 date_of_birth: data.date_of_birth ? dayjs(data.date_of_birth) : null,
                 anniversary_date: data.anniversary_date ? dayjs(data.anniversary_date) : null
             });
-        } else {
+        } else if (!isEdit) {
             form.setFieldsValue({
                 country: "India",
                 state: "Gujarat",
@@ -50,6 +53,7 @@ const DonorForm = ({ id, onBack }) => {
         try {
             const payload = {
                 ...values,
+                pan_card: values.pan_card ? values.pan_card.toUpperCase() : null,
                 date_of_birth: values.date_of_birth?.format("YYYY-MM-DD") || null,
                 anniversary_date: values.anniversary_date?.format("YYYY-MM-DD") || null
             };
@@ -118,22 +122,22 @@ const DonorForm = ({ id, onBack }) => {
                             >
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="donor_name" label="Full Name" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="donor_name" label="Full Name" style={formItemStyle} rules={[{ required: true, message: "Please enter full name" }, { whitespace: true, message: "Name cannot be empty spaces" }]}>
                                             <Input prefix={<UserOutlined style={{ color: '#a1a1aa' }} />} placeholder="Donor Full Name" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="mobile_number" label="Contact No" style={formItemStyle} rules={[{ required: true, message: "Required" }, { pattern: /^\d{10}$/, message: "Invalid number" }]}>
+                                        <Form.Item name="mobile_number" label="Contact No" style={formItemStyle} rules={[{ required: true, message: "Please enter contact number" }, { pattern: /^\d{10}$/, message: "Please enter a valid 10-digit mobile number" }]}>
                                             <Input maxLength={10} prefix={<PhoneOutlined style={{ color: '#a1a1aa' }} />} placeholder="Mobile Number" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24}>
-                                        <Form.Item name="email" label="Email" style={formItemStyle}>
+                                        <Form.Item name="email" label="Email" style={formItemStyle} rules={[{ type: 'email', message: "Please enter a valid email address" }]}>
                                             <Input prefix={<MailOutlined style={{ color: '#a1a1aa' }} />} placeholder="email@example.com" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24}>
-                                        <Form.Item name="pan_card" label="PAN Card" style={formItemStyle} rules={[{ pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, message: "Invalid PAN" }]}>
+                                        <Form.Item name="pan_card" label="PAN Card" style={formItemStyle} rules={[{ pattern: /^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}$/, message: "Please enter a valid PAN (e.g. ABCDE1234F)" }]}>
                                             <Input prefix={<IdcardOutlined style={{ color: '#a1a1aa' }} />} placeholder="ABCDE1234F" />
                                         </Form.Item>
                                     </Col>
@@ -148,7 +152,7 @@ const DonorForm = ({ id, onBack }) => {
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24} sm={12}>
                                         <Form.Item name="date_of_birth" label="Date of Birth" style={formItemStyle}>
-                                            <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
+                                            <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" disabledDate={(current) => current && current > dayjs().endOf('day')} />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
@@ -158,7 +162,7 @@ const DonorForm = ({ id, onBack }) => {
                                     </Col>
                                     <Col xs={24}>
                                         <Form.Item name="anniversary_date" label="Anniversary Date" style={formItemStyle}>
-                                            <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" />
+                                            <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" placeholder="DD-MM-YYYY" disabledDate={(current) => current && current > dayjs().endOf('day')} />
                                         </Form.Item>
                                     </Col>
                                 </Row>
@@ -188,22 +192,22 @@ const DonorForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="country" label="Country" style={formItemStyle}>
+                                        <Form.Item name="country" label="Country" style={formItemStyle} rules={[{ required: true, message: "Please enter country" }]}>
                                             <Input prefix={<GlobalOutlined style={{ color: '#a1a1aa' }} />} placeholder="Country" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="state" label="State" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="state" label="State" style={formItemStyle} rules={[{ required: true, message: "Please enter state" }]}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="State" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="city" label="City" style={formItemStyle} rules={[{ required: true, message: "Required" }]}>
+                                        <Form.Item name="city" label="City" style={formItemStyle} rules={[{ required: true, message: "Please enter city" }]}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="City" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={12}>
-                                        <Form.Item name="pincode" label="Pincode" style={formItemStyle}>
+                                        <Form.Item name="pincode" label="Pincode" style={formItemStyle} rules={[{ pattern: /^\d{6}$/, message: "Please enter a valid 6-digit pincode" }]}>
                                             <Input prefix={<PushpinOutlined style={{ color: '#a1a1aa' }} />} placeholder="Postal Code" />
                                         </Form.Item>
                                     </Col>
