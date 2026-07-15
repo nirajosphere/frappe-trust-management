@@ -55,7 +55,7 @@ export const TAG_CONFIG = {
         glassClass: "tag-glass-magenta"
     },
 
-    "temple admin": {
+    "trust admin": {
         color: "geekblue",
         glassClass: "tag-glass-geekblue"
     },
