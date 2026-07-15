@@ -250,7 +250,7 @@ export const themeConfig = {
             colorPrimaryHover: "#27272a",
             colorPrimaryActive: "#09090b",
 
-            dangerColor: "#dc2626",
+            // dangerColor: "#dc2626",
             colorError: "#dc2626",
             colorErrorHover: "#b91c1c",
             colorErrorActive: "#991b1b",

@@ -176,7 +176,7 @@ const DonorSection = ({ selectedDonor, onDonorSelect, mobile = "", setMobile }) 
             title={<span style={{ fontWeight: 600, color: '#1f2937', fontSize: '14px' }}>Donor Information</span>}
             size="small"
             style={{ borderRadius: '8px', border: '1px solid #f3f4f6', boxShadow: 'none' }}
-            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px' }}
+            headStyle={{ borderBottom: '1px solid #f3f4f6', padding: '12px 16px', background: '#f9fafb' }}
             bodyStyle={{ padding: '16px' }}
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

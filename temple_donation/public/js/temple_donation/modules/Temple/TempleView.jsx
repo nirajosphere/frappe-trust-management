@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Alert, Tag, Button } from "antd";
-import { User, ShieldAlert, FileText, CheckCircle2 } from "lucide-react";
-import { useFrappeGetDoc } from "../../hooks/useFrappe";
+import { User, ShieldAlert, FileText, CheckCircle2, Heart } from "lucide-react";
+import { useFrappeGetDoc, useFrappeGetDocList } from "../../hooks/useFrappe";
 import { DOCTYPE_TEMPLE } from "../../config/constants";
 import { templeFormFields } from "../../formfield/templeFormFields";
 import PageLoader from "../../components/common/PageLoader";
@@ -14,6 +14,10 @@ import ActivityLog from "../../components/common/ActivityLog";
 
 const TempleView = ({ id, onBack, onEdit }) => {
   const { data: doc, loading, error } = useFrappeGetDoc(DOCTYPE_TEMPLE, id);
+  const { data: donationTypes } = useFrappeGetDocList("Donation Type", {
+    fields: ["name", "donation_type", "donation_image", "default_amount"],
+    limit: 1000
+  });
 
   if (loading) return <PageLoader />;
 
@@ -111,7 +115,48 @@ const TempleView = ({ id, onBack, onEdit }) => {
                 })}
               </Row>
             </SectionCard>
-            
+
+            <SectionCard title="Associated Donation Types" icon={<Heart size={15} className="text-zinc-800" />}>
+              {doc.donation_types && doc.donation_types.length > 0 ? (
+                <Row gutter={[12, 12]}>
+                  {doc.donation_types.map((dt) => {
+                    const fullDt = donationTypes?.find(item => item.name === dt.donation_type);
+                    if (!fullDt) return null;
+                    return (
+                      <Col xs={24} sm={12} md={8} key={dt.name}>
+                        <div className="flex items-center gap-3 p-3 rounded-lg border border-zinc-100 bg-zinc-50/50">
+                          {fullDt.donation_image ? (
+                            <img 
+                              src={fullDt.donation_image} 
+                              alt={fullDt.donation_type} 
+                              className="w-10 h-10 object-cover rounded border border-zinc-200 bg-white flex-shrink-0" 
+                            />
+                          ) : (
+                            <div className="w-10 h-10 rounded border border-zinc-200 bg-zinc-100 flex items-center justify-center flex-shrink-0 text-zinc-400 font-bold text-xs">
+                              {fullDt.donation_type?.charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <div className="text-sm font-semibold text-zinc-800 truncate">
+                              {fullDt.donation_type}
+                            </div>
+                            {fullDt.default_amount > 0 && (
+                              <div className="text-xs text-zinc-500 mt-0.5">
+                                Default: ₹{fullDt.default_amount.toLocaleString()}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </Col>
+                    );
+                  })}
+                </Row>
+              ) : (
+                <div className="text-center py-6 text-zinc-400 font-medium text-sm">
+                  No donation types associated with this trust.
+                </div>
+              )}
+            </SectionCard>
             
           </div>
         </Col>
