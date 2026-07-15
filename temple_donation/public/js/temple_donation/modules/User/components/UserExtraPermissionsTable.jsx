@@ -48,7 +48,7 @@ const UserExtraPermissionsTable = ({
                 </Space>
             }
         >
-            <div style={{ 
+            {/* <div style={{ 
                 marginBottom: 20, 
                 padding: '12px 16px', 
                 backgroundColor: '#f8fafc', 
@@ -70,7 +70,7 @@ const UserExtraPermissionsTable = ({
                 <Text type="secondary" style={{ fontSize: '12px' }}>
                     Updating the role assigns standard permissions automatically.
                 </Text>
-            </div>
+            </div> */}
 
             <Alert
                 message="These permissions are overrides added beside the user's role. Gray checkboxes show permissions already active from their role."

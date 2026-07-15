@@ -481,18 +481,18 @@ const TempleForm = ({ id, onBack }) => {
                                         {initials}
                                     </Avatar>
                                     
-                                    <div style={{ flexGrow: 1, minWidth: 0 }}>
-                                        <div style={{ fontSize: '15px', fontWeight: 600, color: '#18181b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    <div className="flex-grow min-w-0">
+                                        <div className="text-[15px] font-semibold text-zinc-900 truncate">
                                             {templeName || "Trust Identity"}
                                         </div>
                                         {templeId && (
-                                            <div style={{ fontSize: '11px', color: '#71717a', marginTop: 2, fontWeight: 500 }}>
+                                            <div className="text-[11px] text-zinc-500 mt-0.5 font-medium">
                                                 System ID: {templeId}
                                             </div>
                                         )}
-                                        <div style={{ marginTop: 6 }}>
-                                            <span style={{ fontSize: '10px', color: '#18181b', backgroundColor: '#f4f4f5', padding: '3px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                                                {selectedDonationTypes.length} Selected
+                                        <div className="mt-1.5">
+                                            <span className="text-[10px] text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded font-semibold">
+                                              {selectedDonationTypes.length} Donation Types
                                             </span>
                                         </div>
                                     </div>

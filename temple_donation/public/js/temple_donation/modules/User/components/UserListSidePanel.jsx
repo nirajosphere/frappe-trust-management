@@ -43,7 +43,7 @@ const UserListSidePanel = ({
                             onClick={() => onSelectUser(item.name)}
                             className={`cursor-pointer px-3 py-2.5 rounded-md transition-colors flex justify-between items-center mb-1.5 last:mb-0 hover:bg-zinc-50 ${
                                 isSelected
-                                    ? "bg-zinc-100/80 border-l-4 border-zinc-900 font-semibold"
+                                    ? "bg-zinc-100/80 font-semibold"
                                     : ""
                              }`}
                         >

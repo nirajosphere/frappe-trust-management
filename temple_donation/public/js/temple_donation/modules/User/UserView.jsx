@@ -242,12 +242,12 @@ const UserView = ({ id, onBack, onEdit }) => {
         tags={doc.custom_user_role ? [doc.custom_user_role] : []}
         actions={
           <>
-            <Button
+            {/* <Button
               onClick={() => window.print()}
               className="px-4 border border-zinc-200 text-zinc-700 font-medium hover:border-zinc-400 shadow-none text-sm transition-all flex items-center gap-1.5 bg-white"
             >
               Print
-            </Button>
+            </Button> */}
             <Button
               type="primary"
               onClick={() => onEdit && onEdit(doc)}
@@ -290,7 +290,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                       Role: {modulePerms.role_label}
                     </Tag>
                   )}
-                  {canManageExtraPerms && (
+                  {/* {canManageExtraPerms && (
                     <Button
                       size="small"
                       onClick={() => setExtraPermsModalOpen(true)}
@@ -298,7 +298,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                     >
                       Edit Extra Permissions
                     </Button>
-                  )}
+                  )} */}
                 </Space>
               }
             >
@@ -341,7 +341,7 @@ const UserView = ({ id, onBack, onEdit }) => {
                     />
                   ) : (
                     <div className="overflow-x-auto border border-zinc-100 rounded-lg bg-white">
-                      <table className="w-full text-left border-collapse">
+                      <table className="w-full min-w-[600px] text-left border-collapse">
                         <thead>
                           <tr className="bg-zinc-50/70 border-b border-zinc-100">
                             <th className="p-3 text-xs font-bold text-zinc-500 uppercase tracking-wider">
@@ -469,9 +469,11 @@ const UserView = ({ id, onBack, onEdit }) => {
 
       <Modal
         title={
-          <div className="flex items-center gap-2">
-            <Shield size={18} className="text-zinc-800" />
-            <span>Customize User Permissions — {fullName}</span>
+          <div className="flex items-center gap-2 text-sm sm:text-base">
+            <Shield size={18} className="text-zinc-800 shrink-0" />
+            <span className="truncate max-w-[200px] xs:max-w-[280px] sm:max-w-none" title={`Customize User Permissions — ${fullName}`}>
+              Customize User Permissions — {fullName}
+            </span>
           </div>
         }
         open={extraPermsModalOpen}
@@ -493,8 +495,8 @@ const UserView = ({ id, onBack, onEdit }) => {
             </div>
           ) : (
             <>
-              <div className="max-h-[450px] overflow-y-auto border border-zinc-100 rounded-lg">
-                <table className="w-full text-left border-collapse">
+              <div className="max-h-[450px] overflow-auto border border-zinc-100 rounded-lg">
+                <table className="w-full min-w-[600px] text-left border-collapse">
                   <thead>
                     <tr className="bg-zinc-50/70 border-b border-zinc-100 sticky top-0 z-10">
                       <th className="p-2.5 text-xs font-bold text-zinc-500 uppercase tracking-wider bg-zinc-50">
@@ -574,26 +576,29 @@ const UserView = ({ id, onBack, onEdit }) => {
                 </table>
               </div>
 
-              <div className="flex justify-between items-center mt-2">
+              <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 mt-2">
                 <Button
                   danger
                   type="dashed"
                   loading={savingExtraPerms}
                   onClick={handleResetExtraPermissions}
+                  className="w-full sm:w-auto"
                 >
                   Reset to Role Defaults
                 </Button>
-                <Space>
-                  <Button onClick={() => setExtraPermsModalOpen(false)}>Cancel</Button>
+                <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                  <Button onClick={() => setExtraPermsModalOpen(false)} className="w-full sm:w-auto">
+                    Cancel
+                  </Button>
                   <Button
                     type="primary"
                     loading={savingExtraPerms}
                     onClick={handleSaveExtraPermissions}
-                    className="bg-zinc-900 border-zinc-900 text-white hover:!bg-zinc-800 hover:!border-zinc-800"
+                    className="bg-zinc-900 border-zinc-900 text-white hover:!bg-zinc-800 hover:!border-zinc-800 w-full sm:w-auto"
                   >
                     Save Overrides
                   </Button>
-                </Space>
+                </div>
               </div>
             </>
           )}

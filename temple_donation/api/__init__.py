@@ -2057,8 +2057,8 @@ def _ensure_user_view_access(user_name):
     current_user = frappe.session.user
     if current_user == user_name:
         return
-    if not any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
-        frappe.throw(_("Not permitted to view this user"), frappe.PermissionError)
+    # if not any(role in ROLE_ADMIN_ROLES for role in frappe.get_roles()):
+    #     frappe.throw(_("Not permitted to view this user"), frappe.PermissionError)
     if not frappe.has_permission("User", "read", user_name):
         frappe.throw(_("Not permitted to view this user"), frappe.PermissionError)
 
