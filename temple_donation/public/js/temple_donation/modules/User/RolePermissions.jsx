@@ -436,6 +436,7 @@ const RolePermissions = () => {
                                 saving={saving}
                                 permissions={permissions}
                                 onEditRoleClick={openEditModal}
+                                onAddModuleClick={() => setAddDoctypeModalOpen(true)}
                                 onSavePermissions={handleSavePermissions}
                                 onPermissionChange={handlePermissionChange}
                                 onToggleAll={handleToggleAll}

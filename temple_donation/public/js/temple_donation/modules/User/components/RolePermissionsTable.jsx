@@ -4,10 +4,65 @@ import {
     DeleteOutlined,
     EditOutlined,
     SaveOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 import SectionCard from "../../../components/common/SectionCard";
 
 const { Text } = Typography;
+
+const DOCTYPE_GROUPS = [
+    {
+        title: "Trust Management",
+        doctypes: ["Temple", "Temple General Settings", "Temple Booking Settings", "Temple Notification Settings", "Receipt Settings", "Document Template"]
+    },
+    {
+        title: "Donations & Donors",
+        doctypes: ["Donor", "Donation", "Donation Type"]
+    },
+    {
+        title: "Room Booking",
+        doctypes: ["Room", "Room Booking", "Building", "Room Type"]
+    },
+    {
+        title: "Inventory Management",
+        doctypes: ["Item", "Inventory Entry", "Item Category", "Store Location"]
+    },
+    {
+        title: "System & Users",
+        doctypes: ["User"]
+    }
+];
+
+const getModuleLabel = (doctype) => {
+    switch (doctype) {
+        case "Temple": return "Trust";
+        case "Temple Details": return "Trust Details";
+        case "Temple General Settings": return "Trust General Settings";
+        case "Temple Booking Settings": return "Trust Booking Settings";
+        case "Temple Notification Settings": return "Trust Notification Settings";
+        default: return doctype;
+    }
+};
+
+const groupPermissions = (permsList) => {
+    const grouped = [];
+    const groupedDocTypes = new Set();
+
+    DOCTYPE_GROUPS.forEach(group => {
+        const items = permsList.filter(p => group.doctypes.includes(p.doctype));
+        if (items.length > 0) {
+            grouped.push({ title: group.title, items });
+            group.doctypes.forEach(dt => groupedDocTypes.add(dt));
+        }
+    });
+
+    const others = permsList.filter(p => !groupedDocTypes.has(p.doctype));
+    if (others.length > 0) {
+        grouped.push({ title: "Other Modules", items: others });
+    }
+
+    return grouped;
+};
 
 const RolePermissionsTable = ({
     selectedRole,
@@ -16,6 +71,7 @@ const RolePermissionsTable = ({
     saving,
     permissions,
     onEditRoleClick,
+    onAddModuleClick,
     onSavePermissions,
     onPermissionChange,
     onToggleAll,
@@ -28,13 +84,22 @@ const RolePermissionsTable = ({
             right={
                 <Space wrap>
                     {!selectedRoleMeta?.is_protected && !selectedRoleMeta?.is_static && (
-                        <Button
-                            size="small"
-                            icon={<EditOutlined />}
-                            onClick={onEditRoleClick}
-                        >
-                            Edit Role
-                        </Button>
+                        <>
+                            <Button
+                                size="small"
+                                icon={<EditOutlined />}
+                                onClick={onEditRoleClick}
+                            >
+                                Edit Role
+                            </Button>
+                            <Button
+                                size="small"
+                                icon={<PlusOutlined />}
+                                onClick={onAddModuleClick}
+                            >
+                                Add Module
+                            </Button>
+                        </>
                     )}
                     <Button
                         size="small"
@@ -104,77 +169,86 @@ const RolePermissionsTable = ({
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-zinc-100">
-                            {permissions.map((row) => {
-                                const isAllChecked =
-                                    row.read && row.write && row.create && row.delete;
-                                return (
-                                    <tr
-                                        key={row.doctype}
-                                        className="hover:bg-zinc-50/50 transition-colors"
-                                    >
-                                        <td className="p-3 text-sm font-medium text-zinc-700">
-                                            {row.doctype === "Temple" ? "Trust" : (row.doctype === "Temple Details" ? "Trust Details" : row.doctype)}
+                            {groupPermissions(permissions).map((group) => (
+                                <React.Fragment key={group.title}>
+                                    <tr className="bg-zinc-50/40 border-y border-zinc-100/60">
+                                        <td colSpan={canRemoveDoctypes ? 7 : 6} className="px-3 py-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wider bg-zinc-50/10">
+                                            {group.title}
                                         </td>
-                                        <td className="p-3 text-center">
-                                            <Checkbox
-                                                checked={!!row.read}
-                                                onChange={(e) =>
-                                                    onPermissionChange(row.doctype, "read", e.target.checked)
-                                                }
-                                            />
-                                        </td>
-                                        <td className="p-3 text-center">
-                                            <Checkbox
-                                                checked={!!row.write}
-                                                onChange={(e) =>
-                                                    onPermissionChange(row.doctype, "write", e.target.checked)
-                                                }
-                                            />
-                                        </td>
-                                        <td className="p-3 text-center">
-                                            <Checkbox
-                                                checked={!!row.create}
-                                                onChange={(e) =>
-                                                    onPermissionChange(row.doctype, "create", e.target.checked)
-                                                }
-                                            />
-                                        </td>
-                                        <td className="p-3 text-center">
-                                            <Checkbox
-                                                checked={!!row.delete}
-                                                onChange={(e) =>
-                                                    onPermissionChange(row.doctype, "delete", e.target.checked)
-                                                }
-                                            />
-                                        </td>
-                                        <td className="p-3 text-center">
-                                            <Checkbox
-                                                checked={!!isAllChecked}
-                                                onChange={(e) =>
-                                                    onToggleAll(row.doctype, e.target.checked)
-                                                }
-                                            />
-                                        </td>
-                                        {canRemoveDoctypes && (
-                                            <td className="p-3 text-center">
-                                                <Popconfirm
-                                                    title={`Remove ${row.doctype === "Temple" ? "Trust" : (row.doctype === "Temple Details" ? "Trust Details" : row.doctype)}?`}
-                                                    onConfirm={() => onRemoveDoctype(row.doctype)}
-                                                    okText="Remove"
-                                                    cancelText="Cancel"
-                                                >
-                                                    <Button
-                                                        type="text"
-                                                        danger
-                                                        size="small"
-                                                        icon={<DeleteOutlined />}
-                                                    />
-                                                </Popconfirm>
-                                            </td>
-                                        )}
                                     </tr>
-                                );
-                            })}
+                                    {group.items.map((row) => {
+                                        const isAllChecked =
+                                            row.read && row.write && row.create && row.delete;
+                                        return (
+                                            <tr
+                                                key={row.doctype}
+                                                className="hover:bg-zinc-50/50 transition-colors"
+                                            >
+                                                <td className="p-3 pl-6 text-sm font-medium text-zinc-700">
+                                                    {getModuleLabel(row.doctype)}
+                                                </td>
+                                                <td className="p-3 text-center">
+                                                    <Checkbox
+                                                        checked={!!row.read}
+                                                        onChange={(e) =>
+                                                            onPermissionChange(row.doctype, "read", e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                <td className="p-3 text-center">
+                                                    <Checkbox
+                                                        checked={!!row.write}
+                                                        onChange={(e) =>
+                                                            onPermissionChange(row.doctype, "write", e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                <td className="p-3 text-center">
+                                                    <Checkbox
+                                                        checked={!!row.create}
+                                                        onChange={(e) =>
+                                                            onPermissionChange(row.doctype, "create", e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                <td className="p-3 text-center">
+                                                    <Checkbox
+                                                        checked={!!row.delete}
+                                                        onChange={(e) =>
+                                                            onPermissionChange(row.doctype, "delete", e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                <td className="p-3 text-center">
+                                                    <Checkbox
+                                                        checked={!!isAllChecked}
+                                                        onChange={(e) =>
+                                                            onToggleAll(row.doctype, e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                {canRemoveDoctypes && (
+                                                    <td className="p-3 text-center">
+                                                        <Popconfirm
+                                                            title={`Remove ${getModuleLabel(row.doctype)}?`}
+                                                            onConfirm={() => onRemoveDoctype(row.doctype)}
+                                                            okText="Remove"
+                                                            cancelText="Cancel"
+                                                        >
+                                                            <Button
+                                                                type="text"
+                                                                danger
+                                                                size="small"
+                                                                icon={<DeleteOutlined />}
+                                                            />
+                                                        </Popconfirm>
+                                                    </td>
+                                                )}
+                                            </tr>
+                                        );
+                                    })}
+                                </React.Fragment>
+                            ))}
                         </tbody>
                     </table>
                 </div>
