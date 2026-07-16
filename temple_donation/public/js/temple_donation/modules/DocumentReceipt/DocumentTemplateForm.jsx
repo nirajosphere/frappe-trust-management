@@ -5,7 +5,7 @@ import {
 } from "antd";
 import {
     SaveOutlined, ArrowLeftOutlined, CopyOutlined, InfoCircleOutlined,
-    EditOutlined, EyeOutlined, LayoutOutlined
+    EditOutlined, EyeOutlined, LayoutOutlined, UndoOutlined
 } from "@ant-design/icons";
 import {
     useFrappeCreateDoc, useFrappeUpdateDoc, useFrappeGetDoc, useFrappeGetDocList
@@ -17,8 +17,47 @@ import FormFooter from "../../components/common/FormFooter";
 import ViewContainer from "../../components/common/ViewContainer";
 
 const { Text, Title, Paragraph } = Typography;
-
 import { sampleData, variablesList, presets } from "./templateConfig";
+
+const templateTypeToPreset = {
+    "Donation Receipt": "donation",
+    "Room Receipt": "room",
+    "Inventory Receipt": "inventory",
+    "Expense Voucher": "expense",
+    "Purchase Receipt": "purchase",
+    "Visitor Pass": "visitor",
+    "Donation Certificate": "certificate"
+};
+
+const presetToTemplateType = {
+    donation: "Donation Receipt",
+    room: "Room Receipt",
+    inventory: "Inventory Receipt",
+    expense: "Expense Voucher",
+    purchase: "Purchase Receipt",
+    visitor: "Visitor Pass",
+    certificate: "Donation Certificate"
+};
+
+const getCategoriesForTemplateType = (type) => {
+    switch (type) {
+        case "Donation Receipt":
+            return ["Temple", "Common", "Donation", "Donation / Room"];
+        case "Donation Certificate":
+            return ["Temple", "Common", "Certificate"];
+        case "Room Receipt":
+            return ["Temple", "Common", "Room", "Donation / Room"];
+        case "Inventory Receipt":
+        case "Purchase Receipt":
+            return ["Temple", "Common", "Inventory"];
+        case "Expense Voucher":
+            return ["Temple", "Common", "Expense"];
+        case "Visitor Pass":
+            return ["Temple", "Common", "Visitor Pass"];
+        default:
+            return null; // All
+    }
+};
 
 const DocumentTemplateForm = ({ id, onBack }) => {
     const isEdit = !!id;
@@ -45,6 +84,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
     const [paperSize, setPaperSize] = useState("A4");
     const [orientation, setOrientation] = useState("Portrait");
     const [previewModalVisible, setPreviewModalVisible] = useState(false);
+    const [aiPromptModalVisible, setAiPromptModalVisible] = useState(false);
+    const [aiResponseText, setAiResponseText] = useState("");
+    const [templateType, setTemplateType] = useState(undefined);
 
     useEffect(() => {
         if (isEdit && data) {
@@ -59,6 +101,7 @@ const DocumentTemplateForm = ({ id, onBack }) => {
             setMargins(data.margins || "15px");
             setPaperSize(data.paper_size || "A4");
             setOrientation(data.print_orientation || "Portrait");
+            setTemplateType(data.template_type || undefined);
         } else {
             const defaultHeader = `
 <div style="display: flex; align-items: center; border-bottom: 2px solid {{primary_color}}; padding-bottom: 12px; margin-bottom: 15px;">
@@ -137,6 +180,188 @@ const DocumentTemplateForm = ({ id, onBack }) => {
         if (changed.margins !== undefined) setMargins(changed.margins);
         if (changed.paper_size !== undefined) setPaperSize(changed.paper_size);
         if (changed.print_orientation !== undefined) setOrientation(changed.print_orientation);
+        if (changed.template_type !== undefined) {
+            setTemplateType(changed.template_type || undefined);
+            const presetKey = templateTypeToPreset[changed.template_type];
+            const preset = presets[presetKey];
+            if (preset) {
+                form.setFieldsValue({
+                    header_html: preset.header,
+                    body_html: preset.body,
+                    footer_html: preset.footer
+                });
+                setHeaderHtml(preset.header);
+                setBodyHtml(preset.body);
+                setFooterHtml(preset.footer);
+                message.success(`Loaded standard preset for ${changed.template_type}`);
+            } else if (changed.template_type === "Custom") {
+                form.setFieldsValue({
+                    header_html: "",
+                    body_html: "",
+                    footer_html: ""
+                });
+                setHeaderHtml("");
+                setBodyHtml("");
+                setFooterHtml("");
+                message.info("Custom Template Type selected. HTML editor cleared.");
+            }
+        }
+    };
+
+    const handleResetToPreset = () => {
+        const templateType = form.getFieldValue("template_type");
+        if (!templateType || templateType === "Custom") {
+            message.warning("Please select a standard Template Type first to reset to its preset");
+            return;
+        }
+        const presetKey = templateTypeToPreset[templateType];
+        const preset = presets[presetKey];
+        if (preset) {
+            Modal.confirm({
+                title: "Reset Template to Preset?",
+                content: `Are you sure you want to overwrite your current HTML edits with the standard ${templateType} preset?`,
+                okText: "Reset",
+                cancelText: "Cancel",
+                onOk: () => {
+                    form.setFieldsValue({
+                        header_html: preset.header,
+                        body_html: preset.body,
+                        footer_html: preset.footer
+                    });
+                    setHeaderHtml(preset.header);
+                    setBodyHtml(preset.body);
+                    setFooterHtml(preset.footer);
+                    message.success(`Loaded standard preset for ${templateType}`);
+                }
+            });
+        }
+    };
+
+    const generateAiPrompt = () => {
+        const type = form.getFieldValue("template_type") || "Custom";
+        const prim = form.getFieldValue("primary_color") || primaryColor;
+        const sec = form.getFieldValue("secondary_color") || secondaryColor;
+        const font = form.getFieldValue("font_family") || fontFamily;
+        
+        const relevantCats = getCategoriesForTemplateType(type);
+        const filteredVars = relevantCats 
+            ? variablesList.filter(v => relevantCats.includes(v.cat))
+            : variablesList;
+            
+        const varsString = filteredVars
+            .map(v => `- \`{{${v.name.replace(/[{}]/g, "")}}}\`: ${v.desc}`)
+            .join("\n");
+        
+        return `Act as an expert web designer and frontend developer. Write a custom print template (HTML + CSS) for a "${type}" in a Temple Management system.
+
+We need three HTML sections:
+1. Header HTML (containing the temple header, logo, name, trust info)
+2. Body HTML (containing the transaction details, formatted tables/labels)
+3. Footer HTML (containing the footer note, blessing quote, signature line)
+
+Design System Constraints:
+- Use vanilla HTML and inline CSS styles ONLY (e.g. style="color: ${prim}; font-family: ${font}; padding: 12px;").
+- Do NOT use external stylesheets, <style> tags, or Tailwind CSS classes.
+- Use the colors:
+  Primary Color: ${prim}
+  Secondary Color: ${sec}
+- Keep it clean, elegant, modern, and readable for print layout (A4/Portrait).
+
+Here are the available variables you can use:
+${varsString}
+
+Format your output EXACTLY as follows with Markdown code blocks:
+
+[START_HEADER]
+\`\`\`html
+[Insert Header HTML code here]
+\`\`\`
+[END_HEADER]
+
+[START_BODY]
+\`\`\`html
+[Insert Body HTML code here]
+\`\`\`
+[END_BODY]
+
+[START_FOOTER]
+\`\`\`html
+[Insert Footer HTML code here]
+\`\`\`
+[END_FOOTER]
+`;
+    };
+
+    const handleImportAiResponse = (fullText) => {
+        if (!fullText) {
+            message.warning("Please paste the AI output first.");
+            return;
+        }
+        
+        let header = "";
+        let body = "";
+        let footer = "";
+        
+        const headerRegex = /\[START_HEADER\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_HEADER\]/i;
+        const bodyRegex = /\[START_BODY\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_BODY\]/i;
+        const footerRegex = /\[START_FOOTER\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_FOOTER\]/i;
+        
+        const headerMatch = fullText.match(headerRegex);
+        const bodyMatch = fullText.match(bodyRegex);
+        const footerMatch = fullText.match(footerRegex);
+        
+        if (headerMatch) header = headerMatch[1].trim();
+        if (bodyMatch) body = bodyMatch[1].trim();
+        if (footerMatch) footer = footerMatch[1].trim();
+        
+        if (!header && !body && !footer) {
+            const legacyHeaderRegex = /(?:=== HEADER HTML ===|<!-- HEADER -->|\[HEADER\]|Header HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|=== BODY HTML ===|<!-- BODY -->|\[BODY\]|Body HTML:?|$)/i;
+            const legacyBodyRegex = /(?:=== BODY HTML ===|<!-- BODY -->|\[BODY\]|Body HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|=== FOOTER HTML ===|<!-- FOOTER -->|\[FOOTER\]|Footer HTML:?|$)/i;
+            const legacyFooterRegex = /(?:=== FOOTER HTML ===|<!-- FOOTER -->|\[FOOTER\]|Footer HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|$)/i;
+            
+            const lhMatch = fullText.match(legacyHeaderRegex);
+            const lbMatch = fullText.match(legacyBodyRegex);
+            const lfMatch = fullText.match(legacyFooterRegex);
+            
+            if (lhMatch) header = lhMatch[1].trim();
+            if (lbMatch) body = lbMatch[1].trim();
+            if (lfMatch) footer = lfMatch[1].trim();
+        }
+        
+        if (!header && !body && !footer) {
+            const headerTagMatch = fullText.match(/<header[^>]*>([\s\S]*?)<\/header>/i);
+            const footerTagMatch = fullText.match(/<footer[^>]*>([\s\S]*?)<\/footer>/i);
+            if (headerTagMatch) {
+                header = headerTagMatch[1].trim();
+                fullText = fullText.replace(headerTagMatch[0], "");
+            }
+            if (footerTagMatch) {
+                footer = footerTagMatch[1].trim();
+                fullText = fullText.replace(footerTagMatch[0], "");
+            }
+            body = fullText.trim();
+            body = body.replace(/```html?/gi, "").replace(/```/g, "").trim();
+        } else {
+            const cleanCode = (codeStr) => {
+                return codeStr.replace(/^\s*```html?/i, "").replace(/```\s*$/, "").trim();
+            };
+            if (header) header = cleanCode(header);
+            if (body) body = cleanCode(body);
+            if (footer) footer = cleanCode(footer);
+        }
+        
+        form.setFieldsValue({
+            header_html: header,
+            body_html: body,
+            footer_html: footer
+        });
+        setHeaderHtml(header);
+        setBodyHtml(body);
+        setFooterHtml(footer);
+        
+        setAiResponseText("");
+        message.success("Successfully imported and split the HTML template sections!");
+        setAiPromptModalVisible(false);
     };
 
     const handleSave = async (values) => {
@@ -155,21 +380,6 @@ const DocumentTemplateForm = ({ id, onBack }) => {
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
         message.success(`Copied placeholder: ${text}`);
-    };
-
-    const handleLoadPreset = (value) => {
-        const preset = presets[value];
-        if (preset) {
-            form.setFieldsValue({
-                header_html: preset.header,
-                body_html: preset.body,
-                footer_html: preset.footer
-            });
-            setHeaderHtml(preset.header);
-            setBodyHtml(preset.body);
-            setFooterHtml(preset.footer);
-            message.success("Preset loaded successfully!");
-        }
     };
 
     // Calculate simulated preview sandbox HTML
@@ -432,17 +642,26 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                             <Card
                                 title={<span><EditOutlined /> HTML Template Editor</span>}
                                 extra={
-                                    <Select
-                                        placeholder="Load Preset Template"
-                                        style={{ width: 220 }}
-                                        onChange={handleLoadPreset}
-                                        options={[
-                                            { label: "Standard Donation Receipt", value: "donation" },
-                                            { label: "Standard Room Booking", value: "room" },
-                                            { label: "Standard Stock Voucher", value: "inventory" }
-                                        ]}
-                                        value={null}
-                                    />
+                                    <Space>
+                                        {templateType && templateType !== "Custom" && (
+                                            <Button
+                                                icon={<UndoOutlined />}
+                                                onClick={handleResetToPreset}
+                                                size="small"
+                                            >
+                                                Reset to Default
+                                            </Button>
+                                        )}
+                                        <Button
+                                            type="primary"
+                                            ghost
+                                            icon={<LayoutOutlined />}
+                                            onClick={() => setAiPromptModalVisible(true)}
+                                            size="small"
+                                        >
+                                            Generate with AI
+                                        </Button>
+                                    </Space>
                                 }
                                 bordered={false}
                                 className="shadow-sm"
@@ -616,6 +835,83 @@ const DocumentTemplateForm = ({ id, onBack }) => {
                         }}
                     />
                 </div>
+            </Modal>
+
+            <Modal
+                title={<span><LayoutOutlined /> AI HTML Template Generator</span>}
+                open={aiPromptModalVisible}
+                onCancel={() => setAiPromptModalVisible(false)}
+                footer={null}
+                width={700}
+                destroyOnClose
+            >
+                <Tabs defaultActiveKey="prompt" items={[
+                    {
+                        key: "prompt",
+                        label: "1. Copy AI Prompt",
+                        children: (
+                            <div style={{ padding: "10px 0" }}>
+                                <Paragraph>
+                                    Copy this pre-configured prompt and paste it into ChatGPT, Claude, or any AI assistant. It includes your theme colors, fonts, and the list of available placeholders.
+                                </Paragraph>
+                                <Input.TextArea
+                                    value={generateAiPrompt()}
+                                    rows={10}
+                                    readOnly
+                                    style={{ fontFamily: "monospace", fontSize: "12px", background: "#f4f4f5", marginBottom: "15px" }}
+                                />
+                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                    <div style={{ display: "flex", gap: "10px" }}>
+                                        <Button type="link" href={`https://chatgpt.com/?q=${encodeURIComponent(generateAiPrompt())}`} target="_blank" rel="noopener noreferrer">
+                                            Open ChatGPT
+                                        </Button>
+                                        <Button type="link" href="https://claude.ai" target="_blank" rel="noopener noreferrer">
+                                            Open Claude
+                                        </Button>
+                                    </div>
+                                    <Button
+                                        type="primary"
+                                        icon={<CopyOutlined />}
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(generateAiPrompt());
+                                            message.success("AI Prompt copied to clipboard!");
+                                        }}
+                                    >
+                                        Copy Prompt
+                                    </Button>
+                                </div>
+                            </div>
+                        )
+                    },
+                    {
+                        key: "import",
+                        label: "2. Paste AI Response to Import",
+                        children: (
+                            <div style={{ padding: "10px 0" }}>
+                                <Paragraph>
+                                    Once the AI responds, copy the entire output and paste it here. Our smart importer will automatically detect and split the code into the Header, Body, and Footer sections!
+                                </Paragraph>
+                                <Input.TextArea
+                                    placeholder="Paste AI response here..."
+                                    rows={10}
+                                    value={aiResponseText}
+                                    onChange={(e) => setAiResponseText(e.target.value)}
+                                    style={{ fontFamily: "monospace", fontSize: "12px", marginBottom: "15px" }}
+                                />
+                                <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+                                    <Button onClick={() => setAiPromptModalVisible(false)}>Cancel</Button>
+                                    <Button
+                                        type="primary"
+                                        onClick={() => handleImportAiResponse(aiResponseText)}
+                                        disabled={!aiResponseText.trim()}
+                                    >
+                                        Parse & Auto-Import HTML
+                                    </Button>
+                                </div>
+                            </div>
+                        )
+                    }
+                ]} />
             </Modal>
         </ViewContainer>
     );

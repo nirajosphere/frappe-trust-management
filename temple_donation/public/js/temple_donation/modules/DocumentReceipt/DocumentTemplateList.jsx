@@ -26,6 +26,12 @@ const DocumentTemplateList = () => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
+    // Fetch Templates
+    const { data: templatesList, loading: loadingTemplates, mutate } = useFrappeGetDocList(DOCTYPE_DOCUMENT_TEMPLATE, {
+        fields: ["*"],
+        limit: 1000
+    });
+
     useEffect(() => {
         setPage(1);
     }, [searchText, selectedTemple, templatesList?.length]);
@@ -35,12 +41,6 @@ const DocumentTemplateList = () => {
     // Fetch Temples
     const { data: temples, loading: loadingTemples } = useFrappeGetDocList("Temple", {
         fields: ["name", "temple_name"],
-        limit: 1000
-    });
-
-    // Fetch Templates
-    const { data: templatesList, loading: loadingTemplates, mutate } = useFrappeGetDocList(DOCTYPE_DOCUMENT_TEMPLATE, {
-        fields: ["*"],
         limit: 1000
     });
 
