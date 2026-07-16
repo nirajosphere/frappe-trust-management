@@ -18,6 +18,9 @@ import ViewContainer from "../../components/common/ViewContainer";
 
 const { Text, Title, Paragraph } = Typography;
 import { sampleData, variablesList, presets } from "./templateConfig";
+import AiTemplateModal from "./AiTemplateModal";
+import DynamicVariableAssistant from "./DynamicVariableAssistant";
+import LiveSandboxPreview from "./LiveSandboxPreview";
 
 const templateTypeToPreset = {
     "Donation Receipt": "donation",
@@ -169,6 +172,14 @@ const DocumentTemplateForm = ({ id, onBack }) => {
         }
     }, [isEdit, data, form]);
 
+    useEffect(() => {
+        if (!isEdit && temples && temples.length === 1) {
+            const singleTemple = temples[0].name;
+            form.setFieldsValue({ temple: singleTemple });
+            setSelectedTemple(singleTemple);
+        }
+    }, [temples, isEdit, form]);
+
     const handleFormValuesChange = (changed, all) => {
         if (changed.temple !== undefined) setSelectedTemple(changed.temple);
         if (changed.header_html !== undefined) setHeaderHtml(changed.header_html);
@@ -242,6 +253,9 @@ const DocumentTemplateForm = ({ id, onBack }) => {
         const prim = form.getFieldValue("primary_color") || primaryColor;
         const sec = form.getFieldValue("secondary_color") || secondaryColor;
         const font = form.getFieldValue("font_family") || fontFamily;
+        const paper = form.getFieldValue("paper_size") || paperSize;
+        const orient = form.getFieldValue("print_orientation") || orientation;
+        const marg = form.getFieldValue("margins") || margins;
         
         const relevantCats = getCategoriesForTemplateType(type);
         const filteredVars = relevantCats 
@@ -260,12 +274,16 @@ We need three HTML sections:
 3. Footer HTML (containing the footer note, blessing quote, signature line)
 
 Design System Constraints:
-- Use vanilla HTML and inline CSS styles ONLY (e.g. style="color: ${prim}; font-family: ${font}; padding: 12px;").
+- Use vanilla HTML and inline CSS styles ONLY (e.g. style="color: ${prim}; font-family: '${font}', sans-serif; padding: 6px;").
 - Do NOT use external stylesheets, <style> tags, or Tailwind CSS classes.
-- Use the colors:
-  Primary Color: ${prim}
-  Secondary Color: ${sec}
-- Keep it clean, elegant, modern, and readable for print layout (A4/Portrait).
+- Theme Colors:
+  - Primary Color: ${prim} (use this for headers, main labels, accents)
+  - Secondary Color: ${sec} (use this for helper text, borders, sub-headings)
+- Typography: Use the font family '${font}' for all text. Set it inline on elements (e.g. style="font-family: '${font}', sans-serif;").
+- Print Dimensions & Layout: The template MUST be optimized for:
+  - Paper Size: ${paper} (Note: If it is Thermal 80mm or 58mm, design a single narrow vertical receipt layout with small padding and font sizes. Do not use wide side-by-side columns).
+  - Print Orientation: ${orient}
+  - Margins: ${marg}
 
 Here are the available variables you can use:
 ${varsString}
@@ -292,76 +310,12 @@ Format your output EXACTLY as follows with Markdown code blocks:
 `;
     };
 
-    const handleImportAiResponse = (fullText) => {
-        if (!fullText) {
-            message.warning("Please paste the AI output first.");
-            return;
-        }
-        
-        let header = "";
-        let body = "";
-        let footer = "";
-        
-        const headerRegex = /\[START_HEADER\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_HEADER\]/i;
-        const bodyRegex = /\[START_BODY\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_BODY\]/i;
-        const footerRegex = /\[START_FOOTER\]\s*(?:```html)?([\s\S]*?)(?:```)?\s*\[END_FOOTER\]/i;
-        
-        const headerMatch = fullText.match(headerRegex);
-        const bodyMatch = fullText.match(bodyRegex);
-        const footerMatch = fullText.match(footerRegex);
-        
-        if (headerMatch) header = headerMatch[1].trim();
-        if (bodyMatch) body = bodyMatch[1].trim();
-        if (footerMatch) footer = footerMatch[1].trim();
-        
-        if (!header && !body && !footer) {
-            const legacyHeaderRegex = /(?:=== HEADER HTML ===|<!-- HEADER -->|\[HEADER\]|Header HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|=== BODY HTML ===|<!-- BODY -->|\[BODY\]|Body HTML:?|$)/i;
-            const legacyBodyRegex = /(?:=== BODY HTML ===|<!-- BODY -->|\[BODY\]|Body HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|=== FOOTER HTML ===|<!-- FOOTER -->|\[FOOTER\]|Footer HTML:?|$)/i;
-            const legacyFooterRegex = /(?:=== FOOTER HTML ===|<!-- FOOTER -->|\[FOOTER\]|Footer HTML:?)\s*(?:```html)?([\s\S]*?)(?:```|$)/i;
-            
-            const lhMatch = fullText.match(legacyHeaderRegex);
-            const lbMatch = fullText.match(legacyBodyRegex);
-            const lfMatch = fullText.match(legacyFooterRegex);
-            
-            if (lhMatch) header = lhMatch[1].trim();
-            if (lbMatch) body = lbMatch[1].trim();
-            if (lfMatch) footer = lfMatch[1].trim();
-        }
-        
-        if (!header && !body && !footer) {
-            const headerTagMatch = fullText.match(/<header[^>]*>([\s\S]*?)<\/header>/i);
-            const footerTagMatch = fullText.match(/<footer[^>]*>([\s\S]*?)<\/footer>/i);
-            if (headerTagMatch) {
-                header = headerTagMatch[1].trim();
-                fullText = fullText.replace(headerTagMatch[0], "");
-            }
-            if (footerTagMatch) {
-                footer = footerTagMatch[1].trim();
-                fullText = fullText.replace(footerTagMatch[0], "");
-            }
-            body = fullText.trim();
-            body = body.replace(/```html?/gi, "").replace(/```/g, "").trim();
-        } else {
-            const cleanCode = (codeStr) => {
-                return codeStr.replace(/^\s*```html?/i, "").replace(/```\s*$/, "").trim();
-            };
-            if (header) header = cleanCode(header);
-            if (body) body = cleanCode(body);
-            if (footer) footer = cleanCode(footer);
-        }
-        
-        form.setFieldsValue({
-            header_html: header,
-            body_html: body,
-            footer_html: footer
-        });
-        setHeaderHtml(header);
-        setBodyHtml(body);
-        setFooterHtml(footer);
-        
-        setAiResponseText("");
-        message.success("Successfully imported and split the HTML template sections!");
-        setAiPromptModalVisible(false);
+    const cleanCode = (codeStr) => {
+        if (!codeStr) return "";
+        return codeStr
+            .replace(/^\s*```(?:html)?/i, "")
+            .replace(/```\s*$/, "")
+            .trim();
     };
 
     const handleSave = async (values) => {
@@ -377,13 +331,109 @@ Format your output EXACTLY as follows with Markdown code blocks:
         }
     };
 
-    const copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text);
-        message.success(`Copied placeholder: ${text}`);
+    const copyToClipboard = (text, successMessage) => {
+        const msg = successMessage || `Copied placeholder: ${text}`;
+        if (!navigator.clipboard) {
+            // Fallback for non-secure context (HTTP)
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand("copy");
+                if (successful) {
+                    message.success(msg);
+                } else {
+                    message.error("Failed to copy text.");
+                }
+            } catch (err) {
+                message.error("Failed to copy text: " + err);
+            }
+            document.body.removeChild(textArea);
+            return;
+        }
+
+        navigator.clipboard.writeText(text).then(
+            () => {
+                message.success(msg);
+            },
+            (err) => {
+                // If permission denied, use fallback
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.opacity = "0";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand("copy");
+                    message.success(msg);
+                } catch (copyErr) {
+                    message.error("Failed to copy text.");
+                }
+                document.body.removeChild(textArea);
+            }
+        );
     };
 
     // Calculate simulated preview sandbox HTML
     const getPreviewHtml = () => {
+        if (!selectedTemple || !templateType) {
+            return `
+                <html>
+                <head>
+                    <style>
+                        body {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                            margin: 0;
+                            padding: 20px;
+                            background-color: #f4f4f5;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            min-height: 100vh;
+                            box-sizing: border-box;
+                        }
+                        .message-box {
+                            background: #ffffff;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+                            border-radius: 8px;
+                            padding: 30px;
+                            text-align: center;
+                            border: 1px solid #e4e4e7;
+                            max-width: 400px;
+                            width: 100%;
+                        }
+                        .message-title {
+                            font-size: 18px;
+                            font-weight: 600;
+                            color: #18181b;
+                            margin-bottom: 8px;
+                        }
+                        .message-text {
+                            font-size: 14px;
+                            color: #71717a;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="message-box">
+                        <div class="message-title">Template Preview</div>
+                        <div class="message-text">Please select Trust and Template Type</div>
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+
         let h = headerHtml;
         let b = bodyHtml;
         let f = footerHtml;
@@ -719,82 +769,15 @@ Format your output EXACTLY as follows with Markdown code blocks:
                     <Col xs={24} xl={10}>
                         <div style={{ display: "flex", flexDirection: "column", gap: "20px", position: "sticky", top: "84px" }}>
 
-                            {/* Sandbox Sandbox Preview */}
-                            <Card
-                                title={<span><EyeOutlined /> Live Sandbox Preview</span>}
-                                extra={
-                                    <Button
-                                        type="primary"
-                                        size="small"
-                                        icon={<EyeOutlined />}
-                                        onClick={() => setPreviewModalVisible(true)}
-                                    >
-                                        Fullscreen Preview
-                                    </Button>
-                                }
-                                bordered={false}
-                                className="shadow-sm"
-                                bodyStyle={{ padding: "12px", background: "#e4e4e7", borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px" }}
-                            >
-                                <div style={{ border: "1px solid #d4d4d8", borderRadius: "6px", background: "#f4f4f5", overflow: "hidden" }}>
-                                    <iframe
-                                        title="Live Output Sandbox"
-                                        srcDoc={getPreviewHtml()}
-                                        style={{
-                                            width: "100%",
-                                            height: "460px",
-                                            border: "none"
-                                        }}
-                                    />
-                                </div>
-                                <div style={{ marginTop: "8px", textAlign: "center" }}>
-                                    <Text type="secondary" style={{ fontSize: "12px" }}>
-                                        <InfoCircleOutlined /> Live preview replaces standard template tags with mock data dynamically.
-                                    </Text>
-                                </div>
-                            </Card>
+                            <LiveSandboxPreview
+                                getPreviewHtml={getPreviewHtml}
+                                onFullscreen={() => setPreviewModalVisible(true)}
+                            />
 
-                            {/* Click to Copy Variables Tray */}
-                            <Card
-                                title={<span><CopyOutlined /> Dynamic Variable Assistant</span>}
-                                bordered={false}
-                                className="shadow-sm"
-                                bodyStyle={{ padding: "0 16px 16px" }}
-                            >
-                                <div style={{ height: "230px", overflowY: "auto", marginTop: "8px" }}>
-                                    <List
-                                        size="small"
-                                        dataSource={variablesList}
-                                        renderItem={item => (
-                                            <List.Item
-                                                actions={[
-                                                    <Tooltip title="Copy placeholder">
-                                                        <Button
-                                                            type="text"
-                                                            size="small"
-                                                            icon={<CopyOutlined />}
-                                                            onClick={() => copyToClipboard(item.name)}
-                                                        />
-                                                    </Tooltip>
-                                                ]}
-                                                style={{ padding: "6px 0" }}
-                                            >
-                                                <List.Item.Meta
-                                                    title={
-                                                        <Space>
-                                                            <Text code style={{ cursor: "pointer", fontSize: "12px" }} onClick={() => copyToClipboard(item.name)}>
-                                                                {item.name}
-                                                            </Text>
-                                                            <Badge count={item.cat} style={{ backgroundColor: "#71717a", fontSize: "10px" }} />
-                                                        </Space>
-                                                    }
-                                                    description={<span style={{ fontSize: "11px" }}>{item.desc}</span>}
-                                                />
-                                            </List.Item>
-                                        )}
-                                    />
-                                </div>
-                            </Card>
+                            <DynamicVariableAssistant
+                                variablesList={variablesList}
+                                copyToClipboard={copyToClipboard}
+                            />
 
                         </div>
                     </Col>
@@ -837,82 +820,35 @@ Format your output EXACTLY as follows with Markdown code blocks:
                 </div>
             </Modal>
 
-            <Modal
-                title={<span><LayoutOutlined /> AI HTML Template Generator</span>}
+            <AiTemplateModal
                 open={aiPromptModalVisible}
                 onCancel={() => setAiPromptModalVisible(false)}
-                footer={null}
-                width={700}
-                destroyOnClose
-            >
-                <Tabs defaultActiveKey="prompt" items={[
-                    {
-                        key: "prompt",
-                        label: "1. Copy AI Prompt",
-                        children: (
-                            <div style={{ padding: "10px 0" }}>
-                                <Paragraph>
-                                    Copy this pre-configured prompt and paste it into ChatGPT, Claude, or any AI assistant. It includes your theme colors, fonts, and the list of available placeholders.
-                                </Paragraph>
-                                <Input.TextArea
-                                    value={generateAiPrompt()}
-                                    rows={10}
-                                    readOnly
-                                    style={{ fontFamily: "monospace", fontSize: "12px", background: "#f4f4f5", marginBottom: "15px" }}
-                                />
-                                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                                    <div style={{ display: "flex", gap: "10px" }}>
-                                        <Button type="link" href={`https://chatgpt.com/?q=${encodeURIComponent(generateAiPrompt())}`} target="_blank" rel="noopener noreferrer">
-                                            Open ChatGPT
-                                        </Button>
-                                        <Button type="link" href="https://claude.ai" target="_blank" rel="noopener noreferrer">
-                                            Open Claude
-                                        </Button>
-                                    </div>
-                                    <Button
-                                        type="primary"
-                                        icon={<CopyOutlined />}
-                                        onClick={() => {
-                                            navigator.clipboard.writeText(generateAiPrompt());
-                                            message.success("AI Prompt copied to clipboard!");
-                                        }}
-                                    >
-                                        Copy Prompt
-                                    </Button>
-                                </div>
-                            </div>
-                        )
-                    },
-                    {
-                        key: "import",
-                        label: "2. Paste AI Response to Import",
-                        children: (
-                            <div style={{ padding: "10px 0" }}>
-                                <Paragraph>
-                                    Once the AI responds, copy the entire output and paste it here. Our smart importer will automatically detect and split the code into the Header, Body, and Footer sections!
-                                </Paragraph>
-                                <Input.TextArea
-                                    placeholder="Paste AI response here..."
-                                    rows={10}
-                                    value={aiResponseText}
-                                    onChange={(e) => setAiResponseText(e.target.value)}
-                                    style={{ fontFamily: "monospace", fontSize: "12px", marginBottom: "15px" }}
-                                />
-                                <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-                                    <Button onClick={() => setAiPromptModalVisible(false)}>Cancel</Button>
-                                    <Button
-                                        type="primary"
-                                        onClick={() => handleImportAiResponse(aiResponseText)}
-                                        disabled={!aiResponseText.trim()}
-                                    >
-                                        Parse & Auto-Import HTML
-                                    </Button>
-                                </div>
-                            </div>
-                        )
+                generateAiPrompt={generateAiPrompt}
+                copyToClipboard={copyToClipboard}
+                onImport={({ header, body, footer }) => {
+                    const cleanedHeader = cleanCode(header);
+                    const cleanedBody = cleanCode(body);
+                    const cleanedFooter = cleanCode(footer);
+
+                    const newValues = {};
+                    if (cleanedHeader) {
+                        newValues.header_html = cleanedHeader;
+                        setHeaderHtml(cleanedHeader);
                     }
-                ]} />
-            </Modal>
+                    if (cleanedBody) {
+                        newValues.body_html = cleanedBody;
+                        setBodyHtml(cleanedBody);
+                    }
+                    if (cleanedFooter) {
+                        newValues.footer_html = cleanedFooter;
+                        setFooterHtml(cleanedFooter);
+                    }
+
+                    form.setFieldsValue(newValues);
+                    message.success("Successfully imported the HTML template sections!");
+                    setAiPromptModalVisible(false);
+                }}
+            />
         </ViewContainer>
     );
 };
