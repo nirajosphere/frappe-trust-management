@@ -229,7 +229,7 @@ const App = () => {
 
     const headerStyle = {
         background: "#ffffff",
-        height: "64px",
+        height: "56px",
         padding: "0 15px",
         display: "flex",
         alignItems: "center",
