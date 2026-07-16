@@ -1,7 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { Layout, Menu, ConfigProvider, Avatar, Dropdown, Space, Drawer, Button, Spin, App as AntApp } from "antd";
-import { DashboardOutlined, UserOutlined, LogoutOutlined, MenuOutlined, SettingOutlined } from "@ant-design/icons";
+import { 
+    DashboardOutlined, 
+    UserOutlined, 
+    LogoutOutlined, 
+    MenuOutlined, 
+    SettingOutlined,
+    BankOutlined,
+    SafetyCertificateOutlined,
+    HomeOutlined,
+    AppstoreOutlined,
+    HeartOutlined,
+    TeamOutlined,
+    TagsOutlined,
+    DatabaseOutlined,
+    InboxOutlined,
+    EnvironmentOutlined,
+    ProfileOutlined,
+    CalendarOutlined,
+    BellOutlined,
+    FileTextOutlined,
+    FileProtectOutlined
+} from "@ant-design/icons";
 import { ChevronDown, X } from "lucide-react";
+
+const getIconForNavItem = (key) => {
+    switch (key) {
+        case "dashboard":
+            return <DashboardOutlined />;
+        case "finance-group":
+        case "ledger":
+            return <BankOutlined />;
+        case "user-management-group":
+        case "users":
+            return <UserOutlined />;
+        case "role-permissions":
+            return <SafetyCertificateOutlined />;
+        case "trust-mgmt":
+        case "temples":
+            return <HomeOutlined />;
+        case "rooms":
+            return <AppstoreOutlined />;
+        case "donations-group":
+        case "donations":
+            return <HeartOutlined />;
+        case "donors":
+            return <TeamOutlined />;
+        case "donation-types":
+            return <TagsOutlined />;
+        case "inventory-group":
+        case "inventory-dashboard":
+            return <DatabaseOutlined />;
+        case "items":
+            return <InboxOutlined />;
+        case "item-categories":
+            return <AppstoreOutlined />;
+        case "store-locations":
+            return <EnvironmentOutlined />;
+        case "inventory-entries":
+            return <ProfileOutlined />;
+        case "general-settings":
+            return <SettingOutlined />;
+        case "booking-settings":
+            return <CalendarOutlined />;
+        case "notification-settings":
+            return <BellOutlined />;
+        case "document-templates":
+            return <FileTextOutlined />;
+        case "receipt-settings":
+            return <FileProtectOutlined />;
+        default:
+            return <SettingOutlined />;
+    }
+};
 
 // Centralized Configs
 import { themeConfig } from "./config/theme";
@@ -29,7 +100,7 @@ const App = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const isMobile = windowWidth < 1024;
+    const isMobile = windowWidth < 1150;
 
     useEffect(() => {
 
@@ -94,18 +165,7 @@ const App = () => {
         }
     ];
 
-    if (settingsItems.length > 0) {
-        userMenuItems.push({
-            key: 'settings-submenu',
-            label: 'Settings',
-            icon: <SettingOutlined />,
-            children: settingsItems.map(item => ({
-                key: item.key,
-                label: item.label,
-                onClick: () => handleMenuClick({ key: item.key })
-            }))
-        });
-    }
+
 
     userMenuItems.push(
         {
@@ -124,10 +184,53 @@ const App = () => {
     const menuItems = getFilteredMenuItems(roles, permissions);
     const groupedMenuItems = getGroupedMenuItems(roles, permissions);
 
+    const menuItemsForDrawer = [
+        {
+            type: 'group',
+            label: 'Platform',
+            key: 'platform-group',
+            children: groupedMenuItems.map(group => {
+                const isSingle = group.isSingle || (group.children && group.children.length === 1);
+                if (isSingle) {
+                    const targetKey = group.isSingle ? group.key : group.children[0].key;
+                    const label = group.isSingle ? group.label : group.children[0].label;
+                    return {
+                        key: targetKey,
+                        icon: getIconForNavItem(targetKey),
+                        label: label
+                    };
+                }
+                return {
+                    key: group.key,
+                    icon: getIconForNavItem(group.key),
+                    label: group.label,
+                    children: group.children.map(child => ({
+                        key: child.key,
+                        icon: getIconForNavItem(child.key),
+                        label: child.label
+                    }))
+                };
+            })
+        }
+    ];
+
+    if (settingsItems.length > 0) {
+        menuItemsForDrawer.push({
+            key: 'settings-collapsible',
+            icon: <SettingOutlined />,
+            label: 'Settings',
+            children: settingsItems.map(item => ({
+                key: item.key,
+                icon: getIconForNavItem(item.key),
+                label: item.label
+            }))
+        });
+    }
+
     const headerStyle = {
         background: "#ffffff",
         height: "64px",
-        padding: isMobile ? "0 16px" : "0 24px",
+        padding: "0 15px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -144,7 +247,6 @@ const App = () => {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        maxWidth: "1280px",
         height: "100%"
     };
 
@@ -321,7 +423,7 @@ const App = () => {
                                                             }}
                                                         >
                                                             <span>{group.label}</span>
-                                                            <ChevronDown size={14} style={{ color: isGroupActive ? '#18181bd' : '#71717a' }} />
+                                                            <ChevronDown size={14} style={{ color: isGroupActive ? '#18181b' : '#71717a' }} />
                                                         </button>
                                                     </Dropdown>
                                                 );
@@ -333,14 +435,43 @@ const App = () => {
                                         {user && (
                                             <NotificationDropdown currentUser={user.email || user.name} />
                                         )}
+                                        {settingsItems.length > 0 && !isMobile && (
+                                            <Dropdown
+                                                menu={{
+                                                    items: settingsItems.map(item => ({
+                                                        key: item.key,
+                                                        label: item.label
+                                                    })),
+                                                    onClick: handleMenuClick,
+                                                    selectedKeys: [currentRoute.split('/')[0]],
+                                                    selectable: true
+                                                }}
+                                                placement="bottomRight"
+                                                arrow
+                                            >
+                                                <div 
+                                                    style={{ 
+                                                        cursor: "pointer", 
+                                                        display: "flex", 
+                                                        alignItems: "center", 
+                                                        padding: "8px",
+                                                        borderRadius: "8px"
+                                                    }} 
+                                                    className="hover:bg-zinc-50"
+                                                >
+                                                    <SettingOutlined style={{ fontSize: "20px", color: "#18181b" }} />
+                                                </div>
+                                            </Dropdown>
+                                        )}
                                         {user && !isMobile && (
                                             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-                                                <div style={userProfileStyle}>
+                                                <div style={userProfileStyle} className="hover:bg-zinc-50">
                                                     <Avatar
                                                         src={user?.image}
                                                         icon={!user?.image && <UserOutlined />}
                                                     />
-
+                                                    <span style={{ fontSize: "14px", color: "#18181b", fontWeight: "600" }}>{user?.name}</span>
+                                                    <ChevronDown size={14} style={{ color: "#71717a" }} />
                                                 </div>
                                             </Dropdown>
                                         )}
@@ -371,107 +502,167 @@ const App = () => {
                             placement="right"
                             onClose={() => setMobileOpen(false)}
                             open={mobileOpen}
-                            size={280}
+                            width={270}
                             closable={false}
-                            styles={{ body: { padding: 0 } }}
+                            styles={{ 
+                                body: { 
+                                    padding: 0, 
+                                    backgroundColor: '#ffffff',
+                                    color: '#18181b'
+                                } 
+                            }}
+                            className="temple-donation-drawer"
                         >
-                            <div className="temple-donation-app" style={{ height: '100%' }}>
-                                <div className="flex flex-col h-full" style={{ padding: 0, background: '#ffffff' }}>
-                                    {/* Custom Header for Drawer */}
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '1px solid #f4f4f5' }}>
-                                        <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={{ height: '36px', objectFit: 'contain' }} />
-                                        <button
-                                            onClick={() => setMobileOpen(false)}
-                                            style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px', borderRadius: '50%', color: '#71717a' }}
-                                        >
-                                            <X size={18} />
-                                        </button>
-                                    </div>
-
-                                    <div style={{ flex: 1, overflowY: 'auto', padding: '12px 4px' }}>
-                                        <Menu
-                                            mode="inline"
-                                            selectedKeys={[currentRoute.split('/')[0]]}
-                                            defaultOpenKeys={groupedMenuItems.map(g => g.key)}
-                                            onClick={({ key }) => {
-                                                handleMenuClick({ key });
-                                                setMobileOpen(false);
-                                            }}
-                                            style={{ border: 'none' }}
-                                            items={[
-                                                ...groupedMenuItems.map(group => {
-                                                    const isSingle = group.isSingle || (group.children && group.children.length === 1);
-                                                    if (isSingle) {
-                                                        const targetKey = group.isSingle ? group.key : group.children[0].key;
-                                                        const label = group.isSingle ? group.label : group.children[0].label;
-                                                        return {
-                                                            key: targetKey,
-                                                            label: label
-                                                        };
-                                                    }
-                                                    return {
-                                                        key: group.key,
-                                                        label: group.label,
-                                                        children: group.children.map(child => ({
-                                                            key: child.key,
-                                                            label: child.label
-                                                        }))
-                                                    };
-                                                }),
-                                                ...(settingsItems.length > 0 ? [{
-                                                    key: 'settings-mobile-group',
-                                                    label: 'Settings',
-                                                    icon: <SettingOutlined />,
-                                                    children: settingsItems.map(item => ({
-                                                        key: item.key,
-                                                        label: item.label
-                                                    }))
-                                                }] : [])
-                                            ]}
-                                        />
-                                    </div>
-
-                                    {user && (
-                                        <div style={{ padding: '16px 20px', borderTop: '1px solid #f4f4f5', background: '#ffffff', flexShrink: 0 }}>
-                                            <div 
-                                                onClick={() => {
-                                                    if (typeof window !== 'undefined') {
-                                                        window.location.href = '/me';
-                                                    }
-                                                }}
-                                                style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', cursor: 'pointer' }}
-                                            >
-                                                <Avatar size={40} src={user?.image} icon={<UserOutlined />} style={{ border: '2px solid #f4f4f5' }} />
-                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#18181b', lineHeight: '1.2' }}>{user?.name}</span>
-                                                    <span style={{ fontSize: '10px', color: '#71717a', fontWeight: '600', textTransform: 'uppercase', tracking: '0.05em', marginTop: '2px' }}>{roles?.[0]}</span>
-                                                </div>
-                                            </div>
-                                            <button
-                                                onClick={logout}
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    gap: '8px',
-                                                    width: '100%',
-                                                    background: '#fef2f2',
-                                                    border: '1px solid #fee2e2',
-                                                    padding: '8px 16px',
-                                                    borderRadius: '8px',
-                                                    cursor: 'pointer',
-                                                    color: '#ef4444',
-                                                    fontWeight: '600',
-                                                    fontSize: '14px',
-                                                    outline: 'none'
-                                                }}
-                                            >
-                                                <LogoutOutlined />
-                                                <span>Logout</span>
-                                            </button>
+                            <div className="temple-donation-drawer-container" style={{ 
+                                height: '100%', 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                background: '#ffffff',
+                                color: '#18181b',
+                                fontFamily: 'Inter, sans-serif'
+                            }}>
+                                {/* Drawer Header */}
+                                <div style={{ 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    justifyContent: 'space-between', 
+                                    padding: '16px 12px 16px 16px', 
+                                    borderBottom: '1px solid #f4f4f5',
+                                    background: '#ffffff'
+                                }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <div style={{ 
+                                            width: '32px', 
+                                            height: '32px', 
+                                            borderRadius: '8px', 
+                                            background: '#f97316', 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center',
+                                            color: '#ffffff',
+                                            fontWeight: 'bold',
+                                            fontSize: '15px'
+                                        }}>
+                                            T
                                         </div>
-                                    )}
+                                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                                            <span style={{ fontSize: '13px', fontWeight: '600', color: '#18181b', lineHeight: '1.2' }}>Trust Management</span>
+                                            <span style={{ fontSize: '11px', color: '#71717a', lineHeight: '1.2' }}>Enterprise</span>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => setMobileOpen(false)}
+                                        style={{ 
+                                            background: 'none', 
+                                            border: 'none', 
+                                            cursor: 'pointer', 
+                                            display: 'flex', 
+                                            alignItems: 'center', 
+                                            justifyContent: 'center', 
+                                            padding: '6px', 
+                                            borderRadius: '6px', 
+                                            color: '#71717a' 
+                                        }}
+                                        className="drawer-close-btn"
+                                    >
+                                        <X size={16} style={{ color: '#71717a' }} />
+                                    </button>
                                 </div>
+
+                                {/* Menu section */}
+                                <div style={{ flex: 1, overflowY: 'auto', padding: '12px 8px' }} className="drawer-menu-scrollable">
+                                    <Menu
+                                        mode="inline"
+                                        theme="light"
+                                        selectedKeys={[currentRoute.split('/')[0]]}
+                                        defaultOpenKeys={[...groupedMenuItems.map(g => g.key), 'settings-collapsible']}
+                                        onClick={({ key }) => {
+                                            handleMenuClick({ key });
+                                            setMobileOpen(false);
+                                        }}
+                                        style={{ 
+                                            border: 'none',
+                                            background: 'transparent'
+                                        }}
+                                        items={menuItemsForDrawer}
+                                    />
+                                </div>
+
+                                {/* Drawer Footer */}
+                                {user && (
+                                    <div style={{ 
+                                        padding: '16px 12px', 
+                                        borderTop: '1px solid #f4f4f5', 
+                                        background: '#ffffff', 
+                                        flexShrink: 0 
+                                    }}>
+                                        <Dropdown 
+                                            menu={{ 
+                                                items: [
+                                                    {
+                                                        key: 'profile',
+                                                        label: 'My Profile',
+                                                        icon: <UserOutlined />,
+                                                        onClick: () => {
+                                                            if (typeof window !== 'undefined') {
+                                                                window.location.href = '/me';
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        type: 'divider'
+                                                    },
+                                                    {
+                                                        key: 'logout',
+                                                        label: 'Log out',
+                                                        icon: <LogoutOutlined />,
+                                                        danger: true,
+                                                        onClick: () => {
+                                                            logout();
+                                                            setMobileOpen(false);
+                                                        }
+                                                    }
+                                                ]
+                                            }} 
+                                            placement="topLeft"
+                                            trigger={['click']}
+                                            overlayClassName="drawer-footer-dropdown"
+                                        >
+                                            <div 
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    alignItems: 'center', 
+                                                    justifyContent: 'space-between',
+                                                    gap: '8px', 
+                                                    cursor: 'pointer',
+                                                    padding: '8px',
+                                                    borderRadius: '8px',
+                                                    width: '100%',
+                                                    textAlign: 'left'
+                                                }}
+                                                className="drawer-user-card"
+                                            >
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+                                                    <Avatar
+                                                        src={user?.image}
+                                                        icon={!user?.image && <UserOutlined />}
+                                                        size={32}
+                                                        style={{ flexShrink: 0 }}
+                                                    />
+                                                    <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                                                        <span style={{ fontSize: '13px', fontWeight: '600', color: '#18181b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: '1.2' }}>
+                                                            {user?.name || 'User'}
+                                                        </span>
+                                                        <span style={{ fontSize: '11px', color: '#71717a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', lineHeight: '1.2' }}>
+                                                            {user?.email || ''}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <ChevronDown size={14} style={{ color: '#71717a', flexShrink: 0 }} />
+                                            </div>
+                                        </Dropdown>
+                                    </div>
+                                )}
                             </div>
                         </Drawer>
 
@@ -490,158 +681,3 @@ const App = () => {
 
 
 export default App;
-// export { App };
-
-
-// import React, { useState, useEffect } from "react";
-// import {
-//     Layout, Menu, ConfigProvider, Avatar, Dropdown,
-//     Space, Drawer, Button
-// } from "antd";
-// import {
-//     UserOutlined, LogoutOutlined, MenuOutlined
-// } from "@ant-design/icons";
-
-// import { themeConfig } from "./config/theme";
-// import { getFilteredMenuItems, getComponentForRoute } from "./config/navigation";
-// import { useUser } from "./context/UserContext";
-
-// import "./styles.css";
-
-// const { Header, Content } = Layout;
-
-// const App = () => {
-//     const [currentRoute, setCurrentRoute] = useState("dashboard");
-//     const [mobileOpen, setMobileOpen] = useState(false);
-
-//     const { user, roles, logout, isAdmin } = useUser();
-
-//     useEffect(() => {
-//         const handleRoute = () => {
-//             if (typeof frappe !== "undefined" && frappe.get_route) {
-//                 const route = frappe.get_route();
-//                 if (route[0] === "temple-donation") {
-//                     const subRoute = route.slice(1).join("/");
-//                     setCurrentRoute(subRoute || "dashboard");
-//                 }
-//             }
-//         };
-
-//         window.update_temple_donation_route = handleRoute;
-//         window.addEventListener("hashchange", handleRoute);
-//         handleRoute();
-
-//         return () => {
-//             window.removeEventListener("hashchange", handleRoute);
-//             delete window.update_temple_donation_route;
-//         };
-//     }, []);
-
-//     const handleMenuClick = ({ key }) => {
-//         if (typeof frappe !== "undefined") {
-//             frappe.set_route("temple-donation", key === "dashboard" ? "" : key);
-//         }
-//         setMobileOpen(false);
-//     };
-
-//     const userMenuItems = [
-//         {
-//             key: "profile",
-//             label: "My Profile",
-//             icon: <UserOutlined />,
-//             onClick: () => frappe?.set_route("UserProfile", user?.email)
-//         },
-//         { type: "divider" },
-//         {
-//             key: "logout",
-//             label: "Logout",
-//             icon: <LogoutOutlined />,
-//             danger: true,
-//             onClick: logout
-//         }
-//     ];
-
-//     const menuItems = getFilteredMenuItems(roles);
-
-//     return (
-//         <ConfigProvider theme={themeConfig}>
-//             <Layout className="min-h-screen">
-
-//                 {/* 🔥 HEADER */}
-//                 <Header className="flex items-center justify-between px-4 border-b bg-white">
-
-//                     {/* LEFT */}
-//                     <div className="flex items-center gap-4">
-//                         <span className="font-bold text-lg">Temple Donation</span>
-//                     </div>
-
-//                     {/* 🔥 DESKTOP MENU (RIGHT SIDE) */}
-//                     <div className="hidden md:flex items-center gap-6">
-
-//                         <Menu
-//                             mode="horizontal"
-//                             selectedKeys={[currentRoute.split('/')[0]]}
-//                             items={menuItems}
-//                             onClick={handleMenuClick}
-//                         />
-
-//                         {!isAdmin && (
-//                             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-//                                 <Space className="cursor-pointer">
-//                                     <Avatar
-//                                         src={user?.image}
-//                                         icon={<UserOutlined />}
-//                                     />
-//                                     <span>{user?.name}</span>
-//                                 </Space>
-//                             </Dropdown>
-//                         )}
-//                     </div>
-
-//                     {/* 🔥 MOBILE MENU BUTTON */}
-//                     <div className="md:hidden">
-//                         <Button
-//                             icon={<MenuOutlined />}
-//                             onClick={() => setMobileOpen(true)}
-//                         />
-//                     </div>
-
-//                 </Header>
-
-//                 {/* 🔥 MOBILE DRAWER */}
-//                 <Drawer
-//                     title="Menu"
-//                     placement="right"
-//                     onClose={() => setMobileOpen(false)}
-//                     open={mobileOpen}
-//                 >
-//                     <Menu
-//                         mode="vertical"
-//                         selectedKeys={[currentRoute.split('/')[0]]}
-//                         items={menuItems}
-//                         onClick={handleMenuClick}
-//                     />
-
-//                     {!isAdmin && (
-//                         <div className="mt-6 border-t pt-4">
-//                             <Dropdown menu={{ items: userMenuItems }}>
-//                                 <Space>
-//                                     <Avatar icon={<UserOutlined />} />
-//                                     <span>{user?.name}</span>
-//                                 </Space>
-//                             </Dropdown>
-//                         </div>
-//                     )}
-//                 </Drawer>
-
-//                 {/* 🔥 CONTENT */}
-//                 <Content className="p-4 md:p-6">
-//                     {getComponentForRoute(currentRoute, roles)}
-//                 </Content>
-
-//             </Layout>
-//         </ConfigProvider>
-//     );
-// };
-
-// export default App;

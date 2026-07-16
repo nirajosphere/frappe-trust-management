@@ -486,7 +486,7 @@ export const groupedNavigationStructure = [
         label: "Donations",
         key: "donations-group",
         children: [
-            { key: "donations", label: "Donation" },
+            { key: "donations", label: "Donations" },
             { key: "donors", label: "Donors" },
             { key: "donation-types", label: "Donation Types" }
         ]
