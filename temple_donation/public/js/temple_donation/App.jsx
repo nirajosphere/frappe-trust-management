@@ -230,7 +230,7 @@ const App = () => {
     const headerStyle = {
         background: "#ffffff",
         height: "56px",
-        padding: "0 15px",
+        padding: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -247,7 +247,8 @@ const App = () => {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        height: "100%"
+        height: "100%",
+        padding: "0 1rem"
     };
 
     const logoContainerStyle = {
@@ -347,7 +348,7 @@ const App = () => {
                         </div>
                     </Header> */}
                         <Header style={headerStyle}>
-                            <div style={headerInnerStyle}>
+                            <div className="container" style={headerInnerStyle}>
 
                                 <div style={logoContainerStyle}>
                                     <img src="/assets/temple_donation/img/logo.svg" alt="Trust Management" style={logoImgStyle} />

@@ -11,7 +11,7 @@ const ActiveDonationsModal = ({
     columns
 }) => {
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
         setPage(1);
@@ -21,7 +21,7 @@ const ActiveDonationsModal = ({
             title={
                 <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #f1f5f9", paddingBottom: "12px" }}>
                     <span style={{ fontSize: "16px", fontWeight: 800, color: "#0f172a" }}>
-                        Active Cash Donations for {selectedUserName}
+                        Active Donations for {selectedUserName}
                     </span>
                     <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 500, fontFamily: "monospace", marginTop: "2px" }}>
                         {selectedUser}
@@ -52,7 +52,10 @@ const ActiveDonationsModal = ({
                     pagination={{
                         current: page,
                         pageSize: pageSize,
+                        total: activeDonations?.length || 0,
                         showSizeChanger: true,
+                        pageSizeOptions: ["5", "10", "20", "50"],
+                        showTotal: (total) => <span className="font-medium text-stone-500">Total <span className="text-zinc-900 font-bold">{total}</span> records</span>,
                         className: "!my-2",
                         onChange: (p, s) => {
                             setPage(p);

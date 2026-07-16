@@ -207,7 +207,7 @@ def get_ledger_donations(ledger_id):
 @frappe.whitelist()
 def get_active_user_donations(user):
     """
-    Get all active (un-reset/pending handover) Cash donations collected by a cashier.
+    Get all active (un-reset/pending handover) donations collected by a cashier.
     """
     last_reset = frappe.db.get_value("Ledger", 
                                     filters={"user": user}, 
@@ -217,19 +217,17 @@ def get_active_user_donations(user):
         donations = frappe.get_all("Donation",
             filters={
                 "owner": user,
-                "payment_mode": "Cash",
                 "creation": [">", last_reset]
             },
-            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            fields=["name", "donor_name", "total_amount", "creation", "temple", "payment_mode"],
             order_by="creation desc"
         )
     else:
         donations = frappe.get_all("Donation",
             filters={
-                "owner": user,
-                "payment_mode": "Cash"
+                "owner": user
             },
-            fields=["name", "donor_name", "total_amount", "creation", "temple"],
+            fields=["name", "donor_name", "total_amount", "creation", "temple", "payment_mode"],
             order_by="creation desc"
         )
         

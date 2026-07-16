@@ -192,17 +192,17 @@ const DonorForm = ({ id, onBack }) => {
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="country" label="Country" style={formItemStyle} rules={[{ required: true, message: "Please enter country" }]}>
+                                        <Form.Item name="country" label="Country" style={formItemStyle}>
                                             <Input prefix={<GlobalOutlined style={{ color: '#a1a1aa' }} />} placeholder="Country" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="state" label="State" style={formItemStyle} rules={[{ required: true, message: "Please enter state" }]}>
+                                        <Form.Item name="state" label="State" style={formItemStyle}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="State" />
                                         </Form.Item>
                                     </Col>
                                     <Col xs={24} sm={8}>
-                                        <Form.Item name="city" label="City" style={formItemStyle} rules={[{ required: true, message: "Please enter city" }]}>
+                                        <Form.Item name="city" label="City" style={formItemStyle}>
                                             <Input prefix={<EnvironmentOutlined style={{ color: '#a1a1aa' }} />} placeholder="City" />
                                         </Form.Item>
                                     </Col>

@@ -72,20 +72,17 @@
   {
    "fieldname": "country",
    "fieldtype": "Data",
-   "label": "Country",
-   "reqd": 1
+   "label": "Country"
   },
   {
    "fieldname": "state",
    "fieldtype": "Data",
-   "label": "State",
-   "reqd": 1
+   "label": "State"
   },
   {
    "fieldname": "city",
    "fieldtype": "Data",
-   "label": "City",
-   "reqd": 1
+   "label": "City"
   },
   {
    "fieldname": "pincode",

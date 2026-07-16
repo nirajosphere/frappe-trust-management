@@ -1,7 +1,8 @@
 import React from 'react';
-import { Avatar, Typography } from 'antd';
+import { Avatar, Typography, Tag } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { formatDateTime } from '../utils/ledgerUtils';
+import { getTagConfig } from '../../../utils/tagUtils';
 
 const { Text } = Typography;
 
@@ -142,19 +143,7 @@ export const activeDonationColumns = [
         key: "donor_name",
         render: (text) => <span className="font-semibold text-sm text-zinc-800">{text || "Anonymous"}</span>
     },
-    {
-        title: "Trust",
-        dataIndex: "temple_name",
-        key: "temple_name",
-        render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>
-    },
-    {
-        title: "Date & Time",
-        dataIndex: "creation",
-        key: "creation",
-        render: (val) => <span className="text-xs text-zinc-500">{formatDateTime(val)}</span>
-    },
-    {
+     {
         title: "Amount",
         dataIndex: "total_amount",
         key: "total_amount",
@@ -164,5 +153,31 @@ export const activeDonationColumns = [
                 ₹{Number(val || 0).toLocaleString("en-IN")}
             </span>
         )
-    }
+    },
+    {
+        title: "Trust",
+        dataIndex: "temple_name",
+        key: "temple_name",
+        render: (text) => <span className="text-xs text-zinc-500 font-medium">{text}</span>
+    },
+    {
+        title: "Payment Mode",
+        dataIndex: "payment_mode",
+        key: "payment_mode",
+        render: (text) => {
+            const tagInfo = getTagConfig(text);
+            return (
+                <Tag className={`tag-glass ${tagInfo.glassClass} !m-0`}>
+                    {text || "Unknown"}
+                </Tag>
+            );
+        }
+    },
+    {
+        title: "Date & Time",
+        dataIndex: "creation",
+        key: "creation",
+        render: (val) => <span className="text-xs text-zinc-500">{formatDateTime(val)}</span>
+    },
+   
 ];

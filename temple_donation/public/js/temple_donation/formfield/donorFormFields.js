@@ -57,15 +57,13 @@ export const donorFormFields = {
             label: "State",
             type: "text",
             placeholder: "Gujarat",
-            defaultValue: "Gujarat",
-            required: true
+            defaultValue: "Gujarat"
         },
         {
             name: "city",
             label: "City",
             type: "text",
-            placeholder: "Enter City",
-            required: true
+            placeholder: "Enter City"
         },
         {
             name: "pincode",

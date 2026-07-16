@@ -80,6 +80,26 @@ export const TAG_CONFIG = {
         glassClass: "tag-glass-volcano"
     },
 
+    cash: {
+        color: "green",
+        glassClass: "tag-glass-green"
+    },
+
+    upi: {
+        color: "geekblue",
+        glassClass: "tag-glass-geekblue"
+    },
+
+    card: {
+        color: "magenta",
+        glassClass: "tag-glass-magenta"
+    },
+
+    cheque: {
+        color: "volcano",
+        glassClass: "tag-glass-volcano"
+    },
+
     default: {
         color: "default",
         glassClass: "tag-glass-gray"
